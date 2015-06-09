@@ -1,0 +1,26 @@
+{
+  "name": "EventVODS",
+  "version": "0.0.1",
+  "authors": [
+    "agjones <alexander.gideon.jones@gmail.com>"
+  ],
+  "description": "Event VOD catalogue service",
+  "moduleType": [
+    "node"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.4.0",
+    "bootstrap": "~3.3.4",
+    "jquery": "~2.1.4",
+    "fontawesome": "~4.3.0"
+  }
+}
