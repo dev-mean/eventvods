@@ -7,6 +7,9 @@
 //server config
     var config = require('./config/config');
     
+    //templating
+    app.set('view engine', 'ejs');
+    
 //routes
     require('./routes/routes')(app);
     app.use('/css', express.static(path.join(__dirname, '..', 'public/css')));
