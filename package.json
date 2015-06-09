@@ -5,7 +5,8 @@
   "main": "dist/server/server.js",
   "dependencies": {
     "bower": "^1.4.1",
-    "ejs": "^2.3.1"
+    "ejs": "^2.3.1",
+    "express": "^4.12.4"
   },
   "devDependencies": {
     "bower": "^1.4.1",
