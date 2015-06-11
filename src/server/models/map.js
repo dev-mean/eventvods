@@ -1,4 +1,11 @@
-function Map (name, sampleImage) {
-	this.name = name;
-	this.sampleImage = sampleImage;
-}
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
+
+var mapSchema = new Schema({
+		mapName: { type: String, required: true, unique: true },
+		sampleImage: String
+});
+
+var Map = mongoose.model('Map', mapSchema);
+
+module.exports = Map;

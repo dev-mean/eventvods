@@ -1,7 +1,14 @@
-function Team (name, country, website, twitterPage, logoImage) {
-    this.name = name;
-    this.country = country;
-    this.website = website;
-    this.twitterPage = twitterPage;
-    this.logoImage = logoImage;
-}
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
+
+var teamSchema = new Schema({
+	name: { type: String, required: true },
+	country: { type: String, required: true },
+	website: String,
+	twitterPage: String,
+	logoImage: String
+});
+
+var Team = mongoose.model('Team', teamSchema);
+
+module.exports = Team;
