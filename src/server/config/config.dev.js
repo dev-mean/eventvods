@@ -1,5 +1,5 @@
 module.exports = {
-    databaseUrl : 'postgresql://' + process.env.IP + ':5432',
+    databaseUrl : 'mongodb://' + process.env.IP + ':27017',
     port : process.env.PORT,
     ip : process.env.IP
 }

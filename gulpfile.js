@@ -8,12 +8,13 @@ var concat = require('gulp-concat');
 var clean = require('gulp-clean');
 var uglify = require('gulp-uglify');
 var rename = require('gulp-rename');
+var less = require('gulp-less');
 
 //Default task - watches
 gulp.task('default', ['watch']);
 
 //Build umbrella task
-gulp.task('build', ['js-build', 'html-build', 'ejs-build', 'css-build', 'bower-build', 'node-build']);
+gulp.task('build', ['js-build', 'html-build', 'ejs-build', 'css-build', 'less-build', 'bower-build', 'node-build']);
 
 //Dev build
 gulp.task('dev-build', ['build', 'node-dev-config-build']);
@@ -50,6 +51,12 @@ gulp.task('ejs-build', function() {
 
 gulp.task('css-build', function() {
     return gulp.src('src/public/css/**/*.css')
+        .pipe(gulp.dest('dist/public/css'));
+});
+
+gulp.task('less-build', function() {
+    return gulp.src('src/public/less/**/*.less')
+        .pipe(less())
         .pipe(gulp.dest('dist/public/css'));
 });
 

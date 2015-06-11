@@ -16,10 +16,9 @@ Icon?
 ehthumbs.db
 Thumbs.db
 
+bower_components/
+dist/
+data/
 node_modules/
 .sass-cache/
-public/stylesheets/*.css
-public/min/
-public/index.html
 vendor/*
-public/fonts

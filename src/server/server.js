@@ -3,6 +3,7 @@
     var app = express();
     var fs = require('fs');
     var path = require('path');
+    var mongoose = require('mongoose');
     
 //server config
     var config = require('./config/config');
