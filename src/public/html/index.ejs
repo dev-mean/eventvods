@@ -1,11 +1,20 @@
-<html>
+<html ng-app="eventApp">
     <head>
         <title>EventVODs</title>
+        <!-- CSS stuff -->
         <link rel="stylesheet" href="/css/bootstrap.min.css"/>
         <link rel="stylesheet" href="/css/font-awesome.min.css">
         <link rel="stylesheet" href="/css/style.css"/>
+        
+        <!-- JS stuff -->
+        <script type="text/javascript" src="/js/jquery.min.js"></script><!-- load jquery -->
+        <script type="text/javascript" src="/js/angular.min.js"></script><!-- load angular -->
+        <script type="text/javascript" src="/js/app/app.js"></script>
+        <script type="text/javascript" src="/js/app/controllers/main.js"></script>
+        <script type="text/javascript" src="/js/app/services/events.js"></script>
+        
     </head>
-    <body>
+    <body ng-controller="mainController">
         <div class="container">
             <div class="jumbotron text-center">
                 <h1><span class="fa fa-lock"></span> EventVODS</h1>
@@ -15,6 +24,32 @@
                 <a href="" class="btn btn-default"><span class="fa fa-user"></span> Beep</a>
                 <a href="" class="btn btn-default"><span class="fa fa-user"></span> Boop</a>
             </div>
+        </div>
+        <div class ="container">
+            <h1>Events:</h1>
+            
+            <div id ="event-list" class="row">
+                <div>
+                    <div class ="checkbox" ng-repeat="event in events">
+                        <label>
+                            <input type="checkbox">{{event}}
+                        </label>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div id="event-form" class="row">
+                <div class="col-sm-8 col-sm-offset-2 text-center">
+                    <form>
+                        <div class="form-group">
+                            <input type="text" class="form-control input-lg text-center" placeholder="Event name" ng-model="eventData.text">
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-lg" ng-click="createEvent()">Add</button>
+                    </form>
+                </div>
+            </div>
+            
         </div>
     </body>
 </html>
