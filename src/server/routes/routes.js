@@ -22,4 +22,26 @@
             res.json({event : "test data", event2 : "test data"});
         });
         
+        app.post('/api/events', function(req, res) {
+            console.log(req.body);
+            Event.create({
+                /*format : req.body.format,
+            	beginDate: new Date('Jun 07, 1954'),
+            	endDate: new Date('Jun 07, 1954'),
+            	tournamentLocation: req.body.tournamentLocation,
+            	casters: req.body.casters,
+            	panel: req.body.panel*/
+            	format : 'test, should throw validation error'
+            }, function(err, events) {
+                if(err)
+                    res.send(err);
+                
+                Event.find(function(err, events) {
+                    if(err)
+                        res.send(err);
+                    res.json(events);
+                });
+            });
+        });
+        
     };

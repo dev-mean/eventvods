@@ -28,6 +28,20 @@
         <div class ="container">
             <h1>Events:</h1>
             
+            <div id="event-form" class="row">
+                <div class="col-sm-8 col-sm-offset-2 text-center">
+                    <form>
+                        <div class="form-group">
+                            <input type="text" class="form-control input-lg text-center" placeholder="format" ng-model="eventData.format">
+                            <input type="text" class="form-control input-lg text-center" placeholder="location" ng-model="eventData.tournamentLocation">
+                            <input type="text" class="form-control input-lg text-center" placeholder="casters" ng-model="eventData.casters">
+                            <input type="text" class="form-control input-lg text-center" placeholder="panel" ng-model="eventData.panel">
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-lg" ng-click="createEvent()">Add</button>
+                    </form>
+                </div>
+            </div>
+            
             <div id ="event-list" class="row">
                 <div>
                     <div class ="checkbox" ng-repeat="event in events">
@@ -37,17 +51,6 @@
                     </div>
                 </div>
                 
-            </div>
-            
-            <div id="event-form" class="row">
-                <div class="col-sm-8 col-sm-offset-2 text-center">
-                    <form>
-                        <div class="form-group">
-                            <input type="text" class="form-control input-lg text-center" placeholder="Event name" ng-model="eventData.text">
-                        </div>
-                        <button type="submit" class="btn btn-primary btn-lg" ng-click="createEvent()">Add</button>
-                    </form>
-                </div>
             </div>
             
         </div>
