@@ -7,6 +7,9 @@ angular.module('eventService', [])
             },
             create : function(eventData) {
                 return $http.post('/api/events', eventData);
+            },
+            delete : function(id) {
+                return $http.delete('/api/events/' + id);
             }
         };
     });

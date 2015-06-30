@@ -9,6 +9,7 @@ var clean = require('gulp-clean');
 var uglify = require('gulp-uglify');
 var rename = require('gulp-rename');
 var less = require('gulp-less');
+var nodemon = require('gulp-nodemon');
 
 //Default task - watches
 gulp.task('default', ['watch']);
@@ -114,6 +115,5 @@ gulp.task('node-prod-config-build', ['config-clean'], function() {
 //Watcher task, monitors angular/node code to restart app and redeploy
 gulp.task('watch', function() {
     gulp.watch('src/**/*', ['build']);
+    
 });
-
-
