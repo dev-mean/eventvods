@@ -5,19 +5,29 @@
     var path = require('path');
     var mongoose = require('mongoose');
     var bodyParser = require('body-parser');
+	var passport = require('passport');
+	var passport_strategy = require('passport-local').Strategy;
+	var morgan = require('morgan'); //Logger
+	var session = require('express-session');
     
 //server config
 	app.set('env', 'development');
     var config = require('./config/config');
+	app.use(morgan('dev'));
     app.use(bodyParser.urlencoded({'extended':'true'}));
     app.use(bodyParser.json());
     app.use(bodyParser.json({ type: 'application/vnd.api+json' }));
+	app.use(session({secret: 'eventvods_dev'}))
+	app.use(passport.initialize());
+	app.use(passport.session());
 	mongoose.connect(config.databaseUrl, function(err){
 		console.log("Connected to mongodb");
 	});
     
     //templating
     app.set('view engine', 'jade');
+	app.locals.pretty = true;
+	
     
 //routes
     require('./routes/routes')(app);
