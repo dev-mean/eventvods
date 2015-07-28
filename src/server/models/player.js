@@ -1,9 +1,10 @@
-var mongoose = required('mongoose');
+var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var playerSchema = new Schema ({
-	name: { type: String, required: true },
-	team: { type: String, required: true }
+	playerID: { type: Number, required: true, unique: true },
+	playerName: { type: String, required: true },
+	playerTeamID: { type: Number, required: true }
 });
 
 var Player = mongoose.model('Player', playerSchema);

@@ -2,11 +2,13 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var teamSchema = new Schema({
-	name: { type: String, required: true },
-	country: { type: String, required: true },
-	website: String,
-	twitterPage: String,
-	logoImage: String
+	teamID: { type: Number, require: true, unique: true },
+	teamGame: String,
+	teamWebsite: String,
+	teamTwitter: String,
+	teamCountry: String,
+	teamImage: String,
+	teamIcon: String
 });
 
 var Team = mongoose.model('Team', teamSchema);

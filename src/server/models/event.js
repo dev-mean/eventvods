@@ -2,12 +2,30 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var eventSchema = new Schema({
-	format: { type: String, required: true },
-	beginDate: { type: Date, required: true },
-	endDate: { type: Date, required: true },
-	tournamentLocation: { type: String, required: true },
-	casters: String,
-	panel: String
+	eventID: { type: Number, required: true, unique: true },
+	eventTitle: { type: String, require: true },
+	eventPermaLink: { type: String, require: true },
+	eventAbbreviation: String,
+	eventFormat: { type: String, required: true },
+	eventType: String,
+	eventModules: String,
+	eventLocation: { type: String, required: true },
+	eventWebsite: String,
+	eventTwitter: String,
+	eventStream: String,
+	eventOwner: String,
+	eventGroup: String,
+	eventSponsors: String,
+	eventStartDate: { type: Date, required: true },
+	eventEndDate: { type: Date, required: true },
+	eventDates: Date,
+	eventMaps: String,
+	eventTeam: String,
+	eventCasters: String,
+	eventPanel: String,
+	eventCustomGroup1: Array,
+	eventCustomField1: Array,
+	eventCustomURL1: Array
 });
 
 var Event = mongoose.model('Event', eventSchema);
