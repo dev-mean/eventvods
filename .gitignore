@@ -19,6 +19,7 @@ Thumbs.db
 bower_components/
 dist/
 data/
+.idea/
 node_modules/
 .sass-cache/
 vendor/*
