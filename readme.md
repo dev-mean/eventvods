@@ -20,5 +20,5 @@ bower install
 To run the service, use the following commands
 ```
 gulp
-*(new window)* node dist/server/server.js
+(new window) node dist/server/server.js
 ```
