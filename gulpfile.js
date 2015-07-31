@@ -15,7 +15,7 @@ var nodemon = require('gulp-nodemon');
 gulp.task('default', ['watch']);
 
 //Build umbrella task
-gulp.task('build', ['js-build', 'html-build', 'css-build', 'less-build', 'bower-build', 'node-build']);
+gulp.task('build', ['js-build', 'jade-build', 'css-build', 'less-build', 'bower-build', 'node-build']);
 
 //Dev build
 gulp.task('dev-build', ['build', 'node-dev-config-build']);
@@ -40,9 +40,9 @@ gulp.task('js-build', function() {
 });
 
 //Building html for deployment
-gulp.task('html-build', function() {
-    return gulp.src('src/public/html/**/*.html')
-        .pipe(gulp.dest('dist/public'));
+gulp.task('jade-build', function() {
+    return gulp.src('src/server/views/**/*.jade')
+        .pipe(gulp.dest('dist/server/views'));
 });
 
 gulp.task('css-build', function() {
