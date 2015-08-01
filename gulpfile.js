@@ -11,6 +11,11 @@ var rename = require('gulp-rename');
 var less = require('gulp-less');
 var nodemon = require('gulp-nodemon');
 
+
+// prevent LESS from destroying watch task.
+
+var plumber = require('gulp-plumber');
+
 //Default task - watches
 gulp.task('default', ['watch']);
 
@@ -50,11 +55,36 @@ gulp.task('css-build', function() {
         .pipe(gulp.dest('dist/public/css'));
 });
 
+/*
 gulp.task('less-build', function() {
     return gulp.src('src/public/less/style.less')
+            .pipe(plumber({
+            handleError: function (err) {
+                console.log(err);
+                this.emit('end');
+            }
+        }))
         .pipe(less())
         .pipe(gulp.dest('dist/public/css'));
+}); */
+
+gulp.task('less-build', function () {
+    return gulp.src('src/public/less/style.less')
+        .pipe(plumber({
+            errorHandler: function(error) {
+                gutil.log(
+                    gutil.colors.cyan('Plumber') + gutil.colors.red(' found unhandled error:\n'),
+                    error.toString()
+                );
+                this.emit('end');
+            }
+        }))
+        .pipe(less())
+        // ... more pipes ...
+        .pipe(plumber.stop())
+        .pipe(gulp.dest('dist/public/css'));
 });
+
 
 //Moving bower packages for deployment
 gulp.task('bower-build', ['angular-build', 'pure-build', 'jquery-build', 'fontawesome-build']);
