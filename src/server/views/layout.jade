@@ -1,11 +1,27 @@
 doctype html
 html(lang='en')
-  head
-    meta(charset='utf-8')
-    meta(http-equiv='X-UA-Compatible', content='IE=edge')
-    meta(name='viewport', content='width=device-width, initial-scale=1')
-    title=title
-    link(href='/assets/css/style.css', rel='stylesheet')
-  body
-    block content 
-    script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js')
+	head
+		meta(charset='utf-8')
+		meta(http-equiv='X-UA-Compatible', content='IE=edge')
+		meta(name='viewport', content='width=device-width, initial-scale=1')
+		title=title
+		link(href='/assets/css/style.css', rel='stylesheet')
+	body
+		div.container
+			div.leftSidebar
+				header.logo
+					a(href="#")
+				div.userBlock
+					a(href="#")
+						img(src="/assets/images/avatar-sample.png")
+						span Mattc0m
+						div.arrow
+				nav.leftNavigation
+					each navsection in ["Dashboard", "Events", "Data", "Users"]
+						a(id=navsection href="#" + navsection) 
+							span.icon
+							span.text 
+								= navsection 
+			div.content
+				block content 
+		script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js')

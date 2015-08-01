@@ -1,8 +1,99 @@
 /* imports */
 @import "reset.less";
-/* @import "pure.less"; */
 @import "elements.less";
 @import "flexbox.less";
 @import "variables.less";
 
-body { background: purple; }
+/* global elements + box sizing */
+html { 
+	background: url(/assets/images/backend-background.jpg) no-repeat center center fixed; 
+	background-size: cover;
+	box-sizing: border-box;
+}
+*, *:before, *:after { box-sizing: inherit; }
+
+body {
+	color: @silver;
+}
+
+a { color: inherit; text-decoration: none; }
+
+/* basic layout */
+.container {
+	width: @containerWidth;
+	background: @default;
+	margin: 60px auto;
+	.drop-shadow(0,6px,12px,0.1);
+	.flex-display;
+	.flex-direction(row);
+
+	.leftSidebar {
+		.flex-display;
+		.flex-direction(column);
+		width: @sidebarWidth;
+		height: 100%;
+		background: @default-dark;
+	}
+	.content {
+		.flex-display;
+		.flex-direction(column);
+		padding: @gutter;
+	}
+}
+
+/* leftSidebar */
+header.logo {
+	padding: @gutter;
+	a {
+		display: block;
+		background: url(/assets/images/logo-medium.png);
+		width: 216px;
+		height: 48px;
+	}
+}
+
+.userBlock {
+	background: @default-darker; 
+
+	a {
+		.flex-display;
+		.align-items(center);
+		.transition;
+		padding: @padding-sm @gutter;
+
+		img { border-radius: 50%; }
+		span { padding-left: @gutter; }
+		.arrow { .triangle(down,3px,@silver); margin-left: auto; .transition;  }
+		&:hover { 
+			color: @green-icon-light;
+			.arrow { .triangle(down,3px,@green-icon-light); }
+		}
+	}
+}
+
+nav {
+	.flex-display;
+	.flex-direction(column);
+	padding: @gutter / 2 0;
+
+	a {
+		padding: @gutter / 2 @gutter;
+		padding-left: 79px;
+		background: url(/assets/images/backend-icons.png) no-repeat;
+		border-left: 5px solid @default-dark;
+		
+		&#Dashboard { background-position: @gutter 11px; }
+		&#Events { background-position: @gutter -47px; }
+		&#Data { background-position: @gutter -105px; }
+		&#Users { background-position: @gutter -220px; }
+
+		span { display: inline-block; }
+
+		.transition;
+		&:hover { 
+			border-left: 5px solid @green;
+			padding-left: 74px;
+			color: @silver-light;
+		}
+	}
+}
