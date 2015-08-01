@@ -1,11 +1,16 @@
-var app = require('express').Router();
+var app = require('express');
+var router = app.Router();
 
-app.get('/', function(req, res) {
-	res.render('overview', {});
+router.get('/', function(req, res) {
+        res.render('overview', {});
+});
+
+router.get('/events', function(req, res) {
+        res.render('events', {});
 });
 
 //event api
-app.get('/api/events', function(req, res) {
+router.get('/api/events', function(req, res) {
 	Event.find(function(err, events) {
 		if(err)
 			res.send(err);
@@ -14,7 +19,7 @@ app.get('/api/events', function(req, res) {
 });
 
 //creates new event, should be fixed to accept all appropriate data, maybe more error handling stuff
-app.post('/api/events', function(req, res) {
+router.post('/api/events', function(req, res) {
 	Event.create({
 		format : req.body.format,
 		beginDate: new Date('Jun 07, 1954'),
@@ -35,7 +40,7 @@ app.post('/api/events', function(req, res) {
 });
 
 //deletes event object using the _id of specified object
-app.post('/api/events/:event_id', function(req, res) {
+router.post('/api/events/:event_id', function(req, res) {
 	Event.remove({
 		_id : req.params.event_id
 	}, function(err, event) {
@@ -50,4 +55,4 @@ app.post('/api/events/:event_id', function(req, res) {
 	});
 });
 
-module.exports = app;
+module.exports = router;
