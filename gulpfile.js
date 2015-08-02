@@ -20,7 +20,7 @@ var plumber = require('gulp-plumber');
 gulp.task('default', ['watch']);
 
 //Build umbrella task
-gulp.task('build', ['js-build', 'jade-build', 'css-build', 'less-build', 'bower-build', 'node-build']);
+gulp.task('build', ['js-build', 'jade-build', 'css-build', 'img-build', 'less-build', 'bower-build', 'node-build']);
 
 //Dev build
 gulp.task('dev-build', ['build', 'node-dev-config-build']);
@@ -48,6 +48,12 @@ gulp.task('js-build', function() {
 gulp.task('jade-build', function() {
     return gulp.src('src/server/views/**/*.jade')
         .pipe(gulp.dest('dist/server/views'));
+});
+
+//Copy images
+gulp.task('img-build', function() {
+    return gulp.src('src/public/images/**/*.*')
+        .pipe(gulp.dest('dist/public/images'));
 });
 
 gulp.task('css-build', function() {
@@ -87,16 +93,11 @@ gulp.task('less-build', function () {
 
 
 //Moving bower packages for deployment
-gulp.task('bower-build', ['angular-build', 'pure-build', 'jquery-build', 'fontawesome-build']);
+gulp.task('bower-build', ['angular-build', 'jquery-build', 'fontawesome-build']);
 
 gulp.task('angular-build', function() {
     return gulp.src('bower_components/angular/angular.min.js')
         .pipe(gulp.dest('dist/public/js'));
-});
-
-gulp.task('pure-build', function() {
-    return gulp.src('bower_components/pure/pure-min.css')
-        .pipe(gulp.dest('dist/public/css'));
 });
 
 gulp.task('jquery-build', function() {

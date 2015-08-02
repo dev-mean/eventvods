@@ -18,10 +18,11 @@ html(lang='en')
 						div.arrow
 				nav.leftNavigation
 					each navsection in ["Dashboard", "Events", "Data", "Users"]
-						a(id=navsection href="#" + navsection) 
-							span.icon
-							span.text 
-								= navsection 
+						a(id=navsection href="#" + navsection)
+							span.text= navsection 
 			div.content
 				block content 
 		script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js')
+		script(src='/assets/js/angular.min.js')
+		block scripts
+		script(src='/assets/js/app/app.js')
