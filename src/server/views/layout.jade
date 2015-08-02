@@ -10,7 +10,7 @@ html(lang='en')
 		div.container
 			div.leftSidebar
 				header.logo
-					a(href="#")
+					a(href="/")
 				div.userBlock
 					a(href="#")
 						img(src="/assets/images/avatar-sample.png")
@@ -18,7 +18,7 @@ html(lang='en')
 						div.arrow
 				nav.leftNavigation
 					each navsection in ["Dashboard", "Events", "Data", "Users"]
-						a(id=navsection href="#" + navsection)
+						a(id=navsection href="/" + navsection.toLowerCase())
 							span.text= navsection 
 			div.content
 				block content 

@@ -1,6 +1,9 @@
-angular.module('eventControllers', ['eventService']).controller('eventList', function($http, Events) {
+angular.module('eventControllers', ['eventService'])
+	.controller('eventList', function($http, Events) {
         var vm = this;
 		vm.fields = ["Event Name", "Game", "Priority", "Todo: Ascertain headers"];
+		//Purely example format.
+		//Will need to change slightly to json format
         vm.eventData = [["Event Example 1", "No db connect", "....yet", "...soontm"],["Event Example 2", "No db connect", "....yet", "...soontm"],["Event Example 3", "No db connect", "....yet", "...soontm"]];
         /*
         //fill events with event data
@@ -26,4 +29,13 @@ angular.module('eventControllers', ['eventService']).controller('eventList', fun
                     $scope.todos = data;
                 });
         };*/
-    });
+    })
+	.controller('eventView', function($http, Events) {
+		//Use ng-init to pass initial data? Messy but fast and user-friendly
+	})
+	.controller('eventForm', function($http, Events) {
+		var vm = this;
+		//Below method seems.....hacky, tbd
+		vm.isEdit = (typeof window.eventData !== undefined) ? true : false;
+		
+	});

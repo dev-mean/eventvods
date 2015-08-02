@@ -12,8 +12,13 @@ var session = require('express-session');
 
 //server config
 app.set('env', 'development');
-var config = require('./config/config');
 app.use(morgan('dev'));
+
+//Static file at the top, prevents all the code below being run for static files.
+app.use('/assets', express.static(path.join(__dirname, '..', 'public')));
+
+var config = require('./config/config');
+
 app.use(bodyParser.urlencoded({
 	'extended': 'true'
 }));
@@ -40,7 +45,7 @@ app.locals.pretty = true;
 //routes
 var routes = require('./routes/routes');
 app.use('/', routes);
-app.use('/assets', express.static(path.join(__dirname, '..', 'public')));
+
 
 // development error handler
 // will print stacktrace
