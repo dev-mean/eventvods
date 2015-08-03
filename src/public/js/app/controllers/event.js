@@ -1,10 +1,19 @@
 angular.module('eventControllers', ['eventService'])
 	.controller('eventList', function($http, Events) {
         var vm = this;
-		vm.fields = ["Event Name", "Game", "Priority", "Todo: Ascertain headers"];
 		//Purely example format.
 		//Will need to change slightly to json format
-        vm.eventData = [["Event Example 1", "No db connect", "....yet", "...soontm"],["Event Example 2", "No db connect", "....yet", "...soontm"],["Event Example 3", "No db connect", "....yet", "...soontm"]];
+        vm.eventData = [{
+			"date": "Dec 10",
+			"game": "CSGO",
+			"title": "Fragbite Masters - Season 4",
+			"status": "Published",
+		},{
+			"date": "Dec 15",
+			"game": "CSGO",
+			"title": "Intel Extreme Masters",
+			"status": "Draft",
+		}];
         /*
         //fill events with event data
         Events.get()
