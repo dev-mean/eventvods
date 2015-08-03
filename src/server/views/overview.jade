@@ -15,8 +15,28 @@ block content
 					tr(ng-repeat="event in events.eventData")
 						td(ng-repeat="field in event") {{field}}
 		//Upcoming events
-		.section
+		.section.events.upcoming
 			h2.title Upcoming Events
+			a.btn(href="/events") View Events
+
+			div.row-list
+				div.item
+					div.imageContain
+						img.eventImage(src="/assets/images/event-image-sm.jpg")
+						div.overlay
+					div.eventDate Dec 10
+					div.eventGame CSGO
+					div.eventTitle Fragbite Masters - Season 4
+					div.eventStatus Published
+				div.item
+					div.imageContain
+						img.eventImage(src="/assets/images/event-image-sm.jpg")
+						div.overlay
+					div.eventDate Dec 15
+					div.eventGame CSGO
+					div.eventTitle Intel Extreme Masters
+					div.eventStatus Draft
+
 		//Data mgr
 		.section
 			h2.title Data Manager
