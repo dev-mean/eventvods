@@ -1,27 +1,32 @@
 angular.module('eventControllers', ['eventService'])
+	.controller('eventOverview', function($http, Events){
+		var vm = this;
+		vm.eventData = [];
+	})
 	.controller('eventList', function($http, Events) {
         var vm = this;
-		//Purely example format.
-		//Will need to change slightly to json format
-        vm.eventData = [{
-			"date": "Dec 10",
-			"game": "CSGO",
-			"title": "Fragbite Masters - Season 4",
-			"status": "Published",
-		},{
-			"date": "Dec 15",
-			"game": "CSGO",
-			"title": "Intel Extreme Masters",
-			"status": "Draft",
-		}];
-        /*
+	
+        vm.eventData = [];
+	
         //fill events with event data
         Events.get()
             .success(function(data) {
-                $scope.events = data;
+               vm.eventData = data;
             });
             
-        //post todo using API
+    })
+	.controller('eventView', function($http, Events) {
+		//Use ng-init to pass initial data? Messy but fast and user-friendly
+	})
+	.controller('eventForm', function($http, Events) {
+		var vm = this;
+		//Below method seems.....hacky, tbd
+		vm.isEdit = (typeof window.eventData !== undefined) ? true : false;
+		
+	});
+
+//Code for refactoring
+/*
         $scope.createEvent = function() {
             if(!$.isEmptyObject($scope.eventData)) {    //if the form isn't empty, create a new event
                 Events.create($scope.eventData)
@@ -38,13 +43,3 @@ angular.module('eventControllers', ['eventService'])
                     $scope.todos = data;
                 });
         };*/
-    })
-	.controller('eventView', function($http, Events) {
-		//Use ng-init to pass initial data? Messy but fast and user-friendly
-	})
-	.controller('eventForm', function($http, Events) {
-		var vm = this;
-		//Below method seems.....hacky, tbd
-		vm.isEdit = (typeof window.eventData !== undefined) ? true : false;
-		
-	});

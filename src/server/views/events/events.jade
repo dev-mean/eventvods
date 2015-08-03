@@ -1,7 +1,19 @@
 extends ../layout
 
 block content
-	h1 Events
+	h1.title Events
+	.section(ng-app="event", ng-controller="eventList as events")
+		//Insert header here
+		div.row-list(ng-repeat="event in events.eventData")
+			div.item
+				div.imageContain
+					img.eventImage(src="/assets/images/event-image-sm.jpg")
+					div.overlay
+				div.eventDate {{event.eventDates | date : "dd MMM"}}
+				div.eventGame {{event.game}}
+				div.eventTitle {{event.eventTitle}}
+				div.eventStatus {{event.status}}
+				
 block scripts
 	script(src='/assets/js/app/services/event.js')
 	script(src='/assets/js/app/controllers/event.js')

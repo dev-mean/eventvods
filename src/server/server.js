@@ -34,7 +34,8 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 mongoose.connect(config.databaseUrl, function(err) {
-	console.log("Connected to mongodb");
+	if(err)	console.log("DB err: "+ err);
+	else console.log("Connected to mongodb");
 });
 
 //templating
@@ -62,7 +63,6 @@ if (app.get('env') === 'development') {
 //listens
 var port = config.port;
 var db = config.databaseUrl;
-var ip = config.ip;
 app.listen(port);
-console.log('App listening on ' + ip + ":" + port);
+console.log('App listening on localhost:' + port);
 console.log('Database: ' + db);

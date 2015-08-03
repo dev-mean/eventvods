@@ -1,5 +1,6 @@
 var app = require('express');
 var router = app.Router();
+var Event = require('../models/event.js');
 
 router.get('/', function(req, res) {
         res.render('overview', {});
@@ -38,7 +39,7 @@ router.get('/event/:id/edit', function(req, res) {
 router.get('/api/events', function(req, res) {
 	Event.find(function(err, events) {
 		if(err)
-			res.send(err);
+			console.log(err);
 		res.json(events);
 	});
 });
