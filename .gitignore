@@ -23,7 +23,6 @@ data/
 node_modules/
 .sass-cache/
 vendor/*
-src/server/config/config.js
 src/public/css
 .idea/
 
