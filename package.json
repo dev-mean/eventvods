@@ -4,6 +4,7 @@
   "description": "EventVODS website",
   "main": "dist/server/server.js",
   "dependencies": {
+    "async": "^1.4.0",
     "body-parser": "^1.13.1",
     "bower": "^1.4.1",
     "express": "^4.12.4",

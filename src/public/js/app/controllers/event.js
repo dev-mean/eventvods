@@ -2,6 +2,11 @@ angular.module('eventControllers', ['eventService'])
 	.controller('eventOverview', function($http, Events){
 		var vm = this;
 		vm.eventData = [];
+		//fill events with event data
+        Events.overview()
+            .success(function(data) {
+               vm.eventData = data;
+            });
 	})
 	.controller('eventList', function($http, Events) {
         var vm = this;

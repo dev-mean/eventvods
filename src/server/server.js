@@ -45,7 +45,10 @@ app.locals.pretty = true;
 
 //routes
 var routes = require('./routes/routes');
+var api = require('./routes/api');
 app.use('/', routes);
+app.use('/api/', api);
+
 
 
 // development error handler

@@ -96,8 +96,22 @@ gulp.task('less-build', function () {
 gulp.task('bower-build', ['angular-build', 'jquery-build', 'fontawesome-build']);
 
 gulp.task('angular-build', function() {
-    return gulp.src('bower_components/angular/angular.min.js')
+	//base angular
+    gulp.src('bower_components/angular/angular.min.js')
         .pipe(gulp.dest('dist/public/js'));
+	//angular-animate
+    gulp.src('bower_components/angular-animate/angular-animate.min.js')
+        .pipe(gulp.dest('dist/public/js'));
+	//ng-table
+	gulp.src('bower_components/ng-table/dist/ng-table.min.js')
+        .pipe(gulp.dest('dist/public/js'));
+	gulp.src('bower_components/ng-table/dist/ng-table.min.css')
+        .pipe(gulp.dest('dist/public/css'));
+	//loading bar			
+	gulp.src('bower_components/angular-loading-bar/build/loading-bar.min.js')
+        .pipe(gulp.dest('dist/public/js'));
+	gulp.src('bower_components/angular-loading-bar/build/loading-bar.min.css')
+        .pipe(gulp.dest('dist/public/css'));
 });
 
 gulp.task('jquery-build', function() {
