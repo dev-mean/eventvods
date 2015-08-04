@@ -2,7 +2,7 @@ extends ../layout
 
 block content
 	h1.title Events
-	.section(ng-app="event", ng-controller="eventList as events")
+	.section(ng-app="event", ng-controller="eventList as events", ng-cloak)
 		//Insert header here
 		div.row-list(ng-repeat="event in events.eventData")
 			div.item
@@ -11,7 +11,7 @@ block content
 					div.overlay
 				div.eventDate {{event.eventDates | date : "dd MMM"}}
 				div.eventGame {{event.game}}
-				div.eventTitle {{event.eventTitle}}
+				div.eventTitle {{event.eventTitle | limitTo: 75}}
 				div.eventStatus {{event.status}}
 				
 block scripts

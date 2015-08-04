@@ -131,7 +131,7 @@ gulp.task('fontawesome-build', function() {
 });
 
 gulp.task('node-build', function() {
-    return gulp.src(['src/server/**/*.js', '!src/server/config/*'])
+    return gulp.src(['src/server/**/*.js'])
         .pipe(gulp.dest('dist/server/'));
 });
 

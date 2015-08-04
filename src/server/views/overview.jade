@@ -4,7 +4,7 @@ block content
 	.appcontainer(ng-app="overview", ng-controller="overviewDisplay as overview")
 		h1.title Overview
 		//Recent events
-		.section
+		.section(ng-cloak)
 			h2.title Recent Events
 			a.btn(href="/events") View Events
 			div.row-list(ng-repeat="event in overview.upcoming")
@@ -17,7 +17,7 @@ block content
 					div.eventTitle {{event.title}}
 					div.eventStatus {{event.status}}
 		//Ongoing events
-		.section
+		.section(ng-cloak)
 			h2.title Ongoing Events
 			a.btn(href="/events") View Events
 			div.row-list(ng-repeat="event in overview.ongoing")
@@ -30,7 +30,7 @@ block content
 					div.eventTitle {{event.title}}
 					div.eventStatus {{event.status}}
 		//Upcoming events
-		.section.events.upcoming
+		.section.(ng-cloak)
 			h2.title Upcoming Events
 			a.btn(href="/events") View Events
 			//Also needs filter: upcoming
@@ -44,10 +44,10 @@ block content
 					div.eventTitle {{event.title}}
 					div.eventStatus {{event.status}}
 		//Data mgr
-		.section
+		.section(ng-cloak)
 			h2.title Data Manager
 		//User mgr
-		.section
+		.section(ng-cloak)
 			h2.title User Manager
 
 block scripts

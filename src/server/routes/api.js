@@ -9,7 +9,6 @@ router.get('/overview', function(req, res){
 	//Try block here for dev only
 	try {
 		var today = new Date().toISOString();
-		console.log(today);
 		async.parallel({
 			upcoming: function(callback){
 				Event.find({
