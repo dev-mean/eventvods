@@ -6,8 +6,9 @@ var async = require('async');
 //This router is mounted at /api....so /events here translates to /api/events
 
 router.get('/overview', function(req, res){
+	//Try block here for dev only
 	try {
-		var today = new Date();
+		var today = new Date().toISOString();
 		console.log(today);
 		async.parallel({
 			upcoming: function(callback){
