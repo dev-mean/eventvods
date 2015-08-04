@@ -18,9 +18,8 @@ var eventSchema = new Schema({
 	eventSponsors: String,
 	eventStartDate: { type: Date, required: true },
 	eventEndDate: { type: Date, required: true },
-	eventDates: Date,
 	eventMaps: String,
-	eventTeam: String,
+	eventTeams: String,
 	eventCasters: String,
 	eventPanel: String,
 	eventCustomGroup1: Array,
@@ -28,6 +27,6 @@ var eventSchema = new Schema({
 	eventCustomURL1: Array
 });
 
-var Event = mongoose.model('Event', eventSchema);
+var Event = mongoose.model('events', eventSchema);
 
 module.exports = Event;
