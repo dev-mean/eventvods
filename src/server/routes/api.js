@@ -5,6 +5,20 @@ var async = require('async');
 
 //This router is mounted at /api....so /events here translates to /api/events
 
+router.get('/test', function(req, res){
+	var d = new Date('2014-02-10T10:50:57.240Z');
+	console.log(d);
+	Event.find(
+		{
+			eventEndDate: d
+		},
+		function(err, events) {
+		if(err)
+			console.log(err);
+		res.json(events);
+	});
+});
+
 router.get('/overview', function(req, res){
 	//Try block here for dev only
 	try {

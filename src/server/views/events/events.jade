@@ -9,7 +9,9 @@ block content
 				div.imageContain
 					img.eventImage(src="/assets/images/event-image-sm.jpg")
 					div.overlay
-				div.eventDate {{event.eventDates | date : "dd MMM"}}
+				div.eventDate {{event.eventStartDate | date : "dd MMM"}}
+				-
+				div.eventDate {{event.eventEndDate | date : "dd MMM"}}
 				div.eventGame {{event.game}}
 				div.eventTitle {{event.eventTitle | limitTo: 75}}
 				div.eventStatus {{event.status}}
