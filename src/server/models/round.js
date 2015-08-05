@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-var roundSchema = new Scheuma({
+var roundSchema = new Schema({
     roundMatchID: { type: Number, required: true },
     roundNumber: Number,
     roundResult: String,
