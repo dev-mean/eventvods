@@ -27,14 +27,14 @@ app.use(bodyParser.json({
 	type: 'application/vnd.api+json'
 }));
 app.use(session({
-	secret: 'eventvods_dev',
+	secret: config.secret,
 	resave: false,
 	saveUninitialized: true
 }))
 app.use(passport.initialize());
 app.use(passport.session());
 mongoose.connect(config.databaseUrl, function(err) {
-	if(err)	console.log("DB err: "+ err);
+	if(err)	console.log("DB err: " + err);
 	else console.log("Connected to mongodb");
 });
 
@@ -66,6 +66,11 @@ if (app.get('env') === 'development') {
 //listens
 var port = config.port;
 var db = config.databaseUrl;
-app.listen(port);
-console.log('App listening on localhost:' + port);
+if(config.ip) {
+  app.listen(port, config.ip);
+} else {
+  app.listen(port);
+}
+
+console.log('App listening on ' + (config.ip || 'localhost') + ':' + port);
 console.log('Database: ' + db);
