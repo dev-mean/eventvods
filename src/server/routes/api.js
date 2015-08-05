@@ -68,6 +68,7 @@ router.get('/overview', function(req, res){
 		console.warn(e);
 	}
 });
+
 router.get('/events', function(req, res) {
 	Event.find(function(err, events) {
 		if(err)
@@ -77,15 +78,8 @@ router.get('/events', function(req, res) {
 });
 
 //creates new event, should be fixed to accept all appropriate data, maybe more error handling stuff
-router.post('/api/events', function(req, res) {
-	Event.create({
-		format : req.body.format,
-		beginDate: new Date('Jun 07, 1954'),
-		endDate: new Date('Jun 07, 1954'),
-		tournamentLocation: req.body.tournamentLocation,
-		casters: req.body.casters,
-		panel: req.body.panel
-	}, function(err, events) {
+router.post('/events', function(req, res) {
+	Event.create(req.body, function(err, events) {
 		if(err)
 			res.send(err);
 
@@ -98,7 +92,7 @@ router.post('/api/events', function(req, res) {
 });
 
 //deletes event object using the _id of specified object
-router.post('/api/events/:event_id', function(req, res) {
+router.post('/events/:event_id', function(req, res) {
 	Event.remove({
 		_id : req.params.event_id
 	}, function(err, event) {
