@@ -2,7 +2,6 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var eventSchema = new Schema({
-	eventID: { type: Number, required: true, unique: true },
 	eventTitle: { type: String, require: true },
 	eventPermaLink: { type: String, require: true },
 	eventAbbreviation: String,
