@@ -2,7 +2,6 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var matchSchema = new Schema({
-    matchID: { type: Number, required: true, unique: true },
     matchDate: Date,
     matchTime: String,
     matchType: String,

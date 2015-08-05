@@ -2,7 +2,6 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var casterSchema = new Schema({
-    casterID: { type: Number, required: true, unique: true },
     casterName: String,
     casterAlias: { type: String, required: true },
     casterWebsite: String,
