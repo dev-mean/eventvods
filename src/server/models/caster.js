@@ -9,6 +9,6 @@ var casterSchema = new Schema({
     casterImage: String
 });
 
-var User = mongoose.model('Caster', casterSchema);
+var Caster = mongoose.model('caster', casterSchema);
 
-module.exports = User;
+module.exports = Caster;

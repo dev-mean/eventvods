@@ -8,6 +8,6 @@ var userSchema = new Schema({
 	userPerferences: String
 });
 
-var User = mongoose.model('User', userSchema);
+var User = mongoose.model('users', userSchema);
 
 module.exports = User;

@@ -8,6 +8,6 @@ var moduleSchema =  new Schema ({
     moduleTeams: String
 });
 
-var Module = mongoose.model('Module', moduleSchema);
+var Module = mongoose.model('modules', moduleSchema);
 
 module.exports = Module;

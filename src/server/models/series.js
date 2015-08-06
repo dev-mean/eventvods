@@ -7,6 +7,6 @@ var seriesSchema = new Schema({
     seriesImage: String
 });
 
-var Series = mongoose.model('Series', seriesSchema);
+var Series = mongoose.model('series', seriesSchema);
 
 module.exports = Series;

@@ -10,6 +10,6 @@ var teamSchema = new Schema({
 	teamIcon: String
 });
 
-var Team = mongoose.model('Team', teamSchema);
+var Team = mongoose.model('teams', teamSchema);
 
 module.exports = Team;

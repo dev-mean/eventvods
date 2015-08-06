@@ -7,6 +7,6 @@ var organizationSchema = new Schema ({
     organizationImage: String
 });
 
-var Organization = mongoose.model('Organization', organizationSchema);
+var Organization = mongoose.model('organizations', organizationSchema);
 
 module.exports = Organization;

@@ -6,6 +6,6 @@ var mapSchema = new Schema({
 		sampleImage: String
 });
 
-var Map = mongoose.model('Map', mapSchema);
+var Map = mongoose.model('maps', mapSchema);
 
 module.exports = Map;

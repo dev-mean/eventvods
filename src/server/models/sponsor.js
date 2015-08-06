@@ -7,6 +7,6 @@ var sponsorSchema = new Schema({
     sponsorImage: String
 });
 
-var Sponsor = mongoose.model('Sponsor', sponsorSchema);
+var Sponsor = mongoose.model('sponsors', sponsorSchema);
 
 module.exports = Sponsor;

@@ -19,11 +19,11 @@ var async = require('async');
 //This router is mounted at /api....so /events here translates to /api/events
 
 router.get('/test', function(req, res){
-	var d = new Date('2014-02-10T10:50:57.240Z');
+	var d = new Date('2012-02-11T03:34:54.000Z');
 	console.log(d);
 	Event.find(
 		{
-			eventEndDate: d
+			eventStartDate: d
 		},
 		function(err, events) {
 		if(err)

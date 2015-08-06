@@ -13,6 +13,6 @@ var matchSchema = new Schema({
     matchWinner: String
 });
 
-var Match = mongoose.model('Match', matchSchema);
+var Match = mongoose.model('matchs', matchSchema);
 
 module.exports = Match;

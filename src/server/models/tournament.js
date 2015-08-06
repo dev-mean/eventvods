@@ -7,6 +7,6 @@ var tournamentSchema = new Schema ({
 	endDate: { type: Date, required: true }
 });
 
-var Tournament = mongoose.model('Tournament', tournamentSchema);
+var Tournament = mongoose.model('tournaments', tournamentSchema);
 
 module.exports = Tournament;

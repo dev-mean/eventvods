@@ -6,6 +6,6 @@ var playerSchema = new Schema ({
 	playerTeamID: { type: Number, required: true }
 });
 
-var Player = mongoose.model('Player', playerSchema);
+var Player = mongoose.model('players', playerSchema);
 
 module.exports = Player;

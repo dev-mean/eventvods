@@ -11,6 +11,6 @@ var roundSchema = new Schema({
     roundDemo: Array
 });
 
-var Round = mongoose.model('Round', roundSchema);
+var Round = mongoose.model('rounds', roundSchema);
 
 module.exports = Round;
