@@ -1,0 +1,19 @@
+extends ../layout
+
+block content
+	.appcontainer(ng-app="data", ng-controller="team as teamList")
+		h1.title Teams
+		a.btn(href="/data/add/team") Add Team
+		.section(ng-cloak)
+			div.row-list(ng-repeat="team in teamList.teams")
+				div.item
+					div.dataimg {{team.teamImage}}
+					div {{team.teamName}}
+					div {{team.teamGame}}
+					div {{team.teamCountry}}
+					div {{team.teamIcon}}
+			p(ng-show="teamList.teams.length == 0")
+				| No teams set up.
+block scripts
+	script(src='/assets/js/app/services/data.js')
+	script(src='/assets/js/app/controllers/data.js')
