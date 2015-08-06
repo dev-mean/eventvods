@@ -4,6 +4,7 @@ block content
 	h1.title Events
 	.section(ng-app="event", ng-controller="eventList as events", ng-cloak)
 		//Insert header here
+		a.btn(href="/events/add") Add Event
 		div.row-list(ng-repeat="event in events.eventData")
 			div.item
 				div.imageContain
