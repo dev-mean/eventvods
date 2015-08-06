@@ -97,11 +97,13 @@ router.post('/casters', function(req, res) {
 		if(err)
 			res.send(err);
 
-/*		Caster.find(function(err, casters) {
-			if(err)
-				res.send(err);
-			res.json(casters);
-		});*/
+		Caster.find(function(err, casters) {
+			if(err) {
+        res.send(err);
+      } else {
+        res.json(casters);
+      }
+		});
 	});
 });
 
@@ -131,14 +133,17 @@ router.get('/events', function(req, res) {
 });
 
 router.post('/events', function(req, res) {
+  console.log(req.body);
 	Event.create(req.body, function(err, events) {
 		if(err)
 			res.send(err);
 
 		Event.find(function(err, events) {
-			if(err)
-				res.send(err);
-			res.json(events);
+			if(err) {
+        res.send(err);
+      } else {
+        res.json(events);
+      }
 		});
 	});
 });
