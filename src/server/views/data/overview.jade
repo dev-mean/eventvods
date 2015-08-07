@@ -1,0 +1,46 @@
+extends ../layout
+
+block content
+	.appcontainer(ng-app="data", ng-controller="dataOverview as overview")
+		h1.title Data
+		//Recent events
+		.section(ng-cloak)
+			h2.title Casters
+			a.btn(href="/data/casters") View Casters
+			a.btn(href="/data/add/caster") Add Casters
+			div.row-list(ng-repeat="caster in overview.casters")
+				div.item
+					div.dataimg {{caster.casterImage}}
+					div {{caster.casterName}}
+					div {{caster.casterAlias}}
+					div {{caster.casterWebsite}}
+					div {{caster.casterCountry}}
+
+			p(ng-show="overview.casters.length == 0")
+				| No casters set up.
+		.section(ng-cloak)
+			h2.title Maps
+			a.btn(href="/data/maps") View Maps
+			a.btn(href="/data/add/map") Add Map
+			div.row-list(ng-repeat="map in overview.maps")
+				div.item
+					div.dataimg {{map.mapImage}}
+					div {{map.mapName}}
+			p(ng-show="overview.maps.length == 0")
+				| No maps set up.
+		.section(ng-cloak)
+			h2.title Teams
+			a.btn(href="/data/teams") View Teams
+			a.btn(href="/data/add/team") Add Team
+			div.row-list(ng-repeat="team in overview.teams")
+				div.item
+					div.dataimg {{team.teamImage}}
+					div {{team.teamName}}
+					div {{team.teamGame}}
+					div {{team.teamCountry}}
+					div {{team.teamIcon}}
+			p(ng-show="overview.maps.length == 0")
+				| No teams set up.
+block scripts
+	script(src='/assets/js/app/services/data.js')
+	script(src='/assets/js/app/controllers/data.js')

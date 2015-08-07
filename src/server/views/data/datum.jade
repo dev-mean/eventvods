@@ -1,0 +1,12 @@
+extends ../layout
+
+block content
+	-console.log(data);
+	-title = (typeof data !== undefined) ? "Edit Event" : "Add Event"
+	h1=title
+block scripts
+	-if(typeof data !== undefined)
+		script.
+			window.eventData = !{data};
+	script(src='/assets/js/app/services/event.js')
+	script(src='/assets/js/app/controllers/event.js')

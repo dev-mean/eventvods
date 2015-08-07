@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var teamSchema = new Schema({
+	teamName: String,
 	teamGame: String,
 	teamWebsite: String,
 	teamTwitter: String,

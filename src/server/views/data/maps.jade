@@ -1,0 +1,16 @@
+extends ../layout
+
+block content
+	.appcontainer(ng-app="data", ng-controller="mapList as mapList")
+		h1.title Maps
+		a.btn(href="/data/add/map") Add Map
+		.section(ng-cloak)
+			div.row-list(ng-repeat="map in mapList.maps")
+				div.item
+					div.dataimg {{map.mapImage}}
+					div {{map.mapName}}
+			p(ng-show="mapList.maps.length == 0")
+				| No maps set up.
+block scripts
+	script(src='/assets/js/app/services/data.js')
+	script(src='/assets/js/app/controllers/data.js')
