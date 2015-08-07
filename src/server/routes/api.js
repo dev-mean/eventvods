@@ -18,80 +18,83 @@ var async = require('async');
 
 //This router is mounted at /api....so /events here translates to /api/events
 
-router.get('/test', function(req, res){
-	var d = new Date('2012-02-11T03:34:54.000Z');
-	console.log(d);
-	Event.find(
-		{
-			eventStartDate: d
+router.get('/overview', function(req, res){
+	var today = new Date().toISOString();
+	async.parallel({
+		upcoming: function(callback){
+			Event.find({
+				"eventStartDate": {
+					$gte: today
+				}
+			}, function(err, docs){
+				if(err) callback(err);
+				else callback(null, docs);
+			});
 		},
-		function(err, events) {
-		if(err)
-			console.log(err);
-		res.json(events);
+		ongoing: function(callback){
+			Event.find({
+				"eventEndDate": {
+					$gte: today
+				},
+				"eventStartDate": {
+					$lte: today
+				}
+			}, function(err, docs){
+				if(err) callback(err);
+				else callback(null, docs);
+			});
+		},
+		recent: function(callback){
+			Event.find({
+				"eventEndDate": {
+					$lte: today
+				}
+			}, function(err, docs){
+				if(err) callback(err);
+				else callback(null, docs);
+			});
+		},
+		casters: function(callback){
+			Caster.find().count(function(err, count){
+				if(err) callback(err);
+				else callback(null, count)
+			});
+		},
+		
+		maps: function(callback){
+			Map.find().count(function(err, count){
+				if(err) callback(err);
+				else callback(null, count)
+			});
+		},
+		
+		teams: function(callback){
+			Team.find().count(function(err, count){
+				if(err) callback(err);
+				else callback(null, count)
+			});
+		}
+
+		//Add in user manager overview calls here.		
+
+	}, function(err, results){
+		if(err) console.warn(err);
+		else res.json(results);
 	});
 });
 
-router.get('/overview', function(req, res){
-	//Try block here for dev only
-	try {
-		var today = new Date().toISOString();
-		async.parallel({
-			upcoming: function(callback){
-				Event.find({
-					"eventStartDate": {
-						$gte: today
-					}
-				}, function(err, docs){
-					if(err) callback(err);
-					else callback(null, docs);
-				});
-			},
-			ongoing: function(callback){
-				Event.find({
-					"eventEndDate": {
-						$gte: today
-					},
-					"eventStartDate": {
-						$lte: today
-					}
-				}, function(err, docs){
-					if(err) callback(err);
-					else callback(null, docs);
-				});
-			},
-			recent: function(callback){
-				Event.find({
-					"eventEndDate": {
-						$lte: today
-					}
-				}, function(err, docs){
-					if(err) callback(err);
-					else callback(null, docs);
-				});
-			}
-			
-			//Add in data manager & user manager overview calls here.	
-		
-		}, function(err, results){
-			if(err) console.warn(err);
-			else res.json(results);
-		})
-	} catch(e) {
-		console.warn(e);
-	}
-});
+
 
 //caster routes
 router.route('/casters')
-	.get('/casters', function(req, res) {
+	.get(function(req, res) {
 		Caster.find(function(err, casters) {
 			if(err)
 				console.log(err);
 			res.json(casters);
 		});
 	})
-	.post('/casters', function(req, res) {
+	.post(function(req, res) {
 	  console.log(req.body);
 		Caster.create(req.body, function(err, casters) {
 			if(err)
@@ -120,6 +123,8 @@ router.route('/casters/:caster_id')
         });
     });
 
+
+
 //event routes
 router.route('/events')
 	.get(function(req, res) {
@@ -133,7 +138,6 @@ router.route('/events')
 		Event.create(req.body, function(err, events) {
 			if(err)
 				res.send(err);
-			});
 		});
 	});
 
