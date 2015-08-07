@@ -83,84 +83,79 @@ router.get('/overview', function(req, res){
 });
 
 //caster routes
-router.get('/casters', function(req, res) {
-	Caster.find(function(err, casters) {
-		if(err)
-			console.log(err);
-		res.json(casters);
-	});
-});
-
-router.post('/casters', function(req, res) {
-  console.log(req.body);
-	Caster.create(req.body, function(err, casters) {
-		if(err)
-			res.send(err);
-
-		Caster.find(function(err, casters) {
-			if(err) {
-        res.send(err);
-      } else {
-        res.json(casters);
-      }
-		});
-	});
-});
-
-
-router.post('/casters/:caster_id', function(req, res) {
-	Caster.remove({
-		_id : req.params.caster_id
-	}, function(err, caster) {
-		if(err)
-			res.send(err);
-
+router.route('/casters')
+	.get('/casters', function(req, res) {
 		Caster.find(function(err, casters) {
 			if(err)
+				console.log(err);
+			res.json(casters);
+		});
+	})
+	.post('/casters', function(req, res) {
+	  console.log(req.body);
+		Caster.create(req.body, function(err, casters) {
+			if(err)
 				res.send(err);
-			res.json(events);
 		});
 	});
-});
+
+router.route('/casters/:caster_id')
+	.delete(function(req, res) {
+		Caster.remove({
+			_id : req.params.caster_id
+		}, function(err, caster) {
+			if(err)
+				res.send(err);
+		});
+	})
+    .put(function(req, res) {
+        Caster.findById(req.params.caster_id, function(err, caster) {
+            if(err)
+                res.send(err);
+            caster = req.body;
+            caster.save(function(err) {
+                if(err)
+                    res.send(err);
+            });
+        });
+    });
 
 //event routes
-router.get('/events', function(req, res) {
-  Event.find(function(err, events) {
-    if(err)
-      console.log(err);
-    res.json(events);
-  });
-});
-
-router.post('/events', function(req, res) {
-  console.log(req.body);
-	Event.create(req.body, function(err, events) {
-		if(err)
-			res.send(err);
-
-		Event.find(function(err, events) {
-			if(err) {
-        res.send(err);
-      } else {
-        res.json(events);
-      }
-		});
-	});
-});
-
-router.post('/events/:event_id', function(req, res) {
-	Event.remove({
-		_id : req.params.event_id
-	}, function(err, event) {
-		if(err)
-			res.send(err);
-
+router.route('/events')
+	.get(function(req, res) {
 		Event.find(function(err, events) {
 			if(err)
-				res.send(err);
+				console.log(err);
 			res.json(events);
 		});
+	})
+	.post(function(req, res) {
+		Event.create(req.body, function(err, events) {
+			if(err)
+				res.send(err);
+			});
+		});
 	});
-});
+
+router.route('/events/:event_id')
+	.delete(function(req, res) {
+		Event.remove({
+			_id : req.params.event_id
+		}, function(err, event) {
+			if(err)
+				res.send(err);
+		});
+	})
+    .put(function(req, res) {
+        Event.findById(req.params.event_id, function(err, event) {
+            if(err)
+                res.send(err);
+            event = req.body;
+            event.save(function(err) {
+                if(err)
+                    res.send(err);
+            });
+        });
+    });
 
 module.exports = router;
