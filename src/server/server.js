@@ -6,9 +6,10 @@ var path = require('path');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var passport = require('passport');
-var passport_strategy = require('passport-local').Strategy;
+var LocalStrategy = require('passport-local').Strategy;
 var morgan = require('morgan'); //Logger
 var session = require('express-session');
+var User = require('./models/user');
 
 //server config
 app.set('env', 'development');
@@ -31,8 +32,14 @@ app.use(session({
 	resave: false,
 	saveUninitialized: true
 }))
+
+/* Passport setup */
 app.use(passport.initialize());
 app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
 mongoose.connect(config.databaseUrl, function(err) {
 	if(err)	console.log("DB err: " + err);
 	else console.log("Connected to mongodb");
@@ -46,8 +53,10 @@ app.locals.pretty = true;
 //routes
 var routes = require('./routes/routes');
 var api = require('./routes/api');
+var auth = require('./routes/auth.js');
 app.use('/', routes);
 app.use('/api/', api);
+app.use('/users/', auth);
 
 
 
