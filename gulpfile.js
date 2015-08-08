@@ -112,6 +112,12 @@ gulp.task('angular-build', function() {
         .pipe(gulp.dest('dist/public/js'));
 	gulp.src('bower_components/angular-loading-bar/build/loading-bar.min.css')
         .pipe(gulp.dest('dist/public/css'));
+	//date picker			
+	gulp.src('bower_components/angular-native-picker/build/angular-datepicker.js')
+        .pipe(gulp.dest('dist/public/js'));
+	gulp.src('bower_components/angular-native-picker/build/themes/*.css')
+		.pipe(rename({prefix: 'angular-datepicker-'}))
+        .pipe(gulp.dest('dist/public/css'));
 });
 
 gulp.task('jquery-build', function() {
