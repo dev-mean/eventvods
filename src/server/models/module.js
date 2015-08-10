@@ -1,13 +1,15 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+var Team = require('./team').schema;
+var Match = require('./match').schema;
 
 var moduleSchema =  new Schema ({
-    moduleEventID: { type: Number, require: true },
     moduleTitle: { type: String, required: true },
-    moduleType: { type: String, required: true },
-    moduleTeams: String
+	moduleMatches: [Match],
+    moduleTeams: [Team],
 });
 
 var Module = mongoose.model('modules', moduleSchema);
 
 module.exports = Module;
+module.exports.schema = moduleSchema;

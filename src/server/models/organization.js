@@ -1,9 +1,10 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+var SocialMedia = require('./socialmedia').schema;
 
 var organizationSchema = new Schema ({
     organizationName: { type: String, required: true },
-    organizationWebsite: String,
+    organizationMedia: [SocialMedia],
     organizationImage: String
 });
 
