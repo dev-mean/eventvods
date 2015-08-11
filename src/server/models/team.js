@@ -1,11 +1,11 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+var SocialMedia = require('./socialmedia').schema;
 
 var teamSchema = new Schema({
 	teamName: String,
 	teamGame: String,
-	teamWebsite: String,
-	teamTwitter: String,
+	teamMedia: [SocialMedia],
 	teamCountry: String,
 	teamImage: String,
 	teamIcon: String
@@ -14,3 +14,4 @@ var teamSchema = new Schema({
 var Team = mongoose.model('teams', teamSchema);
 
 module.exports = Team;
+module.exports.schema = teamSchema;

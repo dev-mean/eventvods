@@ -1,14 +1,11 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+var Link = require('./link').schema;
 
 var roundSchema = new Schema({
-    roundMatchID: { type: Number, required: true },
-    roundNumber: Number,
-    roundResult: String,
-    roundTwitch: String,
-    roundYoutube: String,
-    roundHighlights: String,
-    roundDemo: Array
+    roundTeam1: { type: String, required: true },
+	roundTeam2: { type: String, required: true },
+	roundlinks: [Link],
 });
 
 var Round = mongoose.model('rounds', roundSchema);

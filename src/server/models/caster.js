@@ -1,10 +1,11 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-
+var SocialMedia = require('./socialmedia').schema;
+						  
 var casterSchema = new Schema({
-    casterName: String,
+    casterName: { type: String, required: true},
     casterAlias: { type: String, required: true },
-    casterWebsite: String,
+	casterMedia: [SocialMedia],
     casterCountry: String,
     casterImage: String
 });
@@ -12,3 +13,4 @@ var casterSchema = new Schema({
 var Caster = mongoose.model('caster', casterSchema);
 
 module.exports = Caster;
+module.exports.schema = casterSchema;

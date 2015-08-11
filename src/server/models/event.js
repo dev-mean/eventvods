@@ -1,29 +1,27 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+var SocialMedia = require('./socialmedia').schema;
+var Sponsor = require('./sponsor').schema;
+var Team = require('./team').schema;
+var Caster = require('./caster').schema;
+var Map = require('./map').schema;
+var Module = require('./module').schema;
 
 var eventSchema = new Schema({
-	eventTitle: { type: String, require: true },
-	eventPermaLink: { type: String, require: true },
+	eventGame: { type: String, required: true },
+	eventTitle: { type: String, required: true },
+	eventPermaLink: { type: String, required: true },
 	eventAbbreviation: String,
-	eventFormat: { type: String, required: true },
 	eventType: String,
-	eventModules: String,
+	eventModules: [Module],
 	eventLocation: { type: String, required: true },
-	eventWebsite: String,
-	eventTwitter: String,
-	eventStream: String,
-	eventOwner: String,
-	eventGroup: String,
-	eventSponsors: String,
+	eventMedia: [SocialMedia],
+	eventSponsors: [Sponsor],
 	eventStartDate: { type: Date, required: true },
 	eventEndDate: { type: Date, required: true },
-	eventMaps: String,
-	eventTeams: String,
-	eventCasters: String,
-	eventPanel: String,
-	eventCustomGroup1: Array,
-	eventCustomField1: Array,
-	eventCustomURL1: Array
+	eventMaps: [Map],
+	eventTeams: [Team],
+	eventCasters: [Caster],
 });
 
 var Event = mongoose.model('events', eventSchema);
