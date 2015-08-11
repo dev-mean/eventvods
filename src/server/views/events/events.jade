@@ -1,57 +1,110 @@
 extends ../layout
 
 block content
-	div.contextHead
-		div.leftSide
-			a.btn.lg.solid.icon(href="/events/new")
-				i.icon-file-add
-				span Create Event
-		div.rightSide
-			div.filterControl
-				a(href="#") Show Filter Controls
-			div.viewSelect
-				div.listView.active
-					i.icon-list
-					span List View
-				div.gridView
-					i.icon-grid
-					span Grid View
-	div.listView.events
-		table.standard
-			thead
-				tr
-					th Date
-					th Title
-					th Game
-					th User
-					th Status
-					th 
-					th 	
-			tbody
-				tr
-					td.date 10/15/15
-					td.title The International 7
-					td.game.csgo DOTA 2
-					td.user clam-
-					td.status.draft Draft
-					td.edit
-						a(href="#")
-							i.icon-pencil
-					td.url
-						a(href="#")
-							i.icon-logout
-				tr
-					td.date 10/5/15
-					td.title ESL One Cologne 2015 North American Qualifier
-					td.game.csgo CSGO
-					td.user mattc0m
-					td.status.published Published
-					td.edit
-						a(href="#")
-							i.icon-pencil
-					td.url
-						a(href="#")
-							i.icon-logout
+	div.event-container(ng-app)
+		div.contextHead
+			div.leftSide
+				a.btn.lg.solid.icon(href="/events/new")
+					i.icon-file-add
+					span Create Event
+			div.rightSide
+				div.filterControl
+					a(href="#") Show Filter Controls
+				div.viewSelect
+					div.listView.active
+						i.icon-list
+						span List View
+					div.gridView(ng-click="showGrid = !showGrid")
+						i.icon-grid
+						span Grid View
+		div.listView.events(ng-if="!showGrid")
+			table.standard
+				thead
+					tr
+						th Date
+						th Title
+						th Game
+						th User
+						th Status
+						th 
+						th 	
+				tbody
+					tr
+						td.date 10/15/15
+						td.title The International 7
+						td.game.csgo DOTA 2
+						td.user clam-
+						td.status.draft Draft
+						td.edit
+							a(href="#")
+								i.icon-pencil
+						td.url
+							a(href="#")
+								i.icon-logout
+					tr
+						td.date 10/5/15
+						td.title ESL One Cologne 2015 North American Qualifier
+						td.game.csgo CSGO
+						td.user mattc0m
+						td.status.published Published
+						td.edit
+							a(href="#")
+								i.icon-pencil
+						td.url
+							a(href="#")
+								i.icon-logout
+		div.gridView.events(ng-if="showGrid")
+			div.pagination Page 1 of 20
+			div.grid
+				div.item(style="background-image: url('/assets/images/backend-background.jpg');")
+					div.overlay.hover
+						div.btn.sm.solid Edit Event
+					div.gradient.overlay
+					div.status.draft Draft
+					div.text
+						div.date October 15, 2015
+						div.title ESL One Cologne 2015 North American Qualifier
+				div.item(style="background-image: url('/assets/images/backend-background.jpg');")
+					div.overlay.hover
+						div.btn.sm.solid Edit Event
+					div.gradient.overlay
+					div.status.draft Draft
+					div.text
+						div.date October 13, 2015
+						div.title ESL One Cologne 2015 North American Qualifier
+				div.item(style="background-image: url('/assets/images/backend-background.jpg');")
+					div.overlay.hover
+						div.btn.sm.solid Edit Event
+					div.gradient.overlay
+					div.status.draft Draft
+					div.text
+						div.date October 12, 2015
+						div.title ESL One Cologne 2015 North American Qualifier
+				div.item(style="background-image: url('/assets/images/backend-background.jpg');")
+					div.overlay.hover
+						div.btn.sm.solid Edit Event
+					div.gradient.overlay
+					div.status.draft Draft
+					div.text
+						div.date October 12, 2015
+						div.title ESL One Cologne 2015 North American Qualifier
+				div.item(style="background-image: url('/assets/images/backend-background.jpg');")
+					div.overlay.hover
+						div.btn.sm.solid Edit Event
+					div.gradient.overlay
+					div.status.draft Draft
+					div.text
+						div.date October 4, 2015
+						div.title ESL One Cologne 2015 North American Qualifier
+				div.item(style="background-image: url('/assets/images/backend-background.jpg');")
+					div.overlay.hover
+						div.btn.sm.solid Edit Event
+					div.gradient.overlay
+					div.status.draft Draft
+					div.text
+						div.date October 1, 2015
+						div.title ESL One Cologne 2015 North American Qualifier
+
 				
 block scripts
 	script(src='/assets/js/app/services/event.js')
