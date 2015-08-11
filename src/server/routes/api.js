@@ -161,4 +161,121 @@ router.route('/events/:event_id')
         });
     });
 
+
+
+//link routes
+router.route('/link')
+	.get(function(req, res) {
+		Link.find(function(err, link) {
+			if(err)
+				console.log(err);
+			res.json(events);
+		});
+	})
+	.post(function(req, res) {
+		Link.create(req.body, function(err, link) {
+			if(err)
+				res.send(err);
+		});
+	});
+
+router.route('/link/:link_id')
+	.delete(function(req, res) {
+		Link.remove({
+			_id : req.params.event_id
+		}, function(err, event) {
+			if(err)
+				res.send(err);
+		});
+	})
+    .put(function(req, res) {
+        Link.findById(req.params.link_id, function(err, link) {
+            if(err)
+                res.send(err);
+            link = req.body;
+            link.save(function(err) {
+                if(err)
+                    res.send(err);
+            });
+        });
+    });
+
+
+
+//map routes
+router.route('/map')
+    .get(function(req, res) {
+        Map.find(function(err, map) {
+            if(err)
+                console.log(err);
+            res.json(map);
+        });
+    })
+    .post(function(req, res) {
+        Map.create(req.body, function(err, map) {
+            if(err)
+                res.send(err);
+        });
+    });
+
+router.route('/map/:map_id')
+    .delete(function(req, res) {
+		Map.remove({
+			_id : req.params.map_id
+		}, function(err, map) {
+			if(err)
+				res.send(err);
+		});
+	})
+    .put(function(req, res) {
+        Map.findById(req.params.map_id, function(err, map) {
+          if(err)
+              res.send(err)
+            map = req.body;
+            map.save(function(err) {
+               if(err)
+                   res.send(err);
+            });
+        });
+    })
+
+
+
+//match routes
+router.route('match')
+    .get(function(req, res) {
+        Match.find(function(err, match) {
+            if(err)
+                console.log(err);
+            res.json(match);
+        });
+    })
+    .post(function(req, res) {
+        Match.creat(req.body, function(err, match) {
+            if(err)
+                res.send(err);
+        });
+    })
+
+router.route('match/:match_id')
+    .delete(function(req, res) {
+        Match.remove({
+            _id : req.param.match_id
+        }, function(err, map) {
+            if(err)
+                res.send(err);
+        });
+    })
+    .put(function(req, res) {
+        Map.findById(req.params.map_id, function(err, map) {
+            if(err)
+                res.send(err)
+            map = req.body;
+            map.save(function(err) {
+               if(err)
+                   res.send(err);
+            });
+        });
+    })
+
 module.exports = router;
