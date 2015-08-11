@@ -204,6 +204,7 @@ table.standard {
 }
 
 /* grid view */
+.pagination { padding: @padding-sm @padding; background: @default-light; }
 .grid {
 	.flex-display; 
 	.flex-wrap(wrap);
@@ -230,6 +231,7 @@ table.standard {
 			left: 0; 
 			height: 100%; 
 			width: 100%;
+			
 			&.hover {
 				background: rgba(0,0,0,0.2); 
 				border: 5px solid @green-bright;
@@ -243,17 +245,17 @@ table.standard {
 				}
 			}
 			&.gradient {
-				background-image: -webkit-linear-gradient(top, rgba(52, 56, 80, 0), rgba(52, 56, 80, 0.65));
-				background-image:         linear-gradient(to bottom, rgba(52, 56, 80, 0), rgba(52, 56, 80, 0.65)); 
+				background-image: -webkit-linear-gradient(top, rgba(52, 56, 80, 0), rgba(42, 45, 62, 0.8));
+				background-image:         linear-gradient(to bottom, rgba(52, 56, 80, 0), rgba(42, 45, 62, 0.8)); 
 			}
 		}
 		.text { 
 			bottom: 0; 
 			left: 0;
 			width: 100%; 
+			font-size: 14px;
 			padding: @padding;
 			color: @silver-light;
-			font-size: 14px;
 			.date { color: @silver-dark; font-size: 12px; padding-bottom: 2px; }
 		}
 		.status { top: @padding; right: @padding; }
