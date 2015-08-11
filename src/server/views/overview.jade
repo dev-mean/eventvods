@@ -1,65 +1,66 @@
 extends layout
 
 block content
-	.appcontainer(ng-app="overview", ng-controller="overviewDisplay as overview")
-		h1.title Overview
-		//Recent events
-		.section(ng-cloak)
-			h2.title Recent Events
-			a.btn(href="/events") View Events
-			div.row-list(ng-repeat="event in overview.recent | orderBy: '-eventEndDate'")
-				div.item
-					div.imageContain
-						img.eventImage(src="/assets/images/event-image-sm.jpg")
-						div.overlay
-					div.eventDate {{event.eventStartDate | date : "dd MMM"}}
-					-
-					div.eventDate {{event.eventEndDate | date : "dd MMM"}}
-					div.eventGame {{event.game}}
-					div.eventTitle {{event.eventTitle | limitTo: 75}}
-					div.eventStatus {{event.status}}
-			p(ng-show="overview.recent.length == 0")
-				| No recent events.
-		//Ongoing events
-		.section(ng-cloak)
-			h2.title Ongoing Events
-			a.btn(href="/events") View Events
-			div.row-list(ng-repeat="event in overview.ongoing")
-				div.item
-					div.imageContain
-						img.eventImage(src="/assets/images/event-image-sm.jpg")
-						div.overlay
-					div.eventDate {{event.eventStartDate | date : "dd MMM"}}
-					-
-					div.eventDate {{event.eventEndDate | date : "dd MMM"}}
-					div.eventGame {{event.game}}
-					div.eventTitle {{event.eventTitle | limitTo: 75}}
-					div.eventStatus {{event.status}}
-			p(ng-show="overview.ongoing.length == 0")
-				| No ongoing events.
-		//Upcoming events
-		.section(ng-cloak)
-			h2.title Upcoming Events
-			a.btn(href="/events") View Events
-			div.row-list(ng-repeat="event in overview.upcoming")
-				div.item
-					div.imageContain
-						img.eventImage(src="/assets/images/event-image-sm.jpg")
-						div.overlay
-					div.eventDate {{event.eventStartDate | date : "dd MMM"}}
-					-
-					div.eventDate {{event.eventEndDate | date : "dd MMM"}}
-					div.eventGame {{event.game}}
-					div.eventTitle {{event.eventTitle | limitTo: 75}}
-					div.eventStatus {{event.status}}
-			p(ng-show="overview.upcoming.length == 0")
-				| No upcoming events.
-		//Data mgr
-		.section(ng-cloak)
-			h2.title Data Manager
-		//User mgr
-		.section(ng-cloak)
-			h2.title User Manager
+	div.content
+		.appcontainer(ng-app="overview", ng-controller="overviewDisplay as overview")
+			h1.title Overview
+			//Recent events
+			.section(ng-cloak)
+				h2.title Recent Events
+				a.btn(href="/events") View Events
+				div.row-list(ng-repeat="event in overview.recent | orderBy: '-eventEndDate'")
+					div.item
+						div.imageContain
+							img.eventImage(src="/assets/images/event-image-sm.jpg")
+							div.overlay
+						div.eventDate {{event.eventStartDate | date : "dd MMM"}}
+						-
+						div.eventDate {{event.eventEndDate | date : "dd MMM"}}
+						div.eventGame {{event.game}}
+						div.eventTitle {{event.eventTitle | limitTo: 75}}
+						div.eventStatus {{event.status}}
+				p(ng-show="overview.recent.length == 0")
+					| No recent events.
+			//Ongoing events
+			.section(ng-cloak)
+				h2.title Ongoing Events
+				a.btn(href="/events") View Events
+				div.row-list(ng-repeat="event in overview.ongoing")
+					div.item
+						div.imageContain
+							img.eventImage(src="/assets/images/event-image-sm.jpg")
+							div.overlay
+						div.eventDate {{event.eventStartDate | date : "dd MMM"}}
+						-
+						div.eventDate {{event.eventEndDate | date : "dd MMM"}}
+						div.eventGame {{event.game}}
+						div.eventTitle {{event.eventTitle | limitTo: 75}}
+						div.eventStatus {{event.status}}
+				p(ng-show="overview.ongoing.length == 0")
+					| No ongoing events.
+			//Upcoming events
+			.section(ng-cloak)
+				h2.title Upcoming Events
+				a.btn(href="/events") View Events
+				div.row-list(ng-repeat="event in overview.upcoming")
+					div.item
+						div.imageContain
+							img.eventImage(src="/assets/images/event-image-sm.jpg")
+							div.overlay
+						div.eventDate {{event.eventStartDate | date : "dd MMM"}}
+						-
+						div.eventDate {{event.eventEndDate | date : "dd MMM"}}
+						div.eventGame {{event.game}}
+						div.eventTitle {{event.eventTitle | limitTo: 75}}
+						div.eventStatus {{event.status}}
+				p(ng-show="overview.upcoming.length == 0")
+					| No upcoming events.
+			//Data mgr
+			.section(ng-cloak)
+				h2.title Data Manager
+			//User mgr
+			.section(ng-cloak)
+				h2.title User Manager
 
 block scripts
 	script(src='/assets/js/app/controllers/overview.js')

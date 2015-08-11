@@ -13,7 +13,7 @@ html {
 *, *:before, *:after { box-sizing: inherit; }
 
 body {
-	color: @silver;
+	color: @silver-light;
 }
 
 a { color: inherit; text-decoration: none; }
@@ -33,11 +33,11 @@ a { color: inherit; text-decoration: none; }
 		width: @sidebarWidth;
 		background: @default-dark;
 	}
-	.content {
+	.rightView {
 		.flex-display;
 		.flex-direction(column);
 		.flex-grow(1);
-		padding: @gutter;
+		.content { padding: @gutter; }
 	}
 }
 
@@ -101,7 +101,77 @@ nav {
 .section {
 	position: relative; 
 	h2 { padding: @padding-sm - 6 0;}
-	.btn { position: absolute; top: 0px; right: 0px; }
+	> .btn { position: absolute; top: 0px; right: 0px; }
+}
+
+/* context header */
+.contextHead {
+	background: @default-dark;
+	height: 97px;
+	width: 100%;
+	border-left: 1px solid @default;
+	.flex-display;
+	.justify-content(space-between);
+
+	.leftSide { 
+		padding: @padding-lg;
+	}
+
+	.rightSide {
+		.flex-display;
+
+		.filterControl {
+			padding: @padding-xl;
+			a { 
+				color: @green-bright;
+				&:hover { color: @green-light; } 
+			}
+		}
+
+		.viewSelect {
+			.flex-display; 
+
+			> div { 
+				height: 97px; 
+				width: 105px; 
+				text-align: center;
+				background: lighten(@default-dark,1%);
+				padding-top: 60px;
+				font-size: 14px;
+				color: @silver-dark;
+				cursor: pointer;
+				.transition;
+
+				&:hover, .active { background: @default-light; }
+			}
+		}
+	}
+
+}
+
+/* table standard */
+table.standard {
+	width: 100%;
+	font-size: 14px;
+
+	thead { background: @default-light; }
+	th, td {
+		&:first-child { padding-left: @padding-cell + 6; }
+	}
+	th {
+		padding: @padding-cell + 5 @padding-cell;
+		color: @silver-darker;
+		font-size: 12px;
+		text-transform: uppercase;
+	}
+	td { 
+		padding: @padding-cell; 
+		border-bottom: 1px solid @default-light;
+
+		&.edit, &.url { 
+			border-left: 1px solid @default-light;
+		}
+	}
 }
 
 /* event listing */
@@ -155,7 +225,6 @@ nav {
 			border: 1px solid @green;
 		}
 	}
-
 }
 
 
@@ -182,8 +251,13 @@ nav {
   white-space: nowrap;
 
   .transition;
+
   &:hover { 
     background-color: @green-transparent;
     color: lighten(@green-bright, 10%);
+  }
+
+  &.lg { 
+  	padding: @btn-padding + 2 @btn-padding + 10;
   }
 }
