@@ -275,10 +275,35 @@ table.standard {
   white-space: nowrap;
 
   .transition;
-
   &:hover { 
     background-color: @green-transparent;
     color: lighten(@green-bright, 10%);
+  }
+
+  &.solid {
+  	background: @green-bright;
+  	color: @default-dark;
+  	&:hover {
+  		background-color: darken(@green-bright,5%);
+  		color: @default-darker;
+  	}
+  }
+
+  &.icon {
+  	position: relative;
+  	i, span { .transition; }
+  	i { 
+  		position: absolute;
+  		left: 12px;
+  		margin-top: -2px;
+  		line-height: @font-size-btn; 
+  		font-size: 18px; 
+  	}
+  	span { padding-left: 22px; display: block; }
+  	&:hover { 
+			span { .translate(-2px,0); }
+			i { .translate(2px,0); }
+  	}
   }
 
   &.lg { 
