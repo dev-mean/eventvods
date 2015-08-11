@@ -136,13 +136,20 @@ nav {
 				width: 105px; 
 				text-align: center;
 				background: lighten(@default-dark,1%);
-				padding-top: 60px;
+				padding-top: 20px;
 				font-size: 14px;
-				color: @silver-dark;
 				cursor: pointer;
-				.transition;
 
-				&:hover, .active { background: @default-light; }
+				i { 
+					font-size: 24px; 
+					display: block; 
+					text-align: center; 
+					color: @silver-darker;
+					.transition; 
+				}
+				span { .transition; color: @silver-dark; }
+				&:hover * { color: @silver-light; }
+				&.active { background: @default-light; }
 			}
 		}
 	}
@@ -168,9 +175,26 @@ table.standard {
 		padding: @padding-cell; 
 		border-bottom: 1px solid @default-light;
 
-		&.edit, &.url { 
-			border-left: 1px solid @default-light;
+		&.edit, &.url {
+			padding: 0;
+			margin: 0;
+			width: 44px;
+			overflow: hidden; 
+			a {
+				display: block; 
+				border-left: 1px solid @default-light;
+				line-height: 14px;
+				font-size: 20px;
+				width: 46px;
+				height: 46px;
+				text-align: center;
+				color: @silver-darker; 
+				padding: @padding-cell;
+				.transition; 
+				&:hover { background: @blue; border-color: @blue; color: @default-darker; }
+			}
 		}
+		&.url i { padding-left: 2px; }
 	}
 }
 

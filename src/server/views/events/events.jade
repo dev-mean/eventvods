@@ -8,8 +8,12 @@ block content
 			div.filterControl
 				a(href="#") Show Filter Controls
 			div.viewSelect
-				div.listView List View
-				div.gridView Grid View
+				div.listView.active
+					i.icon-list
+					span List View
+				div.gridView
+					i.icon-grid
+					span Grid View
 	div.listView.events
 		table.standard
 			thead
@@ -30,31 +34,22 @@ block content
 					td.status.draft Draft
 					td.edit
 						a(href="#")
+							i.icon-pencil
 					td.url
 						a(href="#")
+							i.icon-logout
 				tr
 					td.date 10/5/15
 					td.title ESL One Cologne 2015 North American Qualifier
 					td.game.csgo CSGO
 					td.user mattc0m
 					td.status.published Published
-					td.edit 
+					td.edit
 						a(href="#")
-					td.url 
+							i.icon-pencil
+					td.url
 						a(href="#")
-
-	.section(ng-app="event", ng-controller="eventList as events", ng-cloak)
-		div.row-list(ng-repeat="event in events.eventData")
-			div.item
-				div.imageContain
-					img.eventImage(src="/assets/images/event-image-sm.jpg")
-					div.overlay
-				div.eventDate {{event.eventStartDate | date : "dd MMM"}}
-				-
-				div.eventDate {{event.eventEndDate | date : "dd MMM"}}
-				div.eventGame {{event.game}}
-				div.eventTitle {{event.eventTitle | limitTo: 75}}
-				div.eventStatus {{event.status}}
+							i.icon-logout
 				
 block scripts
 	script(src='/assets/js/app/services/event.js')

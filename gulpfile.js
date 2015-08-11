@@ -11,16 +11,15 @@ var rename = require('gulp-rename');
 var less = require('gulp-less');
 var nodemon = require('gulp-nodemon');
 
-
 // prevent LESS from destroying watch task.
-
 var plumber = require('gulp-plumber');
+
 
 //Default task - watches
 gulp.task('default', ['watch']);
 
 //Build umbrella task
-gulp.task('build', ['js-build', 'jade-build', 'css-build', 'img-build', 'less-build', 'bower-build', 'node-build']);
+gulp.task('build', ['js-build', 'jade-build', 'css-build', 'img-build', 'less-build', 'bower-build', 'node-build', 'font-build', 'font-css-build']);
 
 //Dev build
 gulp.task('dev-build', ['build', 'node-dev-config-build']);
@@ -56,8 +55,22 @@ gulp.task('img-build', function() {
         .pipe(gulp.dest('dist/public/images'));
 });
 
+//Copy css
 gulp.task('css-build', function() {
     return gulp.src('src/public/css/**/*.css')
+        .pipe(gulp.dest('dist/public/css'));
+});
+
+//Copy icon font
+gulp.task('font-build', function() {
+    return gulp.src('src/public/webfont/fonts/*.*')
+        .pipe(gulp.dest('dist/public/css/fonts'));
+});
+
+//Copy icon css
+gulp.task('font-css-build', function() {
+    return gulp.src('src/public/webfont/styles.css')
+        .pipe(concat('webfont.css')) // this is what was missing
         .pipe(gulp.dest('dist/public/css'));
 });
 
