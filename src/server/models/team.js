@@ -8,7 +8,13 @@ var teamSchema = new Schema({
 	teamMedia: [SocialMedia],
 	teamCountry: String,
 	teamImage: String,
-	teamIcon: String
+	teamIcon: String,
+	lastUpdated: Date
+});
+
+teamSchema.pre('save', function(next){
+	this.lastUpdated = new Date();
+	next();
 });
 
 var Team = mongoose.model('teams', teamSchema);

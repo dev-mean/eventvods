@@ -115,11 +115,6 @@ gulp.task('angular-build', function() {
 	//angular-animate
     gulp.src('bower_components/angular-animate/angular-animate.min.js')
         .pipe(gulp.dest('dist/public/js'));
-	//ng-table
-	gulp.src('bower_components/ng-table/dist/ng-table.min.js')
-        .pipe(gulp.dest('dist/public/js'));
-	gulp.src('bower_components/ng-table/dist/ng-table.min.css')
-        .pipe(gulp.dest('dist/public/css'));
 	//loading bar			
 	gulp.src('bower_components/angular-loading-bar/build/loading-bar.min.js')
         .pipe(gulp.dest('dist/public/js'));
