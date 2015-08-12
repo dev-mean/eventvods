@@ -163,7 +163,7 @@ router.route('/events/:event_id')
 
 
 //Link routes
-router.route('/link')
+router.route('/links')
 	.get(function(req, res) {
 		Link.find(function(err, link) {
 			if(err)
@@ -178,7 +178,7 @@ router.route('/link')
 		});
 	});
 
-router.route('/link/:link_id')
+router.route('/links/:link_id')
 	.delete(function(req, res) {
 		Link.remove({
 			_id : req.params.event_id
@@ -202,7 +202,7 @@ router.route('/link/:link_id')
 
 
 //Map routes
-router.route('/map')
+router.route('/maps')
     .get(function(req, res) {
         Map.find(function(err, map) {
             if(err)
@@ -217,7 +217,7 @@ router.route('/map')
         });
     });
 
-router.route('/map/:map_id')
+router.route('/maps/:map_id')
     .delete(function(req, res) {
 		Map.remove({
 			_id : req.params.map_id
@@ -241,7 +241,7 @@ router.route('/map/:map_id')
 
 
 //Match routes
-router.route('match')
+router.route('/matches')
     .get(function(req, res) {
         Match.find(function(err, match) {
             if(err)
@@ -256,7 +256,7 @@ router.route('match')
         });
     });
 
-router.route('match/:match_id')
+router.route('/matches/:match_id')
     .delete(function(req, res) {
         Match.remove({
             _id : req.param.match_id
