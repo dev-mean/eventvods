@@ -1,7 +1,7 @@
 extends ../layout
 
 block content
-	div.event-container(ng-app="event", ng-controller="eventList as events", ng-cloak)
+	div.event-container(ng-app="event", ng-controller="eventList", ng-cloak)
 		div.contextHead
 			div.leftSide
 				a.btn.lg.solid.icon(href="/events/new")
@@ -9,27 +9,34 @@ block content
 					span Create Event
 			div.rightSide
 				div.filterControl
-					a(href="#") Show Filter Controls
+					a(href="#", ng-click="showFilters = !showFilters") Toggle Filter Controls
 				div.viewSelect
-					div.listView(ng-click="events.listView = true", ng-class="events.listView ? 'active' : ''")
+					div.listView(ng-click="listView = true", ng-class="listView ? 'active' : ''")
 						i.icon-list
 						span List View
-					div.gridView(ng-click="events.listView = false",  ng-class="events.listView ? '' : 'active'")
+					div.gridView(ng-click="listView = false",  ng-class="listView ? '' : 'active'")
 						i.icon-grid
 						span Grid View
-		div.listView.events(ng-show="events.listView == true")
+		div.filters(ng-show="showFilters")
+				input(type="text", ng-model="search", placeholder="Search")
+		div.listView.events(ng-show="listView == true")
 			table.standard
 				thead
 					tr
-						th Date
-						th Title
-						th Game
-						th User
-						th Status
+						th(ng-class="{'sort-desc': sorted('date', 'desc'), 'sort-asc': sorted('date', 'asc')}")
+							a(href="#", ng-click="setSort('date')") Date
+						th(ng-class="{'sort-desc': sorted('title', 'desc'), 'sort-asc': sorted('title', 'asc')}")
+							a(href="#", ng-click="setSort('title')") Title
+						th(ng-class="{'sort-desc': sorted('game', 'desc'), 'sort-asc': sorted('game', 'asc')}")
+							a(href="#", ng-click="setSort('game')") Game
+						th(ng-class="{'sort-desc': sorted('user', 'desc'), 'sort-asc': sorted('user', 'asc')}")
+							a(href="#", ng-click="setSort('user')") User
+						th(ng-class="{'sort-desc': sorted('status', 'desc'), 'sort-asc': sorted('status', 'asc')}")
+							a(href="#", ng-click="setSort('status')") Status
 						th 
 						th 	
 				tbody
-					tr(ng-repeat="event in events.listData")
+					tr(ng-repeat="event in listData")
 						td.date {{event.eventStartDate | date : "dd MMM"}}
 						td.title {{event.eventTitle}}
 						td.game {{event.eventGame}}
@@ -42,11 +49,9 @@ block content
 							a(ng-href="/event/{{event._id}}")
 								i.icon-logout
 								
-		div.gridView.events(ng-show="events.listView == false")
-			div.pagination 
-				| Page {{events.page}} of {{events.pages}}
+		div.gridView.events(ng-show="listView == false")
 			div.grid
-				div.item(ng-repeat="event in events.listData", ng-style="{'background-image': 'url(\"/assets/images/'+event.eventImageLoc+'\")'}")
+				div.item(ng-repeat="event in listData", ng-style="{'background-image': 'url(\"/assets/images/'+event.eventImageLoc+'\")'}")
 					div.overlay.hover
 						a.btn.sm.solid(ng-href="/event/{{event._id}}/edit") Edit Event
 					div.gradient.overlay
@@ -54,6 +59,9 @@ block content
 					div.text
 						div.date {{event.eventStartDate | date : "MMM dd, yyyy"}}
 						div.title {{event.eventTitle}}
+		span(ng-show="listData == null || listData.length == 0") No events match those criteria.
+		div.pagination(ng-show="pages > 1")
+				| Page {{page}} of {{pages}}
 				
 block scripts
 	script(src='/assets/js/app/services/event.js')
