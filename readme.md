@@ -10,10 +10,9 @@ The master branch contains the latest development branch. This will be replaced 
 Not yet in place.
 
 # Installation
-[npm](https://www.npmjs.com/) and [Bower](http://bower.io/) are used to manage dependancies and [gulp.js](http://gulpjs.com/) is used to manage the build. After cloning the repository run the following commands to install locally:
+[npm](https://www.npmjs.com/) and [Bower](http://bower.io/) are used to manage dependancies and [gulp.js](http://gulpjs.com/) is used to manage the build. After cloning the repository run the following command to install locally:
 ```
 npm install
-bower install
 ```
 
 # Getting Started

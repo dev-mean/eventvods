@@ -39,5 +39,8 @@
   "bugs": {
     "url": "https://github.com/EventVODS/EventVODS/issues"
   },
-  "homepage": "https://github.com/EventVODS/EventVODS"
+  "homepage": "https://github.com/EventVODS/EventVODS",
+  "scripts": {
+      "postinstall": "bower isntall"
+  }
 }
