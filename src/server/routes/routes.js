@@ -14,7 +14,7 @@ router.get('/events', function(req, res) {
 });
 
 router.get('/events/new', function(req, res) {
-        res.render('events/new', {});
+        res.render('events/form', {});
 });
 
 router.get('/event/:id', function(req, res) {

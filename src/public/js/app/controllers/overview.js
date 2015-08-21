@@ -5,5 +5,8 @@ angular.module('overviewController', [])
 			vm.upcoming = response.upcoming;
 			vm.ongoing = response.ongoing;
 			vm.recent = response.recent;
+			vm.casters = response.casters;
+			vm.maps = response.maps;
+			vm.teams = response.teams;
 		});
 	});

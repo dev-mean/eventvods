@@ -24,7 +24,10 @@ router.get('/overview', function(req, res){
 				"eventStartDate": {
 					$gte: today
 				}
-			}, function(err, docs){
+			})
+			.sort('-eventStartDate')
+			.limit(3)
+			.exec(function(err, docs){
 				if(err) callback(err);
 				else callback(null, docs);
 			});
@@ -37,7 +40,10 @@ router.get('/overview', function(req, res){
 				"eventStartDate": {
 					$lte: today
 				}
-			}, function(err, docs){
+			})
+			.sort('eventStartDate')
+			.limit(3)
+			.exec(function(err, docs){
 				if(err) callback(err);
 				else callback(null, docs);
 			});
@@ -47,7 +53,10 @@ router.get('/overview', function(req, res){
 				"eventEndDate": {
 					$lte: today
 				}
-			}, function(err, docs){
+			})
+			.sort('eventEndDate')
+			.limit(3)
+			.exec(function(err, docs){
 				if(err) callback(err);
 				else callback(null, docs);
 			});
@@ -127,15 +136,31 @@ router.route('/casters/:caster_id')
 router.route('/events')
 	.get(function(req, res) {
 		Event.find(function(err, events) {
-			if(err)
-				console.log(err);
-			res.json(events);
+			if(err)	console.log(err);
+			else res.json(events);
 		});
 	})
 	.post(function(req, res) {
-		Event.create(req.body, function(err, events) {
-			if(err)
-				res.send(err);
+		Event.create(req.body, function(err, event) {
+			if(err){
+				if(err.name == "ValidationError"){
+					var response = {
+						'status': 400,
+						'errors': []
+					}
+					for(var i in err.errors)
+						response.errors.push({'message': err.errors[i].message, 'path': err.errors[i].path, 'type': err.errors[i].kind});
+					res.status(response.status).json(response);
+				}
+				else {
+					var response = {
+						'status': 500,
+						'errors': {'message': 'Unknown error occured while adding a new event.', 'path': 'POST /api/events', 'type': 'Unspecified'}
+					}
+					res.status(response.status).json(response);
+				}
+			}
+			else res.sendStatus(200);
 		});
 	});
 

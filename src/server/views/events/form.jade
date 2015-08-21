@@ -1,0 +1,44 @@
+extends ../layout
+
+block content
+	h1 Add Event
+	form(name="form", ng-app="newEvent", ng-controller="eventForm", ng-cloak)
+		a.btn(ng-click="test()") Log event to console
+		// Form page 1
+		.section(ng-show="stage == 1")
+			h2 Tournament Information
+			label Event Title
+			input(type="text", ng-model="data.eventTitle" required)
+			label Event Game
+			input(type="text", ng-model="data.eventGame" required)
+			label Event Location
+			input(type="text", ng-model="data.eventLocation" required)
+			label Event Permalink
+			input(type="text", ng-model="data.eventPermaLink" required)
+			label Event Abbrev
+			input(type="text", ng-model="data.eventAbbreviation" required)
+			label Event Start
+			input(type="text", ng-model="data.eventStartDate", pick-a-date="date", placeholder="Select Date", pick-a-date-options="dateOpts", required)
+			label Event End
+			input(type="text", ng-model="data.eventEndDate", pick-a-date="date", placeholder="Select Date", pick-a-date-options="dateOpts",  required)
+			
+		.section(ng-show="stage == 1")
+			h2 Social Media
+			| TODO
+			
+		// Form page 2
+		.section(ng-show="stage == 2")
+			h2 Teams
+			| TODO
+		// Form page 3
+		.section(ng-show="stage == 3")
+			h2 Brackets
+			| TODO
+		//a.btn(ng-click="prev()",ng-show="stage > 1") Prev Stage
+		//a.btn(ng-click="next()", ng-show="stage < 3") Next Stage
+		a.btn(ng-click="submit()", ng-show="stage == 1") Submit Event
+	
+block scripts
+	script(src='/assets/js/angular-datepicker.js')
+	script(src='/assets/js/app/services/event.js')
+	script(src='/assets/js/app/controllers/event.js')

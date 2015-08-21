@@ -19,13 +19,12 @@ angular.module('eventControllers', ['eventService'])
         $scope.listData = [];
         $scope.pages = 1;
         $scope.page = 1;
-        $scope.filteredData = [];
-        $scope.sortedData = [];
 
         //fill events with event data
         Events.get()
-            .success(function(data) {
-                $scope.eventData = data;
+            .then(function(response) {
+				console.dir(response);
+                $scope.eventData = response.data;
                 $scope.processList();
             });
 
@@ -33,7 +32,10 @@ angular.module('eventControllers', ['eventService'])
             if (newVal === oldVal) return;
             else $scope.processList();
         });
-
+		$scope.$watch('listView', function(newVal, oldVal) {
+            if (newVal === oldVal) return;
+            else $scope.processList();
+        });
         $scope.sorted = function(field, dir) {
             return ($scope.sort.field == field && $scope.sort.dir == dir);
         };
@@ -49,9 +51,9 @@ angular.module('eventControllers', ['eventService'])
         };
 
         $scope.processList = function() {
-            $scope.filteredData = $scope.filter($scope.eventData);
-            $scope.sortedData = $scope.sort($scope.filteredData);
-            $scope.listData = $scope.paginate($scope.sortedData);
+            var data = $scope.filter($scope.eventData);
+            data = $scope.sort(data);
+            $scope.listData = $scope.paginate(data);
         };
 
         $scope.filter = function(data) {
@@ -112,41 +114,63 @@ angular.module('eventControllers', ['eventService'])
         };
         $scope.paginate = function(data) {
             if (typeof data == "undefined" || data === null) return null;
-            if (data.length > $scope.itemsPerPage)
-                return data.slice(($scope.page - 1) * $scope.itemsPerPage, $scope.itemsPerPage);
+			$scope.pages = Math.ceil(data.length / $scope.itemsPerPage);
+			$scope.itemsPerPage = $scope.listView ? 10 : 6;
+            if (data.length > $scope.itemsPerPage){
+				var start = ($scope.page - 1) * $scope.itemsPerPage;
+				var end = start + $scope.itemsPerPage;
+                return data.slice(start, end);
+			}
             else return data;
         };
+		$scope.prevPage = function(){
+			$scope.page--;
+			$scope.processList();
+		};
+		$scope.nextPage = function(){
+			$scope.page++;
+			$scope.processList();
+		};
     })
     .controller('eventView', function($http, Events) {
         //Use ng-init to pass initial data? Messy but fast and user-friendly
     })
-    .controller('eventForm', function($http, Events) {
-        var vm = this;
-
+    .controller('eventForm', function($scope, $http, $location, Events) {
         $scope.stage = 1;
         $scope.errors = [];
+		$scope.data = {};
+	
+		// ===============
+	
+		$scope.dateOpts = {
+			format: 'dd mmm, yyyy',
+			formatSubmit: 'yyyy/mm/dd',
+			hiddenName: true,
+		};
+		$scope.prev = function(){
+			if($scope.stage > 1)
+				$scope.stage--;
+		};
+		$scope.next = function(){
+			if($scope.stage < 3)
+				$scope.stage++;
+		};
 
-        $scope.validate = function(stage) {
-            switch (stage) {
-                case 1:
-                    $scope.stage = 2;
-                    break;
-                case 2:
-                    $scope.stage = 3;
-                    break;
-                case 3:
-                    $scope.stage = 1;
-                    break;
-            }
-        };
         $scope.test = function() {
-            console.dir(vm);
+            console.dir($scope.data);
         };
-        $scope.createEvent = function() {
+        $scope.submit = function() {
+			$scope.data.eventStartDate = new Date($scope.data.eventStartDate);
+			$scope.data.eventEndDate = new Date($scope.data.eventEndDate);
             //TODO: Validation
-            Events.create($scope.eventData)
-                .success(function(data) {
-                    $location.path('/events');
-                });
+			Events.create($scope.data)
+                .then(function(response) {
+                    console.log(response);
+					if(response.status === 200){
+						$location.path ='../';
+					}
+                }, function(response){
+					console.log(response);
+				});
         };
     });
