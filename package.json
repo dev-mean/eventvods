@@ -41,6 +41,6 @@
   },
   "homepage": "https://github.com/EventVODS/EventVODS",
   "scripts": {
-      "postinstall": "bower isntall"
+      "postinstall": "bower install"
   }
 }
