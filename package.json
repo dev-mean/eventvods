@@ -6,7 +6,6 @@
   "dependencies": {
     "async": "^1.4.0",
     "body-parser": "^1.13.1",
-    "bower": "^1.4.1",
     "express": "^4.12.4",
     "express-session": "^1.11.3",
     "jade": "^1.11.0",
@@ -41,6 +40,6 @@
   },
   "homepage": "https://github.com/EventVODS/EventVODS",
   "scripts": {
-      "postinstall": "bower isntall"
+      "postinstall": "bower install"
   }
 }

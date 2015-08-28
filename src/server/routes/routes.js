@@ -1,8 +1,19 @@
 var app = require('express');
 var router = app.Router();
 
+var isAuthenticated = function(req, res, next) {
+    if(req.isAuthenticated()) return next();
+    res.redirect('users/login');
+};
+
+router.all('/*', function(req, res, next) {
+    res.locals.user = req.user;
+    next();
+});
+
 router.get('/', function(req, res) {
-        res.render('overview', {});
+    console.log(res.locals);
+        res.render('overview', res.locals);
 });
 
 router.get('/dashboard', function(req, res) {

@@ -16,6 +16,13 @@ var async = require('async');
 
 //This router is mounted at /api....so /events here translates to /api/events
 
+//auth stuff
+var isAuthenticated = function(req, res, next) {
+    if(req.isAuthenticated()) return next();
+    res.sendStatus(401);
+};
+
+
 router.get('/overview', function(req, res){
 	var today = new Date().toISOString();
 	async.parallel({
