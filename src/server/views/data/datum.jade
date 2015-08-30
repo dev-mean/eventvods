@@ -1,5 +1,6 @@
 extends ../layout
-
+block vars
+	-currentPage = "Data";
 block content
 	-console.log(data);
 	-title = (typeof data !== undefined) ? "Edit Event" : "Add Event"

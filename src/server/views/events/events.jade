@@ -1,5 +1,6 @@
 extends ../layout
-
+block vars
+	-currentPage = "Events";
 block content
 	div.event-container(ng-app="event", ng-controller="eventList", ng-cloak)
 		div.contextHead

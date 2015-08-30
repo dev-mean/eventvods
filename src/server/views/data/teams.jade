@@ -1,5 +1,6 @@
 extends ../layout
-
+block vars
+	-currentPage = "Data";
 block content
 	.appcontainer(ng-app="data", ng-controller="team as teamList")
 		h1.title Teams

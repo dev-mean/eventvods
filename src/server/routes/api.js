@@ -14,6 +14,13 @@ var Team = require('../models/team.js');
 
 var async = require('async');
 
+function api_error(code, message, errors, res){
+	var err = {};
+	err.message = message;
+	err.errors = errors;
+	return res.status(code).json(err);
+}
+
 //This router is mounted at /api....so /events here translates to /api/events
 
 router.get('/overview', function(req, res){
@@ -110,6 +117,13 @@ router.route('/casters')
 	});
 
 router.route('/casters/:caster_id')
+	.get(function(req, res) {
+		Caster.findById(req.params.caster_id, function(err, casters) {
+			if(err)
+				console.log(err);
+			res.json(casters);
+		});
+	})
 	.delete(function(req, res) {
 		Caster.remove({
 			_id : req.params.caster_id
@@ -136,7 +150,7 @@ router.route('/casters/:caster_id')
 router.route('/events')
 	.get(function(req, res) {
 		Event.find(function(err, events) {
-			if(err)	console.log(err);
+			if(err)	api_error(500, 'Unknown error @ GET /api/events', {'message': 'Unknown error occured while fetching events.', 'path': 'GET /api/events', 'type': 'Database'}, res);
 			else res.json(events);
 		});
 	})
@@ -144,27 +158,29 @@ router.route('/events')
 		Event.create(req.body, function(err, event) {
 			if(err){
 				if(err.name == "ValidationError"){
-					var response = {
-						'status': 400,
-						'errors': []
-					}
+					var errors = [];
 					for(var i in err.errors)
-						response.errors.push({'message': err.errors[i].message, 'path': err.errors[i].path, 'type': err.errors[i].kind});
-					res.status(response.status).json(response);
+						errors.push({'message': err.errors[i].message, 'path': err.errors[i].path, 'type': err.errors[i].kind});
+					api_error(400, 'Event validation failed', errors, res);
 				}
 				else {
-					var response = {
-						'status': 500,
-						'errors': {'message': 'Unknown error occured while adding a new event.', 'path': 'POST /api/events', 'type': 'Unspecified'}
-					}
-					res.status(response.status).json(response);
+					api_error(500, 'Unknown error @ POST /api/events', {'message': 'Unknown error occured while adding a new event.', 'path': 'POST /api/events', 'type': 'Database'}, res);
 				}
 			}
-			else res.sendStatus(200);
+			else res.status(200).json({'eventId': event._id});
 		});
 	});
 
-router.route('/events/:event_id')
+router.route('/event/:event_id')
+	.get(function(req, res){
+			Event.findById(req.params.event_id, function(err, event) {
+				if(err)
+					return api_error(400, 'Invalid eventId format provided', {'message': req.params.event_id+' is an invalid id format.', 'path': 'GET /api/event/'+req.params.event_id, 'type': 'Database'}, res);
+				if(!event)
+					return api_error(404, 'Attempted to load non-existent event', {'message': 'Attempted to load event '+req.params.event_id+' which does not exist.', 'path': 'GET /api/event/'+req.params.event_id, 'type': 'Database'}, res);
+				res.json(event);
+			});
+	})
 	.delete(function(req, res) {
 		Event.remove({
 			_id : req.params.event_id
@@ -174,14 +190,18 @@ router.route('/events/:event_id')
 		});
 	})
     .put(function(req, res) {
-        Event.findById(req.params.event_id, function(err, event) {
-            if(err)
-                res.send(err);
-            event = req.body;
-            event.save(function(err) {
-                if(err)
-                    res.send(err);
-            });
+        Event.findByIdAndUpdate(req.params.event_id, req.body, function(err, event) {
+            if(err){
+					if(err.name == "ValidationError"){
+						var errors = [];
+						for(var i in err.errors)
+							errors.push({'message': err.errors[i].message, 'path': err.errors[i].path, 'type': err.errors[i].kind});
+						api_error(400, 'Event validation failed', errors, res);
+					}
+					else return api_error(400, 'Invalid eventId format provided', {'message': req.params.event_id+' is an invalid id format.', 'path': 'PUT /api/event/'+req.params.event_id, 'type': 'Database'}, res);
+			}
+			if(!event) api_error(404, 'Attempted to update non-existent event', {'message': 'Attempted to update event '+req.params.event_id+' which does not exist.', 'path': 'PUT /api/event/'+req.params.event_id, 'type': 'Database'}, res);
+			else res.sendStatus(200);
         });
     });
 

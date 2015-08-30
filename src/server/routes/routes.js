@@ -1,5 +1,6 @@
 var app = require('express');
 var router = app.Router();
+var Event = require('../models/event');
 
 router.get('/', function(req, res) {
         res.render('overview', {});
@@ -18,7 +19,7 @@ router.get('/events/new', function(req, res) {
 });
 
 router.get('/event/:id', function(req, res) {
-        //Needs to send relevant event details
+        Event.find
 		var event = {};
         res.render('events/event', {
 			data: event,
@@ -26,10 +27,8 @@ router.get('/event/:id', function(req, res) {
 });
 
 router.get('/event/:id/edit', function(req, res) {
-		//Needs to send relevant event details
-		var event = {};
         res.render('events/form', {
-			data: JSON.stringify(event), 
+			eventID: req.params.id,
 		});
 });
 

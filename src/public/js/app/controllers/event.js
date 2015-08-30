@@ -23,7 +23,6 @@ angular.module('eventControllers', ['eventService'])
         //fill events with event data
         Events.get()
             .then(function(response) {
-				console.dir(response);
                 $scope.eventData = response.data;
                 $scope.processList();
             });
@@ -136,9 +135,27 @@ angular.module('eventControllers', ['eventService'])
         //Use ng-init to pass initial data? Messy but fast and user-friendly
     })
     .controller('eventForm', function($scope, $http, $location, Events) {
+		$scope.isEdit = false;
         $scope.stage = 1;
         $scope.errors = [];
 		$scope.data = {};
+	
+		$scope.$watch('eventId', function(newv, oldv){
+			if(!$scope.isEdit && typeof $scope.eventId !== "undefined"){
+				$scope.isEdit = true;
+				Events.getSingle($scope.eventId)
+					.then(function(response){
+							$scope.data = response.data;						
+					}, function(response){
+						if(response.status == 400 || response.status == 404)
+							$scope.errors.push(response.data.errors);
+						else {
+							$scope.errors.push({'message': 'Unknown error occured. Please check console.'});
+							console.dir(response);
+						}
+					});
+			}
+		});
 	
 		// ===============
 	
@@ -147,6 +164,16 @@ angular.module('eventControllers', ['eventService'])
 			formatSubmit: 'yyyy/mm/dd',
 			hiddenName: true,
 		};
+	
+		// ===============
+	
+		$scope.flow = {};
+		$scope.$on('flow::fileAdded', function (event, $flow, flowFile) {
+		  event.preventDefault();//prevent file from uploading
+		});
+	
+		// ===============
+	
 		$scope.prev = function(){
 			if($scope.stage > 1)
 				$scope.stage--;
@@ -160,17 +187,34 @@ angular.module('eventControllers', ['eventService'])
             console.dir($scope.data);
         };
         $scope.submit = function() {
+			$scope.errors = [];
 			$scope.data.eventStartDate = new Date($scope.data.eventStartDate);
 			$scope.data.eventEndDate = new Date($scope.data.eventEndDate);
             //TODO: Validation
-			Events.create($scope.data)
-                .then(function(response) {
-                    console.log(response);
-					if(response.status === 200){
-						$location.path ='../';
-					}
-                }, function(response){
-					console.log(response);
-				});
+			if($scope.isEdit){
+				Events.update($scope.eventId, $scope.data)
+					.then(function(response){
+						window.location.href = '../'+$scope.eventId;
+					}, function(response){
+						if(response.status == 400)
+							$scope.errors.push(response.data.errors);
+						else {
+							$scope.errors.push({'message': 'Unknown error occured. Please check console.'});
+							console.dir(response);
+						}
+					});
+			} else {
+				Events.create($scope.data)
+					.then(function(response) {
+						window.location.href = '../../event/' + response.data.eventId;
+					}, function(response){
+						if(response.status == 400)
+							$scope.errors.push(response.data.errors);
+						else {
+							$scope.errors.push({'message': 'Unknown error occured. Please check console.'});
+							console.dir(response);
+						}
+					});
+			}
         };
     });

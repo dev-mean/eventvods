@@ -1,11 +1,16 @@
 extends ../layout
-
+block vars
+	-currentPage = "Events";
 block content
+	-var isEdit = (typeof eventID !== "undefined");
 	h1 Add Event
-	form(name="form", ng-app="newEvent", ng-controller="eventForm", ng-cloak)
+	form(name="form", ng-app="newEvent", ng-controller="eventForm", ng-cloak, ng-init=(isEdit) ? 'eventId = \''+eventID+'\'' : '')
 		a.btn(ng-click="test()") Log event to console
+		.section#errors(ng-show="errors.length > 0")
+			ul
+				li(ng-repeat="error in errors") {{error.message}}
 		// Form page 1
-		.section(ng-show="stage == 1")
+		.section#info(ng-show="stage == 1")
 			h2 Tournament Information
 			label Event Title
 			input(type="text", ng-model="data.eventTitle" required)
@@ -22,10 +27,13 @@ block content
 			label Event End
 			input(type="text", ng-model="data.eventEndDate", pick-a-date="date", placeholder="Select Date", pick-a-date-options="dateOpts",  required)
 			
-		.section(ng-show="stage == 1")
+		.section#social(ng-show="stage == 1")
 			h2 Social Media
 			| TODO
-			
+		.section#image
+			h2 Event Image
+			#image_upload(flow-init, flow-name="flow", flow-drop)
+			img(flow-img="flow.files[0]")
 		// Form page 2
 		.section(ng-show="stage == 2")
 			h2 Teams
@@ -40,5 +48,6 @@ block content
 	
 block scripts
 	script(src='/assets/js/angular-datepicker.js')
+	script(src='/assets/js/ng-flow-standalone.min.js')
 	script(src='/assets/js/app/services/event.js')
 	script(src='/assets/js/app/controllers/event.js')

@@ -1,5 +1,6 @@
 extends ../layout
-
+block vars
+	-currentPage = "Data";
 block content
 	h1.title Events
 	.section(ng-app="event", ng-controller="eventList as events", ng-cloak)

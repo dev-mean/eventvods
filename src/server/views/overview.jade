@@ -1,5 +1,6 @@
 extends layout
-
+block vars
+	-var currentPage = "Dashboard";
 block content
 	div.content
 		.appcontainer(ng-app="overview", ng-controller="overviewDisplay as overview")

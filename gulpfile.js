@@ -126,6 +126,9 @@ gulp.task('angular-build', function() {
 	gulp.src('bower_components/angular-native-picker/build/themes/*.css')
 		.pipe(rename({prefix: 'angular-datepicker-'}))
         .pipe(gulp.dest('dist/public/css'));
+	//image upload	
+	gulp.src('bower_components/ng-flow/dist/ng-flow-standalone.min.js')
+        .pipe(gulp.dest('dist/public/js'));
 });
 
 gulp.task('jquery-build', function() {

@@ -1,3 +1,5 @@
+block vars
+
 doctype html
 html(lang='en')
 	head
@@ -12,7 +14,7 @@ html(lang='en')
 		link(href='/assets/css/angular-datepicker-default.css', rel='stylesheet')
 		link(href='/assets/css/angular-datepicker-default.date.css', rel='stylesheet')
 		link(href='/assets/css/angular-datepicker-default.time.css', rel='stylesheet')
-	body
+	body(flow-prevent-drop)
 		div.container
 			div.leftSidebar
 				header.logo
@@ -24,7 +26,7 @@ html(lang='en')
 						div.arrow
 				nav.leftNavigation
 					each navsection in ["Dashboard", "Events", "Data", "Users"]
-						a(id=navsection href="/" + navsection.toLowerCase())
+						a(id=navsection, href="/" + navsection.toLowerCase(), class=currentPage == navsection ? 'active' : '')
 							span.text= navsection 
 			div.rightView
 				block content 
