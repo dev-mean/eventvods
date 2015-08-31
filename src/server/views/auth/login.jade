@@ -1,0 +1,13 @@
+extends ../layout
+
+block content
+    div.content
+        h1 Login
+        form(name="login" method="post")
+            label Username
+            input(type="text" name="username")
+            br
+            label Password
+            input(type="text" name="password")
+            br
+            input(type="submit" value="Go!")
