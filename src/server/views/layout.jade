@@ -19,8 +19,8 @@ html(lang='en')
 					a(href="/")
 				div.userBlock
 					a(href="#")
-						img(src="/assets/images/avatar-sample.png")
-						span #{locals.user}
+						img(src="/assets/images/avatar-#{locals.user.username}.png")
+						span #{locals.user.username}
 						div.arrow
 				nav.leftNavigation
 					each navsection in ["Dashboard", "Events", "Data", "Users"]

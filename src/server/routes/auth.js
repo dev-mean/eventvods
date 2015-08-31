@@ -18,7 +18,7 @@ router.route('/login')
 				res.json(err);
 			} else {
 				req.login(user, function(err) {
-					res.redirect(req.session.returnTo || "/");
+					res.redirect(req.session.returnTo || '/');
 				});
 			}
 		})
@@ -26,7 +26,7 @@ router.route('/login')
 
 router.get('/logout', function(req, res) {
 	req.logout();
-	res.redirect("/");
+	res.redirect('/');
 });
 
 router.route('/register')
@@ -42,7 +42,7 @@ router.route('/register')
 			res.json(err);
 		} else {
 			req.login(user, function(err) {
-				res.redirect(req.session.returnTo || "/");
+				res.redirect(req.session.returnTo || '/');
 			});
 		}
 		});

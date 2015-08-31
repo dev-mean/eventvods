@@ -18,6 +18,7 @@ var async = require('async');
 
 //auth stuff
 var isAuthenticated = function(req, res, next) {
+    if(process.env.NODE_ENV === 'development') return next();
     if(req.isAuthenticated()) return next();
     res.sendStatus(401);
 };

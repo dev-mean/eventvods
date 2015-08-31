@@ -11,8 +11,10 @@ var morgan = require('morgan'); //Logger
 var session = require('express-session');
 var User = require('./models/user');
 
+
 //server config
 app.set('env', 'development');
+process.env.NODE_ENV = 'development';
 app.use(morgan('dev'));
 
 //Static file at the top, prevents all the code below being run for static files.
@@ -59,7 +61,7 @@ app.use('/api/', api);
 app.use('/users/', auth);
 
 
-
+var router = express.Router();
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
@@ -76,9 +78,9 @@ if (app.get('env') === 'development') {
 var port = config.port;
 var db = config.databaseUrl;
 if(config.ip) {
-  app.listen(port, config.ip);
+      app.listen(port, config.ip);
 } else {
-  app.listen(port);
+      app.listen(port);
 }
 
 console.log('App listening on ' + (config.ip || 'localhost') + ':' + port);
