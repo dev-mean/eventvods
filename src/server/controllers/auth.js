@@ -14,19 +14,20 @@ module.exports = function(rightsNeeded){
 		  	err.status = 403;
 		  	next(err);
 		}
-  	}
-}
+  	};
+};
 module.exports.checkPriv = function(req, res, next, rightsNeeded, callback){
+    var err;
 	if( typeof req.user !== undefined && req.user.userRights >= rightsNeeded)
 		callback(null, req, res, next);
-	else if(typeof req.user !== undefined) {
-		var err = new Error('Insufficient Permissions');
+    else if(typeof req.user !== undefined) {
+		err = new Error('Insufficient Permissions');
 	  	err.status = 403;
 	  	callback(err);
 	}
 	else {
-		var err = new Error('Not authenticated');
+		err = new Error('Not authenticated');
 	  	err.status = 401;
 	  	callback(err);
 	}
-}
+};

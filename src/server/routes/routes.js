@@ -11,8 +11,8 @@ var isAuthenticated = function(req, res, next) {
 // Sets up local user data for templating
 router.all('/*', function(req, res, next) {
     if(process.env.NODE_ENV === 'development') {
-        // Mock user data for dev so jade can compile properly
-        res.locals.user = {_id:"55df72d695628e9e05593574", username:"test", userRights:0};
+        // Mock user data for dev so jade can compile properly if user isn't logged in
+        res.locals.user = req.user || {_id:"55df72d695628e9e05593574", username:"devAdmin", userRights:0};
         return next();
     } 
     res.locals.user = req.user;
@@ -36,7 +36,6 @@ router.get('/events/new', function(req, res) {
 });
 
 router.get('/event/:id', function(req, res) {
-    Event.find
 	var event = {};
     res.render('events/event', {
 		data: event,

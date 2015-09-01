@@ -33,7 +33,7 @@ app.use(session({
 	secret: config.secret,
 	resave: false,
 	saveUninitialized: true
-}))
+}));
 
 /* Passport setup */
 app.use(passport.initialize());

@@ -11,7 +11,7 @@ router.route('/login')
 		User.authenticate()(req.body.username, req.body.password, function(err, user, options) {
 			if (err) res.json(err);
 			if (user === false) {
-				var err = {
+				err = {
 					'status': 403,
 					'message': 'Invalid username or password.'
 				};
@@ -21,7 +21,7 @@ router.route('/login')
 					res.redirect(req.session.returnTo || '/');
 				});
 			}
-		})
+		});
 	});
 
 router.get('/logout', function(req, res) {

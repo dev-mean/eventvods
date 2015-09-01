@@ -8,7 +8,7 @@ var Match = require('../models/match.js');
 var EventModule = require('../models/module.js');
 var Organization = require('../models/organization.js');
 var Round = require('../models/round.js');
-var SocialMedia = require('../models/socialmedia.js')
+var SocialMedia = require('../models/socialmedia.js');
 var Sponsor = require('../models/sponsor.js');
 var Team = require('../models/team.js');
 
@@ -79,21 +79,21 @@ router.get('/overview', function(req, res){
 		casters: function(callback){
 			Caster.find().count(function(err, count){
 				if(err) callback(err);
-				else callback(null, count)
+				else callback(null, count);
 			});
 		},
 		
 		maps: function(callback){
 			Map.find().count(function(err, count){
 				if(err) callback(err);
-				else callback(null, count)
+				else callback(null, count);
 			});
 		},
 		
 		teams: function(callback){
 			Team.find().count(function(err, count){
 				if(err) callback(err);
-				else callback(null, count)
+				else callback(null, count);
 			});
 		}
 
@@ -282,7 +282,7 @@ router.route('/maps/:map_id')
     .put(function(req, res) {
         Map.findById(req.params.map_id, function(err, map) {
           if(err)
-              res.send(err)
+              res.send(err);
             map = req.body;
             map.save(function(err) {
                if(err)
@@ -321,7 +321,7 @@ router.route('/matches/:match_id')
     .put(function(req, res) {
         Map.findById(req.params.map_id, function(err, map) {
             if(err)
-                res.send(err)
+                res.send(err);
             map = req.body;
             map.save(function(err) {
                if(err)
