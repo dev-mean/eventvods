@@ -11,7 +11,6 @@ var morgan = require('morgan'); //Logger
 var session = require('express-session');
 var User = require('./models/user');
 
-
 //server config
 app.set('env', 'development');
 process.env.NODE_ENV = 'development';
@@ -43,7 +42,7 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 mongoose.connect(config.databaseUrl, function(err) {
-	if(err)	console.log("DB err: " + err);
+	if (err)	console.log("DB err: " + err);
 	else console.log("Connected to mongodb");
 });
 
@@ -77,7 +76,7 @@ if (app.get('env') === 'development') {
 //listens
 var port = config.port;
 var db = config.databaseUrl;
-if(config.ip) {
+if (config.ip) {
       app.listen(port, config.ip);
 } else {
       app.listen(port);

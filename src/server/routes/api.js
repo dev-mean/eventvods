@@ -25,8 +25,8 @@ function api_error(code, message, errors, res){
 
 //auth stuff
 var isAuthenticated = function(req, res, next) {
-    if(process.env.NODE_ENV === 'development') return next();
-    if(req.isAuthenticated()) return next();
+    if (process.env.NODE_ENV === 'development') return next();
+    if (req.isAuthenticated()) return next();
     res.sendStatus(401);
 };
 
@@ -43,7 +43,7 @@ router.get('/overview', function(req, res){
 			.sort('-eventStartDate')
 			.limit(3)
 			.exec(function(err, docs){
-				if(err) callback(err);
+				if (err) callback(err);
 				else callback(null, docs);
 			});
 		},
@@ -59,7 +59,7 @@ router.get('/overview', function(req, res){
 			.sort('eventStartDate')
 			.limit(3)
 			.exec(function(err, docs){
-				if(err) callback(err);
+				if (err) callback(err);
 				else callback(null, docs);
 			});
 		},
@@ -72,27 +72,27 @@ router.get('/overview', function(req, res){
 			.sort('eventEndDate')
 			.limit(3)
 			.exec(function(err, docs){
-				if(err) callback(err);
+				if (err) callback(err);
 				else callback(null, docs);
 			});
 		},
 		casters: function(callback){
 			Caster.find().count(function(err, count){
-				if(err) callback(err);
+				if (err) callback(err);
 				else callback(null, count);
 			});
 		},
 		
 		maps: function(callback){
 			Map.find().count(function(err, count){
-				if(err) callback(err);
+				if (err) callback(err);
 				else callback(null, count);
 			});
 		},
 		
 		teams: function(callback){
 			Team.find().count(function(err, count){
-				if(err) callback(err);
+				if (err) callback(err);
 				else callback(null, count);
 			});
 		}
@@ -100,7 +100,7 @@ router.get('/overview', function(req, res){
 		//Add in user manager overview calls here.		
 
 	}, function(err, results){
-		if(err) console.warn(err);
+		if (err) console.warn(err);
 		else res.json(results);
 	});
 });
@@ -111,7 +111,7 @@ router.get('/overview', function(req, res){
 router.route('/casters')
 	.get(function(req, res) {
 		Caster.find(function(err, casters) {
-			if(err)
+			if (err)
 				console.log(err);
 			res.json(casters);
 		});
@@ -119,7 +119,7 @@ router.route('/casters')
 	.post(function(req, res) {
 	  console.log(req.body);
 		Caster.create(req.body, function(err, casters) {
-			if(err)
+			if (err)
 				res.send(err);
 		});
 	});
@@ -127,7 +127,7 @@ router.route('/casters')
 router.route('/casters/:caster_id')
 	.get(function(req, res) {
 		Caster.findById(req.params.caster_id, function(err, casters) {
-			if(err)
+			if (err)
 				console.log(err);
 			res.json(casters);
 		});
@@ -136,17 +136,17 @@ router.route('/casters/:caster_id')
 		Caster.remove({
 			_id : req.params.caster_id
 		}, function(err, caster) {
-			if(err)
+			if (err)
 				res.send(err);
 		});
 	})
     .put(function(req, res) {
         Caster.findById(req.params.caster_id, function(err, caster) {
-            if(err)
+            if (err)
                 res.send(err);
             caster = req.body;
             caster.save(function(err) {
-                if(err)
+                if (err)
                     res.send(err);
             });
         });
@@ -158,14 +158,14 @@ router.route('/casters/:caster_id')
 router.route('/events')
 	.get(function(req, res) {
 		Event.find(function(err, events) {
-			if(err)	api_error(500, 'Unknown error @ GET /api/events', {'message': 'Unknown error occured while fetching events.', 'path': 'GET /api/events', 'type': 'Database'}, res);
+			if (err)	api_error(500, 'Unknown error @ GET /api/events', {'message': 'Unknown error occured while fetching events.', 'path': 'GET /api/events', 'type': 'Database'}, res);
 			else res.json(events);
 		});
 	})
 	.post(function(req, res) {
 		Event.create(req.body, function(err, event) {
-			if(err){
-				if(err.name == "ValidationError"){
+			if (err){
+				if (err.name == "ValidationError"){
 					var errors = [];
 					for(var i in err.errors)
 						errors.push({'message': err.errors[i].message, 'path': err.errors[i].path, 'type': err.errors[i].kind});
@@ -182,9 +182,9 @@ router.route('/events')
 router.route('/event/:event_id')
 	.get(function(req, res){
 			Event.findById(req.params.event_id, function(err, event) {
-				if(err)
+				if (err)
 					return api_error(400, 'Invalid eventId format provided', {'message': req.params.event_id+' is an invalid id format.', 'path': 'GET /api/event/'+req.params.event_id, 'type': 'Database'}, res);
-				if(!event)
+				if (!event)
 					return api_error(404, 'Attempted to load non-existent event', {'message': 'Attempted to load event '+req.params.event_id+' which does not exist.', 'path': 'GET /api/event/'+req.params.event_id, 'type': 'Database'}, res);
 				res.json(event);
 			});
@@ -193,14 +193,14 @@ router.route('/event/:event_id')
 		Event.remove({
 			_id : req.params.event_id
 		}, function(err, event) {
-			if(err)
+			if (err)
 				res.send(err);
 		});
 	})
     .put(function(req, res) {
         Event.findByIdAndUpdate(req.params.event_id, req.body, function(err, event) {
-            if(err){
-					if(err.name == "ValidationError"){
+            if (err){
+					if (err.name == "ValidationError"){
 						var errors = [];
 						for(var i in err.errors)
 							errors.push({'message': err.errors[i].message, 'path': err.errors[i].path, 'type': err.errors[i].kind});
@@ -208,7 +208,7 @@ router.route('/event/:event_id')
 					}
 					else return api_error(400, 'Invalid eventId format provided', {'message': req.params.event_id+' is an invalid id format.', 'path': 'PUT /api/event/'+req.params.event_id, 'type': 'Database'}, res);
 			}
-			if(!event) api_error(404, 'Attempted to update non-existent event', {'message': 'Attempted to update event '+req.params.event_id+' which does not exist.', 'path': 'PUT /api/event/'+req.params.event_id, 'type': 'Database'}, res);
+			if (!event) api_error(404, 'Attempted to update non-existent event', {'message': 'Attempted to update event '+req.params.event_id+' which does not exist.', 'path': 'PUT /api/event/'+req.params.event_id, 'type': 'Database'}, res);
 			else res.sendStatus(200);
         });
     });
@@ -219,14 +219,14 @@ router.route('/event/:event_id')
 router.route('/links')
 	.get(function(req, res) {
 		Link.find(function(err, link) {
-			if(err)
+			if (err)
 				console.log(err);
 			res.json(events);
 		});
 	})
 	.post(function(req, res) {
 		Link.create(req.body, function(err, link) {
-			if(err)
+			if (err)
 				res.send(err);
 		});
 	});
@@ -236,17 +236,17 @@ router.route('/links/:link_id')
 		Link.remove({
 			_id : req.params.event_id
 		}, function(err, event) {
-			if(err)
+			if (err)
 				res.send(err);
 		});
 	})
     .put(function(req, res) {
         Link.findById(req.params.link_id, function(err, link) {
-            if(err)
+            if (err)
                 res.send(err);
             link = req.body;
             link.save(function(err) {
-                if(err)
+                if (err)
                     res.send(err);
             });
         });
@@ -258,14 +258,14 @@ router.route('/links/:link_id')
 router.route('/maps')
     .get(function(req, res) {
         Map.find(function(err, map) {
-            if(err)
+            if (err)
                 console.log(err);
             res.json(map);
         });
     })
     .post(function(req, res) {
         Map.create(req.body, function(err, map) {
-            if(err)
+            if (err)
                 res.send(err);
         });
     });
@@ -275,17 +275,17 @@ router.route('/maps/:map_id')
 		Map.remove({
 			_id : req.params.map_id
 		}, function(err, map) {
-			if(err)
+			if (err)
 				res.send(err);
 		});
 	})
     .put(function(req, res) {
         Map.findById(req.params.map_id, function(err, map) {
-          if(err)
+          if (err)
               res.send(err);
             map = req.body;
             map.save(function(err) {
-               if(err)
+               if (err)
                    res.send(err);
             });
         });
@@ -297,14 +297,14 @@ router.route('/maps/:map_id')
 router.route('/matches')
     .get(function(req, res) {
         Match.find(function(err, match) {
-            if(err)
+            if (err)
                 console.log(err);
             res.json(match);
         });
     })
     .post(function(req, res) {
         Match.creat(req.body, function(err, match) {
-            if(err)
+            if (err)
                 res.send(err);
         });
     });
@@ -314,17 +314,17 @@ router.route('/matches/:match_id')
         Match.remove({
             _id : req.param.match_id
         }, function(err, map) {
-            if(err)
+            if (err)
                 res.send(err);
         });
     })
     .put(function(req, res) {
         Map.findById(req.params.map_id, function(err, map) {
-            if(err)
+            if (err)
                 res.send(err);
             map = req.body;
             map.save(function(err) {
-               if(err)
+               if (err)
                    res.send(err);
             });
         });
@@ -334,14 +334,14 @@ router.route('/matches/:match_id')
 router.route('/organizations')
 	.get(function(req, res) {
 		Organization.find(function(err, organizations) {
-			if(err)
+			if (err)
 				console.log(err);
 			res.json(organizations);
 		});
 	})
 	.post(function(req, res) {
 		organization.create(req.body, function(err, organizations) {
-			if(err)
+			if (err)
 				res.send(err);
 		});
 	});
@@ -351,17 +351,17 @@ router.route('/organizations/:organization_id')
 		organization.remove({
 			_id : req.params.organization_id
 		}, function(err, organization) {
-			if(err)
+			if (err)
 				res.send(err);
 		});
 	})
     .put(function(req, res) {
         organization.findById(req.params.organization_id, function(err, organization) {
-            if(err)
+            if (err)
                 res.send(err);
             organization = req.body;
             organization.save(function(err) {
-                if(err)
+                if (err)
                     res.send(err);
             });
         });
@@ -371,14 +371,14 @@ router.route('/organizations/:organization_id')
 router.route('/rounds')
 	.get(function(req, res) {
 		Round.find(function(err, rounds) {
-			if(err)
+			if (err)
 				console.log(err);
 			res.json(rounds);
 		});
 	})
 	.post(function(req, res) {
 		Round.create(req.body, function(err, rounds) {
-			if(err)
+			if (err)
 				res.send(err);
 		});
 	});
@@ -388,17 +388,17 @@ router.route('/rounds/:round_id')
 		Round.remove({
 			_id : req.params.round_id
 		}, function(err, round) {
-			if(err)
+			if (err)
 				res.send(err);
 		});
 	})
     .put(function(req, res) {
         Round.findById(req.params.round_id, function(err, round) {
-            if(err)
+            if (err)
                 res.send(err);
             round = req.body;
             round.save(function(err) {
-                if(err)
+                if (err)
                     res.send(err);
             });
         });
@@ -408,14 +408,14 @@ router.route('/rounds/:round_id')
 router.route('/socialmedia')
 	.get(function(req, res) {
 		SocialMedia.find(function(err, socialmedia) {
-			if(err)
+			if (err)
 				console.log(err);
 			res.json(socialmedia);
 		});
 	})
 	.post(function(req, res) {
 		SocialMedia.create(req.body, function(err, socialmedia) {
-			if(err)
+			if (err)
 				res.send(err);
 		});
 	});
@@ -425,17 +425,17 @@ router.route('/socialmedia/:socialmedia_id')
 		SocialMedia.remove({
 			_id : req.params.socialmedia_id
 		}, function(err, socialmedia) {
-			if(err)
+			if (err)
 				res.send(err);
 		});
 	})
     .put(function(req, res) {
         SocialMedia.findById(req.params.socialmedia_id, function(err, socialmedia) {
-            if(err)
+            if (err)
                 res.send(err);
             socialmedia = req.body;
             socialmedia.save(function(err) {
-                if(err)
+                if (err)
                     res.send(err);
             });
         });
@@ -445,14 +445,14 @@ router.route('/socialmedia/:socialmedia_id')
 router.route('/sponsors')
 	.get(function(req, res) {
 		Sponsor.find(function(err, sponsors) {
-			if(err)
+			if (err)
 				console.log(err);
 			res.json(sponsors);
 		});
 	})
 	.post(function(req, res) {
 		Sponsor.create(req.body, function(err, sponsors) {
-			if(err)
+			if (err)
 				res.send(err);
 		});
 	});
@@ -462,17 +462,17 @@ router.route('/sponsors/:sponsor_id')
 		Sponsor.remove({
 			_id : req.params.sponsor_id
 		}, function(err, sponsor) {
-			if(err)
+			if (err)
 				res.send(err);
 		});
 	})
     .put(function(req, res) {
         Sponsor.findById(req.params.sponsor_id, function(err, sponsor) {
-            if(err)
+            if (err)
                 res.send(err);
             sponsor = req.body;
             sponsor.save(function(err) {
-                if(err)
+                if (err)
                     res.send(err);
             });
         });
@@ -482,14 +482,14 @@ router.route('/sponsors/:sponsor_id')
 router.route('/teams')
 	.get(function(req, res) {
 		Team.find(function(err, teams) {
-			if(err)
+			if (err)
 				console.log(err);
 			res.json(teams);
 		});
 	})
 	.post(function(req, res) {
 		Team.create(req.body, function(err, teams) {
-			if(err)
+			if (err)
 				res.send(err);
 		});
 	});
@@ -499,17 +499,17 @@ router.route('/teams/:team_id')
 		Team.remove({
 			_id : req.params.team_id
 		}, function(err, team) {
-			if(err)
+			if (err)
 				res.send(err);
 		});
 	})
     .put(function(req, res) {
         Team.findById(req.params.team_id, function(err, team) {
-            if(err)
+            if (err)
                 res.send(err);
             team = req.body;
             team.save(function(err) {
-                if(err)
+                if (err)
                     res.send(err);
             });
         });
@@ -519,14 +519,14 @@ router.route('/teams/:team_id')
 router.route('/eventmodules')
 	.get(function(req, res) {
 		EventModule.find(function(err, eventmodules) {
-			if(err)
+			if (err)
 				console.log(err);
 			res.json(eventmodules);
 		});
 	})
 	.post(function(req, res) {
 		EventModule.create(req.body, function(err, eventmodules) {
-			if(err)
+			if (err)
 				res.send(err);
 		});
 	});
@@ -536,17 +536,17 @@ router.route('/eventmodules/:eventmodule_id')
 		EventModule.remove({
 			_id : req.params.eventmodule_id
 		}, function(err, eventmodule) {
-			if(err)
+			if (err)
 				res.send(err);
 		});
 	})
     .put(function(req, res) {
         EventModule.findById(req.params.eventmodule_id, function(err, eventmodule) {
-            if(err)
+            if (err)
                 res.send(err);
             eventmodule = req.body;
             eventmodule.save(function(err) {
-                if(err)
+                if (err)
                     res.send(err);
             });
         });
