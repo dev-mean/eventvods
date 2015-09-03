@@ -105,7 +105,11 @@ router.get('/data/:id/edit', function(req, res) {
 });
 
 router.get('/profile', function(req, res) {
-    res.render('auth/profile', {}); 
+    res.render('user/profile', {}); 
+});
+
+router.get('/users', function(req, res) {
+    res.render('user/users', {});
 });
 
 module.exports = router;

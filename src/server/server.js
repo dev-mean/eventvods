@@ -57,7 +57,7 @@ var api = require('./routes/api');
 var auth = require('./routes/auth.js');
 app.use('/', routes);
 app.use('/api/', api);
-app.use('/users/', auth);
+app.use('/', auth);
 
 
 var router = express.Router();
