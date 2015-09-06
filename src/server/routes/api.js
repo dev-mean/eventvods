@@ -11,6 +11,7 @@ var Round = require('../models/round.js');
 var SocialMedia = require('../models/socialmedia.js');
 var Sponsor = require('../models/sponsor.js');
 var Team = require('../models/team.js');
+var User = require('../models/user.js');
 
 var async = require('async');
 
@@ -21,14 +22,23 @@ function api_error(code, message, errors, res){
 	return res.status(code).json(err);
 }
 
-//This router is mounted at /api....so /events here translates to /api/events
+// This router is mounted at /api....so /events here translates to /api/events
 
-//auth stuff
+// Auth stuff
 var isAuthenticated = function(req, res, next) {
     if (process.env.NODE_ENV === 'development') return next();
     if (req.isAuthenticated()) return next();
     res.sendStatus(401);
 };
+
+// TODO: maybe move this to another module?
+var isAuthorized = function(role) {
+    return function(req, res, next) {
+        if (req.user.userRights === role)
+            return next();
+    };
+};
+
 
 
 router.get('/overview', function(req, res){
@@ -546,6 +556,43 @@ router.route('/eventmodules/:eventmodule_id')
                 res.send(err);
             eventmodule = req.body;
             eventmodule.save(function(err) {
+                if (err)
+                    res.send(err);
+            });
+        });
+    });
+
+// User stuff
+router.route('/users')
+	.get(function(req, res) {
+		User.find(function(err, user) {
+			if (err)
+				console.log(err);
+			res.json(user);
+		});
+	})
+	.post(function(req, res) {
+		User.create(req.body, function(err, user) {
+			if (err)
+				res.send(err);
+		});
+	});
+
+router.route('/users/:user_id')
+	.delete(function(req, res) {
+		User.remove({
+			_id : req.params.user_id
+		}, function(err, user) {
+			if (err)
+				res.send(err);
+		});
+	})
+    .put(function(req, res) {
+        User.findById(req.params.user_id, function(err, user) {
+            if (err)
+                res.send(err);
+            user = req.body;
+            user.save(function(err) {
                 if (err)
                     res.send(err);
             });
