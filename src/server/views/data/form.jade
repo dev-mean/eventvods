@@ -5,12 +5,8 @@ block content
 	div.event-container(ng-app="data", ng-controller="dataList", ng-cloak)
 		div.contextHead
 			div.leftSide
-				a.btn.lg.solid.icon(href="#")
-					i.icon-file-add
-					span New Team
+				h1 Team Name ELSE "Add Team Data"
 			div.rightSide
-				div.filterControl
-					a(href="#", ng-click="showFilters = !showFilters") {{showFilters ? "Hide" : "Show"}} Filter Controls
 				div.tabs
 					div.teams(ng-click="listView = true", ng-class="listView ? 'active' : ''")
 						i.icon-teams
@@ -21,7 +17,41 @@ block content
 					div.staff(ng-click="listView = false",  ng-class="listView ? '' : 'active'")
 						i.icon-maps
 						span Maps
-
+		div.content.form
+			div.leftSide
+				form
+					.standard.group 
+						input
+						label Name
+					.standard.group 
+						input
+						label Tag
+					.standard.group 
+						input
+						label Game
+					.standard.group 
+						input
+						label Website
+					.standard.group 
+						input
+						label Twitter
+					.standard.group 
+						input
+						label Country
+			div.rightSide
+				.imageUpload.teamLogo
+					h4 Team Logo
+					.tooltip.small
+						i.icon-tooltip
+					.btn.small Remove
+				.imageUpload.teamBackground
+					h4 Team Background
+					.tooltip.small
+						i.icon-tooltip
+					.btn.small Remove
+			div.saveBlock
+				.btn Save Data
+				.btn Save &amp; Add Another
 
 block scripts
 	script(src='/assets/js/app/services/data.js')
