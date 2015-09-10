@@ -5,9 +5,7 @@ block content
 	div.event-container(ng-app="data", ng-controller="dataList", ng-cloak)
 		div.contextHead
 			div.leftSide
-				a.btn.lg.solid.icon(href="#")
-					i.icon-file-add
-					span New Team
+				h1 Team Name ELSE "Add Team Data"
 			div.rightSide
 				div.tabs
 					div.teams(ng-click="listView = true", ng-class="listView ? 'active' : ''")
