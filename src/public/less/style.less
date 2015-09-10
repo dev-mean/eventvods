@@ -126,18 +126,19 @@ header.logo {
 nav {
 	.flex-display;
 	.flex-direction(column);
-	padding: @gutter / 2 0;
+	padding-bottom: @gutter;
 
 	a {
-		padding: @gutter / 2 @gutter;
+		padding: @padding-sm @gutter;
 		padding-left: 79px;
+		margin-bottom: 1px;
 		background: url(/assets/images/backend-icons.png) no-repeat;
-		border-left: 5px solid @default-dark;
+		border-left: 5px solid @default;
 		
-		&#Dashboard { background-position: @gutter 11px; }
-		&#Events { background-position: @gutter -47px; }
-		&#Data { background-position: @gutter -105px; }
-		&#Users { background-position: @gutter -220px; }
+		&#Dashboard { background-position: @gutter 14px; }
+		&#Events { background-position: @gutter -44px; }
+		&#Data { background-position: @gutter -101px; }
+		&#Users { background-position: @gutter -217px; }
 
 		span { display: inline-block; }
 
@@ -147,7 +148,7 @@ nav {
 			padding-left: 74px;
 			color: @silver-light;
 		}
-		&.active { background: @default-light; }
+		&.active { background-color: @default; }
 	}
 }
 
