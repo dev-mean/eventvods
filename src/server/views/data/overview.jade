@@ -2,46 +2,84 @@ extends ../layout
 block vars
 	-currentPage = "Data";
 block content
-	.appcontainer(ng-app="data", ng-controller="dataOverview as overview")
-		h1.title Data
-		//Recent events
-		.section(ng-cloak)
-			h2.title Casters
-			a.btn(href="/data/casters") View Casters
-			a.btn(href="/data/add/caster") Add Casters
-			div.row-list(ng-repeat="caster in overview.casters")
-				div.item
-					div.dataimg {{caster.casterImage}}
-					div {{caster.casterName}}
-					div {{caster.casterAlias}}
-					div {{caster.casterWebsite}}
-					div {{caster.casterCountry}}
+	div.event-container(ng-app="data", ng-controller="dataList", ng-cloak)
+		div.contextHead
+			div.leftSide
+				a.btn.lg.solid.icon(href="#")
+					i.icon-file-add
+					span New Team
+			div.rightSide
+				div.filterControl
+					a(href="#", ng-click="showFilters = !showFilters") {{showFilters ? "Hide" : "Show"}} Filter Controls
+				div.tabs
+					div.teams(ng-click="listView = true", ng-class="listView ? 'active' : ''")
+						i.icon-list
+						span Teams
+					div.staff(ng-click="listView = false",  ng-class="listView ? '' : 'active'")
+						i.icon-grid
+						span Staff
+					div.staff(ng-click="listView = false",  ng-class="listView ? '' : 'active'")
+						i.icon-grid
+						span Maps
+		div.filters(ng-show="showFilters")
+				input(type="text", ng-model="search", placeholder="Search")
+		div.listView.data(ng-show="listView == true")
+			table.standard
+				thead
+					tr
+						th(ng-class="{'sort-desc': sorted('tag', 'desc'), 'sort-asc': sorted('tag', 'asc')}")
+							a(href="#", ng-click="setSort('tag')") Tag
+						th(ng-class="{'sort-desc': sorted('name', 'desc'), 'sort-asc': sorted('name', 'asc')}")
+							a(href="#", ng-click="setSort('name')") Name
+						th(ng-class="{'sort-desc': sorted('game', 'desc'), 'sort-asc': sorted('game', 'asc')}")
+							a(href="#", ng-click="setSort('game')") Icon
+						th(ng-class="{'sort-desc': sorted('country', 'desc'), 'sort-asc': sorted('country', 'asc')}")
+							a(href="#", ng-click="setSort('country')") Country
+						th 
+						th  
+				tbody
+					tr
+						td.tag fnatic
+						td.name Team Fnatic
+						td.icon
+							img(src="/assets/images/logo-fnatic.png")
+						td.country Sweden
+						td.edit
+							a(ng-href="/event/{{event._id}}/edit")
+								i.icon-pencil
+						td.url
+							a(ng-href="/event/{{event._id}}")
+								i.icon-logout
 
-			p(ng-show="overview.casters.length == 0")
-				| No casters set up.
-		.section(ng-cloak)
-			h2.title Maps
-			a.btn(href="/data/maps") View Maps
-			a.btn(href="/data/add/map") Add Map
-			div.row-list(ng-repeat="map in overview.maps")
-				div.item
-					div.dataimg {{map.mapImage}}
-					div {{map.mapName}}
-			p(ng-show="overview.maps.length == 0")
-				| No maps set up.
-		.section(ng-cloak)
-			h2.title Teams
-			a.btn(href="/data/teams") View Teams
-			a.btn(href="/data/add/team") Add Team
-			div.row-list(ng-repeat="team in overview.teams")
-				div.item
-					div.dataimg {{team.teamImage}}
-					div {{team.teamName}}
-					div {{team.teamGame}}
-					div {{team.teamCountry}}
-					div {{team.teamIcon}}
-			p(ng-show="overview.maps.length == 0")
-				| No teams set up.
+					tr(ng-repeat="event in listData")
+						td.date {{event.eventStartDate | date : "dd MMM"}}
+						td.title {{event.eventTitle}}
+						td.game {{event.eventGame}}
+						td.user {{event.user.username}}
+						td.status.draft {{event.eventStatus}}
+						td.edit
+							a(ng-href="/event/{{event._id}}/edit")
+								i.icon-pencil
+						td.url
+							a(ng-href="/event/{{event._id}}")
+								i.icon-logout
+								
+		div.gridView.events(ng-show="listView == false")
+			div.grid
+				div.item(ng-repeat="event in listData", ng-style="{'background-image': 'url(\"/assets/images/'+event.eventImageLoc+'\")'}")
+					div.overlay.hover
+						a.btn.sm.solid(ng-href="/event/{{event._id}}/edit") Edit Event
+					div.gradient.overlay
+					div.status.draft {{event.eventStatus}}
+					div.text
+						div.date {{event.eventStartDate | date : "MMM dd, yyyy"}}
+						div.title {{event.eventTitle}}
+		span(ng-show="listData == null || listData.length == 0") No events match those criteria.
+		div.pagination(ng-show="pages > 1")
+			a.btn(ng-show="page > 1", ng-click="prevPage()") Prev Page
+			| Page {{page}} of {{pages}}
+			a.btn(ng-show="pages > 1 && page < pages", ng-click="nextPage()") Next Page
+
 block scripts
 	script(src='/assets/js/app/services/data.js')
 	script(src='/assets/js/app/controllers/data.js')
