@@ -33,7 +33,8 @@ angular.module('eventControllers', ['eventService'])
         });
 		$scope.$watch('listView', function(newVal, oldVal) {
             if (newVal === oldVal) return;
-            else $scope.processList();
+            $scope.page = 1;
+			$scope.processList();
         });
         $scope.sorted = function(field, dir) {
             return ($scope.sort.field == field && $scope.sort.dir == dir);
@@ -113,8 +114,8 @@ angular.module('eventControllers', ['eventService'])
         };
         $scope.paginate = function(data) {
             if (typeof data == "undefined" || data === null) return null;
-			$scope.pages = Math.ceil(data.length / $scope.itemsPerPage);
 			$scope.itemsPerPage = $scope.listView ? 10 : 6;
+			$scope.pages = Math.ceil(data.length / $scope.itemsPerPage);
             if (data.length > $scope.itemsPerPage){
 				var start = ($scope.page - 1) * $scope.itemsPerPage;
 				var end = start + $scope.itemsPerPage;
@@ -185,6 +186,7 @@ angular.module('eventControllers', ['eventService'])
 
         $scope.test = function() {
             console.dir($scope.data);
+			console.dir($scope.flow);
         };
         $scope.submit = function() {
 			$scope.errors = [];
