@@ -5,33 +5,33 @@ var User = require('../models/user.js');
 
 router.route('/login')
 	.get(function(req, res) {
-		res.render('auth/login', {});
+		res.render('user/login', {});
 	})
 	.post(function(req, res) {
 		User.authenticate()(req.body.username, req.body.password, function(err, user, options) {
 			if (err) res.json(err);
 			if (user === false) {
-				var err = {
+				err = {
 					'status': 403,
 					'message': 'Invalid username or password.'
 				};
 				res.json(err);
 			} else {
 				req.login(user, function(err) {
-					res.redirect(req.session.returnTo || "/");
+					res.redirect(req.session.returnTo || '/');
 				});
 			}
-		})
+		});
 	});
 
 router.get('/logout', function(req, res) {
 	req.logout();
-	res.redirect("/");
+	res.redirect('/');
 });
 
 router.route('/register')
 	.get(function(req, res) {
-		res.render('auth/register', {});
+		res.render('user/register', {});
 	})
 	.post(function(req, res) {
 		User.register(new User({
@@ -42,7 +42,7 @@ router.route('/register')
 			res.json(err);
 		} else {
 			req.login(user, function(err) {
-				res.redirect(req.session.returnTo || "/");
+				res.redirect(req.session.returnTo || '/');
 			});
 		}
 		});

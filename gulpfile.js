@@ -149,6 +149,8 @@ gulp.task('fontawesome-build', function() {
 
 gulp.task('node-build', function() {
     return gulp.src(['src/server/**/*.js'])
+        .pipe(jshint())
+        .pipe(jshint.reporter('jshint-stylish'))
         .pipe(gulp.dest('dist/server/'));
 });
 

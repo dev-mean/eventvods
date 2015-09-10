@@ -13,6 +13,7 @@ var User = require('./models/user');
 
 //server config
 app.set('env', 'development');
+process.env.NODE_ENV = 'development';
 app.use(morgan('dev'));
 
 //Static file at the top, prevents all the code below being run for static files.
@@ -31,7 +32,7 @@ app.use(session({
 	secret: config.secret,
 	resave: false,
 	saveUninitialized: true
-}))
+}));
 
 /* Passport setup */
 app.use(passport.initialize());
@@ -41,7 +42,7 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 mongoose.connect(config.databaseUrl, function(err) {
-	if(err)	console.log("DB err: " + err);
+	if (err)	console.log("DB err: " + err);
 	else console.log("Connected to mongodb");
 });
 
@@ -56,10 +57,10 @@ var api = require('./routes/api');
 var auth = require('./routes/auth.js');
 app.use('/', routes);
 app.use('/api/', api);
-app.use('/users/', auth);
+app.use('/', auth);
 
 
-
+var router = express.Router();
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
@@ -76,10 +77,10 @@ if (app.get('env') === 'development') {
 //listens
 var port = config.port;
 var db = config.databaseUrl;
-if(config.ip) {
-  app.listen(port, config.ip);
+if (config.ip) {
+      app.listen(port, config.ip);
 } else {
-  app.listen(port);
+      app.listen(port);
 }
 
 console.log('App listening on ' + (config.ip || 'localhost') + ':' + port);
