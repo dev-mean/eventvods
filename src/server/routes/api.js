@@ -565,7 +565,9 @@ router.route('/eventmodules/:eventmodule_id')
 // User stuff
 router.route('/users')
 	.get(function(req, res) {
-		User.find(function(err, user) {
+		User.find({})
+            .select('username userRights userPreferences')
+            .exec(function(err, user) {
 			if (err)
 				console.log(err);
 			res.json(user);
