@@ -13,13 +13,13 @@ block content
 					a(href="#", ng-click="showFilters = !showFilters") {{showFilters ? "Hide" : "Show"}} Filter Controls
 				div.tabs
 					div.teams(ng-click="listView = true", ng-class="listView ? 'active' : ''")
-						i.icon-list
+						i.icon-teams
 						span Teams
 					div.staff(ng-click="listView = false",  ng-class="listView ? '' : 'active'")
-						i.icon-grid
+						i.icon-staff
 						span Staff
 					div.staff(ng-click="listView = false",  ng-class="listView ? '' : 'active'")
-						i.icon-grid
+						i.icon-maps
 						span Maps
 		div.filters(ng-show="showFilters")
 				input(type="text", ng-model="search", placeholder="Search")
