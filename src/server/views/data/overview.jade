@@ -50,30 +50,6 @@ block content
 						td.url
 							a(ng-href="/event/{{event._id}}")
 								i.icon-logout
-
-					tr(ng-repeat="event in listData")
-						td.date {{event.eventStartDate | date : "dd MMM"}}
-						td.title {{event.eventTitle}}
-						td.game {{event.eventGame}}
-						td.user {{event.user.username}}
-						td.status.draft {{event.eventStatus}}
-						td.edit
-							a(ng-href="/event/{{event._id}}/edit")
-								i.icon-pencil
-						td.url
-							a(ng-href="/event/{{event._id}}")
-								i.icon-logout
-								
-		div.gridView.events(ng-show="listView == false")
-			div.grid
-				div.item(ng-repeat="event in listData", ng-style="{'background-image': 'url(\"/assets/images/'+event.eventImageLoc+'\")'}")
-					div.overlay.hover
-						a.btn.sm.solid(ng-href="/event/{{event._id}}/edit") Edit Event
-					div.gradient.overlay
-					div.status.draft {{event.eventStatus}}
-					div.text
-						div.date {{event.eventStartDate | date : "MMM dd, yyyy"}}
-						div.title {{event.eventTitle}}
 		span(ng-show="listData == null || listData.length == 0") No events match those criteria.
 		div.pagination(ng-show="pages > 1")
 			a.btn(ng-show="page > 1", ng-click="prevPage()") Prev Page
