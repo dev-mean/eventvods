@@ -18,6 +18,18 @@ body {
 
 a { color: inherit; text-decoration: none; }
 
+.icon-setup {
+  font-family: "eventvods" !important;
+  content: attr(data-icon);
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  speak: none;
+  line-height: 1;
+  .font-smooth;
+}
+
 /* basic layout */
 .container {
 	width: @containerWidth;
@@ -177,6 +189,22 @@ table.standard {
 		color: @silver-darker;
 		font-size: 12px;
 		text-transform: uppercase;
+
+		&.sortable {
+			&.sort-desc, &.sort-asc {
+				color: @green;
+			}
+			&:after {
+				.icon-setup;
+				display: inline-block;
+				content: "O";
+				.transform(rotate(90deg) translate(1px,-5px));
+			}
+			&.sort-asc:after {
+				.transform(rotate(-90deg) translate(-1px,5px));
+			}
+		}
+
 	}
 	td { 
 		padding: @padding-cell; 
