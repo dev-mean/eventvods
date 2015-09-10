@@ -101,7 +101,7 @@ router.get('/data/:id', function(req, res) {
 });
 
 router.get('/data/:id/edit', function(req, res) {
-    res.render('data/datum', {});
+    res.render('data/form', {});
 });
 
 router.get('/profile', function(req, res) {
