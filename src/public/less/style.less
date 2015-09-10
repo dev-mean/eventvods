@@ -19,15 +19,55 @@ body {
 a { color: inherit; text-decoration: none; }
 
 .icon-setup {
-  font-family: "eventvods" !important;
-  content: attr(data-icon);
-  font-style: normal !important;
-  font-weight: normal !important;
-  font-variant: normal !important;
-  text-transform: none !important;
-  speak: none;
-  line-height: 1;
-  .font-smooth;
+	font-family: "eventvods" !important;
+	content: attr(data-icon);
+	font-style: normal !important;
+	font-weight: normal !important;
+	font-variant: normal !important;
+	text-transform: none !important;
+	speak: none;
+	line-height: 1;
+	.font-smooth;
+}
+
+.form-style {
+	border-radius: @input-radius;
+	outline: none;
+	line-height: @font-size;
+	font-size: @font-size;
+	font-weight: normal;
+	padding: @text-padding;
+	background: transparent;
+	border: 2px solid @default-lighter;
+	color: @silver-dark;
+	.transition;
+		
+	&:focus { 
+		border-color: @silver-dark;
+		color: @silver-light;
+	}
+
+	&::-webkit-input-placeholder {
+	font-size: @font-size;
+	line-height: @font-size + 2;
+	color: @silver-darker;
+	}
+	&::-moz-placeholder {
+	font-size: @font-size;
+	line-height: @font-size + 2;
+	color: @silver-darker;
+
+	}
+	&:-moz-placeholder {
+	font-size: @font-size;
+	line-height: @font-size + 2;
+	color: @silver-darker;
+	}
+	&:-ms-input-placeholder { 
+	font-size: @font-size;
+	line-height: @font-size + 2;
+	color: @silver-darker;
+	}
 }
 
 /* basic layout */
@@ -297,6 +337,19 @@ table.standard {
 	}
 }
 
+/* filter control */
+.filters {
+	background: @default-light;
+	width: 100%;
+	padding: @padding-sm;
+	border-bottom: 1px solid @default;
+
+	input {
+		.form-style;
+		width: 100%;
+	}
+}
+
 /* event listing */
 .row-list {
 	width: 100%;
@@ -392,91 +445,77 @@ form {
 
 /* form elements */
 .group.checkbox, .group.radio {
-  input, label { cursor: pointer; }
-  input { 
-    opacity: 0;
-    position: absolute;
-    + label {
-      line-height: @ui-checkbox-size + 2;
-      display: inline-block;
-      padding: 2px;
-      margin: @ui-checkbox-offset @ui-checkbox-size - 12 -@ui-checkbox-offset 0;
-      .transition;
-      &:before {
-        content: '';
-        display: inline-block;
-        vertical-align: middle;
-        position: relative;
-        top: -@ui-checkbox-offset;
-        margin-right: 6px;
-        border-radius: @checkbox-radius;
-        height: @ui-checkbox-size;
-        width: @ui-checkbox-size;
-        border: 2px solid @default-lighter;
-        .transition;
-      }
-      &:hover { 
-        color: @silver;
-        &:before {
-          border-color: @green-bright;
-        }
-      }
-    }
-    &:checked {
-      + label {
-        color: @green-bright;
-        &:before {
-          background: @green-bright;
-          border-color: @default-lighter;
-        }
-        &:hover:before { 
-          border-color: @green-bright;
-        }
-      }   
-    }
-  }
+	input, label { cursor: pointer; }
+	input { 
+		opacity: 0;
+		position: absolute;
+		+ label {
+			line-height: @ui-checkbox-size + 2;
+			display: inline-block;
+			padding: 2px;
+			margin: @ui-checkbox-offset @ui-checkbox-size - 12 -@ui-checkbox-offset 0;
+			.transition;
+			&:before {
+				content: '';
+				display: inline-block;
+				vertical-align: middle;
+				position: relative;
+				top: -@ui-checkbox-offset;
+				margin-right: 6px;
+				border-radius: @checkbox-radius;
+				height: @ui-checkbox-size;
+				width: @ui-checkbox-size;
+				border: 2px solid @default-lighter;
+				.transition;
+			}
+			&:hover { 
+				color: @silver;
+				&:before {
+					border-color: @green-bright;
+				}
+			}
+		}
+		&:checked {
+			+ label {
+				color: @green-bright;
+				&:before {
+					background: @green-bright;
+					border-color: @default-lighter;
+				}
+				&:hover:before { 
+					border-color: @green-bright;
+				}
+			}   
+		}
+	}
 }
 .group.radio input + label:before { border-radius: 50%; }
 
 .group.standard {
 	margin-bottom: 6px; 
 
-  input {
-    border-radius: @input-radius;
-    outline: none;
-    line-height: @font-size;
-    font-size: @font-size;
-    font-weight: normal;
-    padding: @text-padding;
-    margin-right: @padding;
-    background: transparent;
-    border: 2px solid @default-lighter;
-    color: @silver-dark;
-    .transition;
-    
-    &:focus { 
-      border-color: @silver-dark;
-      color: @silver-light;
-    }
-  }
-  label {
-  	line-height: @font-size * 2;
-    color: @silver-dark;
-    font-size: @font-size;
-    cursor: pointer;
-    .transition;
-  }
-  input:focus + label { color: @silver-light; }
+	input {
+		.form-style;
+		margin-right: @padding;
+	}
+	label {
+		line-height: @font-size * 2;
+		color: @silver-dark;
+		font-size: @font-size;
+		cursor: pointer;
+		.transition;
+	}
+	input:focus + label { color: @silver-light; }
 }
 
 .stacked { 
-  &.group { 
-    width: 100%; 
-    display: block; 
-    margin-bottom: 6px;
-    label { width: @label-width; margin: 0; }
-    input { width: 100 - @label-width; margin: 0; }
-  } 
+	&.group { 
+		width: 100%; 
+		display: block; 
+		margin-bottom: 6px;
+		label { width: @label-width; margin: 0; }
+		input { width: 100 - @label-width; margin: 0; }
+	} 
 }
 
 /* image upload block */
@@ -495,64 +534,64 @@ form {
 
 /* button */
 .btn { 
-  line-height: 1em;
-  font-family: arial, sans-serif;
-  font-size: @font-size-btn;
-  font-weight: bold;
+	line-height: 1em;
+	font-family: arial, sans-serif;
+	font-size: @font-size-btn;
+	font-weight: bold;
 
-  border: 2px solid @green-bright;
-  color: @green-bright;
-  
-  margin: 0;
-  padding: @btn-padding @btn-padding + 8;
-  border-radius: @btn-radius; 
-  
-  box-sizing: border-box;
-  display: inline-block;
-  text-align: center;
-  vertical-align: middle;
-  touch-action: manipulation;
-  cursor: pointer;
-  width: auto;
-  white-space: nowrap;
+	border: 2px solid @green-bright;
+	color: @green-bright;
+	
+	margin: 0;
+	padding: @btn-padding @btn-padding + 8;
+	border-radius: @btn-radius; 
+	
+	box-sizing: border-box;
+	display: inline-block;
+	text-align: center;
+	vertical-align: middle;
+	touch-action: manipulation;
+	cursor: pointer;
+	width: auto;
+	white-space: nowrap;
 
-  .transition;
-  &:hover { 
-    background-color: @green-transparent;
-    color: lighten(@green-bright, 10%);
-  }
+	.transition;
+	&:hover { 
+		background-color: @green-transparent;
+		color: lighten(@green-bright, 10%);
+	}
 
-  &.solid {
-  	background: @green-bright;
-  	color: @default-dark;
-  	&:hover {
-  		background-color: darken(@green-bright,5%);
-  		color: @default-darker;
-  	}
-  }
+	&.solid {
+		background: @green-bright;
+		color: @default-dark;
+		&:hover {
+			background-color: darken(@green-bright,5%);
+			color: @default-darker;
+		}
+	}
 
-  &.icon {
-  	position: relative;
-  	i, span { .transition; }
-  	i { 
-  		position: absolute;
-  		left: 14px;
-  		margin-top: -2px;
-  		line-height: @font-size-btn; 
-  		font-size: 18px; 
-  	}
-  	span { padding-left: 22px; display: block; }
-  	&:hover { 
+	&.icon {
+		position: relative;
+		i, span { .transition; }
+		i { 
+			position: absolute;
+			left: 14px;
+			margin-top: -2px;
+			line-height: @font-size-btn; 
+			font-size: 18px; 
+		}
+		span { padding-left: 22px; display: block; }
+		&:hover { 
 			span { .translate(-2px,0); }
 			i { .translate(2px,0); }
-  	}
-  }
+		}
+	}
 
-  &.lg { 
-  	padding: @btn-padding + 3 @btn-padding + 14;
-  }
-  &.small {
-  	font-size: 11px;
-  	padding: @btn-padding - 4 @btn-padding;
-  }
+	&.lg { 
+		padding: @btn-padding + 3 @btn-padding + 14;
+	}
+	&.small {
+		font-size: 11px;
+		padding: @btn-padding - 4 @btn-padding;
+	}
 }
