@@ -116,6 +116,12 @@ nav {
 
 	.leftSide { 
 		padding: @padding-lg;
+
+		h1 { 
+			font-size: 20px;
+			font-weight: 300;
+			line-height: 38px;
+		}
 	}
 
 	.rightSide {
@@ -129,7 +135,7 @@ nav {
 			}
 		}
 
-		.viewSelect {
+		.viewSelect, .tabs {
 			.flex-display; 
 
 			> div { 
@@ -316,7 +322,150 @@ table.standard {
 	}
 }
 
+/* forms + detail view */
 
+.content.form {
+	.flex-display;
+	.flex-wrap(wrap);
+	.leftSide { min-width: 66%; }
+	.rightSide { min-width: 34%; }
+	.saveBlock { 
+		width: 100%; 
+		border-top: 1px solid @default-dark;
+		padding-top: @padding-sm;
+		margin-top: @padding-sm; 
+	}
+}
+
+form {
+	.group { 
+		.flex-display;
+
+		input { 
+			.flex-order(2); 
+			.flex-grow(1);  
+		}
+		label {
+		.flex-order(1); 
+		.flex-grow(1);
+		max-width: 20%;
+		}
+	}
+}
+
+/* form ui variables */
+@checkbox-radius: 6px; 
+@ui-checkbox-size: 20px;
+@ui-checkbox-offset: 2px; /* unfortunate hack to get precise vertical alignment */
+@input-radius: 2px;
+@font-size: 14px;
+@label-width: 16%; /* set percent, stacked view only */
+@text-padding: 4px 5px;
+
+/* form elements */
+.group.checkbox, .group.radio {
+  input, label { cursor: pointer; }
+  input { 
+    opacity: 0;
+    position: absolute;
+    + label {
+      line-height: @ui-checkbox-size + 2;
+      display: inline-block;
+      padding: 2px;
+      margin: @ui-checkbox-offset @ui-checkbox-size - 12 -@ui-checkbox-offset 0;
+      .transition;
+      &:before {
+        content: '';
+        display: inline-block;
+        vertical-align: middle;
+        position: relative;
+        top: -@ui-checkbox-offset;
+        margin-right: 6px;
+        border-radius: @checkbox-radius;
+        height: @ui-checkbox-size;
+        width: @ui-checkbox-size;
+        border: 2px solid @default-lighter;
+        .transition;
+      }
+      &:hover { 
+        color: @silver;
+        &:before {
+          border-color: @green-bright;
+        }
+      }
+    }
+    &:checked {
+      + label {
+        color: @green-bright;
+        &:before {
+          background: @green-bright;
+          border-color: @default-lighter;
+        }
+        &:hover:before { 
+          border-color: @green-bright;
+        }
+      }   
+    }
+  }
+}
+.group.radio input + label:before { border-radius: 50%; }
+
+.group.standard {
+	margin-bottom: 6px; 
+
+  input {
+    border-radius: @input-radius;
+    outline: none;
+    line-height: @font-size;
+    font-size: @font-size;
+    font-weight: normal;
+    padding: @text-padding;
+    margin-right: @padding;
+    background: transparent;
+    border: 2px solid @default-lighter;
+    color: @silver-dark;
+    .transition;
+    
+    &:focus { 
+      border-color: @silver-dark;
+      color: @silver-light;
+    }
+  }
+  label {
+  	line-height: @font-size * 2;
+    color: @silver-dark;
+    font-size: @font-size;
+    cursor: pointer;
+    .transition;
+  }
+  input:focus + label { color: @silver-light; }
+}
+
+.stacked { 
+  &.group { 
+    width: 100%; 
+    display: block; 
+    margin-bottom: 6px;
+    label { width: @label-width; margin: 0; }
+    input { width: 100 - @label-width; margin: 0; }
+  } 
+}
+
+/* image upload block */
+.imageUpload { 
+	padding: @padding-sm; 
+	border: 1px solid @default-dark;
+	margin-bottom: 6px;
+	position: relative;
+
+	.btn { 
+		position: absolute;
+		top: @padding-sm;
+		right: @padding-sm;
+	}
+}
+
+/* button */
 .btn { 
   line-height: 1em;
   font-family: arial, sans-serif;
@@ -373,5 +522,9 @@ table.standard {
 
   &.lg { 
   	padding: @btn-padding + 3 @btn-padding + 14;
+  }
+  &.small {
+  	font-size: 11px;
+  	padding: @btn-padding - 4 @btn-padding;
   }
 }
