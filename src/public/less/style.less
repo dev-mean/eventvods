@@ -250,6 +250,8 @@ table.standard {
 	td { 
 		padding: @padding-cell; 
 		border-bottom: 1px solid @default-light;
+		line-height: @font-size;
+		font-size: @font-size;
 
 		&.edit, &.url {
 			padding: 0;
@@ -276,6 +278,10 @@ table.standard {
 			}
 		}
 		&.url i { padding-left: 2px; }
+		&.icon {
+			padding-top: 6px;
+			img { max-height: 32px; position: absolute; margin-top: -13px; }
+		}
 	}
 }
 
@@ -530,6 +536,23 @@ form {
 		position: absolute;
 		top: @padding-sm;
 		right: @padding-sm;
+	}
+}
+
+/* pagination */
+.pagination {
+	position: relative;
+	text-align: center;
+	.btn {
+		position: absolute;
+		top: @padding-sm;
+		color: @blue-light;
+		padding: 4px;
+		.transition-alt(all 0s); 
+		border: none; 
+		&:hover { background: transparent; color: @blue-light; }
+		&:first-child { left: @padding-sm; }
+		&:last-child { right: @padding-sm; }
 	}
 }
 
