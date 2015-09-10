@@ -32,8 +32,11 @@ block content
 			| TODO
 		.section#image
 			h2 Event Image
-			#image_upload(flow-init, flow-name="flow", flow-drop)
-			img(flow-img="flow.files[0]")
+			#image_upload(flow-init!="{singleFile: true, flowDropEnabled: true}", flow-name="flow", flow-drop)
+				span(flow-btn, flow-attrs="{accept:'image/*'}", ng-click="$flow.cancel()") Drag and drop your image here, or click to select a file.
+				.thumbnail(ng-show="flow.files.length")
+					img(flow-img="flow.files[0]")
+					span.remove(ng-click="flow.cancel()") Remove
 		// Form page 2
 		.section(ng-show="stage == 2")
 			h2 Teams
