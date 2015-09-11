@@ -1,17 +1,18 @@
 var app = require('express');
 var router = app.Router();
-var Caster = require('../models/caster.js');
-var Event = require('../models/event.js');
-var Link = require('../models/link.js');
-var Map = require('../models/map.js');
-var Match = require('../models/match.js');
-var EventModule = require('../models/module.js');
-var Organization = require('../models/organization.js');
-var Round = require('../models/round.js');
-var SocialMedia = require('../models/socialmedia.js');
-var Sponsor = require('../models/sponsor.js');
-var Team = require('../models/team.js');
-var User = require('../models/user.js');
+var image = require('../controllers/image');
+var Caster = require('../models/caster');
+var Event = require('../models/event');
+var Link = require('../models/link');
+var Map = require('../models/map');
+var Match = require('../models/match');
+var EventModule = require('../models/module');
+var Organization = require('../models/organization');
+var Round = require('../models/round');
+var SocialMedia = require('../models/socialmedia');
+var Sponsor = require('../models/sponsor');
+var Team = require('../models/team');
+var User = require('../models/user');
 
 var async = require('async');
 
@@ -601,5 +602,8 @@ router.route('/users/:user_id')
         });
     });
 
-
+router.route('/images/events/:event_id')
+    .post(function(req, res) {
+        image.saveImage(req, res);
+    });
 module.exports = router;

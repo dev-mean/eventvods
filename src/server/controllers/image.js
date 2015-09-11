@@ -2,10 +2,13 @@ var fs = require('fs');
 var multiparty = require('multiparty');
 var path = require('path');
 
-module.exports.saveImage = function(req, res, next) {
+module.exports.saveImage = function(req, res) {
     var form = new multiparty.Form();
     form.parse(req, function(err, fields, files) {
-        var file = files.file[0];
+        console.log('err: ' + err);
+        console.log('fields: ' + fields);
+        console.log('files: %j', files);
+        var file = files.image;
         var contentType = file.headers['content-type'];
         var tempPath = file.path;
         var extensionIndex = tempPath.lastIndexOf('.');
