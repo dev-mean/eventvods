@@ -24,15 +24,15 @@ block content
 			table.standard
 				thead
 					tr
-						th(class="sortable" ng-class="{'sort-desc': sorted('date', 'desc'), 'sort-asc': sorted('date', 'asc')}")
+						th.sortable(ng-class="{'sort-desc': sorted('date', 'desc'), 'sort-asc': sorted('date', 'asc')}")
 							a(href="#", ng-click="setSort('date')") Date
-						th(class="sortable" ng-class="{'sort-desc': sorted('title', 'desc'), 'sort-asc': sorted('title', 'asc')}")
+						th.sortable(ng-class="{'sort-desc': sorted('title', 'desc'), 'sort-asc': sorted('title', 'asc')}")
 							a(href="#", ng-click="setSort('title')") Title
-						th(class="sortable" ng-class="{'sort-desc': sorted('game', 'desc'), 'sort-asc': sorted('game', 'asc')}")
+						th.sortable(ng-class="{'sort-desc': sorted('game', 'desc'), 'sort-asc': sorted('game', 'asc')}")
 							a(href="#", ng-click="setSort('game')") Game
-						th(class="sortable" ng-class="{'sort-desc': sorted('user', 'desc'), 'sort-asc': sorted('user', 'asc')}")
+						th.sortable(ng-class="{'sort-desc': sorted('user', 'desc'), 'sort-asc': sorted('user', 'asc')}")
 							a(href="#", ng-click="setSort('user')") User
-						th(class="sortable" ng-class="{'sort-desc': sorted('status', 'desc'), 'sort-asc': sorted('status', 'asc')}")
+						th.sortable(ng-class="{'sort-desc': sorted('status', 'desc'), 'sort-asc': sorted('status', 'asc')}")
 							a(href="#", ng-click="setSort('status')") Status
 						th 
 						th  
@@ -52,7 +52,7 @@ block content
 								
 		div.gridView.events(ng-show="listView == false")
 			div.grid
-				div.item(ng-repeat="event in listData", ng-style="{'background-image': 'url(\"/assets/images/'+event.eventImageLoc+'\")'}")
+				div.item(ng-repeat="event in listData", ng-style="{'background-image': 'url(\"/assets/images/events/'+event.eventImage+'\")'}")
 					div.overlay.hover
 						a.btn.sm.solid(ng-href="/event/{{event._id}}/edit") Edit Event
 					div.gradient.overlay
