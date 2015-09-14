@@ -1,7 +1,7 @@
 var app = require('express');
 var router = app.Router();
 var Event = require('../models/event');
-var User = require('../models/user.js');
+var User = require('../models/user');
 
 var isAuthenticated = function(req, res, next) {
     // If environment is dev, skip authorization and authentication
