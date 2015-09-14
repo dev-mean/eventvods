@@ -7,3 +7,16 @@ block content
         span User ID: #{locals.user._id}
         br
         span User auth level: #{locals.user.userRights}
+        div.listview
+            table.standard
+                thead
+                    tr
+                        th.sortable Username
+                        th User Rights
+                tbody
+                    tr(ng-repeat="user in userData")
+                        td {{user.username}}
+                        td {{user.userRights}}
+block scripts
+    script(src='/assets/js/app/services/user.js')
+    script(src='/assets/js/app/controllers/user.js')

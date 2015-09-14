@@ -550,9 +550,7 @@ router.route('/eventmodules/:eventmodule_id')
 // User stuff
 router.route('/users')
 	.get(function(req, res) {
-		User.find({})
-            .select('username userRights userPreferences')
-            .exec(function(err, user) {
+		User.find({}, 'username userRights userPreferences', function(err, user) {
 			if (err)
 				console.log(err);
 			res.json(user);
@@ -566,6 +564,13 @@ router.route('/users')
 	});
 
 router.route('/users/:user_id')
+    .get(function(req, res) {
+        User.findById(req.params.user_id, 'username userRights userPreferences', function(err, user) {
+            if(err)
+                res.send(err);
+            res.json(user);
+        });
+    })
 	.delete(function(req, res) {
 		User.remove({
 			_id : req.params.user_id
@@ -586,6 +591,7 @@ router.route('/users/:user_id')
         });
     });
 
+// Uploads image, will be associated with event in the future.
 router.route('/images/events/:event_id')
     .post(image.upload.single('test'), function(req, res) {
         console.log(req.file);
