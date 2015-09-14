@@ -104,7 +104,7 @@ router.get('/overview', function(req, res){
 
 //Caster routes
 router.route('/casters')
-	.get(auth.apiAuth(0), function(req, res) {
+	.get(function(req, res) {
 		Caster.find(function(err, casters) {
 			if (err)
 				console.log(err);
