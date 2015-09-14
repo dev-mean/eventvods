@@ -1,5 +1,6 @@
 var app = require('express');
 var router = app.Router();
+var auth = require('../controllers/auth');
 var image = require('../controllers/image');
 var Caster = require('../models/caster');
 var Event = require('../models/event');
@@ -24,23 +25,6 @@ function api_error(code, message, errors, res){
 }
 
 // This router is mounted at /api....so /events here translates to /api/events
-
-// Auth stuff
-var isAuthenticated = function(req, res, next) {
-    if (process.env.NODE_ENV === 'development') return next();
-    if (req.isAuthenticated()) return next();
-    res.sendStatus(401);
-};
-
-// TODO: maybe move this to another module?
-var isAuthorized = function(role) {
-    return function(req, res, next) {
-        if (req.user.userRights === role)
-            return next();
-    };
-};
-
-
 
 router.get('/overview', function(req, res){
 	var today = new Date().toISOString();
@@ -120,7 +104,7 @@ router.get('/overview', function(req, res){
 
 //Caster routes
 router.route('/casters')
-	.get(function(req, res) {
+	.get(auth.apiAuth(0), function(req, res) {
 		Caster.find(function(err, casters) {
 			if (err)
 				console.log(err);
@@ -603,7 +587,8 @@ router.route('/users/:user_id')
     });
 
 router.route('/images/events/:event_id')
-    .post(function(req, res) {
-        image.saveImage(req, res);
+    .post(image.upload.single('test'), function(req, res) {
+        console.log(req.file);
+        return res.sendStatus(200);
     });
 module.exports = router;

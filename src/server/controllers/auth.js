@@ -1,5 +1,6 @@
-module.exports = function(rightsNeeded){
+module.exports = function(rightsNeeded) {
 	return function(req, res, next) {
+        //if (process.env.NODE_ENV === 'development') return next();
 		if (!req.isAuthenticated || !req.isAuthenticated()) {
 			if (req.session) {
 			  req.session.returnTo = req.originalUrl || req.url;
@@ -9,14 +10,29 @@ module.exports = function(rightsNeeded){
 		else if(req.user.userRights >= rightsNeeded)
 			next();
 		else {
-			//We need an actual user error page to display to user
 			var err = new Error('Insufficient Permissions');
 		  	err.status = 403;
-		  	next(err);
+            res.render('error', {error: err});
 		}
   	};
 };
-module.exports.checkPriv = function(req, res, next, rightsNeeded, callback){
+
+// Auth for API, doesn't try to redirect or anything fancy, as the user should never see these errors
+module.exports.apiAuth = function(rightsNeeded) {
+    return function(req, res, next) {
+        var err;
+        //if (process.env.NODE_ENV === 'development') return next();
+        if (!req.isAuthenticated || !req.isAuthenticated()) {
+		    return res.sendStatus(401);
+		}
+        else if(req.user.userRights >= rightsNeeded)
+			next();
+		else {
+            return res.sendStatus(403);
+		}
+    };
+};
+module.exports.checkPriv = function(req, res, next, rightsNeeded, callback) {
     var err;
 	if( typeof req.user !== undefined && req.user.userRights >= rightsNeeded)
 		callback(null, req, res, next);

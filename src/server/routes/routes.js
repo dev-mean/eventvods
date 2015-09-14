@@ -1,18 +1,12 @@
 var app = require('express');
 var router = app.Router();
+var auth = require('../controllers/auth');
 var Event = require('../models/event');
 var User = require('../models/user');
 
-var isAuthenticated = function(req, res, next) {
-    // If environment is dev, skip authorization and authentication
-    if (process.env.NODE_ENV === 'development') return next();
-    if (!req.isAuthenticated()) res.redirect('users/login');
-    return next();
-};
-
 // Sets up local user data for templating
 router.all('/*', function(req, res, next) {
-    // Dev logic, auto logs in user
+    // Dev logic, auto login user
     if (process.env.NODE_ENV === 'development') {
         if (!req.user) {
             console.log('No user detected, trying to authenticate');
@@ -39,15 +33,7 @@ router.all('/*', function(req, res, next) {
     }
 });
 
-// TODO: possibly change role checking to include multiple roles, strings, etc
-var isAuthorized = function(role) {
-    return function(req, res, next) {
-        if (req.user.userRights === role)
-            return next();
-    };
-};
-
-router.get('/', function(req, res) {
+router.get('/', auth(0), function(req, res) {
     res.render('overview', {});
 });
 
@@ -111,5 +97,7 @@ router.get('/profile', function(req, res) {
 router.get('/users', function(req, res) {
     res.render('user/users', {});
 });
+
+
 
 module.exports = router;
