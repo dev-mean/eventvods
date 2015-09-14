@@ -24,7 +24,7 @@ var eventSchema = new Schema({
 	eventTeams: [Team],
 	eventCasters: [Caster],
 	eventUser: { type: Schema.ObjectId, ref: 'User' },
-	eventImageLoc: { type: String, default: 'eventimages/default.png' }
+	eventImage: { type: String, default: 'default.png' }
 });
 
 var Event = mongoose.model('events', eventSchema);

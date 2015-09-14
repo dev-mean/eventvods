@@ -2,42 +2,64 @@ extends ../layout
 block vars
 	-currentPage = "Data";
 block content
-	div.event-container(ng-app="data", ng-controller="dataList", ng-cloak)
+	div.event-container(ng-app="data", ng-controller="dataOverview", ng-cloak)
 		div.contextHead
 			div.leftSide
-				a.btn.lg.solid.icon(href="#")
+				span.btn.lg.solid.icon(ng-click="test()") Test
+				a.btn.lg.solid.icon(href="add/team", ng-show="view == 'Teams'")
 					i.icon-file-add
 					span New Team
+				a.btn.lg.solid.icon(href="add/staff", ng-show="view == 'Staff'")
+					i.icon-file-add
+					span New Staff
+				a.btn.lg.solid.icon(href="add/map", ng-show="view == 'Maps'")
+					i.icon-file-add
+					span New Map
 			div.rightSide
 				div.filterControl
 					a(href="#", ng-click="showFilters = !showFilters") {{showFilters ? "Hide" : "Show"}} Filter Controls
 				div.tabs
-					div.teams(ng-click="listView = true", ng-class="listView ? 'active' : ''")
+					div.teams(ng-click="view = 'Teams'", ng-class="view == 'Teams' ? 'active' : ''")
 						i.icon-teams
 						span Teams
-					div.staff(ng-click="listView = false",  ng-class="listView ? '' : 'active'")
+					div.staff(ng-click="view = 'Staff'",  ng-class="view == 'Staff' ? 'active' : ''")
 						i.icon-staff
 						span Staff
-					div.staff(ng-click="listView = false",  ng-class="listView ? '' : 'active'")
+					div.staff(ng-click="view = 'Maps'",  ng-class="view == 'Maps' ? 'active' : ''")
 						i.icon-maps
 						span Maps
 		div.filters(ng-show="showFilters")
-				input(type="text", ng-model="search", placeholder="Search")
-		div.listView.data(ng-show="listView == true")
+				input(type="text", ng-model="teams.search", placeholder="Search Teams", ng-show="view == 'Teams'")
+				input(type="text", ng-model="staff.search", placeholder="Search Staff", ng-show="view == 'Staff'")
+				input(type="text", ng-model="maps.search", placeholder="Search Maps", ng-show="view == 'Maps'")
+		div#Teams.data(ng-show="view == 'Teams'")
 			table.standard
 				thead
 					tr
-						th(ng-class="{'sort-desc': sorted('tag', 'desc'), 'sort-asc': sorted('tag', 'asc')}")
-							a(href="#", ng-click="setSort('tag')") Tag
-						th(ng-class="{'sort-desc': sorted('name', 'desc'), 'sort-asc': sorted('name', 'asc')}")
-							a(href="#", ng-click="setSort('name')") Name
-						th(ng-class="{'sort-desc': sorted('game', 'desc'), 'sort-asc': sorted('game', 'asc')}")
-							a(href="#", ng-click="setSort('game')") Icon
-						th(ng-class="{'sort-desc': sorted('country', 'desc'), 'sort-asc': sorted('country', 'asc')}")
-							a(href="#", ng-click="setSort('country')") Country
+						th.sortable(ng-class="{'sort-desc': teams.sorted('tag', 'desc'), 'sort-asc': teams.sorted('tag', 'asc')}")
+							a(href="#", ng-click="teams.sortBy('tag')") Tag
+						th.sortable(ng-class="{'sort-desc': teams.sorted('name', 'desc'), 'sort-asc': teams.sorted('name', 'asc')}")
+							a(href="#", ng-click="teams.sortBy('name')") Name
+						th Icon
+						th.sortable(ng-class="{'sort-desc': teams.sorted('country', 'desc'), 'sort-asc': teams.sorted('country', 'asc')}")
+							a(href="#", ng-click="teams.sortBy('country')") Country
 						th 
 						th  
 				tbody
+					tr(ng-repeat="team in teams.list")
+						td.tag {{team.teamTag}}
+						td.name {{team.teamName}}
+						td.icon
+							img(ng-src="/assets/images/teams/{{team.teamTag}}-logo.png")
+						td.country
+							img(ng-src="/assets/images/countries/{{team.teamCountry}}.png")
+							{{team.teamCountry}}
+						td.edit
+							a(ng-href="/data/team/{{team._id}}/edit")
+								i.icon-pencil
+						td.url
+							a(ng-href="/data/team/{{team._id}}")
+								i.icon-logout
 					tr
 						td.tag fnatic
 						td.name Team Fnatic
@@ -50,7 +72,7 @@ block content
 						td.url
 							a(ng-href="/event/{{event._id}}")
 								i.icon-logout
-		span(ng-show="listData == null || listData.length == 0") No events match those criteria.
+		span(ng-show="listData == null || listData.length == 0") No data matches those criteria.
 		div.pagination(ng-show="pages > 1")
 			a.btn(ng-show="page > 1", ng-click="prevPage()") Prev Page
 			| Page {{page}} of {{pages}}

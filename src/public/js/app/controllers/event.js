@@ -6,10 +6,9 @@ angular.module('eventControllers', ['eventService'])
         $scope.listView = true;
         $scope.showFilters = false;
         $scope.sort = {
-            'field': 'date',
-            'dir': 'asc'
+            field: 'date',
+            dir: 'asc'
         };
-        $scope.filters = [];
         $scope.search = "";
 
         // ================
@@ -24,7 +23,7 @@ angular.module('eventControllers', ['eventService'])
         Events.get()
             .then(function(response) {
                 $scope.eventData = response.data;
-                $scope.processList();
+				$scope.processList();
             });
 
         $scope.$watch('search', function(newVal, oldVal) {
@@ -43,19 +42,17 @@ angular.module('eventControllers', ['eventService'])
         $scope.setSort = function(field) {
             if ($scope.sort.field == field)
                 $scope.sort.dir = ($scope.sort.dir == 'desc') ? 'asc' : 'desc';
-            else {
+			else
                 $scope.sort.field = field;
-                $scope.sort.dir = 'asc';
-            }
             $scope.processList();
         };
 
         $scope.processList = function() {
             var data = $scope.filter($scope.eventData);
-            data = $scope.sort(data);
+            data = $scope.sortdata(data);
             $scope.listData = $scope.paginate(data);
         };
-
+	
         $scope.filter = function(data) {
             if (typeof data == "undefined" || data === null) return null;
             //no filters as of now.
@@ -65,7 +62,7 @@ angular.module('eventControllers', ['eventService'])
                 });
             return data;
         };
-        $scope.sort = function(data) {
+        $scope.sortdata = function(data) {
             if (typeof data == "undefined" || data === null) return null;
             switch ($scope.sort.field) {
                 case "date":

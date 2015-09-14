@@ -1,54 +1,69 @@
 angular.module('dataControllers', ['dataServices'])
-	.controller('dataOverview', function($http, Casters, Maps, Teams) {
-        var vm = this;
+	.controller('dataOverview', function($http, $scope, Staff, Maps, Teams) {
 	
-        vm.casters = [];
-		vm.maps = [];
-		vm.teams = [];
+		$scope.view = "Teams";
+		$scope.showFilters = false;
+			
+		//=================
+		$scope.test = function(){
+			console.dir($scope);
+		};
+		
+		$scope.teams = {
+			sort: {
+				field: 'tag',
+            	dir: 'desc'
+			},
+			sorted: function(field, dir){
+				return ($scope.teams.sort.field == field && $scope.teams.sort.dir == dir);
+			},
+			sortBy: function(field){
+				if($scope.teams.sort.field == field) $scope.teams.sort.dir = $scope.teams.sort.dir == 'desc' ? 'asc' : 'desc';
+				else $scope.teams.sort.field = field;
+			},
+		};
+        $scope.staff = {
+			sort: {
+				field: 'name',
+            	dir: 'desc'
+			},
+			sorted: function(field, dir){
+				return ($scope.staff.sort.field == field && $scope.staff.sort.dir == dir);
+			},
+			sortBy: function(field){
+				if($scope.staff.sort.field == field) $scope.staff.sort.dir = $scope.staff.sort.dir == 'desc' ? 'asc' : 'desc';
+				else $scope.staff.sort.field = field;
+			},
+		};
+		$scope.maps = {
+			sort: {
+				field: 'name',
+            	dir: 'desc'
+			},
+			sorted: function(field, dir){
+				return ($scope.maps.sort.field == field && $scope.maps.sort.dir == dir);
+			},
+			sortBy: function(field){
+				if($scope.maps.sort.field == field) $scope.maps.sort.dir = $scope.maps.sort.dir == 'desc' ? 'asc' : 'desc';
+				else $scope.maps.sort.field = field;
+			},
+		};
 	
-        Casters.get()
-            .success(function(data) {
-               vm.casters = data;
+		
+		//=================
+	
+        Staff.get()
+            .then(function(response) {
+               $scope.staff.data = response.data;
             });
 		Maps.get()
-            .success(function(data) {
-               vm.maps = data;
+            .then(function(response) {
+               $scope.maps.data = response.data;
             });
 		Teams.get()
-            .success(function(data) {
-               vm.teams = data;
+            .then(function(response) {
+               $scope.teams.data = response.data;
             });
-            
-    })
-	.controller('casterList', function($http, Casters) {
-        var vm = this;
 	
-        vm.casters = [];
-		
-        Casters.get()
-            .success(function(data) {
-               vm.casters = data;
-            });
-    })
-	.controller('mapList', function($http, Maps) {
-        var vm = this;
-	
-		vm.maps = [];
-		
-		Maps.get()
-            .success(function(data) {
-               vm.maps = data;
-            });
-            
-    })
-	.controller('teamList', function($http, Teams) {
-        var vm = this;
-
-		vm.teams = [];
-	
-		Teams.get()
-            .success(function(data) {
-               vm.teams = data;
-            });
-            
+		//=================
     });

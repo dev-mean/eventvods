@@ -4,6 +4,7 @@ var SocialMedia = require('./socialmedia').schema;
 
 var teamSchema = new Schema({
 	teamName: String,
+	teamTag: String,
 	teamGame: String,
 	teamMedia: [SocialMedia],
 	teamCountry: String,

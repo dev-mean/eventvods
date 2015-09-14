@@ -1,11 +1,11 @@
 angular.module('dataServices', [])
-    .factory('Casters', function($http) {
+    .factory('Staff', function($http) {
         return {
             get : function() {
                 return $http.get('/api/casters');
             },
-            create : function(casterData) {
-                return $http.post('/api/casters', casterData);
+            create : function(staffData) {
+                return $http.post('/api/casters', staffData);
             },
             delete : function(id) {
                 return $http.delete('/api/casters/' + id);
