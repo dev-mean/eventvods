@@ -2,11 +2,8 @@ extends ../layout
 block vars
     -currentPage = "Users";
 block content
-    div.content
-        h1 #{locals.user.username}
-        span User ID: #{locals.user._id}
-        br
-        span User auth level: #{locals.user.userRights}
+    div.content(ng-app="user", ng-controller="userList", ng-cloak)
+        h1 User Configuration
         div.listview
             table.standard
                 thead
