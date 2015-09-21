@@ -550,7 +550,7 @@ router.route('/eventmodules/:eventmodule_id')
 // User stuff
 router.route('/users')
 	.get(function(req, res) {
-		User.find({}, 'username userRights userPreferences', function(err, user) {
+		User.find({}, 'username userRights userPreferences userEmail lastLogin', function(err, user) {
 			if (err)
 				console.log(err);
 			res.json(user);
@@ -565,7 +565,7 @@ router.route('/users')
 
 router.route('/users/:user_id')
     .get(function(req, res) {
-        User.findById(req.params.user_id, 'username userRights userPreferences', function(err, user) {
+        User.findById(req.params.user_id, 'username userRights userPreferences userEmail lastLogin', function(err, user) {
             if(err)
                 res.send(err);
             res.json(user);
@@ -583,7 +583,10 @@ router.route('/users/:user_id')
         User.findById(req.params.user_id, function(err, user) {
             if (err)
                 res.send(err);
-            user = req.body;
+            // Updates only the fields sent in the request(email, permissions, preferences)
+            if(req.body.userEmail) user.userEmail = req.body.userEmail;
+            if(req.body.userPreferences) user.userPreferences = req.body.userPreferences;
+            if(req.body.userRights) user.useruserRights = req.body.useruserRights;
             user.save(function(err) {
                 if (err)
                     res.send(err);

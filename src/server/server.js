@@ -10,6 +10,7 @@ var LocalStrategy = require('passport-local').Strategy;
 var morgan = require('morgan'); //Logger
 var session = require('express-session');
 var User = require('./models/user');
+var config = require('./config/config');
 
 //server config
 app.set('env', 'development');
@@ -19,7 +20,7 @@ app.use(morgan('dev'));
 //Static file at the top, prevents all the code below being run for static files.
 app.use('/assets', express.static(path.join(__dirname, '..', 'public')));
 
-var config = require('./config/config');
+
 
 app.use(bodyParser.urlencoded({
 	'extended': 'true'
