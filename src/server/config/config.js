@@ -1,6 +1,6 @@
 module.exports = {
-    databaseUrl : 'ds031627.mongolab.com:31627/eventvods',
-    port : process.env.PORT || 3000,
-    ip : null,
-    secret : 'eventvods_dev'
+	databaseUrl: 'ds031627.mongolab.com:31627/eventvods',
+	port: process.env.PORT || 3000,
+	ip: null,
+	secret: 'eventvods_dev'
 };

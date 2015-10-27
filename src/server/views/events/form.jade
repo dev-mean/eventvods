@@ -5,7 +5,7 @@ block content
 	-var isEdit = (typeof eventID !== "undefined");
 	h1 Add Event
 	form(name="form", ng-app="newEvent", ng-controller="eventForm", ng-cloak, ng-init=(isEdit) ? 'eventId = \''+eventID+'\'' : '')
-		a.btn(ng-click="test()") Log event to console
+		a.btn(ng-click="upload()") Upload img tests
 		.section#errors(ng-show!="errors.length > 0")
 			ul
 				li(ng-repeat="error in errors") {{error.message}}
@@ -32,11 +32,8 @@ block content
 			| TODO
 		.section#image
 			h2 Event Image
-			#image_upload(flow-init!="{singleFile: true, flowDropEnabled: true}", flow-name="flow", flow-drop)
-				span(flow-btn, flow-attrs="{accept:'image/*'}", ng-click="$flow.cancel()") Drag and drop your image here, or click to select a file.
-				.thumbnail(ng-show="flow.files.length")
-					img(flow-img="flow.files[0]")
-					span.remove(ng-click="flow.cancel()") Remove
+			#image_upload.dropzone
+				#image_thumbnail
 		// Form page 2
 		.section(ng-show="stage == 2")
 			h2 Teams
@@ -51,6 +48,6 @@ block content
 	
 block scripts
 	script(src='/assets/js/angular-datepicker.js')
-	script(src='/assets/js/ng-flow-standalone.min.js')
+	script(src='/assets/js/dropzone.min.js')
 	script(src='/assets/js/app/services/event.js')
 	script(src='/assets/js/app/controllers/event.js')
