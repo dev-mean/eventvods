@@ -183,8 +183,7 @@ router.route('/events')
           }, res);
         }
       } else {
-				console.log(event);
-				console.log(Event.save);
+        console.log(event._id);
         res.status(200).json({
           'eventId': event._id
         });

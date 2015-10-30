@@ -183,10 +183,7 @@ angular.module('eventControllers', ['eventService'])
       },
     });
 
-    $scope.upload = function() {
-      console.dir($scope.dropzone);
-      $scope.dropzone.processQueue();
-    };
+
 
     // ===============
 
@@ -226,6 +223,7 @@ angular.module('eventControllers', ['eventService'])
       } else {
         Events.create($scope.data)
           .then(function(response) {
+            upload();
             window.location.href = '../../event/' + response.data.eventId;
           }, function(response) {
             if (response.status == 400) {
@@ -238,5 +236,10 @@ angular.module('eventControllers', ['eventService'])
             }
           });
       }
+    };
+
+    upload = function() {
+      console.dir($scope.dropzone);
+      $scope.dropzone.processQueue();
     };
   });
