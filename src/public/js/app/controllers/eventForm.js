@@ -1,4 +1,4 @@
-var app = angular.module('eventControllers', ['eventService']);
+var app = angular.module('eventControllers');
 app.controller('eventForm', function($scope, $http, $location, $window, Events) {
   $scope.isEdit = false;
   $scope.stage = 1;

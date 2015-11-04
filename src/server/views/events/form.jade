@@ -26,7 +26,7 @@ block content
 			input(type="text", ng-model="data.eventStartDate", pick-a-date="date", placeholder="Select Date", pick-a-date-options="dateOpts", required)
 			label Event End
 			input(type="text", ng-model="data.eventEndDate", pick-a-date="date", placeholder="Select Date", pick-a-date-options="dateOpts",  required)
-			
+
 		.section#social(ng-show="stage == 1")
 			h2 Social Media
 			| TODO
@@ -45,9 +45,9 @@ block content
 		//a.btn(ng-click="prev()",ng-show!="stage > 1") Prev Stage
 		//a.btn(ng-click="next()", ng-show!="stage < 3") Next Stage
 		a.btn(ng-click="submit()", ng-show="stage == 1") Submit Event
-	
+
 block scripts
 	script(src='/assets/js/angular-datepicker.js')
 	script(src='/assets/js/dropzone.min.js')
 	script(src='/assets/js/app/services/event.js')
-	script(src='/assets/js/app/controllers/event.js')
+	script(src='/assets/js/app/controllers/eventForm.js')

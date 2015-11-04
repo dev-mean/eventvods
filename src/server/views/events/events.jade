@@ -34,8 +34,8 @@ block content
 							a(href="#", ng-click="setSort('user')") User
 						th.sortable(ng-class="{'sort-desc': sorted('status', 'desc'), 'sort-asc': sorted('status', 'asc')}")
 							a(href="#", ng-click="setSort('status')") Status
-						th 
-						th  
+						th
+						th
 				tbody
 					tr(ng-repeat="event in listData")
 						td.date {{event.eventStartDate | date : "dd MMM"}}
@@ -49,7 +49,7 @@ block content
 						td.url
 							a(ng-href="/event/{{event._id}}")
 								i.icon-logout
-								
+
 		div.gridView.events(ng-show="listView == false")
 			div.grid
 				div.item(ng-repeat="event in listData", ng-style="{'background-image': 'url(\"/assets/images/events/'+event.eventImage+'\")'}")
@@ -65,7 +65,7 @@ block content
 			a.btn(ng-show="page > 1", ng-click="prevPage()") Prev Page
 			p Page {{page}} of {{pages}}
 			a.btn(ng-show="pages > 1 && page < pages", ng-click="nextPage()") Next Page
-				
+
 block scripts
 	script(src='/assets/js/app/services/event.js')
-	script(src='/assets/js/app/controllers/event.js')
+	script(src='/assets/js/app/controllers/eventList.js')

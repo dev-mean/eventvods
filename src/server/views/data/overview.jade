@@ -2,7 +2,7 @@ extends ../layout
 block vars
 	-currentPage = "Data";
 block content
-	div.event-container(ng-app="data", ng-controller="dataOverview", ng-cloak)
+	div.event-container(ng-app="data", ng-controller="dataList", ng-cloak)
 		div.contextHead
 			div.leftSide
 				span.btn.lg.solid.icon(ng-click="test()") Test
@@ -43,41 +43,65 @@ block content
 						th Icon
 						th.sortable(ng-class="{'sort-desc': teams.sorted('country', 'desc'), 'sort-asc': teams.sorted('country', 'asc')}")
 							a(href="#", ng-click="teams.sortBy('country')") Country
-						th 
-						th  
+						th
+						th
 				tbody
 					tr(ng-repeat="team in teams.list")
 						td.tag {{team.teamTag}}
 						td.name {{team.teamName}}
 						td.icon
-							img(ng-src="/assets/images/teams/{{team.teamTag}}-logo.png")
+							img(ng-src="/assets/images/teams/logo/{{team.teamTag}}.png")
 						td.country
 							img(ng-src="/assets/images/countries/{{team.teamCountry}}.png")
-							{{team.teamCountry}}
+							|{{team.teamCountry}}
 						td.edit
 							a(ng-href="/data/team/{{team._id}}/edit")
 								i.icon-pencil
 						td.url
 							a(ng-href="/data/team/{{team._id}}")
 								i.icon-logout
+		div#Staff.data(ng-show="view == 'Staff'")
+			table.standard
+				thead
 					tr
-						td.tag fnatic
-						td.name Team Fnatic
-						td.icon
-							img(src="/assets/images/logo-fnatic.png")
-						td.country Sweden
+						th.sortable(ng-class="{'sort-desc': staff.sorted('name', 'desc'), 'sort-asc': staff.sorted('name', 'asc')}")
+							a(href="#", ng-click="staff.sortBy('name')") Name
+						th.sortable(ng-class="{'sort-desc': staff.sorted('alias', 'desc'), 'sort-asc': staff.sorted('alias', 'asc')}")
+							a(href="#", ng-click="staff.sortBy('alias')") Alias
+						th.sortable(ng-class="{'sort-desc': staff.sorted('country', 'desc'), 'sort-asc': staff.sorted('country', 'asc')}")
+							a(href="#", ng-click="staff.sortBy('country')") Country
+						th
+						th
+				tbody
+					tr(ng-repeat="staff in staff.list")
+						td.name {{staff.casterName}}
+						td.alias {{staff.casterAlias}}
+						td.country
+							img(ng-src="/assets/images/countries/{{team.teamCountry}}.png")
+							|{{staff.casterCountry}}
 						td.edit
-							a(ng-href="/event/{{event._id}}/edit")
+							a(ng-href="/data/staff/{{staff._id}}/edit")
 								i.icon-pencil
 						td.url
-							a(ng-href="/event/{{event._id}}")
+							a(ng-href="/data/staff/{{staff._id}}")
 								i.icon-logout
-		span(ng-show="listData == null || listData.length == 0") No data matches those criteria.
-		div.pagination(ng-show="pages > 1")
-			a.btn(ng-show="page > 1", ng-click="prevPage()") Prev Page
-			| Page {{page}} of {{pages}}
-			a.btn(ng-show="pages > 1 && page < pages", ng-click="nextPage()") Next Page
+		span(ng-show="(teams.list == null || teams.list.length == 0) && view == 'Teams'") No data matches those criteria.
+		span(ng-show="(staff.list == null || staff.list.length == 0) && view == 'Staff'") No data matches those criteria.
+		span(ng-show="(maps.list == null || maps.list.length == 0) && view == 'Maps'") No data matches those criteria.
+		div.pagination(ng-show="teams.pages > 1 && view =='Teams' ")
+			a.btn(ng-show="teams.page > 1", ng-click="teams.prevPage()") Prev Page
+			| Page {{teams.page}} of {{teams.pages}}
+			a.btn(ng-show="teams.pages > 1 && teams.page < teams.pages", ng-click="teams.nextPage()") Next Page
+		div.pagination(ng-show="staff.pages > 1 && view =='Staff' ")
+			a.btn(ng-show="staff.page > 1", ng-click="staff.prevPage()") Prev Page
+			| Page {{staff.page}} of {{staff.pages}}
+			a.btn(ng-show="staff.pages > 1 && staff.page < staff.pages", ng-click="staff.nextPage()") Next Page
+		div.pagination(ng-show="maps.pages > 1 && view =='Maps' ")
+			a.btn(ng-show="maps.page > 1", ng-click="maps.prevPage()") Prev Page
+			| Page {{maps.page}} of {{maps.pages}}
+			a.btn(ng-show="maps.pages > 1 && maps.page < maps.pages", ng-click="maps.nextPage()") Next Page
+		
 
 block scripts
 	script(src='/assets/js/app/services/data.js')
-	script(src='/assets/js/app/controllers/data.js')
+	script(src='/assets/js/app/controllers/dataList.js')
