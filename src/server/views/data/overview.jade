@@ -85,6 +85,26 @@ block content
 						td.url
 							a(ng-href="/data/staff/{{staff._id}}")
 								i.icon-logout
+		div#Maps.data(ng-show="view == 'Maps'")
+			table.standard
+				thead
+					tr
+						th Map
+						th.sortable(ng-class="{'sort-desc': maps.sorted('name', 'desc'), 'sort-asc': maps.sorted('name', 'asc')}")
+							a(href="#", ng-click="maps.sortBy('name')") Name
+						th Game
+						th
+				tbody
+					tr(ng-repeat="map in maps.list")
+						td.map img(ng-src="/assets/images/maps/{{map.teamTag}}.png")
+						td.name {{map.mapName}}
+						td.game {{map.mapGame}}
+						td.edit
+							a(ng-href="/data/map/{{staff._id}}/edit")
+								i.icon-pencil
+						td.url
+							a(ng-href="/data/map/{{staff._id}}")
+								i.icon-logout
 		span(ng-show="(teams.list == null || teams.list.length == 0) && view == 'Teams'") No data matches those criteria.
 		span(ng-show="(staff.list == null || staff.list.length == 0) && view == 'Staff'") No data matches those criteria.
 		span(ng-show="(maps.list == null || maps.list.length == 0) && view == 'Maps'") No data matches those criteria.

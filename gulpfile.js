@@ -19,13 +19,17 @@ var plumber = require('gulp-plumber');
 gulp.task('default', ['watch']);
 
 //Build umbrella task
-gulp.task('build', ['js-build', 'jade-build', 'css-build', 'img-build', 'less-build', 'bower-build', 'node-build', 'font-build', 'font-css-build']);
+gulp.task('build', ['clean'], function () {
+	gulp.start('server-side');
+	gulp.start('public-side');
+});
+//'jade-build', 'css-build', 'img-build', 'bower-build', 'node-build', 'font-build', 'font-css-build']);
 
-//Dev build
-gulp.task('dev-build', ['build', 'node-dev-config-build']);
+gulp.task('server-side', ['node-build', 'jade-build']);
 
-//Prod build
-gulp.task('prod-build', ['build', 'node-prod-config-build']);
+gulp.task('public-side', ['js-build', 'img-build', 'font-build', 'font-css-build', 'less-build', 'bower-build']);
+
+gulp.task('bower-build', ['bower-copy', 'js-concat-common', 'js-concat-form', 'fontawesome-build']);
 
 //Cleans deploy folder
 gulp.task('clean', function () {
@@ -33,7 +37,14 @@ gulp.task('clean', function () {
 		.pipe(clean());
 });
 
-//Building JS for deployment
+//Copy templates
+gulp.task('jade-build', function () {
+	return gulp.src('src/server/views/**/*.jade')
+		.pipe(gulp.dest('dist/server/views'));
+});
+
+
+//Building front-end JS for deployment
 gulp.task('js-build', function () {
 	return gulp.src('src/public/js/**/*.js')
 		.pipe(jshint())
@@ -43,22 +54,10 @@ gulp.task('js-build', function () {
 		.pipe(gulp.dest('dist/public/js'));
 });
 
-//Building html for deployment
-gulp.task('jade-build', function () {
-	return gulp.src('src/server/views/**/*.jade')
-		.pipe(gulp.dest('dist/server/views'));
-});
-
 //Copy images
 gulp.task('img-build', function () {
 	return gulp.src('src/public/images/**/*.*')
 		.pipe(gulp.dest('dist/public/images'));
-});
-
-//Copy css
-gulp.task('css-build', function () {
-	return gulp.src('src/public/css/**/*.css')
-		.pipe(gulp.dest('dist/public/css'));
 });
 
 //Copy icon font
@@ -73,19 +72,6 @@ gulp.task('font-css-build', function () {
 		.pipe(concat('webfont.css')) // this is what was missing
 		.pipe(gulp.dest('dist/public/css'));
 });
-
-/*
-gulp.task('less-build', function() {
-    return gulp.src('src/public/less/style.less')
-            .pipe(plumber({
-            handleError: function (err) {
-                console.log(err);
-                this.emit('end');
-            }
-        }))
-        .pipe(less())
-        .pipe(gulp.dest('dist/public/css'));
-}); */
 
 gulp.task('less-build', function () {
 	return gulp.src('src/public/less/style.less')
@@ -106,37 +92,31 @@ gulp.task('less-build', function () {
 
 
 //Moving bower packages for deployment
-gulp.task('bower-build', ['angular-build', 'jquery-build', 'fontawesome-build']);
-
-gulp.task('angular-build', function () {
-	//base angular
-	gulp.src('bower_components/angular/angular.min.js')
-		.pipe(gulp.dest('dist/public/js'));
-	//angular-animate
-	gulp.src('bower_components/angular-animate/angular-animate.min.js')
-		.pipe(gulp.dest('dist/public/js'));
-	//loading bar			
-	gulp.src('bower_components/angular-loading-bar/build/loading-bar.min.js')
-		.pipe(gulp.dest('dist/public/js'));
+gulp.task('bower-copy', function () {
 	gulp.src('bower_components/angular-loading-bar/build/loading-bar.min.css')
 		.pipe(gulp.dest('dist/public/css'));
-	//date picker			
-	gulp.src('bower_components/angular-native-picker/build/angular-datepicker.js')
-		.pipe(gulp.dest('dist/public/js'));
 	gulp.src('bower_components/angular-native-picker/build/themes/*.css')
 		.pipe(rename({
 			prefix: 'angular-datepicker-'
 		}))
 		.pipe(gulp.dest('dist/public/css'));
-	//Dropzone
-	gulp.src('bower_components/dropzone/dist/min/dropzone.min.js')
-		.pipe(gulp.dest('dist/public/js'));
 	gulp.src('bower_components/dropzone/dist/min/dropzone.min.css')
 		.pipe(gulp.dest('dist/public/css'));
-});
+})
 
-gulp.task('jquery-build', function () {
-	return gulp.src('bower_components/jquery/dist/jquery.min.js')
+gulp.task('js-concat-common', function () {
+	return gulp.src(['bower_components/jquery/dist/jquery.min.js',
+			  'bower_components/angular/angular.min.js',
+			  'bower_components/angular-animate/angular-animate.min.js',
+			  'bower_components/angular-loading-bar/build/loading-bar.min.js'])
+		.pipe(concat("common.js"))
+		.pipe(gulp.dest('dist/public/js'));
+});
+gulp.task('js-concat-form', function () {
+	return gulp.src(['bower_components/angular-native-picker/build/angular-datepicker.js',
+			  'bower_components/dropzone/dist/min/dropzone.min.js',
+			  'bower_components/parsleyjs/dist/parsley.min.js'])
+		.pipe(concat("form.js"))
 		.pipe(gulp.dest('dist/public/js'));
 });
 
@@ -158,25 +138,8 @@ gulp.task('node-build', function () {
 		.pipe(gulp.dest('dist/server/'));
 });
 
-gulp.task('config-clean', function () {
-	return gulp.src('dist/server/config/')
-		.pipe(clean());
-});
-
-gulp.task('node-dev-config-build', ['config-clean'], function () {
-	return gulp.src(['src/server/config/config.dev.js'])
-		.pipe(rename('config.js'))
-		.pipe(gulp.dest('dist/server/config'));
-});
-
-gulp.task('node-prod-config-build', ['config-clean'], function () {
-	return gulp.src(['src/server/config/config.prod.js'])
-		.pipe(rename('config.js'))
-		.pipe(gulp.dest('dist/server/config'));
-});
 
 //Watcher task, monitors angular/node code to restart app and redeploy
 gulp.task('watch', function () {
 	gulp.watch('src/**/*', ['build']);
-
 });
