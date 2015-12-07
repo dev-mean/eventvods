@@ -29,7 +29,7 @@ gulp.task('server-side', ['node-build', 'jade-build']);
 
 gulp.task('public-side', ['js-build', 'img-build', 'font-build', 'font-css-build', 'less-build', 'bower-build']);
 
-gulp.task('bower-build', ['bower-copy', 'js-concat-common', 'js-concat-form', 'fontawesome-build']);
+gulp.task('bower-build', ['bower-copy', 'angular-build', 'js-concat-form', 'fontawesome-build']);
 
 //Cleans deploy folder
 gulp.task('clean', function () {
@@ -104,6 +104,9 @@ gulp.task('bower-copy', function () {
 		.pipe(gulp.dest('dist/public/css'));
 })
 
+// Concatenation of dependencies may not be the best solution.
+// Considering that some page will not need every dependency
+/*
 gulp.task('js-concat-common', function () {
 	return gulp.src(['bower_components/jquery/dist/jquery.min.js',
 			  'bower_components/angular/angular.min.js',
@@ -112,6 +115,23 @@ gulp.task('js-concat-common', function () {
 		.pipe(concat("common.js"))
 		.pipe(gulp.dest('dist/public/js'));
 });
+*/
+
+// Builds out angular dependencies
+gulp.task('angular-build', function() {
+	gulp.src('bower_components/angular/angular.min.js')
+			.pipe(gulp.dest('dist/public/js'));
+
+	gulp.src('bower_components/angular-animate/angular-animate.min.js')
+			.pipe(gulp.dest('dist/public/js'));
+
+	gulp.src('bower_components/angular-loading-bar/build/loading-bar.min.js')
+			.pipe(gulp.dest('dist/public/js'));
+
+	gulp.src('bower_components/angular-native-picker/build/angular-datepicker.js')
+			.pipe(gulp.dest('dist/public/js'));
+});
+
 gulp.task('js-concat-form', function () {
 	return gulp.src(['bower_components/angular-native-picker/build/angular-datepicker.js',
 			  'bower_components/dropzone/dist/min/dropzone.min.js',
