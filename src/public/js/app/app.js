@@ -1,11 +1,7 @@
-(function() {
-  'use strict';
-
-  angular.module('eventApp', ['ngAnimate', 'ngRoute', 'ngResource'])
+angular.module('eventApp', ['ngAnimate', 'ngRoute', 'ngResource'])
     .constant('eventConstants', {
       baseUri: 'http://localhost:3000/api'
-    });
-}());
+});
 
 /*
 angular.module('overview', ['ngAnimate', 'angular-loading-bar', 'overviewController']);
