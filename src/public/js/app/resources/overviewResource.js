@@ -2,7 +2,7 @@ angular.module('eventApp').factory('overviewResource', [
   '$resource', 'eventConstants',
   function($resource, eventConstants) {
     return {
-      getOverview: $resource(config.baseUri + 'overview')
+      getOverview: $resource(eventConstants.baseUri + 'overview')
     };
   }
 ]);
