@@ -9,7 +9,7 @@ block content
 			.section(ng-cloak)
 				h2.title Recent Events
 				a.btn(href="/events") View Events
-				div.row-list(ng-repeat="event in overview.data.recent | orderBy: '-eventEndDate'")
+				div.row-list(ng-repeat="event in overview.overviewData.recent | orderBy: '-eventEndDate'")
 					div.item
 						div.imageContain
 							img.eventImage(src="/assets/images/event-image-sm.jpg")
@@ -20,13 +20,13 @@ block content
 						div.eventGame {{event.game}}
 						div.eventTitle {{event.eventTitle | limitTo: 75}}
 						div.eventStatus {{event.status}}
-				p(ng-show="overview.recent.length == 0")
+				p(ng-show="overview.overviewData.recent.length == 0")
 					| No recent events.
 			//Ongoing events
 			.section(ng-cloak)
 				h2.title Ongoing Events
 				a.btn(href="/events") View Events
-				div.row-list(ng-repeat="event in overview.data.ongoing")
+				div.row-list(ng-repeat="event in overview.overviewData.data.ongoing")
 					div.item
 						div.imageContain
 							img.eventImage(src="/assets/images/event-image-sm.jpg")
@@ -37,13 +37,13 @@ block content
 						div.eventGame {{event.game}}
 						div.eventTitle {{event.eventTitle | limitTo: 75}}
 						div.eventStatus {{event.status}}
-				p(ng-show="overview.data.ongoing.length == 0")
+				p(ng-show="overview.overviewData.ongoing.length == 0")
 					| No ongoing events.
 			//Upcoming events
 			.section(ng-cloak)
 				h2.title Upcoming Events
 				a.btn(href="/events") View Events
-				div.row-list(ng-repeat="event in overview.data.upcoming")
+				div.row-list(ng-repeat="event in overview.overviewData.upcoming")
 					div.item
 						div.imageContain
 							img.eventImage(src="/assets/images/event-image-sm.jpg")
@@ -54,7 +54,7 @@ block content
 						div.eventGame {{event.game}}
 						div.eventTitle {{event.eventTitle | limitTo: 75}}
 						div.eventStatus {{event.status}}
-				p(ng-show="overview.data.upcoming.length == 0")
+				p(ng-show="overview.overviewData.upcoming.length == 0")
 					| No upcoming events.
 			//Data mgr
 			.section(ng-cloak)

@@ -6,8 +6,14 @@
     function(mainPageService) {
       var controller = this;
 
-      console.log(mainPageService.overviewData);
+      mainPageService.getOverview.$promise.then(function(result) {
+        var data = cleanResponse(result);
+        controller.overviewData = data;
+      });
 
+      function cleanResponse(resp) {
+        return JSON.parse(angular.toJson(resp));
+      }
     }
   ]);
 }());
