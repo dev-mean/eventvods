@@ -26,17 +26,26 @@ block content
 					tr
 						th
 							a(href="", ng-click="eventList.setSort('eventStartDate')") Date
-							span(class="caret-down")
+							span(ng-show="eventList.ui.sortType == 'eventStartDate' && !eventList.ui.sortReverse",
+										class="caret-down")
+							span(ng-show="eventList.ui.sortType == 'eventStartDate' && eventList.ui.sortReverse",
+										class="caret-up")
 						th
 							a(href="", ng-click="eventList.setSort('eventTitle')") Title
-							span(class="caret-down")
+							span(ng-show="eventList.ui.sortType == 'eventTitle' && !eventList.ui.sortReverse",
+										class="caret-down")
+							span(ng-show="eventList.ui.sortType == 'eventTitle' && eventList.ui.sortReverse",
+										class="caret-up")
 						th
 							a(href="", ng-click="eventList.setSort('eventGame')") Game
-							span(class="caret-down")
+							span(ng-show="eventList.ui.sortType == 'eventGame' && !eventList.ui.sortReverse",
+										class="caret-down")
+							span(ng-show="eventList.ui.sortType == 'eventGame' && eventList.ui.sortReverse",
+										class="caret-up")
 						th
 						th
 				tbody
-					tr(ng-repeat="event in eventList.listData | orderBy: eventList.ui.sortType")
+					tr(ng-repeat="event in eventList.listData | orderBy: eventList.ui.sortType : eventList.ui.sortReverse")
 						td.date {{event.eventStartDate | date : "dd MMM, yyyy"}}
 						td.title {{event.eventTitle}}
 						td.game {{event.eventGame}}
