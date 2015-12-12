@@ -10,17 +10,17 @@ block content
 					span Create Event
 			div.rightSide
 				div.filterControl
-					a(href="#", ng-click="showFilters = !showFilters") {{showFilters ? "Hide" : "Show"}} Filter Controls
+					a(href="#", ng-click="eventList.ui.showFilters = !eventList.ui.showFilters") {{eventList.ui.showFilters ? "Hide" : "Show"}} Filter Controls
 				div.viewSelect
-					div.listView(ng-click="listView = true", ng-class="listView ? 'active' : ''")
+					div.listView(ng-click="eventList.ui.ListView = true", ng-class="eventList.ui.listView ? 'active' : ''")
 						i.icon-list
 						span List View
-					div.gridView(ng-click="listView = false",  ng-class="listView ? '' : 'active'")
+					div.gridView(ng-click="eventList.ui.listView = false",  ng-class="eventList.ui.listView ? '' : 'active'")
 						i.icon-grid
 						span Grid View
-		div.filters(ng-show="showFilters")
+		div.filters(ng-show="evenList.ui.showFilters")
 				input(type="text", ng-model="search", placeholder="Enter Event Title")
-		div.listView.events(ng-show="listView == true")
+		div.listView.events(ng-show="eventList.ui.listView == true")
 			table.standard
 				thead
 					tr
@@ -37,7 +37,7 @@ block content
 						th
 						th
 				tbody
-					tr(ng-repeat="event in listData")
+					tr(ng-repeat="event in eventList.listData")
 						td.date {{event.eventStartDate | date : "dd MMM"}}
 						td.title {{event.eventTitle}}
 						td.game {{event.eventGame}}

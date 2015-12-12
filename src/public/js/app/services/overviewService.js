@@ -6,7 +6,7 @@
     function(overviewResource) {
       var service = this;
 
-      service.getOverview = overviewResource.getOverview.get();
+      service.getOverview = overviewResource.getOverview.get;
     }
   ]);
 }());

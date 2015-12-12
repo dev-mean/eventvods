@@ -2,23 +2,49 @@
   angular.module('eventApp').controller('eventListController', [
     'eventService',
     function(eventService) {
-			var controller = this;
+      var controller = this;
 
-			controller.ui = {
-				loaded: false,
-				listView: true,
-				showFilters: false,
-				sort: {
-					field: 'data',
-					dir: 'asc'
-				},
-				search: '',
-				itemPerPage: 10
-			};
+      controller.ui = {
+        loaded: false,
+        listView: true,
+        showFilters: false,
+        sort: {
+          field: 'data',
+          dir: 'asc'
+        },
+        search: '',
+        itemsPerPage: 10,
+        pages: 1,
+        page: 1
+      };
 
-			eventService.getEvents.$promise.then(function(result) {
-				console.log(result);
-			});
+      eventService.getEvents().$promise.then(function(result) {
+        var data = cleanResponse(result);
+        controller.listData = data;
+        controller.paginate(controller.listData);
+      });
+
+      function cleanResponse(resp) {
+        return JSON.parse(angular.toJson(resp));
+      }
+
+      controller.paginate = function(data) {
+        if (typeof data === "undefined" || data === null) {
+          return null;
+        }
+
+        controller.ui.itemsPerPage = controller.ui.listView ? 10 : 6;
+
+        controller.ui.pages = Math.ceil(data.length / controller.ui.itemsPerPage);
+
+        if (data.length > controller.ui.itemsPerPage) {
+          var start = (controller.ui.page - 1) * controller.ui.itemsPerPage;
+          var end = start + controller.ui.itemsPerPage;
+          return data.slice(start, end);
+        } else {
+          return data;
+        }
+      };
     }
   ]);
 }());

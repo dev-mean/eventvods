@@ -6,7 +6,7 @@
     function(overviewService) {
       var controller = this;
 
-      overviewService.getOverview.$promise.then(function(result) {
+      overviewService.getOverview().$promise.then(function(result) {
         var data = cleanResponse(result);
         controller.overviewData = data;
       });
