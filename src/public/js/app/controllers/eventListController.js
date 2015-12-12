@@ -46,6 +46,7 @@
 
       controller.setSort = function(sortType) {
         controller.ui.sortType = sortType;
+        controller.ui.sortReverse = !controller.ui.sortReverse;
       };
     }
   ]);

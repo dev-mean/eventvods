@@ -26,10 +26,13 @@ block content
 					tr
 						th
 							a(href="", ng-click="eventList.setSort('eventStartDate')") Date
+							span(class="caret-down")
 						th
-							a(href="", ng-click="eventList.setSort('event.eventTitle')") Title
+							a(href="", ng-click="eventList.setSort('eventTitle')") Title
+							span(class="caret-down")
 						th
-							a(href="", ng-click="eventList.setSort('event.eventGame')") Game
+							a(href="", ng-click="eventList.setSort('eventGame')") Game
+							span(class="caret-down")
 						th
 						th
 				tbody
