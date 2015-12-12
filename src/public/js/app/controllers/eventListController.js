@@ -8,10 +8,8 @@
         loaded: false,
         listView: true,
         showFilters: false,
-        sort: {
-          field: 'data',
-          dir: 'asc'
-        },
+        sortType: 'date',
+        sortReverse: false,
         search: '',
         itemsPerPage: 10,
         pages: 1,
@@ -44,6 +42,10 @@
         } else {
           return data;
         }
+      };
+
+      controller.setSort = function(sortType) {
+        controller.ui.sortType = sortType;
       };
     }
   ]);

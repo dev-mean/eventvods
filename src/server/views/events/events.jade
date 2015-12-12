@@ -24,19 +24,15 @@ block content
 			table.standard
 				thead
 					tr
-						th.sortable(ng-class="{'sort-desc': sorted('date', 'desc'), 'sort-asc': sorted('date', 'asc')}")
-							a(href="#", ng-click="setSort('date')") Date
-						th.sortable(ng-class="{'sort-desc': sorted('title', 'desc'), 'sort-asc': sorted('title', 'asc')}")
-							a(href="#", ng-click="setSort('title')") Title
-						th.sortable(ng-class="{'sort-desc': sorted('game', 'desc'), 'sort-asc': sorted('game', 'asc')}")
-							a(href="#", ng-click="setSort('game')") Game
-						th.sortable(ng-class="{'sort-desc': sorted('user', 'desc'), 'sort-asc': sorted('user', 'asc')}")
-							a(href="#", ng-click="setSort('user')") User
-						th.sortable(ng-class="{'sort-desc': sorted('status', 'desc'), 'sort-asc': sorted('status', 'asc')}")
-							a(href="#", ng-click="setSort('status')") Status
 						th
+							a Date
+						th
+							a Title
+						th
+							a Game
 						th
 				tbody
+					//tr(ng-repeat="event in eventList.listData | orderBy: eventList.ui.sortType")
 					tr(ng-repeat="event in eventList.listData")
 						td.date {{event.eventStartDate | date : "dd MMM"}}
 						td.title {{event.eventTitle}}
