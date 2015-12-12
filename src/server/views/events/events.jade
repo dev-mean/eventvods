@@ -25,16 +25,16 @@ block content
 				thead
 					tr
 						th
-							a Date
+							a(href="", ng-click="eventList.setSort('eventStartDate')") Date
 						th
-							a Title
+							a(href="", ng-click="eventList.setSort('event.eventTitle')") Title
 						th
-							a Game
+							a(href="", ng-click="eventList.setSort('event.eventGame')") Game
+						th
 						th
 				tbody
-					//tr(ng-repeat="event in eventList.listData | orderBy: eventList.ui.sortType")
-					tr(ng-repeat="event in eventList.listData")
-						td.date {{event.eventStartDate | date : "dd MMM"}}
+					tr(ng-repeat="event in eventList.listData | orderBy: eventList.ui.sortType")
+						td.date {{event.eventStartDate | date : "dd MMM, yyyy"}}
 						td.title {{event.eventTitle}}
 						td.game {{event.eventGame}}
 						td.user {{event.user.username}}

@@ -8,7 +8,7 @@
         loaded: false,
         listView: true,
         showFilters: false,
-        sortType: 'date',
+        sortType: 'eventStartDate',
         sortReverse: false,
         search: '',
         itemsPerPage: 10,
