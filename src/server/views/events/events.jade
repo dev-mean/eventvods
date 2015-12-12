@@ -18,8 +18,8 @@ block content
 					div.gridView(ng-click="eventList.ui.listView = false",  ng-class="eventList.ui.listView ? '' : 'active'")
 						i.icon-grid
 						span Grid View
-		div.filters(ng-show="evenList.ui.showFilters")
-				input(type="text", ng-model="search", placeholder="Enter Event Title")
+		div.filters(ng-show="eventList.ui.showFilters")
+				input(type="text", ng-model="eventList.ui.search", placeholder="Enter Event Title")
 		div.listView.events(ng-show="eventList.ui.listView == true")
 			table.standard
 				thead

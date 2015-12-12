@@ -48,6 +48,17 @@
         controller.ui.sortReverse = !controller.ui.sortReverse;
       };
 
+      controller.filter = function (data) {
+        if (controller.ui.search !== "") {
+          data = data.filter(function (item) {
+            return ~item.eventTitle
+                          .toLowerCase()
+                          .indexof(controller.ui.search.toLowerCase());
+          });
+        }
+        return data;
+      };
+
       controller.previousPage = function () {
         controller.ui.page = controller.ui.page - 1;
         controller.listData = controller.paginate(controller.eventData);
