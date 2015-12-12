@@ -1,3 +1,30 @@
+(function() {
+  angular.module('eventApp').controller('eventListController', [
+    'eventService',
+    function(eventService) {
+			var controller = this;
+
+			controller.ui = {
+				loaded: false,
+				listView: true,
+				showFilters: false,
+				sort: {
+					field: 'data',
+					dir: 'asc'
+				},
+				search: '',
+				itemPerPage: 10
+			};
+
+			eventService.getEvents.$promise.then(function(result) {
+				console.log(result);
+			});
+    }
+  ]);
+}());
+
+
+/*
 var app = angular.module('eventControllers');
 app.controller('eventList', function ($scope, $http, Events) {
 	// ================
@@ -129,3 +156,4 @@ app.controller('eventList', function ($scope, $http, Events) {
 		$scope.processList();
 	};
 });
+*/

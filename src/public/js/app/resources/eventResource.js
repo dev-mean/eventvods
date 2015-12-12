@@ -25,7 +25,7 @@
             params: { eventId: '@eventId' }
           }
         })
-      }
+      };
     }
   ]);
 }());

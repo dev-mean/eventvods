@@ -2,7 +2,7 @@ extends ../layout
 block vars
 	-currentPage = "Events";
 block content
-	div.event-container(ng-app="event", ng-controller="eventList", ng-cloak)
+	div.event-container(ng-app="eventApp", ng-controller="eventListController as eventList", ng-cloak)
 		div.contextHead
 			div.leftSide
 				a.btn.lg.solid.icon(href="/events/new")
@@ -67,5 +67,7 @@ block content
 			a.btn(ng-show="pages > 1 && page < pages", ng-click="nextPage()") Next Page
 
 block scripts
-	script(src='/assets/js/app/services/event.js')
-	script(src='/assets/js/app/controllers/eventList.js')
+	script(src='/assets/js/app/app.js')
+	script(src='/assets/js/app/resources/eventResource.js')
+	script(src='/assets/js/app/services/eventService.js')
+	script(src='/assets/js/app/controllers/eventListController.js')

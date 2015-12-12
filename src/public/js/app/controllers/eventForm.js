@@ -1,3 +1,5 @@
+
+/*
 var app = angular.module('eventControllers');
 app.controller('eventForm', function($scope, $http, $location, $window, Events) {
   $scope.isEdit = false;
@@ -107,3 +109,4 @@ app.controller('eventForm', function($scope, $http, $location, $window, Events) 
     }
   };
 });
+*/

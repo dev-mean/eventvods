@@ -2,11 +2,11 @@
   'use strict';
 
   angular.module('eventApp').controller('overviewController', [
-    'mainPageService',
-    function(mainPageService) {
+    'overviewService',
+    function(overviewService) {
       var controller = this;
 
-      mainPageService.getOverview.$promise.then(function(result) {
+      overviewService.getOverview.$promise.then(function(result) {
         var data = cleanResponse(result);
         controller.overviewData = data;
       });

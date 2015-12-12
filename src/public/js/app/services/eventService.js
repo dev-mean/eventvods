@@ -1,15 +1,15 @@
 (function() {
 	'use strict';
 
-	angular.module('eventApp').service('eventPageService', [
+	angular.module('eventApp').service('eventService', [
 		'eventResource',
 		function(eventResource) {
 			var service = this;
-			service.getEvents = eventResource.getEvents.query;
-			service.getEvent = eventResource.getEvent.get;
-			service.createEvent = eventResource.createEvent.save;
-			service.updateEvent = eventResource.updateEvent.save;
-			service.deleteEvent = eventResource.deleteEvent.delete;
+			service.getEvents = eventResource.getEvents.query();
+			service.getEvent = eventResource.getEvent.get();
+			service.createEvent = eventResource.createEvent.save();
+			service.updateEvent = eventResource.updateEvent.save();
+			service.deleteEvent = eventResource.deleteEvent.delete();
 		}
 	]);
 }());

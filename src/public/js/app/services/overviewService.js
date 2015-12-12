@@ -1,12 +1,12 @@
 (function() {
   'use strict';
 
-  angular.module('eventApp').service('mainPageService', [
+  angular.module('eventApp').service('overviewService', [
     'overviewResource',
     function(overviewResource) {
       var service = this;
 
-      service.getOverview = overviewResource.getOverview.get;
+      service.getOverview = overviewResource.getOverview.get();
     }
   ]);
 }());
