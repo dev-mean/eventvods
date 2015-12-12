@@ -18,8 +18,11 @@
 
       eventService.getEvents().$promise.then(function(result) {
         var data = cleanResponse(result);
-        controller.listData = data;
+        controller.listData = controller.paginate(data);
+        /*
+        controller.listData = controller.data;
         controller.paginate(controller.listData);
+        */
       });
 
       function cleanResponse(resp) {
@@ -47,6 +50,17 @@
       controller.setSort = function(sortType) {
         controller.ui.sortType = sortType;
         controller.ui.sortReverse = !controller.ui.sortReverse;
+      };
+
+      controller.prevPage = function () {
+        controller.ui.page = controller.ui.page - 1;
+        console.log(controller.ui.page);
+        //$scope.processList();
+      };
+      controller.nextPage = function () {
+        controller.ui.page = controller.ui.page + 1;
+        console.log(controller.ui.page);
+        //$scope.processList();
       };
     }
   ]);
