@@ -70,9 +70,9 @@ block content
 						div.title {{event.eventTitle}}
 		span(ng-show="(eventList.ui.listData == null || eventList.ui.listData.length == 0) && (eventList.ui.loaded == true)") No events match those criteria.
 		div.pagination(ng-show="eventList.ui.pages > 1")
-			a.btn(ng-show="eventList.ui.page > 1", ng-click="prevPage()") Prev Page
+			a.btn(ng-show="eventList.ui.page > 1", ng-click="eventList.previousPage()") Prev Page
 			p Page {{eventList.ui.page}} of {{eventList.ui.pages}}
-			a.btn(ng-show="eventList.ui.pages > 1 && eventList.ui.page < eventList.ui.pages", ng-click="nextPage()") Next Page
+			a.btn(ng-show="eventList.ui.pages > 1 && eventList.ui.page < eventList.ui.pages", ng-click="eventList.nextPage()") Next Page
 
 block scripts
 	script(src='/assets/js/app/app.js')

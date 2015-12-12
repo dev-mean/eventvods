@@ -18,11 +18,9 @@
 
       eventService.getEvents().$promise.then(function(result) {
         var data = cleanResponse(result);
+        controller.eventData = data;
         controller.listData = controller.paginate(data);
-        /*
-        controller.listData = controller.data;
-        controller.paginate(controller.listData);
-        */
+        console.log(controller.listData);
       });
 
       function cleanResponse(resp) {
@@ -30,11 +28,9 @@
       }
 
       controller.paginate = function(data) {
-        if (typeof data === "undefined" || data === null) {
-          return null;
+        if (controller.ui.listView === false) {
+          controller.ui.itemsPerPage = 6;
         }
-
-        controller.ui.itemsPerPage = controller.ui.listView ? 10 : 6;
 
         controller.ui.pages = Math.ceil(data.length / controller.ui.itemsPerPage);
 
@@ -52,15 +48,14 @@
         controller.ui.sortReverse = !controller.ui.sortReverse;
       };
 
-      controller.prevPage = function () {
+      controller.previousPage = function () {
         controller.ui.page = controller.ui.page - 1;
-        console.log(controller.ui.page);
-        //$scope.processList();
+        controller.listData = controller.paginate(controller.eventData);
       };
+
       controller.nextPage = function () {
         controller.ui.page = controller.ui.page + 1;
-        console.log(controller.ui.page);
-        //$scope.processList();
+        controller.listData = controller.paginate(controller.eventData);
       };
     }
   ]);
