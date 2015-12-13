@@ -1,3 +1,4 @@
+// TODO (Nick): Event loading for editings needs to be fixed
 extends ../layout
 block vars
 	-currentPage = "Events";
@@ -57,7 +58,6 @@ block content
 						td.url
 							a(ng-href="/event/{{event._id}}")
 								i.icon-logout
-		//TODO(Nick): This piece still needs to be fixed
 		div.gridView.events(ng-show="eventList.ui.listView == false")
 			div.grid
 				div.item(ng-repeat="event in eventList.listData", ng-style="{'background-image': 'url(\"/assets/images/events/'+event.eventImage+'\")'}")

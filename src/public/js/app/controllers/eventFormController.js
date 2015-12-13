@@ -1,3 +1,12 @@
+(function() {
+  angular.module('eventApp').controller('eventFormController', [
+    'eventFormService',
+    function(eventFormService) {
+
+    }
+  ]);
+}());
+
 
 /*
 var app = angular.module('eventControllers');
