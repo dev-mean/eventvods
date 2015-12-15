@@ -2,6 +2,7 @@
 var gulp = require('gulp');
 
 //Include plugins
+var gjade = require('gulp-jade');
 var gutil = require('gulp-util');
 var jshint = require('gulp-jshint');
 var concat = require('gulp-concat');
@@ -39,8 +40,16 @@ gulp.task('clean', function () {
 
 //Copy templates
 gulp.task('jade-build', function () {
-	return gulp.src('src/server/views/**/*.jade')
+	var YOUR_LOCALS = {};
+
+	gulp.src('src/server/views/**/*.jade')
+		.pipe(gjade({
+			locals: YOUR_LOCALS
+		}))
 		.pipe(gulp.dest('dist/public/views'));
+
+	//return gulp.src('src/server/views/**/*.jade')
+		//.pipe(gulp.dest('dist/public/views'));
 	//return gulp.src('src/server/views/**/*.jade')
 		//.pipe(gulp.dest('dist/server/views'));
 });

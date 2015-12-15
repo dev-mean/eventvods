@@ -13,23 +13,22 @@ block content
                 thead
                     tr
                         th.sortable
-                            a(href="#", ng-click="sortOn = 'username'") Username
+                          a(href="#", ng-click="sortOn = 'username'") Username
                         th.sortable
-                            a(href="#", ng-click="sortOn = 'userEmail'") Email
+                          a(href="#", ng-click="sortOn = 'userEmail'") Email
                         th
-                            a(href="#", ng-click="sortOn = 'userRights'") User Rights
+                          a(href="#", ng-click="sortOn = 'userRights'") User Rights
                         th.sortable
-                            a(href="#", ng-click="sortOn = 'userLogin'") Last Login
-						th
+                          a(href="#", ng-click="sortOn = 'userLogin'") Last Login
                 tbody
                     tr(ng-repeat="user in userData | orderBy:sortOn:sortReverse | filter:{username: searchTerm}")
                         td {{user.username}}
                         td {{user.userEmail}}
                         td {{user.userRights}}
                         td {{user.lastLogin}}
-						td.edit
-							a(ng-href="/user/{{user._id}}/edit")
-								i.icon-pencil
-block scripts
+                        td.edit
+                        a(ng-href="/user/{{user._id}}/edit")
+                        i.icon-penci
+  block scripts
     script(src='/assets/js/app/services/user.js')
     script(src='/assets/js/app/controllers/user.js')
