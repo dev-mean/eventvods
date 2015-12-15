@@ -40,8 +40,11 @@ gulp.task('clean', function () {
 //Copy templates
 gulp.task('jade-build', function () {
 	return gulp.src('src/server/views/**/*.jade')
-		.pipe(gulp.dest('dist/server/views'));
+		.pipe(gulp.dest('dist/public/views'));
+	//return gulp.src('src/server/views/**/*.jade')
+		//.pipe(gulp.dest('dist/server/views'));
 });
+
 
 
 //Building front-end JS for deployment
@@ -91,7 +94,8 @@ gulp.task('less-build', function () {
 });
 
 
-//Moving bower packages for deployment
+// Moving bower packages for deployment
+// TODO(Nick): Bower components can  be re-routed with a .bowerrc file to another location.
 gulp.task('bower-copy', function () {
 	gulp.src('bower_components/angular-loading-bar/build/loading-bar.min.css')
 		.pipe(gulp.dest('dist/public/css'));

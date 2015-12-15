@@ -18,6 +18,7 @@ npm install
 # Getting Started
 To run the service, use the following commands
 ```
-gulp
-(new window) node dist/server/server.js
+gulp build
+
+(new window) node dist/server/server.js or npm start in project directory
 ```

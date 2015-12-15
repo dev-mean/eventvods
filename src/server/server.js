@@ -48,7 +48,8 @@ mongoose.connect(config.databaseUrl, function(err) {
 });
 
 //templating
-app.set('views', path.join(__dirname, 'views'));
+//app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, '../public/views'));
 app.set('view engine', 'jade');
 app.locals.pretty = true;
 
