@@ -132,6 +132,9 @@ gulp.task('angular-build', function() {
 	gulp.src('bower_components/angular-animate/angular-animate.min.js')
 			.pipe(gulp.dest('dist/public/js'));
 
+	gulp.src('bower_components/angular-route/angular-route.js')
+			.pipe(gulp.dest('dist/public/js'));
+
 	gulp.src('bower_components/angular-loading-bar/build/loading-bar.min.js')
 			.pipe(gulp.dest('dist/public/js'));
 

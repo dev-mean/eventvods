@@ -8,10 +8,10 @@
         stage: 1,
         error: [],
         data: { },
-        
+
       };
 
-
+      console.log('hello world');
     }
   ]);
 }());

@@ -3,7 +3,7 @@ extends ../layout
 block vars
 	-currentPage = "Events";
 block content
-	div.event-container(ng-app="eventApp", ng-controller="eventListController as eventList", ng-cloak)
+	div.event-container(ng-app="eventApp", ng-controller="eventListController as eventListController", ng-cloak)
 		div.contextHead
 			div.leftSide
 				a.btn.lg.solid.icon(href="/events/new")
@@ -11,42 +11,42 @@ block content
 					span Create Event
 			div.rightSide
 				div.filterControl
-					a(href="#", ng-click="eventList.ui.showFilters = !eventList.ui.showFilters") {{eventList.ui.showFilters ? "Hide" : "Show"}} Filter Controls
+					a(href="#", ng-click="eventListController.ui.showFilters = !eventList.ui.showFilters") {{eventList.ui.showFilters ? "Hide" : "Show"}} Filter Controls
 				div.viewSelect
-					div.listView(ng-click="eventList.ui.listView = true", ng-class="eventList.ui.listView ? 'active' : ''")
+					div.listView(ng-click="eventListController.ui.listView = true", ng-class="eventList.ui.listView ? 'active' : ''")
 						i.icon-list
 						span List View
-					div.gridView(ng-click="eventList.ui.listView = false",  ng-class="eventList.ui.listView ? '' : 'active'")
+					div.gridView(ng-click="eventListController.ui.listView = false",  ng-class="eventList.ui.listView ? '' : 'active'")
 						i.icon-grid
 						span Grid View
-		div.filters(ng-show="eventList.ui.showFilters")
-				input(type="text", ng-model="eventList.ui.search", placeholder="Enter Event Title")
-		div.listView.events(ng-show="eventList.ui.listView == true")
+		div.filters(ng-show="eventListController.ui.showFilters")
+				input(type="text", ng-model="eventListController.ui.search", placeholder="Enter Event Title")
+		div.listView.events(ng-show="eventListController.ui.listView == true")
 			table.standard
 				thead
 					tr
 						th
-							a(href="", ng-click="eventList.setSort('eventStartDate')") Date
-							span(ng-show="eventList.ui.sortType == 'eventStartDate' && !eventList.ui.sortReverse",
+							a(href="", ng-click="eventListController.setSort('eventStartDate')") Date
+							span(ng-show="eventListController.ui.sortType == 'eventStartDate' && !eventListController.ui.sortReverse",
 										class="caret-down")
-							span(ng-show="eventList.ui.sortType == 'eventStartDate' && eventList.ui.sortReverse",
+							span(ng-show="eventListController.ui.sortType == 'eventStartDate' && eventListController.ui.sortReverse",
 										class="caret-up")
 						th
 							a(href="", ng-click="eventList.setSort('eventTitle')") Title
-							span(ng-show="eventList.ui.sortType == 'eventTitle' && !eventList.ui.sortReverse",
+							span(ng-show="eventListController.ui.sortType == 'eventTitle' && !eventListController.ui.sortReverse",
 										class="caret-down")
-							span(ng-show="eventList.ui.sortType == 'eventTitle' && eventList.ui.sortReverse",
+							span(ng-show="eventListController.ui.sortType == 'eventTitle' && eventListController.ui.sortReverse",
 										class="caret-up")
 						th
-							a(href="", ng-click="eventList.setSort('eventGame')") Game
-							span(ng-show="eventList.ui.sortType == 'eventGame' && !eventList.ui.sortReverse",
+							a(href="", ng-click="eventListController.setSort('eventGame')") Game
+							span(ng-show="eventListController.ui.sortType == 'eventGame' && !eventListController.ui.sortReverse",
 										class="caret-down")
-							span(ng-show="eventList.ui.sortType == 'eventGame' && eventList.ui.sortReverse",
+							span(ng-show="eventListController.ui.sortType == 'eventGame' && eventListController.ui.sortReverse",
 										class="caret-up")
 						th
 						th
 				tbody
-					tr(ng-repeat="event in eventList.listData | orderBy: eventList.ui.sortType : eventList.ui.sortReverse")
+					tr(ng-repeat="event in eventListController.listData | orderBy: eventListController.ui.sortType : eventListController.ui.sortReverse")
 						td.date {{event.eventStartDate | date : "dd MMM, yyyy"}}
 						td.title {{event.eventTitle}}
 						td.game {{event.eventGame}}
@@ -58,9 +58,9 @@ block content
 						td.url
 							a(ng-href="/event/{{event._id}}")
 								i.icon-logout
-		div.gridView.events(ng-show="eventList.ui.listView == false")
+		div.gridView.events(ng-show="eventListController.ui.listView == false")
 			div.grid
-				div.item(ng-repeat="event in eventList.listData", ng-style="{'background-image': 'url(\"/assets/images/events/'+event.eventImage+'\")'}")
+				div.item(ng-repeat="event in eventListController.listData", ng-style="{'background-image': 'url(\"/assets/images/events/'+event.eventImage+'\")'}")
 					div.overlay.hover
 						a.btn.sm.solid(ng-href="/event/{{event._id}}/edit") Edit Event
 					div.gradient.overlay
@@ -68,11 +68,11 @@ block content
 					div.text
 						div.date {{event.eventStartDate | date : "MMM dd, yyyy"}}
 						div.title {{event.eventTitle}}
-		span(ng-show="(eventList.ui.listData == null || eventList.ui.listData.length == 0) && (eventList.ui.loaded == true)") No events match those criteria.
-		div.pagination(ng-show="eventList.ui.pages > 1")
-			a.btn(ng-show="eventList.ui.page > 1", ng-click="eventList.previousPage()") Prev Page
+		span(ng-show="(eventListController.ui.listData == null || eventListController.ui.listData.length == 0) && (eventListController.ui.loaded == true)") No events match those criteria.
+		div.pagination(ng-show="eventListController.ui.pages > 1")
+			a.btn(ng-show="eventListController.ui.page > 1", ng-click="eventListController.previousPage()") Prev Page
 			p Page {{eventList.ui.page}} of {{eventList.ui.pages}}
-			a.btn(ng-show="eventList.ui.pages > 1 && eventList.ui.page < eventList.ui.pages", ng-click="eventList.nextPage()") Next Page
+			a.btn(ng-show="eventListController.ui.pages > 1 && eventListController.ui.page < eventListController.ui.pages", ng-click="eventListController.nextPage()") Next Page
 
 block scripts
 	script(src='/assets/js/app/app.js')
