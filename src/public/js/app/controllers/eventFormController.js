@@ -1,4 +1,6 @@
 (function() {
+  'use strict';
+
   angular.module('eventApp').controller('eventFormController', [
     'eventFormService',
     function(eventFormService) {
@@ -10,8 +12,6 @@
         data: { },
 
       };
-
-      console.log('hello world');
     }
   ]);
 }());

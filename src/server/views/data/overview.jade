@@ -2,7 +2,7 @@ extends ../layout
 block vars
 	-currentPage = "Data";
 block content
-	div.event-container(ng-app="data", ng-controller="dataList", ng-cloak)
+	div.event-container(ng-app="eventApp", ng-controller="dataListController", ng-cloak)
 		div.contextHead
 			div.leftSide
 				span.btn.lg.solid.icon(ng-click="test()") Test
@@ -123,5 +123,5 @@ block content
 		
 
 block scripts
-	script(src='/assets/js/app/services/data.js')
-	script(src='/assets/js/app/controllers/dataList.js')
+	//script(src='/assets/js/app/services/data.js')
+	script(src='/assets/js/app/controllers/dataListController.js')

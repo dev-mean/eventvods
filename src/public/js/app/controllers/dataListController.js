@@ -1,5 +1,15 @@
-angular.module('dataControllers')
-	.controller('dataList', function ($http, $scope, Staff, Maps, Teams) {
+(function() {
+	'use strict';
+
+		angular.module('eventApp').controller('dataListController', [
+			function() {
+				console.log('here');
+			}
+		]);
+}());
+
+/*
+angular.module('eventApp').controller('dataList', function ($http, $scope, Staff, Maps, Teams) {
 
 		$scope.view = "Teams";
 		$scope.showFilters = false;
@@ -256,3 +266,5 @@ angular.module('dataControllers')
 
 		//=================
 	});
+
+*/

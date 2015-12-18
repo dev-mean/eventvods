@@ -71,7 +71,7 @@ block content
 		span(ng-show="(eventListController.ui.listData == null || eventListController.ui.listData.length == 0) && (eventListController.ui.loaded == true)") No events match those criteria.
 		div.pagination(ng-show="eventListController.ui.pages > 1")
 			a.btn(ng-show="eventListController.ui.page > 1", ng-click="eventListController.previousPage()") Prev Page
-			p Page {{eventList.ui.page}} of {{eventList.ui.pages}}
+			p Page {{eventListController.ui.page}} of {{eventListController.ui.pages}}
 			a.btn(ng-show="eventListController.ui.pages > 1 && eventListController.ui.page < eventListController.ui.pages", ng-click="eventListController.nextPage()") Next Page
 
 block scripts
