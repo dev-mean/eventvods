@@ -1,8 +1,8 @@
-var app = require('express');
-var router = app.Router();
-var auth = require('../controllers/auth');
-var Event = require('../models/event');
-var User = require('../models/user');
+var app       = require('express');
+var router    = app.Router();
+var auth      = require('../controllers/auth');
+var Event     = require('../models/event');
+var User      = require('../models/user');
 
 // Sets up local user data for templating
 router.all('/*', function(req, res, next) {
@@ -91,13 +91,11 @@ router.get('/data/:id/edit', function(req, res) {
 });
 
 router.get('/profile', function(req, res) {
-    res.render('user/profile', {}); 
+    res.render('user/profile', {});
 });
 
 router.get('/users', function(req, res) {
     res.render('user/users', {});
 });
-
-
 
 module.exports = router;

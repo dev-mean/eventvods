@@ -1,16 +1,16 @@
 //server setup
-var express = require('express');
-var app = express();
-var fs = require('fs');
-var path = require('path');
-var mongoose = require('mongoose');
-var bodyParser = require('body-parser');
-var passport = require('passport');
-var LocalStrategy = require('passport-local').Strategy;
-var morgan = require('morgan'); //Logger
-var session = require('express-session');
-var User = require('./models/user');
-var config = require('./config/config');
+var express 				= require('express');
+var app 						= express();
+var fs 							= require('fs');
+var path 						= require('path');
+var mongoose 				= require('mongoose');
+var bodyParser 			= require('body-parser');
+var passport 				= require('passport');
+var LocalStrategy 	= require('passport-local').Strategy;
+var morgan 					= require('morgan'); //Logger
+var session 				= require('express-session');
+var User 						= require('./models/user');
+var config 					= require('./config/config');
 
 //server config
 app.set('env', 'development');
@@ -25,15 +25,20 @@ app.use('/assets', express.static(path.join(__dirname, '..', 'public')));
 app.use(bodyParser.urlencoded({
 	'extended': 'true'
 }));
+
 app.use(bodyParser.json());
+
 app.use(bodyParser.json({
-	type: 'application/vnd.api+json'
-}));
+		type: 'application/vnd.api+json'
+	})
+);
+
 app.use(session({
-	secret: config.secret,
-	resave: false,
-	saveUninitialized: true
-}));
+		secret: config.secret,
+		resave: false,
+		saveUninitialized: true
+	})
+);
 
 /* Passport setup */
 app.use(passport.initialize());
@@ -48,8 +53,8 @@ mongoose.connect(config.databaseUrl, function(err) {
 });
 
 //templating
-//app.set('views', path.join(__dirname, 'views'));
-app.set('views', path.join(__dirname, '../public/views'));
+app.set('views', path.join(__dirname, 'views'));
+//app.set('views', path.join(__dirname, '../public/views'));
 app.set('view engine', 'jade');
 app.locals.pretty = true;
 
