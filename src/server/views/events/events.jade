@@ -32,7 +32,7 @@ block content
 							span(ng-show="eventListController.ui.sortType == 'eventStartDate' && eventListController.ui.sortReverse",
 										class="caret-up")
 						th
-							a(href="", ng-click="eventList.setSort('eventTitle')") Title
+							a(href="", ng-click="eventListController.setSort('eventTitle')") Title
 							span(ng-show="eventListController.ui.sortType == 'eventTitle' && !eventListController.ui.sortReverse",
 										class="caret-down")
 							span(ng-show="eventListController.ui.sortType == 'eventTitle' && eventListController.ui.sortReverse",
