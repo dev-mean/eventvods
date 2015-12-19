@@ -4,6 +4,7 @@
   angular.module('eventApp').factory('eventResource', [
     '$resource', 'eventConstants',
     function($resource, eventConstants) {
+      // TODO(Nick): Needs to be refactored
       return {
         getEvents: $resource(eventConstants.baseUri + 'events'),
         getEvent: $resource(eventConstants.baseUri + 'event/:eventId', { }, {
@@ -13,7 +14,7 @@
           }
         }),
         createEvent: $resource(eventConstants.baseUri + 'events'),
-        updateEvent: $resource(eventConstants.baseUri + 'event/:eventId', { },{
+        updateEvent: $resource(eventConstants.baseUri + 'event/:eventId', { }, {
           'save': {
             method: 'POST',
             params: { eventId: '@eventId' }

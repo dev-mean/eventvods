@@ -2,8 +2,10 @@
   'use strict';
 
   angular.module('eventApp').controller('dataListController', [
-    function() {
+    'dataListService',
+    function(dataListService) {
       var controller = this;
+
       controller.ui = {
         showFilters: true,
         view: 'Teams',
@@ -18,6 +20,10 @@
         page: 1,
         search: ''
       };
+
+			function cleanResponse(resp) {
+				return JSON.parse(angular.toJson(resp));
+			}
     }
   ]);
 }());
@@ -275,6 +281,7 @@ angular.module('eventApp').controller('dataList', function ($http, $scope, Staff
 		Teams.get()
 			.then(function (response) {
 				$scope.teams.data = response.data;
+				$scope.teams.process();
 				$scope.teams.process();
 			});
 

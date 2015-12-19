@@ -36,17 +36,19 @@ block content
 			table.standard
 				thead
 					tr
-						th.sortable(ng-class="{'sort-desc': teams.sorted('tag', 'desc'), 'sort-asc': teams.sorted('tag', 'asc')}")
-							a(href="#", ng-click="teams.sortBy('tag')") Tag
-						th.sortable(ng-class="{'sort-desc': teams.sorted('name', 'desc'), 'sort-asc': teams.sorted('name', 'asc')}")
-							a(href="#", ng-click="teams.sortBy('name')") Name
-						th Icon
-						th.sortable(ng-class="{'sort-desc': teams.sorted('country', 'desc'), 'sort-asc': teams.sorted('country', 'asc')}")
-							a(href="#", ng-click="teams.sortBy('country')") Country
+						th
+							a(href="", ng-click="dataListController.setTeamSort('tag')") Tag
+								// Up and down carets here
+						th
+							a(href="", ng-click="dataListController.setTeamSort('name')") Name
+								// Up and down carets here
+						th
+							a(href="", ng=click="dataListController.setTeamSort('country')") Country
+								// Up and down carets here
 						th
 						th
 				tbody
-					tr(ng-repeat="team in teams.list")
+					tr(ng-repeat="team in dataListController.teams.list")
 						td.tag {{team.teamTag}}
 						td.name {{team.teamName}}
 						td.icon
@@ -124,4 +126,6 @@ block content
 
 block scripts
 	script(src='/assets/js/app/app.js')
+	script(src='/assets/js/app/resources/teamResource.js')
+	script(src='/assets/js/app/services/dataListService.js')
 	script(src='/assets/js/app/controllers/dataListController.js')

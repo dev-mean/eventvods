@@ -1,3 +1,18 @@
+(function() {
+	'use strict';
+
+	angular.module('eventApp').service('dataListService', [
+		'teamResource',
+		function(dataListService) {
+
+		}
+	]);
+}());
+
+
+
+
+/*
 angular.module('dataServices', [])
 	.factory('Staff', function($http) {
 		return {
@@ -39,3 +54,4 @@ angular.module('dataServices', [])
 		};
 	});
 angular.module('dataControllers', ['dataServices']);
+*/
