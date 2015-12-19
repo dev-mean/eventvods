@@ -2,37 +2,37 @@ extends ../layout
 block vars
 	-currentPage = "Data";
 block content
-	div.event-container(ng-app="eventApp", ng-controller="dataListController", ng-cloak)
+	div.event-container(ng-app="eventApp", ng-controller="dataListController as dataListController", ng-cloak)
 		div.contextHead
 			div.leftSide
-				span.btn.lg.solid.icon(ng-click="test()") Test
-				a.btn.lg.solid.icon(href="add/team", ng-show="view == 'Teams'")
+				//span.btn.lg.solid.icon(ng-click="test()") Test
+				a.btn.lg.solid.icon(href="add/team", ng-show="dataListController.ui.view == 'Teams'")
 					i.icon-file-add
 					span New Team
-				a.btn.lg.solid.icon(href="add/staff", ng-show="view == 'Staff'")
+				a.btn.lg.solid.icon(href="add/staff", ng-show="dataListController.ui.view == 'Staff'")
 					i.icon-file-add
 					span New Staff
-				a.btn.lg.solid.icon(href="add/map", ng-show="view == 'Maps'")
+				a.btn.lg.solid.icon(href="add/map", ng-show="dataListController.ui.view == 'Maps'")
 					i.icon-file-add
 					span New Map
 			div.rightSide
 				div.filterControl
-					a(href="#", ng-click="showFilters = !showFilters") {{showFilters ? "Hide" : "Show"}} Filter Controls
+					a(href="#", ng-click="dataListController.ui.showFilters = !dataListController.ui.showFilters") {{dataListController.ui.showFilters ? "Hide" : "Show"}} Filter Controls
 				div.tabs
-					div.teams(ng-click="view = 'Teams'", ng-class="view == 'Teams' ? 'active' : ''")
+					div.teams(ng-click="dataListController.ui.view = 'Teams'", ng-class="dataListController.ui.view == 'Teams' ? 'active' : ''")
 						i.icon-teams
 						span Teams
-					div.staff(ng-click="view = 'Staff'",  ng-class="view == 'Staff' ? 'active' : ''")
+					div.staff(ng-click="dataListController.ui.view = 'Staff'",  ng-class="dataListController.ui.view == 'Staff' ? 'active' : ''")
 						i.icon-staff
 						span Staff
-					div.staff(ng-click="view = 'Maps'",  ng-class="view == 'Maps' ? 'active' : ''")
+					div.staff(ng-click="dataListController.ui.view = 'Maps'",  ng-class="dataListController.ui.view == 'Maps' ? 'active' : ''")
 						i.icon-maps
 						span Maps
-		div.filters(ng-show="showFilters")
-				input(type="text", ng-model="teams.search", placeholder="Search Teams", ng-show="view == 'Teams'")
-				input(type="text", ng-model="staff.search", placeholder="Search Staff", ng-show="view == 'Staff'")
-				input(type="text", ng-model="maps.search", placeholder="Search Maps", ng-show="view == 'Maps'")
-		div#Teams.data(ng-show="view == 'Teams'")
+		div.filters(ng-show="dataListController.ui.showFilters")
+				input(type="text", ng-model="teams.search", placeholder="Search Teams", ng-show="dataListController.ui.view == 'Teams'")
+				input(type="text", ng-model="staff.search", placeholder="Search Staff", ng-show="dataListController.ui.view == 'Staff'")
+				input(type="text", ng-model="maps.search", placeholder="Search Maps", ng-show="dataListController.ui.view == 'Maps'")
+		div#Teams.data(ng-show="dataListController.ui.view == 'Teams'")
 			table.standard
 				thead
 					tr
@@ -123,5 +123,5 @@ block content
 		
 
 block scripts
-	//script(src='/assets/js/app/services/data.js')
+	script(src='/assets/js/app/app.js')
 	script(src='/assets/js/app/controllers/dataListController.js')

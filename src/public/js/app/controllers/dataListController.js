@@ -1,11 +1,25 @@
 (function() {
-	'use strict';
+  'use strict';
 
-		angular.module('eventApp').controller('dataListController', [
-			function() {
-				console.log('here');
-			}
-		]);
+  angular.module('eventApp').controller('dataListController', [
+    function() {
+      var controller = this;
+      controller.ui = {
+        showFilters: true,
+        view: 'Teams',
+        teams: {
+          data: {},
+          list: {},
+          sort: {
+            field: 'tag',
+            dir: 'desc'
+          }
+        },
+        page: 1,
+        search: ''
+      };
+    }
+  ]);
 }());
 
 /*
