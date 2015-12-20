@@ -2,22 +2,24 @@
 	'use strict';
 
 	angular.module('eventApp').service('dataListService', [
-		'teamResource', 'staffResource',
-		function(teamResource, staffResource) {
+		'mapResource', 'staffResource', 'teamResource',
+		function(mapResource, staffResource, teamResource) {
 			var service = this;
 
-			service.getTeams = teamResource.getTeams.query;
-			service.createTeam = teamResource.createTeam.save;
-			service.deleteTeam = teamResource.deleteTeam.delete;
+			service.getMaps = mapResource.getMaps.query;
+			service.createMap = mapResource.createMap.save;
+			service.deleteMap = mapResource.deleteMap.delete;
 
 			service.getCasters = staffResource.getCasters.query;
 			service.createCaster = staffResource.createCaster.save;
 			service.deleteCaster = staffResource.deleteCaster.delete;
+
+			service.getTeams = teamResource.getTeams.query;
+			service.createTeam = teamResource.createTeam.save;
+			service.deleteTeam = teamResource.deleteTeam.delete;
 		}
 	]);
 }());
-
-
 
 
 /*

@@ -31,7 +31,13 @@
       dataListService.getCasters().$promise.then(function(result) {
         var data = cleanResponse(result);
         controller.casterData = data;
-        controller.casterListData = data;
+        controller.casterListData = controller.paginate(data);
+      });
+
+      dataListService.getMaps().$promise.then(function(result) {
+        var data = cleanResponse(result);
+        controller.mapData = data;
+        controller.mapListData =  controller.paginate(data);
       });
 
 			function cleanResponse(resp) {
