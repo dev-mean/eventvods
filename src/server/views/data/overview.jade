@@ -6,7 +6,8 @@ block content
 		div.contextHead
 			div.leftSide
 				//span.btn.lg.solid.icon(ng-click="test()") Test
-				a.btn.lg.solid.icon(href="add/team", ng-show="dataListController.ui.view == 'Teams'")
+				//a.btn.lg.solid.icon(href="add/team", ng-show="dataListController.ui.view == 'Teams'")
+				a.btn.lg.solid.icon(href="data/new", ng-show="dataListController.ui.view == 'Teams'")
 					i.icon-file-add
 					span New Team
 				a.btn.lg.solid.icon(href="add/staff", ng-show="dataListController.ui.view == 'Staff'")
@@ -17,7 +18,7 @@ block content
 					span New Map
 			div.rightSide
 				div.filterControl
-					a(href="#", ng-click="dataListController.ui.showFilters = !dataListController.ui.showFilters") {{dataListController.ui.showFilters ? "Hide" : "Show"}} Filter Controls
+					a(href="", ng-click="dataListController.ui.showFilters = !dataListController.ui.showFilters") {{dataListController.ui.showFilters ? "Hide" : "Show"}} Filter Controls
 				div.tabs
 					div.teams(ng-click="dataListController.ui.view = 'Teams'", ng-class="dataListController.ui.view == 'Teams' ? 'active' : ''")
 						i.icon-teams
@@ -48,7 +49,7 @@ block content
 						th
 						th
 				tbody
-					tr(ng-repeat="team in dataListController.teams")
+					tr(ng-repeat="team in dataListController.teamListData")
 						td.tag {{team.teamTag}}
 						td.name {{team.teamName}}
 						td.icon
@@ -78,7 +79,7 @@ block content
 						th
 						th
 				tbody
-					tr(ng-repeat="staff in dataListController.staff.list")
+					tr(ng-repeat="staff in dataListController.casterListData")
 						td.name {{staff.casterName}}
 						td.alias {{staff.casterAlias}}
 						td.country
@@ -103,7 +104,7 @@ block content
 								// Up and down carets here
 						th
 				tbody
-					tr(ng-repeat="map in dataListController.maps.list")
+					tr(ng-repeat="map in dataListController.mapListData")
 						td.map img(ng-src="/assets/images/maps/{{map.teamTag}}.png")
 						td.name {{map.mapName}}
 						td.game {{map.mapGame}}

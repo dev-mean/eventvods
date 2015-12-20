@@ -40,7 +40,7 @@
         controller.mapListData =  controller.paginate(data);
       });
 
-			function cleanResponse(resp) {
+      function cleanResponse(resp) {
 				return JSON.parse(angular.toJson(resp));
 			}
 
