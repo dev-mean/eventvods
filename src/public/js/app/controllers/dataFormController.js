@@ -2,8 +2,8 @@
   'use strict';
 
   angular.module('eventApp').controller('dataFormController', [
-    '',
-    function() {
+    'dataFormService',
+    function(dataFormService) {
       var controller = this;
 
       controller.ui = {

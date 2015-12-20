@@ -2,7 +2,7 @@ extends ../layout
 block vars
 	-currentPage = "Data";
 block content
-	div.event-container(ng-app="eventApp", ng-controller="dataFormController as dataFormController", ng-cloak)
+	div.event-container(ng-controller="dataFormController as dataFormController", ng-cloak)
 		div.contextHead
 			div.leftSide
 				h1 Team Name ELSE "Add Team Data"
@@ -55,5 +55,9 @@ block content
 
 block scripts
 	script(src='/assets/js/app/app.js')
+	script(src='/assets/js/app/resources/mapResource.js')
+	script(src='/assets/js/app/resources/staffResource.js')
+	script(src='/assets/js/app/resources/teamResource.js')
 	script(src='/assets/js/app/services/dataFormService.js')
+	script(src='/assets/js/app/controllers/layoutController.js')
 	script(src='/assets/js/app/controllers/dataFormController.js')

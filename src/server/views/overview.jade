@@ -3,7 +3,7 @@ block vars
 	-var currentPage = "Dashboard";
 block content
 	div.content
-		.appcontainer(ng-app="eventApp" ng-controller="overviewController as overviewController")
+		.appcontainer(ng-controller="overviewController as overviewController")
 			h1.title Overview
 			//Recent events
 			.section(ng-cloak)
@@ -77,4 +77,5 @@ block scripts
 	script(src='/assets/js/app/app.js')
 	script(src='/assets/js/app/resources/overviewResource.js')
 	script(src='/assets/js/app/services/overviewService.js')
+	script(src='/assets/js/app/controllers/layoutController.js')
 	script(src='/assets/js/app/controllers/overviewController.js')

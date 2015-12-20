@@ -3,7 +3,7 @@ extends ../layout
 block vars
 	-currentPage = "Events";
 block content
-	div.event-container(ng-app="eventApp", ng-controller="eventListController as eventListController", ng-cloak)
+	div.event-container(ng-controller="eventListController as eventListController", ng-cloak)
 		div.contextHead
 			div.leftSide
 				a.btn.lg.solid.icon(href="/events/new")
@@ -78,4 +78,5 @@ block scripts
 	script(src='/assets/js/app/app.js')
 	script(src='/assets/js/app/resources/eventResource.js')
 	script(src='/assets/js/app/services/eventService.js')
+	script(src='/assets/js/app/controllers/layoutController.js')
 	script(src='/assets/js/app/controllers/eventListController.js')

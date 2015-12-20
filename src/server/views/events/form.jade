@@ -4,7 +4,7 @@ block vars
 block content
 	-var isEdit = (typeof eventID !== "undefined");
 	h1 Add Event
-	form(name="form", ng-app="eventApp", ng-controller="eventFormController", ng-cloak)
+	form(name="form", ng-controller="eventFormController", ng-cloak)
 		a.btn(ng-click="upload()") Upload img tests
 		.section#errors(ng-show!="errors.length > 0")
 			ul
@@ -52,4 +52,5 @@ block scripts
 	script(src='/assets/js/dropzone.min.js')
 	script(src='/assets/js/app/services/eventResource.js')
 	script(src='/assets/js/app/services/eventFormService.js')
+	script(src='/assets/js/app/controllers/layoutController.js')
 	script(src='/assets/js/app/controllers/eventFormController.js')
