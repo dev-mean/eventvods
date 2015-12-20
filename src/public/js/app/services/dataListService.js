@@ -2,9 +2,17 @@
 	'use strict';
 
 	angular.module('eventApp').service('dataListService', [
-		'teamResource',
-		function(dataListService) {
+		'teamResource', 'staffResource',
+		function(teamResource, staffResource) {
+			var service = this;
 
+			service.getTeams = teamResource.getTeams.query;
+			service.createTeam = teamResource.createTeam.save;
+			service.deleteTeam = teamResource.deleteTeam.delete;
+
+			service.getCasters = staffResource.getCasters.query;
+			service.createCaster = staffResource.createCaster.save;
+			service.deleteCaster = staffResource.deleteCaster.delete;
 		}
 	]);
 }());

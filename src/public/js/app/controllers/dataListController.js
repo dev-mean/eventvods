@@ -10,20 +10,73 @@
         showFilters: true,
         view: 'Teams',
         teams: {
-          data: {},
-          list: {},
           sort: {
             field: 'tag',
             dir: 'desc'
           }
         },
+        listView: true,
+        itemsPerPage: 10,
+        pages: 1,
         page: 1,
         search: ''
       };
 
+      dataListService.getTeams().$promise.then(function(result) {
+        var data = cleanResponse(result);
+        controller.teamData = data;
+        controller.teamListData = controller.paginate(data);
+      });
+
+      dataListService.getCasters().$promise.then(function(result) {
+        var data = cleanResponse(result);
+        controller.casterData = data;
+        controller.casterListData = data;
+      });
+
 			function cleanResponse(resp) {
 				return JSON.parse(angular.toJson(resp));
 			}
+
+      controller.paginate = function(data) {
+        if (controller.ui.listView === false) {
+          controller.ui.itemsPerPage = 6;
+        }
+
+        controller.ui.pages = Math.ceil(data.length / controller.ui.itemsPerPage);
+
+        if (data.length > controller.ui.itemsPerPage) {
+            var start = (controller.ui.page - 1) * controller.ui.itemsPerPage;
+            var end = start + controller.ui.itemsPerPage;
+            return data.slice(start, end);
+        } else {
+          return data;
+        }
+      };
+
+      controller.previousPage = function(listType) {
+        controller.ui.page = controller.ui.page - 1;
+        if (listType === 'team') {
+          // Teams
+          controller.teamListData = controller.paginate(controller.teamData);
+        } else if (listType === 'staff') {
+          // Staff
+        } else {
+          // Maps
+        }
+      };
+
+      controller.nextPage = function() {
+        controller.ui.page = controller.ui.page + 1;
+        if (listType === 'team') {
+          // Teams
+          controller.teamListData = controller.paginate(controller.teamData);
+        } else if (listType === 'staff') {
+          // Staff
+        } else {
+          // Maps
+        }
+      };
     }
   ]);
 }());

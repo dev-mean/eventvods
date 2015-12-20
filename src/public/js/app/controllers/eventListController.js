@@ -20,7 +20,6 @@
         var data = cleanResponse(result);
         controller.eventData = data;
         controller.listData = controller.paginate(data);
-        console.log(controller.listData);
       });
 
       function cleanResponse(resp) {
