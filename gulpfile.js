@@ -1,5 +1,4 @@
 var gulp 			= require('gulp');
-var gjade 		= require('gulp-jade');
 var gutil 		= require('gulp-util');
 var jshint 		= require('gulp-jshint');
 var concat 		= require('gulp-concat');
