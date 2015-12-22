@@ -1,91 +1,121 @@
-(function() {
-  'use strict';
+(function () {
+    'use strict';
 
-  angular.module('eventApp').controller('dataListController', [
-    'dataListService',
-    function(dataListService) {
-      var controller = this;
+    angular.module('eventApp').controller('dataListController', [
+        'dataListService',
+        function (dataListService) {
+            var controller = this;
 
-      controller.ui = {
-        showFilters: true,
-        view: 'Teams',
-        teams: {
-          sort: {
-            field: 'tag',
-            dir: 'desc'
-          }
-        },
-        listView: true,
-        itemsPerPage: 10,
-        pages: 1,
-        page: 1,
-        search: ''
-      };
+            controller.ui = {
+                showFilters: true,
+                view: 'Teams',
+                teams: {
+                    sort: {
+                        sortType: 'tag',
+                        sortReverse: false,
+						pages: 1,
+						page: 1,
+                    }
+                },
+                staff: {
+                    sort: {
+                        sortType: 'name',
+                        sortReverse: false,
+						pages: 1,
+						page: 1,
+                    }
+                },
+                maps: {
+                    sort: {
+                        sortType: 'map',
+                        sortReverse: false,
+						pages: 1,
+						page: 1,
+                    }
+                },
+                listView: true,
+                itemsPerPage: 3,
+                search: ''
+            };
 
-      dataListService.getTeams().$promise.then(function(result) {
-        var data = cleanResponse(result);
-        controller.teamData = data;
-        controller.teamListData = controller.paginate(data);
-      });
+            dataListService.getTeams().$promise.then(function (result) {
+					var data = cleanResponse(result);
+					controller.teamData = data;
+					controller.teamListData = controller.paginate(data, 'teams');
+            });
 
-      dataListService.getCasters().$promise.then(function(result) {
-        var data = cleanResponse(result);
-        controller.casterData = data;
-        controller.casterListData = controller.paginate(data);
-      });
+            dataListService.getCasters().$promise.then(function (result) {
+					var data = cleanResponse(result);
+					controller.casterData = data;
+					controller.casterListData = controller.paginate(data, 'staff');
+            });
 
-      dataListService.getMaps().$promise.then(function(result) {
-        var data = cleanResponse(result);
-        controller.mapData = data;
-        controller.mapListData =  controller.paginate(data);
-      });
+            dataListService.getMaps().$promise.then(function (result) {
+					var data = cleanResponse(result);
+					controller.mapData = data;
+					controller.mapListData = controller.paginate(data, 'maps');
+            });
 
-      function cleanResponse(resp) {
-				return JSON.parse(angular.toJson(resp));
-			}
+            function cleanResponse(resp) {
+                return JSON.parse(angular.toJson(resp));
+            }
 
-      controller.paginate = function(data) {
-        if (controller.ui.listView === false) {
-          controller.ui.itemsPerPage = 6;
+            //TODO (Martin): Refactor into one sort function
+            controller.setTeamSort = function (sortType) {
+                controller.ui.teams.sort.sortType = sortType;
+                controller.ui.teams.sort.sortReverse = !controller.ui.teams.sort.sortReverse;
+            };
+
+			controller.setStaffSort = function (sortType) {
+                controller.ui.staff.sort.sortType = sortType;
+                controller.ui.staff.sort.sortReverse = !controller.ui.staff.sort.sortReverse;
+            };
+
+			controller.setMapSort = function (sortType) {
+                controller.ui.maps.sort.sortType = sortType;
+                controller.ui.maps.sort.sortReverse = !controller.ui.maps.sort.sortReverse;
+            };
+
+            controller.paginate = function (data, viewName) {
+                if (controller.ui.listView === false) {
+                    controller.ui.itemsPerPage = 6;
+                }
+				
+                controller.ui[viewName].sort.pages = Math.ceil(data.length / controller.ui.itemsPerPage);
+
+                if (data.length > controller.ui.itemsPerPage) {
+                    var start = (controller.ui[viewName].sort.page - 1) * controller.ui.itemsPerPage;
+                    var end = start + controller.ui.itemsPerPage;
+                    return data.slice(start, end);
+                } else {
+                    return data;
+                }
+            };
+
+            controller.previousPage = function (viewName) {
+                controller.ui[viewName].sort.page = controller.ui[viewName].sort.page - 1;
+                if (viewName === 'teams') {
+                    controller.teamListData = controller.paginate(controller.teamData, 'teams');
+                } else if (viewName === 'staff') {
+                    controller.casterListData = controller.paginate(controller.casterData, 'staff');
+                } else {
+                    controller.mapListData = controller.paginate(controller.mapData, 'maps');
+                }
+            };
+
+            controller.nextPage = function (viewName) {
+				controller.ui[viewName].sort.page = controller.ui[viewName].sort.page + 1;
+                if (viewName === 'teams') {
+                    controller.teamListData = controller.paginate(controller.teamData, 'teams');
+                } else if (viewName === 'staff') {
+                    controller.casterListData = controller.paginate(controller.casterData, 'staff');
+                } else {
+                    controller.mapListData = controller.paginate(controller.mapData, 'maps');
+                }
+            };
         }
-
-        controller.ui.pages = Math.ceil(data.length / controller.ui.itemsPerPage);
-
-        if (data.length > controller.ui.itemsPerPage) {
-            var start = (controller.ui.page - 1) * controller.ui.itemsPerPage;
-            var end = start + controller.ui.itemsPerPage;
-            return data.slice(start, end);
-        } else {
-          return data;
-        }
-      };
-
-      controller.previousPage = function(listType) {
-        controller.ui.page = controller.ui.page - 1;
-        if (listType === 'team') {
-          // Teams
-          controller.teamListData = controller.paginate(controller.teamData);
-        } else if (listType === 'staff') {
-          // Staff
-        } else {
-          // Maps
-        }
-      };
-
-      controller.nextPage = function() {
-        controller.ui.page = controller.ui.page + 1;
-        if (listType === 'team') {
-          // Teams
-          controller.teamListData = controller.paginate(controller.teamData);
-        } else if (listType === 'staff') {
-          // Staff
-        } else {
-          // Maps
-        }
-      };
-    }
-  ]);
-}());
+    ]);
+} ());
 
 /*
 angular.module('eventApp').controller('dataList', function ($http, $scope, Staff, Maps, Teams) {
