@@ -39,17 +39,27 @@ block content
 					tr
 						th
 							a(href="", ng-click="dataListController.setTeamSort('tag')") Tag
-								// Up and down carets here
+							span(ng-show="dataListController.ui.teams.sort.sortType == 'tag' && !dataListController.ui.teams.sort.sortReverse",
+										class="caret-down")
+							span(ng-show="dataListController.ui.teams.sort.sortType == 'tag' && dataListController.ui.teams.sort.sortReverse",
+										class="caret-up")
 						th
 							a(href="", ng-click="dataListController.setTeamSort('name')") Name
-								// Up and down carets here
+							span(ng-show="dataListController.ui.teams.sort.sortType == 'name' && !dataListController.ui.teams.sort.sortReverse",
+										class="caret-down")
+							span(ng-show="dataListController.ui.teams.sort.sortType == 'name' && dataListController.ui.teams.sort.sortReverse",
+										class="caret-up")
 						th
-							a(href="", ng=click="dataListController.setTeamSort('country')") Country
-								// Up and down carets here
+							a(href="", ng-click="dataListController.setTeamSort('country')") Country
+							span(ng-show="dataListController.ui.teams.sort.sortType == 'country' && !dataListController.ui.teams.sort.sortReverse",
+										class="caret-down")
+							span(ng-show="dataListController.ui.teams.sort.sortType == 'country' && dataListController.ui.teams.sort.sortReverse",
+										class="caret-up")
+						th
 						th
 						th
 				tbody
-					tr(ng-repeat="team in dataListController.teamListData")
+					tr(ng-repeat="team in dataListController.teamListData | orderBy: dataListController.ui.teams.sort.sortType : dataListController.ui.teams.sort.sortReverse")
 						td.tag {{team.teamTag}}
 						td.name {{team.teamName}}
 						td.icon
@@ -69,17 +79,26 @@ block content
 					tr
 						th
 							a(href="", ng-click="dataListController.setStaffSort('name')") Name
-								// Up and down carets here			
+							span(ng-show="dataListController.ui.staff.sort.sortType == 'name' && !dataListController.ui.staff.sort.sortReverse",
+										class="caret-down")
+							span(ng-show="dataListController.ui.staff.sort.sortType == 'name' && dataListController.ui.staff.sort.sortReverse",
+										class="caret-up")
 						th
 							a(href="", ng-click="dataListController.setStaffSort('alias')") Alias
-								// Up and down carets here
+							span(ng-show="dataListController.ui.staff.sort.sortType == 'alias' && !dataListController.ui.staff.sort.sortReverse",
+										class="caret-down")
+							span(ng-show="dataListController.ui.staff.sort.sortType == 'alias' && dataListController.ui.staff.sort.sortReverse",
+										class="caret-up")
 						th
 							a(href="", ng-click="dataListController.setStaffSort('country')") Country
-							// Up and down carets here
+							span(ng-show="dataListController.ui.staff.sort.sortType == 'country' && !dataListController.ui.staff.sort.sortReverse",
+										class="caret-down")
+							span(ng-show="dataListController.ui.staff.sort.sortType == 'country' && dataListController.ui.staff.sort.sortReverse",
+										class="caret-up")
 						th
 						th
 				tbody
-					tr(ng-repeat="staff in dataListController.casterListData")
+					tr(ng-repeat="staff in dataListController.casterListData | orderBy: dataListController.ui.staff.sort.sortType : dataListController.ui.staff.sort.sortReverse")
 						td.name {{staff.casterName}}
 						td.alias {{staff.casterAlias}}
 						td.country
@@ -95,16 +114,28 @@ block content
 			table.standard
 				thead
 					tr
-						th Map
 						th
-							a(href="", ng-click"dataListController.setMapSort('name')") Name
-								// Up and down carets here
+							a(href="", ng-click="dataListController.setMapSort('map')") Map
+							span(ng-show="dataListController.ui.maps.sort.sortType == 'map' && !dataListController.ui.maps.sort.sortReverse",
+										class="caret-down")
+							span(ng-show="dataListController.ui.maps.sort.sortType == 'map' && dataListController.ui.maps.sort.sortReverse",
+										class="caret-up")
 						th
-							a(href="", ng-click"dataListController.setMapSort('game')") Game
-								// Up and down carets here
+							a(href="", ng-click="dataListController.setMapSort('name')") Name
+							span(ng-show="dataListController.ui.maps.sort.sortType == 'name' && !dataListController.ui.maps.sort.sortReverse",
+										class="caret-down")
+							span(ng-show="dataListController.ui.maps.sort.sortType == 'name' && dataListController.ui.maps.sort.sortReverse",
+										class="caret-up")
+						th
+							a(href="", ng-click="dataListController.setMapSort('game')") Game
+							span(ng-show="dataListController.ui.maps.sort.sortType == 'game' && !dataListController.ui.maps.sort.sortReverse",
+										class="caret-down")
+							span(ng-show="dataListController.ui.maps.sort.sortType == 'game' && dataListController.ui.maps.sort.sortReverse",
+										class="caret-up")
+						th
 						th
 				tbody
-					tr(ng-repeat="map in dataListController.mapListData")
+					tr(ng-repeat="map in dataListController.mapListData | orderBy: dataListController.ui.maps.sort.sortType : dataListController.ui.maps.sort.sortReverse")
 						td.map img(ng-src="/assets/images/maps/{{map.teamTag}}.png")
 						td.name {{map.mapName}}
 						td.game {{map.mapGame}}
@@ -114,22 +145,21 @@ block content
 						td.url
 							a(ng-href="/data/map/{{map._id}}")
 								i.icon-logout
-		span(ng-show="(teams.list == null || teams.list.length == 0) && view == 'Teams'") No data matches those criteria.
-		span(ng-show="(staff.list == null || staff.list.length == 0) && view == 'Staff'") No data matches those criteria.
-		span(ng-show="(maps.list == null || maps.list.length == 0) && view == 'Maps'") No data matches those criteria.
-		div.pagination(ng-show="teams.pages > 1 && view =='Teams' ")
-			a.btn(ng-show="teams.page > 1", ng-click="teams.prevPage()") Prev Page
-			| Page {{teams.page}} of {{teams.pages}}
-			a.btn(ng-show="teams.pages > 1 && teams.page < teams.pages", ng-click="teams.nextPage()") Next Page
-		div.pagination(ng-show="staff.pages > 1 && view =='Staff' ")
-			a.btn(ng-show="staff.page > 1", ng-click="staff.prevPage()") Prev Page
-			| Page {{staff.page}} of {{staff.pages}}
-			a.btn(ng-show="staff.pages > 1 && staff.page < staff.pages", ng-click="staff.nextPage()") Next Page
-		div.pagination(ng-show="maps.pages > 1 && view =='Maps' ")
-			a.btn(ng-show="maps.page > 1", ng-click="maps.prevPage()") Prev Page
-			| Page {{maps.page}} of {{maps.pages}}
-			a.btn(ng-show="maps.pages > 1 && maps.page < maps.pages", ng-click="maps.nextPage()") Next Page
-		
+		span(ng-show="(dataListController.teamData == null || dataListController.teamData.length == 0) && dataListController.ui.view == 'Teams'") No data matches those criteria.
+		span(ng-show="(dataListController.casterData == null || dataListController.casterData.length == 0) && dataListController.ui.view == 'Staff'") No data matches those criteria.
+		span(ng-show="(dataListController.mapData == null || dataListController.mapData.length == 0) && dataListController.ui.view == 'Maps'") No data matches those criteria.
+		div.pagination(ng-show="dataListController.ui.teams.sort.pages > 1 && dataListController.ui.view == 'Teams'")
+			a.btn(ng-show="dataListController.ui.teams.sort.page > 1", ng-click="dataListController.previousPage('teams')") Prev Page
+			| Page {{dataListController.ui.teams.sort.page}} of {{dataListController.ui.teams.sort.pages}}
+			a.btn(ng-show="dataListController.ui.teams.sort.pages > 1 && dataListController.ui.teams.sort.page < dataListController.ui.teams.sort.pages", ng-click="dataListController.nextPage('teams')") Next Page
+		div.pagination(ng-show="dataListController.ui.staff.sort.pages > 1 && dataListController.ui.view =='Staff'")
+			a.btn(ng-show="dataListController.ui.staff.sort.page > 1", ng-click="dataListController.previousPage('staff')") Prev Page
+			| Page {{dataListController.ui.staff.sort.page}} of {{dataListController.ui.staff.sort.pages}}
+			a.btn(ng-show="dataListController.ui.staff.sort.pages > 1 && dataListController.ui.staff.sort.page < dataListController.ui.staff.sort.pages", ng-click="dataListController.nextPage('staff')") Next Page
+		div.pagination(ng-show="dataListController.ui.maps.sort.pages > 1 && dataListController.ui.view =='Maps'")
+			a.btn(ng-show="dataListController.ui.maps.sort.page > 1", ng-click="dataListController.previousPage('maps')") Prev Page
+			| Page {{dataListController.ui.maps.sort.page}} of {{dataListController.ui.maps.sort.pages}}
+			a.btn(ng-show="dataListController.ui.maps.sort.pages > 1 && dataListController.ui.maps.sort.page < dataListController.ui.maps.sort.pages", ng-click="dataListController.nextPage('maps')") Next Page
 
 block scripts
 	script(src='/assets/js/app/app.js')
