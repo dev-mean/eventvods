@@ -3,7 +3,7 @@ var Schema = mongoose.Schema;
 
 var socialMediaSchema = new Schema({
     mediaType: { type: String, enum: ['Website', 'Twitter', 'Facebook', 'Twitch', 'Youtube', 'Stream', 'Other'], required: true },
-	mediaName: { type: String },
+    mediaName: { type: String },
     mediaURL: { type: String, required: true }
 });
 

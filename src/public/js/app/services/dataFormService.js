@@ -6,9 +6,9 @@
     function(mapResource, staffResource, teamResource) {
       var service = this;
 
-      service.createMap = mapResource.createMap.save;
-      service.createCaster = staffResource.createCaster.save;
-      service.createTeam = teamResource.createTeam.save;
+      service.createMap = mapResource.createMap;
+      service.createCaster = staffResource.createCaster;
+      service.createTeam = teamResource.createTeam;
     }
   ]);
 }());

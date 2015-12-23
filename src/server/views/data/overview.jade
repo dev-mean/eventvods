@@ -8,15 +8,16 @@ block content
 				//span.btn.lg.solid.icon(ng-click="test()") Test
 				//a.btn.lg.solid.icon(href="add/team", ng-show="dataListController.ui.view == 'Teams'")
 				// Just have one button to access data management portion
-				a.btn.lg.solid.icon(href="data/new", ng-show="dataListController.ui.view == 'Teams'")
+				//a.btn.lg.solid.icon(href="data/new", ng-if="dataListController.ui.view == 'Teams'")
+				a.btn.lg.solid.icon(href="data/new")z
 					i.icon-file-add
-					span New Team
-				a.btn.lg.solid.icon(href="data/new", ng-show="dataListController.ui.view == 'Staff'")
-					i.icon-file-add
-					span New Staff
-				a.btn.lg.solid.icon(href="data/new", ng-show="dataListController.ui.view == 'Maps'")
-					i.icon-file-add
-					span New Map
+					span Create New Data
+				//a.btn.lg.solid.icon(href="data/new", ng-if="dataListController.ui.view == 'Staff'")
+					//i.icon-file-add
+					//span New Staff
+				//a.btn.lg.solid.icon(href="data/new", ng-if="dataListController.ui.view == 'Maps'")
+					//i.icon-file-add
+					//span New Map
 			div.rightSide
 				div.filterControl
 					a(href="", ng-click="dataListController.ui.showFilters = !dataListController.ui.showFilters") {{dataListController.ui.showFilters ? "Hide" : "Show"}} Filter Controls

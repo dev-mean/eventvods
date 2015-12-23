@@ -20,15 +20,16 @@ block content
 		div.content.form
 			div.leftSide
 				div(ng-if="dataFormController.ui.view == 'team'")
+					h2 Team
 					form
 						.standard.group 
-							input
+							input(ng-model="dataFormController.ui.teamModel.teamName")
 							label Name
 						.standard.group 
-							input
+							input(ng-model="dataFormController.ui.teamModel.teamTag")
 							label Tag
 						.standard.group 
-							input
+							input(ng-model="dataFormController.ui.teamModel.teamGame")
 							label Game
 						.standard.group 
 							input
@@ -37,7 +38,7 @@ block content
 							input
 							label Twitter
 						.standard.group 
-							input
+							input(ng-model="dataFormController.ui.teamModel.teamCountry")
 							label Country
 					div.rightSide
 						.imageUpload.teamLogo
@@ -51,27 +52,41 @@ block content
 								i.icon-tooltip
 							.btn.small Remove
 					div.saveBlock
-						.btn Save Data
+						.btn(ng-click="dataFormController.saveTeam(dataFormController.ui.teamModel)") Save Data
 						.btn Save &amp; Add Another
 				div(ng-if="dataFormController.ui.view == 'staff'")
+					h2 Staff
 					form
 						.standard.group
-							input
+							input(ng-model="dataFormController.ui.casterModel.casterName")
 							label Name 
 						.standard.group
-							input 
+							input(ng-model="dataFormController.ui.casterModel.casterAlias")
 							label Alias
 						.standard.group
-							input
+							input(ng-model="dataFormController.ui.casterModel.casterCountry")
 							label Country
+					div.saveBlock
+						.btn(ng-click="dataFormController.saveStaff(dataFormController.ui.casterModel)") Save Data
+						.btn Save &amp; Add Another
 				div(ng-if="dataFormController.ui.view == 'map'")
+					h2 Map
 					form
 						.standard.group
-							input
+							input(ng-model="dataFormController.ui.mapModel.mapName")
 							label Name
 						.standard.group
-							input
+							input(ng-model="dataFormController.ui.mapModel.mapGame")
 							label Game
+					div.rightSide
+						.imageUpload.mapImage
+							h4 Map images
+							.tooltip.small
+									i.icon-tooltip
+								.btn.small Remove
+					div.saveBlock
+						.btn(ng-click="dataFormController.saveMap(dataFormController.ui.mapModel)") Save Data
+						.btn Save &amp; Add Another
 block scripts
 	script(src='/assets/js/app/app.js')
 	script(src='/assets/js/app/resources/mapResource.js')
