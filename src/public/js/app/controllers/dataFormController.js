@@ -7,7 +7,7 @@
       var controller = this;
 
       controller.ui = {
-        listView: true
+        view: 'team'
       };
     }
   ]);

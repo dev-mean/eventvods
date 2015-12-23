@@ -5,54 +5,73 @@ block content
 	div.event-container(ng-controller="dataFormController as dataFormController", ng-cloak)
 		div.contextHead
 			div.leftSide
-				h1 Team Name ELSE "Add Team Data"
+				h1 Data Manager
 			div.rightSide
 				div.tabs
-					div.teams(ng-click="dataFormController.ui.listView = true", ng-class="dataFormController.ui.listView ? 'active' : ''")
+					div.teams(ng-click="dataFormController.ui.view = 'team'")
 						i.icon-teams
 						span Teams
-					div.staff(ng-click="dataFormController.ui.listView = false",  ng-class="dataFormController.ui.listView ? '' : 'active'")
+					div.staff(ng-click="dataFormController.ui.view = 'staff'")
 						i.icon-staff
 						span Staff
-					div.staff(ng-click="dataFormController.ui.listView = false",  ng-class="dataFormController.ui.listView ? '' : 'active'")
+					div.map(ng-click="dataFormController.ui.view = 'map'")
 						i.icon-maps
 						span Maps
 		div.content.form
 			div.leftSide
-				form
-					.standard.group 
-						input
-						label Name
-					.standard.group 
-						input
-						label Tag
-					.standard.group 
-						input
-						label Game
-					.standard.group 
-						input
-						label Website
-					.standard.group 
-						input
-						label Twitter
-					.standard.group 
-						input
-						label Country
-			div.rightSide
-				.imageUpload.teamLogo
-					h4 Team Logo
-					.tooltip.small
-						i.icon-tooltip
-					.btn.small Remove
-				.imageUpload.teamBackground
-					h4 Team Background
-					.tooltip.small
-						i.icon-tooltip
-					.btn.small Remove
-			div.saveBlock
-				.btn Save Data
-				.btn Save &amp; Add Another
-
+				div(ng-if="dataFormController.ui.view == 'team'")
+					form
+						.standard.group 
+							input
+							label Name
+						.standard.group 
+							input
+							label Tag
+						.standard.group 
+							input
+							label Game
+						.standard.group 
+							input
+							label Website
+						.standard.group 
+							input
+							label Twitter
+						.standard.group 
+							input
+							label Country
+					div.rightSide
+						.imageUpload.teamLogo
+							h4 Team Logo
+							.tooltip.small
+								i.icon-tooltip
+							.btn.small Remove
+						.imageUpload.teamBackground
+							h4 Team Background
+							.tooltip.small
+								i.icon-tooltip
+							.btn.small Remove
+					div.saveBlock
+						.btn Save Data
+						.btn Save &amp; Add Another
+				div(ng-if="dataFormController.ui.view == 'staff'")
+					form
+						.standard.group
+							input
+							label Name 
+						.standard.group
+							input 
+							label Alias
+						.standard.group
+							input
+							label Country
+				div(ng-if="dataFormController.ui.view == 'map'")
+					form
+						.standard.group
+							input
+							label Name
+						.standard.group
+							input
+							label Game
 block scripts
 	script(src='/assets/js/app/app.js')
 	script(src='/assets/js/app/resources/mapResource.js')

@@ -2,18 +2,19 @@ extends ../layout
 block vars
 	-currentPage = "Data";
 block content
-	div.event-container(ng-app="eventApp", ng-controller="dataListController as dataListController", ng-cloak)
+	div.event-container(ng-controller="dataListController as dataListController", ng-cloak)
 		div.contextHead
 			div.leftSide
 				//span.btn.lg.solid.icon(ng-click="test()") Test
 				//a.btn.lg.solid.icon(href="add/team", ng-show="dataListController.ui.view == 'Teams'")
+				// Just have one button to access data management portion
 				a.btn.lg.solid.icon(href="data/new", ng-show="dataListController.ui.view == 'Teams'")
 					i.icon-file-add
 					span New Team
-				a.btn.lg.solid.icon(href="add/staff", ng-show="dataListController.ui.view == 'Staff'")
+				a.btn.lg.solid.icon(href="data/new", ng-show="dataListController.ui.view == 'Staff'")
 					i.icon-file-add
 					span New Staff
-				a.btn.lg.solid.icon(href="add/map", ng-show="dataListController.ui.view == 'Maps'")
+				a.btn.lg.solid.icon(href="data/new", ng-show="dataListController.ui.view == 'Maps'")
 					i.icon-file-add
 					span New Map
 			div.rightSide
