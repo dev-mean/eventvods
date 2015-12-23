@@ -44,7 +44,7 @@
   "homepage": "https://github.com/EventVODS/EventVODS",
   "scripts": {
     "postinstall": "bower install",
-    "build": "gulp build",
+    "build-assets": "gulp build",
     "start": "nodemon dist/server/server.js"
   }
 }
