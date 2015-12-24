@@ -34,5 +34,8 @@
   },
   "devDependencies": {
     "qunit": "~1.18.0"
+  },
+  "resolutions": {
+    "angular": "1.4.8"
   }
 }

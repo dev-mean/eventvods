@@ -9,5 +9,7 @@ html(lang='en')
 		link(href='/assets/css/webfont.css', rel='stylesheet')
 	body(flow-prevent-drop)
 		div.container
-			span #{error}
-			div.rightView
+			if (stack)
+				pre #{stack}
+			else
+				span #{message}
