@@ -45,10 +45,8 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 mongoose.connect(config.databaseUrl, function (err) {
-    if (err) {
-        console.log("DB err: " + err);
-        next(err);
-    } else console.log("Connected to mongodb");
+    if (err) console.log("DB err: " + err);
+    else console.log("Connected to mongodb");
 });
 
 //templating
