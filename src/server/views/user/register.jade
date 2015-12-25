@@ -3,11 +3,22 @@ extends ../layout
 block content
     div.content
         h1 Register
+        if errors.length > 0
+            div#errors
+                ul
+                    each val in errors
+                        li= val.message
         form(name="register" method="post")
             label Username
-            input(type="text" name="username")
+            input(type="text" name="Username")
+            br
+            label Email
+            input(type="email" name="Email")
             br
             label Password
-            input(type="text" name="password")
+            input(type="password" name="Password")
+            br
+            label Confirm Password
+            input(type="password" name="Password_confirm")
             br
             input(type="submit" value="Sign up!")
