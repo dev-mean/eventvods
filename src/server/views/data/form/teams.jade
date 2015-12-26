@@ -8,13 +8,13 @@ block content
 				h1 Data Manager
 			div.rightSide
 				div.tabs
-					div.teams(href="#")
+					div.teams.active(ng-click="dataFormController.goTo('teams')")
 						i.icon-teams
 						span Teams
-					div.staff(href="#")
+					div.staff(ng-click="dataFormController.goTo('staff')")
 						i.icon-staff
 						span Staff
-					div.map(href="#")
+					div.map(ng-click="dataFormController.goTo('maps')")
 						i.icon-maps
 						span Maps
 		div.content.form

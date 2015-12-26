@@ -2,15 +2,18 @@
   'use strict';
 
   angular.module('eventApp').controller('dataFormController', [
-    'dataFormService',
-    function(dataFormService) {
+    'dataFormService', '$window',
+    function(dataFormService, $window) {
       var controller = this;
 
       controller.ui = {
-        view: 'team',
         casterModel: new dataFormService.createCaster(),
         mapModel: new dataFormService.createMap(),
         teamModel: new dataFormService.createTeam()
+      };
+      
+      controller.goTo = function(name) {
+          $window.location.href = 'data/new/' + name;
       };
 
       controller.saveStaff = function(casterModel) {
