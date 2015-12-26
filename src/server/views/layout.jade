@@ -7,6 +7,7 @@ html(lang='en')
 		meta(http-equiv='X-UA-Compatible', content='IE=edge')
 		meta(name='viewport', content='width=device-width, initial-scale=1')
 		title=title
+		link(rel='icon', href='assets/images/favicon.png', type='image/x-icon')
 		base(href='/')
 		link(href='/assets/css/style.css', rel='stylesheet')
 		link(href='/assets/css/webfont.css', rel='stylesheet')
@@ -21,12 +22,13 @@ html(lang='en')
 			div.leftSidebar
 				header.logo
 					a(href="/")
-				div.userBlock
-					a(href="#")
-						// User icons
-						//img(src="/assets/images/avatars/#{locals.user.username}.png")
-						//span #{locals.user.username}
-						div.arrow
+				if locals.user
+					div.userBlock
+						a(href="#")
+							// User icons
+							//img(src="/assets/images/avatars/#{locals.user.username}.png")
+							span #{locals.user.username}
+							div.arrow
 				nav.leftNavigation
 					each navsection in ["Dashboard", "Events", "Data", "Users"]
 						a(id=navsection, href="/" + navsection.toLowerCase(), class=currentPage == navsection ? 'active' : '')
