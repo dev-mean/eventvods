@@ -8,7 +8,7 @@
 
       controller.ui = {
         showFilters: true,
-        view: 'Teams',
+        view: 'teams',
         teams: {
           sort: {
             sortType: 'tag',
