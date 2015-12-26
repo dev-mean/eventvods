@@ -9,7 +9,7 @@ block content
 				//a.btn.lg.solid.icon(href="add/team", ng-show="dataListController.ui.view == 'Teams'")
 				// Just have one button to access data management portion
 				//a.btn.lg.solid.icon(href="data/new", ng-if="dataListController.ui.view == 'Teams'")
-				a.btn.lg.solid.icon(href="data/new")
+				a.btn.lg.solid.icon(href="data/new/{{dataListController.ui.view}}")
 					i.icon-file-add
 					span Create New Data
 				//a.btn.lg.solid.icon(href="data/new", ng-if="dataListController.ui.view == 'Staff'")
@@ -22,20 +22,20 @@ block content
 				div.filterControl
 					a(href="", ng-click="dataListController.ui.showFilters = !dataListController.ui.showFilters") {{dataListController.ui.showFilters ? "Hide" : "Show"}} Filter Controls
 				div.tabs
-					div.teams(ng-click="dataListController.ui.view = 'Teams'", ng-class="dataListController.ui.view == 'Teams' ? 'active' : ''")
+					div.teams(ng-click="dataListController.ui.view = 'teams'", ng-class="dataListController.ui.view == 'teams' ? 'active' : ''")
 						i.icon-teams
 						span Teams
-					div.staff(ng-click="dataListController.ui.view = 'Staff'",  ng-class="dataListController.ui.view == 'Staff' ? 'active' : ''")
+					div.staff(ng-click="dataListController.ui.view = 'staff'",  ng-class="dataListController.ui.view == 'staff' ? 'active' : ''")
 						i.icon-staff
 						span Staff
-					div.staff(ng-click="dataListController.ui.view = 'Maps'",  ng-class="dataListController.ui.view == 'Maps' ? 'active' : ''")
+					div.staff(ng-click="dataListController.ui.view = 'maps'",  ng-class="dataListController.ui.view == 'maps' ? 'active' : ''")
 						i.icon-maps
 						span Maps
 		div.filters(ng-show="dataListController.ui.showFilters")
-				input(type="text", ng-model="teams.search", placeholder="Search Teams", ng-show="dataListController.ui.view == 'Teams'")
-				input(type="text", ng-model="staff.search", placeholder="Search Staff", ng-show="dataListController.ui.view == 'Staff'")
-				input(type="text", ng-model="maps.search", placeholder="Search Maps", ng-show="dataListController.ui.view == 'Maps'")
-		div#Teams.data(ng-show="dataListController.ui.view == 'Teams'")
+				input(type="text", ng-model="teams.search", placeholder="Search Teams", ng-show="dataListController.ui.view == 'teams'")
+				input(type="text", ng-model="staff.search", placeholder="Search Staff", ng-show="dataListController.ui.view == 'staff'")
+				input(type="text", ng-model="maps.search", placeholder="Search Maps", ng-show="dataListController.ui.view == 'maps'")
+		div#Teams.data(ng-show="dataListController.ui.view == 'teams'")
 			table.standard
 				thead
 					tr
@@ -75,7 +75,7 @@ block content
 						td.url
 							a(ng-href="/data/team/{{team._id}}")
 								i.icon-logout
-		div#Staff.data(ng-show="dataListController.ui.view == 'Staff'")
+		div#Staff.data(ng-show="dataListController.ui.view == 'staff'")
 			table.standard
 				thead
 					tr
@@ -112,7 +112,7 @@ block content
 						td.url
 							a(ng-href="/data/staff/{{staff._id}}")
 								i.icon-logout
-		div#Maps.data(ng-show="dataListController.ui.view == 'Maps'")
+		div#Maps.data(ng-show="dataListController.ui.view == 'maps'")
 			table.standard
 				thead
 					tr
@@ -147,18 +147,18 @@ block content
 						td.url
 							a(ng-href="/data/map/{{map._id}}")
 								i.icon-logout
-		span(ng-show="(dataListController.teamData == null || dataListController.teamData.length == 0) && dataListController.ui.view == 'Teams'") No data matches those criteria.
-		span(ng-show="(dataListController.casterData == null || dataListController.casterData.length == 0) && dataListController.ui.view == 'Staff'") No data matches those criteria.
-		span(ng-show="(dataListController.mapData == null || dataListController.mapData.length == 0) && dataListController.ui.view == 'Maps'") No data matches those criteria.
-		div.pagination(ng-show="dataListController.ui.teams.sort.pages > 1 && dataListController.ui.view == 'Teams'")
+		span(ng-show="(dataListController.teamData == null || dataListController.teamData.length == 0) && dataListController.ui.view == 'teams'") No data matches those criteria.
+		span(ng-show="(dataListController.casterData == null || dataListController.casterData.length == 0) && dataListController.ui.view == 'staff'") No data matches those criteria.
+		span(ng-show="(dataListController.mapData == null || dataListController.mapData.length == 0) && dataListController.ui.view == 'maps'") No data matches those criteria.
+		div.pagination(ng-show="dataListController.ui.teams.sort.pages > 1 && dataListController.ui.view == 'teams'")
 			a.btn(ng-show="dataListController.ui.teams.sort.page > 1", ng-click="dataListController.previousPage('teams')") Prev Page
 			| Page {{dataListController.ui.teams.sort.page}} of {{dataListController.ui.teams.sort.pages}}
 			a.btn(ng-show="dataListController.ui.teams.sort.pages > 1 && dataListController.ui.teams.sort.page < dataListController.ui.teams.sort.pages", ng-click="dataListController.nextPage('teams')") Next Page
-		div.pagination(ng-show="dataListController.ui.staff.sort.pages > 1 && dataListController.ui.view =='Staff'")
+		div.pagination(ng-show="dataListController.ui.staff.sort.pages > 1 && dataListController.ui.view =='staff'")
 			a.btn(ng-show="dataListController.ui.staff.sort.page > 1", ng-click="dataListController.previousPage('staff')") Prev Page
 			| Page {{dataListController.ui.staff.sort.page}} of {{dataListController.ui.staff.sort.pages}}
 			a.btn(ng-show="dataListController.ui.staff.sort.pages > 1 && dataListController.ui.staff.sort.page < dataListController.ui.staff.sort.pages", ng-click="dataListController.nextPage('staff')") Next Page
-		div.pagination(ng-show="dataListController.ui.maps.sort.pages > 1 && dataListController.ui.view =='Maps'")
+		div.pagination(ng-show="dataListController.ui.maps.sort.pages > 1 && dataListController.ui.view =='maps'")
 			a.btn(ng-show="dataListController.ui.maps.sort.page > 1", ng-click="dataListController.previousPage('maps')") Prev Page
 			| Page {{dataListController.ui.maps.sort.page}} of {{dataListController.ui.maps.sort.pages}}
 			a.btn(ng-show="dataListController.ui.maps.sort.pages > 1 && dataListController.ui.maps.sort.page < dataListController.ui.maps.sort.pages", ng-click="dataListController.nextPage('maps')") Next Page

@@ -66,8 +66,12 @@ router.get('/data', auth.updater(), function (req, res) {
 	res.render('data/overview', {});
 });
 
+router.get('/data/new/:type', auth.updater(), function(req, res) {
+    res.render('data/form/' + req.params.type, {});
+});
+    
 router.get('/data/new', auth.updater(), function (req, res) {
-	res.render('data/form', {});
+	res.render('data/form/teams', {});
 });
 
 router.get('/data/casters', auth.updater(), function (req, res) {

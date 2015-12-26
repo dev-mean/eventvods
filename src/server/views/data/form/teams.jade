@@ -1,4 +1,4 @@
-extends ../layout
+extends ../../layout
 block vars
 	-currentPage = "Data";
 block content
@@ -8,18 +8,18 @@ block content
 				h1 Data Manager
 			div.rightSide
 				div.tabs
-					div.teams(ng-click="dataFormController.ui.view = 'team'")
+					div.teams.active(ng-click="dataFormController.goTo('teams')")
 						i.icon-teams
 						span Teams
-					div.staff(ng-click="dataFormController.ui.view = 'staff'")
+					div.staff(ng-click="dataFormController.goTo('staff')")
 						i.icon-staff
 						span Staff
-					div.map(ng-click="dataFormController.ui.view = 'map'")
+					div.map(ng-click="dataFormController.goTo('maps')")
 						i.icon-maps
 						span Maps
 		div.content.form
 			div.leftSide
-				div(ng-if="dataFormController.ui.view == 'team'")
+				div
 					h2 Team
 					form
 						.standard.group 
@@ -53,39 +53,6 @@ block content
 							.btn.small Remove
 					div.saveBlock
 						.btn(ng-click="dataFormController.saveTeam(dataFormController.ui.teamModel)") Save Data
-						.btn Save &amp; Add Another
-				div(ng-if="dataFormController.ui.view == 'staff'")
-					h2 Staff
-					form
-						.standard.group
-							input(ng-model="dataFormController.ui.casterModel.casterName")
-							label Name 
-						.standard.group
-							input(ng-model="dataFormController.ui.casterModel.casterAlias")
-							label Alias
-						.standard.group
-							input(ng-model="dataFormController.ui.casterModel.casterCountry")
-							label Country
-					div.saveBlock
-						.btn(ng-click="dataFormController.saveStaff(dataFormController.ui.casterModel)") Save Data
-						.btn Save &amp; Add Another
-				div(ng-if="dataFormController.ui.view == 'map'")
-					h2 Map
-					form
-						.standard.group
-							input(ng-model="dataFormController.ui.mapModel.mapName")
-							label Name
-						.standard.group
-							input(ng-model="dataFormController.ui.mapModel.mapGame")
-							label Game
-					div.rightSide
-						.imageUpload.mapImage
-							h4 Map images
-							.tooltip.small
-									i.icon-tooltip
-								.btn.small Remove
-					div.saveBlock
-						.btn(ng-click="dataFormController.saveMap(dataFormController.ui.mapModel)") Save Data
 						.btn Save &amp; Add Another
 block scripts
 	script(src='/assets/js/app/app.js')

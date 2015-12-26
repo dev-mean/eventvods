@@ -1,0 +1,44 @@
+extends ../../layout
+block vars
+	-currentPage = "Data";
+block content
+	div.event-container(ng-controller="dataFormController as dataFormController", ng-cloak)
+		div.contextHead
+			div.leftSide
+				h1 Data Manager
+			div.rightSide
+				div.tabs
+					div.teams(ng-click="dataFormController.goTo('teams')")
+						i.icon-teams
+						span Teams
+					div.staff.active(ng-click="dataFormController.goTo('staff')")
+						i.icon-staff
+						span Staff
+					div.map(ng-click="dataFormController.goTo('maps')")
+						i.icon-maps
+						span Maps
+		div.content.form
+			div.leftSide
+				div
+					h2 Staff
+					form
+						.standard.group
+							input(ng-model="dataFormController.ui.casterModel.casterName")
+							label Name 
+						.standard.group
+							input(ng-model="dataFormController.ui.casterModel.casterAlias")
+							label Alias
+						.standard.group
+							input(ng-model="dataFormController.ui.casterModel.casterCountry")
+							label Country
+					div.saveBlock
+						.btn(ng-click="dataFormController.saveStaff(dataFormController.ui.casterModel)") Save Data
+						.btn Save &amp; Add Another
+block scripts
+	script(src='/assets/js/app/app.js')
+	script(src='/assets/js/app/resources/mapResource.js')
+	script(src='/assets/js/app/resources/staffResource.js')
+	script(src='/assets/js/app/resources/teamResource.js')
+	script(src='/assets/js/app/services/dataFormService.js')
+	script(src='/assets/js/app/controllers/layoutController.js')
+	script(src='/assets/js/app/controllers/dataFormController.js')
