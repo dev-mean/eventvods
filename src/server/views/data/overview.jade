@@ -9,7 +9,7 @@ block content
 				//a.btn.lg.solid.icon(href="add/team", ng-show="dataListController.ui.view == 'Teams'")
 				// Just have one button to access data management portion
 				//a.btn.lg.solid.icon(href="data/new", ng-if="dataListController.ui.view == 'Teams'")
-				a.btn.lg.solid.icon(href="data/new")
+				a.btn.lg.solid.icon(href="data/new/{{dataListController.ui.view}}")
 					i.icon-file-add
 					span Create New Data
 				//a.btn.lg.solid.icon(href="data/new", ng-if="dataListController.ui.view == 'Staff'")

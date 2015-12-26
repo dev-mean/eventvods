@@ -66,8 +66,8 @@ router.get('/data', function(req, res) {
     res.render('data/overview', {});
 });
 
-router.get('/data/new', function(req, res) {
-    res.render('data/form', {});
+router.get('/data/new/:type', function(req, res) {
+    res.render('data/form/' + req.params.type, {});
 });
 
 router.get('/data/casters', function(req, res) {

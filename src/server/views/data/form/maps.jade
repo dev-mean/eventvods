@@ -1,0 +1,47 @@
+extends ../../layout
+block vars
+	-currentPage = "Data";
+block content
+	div.event-container(ng-controller="dataFormController as dataFormController", ng-cloak)
+		div.contextHead
+			div.leftSide
+				h1 Data Manager
+			div.rightSide
+				div.tabs
+					div.teams(href="#")
+						i.icon-teams
+						span Teams
+					div.staff(href="#")
+						i.icon-staff
+						span Staff
+					div.map(href="#")
+						i.icon-maps
+						span Maps
+		div.content.form
+			div.leftSide
+				div
+					h2 Map
+					form
+						.standard.group
+							input(ng-model="dataFormController.ui.mapModel.mapName")
+							label Name
+						.standard.group
+							input(ng-model="dataFormController.ui.mapModel.mapGame")
+							label Game
+					div.rightSide
+						.imageUpload.mapImage
+							h4 Map images
+							.tooltip.small
+									i.icon-tooltip
+								.btn.small Remove
+					div.saveBlock
+						.btn(ng-click="dataFormController.saveMap(dataFormController.ui.mapModel)") Save Data
+						.btn Save &amp; Add Another
+block scripts
+	script(src='/assets/js/app/app.js')
+	script(src='/assets/js/app/resources/mapResource.js')
+	script(src='/assets/js/app/resources/staffResource.js')
+	script(src='/assets/js/app/resources/teamResource.js')
+	script(src='/assets/js/app/services/dataFormService.js')
+	script(src='/assets/js/app/controllers/layoutController.js')
+	script(src='/assets/js/app/controllers/dataFormController.js')
