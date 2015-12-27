@@ -24,34 +24,38 @@ var keygen = require('keygenerator');
 
 // This router is mounted at /api....so /events here translates to /api/events
 
-//basic api management
+// Enable CORS for /api routing.
+// TODO: Consider whitelist / blacklisting domains?
+router.all('*', function (req, res, next) {
+	var oneof = false;
+	if (req.headers.origin) {
+		res.header('Access-Control-Allow-Origin', req.headers.origin);
+		oneof = true;
+	}
+	if (req.headers['access-control-request-method']) {
+		res.header('Access-Control-Allow-Methods', req.headers['access-control-request-method']);
+		oneof = true;
+	}
+	if (req.headers['access-control-request-headers']) {
+		res.header('Access-Control-Allow-Headers', req.headers['access-control-request-headers']);
+		oneof = true;
+	}
+	if (oneof) {
+		res.header('Access-Control-Max-Age', 60 * 60 * 24 * 31);
+	}
 
-
-
-router.post('/key/generate', function (req, res, next) {
-	Indicative
-		.validateAll(req.body, Validators.apiRegister, Validators.messages)
-		.then(function () {
-			auth.generate_key(req, res);
-		})
-		.catch(function (errors) {
-			var err = new Error("Bad Request");
-			err.status = 400;
-			err.errors = errors;
-			next(err);
-		});
+	// intercept OPTIONS method for pre-flight CORS check
+	if (oneof && req.method == 'OPTIONS') {
+		res.send(200);
+	} else {
+		next();
+	}
 });
-router.get('/keys/list', function (req, res, next) {
-	APIKey.find({}, function (err, keys) {
-		console.log(keys);
-	});
-});
 
+// api routes
 
-
-//api routes
-
-router.get('/overview', function (req, res) {
+//OVERVIEW
+router.get('/overview', auth.public_api(), function (req, res) {
 	var today = new Date().toISOString();
 	async.parallel({
 		upcoming: function (callback) {
@@ -97,21 +101,21 @@ router.get('/overview', function (req, res) {
 				});
 		},
 		casters: function (callback) {
-			Caster.find().count(function (err, count) {
+			Caster.count(function (err, count) {
 				if (err) callback(err);
 				else callback(null, count);
 			});
 		},
 
 		maps: function (callback) {
-			Map.find().count(function (err, count) {
+			Map.count(function (err, count) {
 				if (err) callback(err);
 				else callback(null, count);
 			});
 		},
 
 		teams: function (callback) {
-			Team.find().count(function (err, count) {
+			Team.count(function (err, count) {
 				if (err) callback(err);
 				else callback(null, count);
 			});
@@ -125,50 +129,7 @@ router.get('/overview', function (req, res) {
 	});
 });
 
-
-
-//Caster routes
-router.route('/casters')
-	.get(function (req, res) {
-		Caster.find(function (err, casters) {
-			if (err) next(err);
-			res.json(casters);
-		});
-	})
-	.post(function (req, res) {
-		console.log(req.body);
-		Caster.create(req.body, function (err, casters) {
-			if (err) next(err);
-		});
-	});
-
-router.route('/casters/:caster_id')
-	.get(function (req, res) {
-		Caster.findById(req.params.caster_id, function (err, casters) {
-			if (err) next(err);
-			res.json(casters);
-		});
-	})
-	.delete(function (req, res) {
-		Caster.remove({
-			_id: req.params.caster_id
-		}, function (err, caster) {
-			if (err) next(err);
-		});
-	})
-	.put(function (req, res) {
-		Caster.findById(req.params.caster_id, function (err, caster) {
-			if (err) next(err);
-			caster = req.body;
-			caster.save(function (err) {
-				if (err) next(err);
-			});
-		});
-	});
-
-
-
-//Event routes
+//EVENTS
 router.route('/events')
 	.get(auth.public_api(), function (req, res) {
 		Event.find(function (err, events) {
@@ -176,51 +137,195 @@ router.route('/events')
 			else res.json(events);
 		});
 	})
-	.post(function (req, res) {
-		Event.create(req.body, function (err, event) {
-			if (err) next(err);
-			else res.status(200).json({
-				'eventId': event._id
+	.post(auth.updater(), function (req, res) {
+		Indicative
+			.validateAll(req.body, Validators.event, Validators.messages)
+			.then(function () {
+				Event.create(req.body, function (err, event) {
+					if (err) next(err);
+					else res.json(event);
+				});
+			})
+			.catch(function (errors) {
+				var err = new Error("Bad Request");
+				err.status = 400;
+				err.errors = errors;
+				next(err);
 			});
-		});
 	});
 
 router.route('/event/:event_id')
-	.get(function (req, res) {
+	.get(auth.public_api(), function (req, res) {
 		Event.findById(req.params.event_id, function (err, event) {
 			if (err) next(err);
 			if (!event) {
-				err = new Error("Event not found");
+				err = new Error("Event Not Found");
 				err.status = 404;
 				next(err);
 			}
 			res.json(event);
 		});
 	})
-	.delete(function (req, res) {
+	.delete(auth.updater(), function (req, res) {
 		Event.remove({
 			_id: req.params.event_id
-		}, function (err, event) {
+		}, function (err) {
 			if (err) next(err);
+			else res.sendStatus(204);
 		});
 	})
-	.put(function (req, res) {
-		Event.findByIdAndUpdate(req.params.event_id, req.body, function (err, event) {
+	.put(auth.updater(), function (req, res) {
+		Indicative
+			.validateAll(req.body, Validators.event, Validators.messages)
+			.then(function () {
+				Event.findByIdAndUpdate(req.params.event_id, req.body, function (err, event) {
+					if (err) next(err);
+					if (!event) {
+						err = new Error("Event not found");
+						err.status = 404;
+						next(err);
+					} else res.json(event);
+				});
+			})
+			.catch(function (errors) {
+				var err = new Error("Bad Request");
+				err.status = 400;
+				err.errors = errors;
+				next(err);
+			});
+	});
+//APIKEYS
+router.route('/keys')
+	.get(auth.admin(), function (req, res, next) {
+		APIKey.find(function (err, keys) {
 			if (err) next(err);
-			if (!event) {
-				err = new Error("Event not found");
+			res.json(keys);
+		});
+	})
+	.post(auth.admin(), function (req, res, next) {
+		Indicative
+			.validateAll(req.body, Validators.api, Validators.messages)
+			.then(function () {
+				auth.generate_key(req, res, function (key) {
+					res.json(key);
+				});
+			})
+			.catch(function (errors) {
+				var err = new Error("Bad Request");
+				err.status = 400;
+				err.errors = errors;
+				next(err);
+			});
+	});
+
+router.route('/key/:keyid')
+	.delete(auth.admin(), function (req, res) {
+		APIKey.remove({
+			_id: req.params.keyid
+		}, function (err) {
+			if (err) next(err);
+			else res.sendStatus(204);
+		});
+	})
+	.put(auth.admin(), function (req, res) {
+		Indicative
+			.validateAll(req.body, Validators.api, Validators.messages)
+			.then(function () {
+				APIKey.findByIdAndUpdate(req.params.keyid, req.body, function (err, key) {
+					if (err) next(err);
+					if (!key) {
+						err = new Error("APIKey Not Found");
+						err.status = 404;
+						next(err);
+					} else res.json(key);
+				});
+			})
+			.catch(function (errors) {
+				var err = new Error("Bad Request");
+				err.status = 400;
+				err.errors = errors;
+				next(err);
+			});
+
+	});
+
+
+//Caster routes
+router.route('/casters')
+	.get(auth.public_api(), function (req, res) {
+		Caster.find(function (err, casters) {
+			if (err) next(err);
+			res.json(casters);
+		});
+	})
+	.post(auth.updater(), function (req, res) {
+		Indicative
+			.validateAll(req.body, Validators.caster, Validators.messages)
+			.then(function () {
+				Caster.create(req.body, function (err, caster) {
+					if (err) next(err);
+					res.json(caster);
+				});
+			})
+			.catch(function (errors) {
+				var err = new Error("Bad Request");
+				err.status = 400;
+				err.errors = errors;
+				next(err);
+			})
+	});
+
+router.route('/casters/:caster_id')
+	.get(auth.public_api(), function (req, res) {
+		Caster.findById(req.params.caster_id, function (err, caster) {
+			if (err) next(err);
+			if (!caster) {
+				err = new Error("Caster Not Found");
 				err.status = 404;
 				next(err);
-			} else res.sendStatus(200);
+			} else res.json(caster);
 		});
+	})
+	.delete(auth.updater(), function (req, res) {
+		Caster.remove({
+			_id: req.params.caster_id
+		}, function (err, caster) {
+			if (err) next(err);
+			else res.sendStatus(204);
+		});
+	})
+	.put(auth.updater(), function (req, res) {
+		Indicative
+			.validateAll(req.body, Validators.caster, Validators.messages)
+			.then(function () {
+				Caster.findByIdAndUpdate(req.params.caster_id, req.body, function (err, caster) {
+					if (err) next(err);
+					if (!caster) {
+						err = new Error("Caster Not Found");
+						err.status = 404;
+						next(err);
+					} else res.json(caster);
+				});
+			})
+			.catch(function (errors) {
+				var err = new Error("Bad Request");
+				err.status = 400;
+				err.errors = errors;
+				next(err);
+			})
 	});
+
+
+
+//Todo vvvv
+
 
 //Link routes
 router.route('/links')
 	.get(function (req, res) {
-		Link.find(function (err, link) {
+		Link.find(function (err, links) {
 			if (err) next(err);
-			res.json(events);
+			res.json(links);
 		});
 	})
 	.post(function (req, res) {

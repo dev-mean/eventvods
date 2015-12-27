@@ -3,11 +3,17 @@ var Schema = mongoose.Schema;
 var SocialMedia = require('./socialmedia').schema;
 
 var casterSchema = new Schema({
-    casterName: { type: String, required: true},
-    casterAlias: { type: String, required: true },
-		casterMedia: [SocialMedia],
-    casterCountry: String,
-    casterImage: String
+	casterName: {
+		type: String,
+		required: true
+	},
+	casterAlias: {
+		type: String,
+		required: true
+	},
+	casterMedia: [SocialMedia],
+	casterCountry: String,
+	casterImage: String
 });
 
 var Caster = mongoose.model('caster', casterSchema);
