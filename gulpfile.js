@@ -86,37 +86,40 @@ gulp.task('less-build', function () {
 // Moving bower packages for deployment
 // TODO(Nick): Bower components can  be re-routed with a .bowerrc file to another location.
 gulp.task('bower-copy', function () {
-	gulp.src('bower_components/angular-loading-bar/build/loading-bar.min.css')
-		.pipe(gulp.dest('dist/public/css'));
-	gulp.src('bower_components/angular-native-picker/build/themes/*.css')
-		.pipe(rename({
-			prefix: 'angular-datepicker-'
-		}))
-		.pipe(gulp.dest('dist/public/css'));
-	gulp.src('bower_components/dropzone/dist/min/dropzone.min.css')
-		.pipe(gulp.dest('dist/public/css'));
+    gulp.src('bower_components/angular-loading-bar/build/loading-bar.min.css')
+        .pipe(gulp.dest('dist/public/css'));
+    gulp.src('bower_components/angular-native-picker/build/themes/*.css')
+        .pipe(rename({
+            prefix: 'angular-datepicker-'
+        }))
+        .pipe(gulp.dest('dist/public/css'));
+    gulp.src('bower_components/dropzone/dist/min/dropzone.min.css')
+        .pipe(gulp.dest('dist/public/css'));
+    gulp.src('bower_components/toastr/toastr.min.css')
+        .pipe(gulp.dest('dist/public/css'));
+    gulp.src('bower_components/toastr/toastr.min.js')
+        .pipe(gulp.dest('dist/public/js'));
 })
 
-
 // Builds out angular dependencies
-gulp.task('angular-build', function() {
-	gulp.src('bower_components/angular/angular.min.js')
-			.pipe(gulp.dest('dist/public/js'));
+gulp.task('angular-build', function () {
+    gulp.src('bower_components/angular/angular.min.js')
+        .pipe(gulp.dest('dist/public/js'));
 
-	gulp.src('bower_components/angular-resource/angular-resource.js')
-			.pipe(gulp.dest('dist/public/js'));
+    gulp.src('bower_components/angular-resource/angular-resource.js')
+        .pipe(gulp.dest('dist/public/js'));
 
-	gulp.src('bower_components/angular-animate/angular-animate.min.js')
-			.pipe(gulp.dest('dist/public/js'));
+    gulp.src('bower_components/angular-animate/angular-animate.min.js')
+        .pipe(gulp.dest('dist/public/js'));
 
-	gulp.src('bower_components/angular-route/angular-route.js')
-			.pipe(gulp.dest('dist/public/js'));
+    gulp.src('bower_components/angular-route/angular-route.js')
+        .pipe(gulp.dest('dist/public/js'));
 
-	gulp.src('bower_components/angular-loading-bar/build/loading-bar.min.js')
-			.pipe(gulp.dest('dist/public/js'));
+    gulp.src('bower_components/angular-loading-bar/build/loading-bar.min.js')
+        .pipe(gulp.dest('dist/public/js'));
 
-	gulp.src('bower_components/angular-native-picker/build/angular-datepicker.js')
-			.pipe(gulp.dest('dist/public/js'));
+    gulp.src('bower_components/angular-native-picker/build/angular-datepicker.js')
+        .pipe(gulp.dest('dist/public/js'));
 });
 
 gulp.task('js-concat-form', function () {
