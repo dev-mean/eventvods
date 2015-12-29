@@ -5,7 +5,7 @@ var Event = require('../models/event');
 var User = require('../models/user');
 
 // Sets up local user data for templating
-/*router.all('/*', function (req, res, next) {
+router.all('/*', function (req, res, next) {
 	// Dev logic, auto login user
 	if (process.env.NODE_ENV === 'development' || app.get('env') == 'development') {
 		if (!req.isAuthenticated || !req.isAuthenticated()) {
@@ -31,7 +31,7 @@ var User = require('../models/user');
 		res.locals.user = req.user;
 		return next();
 	}
-});*/
+});
 
 router.get('/', auth.updater(), function (req, res) {
 	res.render('overview', {});
