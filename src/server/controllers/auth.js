@@ -27,8 +27,8 @@ function key_generate_recurse(req, res, callback) {
 					},
 					apiKey: key
 				}, function (err, key) {
-					if (err) next(err);
-					callback(key);
+					if (err) callback(err);
+					callback(null, key);
 				});
 			} else key_generate_recurse(req, res, callback);
 		});
@@ -49,12 +49,14 @@ function errorNoPermission(req, res, next) {
 	next(err);
 }
 
-module.exports.logged_in = function () {
+module.exports.logged_in = function (skipEmailCheck) {
 	return function (req, res, next) {
 		if (!req.isAuthenticated || !req.isAuthenticated())
 			loginRedirect(req, res);
-		else
+		else if (req.user.emailConfirmed || skipEmailCheck)
 			next();
+		else
+			res.redirect('/user/verifyemail');
 	};
 };
 module.exports.updater = function () {

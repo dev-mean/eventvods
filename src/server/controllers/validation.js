@@ -14,7 +14,7 @@ module.exports.messages = {
 };
 
 module.exports.register = {
-	Username: 'required|alpha_numeric|min:3|max:16',
+	Username: 'required|min:3|max:16',
 	Email: 'required|email',
 	Password: 'required|min:6',
 	Password_confirm: 'same:Password'
@@ -51,5 +51,61 @@ module.exports.caster = {
 module.exports.link = {
 	linkText: 'required|alpha_numeric|',
 	linkURL: 'required|alpha_numeric',
-	linkSpoiler: 'required|boolean',
+	linkSpoiler: 'required|boolean'
+};
+
+module.exports.map = {
+	mapImage: 'alpha_numeric',
+	mapGame: 'required|alpha_numeric',
+	mapName: 'required|alpha_numeric'
+};
+
+module.exports.match = {
+	matchStatus: 'required|in:Upcoming,Live,Finished',
+	matchDate: 'required|date',
+	matchType: 'alpha_numeric',
+	matchRounds: 'array',
+	matchTeam1: 'required',
+	matchTeam2: 'required',
+	matchTeam1Wins: 'required|integer',
+	matchTeam2Wins: 'required|integer',
+	matchWinner: 'required_when:matchStatus,Finished'
+};
+module.exports.organization = {
+	organizationName: 'required',
+	organizationMedia: 'array'
+};
+module.exports.round = {
+
+	roundTeam1: 'required',
+	roundTeam2: 'required',
+	roundlinks: 'array'
+};
+module.exports.socialMedia = {
+	mediaType: 'required|in:Website,Twitter,Facebook,Twitch,Youtube,Stream,Other',
+	mediaName: 'required',
+	mediaURL: 'required|url'
+};
+module.exports.sponsor = {
+	sponsorName: 'required',
+	sponsorWebsite: 'required|url'
+};
+module.exports.team = {
+	teamName: 'required',
+	teamTag: 'required|max:4',
+	teamGame: 'required',
+	teamMedia: 'array',
+	teamCountry: 'required'
+};
+module.exports.module = {
+	moduleTitle: 'required',
+	moduleMatches: 'array',
+	moduleTeams: 'array',
+};
+module.exports.user = {
+	username: 'required|min:3|max:16',
+	userEmail: 'required|email',
+	userRights: 'required|integer',
+	userPreferences: 'required',
+	emailConfirmed: 'required|boolean'
 };

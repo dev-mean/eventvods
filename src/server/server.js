@@ -22,19 +22,19 @@ app.use('/assets', express.static(path.join(__dirname, '..', 'public')));
 
 
 app.use(bodyParser.urlencoded({
-    'extended': 'true'
+	'extended': 'true'
 }));
 
 app.use(bodyParser.json());
 
 app.use(bodyParser.json({
-    type: 'application/vnd.api+json'
+	type: 'application/vnd.api+json'
 }));
 
 app.use(session({
-    secret: config.secret,
-    resave: false,
-    saveUninitialized: true
+	secret: config.secret,
+	resave: false,
+	saveUninitialized: true
 }));
 
 /* Passport setup */
@@ -45,8 +45,8 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 mongoose.connect(config.databaseUrl, function (err) {
-    if (err) console.log("DB err: " + err);
-    else console.log("Connected to mongodb");
+	if (err) console.log("DB err: " + err);
+	else console.log("Connected to mongodb");
 });
 
 //templating
@@ -59,30 +59,30 @@ app.locals.pretty = true;
 var routes = require('./routes/routes');
 var api = require('./routes/api');
 var auth = require('./routes/auth.js');
-app.use('/', routes);
-app.use('/api/', api);
 app.use('/user', auth);
+app.use('/api', api);
+app.use('/', routes);
 
 // 404 handler
 app.use(function (req, res, next) {
-    var err = new Error("404 - Page Not Found");
-    err.status = 404;
-    next(err);
+	var err = new Error("404 - Page Not Found");
+	err.status = 404;
+	next(err);
 });
 
 // prints stacktrace only in dev mode
 app.use(function (err, req, res, next) {
-    res.status(err.status || 500);
-    console.log(err);
+	res.status(err.status || 500);
+	console.log(err);
 
-    if (process.env.NODE_ENV == "development" || app.get('env') == "development")
-        res.render('error', {
-            message: err.message,
-            stack: err.stack
-        });
-    else res.render('error', {
-        message: err.message
-    });
+	if (process.env.NODE_ENV == "development" || app.get('env') == "development")
+		res.render('error', {
+			message: err.message,
+			stack: err.stack
+		});
+	else res.render('error', {
+		message: err.message
+	});
 
 });
 
@@ -90,9 +90,9 @@ app.use(function (err, req, res, next) {
 var port = config.port;
 var db = config.databaseUrl;
 if (config.ip) {
-    app.listen(port, config.ip);
+	app.listen(port, config.ip);
 } else {
-    app.listen(port);
+	app.listen(port);
 }
 
 console.log('App listening on ' + (config.ip || 'localhost') + ':' + port);

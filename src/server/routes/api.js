@@ -206,7 +206,8 @@ router.route('/keys')
 		Indicative
 			.validateAll(req.body, Validators.api, Validators.messages)
 			.then(function () {
-				auth.generate_key(req, res, function (key) {
+				auth.generate_key(req, res, function (err, key) {
+					if (err) next(err);
 					res.json(key);
 				});
 			})
@@ -272,20 +273,10 @@ router.route('/casters')
 				err.status = 400;
 				err.errors = errors;
 				next(err);
-			})
+			});
 	});
 
 router.route('/casters/:caster_id')
-	.get(auth.public_api(), function (req, res) {
-		Caster.findById(req.params.caster_id, function (err, caster) {
-			if (err) next(err);
-			if (!caster) {
-				err = new Error("Caster Not Found");
-				err.status = 404;
-				next(err);
-			} else res.json(caster);
-		});
-	})
 	.delete(auth.updater(), function (req, res) {
 		Caster.remove({
 			_id: req.params.caster_id
@@ -312,346 +303,550 @@ router.route('/casters/:caster_id')
 				err.status = 400;
 				err.errors = errors;
 				next(err);
-			})
+			});
 	});
 
 
 
-//Todo vvvv
-
 
 //Link routes
 router.route('/links')
-	.get(function (req, res) {
+	.get(auth.public_api(), function (req, res) {
 		Link.find(function (err, links) {
 			if (err) next(err);
 			res.json(links);
 		});
 	})
-	.post(function (req, res) {
-		Link.create(req.body, function (err, link) {
-			if (err) next(err);
-		});
+	.post(auth.updater(), function (req, res) {
+		Indicative
+			.validateAll(req.body, Validators.link, Validators.messages)
+			.then(function () {
+				Link.create(req.body, function (err, link) {
+					if (err) next(err);
+					else res.json(link);
+				});
+			})
+			.catch(function (errors) {
+				var err = new Error("Bad Request");
+				err.status = 400;
+				err.errors = errors;
+				next(err);
+			});
 	});
 
 router.route('/links/:link_id')
-	.delete(function (req, res) {
+	.delete(auth.updater(), function (req, res) {
 		Link.remove({
-			_id: req.params.event_id
-		}, function (err, event) {
+			_id: req.params.link_id
+		}, function (err) {
 			if (err) next(err);
+			else res.sendStatus(204);
 		});
 	})
-	.put(function (req, res) {
-		Link.findById(req.params.link_id, function (err, link) {
-			if (err) next(err);
-			link = req.body;
-			link.save(function (err) {
-				if (err) next(err);
+	.put(auth.updater(), function (req, res) {
+		Indicative
+			.validateAll(req.body, Validators.link, Validators.messages)
+			.then(function () {
+				Link.findByIdAndUpdate(req.params.link_id, req.body, function (err, link) {
+					if (err) next(err);
+					if (!link) {
+						err = new Error("Link Not Found");
+						err.status = 404;
+						next(err);
+					} else res.json(link);
+				});
+			})
+			.catch(function (errors) {
+				var err = new Error("Bad Request");
+				err.status = 400;
+				err.errors = errors;
+				next(err);
 			});
-		});
 	});
 
 
 
 //Map routes
 router.route('/maps')
-	.get(function (req, res) {
+	.get(auth.public_api(), function (req, res) {
 		Map.find(function (err, map) {
 			if (err) next(err);
 			res.json(map);
 		});
 	})
-	.post(function (req, res) {
-		Map.create(req.body, function (err, map) {
-			if (err) next(err);
-		});
+	.post(auth.updater(), function (req, res) {
+		Indicative
+			.validateAll(req.body, Validators.map, Validators.messages)
+			.then(function () {
+				Map.create(req.body, function (err, map) {
+					if (err) next(err);
+					res.json(map);
+				});
+			})
+			.catch(function (errors) {
+				var err = new Error("Bad Request");
+				err.status = 400;
+				err.errors = errors;
+				next(err);
+			});
 	});
 
 router.route('/maps/:map_id')
-	.delete(function (req, res) {
+	.delete(auth.updater(), function (req, res) {
 		Map.remove({
 			_id: req.params.map_id
 		}, function (err, map) {
 			if (err) next(err);
+			else res.sendStatus(204);
 		});
 	})
-	.put(function (req, res) {
-		Map.findById(req.params.map_id, function (err, map) {
-			if (err) next(err);
-			map = req.body;
-			map.save(function (err) {
-				if (err) next(err);
+	.put(auth.updater(), function (req, res) {
+		Indicative
+			.validateAll(req.body, Validators.map, Validators.messages)
+			.then(function () {
+				Map.findByIdAndUpdate(req.params.map_id, req.body, function (err, map) {
+					if (err) next(err);
+					if (!map) {
+						err = new Error("Map Not Found");
+						err.status = 404;
+						next(err);
+					} else res.json(map);
+				});
+			})
+			.catch(function (errors) {
+				var err = new Error("Bad Request");
+				err.status = 400;
+				err.errors = errors;
+				next(err);
 			});
-		});
 	});
 
 
 
 //Match routes
 router.route('/matches')
-	.get(function (req, res) {
-		Match.find(function (err, match) {
+	.get(auth.public_api(), function (req, res) {
+		Match.find(function (err, matches) {
 			if (err) next(err);
-			res.json(match);
+			res.json(matches);
 		});
 	})
-	.post(function (req, res) {
-		Match.creat(req.body, function (err, match) {
-			if (err) next(err);
-		});
+	.post(auth.updater(), function (req, res) {
+		Indicative
+			.validateAll(req.body, Validators.match, Validators.messages)
+			.then(function () {
+				Match.create(req.body, function (err, match) {
+					if (err) next(err);
+					res.json(match);
+				});
+			})
+			.catch(function (errors) {
+				var err = new Error("Bad Request");
+				err.status = 400;
+				err.errors = errors;
+				next(err);
+			});
 	});
 
 router.route('/matches/:match_id')
-	.delete(function (req, res) {
+	.delete(auth.updater(), function (req, res) {
 		Match.remove({
 			_id: req.param.match_id
 		}, function (err, map) {
 			if (err) next(err);
+			res.sendStatus(204);
 		});
 	})
-	.put(function (req, res) {
-		Map.findById(req.params.map_id, function (err, map) {
-			if (err) next(err);
-			map = req.body;
-			map.save(function (err) {
-				if (err) next(err);
+	.put(auth.updater(), function (req, res) {
+		Indicative
+			.validateAll(req.body, Validators.match, Validators.messages)
+			.then(function () {
+				Match.findByIdAndUpdate(req.params.match_id, req.body, function (err, match) {
+					if (err) next(err);
+					if (!match) {
+						err = new Error("Match Not Found");
+						err.status = 404;
+						next(err);
+					} else res.json(match);
+				});
+			})
+			.catch(function (errors) {
+				var err = new Error("Bad Request");
+				err.status = 400;
+				err.errors = errors;
+				next(err);
 			});
-		});
 	});
 
 //Organization routes
 router.route('/organizations')
-	.get(function (req, res) {
+	.get(auth.public_api(), function (req, res) {
 		Organization.find(function (err, organizations) {
 			if (err) next(err);
 			res.json(organizations);
 		});
 	})
-	.post(function (req, res) {
-		organization.create(req.body, function (err, organizations) {
-			if (err) next(err);
-		});
+	.post(auth.updater(), function (req, res) {
+		Indicative
+			.validateAll(req.body, Validators.organization, Validators.messages)
+			.then(function () {
+				Organization.create(req.body, function (err, org) {
+					if (err) next(err);
+					res.json(org);
+				});
+			})
+			.catch(function (errors) {
+				var err = new Error("Bad Request");
+				err.status = 400;
+				err.errors = errors;
+				next(err);
+			});
+
 	});
 
 router.route('/organizations/:organization_id')
-	.delete(function (req, res) {
+	.delete(auth.updater(), function (req, res) {
 		organization.remove({
 			_id: req.params.organization_id
-		}, function (err, organization) {
+		}, function (err) {
 			if (err) next(err);
+			res.sendStatus(204);
 		});
 	})
-	.put(function (req, res) {
-		organization.findById(req.params.organization_id, function (err, organization) {
-			if (err) next(err);
-			organization = req.body;
-			organization.save(function (err) {
-				if (err) next(err);
+	.put(auth.updater(), function (req, res) {
+		Indicative
+			.validateAll(req.body, Validators.organization, Validators.messages)
+			.then(function () {
+				Match.findByIdAndUpdate(req.params.organization_id, req.body, function (err, org) {
+					if (err) next(err);
+					if (!org) {
+						err = new Error("Organization Not Found");
+						err.status = 404;
+						next(err);
+					} else res.json(org);
+				});
+			})
+			.catch(function (errors) {
+				var err = new Error("Bad Request");
+				err.status = 400;
+				err.errors = errors;
+				next(err);
 			});
-		});
 	});
 
 //Round routes
 router.route('/rounds')
-	.get(function (req, res) {
+	.get(auth.public_api(), function (req, res) {
 		Round.find(function (err, rounds) {
 			if (err) next(err);
 			res.json(rounds);
 		});
 	})
-	.post(function (req, res) {
-		Round.create(req.body, function (err, rounds) {
-			if (err) next(err);
-		});
+	.post(auth.updater(), function (req, res) {
+		Indicative
+			.validateAll(req.body, Validators.round, Validators.messages)
+			.then(function () {
+				Round.create(req.body, function (err, round) {
+					if (err) next(err);
+					res.json(round);
+				});
+			})
+			.catch(function (errors) {
+				var err = new Error("Bad Request");
+				err.status = 400;
+				err.errors = errors;
+				next(err);
+			});
+
 	});
 
 router.route('/rounds/:round_id')
-	.delete(function (req, res) {
+	.delete(auth.updater(), function (req, res) {
 		Round.remove({
 			_id: req.params.round_id
-		}, function (err, round) {
+		}, function (err) {
 			if (err) next(err);
+			res.sendStatus(204);
 		});
 	})
-	.put(function (req, res) {
-		Round.findById(req.params.round_id, function (err, round) {
-			if (err) next(err);
-			round = req.body;
-			round.save(function (err) {
-				if (err) next(err);
+	.put(auth.updater(), function (req, res) {
+		Indicative
+			.validateAll(req.body, Validators.round, Validators.messages)
+			.then(function () {
+				Match.findByIdAndUpdate(req.params.round_id, req.body, function (err, round) {
+					if (err) next(err);
+					if (!round) {
+						err = new Error("Round Not Found");
+						err.status = 404;
+						next(err);
+					} else res.json(round);
+				});
+			})
+			.catch(function (errors) {
+				var err = new Error("Bad Request");
+				err.status = 400;
+				err.errors = errors;
+				next(err);
 			});
-		});
 	});
 
 //Social media routes
 router.route('/socialmedia')
-	.get(function (req, res) {
+	.get(auth.public_api(), function (req, res) {
 		SocialMedia.find(function (err, socialmedia) {
 			if (err) next(err);
 			res.json(socialmedia);
 		});
 	})
-	.post(function (req, res) {
-		SocialMedia.create(req.body, function (err, socialmedia) {
-			if (err) next(err);
-		});
+	.post(auth.updater(), function (req, res) {
+		Indicative
+			.validateAll(req.body, Validators.socialMedia, Validators.messages)
+			.then(function () {
+				SocialMedia.create(req.body, function (err, socialmedia) {
+					if (err) next(err);
+					res.json(socialmedia);
+				});
+			})
+			.catch(function (errors) {
+				var err = new Error("Bad Request");
+				err.status = 400;
+				err.errors = errors;
+				next(err);
+			});
 	});
 
 router.route('/socialmedia/:socialmedia_id')
-	.delete(function (req, res) {
+	.delete(auth.updater(), function (req, res) {
 		SocialMedia.remove({
 			_id: req.params.socialmedia_id
-		}, function (err, socialmedia) {
+		}, function (err) {
 			if (err) next(err);
+			res.sendStatus(204);
 		});
 	})
-	.put(function (req, res) {
-		SocialMedia.findById(req.params.socialmedia_id, function (err, socialmedia) {
-			if (err) next(err);
-			socialmedia = req.body;
-			socialmedia.save(function (err) {
-				if (err) next(err);
+	.put(auth.updater(), function (req, res) {
+		Indicative
+			.validateAll(req.body, Validators.socialMedia, Validators.messages)
+			.then(function () {
+				SocialMedia.findByIdAndUpdate(req.params.socialmedia_id, req.body, function (err, socialmedia) {
+					if (err) next(err);
+					if (!socialmedia) {
+						err = new Error("SocialMedia Not Found");
+						err.status = 404;
+						next(err);
+					} else res.json(socialmedia);
+				});
+			})
+			.catch(function (errors) {
+				var err = new Error("Bad Request");
+				err.status = 400;
+				err.errors = errors;
+				next(err);
 			});
-		});
 	});
 
 //Sponsor routes
 router.route('/sponsors')
-	.get(function (req, res) {
+	.get(auth.public_api(), function (req, res) {
 		Sponsor.find(function (err, sponsors) {
 			if (err) next(err);
 			res.json(sponsors);
 		});
 	})
-	.post(function (req, res) {
-		Sponsor.create(req.body, function (err, sponsors) {
-			if (err) next(err);
-		});
+	.post(auth.updater(), function (req, res) {
+		Indicative
+			.validateAll(req.body, Validators.sponsor, Validators.messages)
+			.then(function () {
+				Sponsor.create(req.body, function (err, sponsor) {
+					if (err) next(err);
+					res.json(sponsor);
+				});
+			})
+			.catch(function (errors) {
+				var err = new Error("Bad Request");
+				err.status = 400;
+				err.errors = errors;
+				next(err);
+			});
 	});
 
 router.route('/sponsors/:sponsor_id')
-	.delete(function (req, res) {
+	.delete(auth.updater(), function (req, res) {
 		Sponsor.remove({
 			_id: req.params.sponsor_id
-		}, function (err, sponsor) {
+		}, function (err) {
 			if (err) next(err);
+			res.sendStatus(204);
 		});
 	})
-	.put(function (req, res) {
-		Sponsor.findById(req.params.sponsor_id, function (err, sponsor) {
-			if (err) next(err);
-			sponsor = req.body;
-			sponsor.save(function (err) {
-				if (err) next(err);
+	.put(auth.updater(), function (req, res) {
+		Indicative
+			.validateAll(req.body, Validators.sponsor, Validators.messages)
+			.then(function () {
+				Sponsor.findByIdAndUpdate(req.params.sponsor_id, req.body, function (err, sponsor) {
+					if (err) next(err);
+					if (!sponsor) {
+						err = new Error("Sponsor Not Found");
+						err.status = 404;
+						next(err);
+					} else res.json(sponsor);
+				});
+			})
+			.catch(function (errors) {
+				var err = new Error("Bad Request");
+				err.status = 400;
+				err.errors = errors;
+				next(err);
 			});
-		});
 	});
 
 //Team routes
 router.route('/teams')
-	.get(function (req, res) {
+	.get(auth.public_api(), function (req, res) {
 		Team.find(function (err, teams) {
 			if (err) next(err);
 			res.json(teams);
 		});
 	})
-	.post(function (req, res) {
-		Team.create(req.body, function (err, teams) {
-			if (err) next(err);
-		});
+	.post(auth.updater(), function (req, res) {
+		Indicative
+			.validateAll(req.body, Validators.team, Validators.messages)
+			.then(function () {
+				Team.create(req.body, function (err, team) {
+					if (err) next(err);
+					res.json(team);
+				});
+			})
+			.catch(function (errors) {
+				var err = new Error("Bad Request");
+				err.status = 400;
+				err.errors = errors;
+				next(err);
+			});
 	});
 
 router.route('/teams/:team_id')
-	.delete(function (req, res) {
+	.delete(auth.updater(), function (req, res) {
 		Team.remove({
 			_id: req.params.team_id
-		}, function (err, team) {
+		}, function (err) {
 			if (err) next(err);
+			res.sendStatus(204);
 		});
 	})
-	.put(function (req, res) {
-		Team.findById(req.params.team_id, function (err, team) {
-			if (err) next(err);
-			team = req.body;
-			team.save(function (err) {
-				if (err) next(err);
+	.put(auth.updater(), function (req, res) {
+		Indicative
+			.validateAll(req.body, Validators.team, Validators.messages)
+			.then(function () {
+				Team.findByIdAndUpdate(req.params.team_id, req.body, function (err, team) {
+					if (err) next(err);
+					if (!team) {
+						err = new Error("Team Not Found");
+						err.status = 404;
+						next(err);
+					} else res.json(team);
+				});
+			})
+			.catch(function (errors) {
+				var err = new Error("Bad Request");
+				err.status = 400;
+				err.errors = errors;
+				next(err);
 			});
-		});
 	});
 
 //Event module routes
 router.route('/eventmodules')
-	.get(function (req, res) {
+	.get(auth.public_api(), function (req, res) {
 		EventModule.find(function (err, eventmodules) {
 			if (err) next(err);
 			res.json(eventmodules);
 		});
 	})
-	.post(function (req, res) {
-		EventModule.create(req.body, function (err, eventmodules) {
-			if (err) next(err);
-		});
+	.post(auth.updater(), function (req, res) {
+		Indicative
+			.validateAll(req.body, Validators.module, Validators.messages)
+			.then(function () {
+				EventModule.create(req.body, function (err, module) {
+					if (err) next(err);
+					res.json(module);
+				});
+			})
+			.catch(function (errors) {
+				var err = new Error("Bad Request");
+				err.status = 400;
+				err.errors = errors;
+				next(err);
+			});
 	});
 
 router.route('/eventmodules/:eventmodule_id')
-	.delete(function (req, res) {
+	.delete(auth.updater(), function (req, res) {
 		EventModule.remove({
 			_id: req.params.eventmodule_id
-		}, function (err, eventmodule) {
+		}, function (err) {
 			if (err) next(err);
+			res.sendStatus(204);
 		});
 	})
-	.put(function (req, res) {
-		EventModule.findById(req.params.eventmodule_id, function (err, eventmodule) {
-			if (err)
-				res.send(err);
-			eventmodule = req.body;
-			eventmodule.save(function (err) {
-				if (err) next(err);
+	.put(auth.updater(), function (req, res) {
+		Indicative
+			.validateAll(req.body, Validators.module, Validators.messages)
+			.then(function () {
+				EventModule.findByIdAndUpdate(req.params.eventmodule_id, req.body, function (err, module) {
+					if (err) next(err);
+					if (!module) {
+						err = new Error("EventModule Not Found");
+						err.status = 404;
+						next(err);
+					} else res.json(module);
+				});
+			})
+			.catch(function (errors) {
+				var err = new Error("Bad Request");
+				err.status = 400;
+				err.errors = errors;
+				next(err);
 			});
-		});
 	});
 
 // User stuff
 router.route('/users')
-	.get(function (req, res) {
+	.get(auth.admin(), function (req, res) {
 		User.find({}, 'username userRights', function (err, users) {
 			if (err) next(err);
 			res.json(users);
 		});
-	})
-	.post(function (req, res) {
-		User.create(req.body, function (err, user) {
-			if (err) next(err);
-		});
 	});
 
 router.route('/users/:user_id')
-	.get(function (req, res) {
-		User.findById(req.params.user_id, 'username userRights', function (err, user) {
-			if (err) next(err);
-			res.json(user);
-		});
-	})
-	.delete(function (req, res) {
+	.delete(auth.admin(), function (req, res) {
 		User.remove({
 			_id: req.params.user_id
-		}, function (err, user) {
+		}, function (err) {
 			if (err) next(err);
+			res.sendStatus(204);
 		});
 	})
-	.put(function (req, res) {
-		User.findById(req.params.user_id, function (err, user) {
-			if (err) next(err);
-			// Updates only the fields sent in the request(email, permissions, preferences)
-			if (req.body.userEmail) user.userEmail = req.body.userEmail;
-			if (req.body.userPreferences) user.userPreferences = req.body.userPreferences;
-			if (req.body.userRights) user.useruserRights = req.body.useruserRights;
-			user.save(function (err) {
-				if (err) next(err);
+	.put(auth.admin(), function (req, res) {
+		Indicative
+			.validateAll(req.body, Validators.user, Validators.messages)
+			.then(function () {
+				User.findByIdAndUpdate(req.params.user_id, req.body, function (err, user) {
+					if (err) next(err);
+					if (!user) {
+						err = new Error("User Not Found");
+						err.status = 404;
+						next(err);
+					} else res.json(user);
+				});
+			})
+			.catch(function (errors) {
+				var err = new Error("Bad Request");
+				err.status = 400;
+				err.errors = errors;
+				next(err);
 			});
-		});
 	});
 
 router.route('/images/events/:event_id')
