@@ -25,6 +25,9 @@ vendor/*
 src/public/css
 .idea/
 
+# Simon IDE settings
+.brackets.json
+
 # matt's ui environment
 ui-preview/
 assets/

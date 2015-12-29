@@ -8,7 +8,7 @@ constants = {
 };
 module.exports.constants = constants;
 
-function key_generate_recurse(req, res) {
+function key_generate_recurse(req, res, callback) {
 	var key = keygen._({
 		length: 24,
 		sticks: true
@@ -26,11 +26,11 @@ function key_generate_recurse(req, res) {
 						url: req.body.URL
 					},
 					apiKey: key
-				}, function (err) {
-					if (err) next(err);
-					res.send(key);
+				}, function (err, key) {
+					if (err) callback(err);
+					callback(null, key);
 				});
-			} else key_generate_recurse(req, res);
+			} else key_generate_recurse(req, res, callback);
 		});
 }
 module.exports.generate_key = key_generate_recurse;
@@ -48,13 +48,15 @@ function errorNoPermission(req, res, next) {
 	Error.captureStackTrace(err);
 	next(err);
 }
-//General check for 
-module.exports.logged_in = function () {
+
+module.exports.logged_in = function (skipEmailCheck) {
 	return function (req, res, next) {
 		if (!req.isAuthenticated || !req.isAuthenticated())
 			loginRedirect(req, res);
-		else
+		else if (req.user.emailConfirmed || skipEmailCheck)
 			next();
+		else
+			res.redirect('/user/verifyemail');
 	};
 };
 module.exports.updater = function () {
@@ -83,11 +85,5 @@ module.exports.public_api = function () {
 	return function (req, res, next) {
 		//no api for now - just auto approve
 		return next();
-	};
-};
-//
-module.exports.private_api = function () {
-	return function (req, res, next) {
-		errorNoPermission(req, res, next);
 	};
 };
