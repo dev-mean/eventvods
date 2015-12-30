@@ -11,7 +11,7 @@
         view: 'teams',
         teams: {
           sort: {
-            sortType: 'tag',
+            sortType: 'teamTag',
             sortReverse: false,
             pages: 1,
             page: 1,
@@ -19,7 +19,7 @@
         },
         staff: {
           sort: {
-            sortType: 'name',
+            sortType: 'casterName',
             sortReverse: false,
             pages: 1,
             page: 1,
@@ -27,14 +27,14 @@
         },
         maps: {
           sort: {
-            sortType: 'map',
+            sortType: 'mapName',
             sortReverse: false,
             pages: 1,
             page: 1,
           }
         },
         listView: true,
-        itemsPerPage: 3,
+        itemsPerPage: 10,
         search: ''
       };
 

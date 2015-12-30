@@ -40,16 +40,16 @@ block content
 				thead
 					tr
 						th
-							a(href="", ng-click="dataListController.setTeamSort('tag')") Tag
-							span(ng-show="dataListController.ui.teams.sort.sortType == 'tag' && !dataListController.ui.teams.sort.sortReverse",
+							a(href="", ng-click="dataListController.setTeamSort('teamTag')") Tag
+							span(ng-show="dataListController.ui.teams.sort.sortType == 'teamTag' && !dataListController.ui.teams.sort.sortReverse",
 										class="caret-down")
-							span(ng-show="dataListController.ui.teams.sort.sortType == 'tag' && dataListController.ui.teams.sort.sortReverse",
+							span(ng-show="dataListController.ui.teams.sort.sortType == 'teamTag' && dataListController.ui.teams.sort.sortReverse",
 										class="caret-up")
 						th
-							a(href="", ng-click="dataListController.setTeamSort('name')") Name
-							span(ng-show="dataListController.ui.teams.sort.sortType == 'name' && !dataListController.ui.teams.sort.sortReverse",
+							a(href="", ng-click="dataListController.setTeamSort('teamName')") Name
+							span(ng-show="dataListController.ui.teams.sort.sortType == 'teamName' && !dataListController.ui.teams.sort.sortReverse",
 										class="caret-down")
-							span(ng-show="dataListController.ui.teams.sort.sortType == 'name' && dataListController.ui.teams.sort.sortReverse",
+							span(ng-show="dataListController.ui.teams.sort.sortType == 'teamName' && dataListController.ui.teams.sort.sortReverse",
 										class="caret-up")
 						th
 							a(href="", ng-click="dataListController.setTeamSort('country')") Country
@@ -80,22 +80,22 @@ block content
 				thead
 					tr
 						th
-							a(href="", ng-click="dataListController.setStaffSort('name')") Name
-							span(ng-show="dataListController.ui.staff.sort.sortType == 'name' && !dataListController.ui.staff.sort.sortReverse",
+							a(href="", ng-click="dataListController.setStaffSort('casterName')") Name
+							span(ng-show="dataListController.ui.staff.sort.sortType == 'casterName' && !dataListController.ui.staff.sort.sortReverse",
 										class="caret-down")
-							span(ng-show="dataListController.ui.staff.sort.sortType == 'name' && dataListController.ui.staff.sort.sortReverse",
+							span(ng-show="dataListController.ui.staff.sort.sortType == 'casterName' && dataListController.ui.staff.sort.sortReverse",
 										class="caret-up")
 						th
-							a(href="", ng-click="dataListController.setStaffSort('alias')") Alias
-							span(ng-show="dataListController.ui.staff.sort.sortType == 'alias' && !dataListController.ui.staff.sort.sortReverse",
+							a(href="", ng-click="dataListController.setStaffSort('casterAlias')") Alias
+							span(ng-show="dataListController.ui.staff.sort.sortType == 'casterAlias' && !dataListController.ui.staff.sort.sortReverse",
 										class="caret-down")
-							span(ng-show="dataListController.ui.staff.sort.sortType == 'alias' && dataListController.ui.staff.sort.sortReverse",
+							span(ng-show="dataListController.ui.staff.sort.sortType == 'casterAlias' && dataListController.ui.staff.sort.sortReverse",
 										class="caret-up")
 						th
-							a(href="", ng-click="dataListController.setStaffSort('country')") Country
-							span(ng-show="dataListController.ui.staff.sort.sortType == 'country' && !dataListController.ui.staff.sort.sortReverse",
+							a(href="", ng-click="dataListController.setStaffSort('casterCountry')") Country
+							span(ng-show="dataListController.ui.staff.sort.sortType == 'casterCountry' && !dataListController.ui.staff.sort.sortReverse",
 										class="caret-down")
-							span(ng-show="dataListController.ui.staff.sort.sortType == 'country' && dataListController.ui.staff.sort.sortReverse",
+							span(ng-show="dataListController.ui.staff.sort.sortType == 'casterCountry' && dataListController.ui.staff.sort.sortReverse",
 										class="caret-up")
 						th
 						th
@@ -123,16 +123,16 @@ block content
 							span(ng-show="dataListController.ui.maps.sort.sortType == 'map' && dataListController.ui.maps.sort.sortReverse",
 										class="caret-up")
 						th
-							a(href="", ng-click="dataListController.setMapSort('name')") Name
-							span(ng-show="dataListController.ui.maps.sort.sortType == 'name' && !dataListController.ui.maps.sort.sortReverse",
+							a(href="", ng-click="dataListController.setMapSort('mapName')") Name
+							span(ng-show="dataListController.ui.maps.sort.sortType == 'mapName' && !dataListController.ui.maps.sort.sortReverse",
 										class="caret-down")
-							span(ng-show="dataListController.ui.maps.sort.sortType == 'name' && dataListController.ui.maps.sort.sortReverse",
+							span(ng-show="dataListController.ui.maps.sort.sortType == 'mapName' && dataListController.ui.maps.sort.sortReverse",
 										class="caret-up")
 						th
-							a(href="", ng-click="dataListController.setMapSort('game')") Game
-							span(ng-show="dataListController.ui.maps.sort.sortType == 'game' && !dataListController.ui.maps.sort.sortReverse",
+							a(href="", ng-click="dataListController.setMapSort('mapGame')") Game
+							span(ng-show="dataListController.ui.maps.sort.sortType == 'mapGame' && !dataListController.ui.maps.sort.sortReverse",
 										class="caret-down")
-							span(ng-show="dataListController.ui.maps.sort.sortType == 'game' && dataListController.ui.maps.sort.sortReverse",
+							span(ng-show="dataListController.ui.maps.sort.sortType == 'mapGame' && dataListController.ui.maps.sort.sortReverse",
 										class="caret-up")
 						th
 						th
