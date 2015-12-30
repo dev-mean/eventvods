@@ -17,7 +17,8 @@ html(lang='en')
 		link(href='/assets/css/angular-datepicker-default.date.css', rel='stylesheet')
 		link(href='/assets/css/angular-datepicker-default.time.css', rel='stylesheet')
 		link(href='/assets/css/dropzone.min.css', rel='stylesheet')
-	body
+		link(href='/assets/css/toastr.min.css', rel='stylesheet')
+	body(flow-prevent-drop)
 		div(ng-app="eventApp", ng-controller="layoutController as layoutController").container
 			div.leftSidebar
 				header.logo
@@ -41,4 +42,5 @@ html(lang='en')
 		script(src='/assets/js/loading-bar.min.js')
 		script(src='/assets/js/angular-resource.js')
 		script(src='/assets/js/angular-route.js')
+		script(src='/assets/js/toastr.min.js')
 		block scripts

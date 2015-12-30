@@ -2,8 +2,8 @@
   'use strict';
 
   angular.module('eventApp').controller('dataFormController', [
-    'dataFormService', '$window',
-    function(dataFormService, $window) {
+    'dataFormService', '$window', 'notificationFactory',
+    function(dataFormService, $window, notificationFactory) {
       var controller = this;
 
       controller.ui = {
@@ -17,15 +17,27 @@
       };
 
       controller.saveStaff = function(casterModel) {
-        casterModel.$save();
+        casterModel.$save(function (user, headers) {
+                    notificationFactory.success('Caster created');
+                }, function (error) {
+                    notificationFactory.error('Error creating caster.'); //TODO: Show specific error?
+                });
       };
 
       controller.saveMap = function(mapModel) {
-        mapModel.$save();
+        mapModel.$save(function (user, headers) {
+                    notificationFactory.success('Map created');
+                }, function (error) {
+                    notificationFactory.error('Error creating map.'); //TODO: Show specific error?
+                });
       };
 
       controller.saveTeam = function(teamModel) {
-        teamModel.$save();
+        teamModel.$save(function (user, headers) {
+                    notificationFactory.success('Team created');
+                }, function (error) {
+                    notificationFactory.error('Error creating team.'); //TODO: Show specific error?
+                });
       };
     }
   ]);
