@@ -55,7 +55,7 @@ router.all('*', function (req, res, next) {
 // api routes
 
 //OVERVIEW
-router.get('/overview', auth.public_api(), function (req, res) {
+router.get('/overview', auth.public_api(), function (req, res, next) {
 	var today = new Date().toISOString();
 	async.parallel({
 		upcoming: function (callback) {
@@ -131,13 +131,13 @@ router.get('/overview', auth.public_api(), function (req, res) {
 
 //EVENTS
 router.route('/events')
-	.get(auth.public_api(), function (req, res) {
+	.get(auth.public_api(), function (req, res, next) {
 		Event.find(function (err, events) {
 			if (err) next(err);
 			else res.json(events);
 		});
 	})
-	.post(auth.updater(), function (req, res) {
+	.post(auth.updater(), function (req, res, next) {
 		Indicative
 			.validateAll(req.body, Validators.event, Validators.messages)
 			.then(function () {
@@ -155,7 +155,7 @@ router.route('/events')
 	});
 
 router.route('/event/:event_id')
-	.get(auth.public_api(), function (req, res) {
+	.get(auth.public_api(), function (req, res, next) {
 		Event.findById(req.params.event_id, function (err, event) {
 			if (err) next(err);
 			if (!event) {
@@ -166,7 +166,7 @@ router.route('/event/:event_id')
 			res.json(event);
 		});
 	})
-	.delete(auth.updater(), function (req, res) {
+	.delete(auth.updater(), function (req, res, next) {
 		Event.remove({
 			_id: req.params.event_id
 		}, function (err) {
@@ -174,7 +174,7 @@ router.route('/event/:event_id')
 			else res.sendStatus(204);
 		});
 	})
-	.put(auth.updater(), function (req, res) {
+	.put(auth.updater(), function (req, res, next) {
 		Indicative
 			.validateAll(req.body, Validators.event, Validators.messages)
 			.then(function () {
@@ -220,7 +220,7 @@ router.route('/keys')
 	});
 
 router.route('/key/:keyid')
-	.delete(auth.admin(), function (req, res) {
+	.delete(auth.admin(), function (req, res, next) {
 		APIKey.remove({
 			_id: req.params.keyid
 		}, function (err) {
@@ -228,7 +228,7 @@ router.route('/key/:keyid')
 			else res.sendStatus(204);
 		});
 	})
-	.put(auth.admin(), function (req, res) {
+	.put(auth.admin(), function (req, res, next) {
 		Indicative
 			.validateAll(req.body, Validators.api, Validators.messages)
 			.then(function () {
@@ -253,13 +253,13 @@ router.route('/key/:keyid')
 
 //Caster routes
 router.route('/casters')
-	.get(auth.public_api(), function (req, res) {
+	.get(auth.public_api(), function (req, res, next) {
 		Caster.find(function (err, casters) {
 			if (err) next(err);
 			res.json(casters);
 		});
 	})
-	.post(auth.updater(), function (req, res) {
+	.post(auth.updater(), function (req, res, next) {
 		Indicative
 			.validateAll(req.body, Validators.caster, Validators.messages)
 			.then(function () {
@@ -277,7 +277,7 @@ router.route('/casters')
 	});
 
 router.route('/casters/:caster_id')
-	.delete(auth.updater(), function (req, res) {
+	.delete(auth.updater(), function (req, res, next) {
 		Caster.remove({
 			_id: req.params.caster_id
 		}, function (err, caster) {
@@ -285,7 +285,7 @@ router.route('/casters/:caster_id')
 			else res.sendStatus(204);
 		});
 	})
-	.put(auth.updater(), function (req, res) {
+	.put(auth.updater(), function (req, res, next) {
 		Indicative
 			.validateAll(req.body, Validators.caster, Validators.messages)
 			.then(function () {
@@ -311,13 +311,13 @@ router.route('/casters/:caster_id')
 
 //Link routes
 router.route('/links')
-	.get(auth.public_api(), function (req, res) {
+	.get(auth.public_api(), function (req, res, next) {
 		Link.find(function (err, links) {
 			if (err) next(err);
 			res.json(links);
 		});
 	})
-	.post(auth.updater(), function (req, res) {
+	.post(auth.updater(), function (req, res, next) {
 		Indicative
 			.validateAll(req.body, Validators.link, Validators.messages)
 			.then(function () {
@@ -335,7 +335,7 @@ router.route('/links')
 	});
 
 router.route('/links/:link_id')
-	.delete(auth.updater(), function (req, res) {
+	.delete(auth.updater(), function (req, res, next) {
 		Link.remove({
 			_id: req.params.link_id
 		}, function (err) {
@@ -343,7 +343,7 @@ router.route('/links/:link_id')
 			else res.sendStatus(204);
 		});
 	})
-	.put(auth.updater(), function (req, res) {
+	.put(auth.updater(), function (req, res, next) {
 		Indicative
 			.validateAll(req.body, Validators.link, Validators.messages)
 			.then(function () {
@@ -368,13 +368,13 @@ router.route('/links/:link_id')
 
 //Map routes
 router.route('/maps')
-	.get(auth.public_api(), function (req, res) {
+	.get(auth.public_api(), function (req, res, next) {
 		Map.find(function (err, map) {
 			if (err) next(err);
 			res.json(map);
 		});
 	})
-	.post(auth.updater(), function (req, res) {
+	.post(auth.updater(), function (req, res, next) {
 		Indicative
 			.validateAll(req.body, Validators.map, Validators.messages)
 			.then(function () {
@@ -392,7 +392,7 @@ router.route('/maps')
 	});
 
 router.route('/maps/:map_id')
-	.delete(auth.updater(), function (req, res) {
+	.delete(auth.updater(), function (req, res, next) {
 		Map.remove({
 			_id: req.params.map_id
 		}, function (err, map) {
@@ -400,7 +400,7 @@ router.route('/maps/:map_id')
 			else res.sendStatus(204);
 		});
 	})
-	.put(auth.updater(), function (req, res) {
+	.put(auth.updater(), function (req, res, next) {
 		Indicative
 			.validateAll(req.body, Validators.map, Validators.messages)
 			.then(function () {
@@ -425,13 +425,13 @@ router.route('/maps/:map_id')
 
 //Match routes
 router.route('/matches')
-	.get(auth.public_api(), function (req, res) {
+	.get(auth.public_api(), function (req, res, next) {
 		Match.find(function (err, matches) {
 			if (err) next(err);
 			res.json(matches);
 		});
 	})
-	.post(auth.updater(), function (req, res) {
+	.post(auth.updater(), function (req, res, next) {
 		Indicative
 			.validateAll(req.body, Validators.match, Validators.messages)
 			.then(function () {
@@ -449,7 +449,7 @@ router.route('/matches')
 	});
 
 router.route('/matches/:match_id')
-	.delete(auth.updater(), function (req, res) {
+	.delete(auth.updater(), function (req, res, next) {
 		Match.remove({
 			_id: req.param.match_id
 		}, function (err, map) {
@@ -457,7 +457,7 @@ router.route('/matches/:match_id')
 			res.sendStatus(204);
 		});
 	})
-	.put(auth.updater(), function (req, res) {
+	.put(auth.updater(), function (req, res, next) {
 		Indicative
 			.validateAll(req.body, Validators.match, Validators.messages)
 			.then(function () {
@@ -480,13 +480,13 @@ router.route('/matches/:match_id')
 
 //Organization routes
 router.route('/organizations')
-	.get(auth.public_api(), function (req, res) {
+	.get(auth.public_api(), function (req, res, next) {
 		Organization.find(function (err, organizations) {
 			if (err) next(err);
 			res.json(organizations);
 		});
 	})
-	.post(auth.updater(), function (req, res) {
+	.post(auth.updater(), function (req, res, next) {
 		Indicative
 			.validateAll(req.body, Validators.organization, Validators.messages)
 			.then(function () {
@@ -505,7 +505,7 @@ router.route('/organizations')
 	});
 
 router.route('/organizations/:organization_id')
-	.delete(auth.updater(), function (req, res) {
+	.delete(auth.updater(), function (req, res, next) {
 		organization.remove({
 			_id: req.params.organization_id
 		}, function (err) {
@@ -513,7 +513,7 @@ router.route('/organizations/:organization_id')
 			res.sendStatus(204);
 		});
 	})
-	.put(auth.updater(), function (req, res) {
+	.put(auth.updater(), function (req, res, next) {
 		Indicative
 			.validateAll(req.body, Validators.organization, Validators.messages)
 			.then(function () {
@@ -536,13 +536,13 @@ router.route('/organizations/:organization_id')
 
 //Round routes
 router.route('/rounds')
-	.get(auth.public_api(), function (req, res) {
+	.get(auth.public_api(), function (req, res, next) {
 		Round.find(function (err, rounds) {
 			if (err) next(err);
 			res.json(rounds);
 		});
 	})
-	.post(auth.updater(), function (req, res) {
+	.post(auth.updater(), function (req, res, next) {
 		Indicative
 			.validateAll(req.body, Validators.round, Validators.messages)
 			.then(function () {
@@ -561,7 +561,7 @@ router.route('/rounds')
 	});
 
 router.route('/rounds/:round_id')
-	.delete(auth.updater(), function (req, res) {
+	.delete(auth.updater(), function (req, res, next) {
 		Round.remove({
 			_id: req.params.round_id
 		}, function (err) {
@@ -569,7 +569,7 @@ router.route('/rounds/:round_id')
 			res.sendStatus(204);
 		});
 	})
-	.put(auth.updater(), function (req, res) {
+	.put(auth.updater(), function (req, res, next) {
 		Indicative
 			.validateAll(req.body, Validators.round, Validators.messages)
 			.then(function () {
@@ -592,13 +592,13 @@ router.route('/rounds/:round_id')
 
 //Social media routes
 router.route('/socialmedia')
-	.get(auth.public_api(), function (req, res) {
+	.get(auth.public_api(), function (req, res, next) {
 		SocialMedia.find(function (err, socialmedia) {
 			if (err) next(err);
 			res.json(socialmedia);
 		});
 	})
-	.post(auth.updater(), function (req, res) {
+	.post(auth.updater(), function (req, res, next) {
 		Indicative
 			.validateAll(req.body, Validators.socialMedia, Validators.messages)
 			.then(function () {
@@ -616,7 +616,7 @@ router.route('/socialmedia')
 	});
 
 router.route('/socialmedia/:socialmedia_id')
-	.delete(auth.updater(), function (req, res) {
+	.delete(auth.updater(), function (req, res, next) {
 		SocialMedia.remove({
 			_id: req.params.socialmedia_id
 		}, function (err) {
@@ -624,7 +624,7 @@ router.route('/socialmedia/:socialmedia_id')
 			res.sendStatus(204);
 		});
 	})
-	.put(auth.updater(), function (req, res) {
+	.put(auth.updater(), function (req, res, next) {
 		Indicative
 			.validateAll(req.body, Validators.socialMedia, Validators.messages)
 			.then(function () {
@@ -647,13 +647,13 @@ router.route('/socialmedia/:socialmedia_id')
 
 //Sponsor routes
 router.route('/sponsors')
-	.get(auth.public_api(), function (req, res) {
+	.get(auth.public_api(), function (req, res, next) {
 		Sponsor.find(function (err, sponsors) {
 			if (err) next(err);
 			res.json(sponsors);
 		});
 	})
-	.post(auth.updater(), function (req, res) {
+	.post(auth.updater(), function (req, res, next) {
 		Indicative
 			.validateAll(req.body, Validators.sponsor, Validators.messages)
 			.then(function () {
@@ -671,7 +671,7 @@ router.route('/sponsors')
 	});
 
 router.route('/sponsors/:sponsor_id')
-	.delete(auth.updater(), function (req, res) {
+	.delete(auth.updater(), function (req, res, next) {
 		Sponsor.remove({
 			_id: req.params.sponsor_id
 		}, function (err) {
@@ -679,7 +679,7 @@ router.route('/sponsors/:sponsor_id')
 			res.sendStatus(204);
 		});
 	})
-	.put(auth.updater(), function (req, res) {
+	.put(auth.updater(), function (req, res, next) {
 		Indicative
 			.validateAll(req.body, Validators.sponsor, Validators.messages)
 			.then(function () {
@@ -702,13 +702,13 @@ router.route('/sponsors/:sponsor_id')
 
 //Team routes
 router.route('/teams')
-	.get(auth.public_api(), function (req, res) {
+	.get(auth.public_api(), function (req, res, next) {
 		Team.find(function (err, teams) {
 			if (err) next(err);
 			res.json(teams);
 		});
 	})
-	.post(auth.updater(), function (req, res) {
+	.post(auth.updater(), function (req, res, next) {
 		Indicative
 			.validateAll(req.body, Validators.team, Validators.messages)
 			.then(function () {
@@ -726,7 +726,7 @@ router.route('/teams')
 	});
 
 router.route('/teams/:team_id')
-	.delete(auth.updater(), function (req, res) {
+	.delete(auth.updater(), function (req, res, next) {
 		Team.remove({
 			_id: req.params.team_id
 		}, function (err) {
@@ -734,7 +734,7 @@ router.route('/teams/:team_id')
 			res.sendStatus(204);
 		});
 	})
-	.put(auth.updater(), function (req, res) {
+	.put(auth.updater(), function (req, res, next) {
 		Indicative
 			.validateAll(req.body, Validators.team, Validators.messages)
 			.then(function () {
@@ -757,13 +757,13 @@ router.route('/teams/:team_id')
 
 //Event module routes
 router.route('/eventmodules')
-	.get(auth.public_api(), function (req, res) {
+	.get(auth.public_api(), function (req, res, next) {
 		EventModule.find(function (err, eventmodules) {
 			if (err) next(err);
 			res.json(eventmodules);
 		});
 	})
-	.post(auth.updater(), function (req, res) {
+	.post(auth.updater(), function (req, res, next) {
 		Indicative
 			.validateAll(req.body, Validators.module, Validators.messages)
 			.then(function () {
@@ -781,7 +781,7 @@ router.route('/eventmodules')
 	});
 
 router.route('/eventmodules/:eventmodule_id')
-	.delete(auth.updater(), function (req, res) {
+	.delete(auth.updater(), function (req, res, next) {
 		EventModule.remove({
 			_id: req.params.eventmodule_id
 		}, function (err) {
@@ -789,7 +789,7 @@ router.route('/eventmodules/:eventmodule_id')
 			res.sendStatus(204);
 		});
 	})
-	.put(auth.updater(), function (req, res) {
+	.put(auth.updater(), function (req, res, next) {
 		Indicative
 			.validateAll(req.body, Validators.module, Validators.messages)
 			.then(function () {
@@ -812,7 +812,7 @@ router.route('/eventmodules/:eventmodule_id')
 
 // User stuff
 router.route('/users')
-	.get(auth.admin(), function (req, res) {
+	.get(auth.admin(), function (req, res, next) {
 		User.find({}, 'username userRights', function (err, users) {
 			if (err) next(err);
 			res.json(users);
@@ -820,7 +820,7 @@ router.route('/users')
 	});
 
 router.route('/users/:user_id')
-	.delete(auth.admin(), function (req, res) {
+	.delete(auth.admin(), function (req, res, next) {
 		User.remove({
 			_id: req.params.user_id
 		}, function (err) {
@@ -828,7 +828,7 @@ router.route('/users/:user_id')
 			res.sendStatus(204);
 		});
 	})
-	.put(auth.admin(), function (req, res) {
+	.put(auth.admin(), function (req, res, next) {
 		Indicative
 			.validateAll(req.body, Validators.user, Validators.messages)
 			.then(function () {
@@ -850,7 +850,7 @@ router.route('/users/:user_id')
 	});
 
 router.route('/images/events/:event_id')
-	.post(image.upload.single('file'), function (req, res) {
+	.post(image.upload.single('file'), function (req, res, next) {
 		console.log("File uploaded for eventid " + req.params.event_id + ": " + req.file);
 		return res.sendStatus(200);
 	});
