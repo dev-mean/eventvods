@@ -21,15 +21,15 @@ block content
 			div.leftSide
 				div
 					h2 Team
-					form
+					form#dataForm
 						.standard.group 
-							input(ng-model="dataFormController.ui.teamModel.teamName")
+							input(ng-model="dataFormController.ui.teamModel.teamName", data-required="true", data-parsley-maxlength="30", data-parsley-errors-messages-disabled, data-parsley-validate-if-empty)
 							label Name
 						.standard.group 
-							input(ng-model="dataFormController.ui.teamModel.teamTag")
+							input(ng-model="dataFormController.ui.teamModel.teamTag", data-required="true", data-parsley-maxlength="30", data-parsley-errors-messages-disabled, data-parsley-validate-if-empty)
 							label Tag
 						.standard.group 
-							input(ng-model="dataFormController.ui.teamModel.teamGame")
+							input(ng-model="dataFormController.ui.teamModel.teamGame", data-required="true", data-parsley-maxlength="30", data-parsley-errors-messages-disabled, data-parsley-validate-if-empty)
 							label Game
 						.standard.group 
 							input
@@ -38,7 +38,7 @@ block content
 							input
 							label Twitter
 						.standard.group 
-							input(ng-model="dataFormController.ui.teamModel.teamCountry")
+							input(ng-model="dataFormController.ui.teamModel.teamCountry", data-required="true", data-parsley-maxlength="30", data-parsley-errors-messages-disabled, data-parsley-validate-if-empty)
 							label Country
 					div.rightSide
 						.imageUpload.teamLogo
@@ -63,3 +63,4 @@ block scripts
 	script(src='/assets/js/app/services/dataFormService.js')
 	script(src='/assets/js/app/controllers/layoutController.js')
 	script(src='/assets/js/app/controllers/dataFormController.js')
+	script(src='/assets/js/form.js')
