@@ -3,14 +3,14 @@
     
     angular.module('eventApp').value('evToastr', toastr);
 
-    angular.module('eventApp').factory('notificationFactory', function (evToastr) {
-        return {
-            success: function (text) {
+    angular.module('eventApp').service('notificationService', function (evToastr) {
+        var service = this;
+        
+            service.success = function (text) {
                 evToastr.success(text);
-            },
-            error: function (text) {
+            };
+            service.error = function (text) {
                 evToastr.error(text);
-            }
-        };
+            };
     });
 } ());

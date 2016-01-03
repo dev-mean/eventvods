@@ -99,6 +99,8 @@ gulp.task('bower-copy', function () {
         .pipe(gulp.dest('dist/public/css'));
     gulp.src('bower_components/toastr/toastr.min.js')
         .pipe(gulp.dest('dist/public/js'));
+    gulp.src('bower_components/parsleyjs/src/parsley.css')
+        .pipe(gulp.dest('dist/public/css'));
 })
 
 // Builds out angular dependencies

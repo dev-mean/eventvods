@@ -21,12 +21,12 @@ block content
 			div.leftSide
 				div
 					h2 Map
-					form
+					form#dataForm
 						.standard.group
-							input(ng-model="dataFormController.ui.mapModel.mapName")
+							input(ng-model="dataFormController.ui.mapModel.mapName", data-required="true", data-parsley-maxlength="30", data-parsley-errors-messages-disabled, data-parsley-validate-if-empty)
 							label Name
 						.standard.group
-							input(ng-model="dataFormController.ui.mapModel.mapGame")
+							input(ng-model="dataFormController.ui.mapModel.mapGame", data-required="true", data-parsley-maxlength="30", data-parsley-errors-messages-disabled, data-parsley-validate-if-empty)
 							label Game
 					div.rightSide
 						.imageUpload.mapImage
@@ -46,3 +46,4 @@ block scripts
 	script(src='/assets/js/app/services/dataFormService.js')
 	script(src='/assets/js/app/controllers/layoutController.js')
 	script(src='/assets/js/app/controllers/dataFormController.js')
+	script(src='/assets/js/form.js')
