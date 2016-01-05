@@ -7,14 +7,17 @@
 			var service = this;
 
 			service.getMaps = mapResource.getMaps.query;
+			service.getMap = mapResource.getMap.get;
 			service.createMap = mapResource.createMap.save;
 			service.deleteMap = mapResource.deleteMap.delete;
 
 			service.getCasters = staffResource.getCasters.query;
+			service.getCaster = staffResource.getCaster.get;
 			service.createCaster = staffResource.createCaster.save;
 			service.deleteCaster = staffResource.deleteCaster.delete;
 
 			service.getTeams = teamResource.getTeams.query;
+			service.getTeam = teamResource.getTeam.get;
 			service.createTeam = teamResource.createTeam.save;
 			service.deleteTeam = teamResource.deleteTeam.delete;
 		}

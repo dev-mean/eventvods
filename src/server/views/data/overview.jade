@@ -70,7 +70,7 @@ block content
 							img(ng-src="/assets/images/countries/{{team.teamCountry}}.png")
 							|{{team.teamCountry}}
 						td.edit
-							a(ng-href="/data/teams/{{team._id}}/edit")
+							a(ng-href="/data/edit/teams/{{team._id}}")
 								i.icon-pencil
 						td.url
 							a(ng-href="/data/team/{{team._id}}")
@@ -107,7 +107,7 @@ block content
 							img(ng-src="/assets/images/countries/{{team.teamCountry}}.png")
 							|{{staff.casterCountry}}
 						td.edit
-							a(ng-href="/data/staff/{{staff._id}}/edit")
+							a(ng-href="/data/edit/staff/{{staff._id}}")
 								i.icon-pencil
 						td.url
 							a(ng-href="/data/staff/{{staff._id}}")
@@ -142,7 +142,7 @@ block content
 						td.name {{map.mapName}}
 						td.game {{map.mapGame}}
 						td.edit
-							a(ng-href="/data/maps/{{map._id}}/edit")
+							a(ng-href="/data/edit/maps/{{map._id}}")
 								i.icon-pencil
 						td.url
 							a(ng-href="/data/map/{{map._id}}")
