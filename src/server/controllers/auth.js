@@ -1,5 +1,6 @@
 var keygen = require('keygenerator');
 var APIKey = require('../models/APIKey');
+var config = require('../config/config');
 constants = {
 	"end_user": 0,
 	"logged_in": 1,
@@ -83,7 +84,28 @@ module.exports.admin = function () {
 // Auth for API, doesn't try to redirect or anything fancy, as the user should never see these errors
 module.exports.public_api = function () {
 	return function (req, res, next) {
-		//no api for now - just auto approve
-		return next();
+		var key = req.query.apikey || req.get('X-Eventvods-Authorization');
+		if (process.env.NODE_ENV == "development" || app.get('env') == "development" ||
+			(req.isAuthenticated && req.isAuthenticated() && req.user.userRights >= constants.updater))
+			key = config.secret;
+		if (typeof key === "undefined" || key === null || key === "") {
+			var err = new Error("Unauthorized - No API Key provided");
+			err.status = 401;
+			res.use_express_redis_cache = false;
+			return next(err);
+		}
+		req.apiKey = key;
+		APIKey.count({
+			apiKey: key
+		}, function (err, count) {
+			if (count > 0 || key == config.secret)
+				next();
+			else {
+				err = new Error("Forbidden");
+				err.status = 403;
+				res.use_express_redis_cache = false;
+				next(err);
+			}
+		});
 	};
 };
