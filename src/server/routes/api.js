@@ -931,7 +931,7 @@ router.use(function (req, res, next) {
 // prints stacktrace only in dev mode
 router.use(function (err, req, res, next) {
 	res.status(err.status || 500);
-	if (err.status == 403 || err.status == 401 || err.status == 404)
+	if (err.status == 403 || err.status == 401 || err.status == 404 || err.status == 429)
 		logger.warn(err);
 	else
 		logger.error(err);
