@@ -19,8 +19,64 @@ var multer = require('multer');
 var async = require('async');
 var Validators = require('../controllers/validation');
 var Indicative = require('indicative');
+var logger = require('bristol');
 var APIKey = require('../models/APIKey');
 var keygen = require('keygenerator');
+var config = require('../config/config');
+
+// Redis is magic basically
+
+var redis = require('redis').createClient(config.redis.port, config.redis.host, {
+	auth_pass: config.redis.auth,
+	prefix: 'api'
+});
+
+redis.on('connect', function () {
+	logger.info('Redis server online.');
+});
+
+// Set up caching middleware
+
+var cache = require('express-redis-cache')({
+	client: redis,
+	prefix: ':cache',
+	expire: 43200
+});
+
+// Set up ratelimit middleware
+
+var RateLimitjs = require('ratelimit.js').RateLimit;
+var ExpressMiddleware = require('ratelimit.js').ExpressMiddleware;
+
+// Essentially:
+// Max 12 requests per second (one full update of all API routes = 12 calls)
+// & 24 requests per minute
+// & 192 requests per hour
+var limiter = new RateLimitjs(redis, [{
+	interval: 1,
+	limit: 12
+}, {
+	interval: 60,
+	limit: 24
+}, {
+	interval: 3600,
+	limit: 192
+}], {
+	prefix: ':limiter'
+});
+var middlewareFactory = new ExpressMiddleware(limiter, {
+	ignoreRedisErrors: true
+});
+
+var rateLimit = middlewareFactory.middleware({
+	extractIps: function (req) {
+		return req.apiKey;
+	}
+}, function (req, res, next) {
+	var err = new Error("Rate Limit Exceeded");
+	err.status = 429;
+	next(err);
+});
 
 // This router is mounted at /api....so /events here translates to /api/events
 
@@ -53,9 +109,18 @@ router.all('*', function (req, res, next) {
 });
 
 // api routes
-
+router.get('/test', function (req, res, next) {
+	cache.get(function (err, entries) {
+		res.json(entries);
+	});
+});
+router.get('/delete/:cache', function (req, res, next) {
+	cache.del(req.params.cache, function (err, count) {
+		res.send(count + " entries deleted.");
+	});
+});
 //OVERVIEW
-router.get('/overview', auth.public_api(), function (req, res, next) {
+router.get('/overview', auth.public_api(), rateLimit, cache.route('overview', 3600), function (req, res, next) {
 	var today = new Date().toISOString();
 	async.parallel({
 		upcoming: function (callback) {
@@ -131,7 +196,7 @@ router.get('/overview', auth.public_api(), function (req, res, next) {
 
 //EVENTS
 router.route('/events')
-	.get(auth.public_api(), function (req, res, next) {
+	.get(auth.public_api(), rateLimit, cache.route('events'), function (req, res, next) {
 		Event.find(function (err, events) {
 			if (err) next(err);
 			else res.json(events);
@@ -155,7 +220,7 @@ router.route('/events')
 	});
 
 router.route('/event/:event_id')
-	.get(auth.public_api(), function (req, res, next) {
+	.get(auth.public_api(), rateLimit, cache.route('event'), function (req, res, next) {
 		Event.findById(req.params.event_id, function (err, event) {
 			if (err) next(err);
 			if (!event) {
@@ -253,7 +318,7 @@ router.route('/key/:keyid')
 
 //Caster routes
 router.route('/casters')
-	.get(auth.public_api(), function (req, res, next) {
+	.get(auth.public_api(), rateLimit, cache.route('casters'), function (req, res, next) {
 		Caster.find(function (err, casters) {
 			if (err) next(err);
 			res.json(casters);
@@ -311,7 +376,7 @@ router.route('/casters/:caster_id')
 
 //Link routes
 router.route('/links')
-	.get(auth.public_api(), function (req, res, next) {
+	.get(auth.public_api(), rateLimit, cache.route('links'), function (req, res, next) {
 		Link.find(function (err, links) {
 			if (err) next(err);
 			res.json(links);
@@ -368,7 +433,7 @@ router.route('/links/:link_id')
 
 //Map routes
 router.route('/maps')
-	.get(auth.public_api(), function (req, res, next) {
+	.get(auth.public_api(), rateLimit, cache.route('maps'), function (req, res, next) {
 		Map.find(function (err, map) {
 			if (err) next(err);
 			res.json(map);
@@ -425,7 +490,7 @@ router.route('/maps/:map_id')
 
 //Match routes
 router.route('/matches')
-	.get(auth.public_api(), function (req, res, next) {
+	.get(auth.public_api(), rateLimit, cache.route('matches'), function (req, res, next) {
 		Match.find(function (err, matches) {
 			if (err) next(err);
 			res.json(matches);
@@ -480,7 +545,7 @@ router.route('/matches/:match_id')
 
 //Organization routes
 router.route('/organizations')
-	.get(auth.public_api(), function (req, res, next) {
+	.get(auth.public_api(), rateLimit, cache.route('organizations'), function (req, res, next) {
 		Organization.find(function (err, organizations) {
 			if (err) next(err);
 			res.json(organizations);
@@ -536,7 +601,7 @@ router.route('/organizations/:organization_id')
 
 //Round routes
 router.route('/rounds')
-	.get(auth.public_api(), function (req, res, next) {
+	.get(auth.public_api(), rateLimit, cache.route('rounds'), function (req, res, next) {
 		Round.find(function (err, rounds) {
 			if (err) next(err);
 			res.json(rounds);
@@ -592,7 +657,7 @@ router.route('/rounds/:round_id')
 
 //Social media routes
 router.route('/socialmedia')
-	.get(auth.public_api(), function (req, res, next) {
+	.get(auth.public_api(), rateLimit, cache.route('socialmedia'), function (req, res, next) {
 		SocialMedia.find(function (err, socialmedia) {
 			if (err) next(err);
 			res.json(socialmedia);
@@ -647,7 +712,7 @@ router.route('/socialmedia/:socialmedia_id')
 
 //Sponsor routes
 router.route('/sponsors')
-	.get(auth.public_api(), function (req, res, next) {
+	.get(auth.public_api(), rateLimit, cache.route('sponsors'), function (req, res, next) {
 		Sponsor.find(function (err, sponsors) {
 			if (err) next(err);
 			res.json(sponsors);
@@ -702,7 +767,7 @@ router.route('/sponsors/:sponsor_id')
 
 //Team routes
 router.route('/teams')
-	.get(auth.public_api(), function (req, res, next) {
+	.get(auth.public_api(), rateLimit, cache.route('teams'), function (req, res, next) {
 		Team.find(function (err, teams) {
 			if (err) next(err);
 			res.json(teams);
@@ -757,7 +822,7 @@ router.route('/teams/:team_id')
 
 //Event module routes
 router.route('/eventmodules')
-	.get(auth.public_api(), function (req, res, next) {
+	.get(auth.public_api(), rateLimit, cache.route('modules'), function (req, res, next) {
 		EventModule.find(function (err, eventmodules) {
 			if (err) next(err);
 			res.json(eventmodules);
@@ -866,8 +931,10 @@ router.use(function (req, res, next) {
 // prints stacktrace only in dev mode
 router.use(function (err, req, res, next) {
 	res.status(err.status || 500);
-	console.log(err);
-
+	if (err.status == 403 || err.status == 401 || err.status == 404)
+		logger.warn(err);
+	else
+		logger.error(err);
 	if (process.env.NODE_ENV == "development" || app.get('env') == "development")
 		res.json({
 			"status": err.status,

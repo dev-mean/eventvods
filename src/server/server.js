@@ -11,11 +11,22 @@ var morgan = require('morgan'); //Logger
 var session = require('express-session');
 var User = require('./models/user');
 var config = require('./config/config');
+var RedisStore = require('connect-redis')(session);
 
 //server config
 app.set('env', 'development');
 process.env.NODE_ENV = 'development';
 app.use(morgan('dev'));
+
+//Set up logging
+var logger = require('bristol');
+//logger.addTarget('loggly', config.logs)
+//.withFormatter('json')
+//.withLowestSeverity('warn');
+logger.addTarget('console')
+	.withFormatter('human');
+//.withHighestSeverity('trace');
+
 
 //Static file at the top, prevents all the code below being run for static files.
 app.use('/assets', express.static(path.join(__dirname, '..', 'public')));
@@ -34,7 +45,13 @@ app.use(bodyParser.json({
 app.use(session({
 	secret: config.secret,
 	resave: false,
-	saveUninitialized: true
+	saveUninitialized: true,
+	store: new RedisStore({
+		host: config.redis.host,
+		port: config.redis.port,
+		pass: config.redis.auth,
+		ttl: 604800
+	})
 }));
 
 /* Passport setup */
@@ -45,13 +62,12 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 mongoose.connect(config.databaseUrl, function (err) {
-	if (err) console.log("DB err: " + err);
-	else console.log("Connected to mongodb");
+	if (err) logger.error(err);
+	else logger.info("MongoDB server online.");
 });
 
 //templating
 app.set('views', path.join(__dirname, 'views'));
-//app.set('views', path.join(__dirname, '../public/views'));
 app.set('view engine', 'jade');
 app.locals.pretty = true;
 
@@ -73,7 +89,7 @@ app.use(function (req, res, next) {
 // prints stacktrace only in dev mode
 app.use(function (err, req, res, next) {
 	res.status(err.status || 500);
-	console.log(err);
+	logger.error(err);
 
 	if (process.env.NODE_ENV == "development" || app.get('env') == "development")
 		res.render('error', {
@@ -95,5 +111,4 @@ if (config.ip) {
 	app.listen(port);
 }
 
-console.log('App listening on ' + (config.ip || 'localhost') + ':' + port);
-console.log('Database: ' + db);
+logger.info('App listening on ' + (config.ip || 'localhost') + ':' + port);
