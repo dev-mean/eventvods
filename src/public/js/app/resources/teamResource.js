@@ -14,8 +14,8 @@
           }
         }),
         createTeam: $resource(eventConstants.baseUri + 'teams'),
-        updateTeam: $resource(eventConstants.baseUri + 'teams/:teamId' , { }, {
-          'update': {
+        updateTeam: $resource(eventConstants.baseUri + 'teams/:teamId', { }, {
+          'put': {
             method: 'PUT',
             params: { teamId: '@teamId' }
           }

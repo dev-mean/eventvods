@@ -14,6 +14,12 @@
           }
         }),
         createCaster: $resource(eventConstants.baseUri + 'casters'),
+        updateCaster: $resource(eventConstants.baseUri + 'casters/:casterId', { }, {
+          'put': {
+            method: 'PUT',
+            params: { casterId: '@casterId' }
+          }
+        }),
         deleteCaster: $resource(eventConstants.baseUri + 'casters/:casterId', { }, {
           'delete': {
             method: 'DELETE',

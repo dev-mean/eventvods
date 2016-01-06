@@ -14,6 +14,12 @@
           }
         }),
         createMap: $resource(eventConstants.baseUri + 'maps'),
+        updateMap: $resource(eventConstants.baseUri + 'maps/:mapId', { }, {
+          'put': {
+            method: 'PUT',
+            params: { mapId: '@mapId' }
+          }
+        }),
         deleteMap: $resource(eventConstants.baseUri + 'maps/:mapId', { }, {
             'delete': {
               method: 'DELETE',
