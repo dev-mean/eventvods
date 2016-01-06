@@ -20,7 +20,7 @@ module.exports = {
 	redis: {
 		"host": "pub-redis-12018.us-east-1-3.7.ec2.redislabs.com",
 		"port": "12018",
-		"auth": "",
+		"auth": "Testing123",
 	}
 
 };

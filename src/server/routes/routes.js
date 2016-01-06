@@ -90,8 +90,10 @@ router.get('/data/:id', auth.updater(), function (req, res) {
 	res.render('data/item', {});
 });
 
-router.get('/data/:type/:id/edit', auth.updater(), function (req, res) {
-	res.render('data/form/' + req.params.type, {});
+router.get('/data/edit/:type/:id', auth.updater(), function (req, res) {
+	res.render('data/form/' + req.params.type, {
+        dataId: req.params.id
+    });
 });
 
 router.get('/profile', auth.updater(), function (req, res) {

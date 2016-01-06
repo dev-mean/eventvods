@@ -350,6 +350,17 @@ router.route('/casters/:caster_id')
 			else res.sendStatus(204);
 		});
 	})
+    .get(auth.public_api(), function (req, res, next) {
+		Caster.findById(req.params.caster_id, function (err, caster) {
+			if (err) next(err);
+			if (!caster) {
+				err = new Error("Caster Not Found");
+				err.status = 404;
+				next(err);
+			}
+			res.json(caster);
+		});
+	})
 	.put(auth.updater(), function (req, res, next) {
 		Indicative
 			.validateAll(req.body, Validators.caster, Validators.messages)
@@ -463,6 +474,17 @@ router.route('/maps/:map_id')
 		}, function (err, map) {
 			if (err) next(err);
 			else res.sendStatus(204);
+		});
+	})
+    .get(auth.public_api(), function (req, res, next) {
+		Map.findById(req.params.map_id, function (err, map) {
+			if (err) next(err);
+			if (!map) {
+				err = new Error("Map Not Found");
+				err.status = 404;
+				next(err);
+			}
+			res.json(map);
 		});
 	})
 	.put(auth.updater(), function (req, res, next) {
@@ -797,6 +819,17 @@ router.route('/teams/:team_id')
 		}, function (err) {
 			if (err) next(err);
 			res.sendStatus(204);
+		});
+	})    
+    .get(auth.public_api(), function (req, res, next) {
+		Team.findById(req.params.team_id, function (err, team) {
+			if (err) next(err);
+			if (!team) {
+				err = new Error("Team Not Found");
+				err.status = 404;
+				next(err);
+			}
+			res.json(team);
 		});
 	})
 	.put(auth.updater(), function (req, res, next) {
