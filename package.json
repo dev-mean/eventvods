@@ -7,8 +7,11 @@
     "async": "^1.4.0",
     "body-parser": "^1.13.1",
     "bower": "^1.7.1",
+    "bristol": "^0.3.3",
+    "connect-redis": "^3.0.1",
     "express": "^4.12.4",
-    "express-session": "^1.11.3",
+    "express-redis-cache": "^0.2.0",
+    "express-session": "^1.12.1",
     "gulp": "^3.9.0",
     "gulp-clean": "^0.3.1",
     "gulp-concat": "^2.5.2",
@@ -23,6 +26,8 @@
     "jade": "^1.11.0",
     "jshint-stylish": "^2.0.0",
     "keygenerator": "^1.0.4",
+    "lodash": "^3.10.1",
+    "loggly": "^1.0.9",
     "mongoose": "^4.0.5",
     "morgan": "^1.6.1",
     "multer": "^1.0.6",
@@ -32,7 +37,8 @@
     "nodemon": "^1.8.1",
     "passport": "^0.2.2",
     "passport-local": "^1.0.0",
-    "passport-local-mongoose": "^1.0.1"
+    "passport-local-mongoose": "^1.0.1",
+    "ratelimit.js": "^1.7.0"
   },
   "repository": {
     "type": "git",
