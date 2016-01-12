@@ -1,0 +1,85 @@
+<div class="content">
+  <div class="appcontainer" ng-controller="overviewController as overviewController">
+    <h1 class="title">Overview</h1>
+    <!--Recent events-->
+    <div class="section" ng-cloak="ng-cloak">
+      <h2 class="title">Recent Events</h2>
+      <a class="btn" href="/events">View Events</a>
+      <div class="row-list" ng-repeat="event in overviewController.overviewData.recent | orderBy: '-eventEndDate'">
+        <div class="item">
+          <div class="imageContain"><img class="eventImage" src="/assets/images/event-image-sm.jpg"/>
+            <div class="overlay"></div>
+          </div>
+          <div class="eventDate">{{event.eventStartDate | date : "dd MMM"}}</div>
+          <div class="eventDate">{{event.eventEndDate | date : "dd MMM"}}</div>
+          <div class="eventGame">{{event.game}}</div>
+          <div class="eventTitle">{{event.eventTitle | limitTo: 75}}</div>
+          <div class="eventStatus">{{event.status}}</div>
+        </div>
+        <p ng-show="overviewController.overviewData.recent.length == 0">No recent events.</p>
+      </div>
+    </div>
+    <!--Ongoing events-->
+    <div class="section" ng-cloak="ng-cloak">
+      <h2 class="title">Ongoing Events</h2>
+      <a class="btn" href="/events">View Events</a>
+      <div class="row-list" ng-repeat="event in overviewController.overviewData.ongoing">
+        <div class="item">
+          <div class="imageContain"><img class="eventImage" src="/assets/images/event-image-sm.jpg"/>
+            <div class="overlay"></div>
+          </div>
+          <div class="eventDate">{{event.eventStartDate | date : "dd MMM"}}</div>
+          <div class="eventDate">{{event.eventEndDate | date : "dd MMM"}}</div>
+          <div class="eventGame">{{event.game}}</div>
+          <div class="eventTitle">{{event.eventTitle | limitTo: 75}}</div>
+          <div class="eventTitle">{{event.eventTitle | limitTo: 75}}</div>
+          <div class="eventStatus">{{event.status}}</div>
+        </div>
+        <p ng-show="overviewController.overviewData.ongoing.length == 0">No ongoing events.</p>
+      </div>
+    </div>
+    <!-- Upcoming events-->
+    <div class="section" ng-cloak="ng-cloak">
+      <h2 class="title">Upcoming Events</h2>
+      <a class="btn" href="/events">View Events</a>
+      <div class="row-list" ng-repeat="event in overviewController.overviewData.upcoming">
+        <div class="item">
+          <div class="imageContain"><img class="eventImage" src="/assets/images/event-image-sm.jpg"/>
+            <div class="overlay"></div>
+          </div>
+          <div class="eventDate">{{event.eventStartDate | date : "dd MMM"}}</div>
+          <div class="eventDate">{{event.eventEndDate | date : "dd MMM"}}</div>
+          <div class="eventGame">{{event.game}}</div>
+          <div class="eventTitle">{{event.eventTitle | limitTo: 75}}</div>
+          <div class="eventStatus">{{event.status}}</div>
+        </div>
+        <p ng-show="overviewController.overviewData.upcoming.length == 0"></p>No upcoming events.
+        <!-- Data manager-->
+        <div class="section" ng-cloak="ng-cloak">
+          <h2 class="title">Data Manager</h2>
+          <div class="box">
+            <span class="data">Casters</span>
+            <span class="count">{{overview.caster}}</span>
+          </div>
+          <div class="box">
+            <span class="data">Maps</span>
+            <span class="count">{{overview.maps}}</span>
+          </div>
+          <div class="box">
+            <span class="data">Teams</span>
+            <span class="count">{{overview.teams}}</span>
+          </div>
+        </div>
+        <!-- User manager-->
+        <div class="section" ng-cloak="ng-cloak">
+          <h2 class="title">User Manager</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="/assets/js/app/app.js"></script>
+<script src="/assets/js/app/resources/overviewResource.js"></script>
+<script src="/assets/js/app/services/overviewService.js"></script>
+<script src="/assets/js/app/controllers/layoutController.js"></script>
+<script src="/assets/js/app/controllers/overviewController.js"></script>
