@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>Eventvods</title>
+    <link href="assests/images/favicon.png" rel="icon" type="image/x-icon">
+    <base href="/"/>
+    <!-- TODO(Nick): Create Style Sheet injector Here  -->
+    <link href="/assests/css/style.css" rel="stylesheet">
+    <link href="/assests/css/webfont.css" rel="stylesheet">
+    <link href="/assests/css/loading-bar.min.css" rel="stylesheet">
+    <link href="/assests/css/angular-datepicker-default.time.css" rel="stylesheet">
+    <link href="/assests/css/angular-datepicker-default.css" rel="stylesheet">
+    <link href="/assets/css/angular-datepicker-default.date.css" rel="stylesheet">
+    <link href="/assests/css/angular-datepicker-default.time.css" rel="stylesheet">
+    <link href="/assests/css/dropzone.min.css" rel="stylesheet">
+    <link href="/assests/css/toastr.min.css" rel="stylesheet">
+    <link href="/assests/css/parsley.css" rel="stylesheet">
+  </head>
+  <body flow-prevent-drop>
+    <div class="container" ng-app="eventApp">
+      <div class="leftSidebar">
+        <header class="logo">
+          <a href="/"></a>
+        </header>
+        <nav class="leftNavigation">
+          <a href="/dashboard" id="Dashboard">
+            <span class="text">Dashboard</span>
+          </a>
+          <a href="/events" id="Events">
+            <span class="text">Events</span>
+          </a>
+          <a href="/data" id="Data">
+            <span class="text">Data</span>
+          </a>
+          <a href="/users" id="Users">
+            <span class="text">Users</span>
+          </a>
+        </nav>
+      </div>
+      <div class="rightView">
+        <!-- Content blocks go here -->
+        <ng-view></ng-view>
+      </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="/js/angular.min.js"></script>
+    <script src="/js/angular-datepicker.js"></script>
+    <script src="/js/angular-animate.min.js"></script>
+    <script src="/js/loading-bar.min.js"></script>
+    <script src="/js/angular-resource.js"></script>
+    <script src="/js/angular-route.js"></script>
+    <script src="/js/toastr.min.js"></script>
+  </body>
+</html>

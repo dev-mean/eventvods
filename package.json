@@ -2,7 +2,7 @@
   "name": "EventVODS",
   "version": "0.0.1",
   "description": "EventVODS website",
-  "main": "dist/server/server.js",
+  "main": "server.js",
   "dependencies": {
     "async": "^1.4.0",
     "body-parser": "^1.13.1",
@@ -45,14 +45,15 @@
     "type": "git",
     "url": "https://github.com/EventVODS/EventVODS.git"
   },
-  "author": "da boyz",
+  "author": "",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/EventVODS/EventVODS/issues"
   },
   "homepage": "https://github.com/EventVODS/EventVODS",
   "scripts": {
-    "postinstall": "bower install && gulp build",
-    "start": "nodemon dist/server/server.js"
+    "dependencies": "npm install --prefix ./app",
+    "postinstall": "bower install",
+    "start": "npm install --prefix ./app && nodemon server.js"
   }
 }

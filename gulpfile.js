@@ -18,7 +18,7 @@ gulp.task('build', ['clean'], function () {
 	gulp.start('public-side');
 });
 
-gulp.task('server-side', ['node-build', 'jade-build']);
+gulp.task('server-side', ['node-build', 'html-build']);
 
 gulp.task('public-side', ['js-build', 'img-build', 'font-build', 'font-css-build', 'less-build', 'bower-build']);
 
@@ -30,10 +30,10 @@ gulp.task('clean', function () {
 		.pipe(clean());
 });
 
-// Copy templates
-gulp.task('jade-build', function () {
-	return gulp.src('src/server/views/**/*.jade')
-		.pipe(gulp.dest('dist/server/views'));
+// Copy html templates
+gulp.task('html-build', function () {
+	return gulp.src('src/public/views/**/*.html')
+		.pipe(gulp.dest('dist/public/views'));
 });
 
 // Building front-end JS for deployment
@@ -101,7 +101,7 @@ gulp.task('bower-copy', function () {
         .pipe(gulp.dest('dist/public/js'));
     gulp.src('bower_components/parsleyjs/src/parsley.css')
         .pipe(gulp.dest('dist/public/css'));
-})
+});
 
 // Builds out angular dependencies
 gulp.task('angular-build', function () {
