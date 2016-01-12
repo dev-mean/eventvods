@@ -22,7 +22,7 @@ var Indicative = require('indicative');
 var logger = require('bristol');
 var APIKey = require('../models/APIKey');
 var keygen = require('keygenerator');
-var config = require('../config/config');
+var config = require('../../config/config');
 
 // Redis is magic basically
 

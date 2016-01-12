@@ -9,7 +9,7 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var morgan = require('morgan'); //Logger
 var session = require('express-session');
-var User = require('./models/user');
+var User = require('./app/models/user');
 var config = require('./config/config');
 var RedisStore = require('connect-redis')(session);
 
@@ -70,9 +70,9 @@ mongoose.connect(config.databaseUrl, function (err) {
 // app.locals.pretty = true;
 
 //routes
-var routes = require('./routes/routes');
-var api = require('./routes/api');
-var auth = require('./routes/auth.js');
+var routes = require('./app/routes/routes');
+var api = require('./app/routes/api');
+var auth = require('./app/routes/auth.js');
 app.use('/user', auth);
 app.use('/api', api);
 app.use('/', routes);
