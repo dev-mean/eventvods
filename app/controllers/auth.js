@@ -1,6 +1,6 @@
 var keygen = require('keygenerator');
 var APIKey = require('../models/APIKey');
-var config = require('../config/config');
+var config = require('../../config/config');
 constants = {
 	"end_user": 0,
 	"logged_in": 1,

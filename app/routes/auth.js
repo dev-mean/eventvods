@@ -7,7 +7,7 @@ var Validators = require('../controllers/validation.js');
 var keygen = require('keygenerator');
 var nodemailer = require('nodemailer');
 var smtpTransport = require('nodemailer-smtp-transport');
-var config = require('../config/config');
+var config = require('../../config/config');
 
 router.route('/login')
 	.get(function (req, res, next) {

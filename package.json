@@ -54,6 +54,6 @@
   "scripts": {
     "dependencies": "npm install --prefix ./app",
     "postinstall": "bower install",
-    "start": "npm install --prefix ./app && nodemon server.js"
+    "start": "npm install && nodemon server.js"
   }
 }
