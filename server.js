@@ -12,6 +12,7 @@ var session = require('express-session');
 var User = require('./app/models/user');
 var config = require('./config/config');
 var RedisStore = require('connect-redis')(session);
+var favicon = require('serve-favicon');	
 
 //server config
 app.set('env', 'development');
@@ -28,7 +29,8 @@ logger.addTarget('console')
 //.withHighestSeverity('trace');
 
 //Static file at the top, prevents all the code below being run for static files.
-app.use(express.static(path.join(__dirname, 'public')));
+app.use('/assets', express.static(path.join(__dirname, 'public')));
+app.use(favicon(path.join(__dirname, 'public','favicon.ico')));
 
 app.use(bodyParser.urlencoded({
 	'extended': 'true'
@@ -52,6 +54,7 @@ app.use(session({
 	})
 }));
 
+
 /* Passport setup */
 app.use(passport.initialize());
 app.use(passport.session());
@@ -73,8 +76,8 @@ mongoose.connect(config.databaseUrl, function (err) {
 var routes = require('./app/routes/routes');
 var api = require('./app/routes/api');
 var auth = require('./app/routes/auth.js');
-app.use('/user', auth);
-app.use('/api', api);
+//app.use('/user', auth);
+//app.use('/api', api);
 app.use('/', routes);
 
 // 404 handler
@@ -84,7 +87,6 @@ app.use(function (req, res, next) {
 	next(err);
 });
 
-// prints stacktrace only in dev mode
 app.use(function (err, req, res, next) {
 	res.status(err.status || 500);
 	logger.error(err);
