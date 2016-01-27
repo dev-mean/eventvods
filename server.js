@@ -77,13 +77,14 @@ var routes = require('./app/routes/routes');
 var api = require('./app/routes/api');
 var auth = require('./app/routes/auth.js');
 //app.use('/user', auth);
-//app.use('/api', api);
+app.use('/api', api);
 app.use('/', routes);
 
 // 404 handler
 app.use(function (req, res, next) {
 	var err = new Error("404 - Page Not Found");
 	err.status = 404;
+	err.path = req.path;
 	next(err);
 });
 

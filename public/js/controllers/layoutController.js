@@ -7,7 +7,13 @@
             // route for the home page
             .when('/', {
                 templateUrl : '/assets/views/overview.html',
-                controller  : 'overviewController'
+                controller  : 'overviewController',
+                controllerAs  : 'overviewController'
+            })
+            .when('/events', {
+                templateUrl : '/assets/views/events.html',
+                controller  : 'eventListController',
+                controllerAs  : 'eventListController'
             })
 
   })

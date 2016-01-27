@@ -1,5 +1,4 @@
 <div class="content">
-  <div class="appcontainer" ng-controller="overviewController as overviewController">
     <h1 class="title">Overview</h1>
     <!--Recent events-->
     <div class="section" ng-cloak="ng-cloak">
@@ -53,7 +52,7 @@
           <div class="eventTitle">{{event.eventTitle | limitTo: 75}}</div>
           <div class="eventStatus">{{event.status}}</div>
         </div>
-        <p ng-show="overviewController.overviewData.upcoming.length == 0"></p>No upcoming events.
+        <p ng-show="overviewController.overviewData.upcoming.length == 0">No upcoming events.</p>
         <!-- Data manager-->
         <div class="section" ng-cloak="ng-cloak">
           <h2 class="title">Data Manager</h2>
@@ -76,10 +75,4 @@
         </div>
       </div>
     </div>
-  </div>
 </div>
-<script src="/assets/js/app/app.js"></script>
-<script src="/assets/js/app/resources/overviewResource.js"></script>
-<script src="/assets/js/app/services/overviewService.js"></script>
-<script src="/assets/js/app/controllers/layoutController.js"></script>
-<script src="/assets/js/app/controllers/overviewController.js"></script>
