@@ -9,7 +9,6 @@
       overviewService.getOverview().$promise.then(function(result) {
         var data = cleanResponse(result);
         controller.overviewData = data;
-        console.log(data);
       });
 
       function cleanResponse(resp) {

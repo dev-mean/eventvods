@@ -6,24 +6,24 @@
     function($resource, eventConstants) {
       return {
         // TODO (Nick): Refactor
-        getCasters: $resource(eventConstants.baseUri + 'casters'),
-        getCaster: $resource(eventConstants.baseUri + 'casters/:casterId', { }, {
+        getCasters: $resource(eventConstants.baseUri + 'staff'),
+        getCaster: $resource(eventConstants.baseUri + 'staff/:staffId', { }, {
           'get': {
             method: 'GET',
-            params: { casterId: '@casterId' }
+            params: { casterId: '@staffId' }
           }
         }),
-        createCaster: $resource(eventConstants.baseUri + 'casters'),
-        updateCaster: $resource(eventConstants.baseUri + 'casters/:casterId', { }, {
+        createCaster: $resource(eventConstants.baseUri + 'staff'),
+        updateCaster: $resource(eventConstants.baseUri + 'staff/:staffId', { }, {
           'put': {
             method: 'PUT',
-            params: { casterId: '@casterId' }
+            params: { casterId: '@staffId' }
           }
         }),
-        deleteCaster: $resource(eventConstants.baseUri + 'casters/:casterId', { }, {
+        deleteCaster: $resource(eventConstants.baseUri + 'staff/:staffId', { }, {
           'delete': {
             method: 'DELETE',
-            params: { casterId: '@casterId' }
+            params: { casterId: '@staffId' }
           }
         })
       };

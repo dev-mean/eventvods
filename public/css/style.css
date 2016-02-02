@@ -12,6 +12,7 @@
  * make sure we're resetting all spacing elements.
  *
  */
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
 html,
 body {
   border: 0;
@@ -142,6 +143,12 @@ a img {
 .clearfix:after {
   clear: both;
 }
+.no-transition {
+  -moz-transition: none;
+  -webkit-transition: none;
+  -o-transition: color 0 ease-in;
+  transition: none;
+}
 /* colors */
 /* layout */
 /* global elements + box sizing */
@@ -157,24 +164,14 @@ html {
 }
 body {
   color: #d3d7e3;
+  font-family: 'Open Sans', sans-serif !important;
 }
 a {
   color: inherit;
   text-decoration: none;
 }
-.icon-setup {
-  font-family: "eventvods" !important;
-  content: attr(data-icon);
-  font-style: normal !important;
-  font-weight: normal !important;
-  font-variant: normal !important;
-  text-transform: none !important;
-  speak: none;
-  line-height: 1;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
+p {
+  padding-left: 15px;
 }
 .form-style {
   border-radius: 2px;
@@ -260,9 +257,7 @@ a {
   -moz-flex-grow: 1;
   -ms-flex-grow: 1;
   flex-grow: 1;
-}
-.container .rightView .content {
-  padding: 24px;
+  background: #343850;
 }
 /* leftSidebar */
 header.logo {
@@ -341,48 +336,44 @@ nav {
 }
 nav a {
   padding: 16px 24px;
-  padding-left: 79px;
+  padding-left: 54px;
   margin-bottom: 1px;
-  background: url(/assets/images/backend-icons.png) no-repeat;
   border-left: 5px solid #3c405c;
   -webkit-transition: all 0.25s ease-in-out;
   -moz-transition: all 0.25s ease-in-out;
   -o-transition: all 0.25s ease-in-out;
   transition: all 0.25s ease-in-out;
 }
-nav a#Dashboard {
-  background-position: 24px 14px;
-}
-nav a#Events {
-  background-position: 24px -44px;
-}
-nav a#Data {
-  background-position: 24px -101px;
-}
-nav a#Users {
-  background-position: 24px -217px;
-}
 nav a span {
   display: inline-block;
 }
 nav a:hover {
   border-left: 5px solid #0fc461;
-  padding-left: 74px;
-  color: #d3d7e3;
+}
+nav a:hover i.fa {
+  left: -30px;
 }
 nav a.active {
   background-color: #3c405c;
 }
+nav a i.fa {
+  position: relative;
+  left: -25px;
+  -webkit-transition: all 0.25s ease-in-out;
+  -moz-transition: all 0.25s ease-in-out;
+  -o-transition: all 0.25s ease-in-out;
+  transition: all 0.25s ease-in-out;
+}
 .section {
   position: relative;
+  background: #3c405c;
+  padding: 24px;
+  padding-top: 0;
+  margin-top: 0;
+  margin-bottom: 24px;
 }
 .section h2 {
   padding: 10px 0;
-}
-.section > .btn {
-  position: absolute;
-  top: 0px;
-  right: 0px;
 }
 /* context header */
 .contextHead {
@@ -400,29 +391,15 @@ nav a.active {
   -ms-justify-content: space-between;
   justify-content: space-between;
 }
-.contextHead .leftSide {
+.contextHead .leftSide,
+.contextHead .rightSide {
   padding: 30px;
 }
-.contextHead .leftSide h1 {
+.contextHead .leftSide h1,
+.contextHead .rightSide h1 {
   font-size: 20px;
   font-weight: 300;
   line-height: 38px;
-}
-.contextHead .rightSide {
-  display: -webkit-flex;
-  display: -moz-flex;
-  display: -ms-flexbox;
-  display: -ms-flex;
-  display: flex;
-}
-.contextHead .rightSide .filterControl {
-  padding: 36px;
-}
-.contextHead .rightSide .filterControl a {
-  color: #3cff85;
-}
-.contextHead .rightSide .filterControl a:hover {
-  color: #0cdb6a;
 }
 .contextHead .rightSide .viewSelect,
 .contextHead .rightSide .tabs {
@@ -473,6 +450,7 @@ nav a.active {
 table.standard {
   width: 100%;
   font-size: 14px;
+  border-left: 1px solid #3c405c;
 }
 table.standard thead {
   background: #474c6c;
@@ -491,37 +469,9 @@ table.standard th.sortable.sort-desc,
 table.standard th.sortable.sort-asc {
   color: #0fc461;
 }
-table.standard th.sortable:after {
-  font-family: "eventvods" !important;
-  content: attr(data-icon);
-  font-style: normal !important;
-  font-weight: normal !important;
-  font-variant: normal !important;
-  text-transform: none !important;
-  speak: none;
-  line-height: 1;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
-  display: inline-block;
-  content: "O";
-  -webkit-transform: rotate(90deg) translate(1px, -5px);
-  -moz-transform: rotate(90deg) translate(1px, -5px);
-  -o-transform: rotate(90deg) translate(1px, -5px);
-  -ms-transform: rotate(90deg) translate(1px, -5px);
-  transform: rotate(90deg) translate(1px, -5px);
-}
-table.standard th.sortable.sort-asc:after {
-  -webkit-transform: rotate(-90deg) translate(-1px, 5px);
-  -moz-transform: rotate(-90deg) translate(-1px, 5px);
-  -o-transform: rotate(-90deg) translate(-1px, 5px);
-  -ms-transform: rotate(-90deg) translate(-1px, 5px);
-  transform: rotate(-90deg) translate(-1px, 5px);
-}
 table.standard td {
   padding: 12px;
-  border-bottom: 1px solid #474c6c;
+  border-bottom: 1px solid #3c405c;
   line-height: 14px;
   font-size: 14px;
 }
@@ -529,13 +479,13 @@ table.standard td.edit,
 table.standard td.url {
   padding: 0;
   margin: 0;
-  width: 44px;
+  width: 48px;
   overflow: hidden;
 }
 table.standard td.edit a,
 table.standard td.url a {
   display: block;
-  border-left: 1px solid #474c6c;
+  border-left: 1px solid #3c405c;
   line-height: 14px;
   font-size: 20px;
   width: 46px;
@@ -550,9 +500,8 @@ table.standard td.url a {
 }
 table.standard td.edit a:hover,
 table.standard td.url a:hover {
-  background: #0371d4;
-  border-color: #0371d4;
-  color: #2a2d3e;
+  background: #3c405c;
+  color: #0371d4;
 }
 table.standard td.url i {
   padding-left: 2px;
@@ -565,16 +514,14 @@ table.standard td.icon img {
   position: absolute;
   margin-top: -13px;
 }
-/* temp carets */
-/* Matt todo: create a better caret
-	for table view
- */
 .caret-up {
   width: 0;
   height: 0;
   border-left: 5px solid transparent;
   border-right: 5px solid transparent;
   border-bottom: 5px solid #0fc461;
+  position: relative;
+  top: -11px;
 }
 .caret-down {
   width: 0;
@@ -582,6 +529,8 @@ table.standard td.icon img {
   border-left: 5px solid transparent;
   border-right: 5px solid transparent;
   border-top: 5px solid #0fc461;
+  position: relative;
+  top: 11px;
 }
 /* grid view */
 .pagination {
@@ -821,6 +770,12 @@ table.standard td.icon img {
   -moz-box-shadow: inset 400px 0 0 #0fc461;
   box-shadow: inset 400px 0 0 #0fc461;
   border: 1px solid #0fc461;
+}
+.content h1.title {
+  margin-left: 3px;
+  margin-top: 29px;
+  margin-bottom: 29px;
+  font-size: 1.5em;
 }
 /* forms + detail view */
 .content.form {
@@ -1067,10 +1022,6 @@ form .group label {
   cursor: pointer;
   width: auto;
   white-space: nowrap;
-  -webkit-transition: all 0.25s ease-in-out;
-  -moz-transition: all 0.25s ease-in-out;
-  -o-transition: all 0.25s ease-in-out;
-  transition: all 0.25s ease-in-out;
 }
 .btn:hover {
   background-color: rgba(60, 255, 133, 0.12);
@@ -1087,37 +1038,15 @@ form .group label {
 .btn.icon {
   position: relative;
 }
-.btn.icon i,
-.btn.icon span {
-  -webkit-transition: all 0.25s ease-in-out;
-  -moz-transition: all 0.25s ease-in-out;
-  -o-transition: all 0.25s ease-in-out;
-  transition: all 0.25s ease-in-out;
-}
 .btn.icon i {
   position: absolute;
   left: 14px;
-  margin-top: -2px;
   line-height: 14px;
   font-size: 18px;
 }
 .btn.icon span {
   padding-left: 22px;
   display: block;
-}
-.btn.icon:hover span {
-  -webkit-transform: translate(-2px, 0);
-  -moz-transform: translate(-2px, 0);
-  -o-transform: translate(-2px, 0);
-  -ms-transform: translate(-2px, 0);
-  transform: translate(-2px, 0);
-}
-.btn.icon:hover i {
-  -webkit-transform: translate(2px, 0);
-  -moz-transform: translate(2px, 0);
-  -o-transform: translate(2px, 0);
-  -ms-transform: translate(2px, 0);
-  transform: translate(2px, 0);
 }
 .btn.lg {
   padding: 9px 20px;

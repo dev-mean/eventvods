@@ -8,6 +8,9 @@ var less 			= require('gulp-less');
 var nodemon 	= require('gulp-nodemon');
 var plumber 	= require('gulp-plumber');
 
+gulp.task('watch', function(){
+	gulp.watch('public/less/*.less', ['less-compile']);
+});
 
 gulp.task('default', ['build']);
 

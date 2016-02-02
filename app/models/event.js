@@ -3,7 +3,7 @@ var Schema = mongoose.Schema;
 var SocialMedia = require('./socialmedia').schema;
 var Sponsor = require('./sponsor').schema;
 var Team = require('./team').schema;
-var Caster = require('./caster').schema;
+var Staff = require('./staff').schema;
 var Map = require('./map').schema;
 var Module = require('./module').schema;
 var User = require('./user').schema;
@@ -22,7 +22,7 @@ var eventSchema = new Schema({
 	eventEndDate: { type: Date, required: true },
 	eventMaps: [Map],
 	eventTeams: [Team],
-	eventCasters: [Caster],
+	eventStaff: [Staff],
 	eventUser: { type: Schema.ObjectId, ref: 'User' },
 	eventImage: { type: String, default: 'default.png' }
 });
