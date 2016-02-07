@@ -162,7 +162,6 @@ nav {
 	padding: @gutter;
 	padding-top: 0;
 	margin-top: 0;
-	margin-bottom: @gutter;
 	h2 {
 		padding: @padding-sm - 6 0;
 	}
@@ -314,6 +313,25 @@ table.standard {
 .pagination {
 	padding: @padding-sm @padding;
 	background: @default-light;
+	.flex-display;
+	.flex-direction(row);
+	.flex-wrap(nowrap);
+	.justify-content(space-between);
+	.btn {
+		color: @blue-light;
+		padding: 4px;
+		border: none;
+		&:hover {
+			background: transparent;
+			color: @blue-light;
+		}
+		&:first-child {
+			left: @padding-sm;
+		}
+		&:last-child {
+			right: @padding-sm;
+		}
+	}
 }
 .grid {
 	.flex-display;
@@ -384,18 +402,37 @@ table.standard {
 	}
 }
 
-/* filter control */
+/* second row  */
 
-.filters {
+.filters, .tabs {
 	background: @default-light;
 	width: 100%;
-	padding: @padding-sm;
 	border-bottom: 1px solid @default;
+	border-left: 1px solid @default;
 	input {
 		.form-style;
 		width: 100%;
 	}
 }
+.filters {
+	padding: @padding-sm;
+}
+.tabs {
+	.flex-display(inline-flex);
+	.flex-direction(row);
+	.flex-wrap(nowrap);
+	.justify-content(stretch);
+	span {
+		padding: @padding-sm;
+		&:hover {
+			background: @default;
+		}
+		&.selected {
+			background: @default;
+			text-decoration: underline;
+		}
+	}
+}	
 
 /* event listing */
 
@@ -611,31 +648,6 @@ form {
 		position: absolute;
 		top: @padding-sm;
 		right: @padding-sm;
-	}
-}
-
-/* pagination */
-
-.pagination {
-	position: relative;
-	text-align: center;
-	.btn {
-		position: absolute;
-		top: @padding-sm;
-		color: @blue-light;
-		padding: 4px;
-		.transition-alt(all 0s);
-		border: none;
-		&:hover {
-			background: transparent;
-			color: @blue-light;
-		}
-		&:first-child {
-			left: @padding-sm;
-		}
-		&:last-child {
-			right: @padding-sm;
-		}
 	}
 }
 

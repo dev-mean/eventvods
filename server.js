@@ -60,12 +60,12 @@ app.set('views', path.join(__dirname, 'app', 'views'));
 app.set('view engine', 'jade');
 app.locals.pretty = true;
 //routes
-var routes = require('./app/routes/routes');
+var backend = require('./app/routes/backend');
 var api = require('./app/routes/api');
 var auth = require('./app/routes/auth.js');
 //app.use('/user', auth);
 app.use('/api', api);
-app.use('/', routes);
+app.use('/', backend);
 // 404 handler
 app.use(function(req, res, next) {
     var err = new Error("404 - Page Not Found");

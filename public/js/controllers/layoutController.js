@@ -12,10 +12,16 @@
                 title : "Dashboard"
             })
             .when('/events', {
-                templateUrl : '/assets/views/events.html',
+                templateUrl : '/assets/views/event/list.html',
                 controller  : 'eventListController',
                 controllerAs  : 'eventListController',
                 title : "Events"
+            })
+            .when('/events/new', {
+                templateUrl : '/assets/views/event/form.html',
+                controller  : 'newEventController',
+                controllerAs  : 'newEventController',
+                title : "New Event"
             })
             .when('/staff', {
                 templateUrl : '/assets/views/staff.html',

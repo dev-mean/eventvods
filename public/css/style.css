@@ -370,7 +370,6 @@ nav a i.fa {
   padding: 24px;
   padding-top: 0;
   margin-top: 0;
-  margin-bottom: 24px;
 }
 .section h2 {
   padding: 10px 0;
@@ -536,6 +535,38 @@ table.standard td.icon img {
 .pagination {
   padding: 16px 20px;
   background: #474c6c;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: -ms-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+  -moz-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-flex-wrap: nowrap;
+  -moz-flex-wrap: nowrap;
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  -webkit-justify-content: space-between;
+  -moz-justify-content: space-between;
+  -ms-justify-content: space-between;
+  justify-content: space-between;
+}
+.pagination .btn {
+  color: #0b93ea;
+  padding: 4px;
+  border: none;
+}
+.pagination .btn:hover {
+  background: transparent;
+  color: #0b93ea;
+}
+.pagination .btn:first-child {
+  left: 16px;
+}
+.pagination .btn:last-child {
+  right: 16px;
 }
 .grid {
   display: -webkit-flex;
@@ -640,14 +671,16 @@ table.standard td.icon img {
   top: 20px;
   right: 20px;
 }
-/* filter control */
-.filters {
+/* second row  */
+.filters,
+.tabs {
   background: #474c6c;
   width: 100%;
-  padding: 16px;
   border-bottom: 1px solid #3c405c;
+  border-left: 1px solid #3c405c;
 }
-.filters input {
+.filters input,
+.tabs input {
   border-radius: 2px;
   outline: none;
   line-height: 14px;
@@ -663,29 +696,66 @@ table.standard td.icon img {
   transition: all 0.25s ease-in-out;
   width: 100%;
 }
-.filters input:focus {
+.filters input:focus,
+.tabs input:focus {
   border-color: #a4abc1;
   color: #d3d7e3;
 }
-.filters input::-webkit-input-placeholder {
+.filters input::-webkit-input-placeholder,
+.tabs input::-webkit-input-placeholder {
   font-size: 14px;
   line-height: 16px;
   color: #8690af;
 }
-.filters input::-moz-placeholder {
+.filters input::-moz-placeholder,
+.tabs input::-moz-placeholder {
   font-size: 14px;
   line-height: 16px;
   color: #8690af;
 }
-.filters input:-moz-placeholder {
+.filters input:-moz-placeholder,
+.tabs input:-moz-placeholder {
   font-size: 14px;
   line-height: 16px;
   color: #8690af;
 }
-.filters input:-ms-input-placeholder {
+.filters input:-ms-input-placeholder,
+.tabs input:-ms-input-placeholder {
   font-size: 14px;
   line-height: 16px;
   color: #8690af;
+}
+.filters {
+  padding: 16px;
+}
+.tabs {
+  display: -webkit-inline-flex;
+  display: -moz-inline-flex;
+  display: -ms-inline-flexbox;
+  display: -ms-inline-flex;
+  display: inline-flex;
+  -webkit-flex-direction: row;
+  -moz-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-flex-wrap: nowrap;
+  -moz-flex-wrap: nowrap;
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  -webkit-justify-content: stretch;
+  -moz-justify-content: stretch;
+  -ms-justify-content: stretch;
+  justify-content: stretch;
+}
+.tabs span {
+  padding: 16px;
+}
+.tabs span:hover {
+  background: #3c405c;
+}
+.tabs span.selected {
+  background: #3c405c;
+  text-decoration: underline;
 }
 /* event listing */
 .row-list {
@@ -975,32 +1045,6 @@ form .group label {
 .imageUpload .btn {
   position: absolute;
   top: 16px;
-  right: 16px;
-}
-/* pagination */
-.pagination {
-  position: relative;
-  text-align: center;
-}
-.pagination .btn {
-  position: absolute;
-  top: 16px;
-  color: #0b93ea;
-  padding: 4px;
-  -webkit-transition: all 0s 0.25s ease-in-out;
-  -moz-transition: all 0s 0.25s ease-in-out;
-  -o-transition: all 0s 0.25s ease-in-out;
-  transition: all 0s 0.25s ease-in-out;
-  border: none;
-}
-.pagination .btn:hover {
-  background: transparent;
-  color: #0b93ea;
-}
-.pagination .btn:first-child {
-  left: 16px;
-}
-.pagination .btn:last-child {
   right: 16px;
 }
 /* button */

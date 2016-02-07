@@ -1,6 +1,6 @@
 <div class="contextHead">
     <div class="leftSide">
-        <a href="/events/new" class="btn lg solid icon">
+        <a href="#events/new" class="btn lg solid icon">
             <i class="fa fa-plus-circle">
             </i>
             <span>
@@ -126,13 +126,13 @@
     No events match those criteria.
 </span>
 <div ng-show="eventListController.ui.pages > 1" class="pagination">
-    <a ng-show="eventListController.ui.page > 1" ng-click="eventListController.previousPage()" class="btn">
+    <a ng-style="{visibility: eventListController.ui.page > 1 && 'visible' || 'hidden'}" ng-click="eventListController.previousPage()" class="btn">
         Prev Page
     </a>
     <p>
         Page {{eventListController.ui.page}} of {{eventListController.ui.pages}}
     </p>
-    <a ng-show="eventListController.ui.pages > 1 && eventListController.ui.page < eventListController.ui.pages" ng-click="eventListController.nextPage()" class="btn">
+    <a ng-style="{visibility: (eventListController.ui.pages > 1 && eventListController.ui.page < eventListController.ui.pages) && 'visible' || 'hidden'}" ng-click="eventListController.nextPage()" class="btn">
         Next Page
     </a>
 </div>
