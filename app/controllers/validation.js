@@ -40,7 +40,7 @@ module.exports.event = {
 	eventEndDate: 'required|date'
 };
 
-module.exports.caster = {
+module.exports.staff = {
 	casterName: 'required|alpha_numeric',
 	casterAlias: 'requred|alpha_numeric',
 	casterMedia: 'array',

@@ -1,0 +1,119 @@
+<div class="contextHead">
+    <div class="leftSide">
+        <h1>
+            New Event
+        </h1>
+    </div>
+    <div class="rightSide">
+        <a class="btn lg solid">
+            <span>
+                Save Draft
+            </span>
+        </a>
+        <a class="btn lg solid">
+            <span>
+                Publish
+            </span>
+        </a>
+    </div>
+</div>
+<div class="tabs">
+    <span ng-class="{selected: newEventController.ui.stage == 1}" ng-click="newEventController.ui.stage = 1">
+        Tournament Details
+    </span>
+    <span ng-class="{selected: newEventController.ui.stage == 2}" ng-click="newEventController.ui.stage = 2">
+        Media
+    </span>
+    <span ng-class="{selected: newEventController.ui.stage == 3}" ng-click="newEventController.ui.stage = 3">
+        Staff
+    </span>
+    <span ng-class="{selected: newEventController.ui.stage == 4}" ng-click="newEventController.ui.stage = 4">
+        Teams
+    </span>
+    <span ng-class="{selected: newEventController.ui.stage == 5}" ng-click="newEventController.ui.stage = 5">
+        Brackets
+    </span>
+    <span ng-class="{selected: newEventController.ui.stage == 6}" ng-click="newEventController.ui.stage = 6">
+        Image
+    </span>
+</div>
+<form name="form" ng-cloak>
+    <div id="errors" ng-show="newEventController.ui.errors.length >0" class="errors">
+        <ul>
+            <li ng-repeat="error in newEventController.ui.errors">
+                {{error.message}}
+            </li>
+        </ul>
+    </div>
+    <!-- Form page 1 -->
+    <div id="info" ng-show="newEventController.ui.stage == 1" class="section">
+        <h2>
+            Tournament Information
+        </h2>
+        <div class="standard group">
+            <label>
+                Event Title
+            </label>
+            <input type="text" ng-model="newEventController.data.eventTitle" required="required"/>
+        </div>
+        <div class="standard group">
+            <label>
+                Event Game
+            </label>
+            <input type="text" ng-model="newEventController.data.eventGame" required="required"/>
+        </div>
+        <div class="standard group">
+            <label>
+                Event Location
+            </label>
+            <input type="text" ng-model="newEventController.data.eventLocation" required="required"/>
+        </div>
+        <div class="standard group">
+            <label>
+                Event Permalink
+            </label>
+            <input type="text" ng-model="newEventController.data.eventPermaLink" required="required"/>
+        </div>
+        <div class="standard group">
+            <label>
+                Event Abbrev
+            </label>
+            <input type="text" ng-model="newEventController.data.eventAbbreviation" required="required"/>
+        </div>
+        <div class="standard group">
+            <label>
+                Event Priority
+            </label>
+            <input type="text" ng-model="newEventController.data.eventPriority" required="required"/>
+        </div>
+        <div class="standard group">
+            <label>
+                Event Start
+            </label>
+            <input type="text" ng-model="newEventController.data.eventStartDate" pick-a-date="date" placeholder="Select Date" pick-a-date-options="dateOpts" required="required"/>
+        </div>
+        <div class="standard group">
+            <label>
+                Event End
+            </label>
+            <input type="text" ng-model="newEventController.data.eventEndDate" pick-a-date="date" placeholder="Select Date" pick-a-date-options="dateOpts" required="required"/>
+        </div>
+    </div>
+    <div id="image" ng-show="newEventController.ui.stage == 6" class="section">
+        <h2>
+            Event Image
+        </h2>
+        <div id="image_upload" class="dropzone">
+            <div id="image_thumbnail">
+            </div>
+        </div>
+    </div>
+    <div class="pagination">
+        <a ng-style="{visibility: newEventController.ui.stage >1 && 'visible' || 'hidden'}" ng-click="newEventController.prevSection()" class="btn">
+            Previous
+        </a>
+        <a ng-style="{visibility: newEventController.ui.stage < 6 && 'visible' || 'hidden'}" ng-click="newEventController.nextSection()" class="btn">
+            Next
+        </a>
+    </div>
+</form>

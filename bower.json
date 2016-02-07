@@ -23,7 +23,6 @@
     "angular-resource": "~1.4.8",
     "jquery": "~2.1.4",
     "fontawesome": "~4.3.0",
-    "angular-loading-bar": "~0.8.0",
     "angular-animate": "~1.4.3",
     "angular-native-picker": "~1.0.4",
     "dropzone": "~4.2.0",

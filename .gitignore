@@ -16,19 +16,11 @@ Icon?
 ehthumbs.db
 Thumbs.db
 
-bower_components/
-dist/
 .idea/
 node_modules/
 .sass-cache/
-vendor/*
-src/public/css
 .idea/
+public/lib/
 
 # Simon IDE settings
 .brackets.json
-
-# matt's ui environment
-ui-preview/
-assets/
-Prepros Build/
