@@ -37,27 +37,27 @@
                     <a href="" ng-click="staffListController.setStaffSort('casterName')">
                         Name
                     </a>
-                    <span ng-show="staffListController.ui.sort.sortType == 'casterName' &amp;&amp; !staffListController.ui.sort.sortReverse" class="caret-down">
+                    <span ng-show="staffListController.ui.sortType == 'casterName' && !staffListController.ui.sortReverse" class="caret-down">
                     </span>
-                    <span ng-show="staffListController.ui.sort.sortType == 'casterName' &amp;&amp; staffListController.ui.sort.sortReverse" class="caret-up">
+                    <span ng-show="staffListController.ui.sortType == 'casterName' && staffListController.ui.sortReverse" class="caret-up">
                     </span>
                 </th>
                 <th>
                     <a href="" ng-click="staffListController.setStaffSort('casterAlias')">
                         Alias
                     </a>
-                    <span ng-show="staffListController.ui.sort.sortType == 'casterAlias' && !staffListController.ui.sort.sortReverse" class="caret-down">
+                    <span ng-show="staffListController.ui.sortType == 'casterAlias' && !staffListController.ui.sortReverse" class="caret-down">
                     </span>
-                    <span ng-show="staffListController.ui.sort.sortType == 'casterAlias' &amp;&amp; staffListController.ui.sort.sortReverse" class="caret-up">
+                    <span ng-show="staffListController.ui.sortType == 'casterAlias' && staffListController.ui.sortReverse" class="caret-up">
                     </span>
                 </th>
                 <th>
                     <a href="" ng-click="staffListController.setStaffSort('casterCountry')">
                         Country
                     </a>
-                    <span ng-show="staffListController.ui.sort.sortType == 'casterCountry' &amp;&amp; !staffListController.ui.sort.sortReverse" class="caret-down">
+                    <span ng-show="staffListController.ui.sortType == 'casterCountry' && !staffListController.ui.sortReverse" class="caret-down">
                     </span>
-                    <span ng-show="staffListController.ui.sort.sortType == 'casterCountry' &amp;&amp; staffListController.ui.sort.sortReverse" class="caret-up">
+                    <span ng-show="staffListController.ui.sortType == 'casterCountry' && staffListController.ui.sortReverse" class="caret-up">
                     </span>
                 </th>
                 <th>
@@ -67,7 +67,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="staff in staffListController.casterListData | orderBy: staffListController.ui.sort.sortType : staffListController.ui.sort.sortReverse">
+            <tr ng-repeat="staff in staffListController.casterListData | orderBy: staffListController.ui.sortType : staffListController.ui.sortReverse">
                 <td class="name">
                     {{staff.casterName}}
                 </td>
@@ -97,13 +97,15 @@
 <span ng-show="(staffListController.casterData == null || staffListController.casterData.length == 0)">
     No data matches those criteria.
 </span>
-<div ng-show="staffListController.ui.sort.pages > 1" class="pagination">
-    <a ng-show="staffListController.ui.sort.page > 1" ng-click="staffListController.previousPage('staff')" class="btn">
-        Prev Page <pre>{{staffListController.ui.sort.pages}}</pre>
+<div ng-show="staffListController.ui.pages > 1" class="pagination">    
+     <a ng-style="{visibility: staffListController.ui.page > 1 && 'visible' || 'hidden'}" ng-click="staffListController.previousPage()" class="btn">
+        Prev Page
     </a>
-    Page {{staffListController.ui.sort.page}} of {{staffListController.ui.sort.pages}}
-    <a ng-show="staffListController.ui.sort.pages > 1 && staffListController.ui.sort.page < staffListController.ui.sort.pages" ng-click="staffListController.nextPage('staff')" class="btn">
+    <p>
+        Page {{staffListController.ui.page}} of {{staffListController.ui.pages}}
+    </p>
+    <a ng-style="{visibility: (staffListController.ui.pages > 1 && staffListController.ui.page < staffListController.ui.pages) && 'visible' || 'hidden'}" ng-click="staffListController.nextPage()" class="btn">
         Next Page
     </a>
-</div>
+    
 </div>

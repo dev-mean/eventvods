@@ -1,14 +1,14 @@
 (function() {
   'use strict';
 
-  angular.module('eventApp').controller('staffListController', [
-    'staffService',
-    function(staffService, $route, $scope, $routeParams) {
+  angular.module('eventApp').controller('mapListController', [
+    'mapService',
+    function(mapService) {
       var controller = this;
 
       controller.ui = {
           showFilters: true,
-          sortType: 'casterName',
+          sortType: 'mapName',
           sortReverse: false,
           pages: 1,
           page: 1,
@@ -17,17 +17,17 @@
           search: ''
       };
 
-      staffService.getCasters().$promise.then(function(result) {
+      mapService.getMaps().$promise.then(function(result) {
         var data = cleanResponse(result);
-        controller.casterData = data;
-        controller.casterListData = controller.paginate(data);
+        controller.mapData = data;
+        controller.mapListData = controller.paginate(data);
       });
 
       function cleanResponse(resp) {
         return JSON.parse(angular.toJson(resp));
       }
-
-      controller.setStaffSort = function(sortType) {
+      
+      controller.setMapSort = function(sortType) {
         controller.ui.sortType = sortType;
         controller.ui.sortReverse = !controller.ui.sortReverse;
       };
@@ -46,11 +46,11 @@
 
       controller.previousPage = function () {
           controller.ui.page = controller.ui.page - 1;
-          controller.casterListData = controller.paginate(controller.casterData);
+          controller.mapListData = controller.paginate(controller.mapData);
       };
       controller.nextPage = function () {
           controller.ui.page = controller.ui.page + 1;
-          controller.casterListData = controller.paginate(controller.casterData);
+          controller.mapListData = controller.paginate(controller.mapData);
       };
     }
   ]);
