@@ -1,92 +1,61 @@
 <div class="contextHead">
     <div class="leftSide">
         <!-- span.btn.lg.solid.icon(ng-click="test()") Test -->
-        <!-- a.btn.lg.solid.icon(href="add/team", ng-show="dataListController.ui.view == 'Teams'") -->
+        <!-- a.btn.lg.solid.icon(href="add/team", ng-show=") -->
         <!-- Just have one button to access data management portion -->
-        <!-- a.btn.lg.solid.icon(href="data/new", ng-if="dataListController.ui.view == 'Teams'") -->
-        <a href="data/new/{{dataListController.ui.view}}" class="btn lg solid icon">
+        <!-- a.btn.lg.solid.icon(href="data/new", ng-if=") -->
+        <a href="data/new/teams" class="btn lg solid icon">
             <i class="icon-file-add">
             </i>
             <span>
                 Create New Data
             </span>
         </a>
-        <!--
-            a.btn.lg.solid.icon(href="data/new", ng-if="dataListController.ui.view == 'Staff'")
-            //i.icon-file-add
-            //span New Staff
-        -->
-        <!--
-            a.btn.lg.solid.icon(href="data/new", ng-if="dataListController.ui.view == 'Maps'")
-            //i.icon-file-add
-            //span New Map
-        -->
     </div>
     <div class="rightSide">
-        <div class="filterControl">
-            <a href="" ng-click="dataListController.ui.showFilters = !dataListController.ui.showFilters">
-                {{dataListController.ui.showFilters ? "Hide" : "Show"}} Filter Controls
-            </a>
-        </div>
-        <div class="tabs">
-            <div ng-click="dataListController.ui.view = 'teams'" ng-class="dataListController.ui.view == 'teams' ? 'active' : ''" class="teams">
-                <i class="icon-teams">
-                </i>
-                <span>
-                    Teams
-                </span>
-            </div>
-            <div ng-click="dataListController.ui.view = 'staff'" ng-class="dataListController.ui.view == 'staff' ? 'active' : ''" class="staff">
-                <i class="icon-staff">
-                </i>
-                <span>
-                    Staff
-                </span>
-            </div>
-            <div ng-click="dataListController.ui.view = 'maps'" ng-class="dataListController.ui.view == 'maps' ? 'active' : ''" class="staff">
-                <i class="icon-maps">
-                </i>
-                <span>
-                    Maps
-                </span>
-            </div>
-        </div>
+        <a class="btn lg solid icon" ng-click="teamListController.ui.showFilters = !teamListController.ui.showFilters">
+            <i class="fa fa-arrow-down" ng-show="teamListController.ui.showFilters">
+            </i>
+            <i class="fa fa-arrow-right" ng-show="!teamListController.ui.showFilters">
+            </i>
+            <span>
+                Toggle Filter Controls
+            </span>
+        </a>
     </div>
 </div>
-<div ng-show="dataListController.ui.showFilters" class="filters">
-    <input type="text" ng-model="teams.search" placeholder="Search Teams" ng-show="dataListController.ui.view == 'teams'"/>
-    <input type="text" ng-model="staff.search" placeholder="Search Staff" ng-show="dataListController.ui.view == 'staff'"/>
-    <input type="text" ng-model="maps.search" placeholder="Search Maps" ng-show="dataListController.ui.view == 'maps'"/>
+<div ng-show="teamListController.ui.showFilters" class="filters">
+    <input type="text" ng-model="teams.search" placeholder="Search Teams" />
 </div>
-<div id="Teams" ng-show="dataListController.ui.view == 'teams'" class="data">
+<div id="Teams" class="data">
     <table class="standard">
         <thead>
             <tr>
                 <th>
-                    <a href="" ng-click="dataListController.setTeamSort('teamTag')">
+                    <a href="" ng-click="teamListController.setTeamSort('teamTag')">
                         Tag
                     </a>
-                    <span ng-show="dataListController.ui.teams.sort.sortType == 'teamTag' &amp;&amp; !dataListController.ui.teams.sort.sortReverse" class="caret-down">
+                    <span ng-show="teamListController.ui.sortType == 'teamTag' &amp;&amp; !teamListController.ui.sortReverse" class="caret-down">
                     </span>
-                    <span ng-show="dataListController.ui.teams.sort.sortType == 'teamTag' &amp;&amp; dataListController.ui.teams.sort.sortReverse" class="caret-up">
+                    <span ng-show="teamListController.ui.sortType == 'teamTag' &amp;&amp; teamListController.ui.sortReverse" class="caret-up">
                     </span>
                 </th>
                 <th>
-                    <a href="" ng-click="dataListController.setTeamSort('teamName')">
+                    <a href="" ng-click="teamListController.setTeamSort('teamName')">
                         Name
                     </a>
-                    <span ng-show="dataListController.ui.teams.sort.sortType == 'teamName' &amp;&amp; !dataListController.ui.teams.sort.sortReverse" class="caret-down">
+                    <span ng-show="teamListController.ui.sortType == 'teamName' &amp;&amp; !teamListController.ui.sortReverse" class="caret-down">
                     </span>
-                    <span ng-show="dataListController.ui.teams.sort.sortType == 'teamName' &amp;&amp; dataListController.ui.teams.sort.sortReverse" class="caret-up">
+                    <span ng-show="teamListController.ui.sortType == 'teamName' &amp;&amp; teamListController.ui.sortReverse" class="caret-up">
                     </span>
                 </th>
                 <th>
-                    <a href="" ng-click="dataListController.setTeamSort('country')">
+                    <a href="" ng-click="teamListController.setTeamSort('country')">
                         Country
                     </a>
-                    <span ng-show="dataListController.ui.teams.sort.sortType == 'country' &amp;&amp; !dataListController.ui.teams.sort.sortReverse" class="caret-down">
+                    <span ng-show="teamListController.ui.sortType == 'country' &amp;&amp; !teamListController.ui.sortReverse" class="caret-down">
                     </span>
-                    <span ng-show="dataListController.ui.teams.sort.sortType == 'country' &amp;&amp; dataListController.ui.teams.sort.sortReverse" class="caret-up">
+                    <span ng-show="teamListController.ui.sortType == 'country' &amp;&amp; teamListController.ui.sortReverse" class="caret-up">
                     </span>
                 </th>
                 <th>
@@ -98,7 +67,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="team in dataListController.teamListData | orderBy: dataListController.ui.teams.sort.sortType : dataListController.ui.teams.sort.sortReverse">
+            <tr ng-repeat="team in teamListController.teamListData | orderBy: teamListController.ui.sortType : teamListController.ui.sortReverse">
                 <td class="tag">
                     {{team.teamTag}}
                 </td>
@@ -106,11 +75,10 @@
                     {{team.teamName}}
                 </td>
                 <td class="icon">
-                    <img ng-src="/assets/images/teams/logo/{{team.teamTag}}.png"/>
+                    <img ng-src="/assets/images/teams/logo/{{team.teamTag}}.png" />
                 </td>
                 <td class="country">
-                    <img ng-src="/assets/images/countries/{{team.teamCountry}}.png"/>
-                    {{team.teamCountry}}
+                    <img ng-src="/assets/images/countries/{{team.teamCountry}}.png" /> {{team.teamCountry}}
                 </td>
                 <td class="edit">
                     <a ng-href="/data/edit/teams/{{team._id}}">
@@ -128,169 +96,17 @@
         </tbody>
     </table>
 </div>
-<div id="Staff" ng-show="dataListController.ui.view == 'staff'" class="data">
-    <table class="standard">
-        <thead>
-            <tr>
-                <th>
-                    <a href="" ng-click="dataListController.setStaffSort('casterName')">
-                        Name
-                    </a>
-                    <span ng-show="dataListController.ui.staff.sort.sortType == 'casterName' &amp;&amp; !dataListController.ui.staff.sort.sortReverse" class="caret-down">
-                    </span>
-                    <span ng-show="dataListController.ui.staff.sort.sortType == 'casterName' &amp;&amp; dataListController.ui.staff.sort.sortReverse" class="caret-up">
-                    </span>
-                </th>
-                <th>
-                    <a href="" ng-click="dataListController.setStaffSort('casterAlias')">
-                        Alias
-                    </a>
-                    <span ng-show="dataListController.ui.staff.sort.sortType == 'casterAlias' &amp;&amp; !dataListController.ui.staff.sort.sortReverse" class="caret-down">
-                    </span>
-                    <span ng-show="dataListController.ui.staff.sort.sortType == 'casterAlias' &amp;&amp; dataListController.ui.staff.sort.sortReverse" class="caret-up">
-                    </span>
-                </th>
-                <th>
-                    <a href="" ng-click="dataListController.setStaffSort('casterCountry')">
-                        Country
-                    </a>
-                    <span ng-show="dataListController.ui.staff.sort.sortType == 'casterCountry' &amp;&amp; !dataListController.ui.staff.sort.sortReverse" class="caret-down">
-                    </span>
-                    <span ng-show="dataListController.ui.staff.sort.sortType == 'casterCountry' &amp;&amp; dataListController.ui.staff.sort.sortReverse" class="caret-up">
-                    </span>
-                </th>
-                <th>
-                </th>
-                <th>
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr ng-repeat="staff in dataListController.casterListData | orderBy: dataListController.ui.staff.sort.sortType : dataListController.ui.staff.sort.sortReverse">
-                <td class="name">
-                    {{staff.casterName}}
-                </td>
-                <td class="alias">
-                    {{staff.casterAlias}}
-                </td>
-                <td class="country">
-                    <img ng-src="/assets/images/countries/{{team.teamCountry}}.png"/>
-                    {{staff.casterCountry}}
-                </td>
-                <td class="edit">
-                    <a ng-href="/data/edit/staff/{{staff._id}}">
-                        <i class="icon-pencil">
-                        </i>
-                    </a>
-                </td>
-                <td class="url">
-                    <a ng-href="/data/staff/{{staff._id}}">
-                        <i class="icon-logout">
-                        </i>
-                    </a>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</div>
-<div id="Maps" ng-show="dataListController.ui.view == 'maps'" class="data">
-    <table class="standard">
-        <thead>
-            <tr>
-                <th>
-                    <a href="" ng-click="dataListController.setMapSort('map')">
-                        Map
-                    </a>
-                    <span ng-show="dataListController.ui.maps.sort.sortType == 'map' &amp;&amp; !dataListController.ui.maps.sort.sortReverse" class="caret-down">
-                    </span>
-                    <span ng-show="dataListController.ui.maps.sort.sortType == 'map' &amp;&amp; dataListController.ui.maps.sort.sortReverse" class="caret-up">
-                    </span>
-                </th>
-                <th>
-                    <a href="" ng-click="dataListController.setMapSort('mapName')">
-                        Name
-                    </a>
-                    <span ng-show="dataListController.ui.maps.sort.sortType == 'mapName' &amp;&amp; !dataListController.ui.maps.sort.sortReverse" class="caret-down">
-                    </span>
-                    <span ng-show="dataListController.ui.maps.sort.sortType == 'mapName' &amp;&amp; dataListController.ui.maps.sort.sortReverse" class="caret-up">
-                    </span>
-                </th>
-                <th>
-                    <a href="" ng-click="dataListController.setMapSort('mapGame')">
-                        Game
-                    </a>
-                    <span ng-show="dataListController.ui.maps.sort.sortType == 'mapGame' &amp;&amp; !dataListController.ui.maps.sort.sortReverse" class="caret-down">
-                    </span>
-                    <span ng-show="dataListController.ui.maps.sort.sortType == 'mapGame' &amp;&amp; dataListController.ui.maps.sort.sortReverse" class="caret-up">
-                    </span>
-                </th>
-                <th>
-                </th>
-                <th>
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr ng-repeat="map in dataListController.mapListData | orderBy: dataListController.ui.maps.sort.sortType : dataListController.ui.maps.sort.sortReverse">
-                <td class="map">
-                    img(ng-src="/assets/images/maps/{{map.teamTag}}.png")
-                </td>
-                <td class="name">
-                    {{map.mapName}}
-                </td>
-                <td class="game">
-                    {{map.mapGame}}
-                </td>
-                <td class="edit">
-                    <a ng-href="/data/edit/maps/{{map._id}}">
-                        <i class="icon-pencil">
-                        </i>
-                    </a>
-                </td>
-                <td class="url">
-                    <a ng-href="/data/map/{{map._id}}">
-                        <i class="icon-logout">
-                        </i>
-                    </a>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</div>
-<span ng-show="(dataListController.teamData == null || dataListController.teamData.length == 0) &amp;&amp; dataListController.ui.view == 'teams'">
+<span ng-show="(teamListController.teamData == null || teamListController.teamData.length == 0)">
     No data matches those criteria.
 </span>
-<span ng-show="(dataListController.casterData == null || dataListController.casterData.length == 0) &amp;&amp; dataListController.ui.view == 'staff'">
-    No data matches those criteria.
-</span>
-<span ng-show="(dataListController.mapData == null || dataListController.mapData.length == 0) &amp;&amp; dataListController.ui.view == 'maps'">
-    No data matches those criteria.
-</span>
-<div ng-show="dataListController.ui.teams.sort.pages &gt; 1 &amp;&amp; dataListController.ui.view == 'teams'" class="pagination">
-    <a ng-show="dataListController.ui.teams.sort.page &gt; 1" ng-click="dataListController.previousPage('teams')" class="btn">
+<div ng-show="teamListController.ui.pages > 1" class="pagination">
+    <a ng-style="{visibility: teamListController.ui.page > 1 && 'visible' || 'hidden'}" ng-click="teamListController.previousPage()" class="btn">
         Prev Page
     </a>
-    Page {{dataListController.ui.teams.sort.page}} of {{dataListController.ui.teams.sort.pages}}
-    <a ng-show="dataListController.ui.teams.sort.pages &gt; 1 &amp;&amp; dataListController.ui.teams.sort.page &lt; dataListController.ui.teams.sort.pages" ng-click="dataListController.nextPage('teams')" class="btn">
+    <p>
+        Page {{teamListController.ui.page}} of {{teamListController.ui.pages}}
+    </p>
+    <a ng-style="{visibility: (teamListController.ui.pages > 1 && teamListController.ui.page < teamListController.ui.pages) && 'visible' || 'hidden'}" ng-click="teamListController.nextPage()" class="btn">
         Next Page
     </a>
-</div>
-<div ng-show="dataListController.ui.staff.sort.pages &gt; 1 &amp;&amp; dataListController.ui.view =='staff'" class="pagination">
-    <a ng-show="dataListController.ui.staff.sort.page &gt; 1" ng-click="dataListController.previousPage('staff')" class="btn">
-        Prev Page
-    </a>
-    Page {{dataListController.ui.staff.sort.page}} of {{dataListController.ui.staff.sort.pages}}
-    <a ng-show="dataListController.ui.staff.sort.pages &gt; 1 &amp;&amp; dataListController.ui.staff.sort.page &lt; dataListController.ui.staff.sort.pages" ng-click="dataListController.nextPage('staff')" class="btn">
-        Next Page
-    </a>
-</div>
-<div ng-show="dataListController.ui.maps.sort.pages &gt; 1 &amp;&amp; dataListController.ui.view =='maps'" class="pagination">
-    <a ng-show="dataListController.ui.maps.sort.page &gt; 1" ng-click="dataListController.previousPage('maps')" class="btn">
-        Prev Page
-    </a>
-    Page {{dataListController.ui.maps.sort.page}} of {{dataListController.ui.maps.sort.pages}}
-    <a ng-show="dataListController.ui.maps.sort.pages &gt; 1 &amp;&amp; dataListController.ui.maps.sort.page &lt; dataListController.ui.maps.sort.pages" ng-click="dataListController.nextPage('maps')" class="btn">
-        Next Page
-    </a>
-</div>
 </div>

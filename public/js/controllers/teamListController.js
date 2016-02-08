@@ -1,72 +1,71 @@
 (function() {
   'use strict';
 
-  angular.module('eventApp').controller('staffListController', [
-    'staffService',
-    function(staffService, $route, $scope, $routeParams) {
+  angular.module('eventApp').controller('teamListController', [
+    'teamService',
+    function(teamService) {
       var controller = this;
-      
-    //   $scope.init = function () {
-    //       //  Calling routeParam method
-    //       if ($route.current.method !== undefined) {
-    //           $scope[$route.current.method]();
-    //       }
-    //   };
-    //   
-    //   $scope.init();
 
       controller.ui = {
-        showFilters: true,
-        sort: {
-            sortType: 'casterName',
-            sortReverse: false,
-            pages: 1,
-            page: 1,
-          },
-        listView: true,
-        itemsPerPage: 10,
-        search: ''
+          showFilters: true,
+          sortType: 'teamTag',
+          sortReverse: false,
+          pages: 1,
+          page: 1,
+          listView: true,
+          itemsPerPage: 10,
+          search: ''
       };
 
-      staffService.getCasters().$promise.then(function(result) {
+      teamService.getTeams().$promise.then(function(result) {
         var data = cleanResponse(result);
-        controller.casterData = data;
-        controller.casterListData = controller.paginate(data);
+        controller.teamData = data;
+        controller.teamListData = controller.paginate(data);
       });
 
       function cleanResponse(resp) {
         return JSON.parse(angular.toJson(resp));
       }
+      
+      controller.setTeamSort = function(sortType) {
+        controller.ui.sortType = sortType;
+        controller.ui.sortReverse = !controller.ui.sortReverse;
+      };
+// 
+//        controller.paginate = function(data) {
+//         if (controller.ui.listView === false) {
+//           controller.ui.itemsPerPage = 6;
+//         }
+// 
+//         controller.ui.sort.pages = Math.ceil(data.length / controller.ui.itemsPerPage);
+// 
+//         if (data.length > controller.ui.itemsPerPage) {
+//           var start = (controller.ui.sort.page - 1) * controller.ui.itemsPerPage;
+//           var end = start + controller.ui.itemsPerPage;
+//           return data.slice(start, end);
+//         } else {
+//           return data;
+      //         }
+      //       };
 
-      controller.setSort = function(sortType) {
-        controller.ui.sort.sortType = sortType;
-        controller.ui.sort.sortReverse = !controller.ui.staff.sort.sortReverse;
+      controller.paginate = function (data) {
+        //   data = controller.filter(data);
+        //   data = controller.sort(data);
+          controller.ui.pages = Math.ceil(data.length / controller.ui.itemsPerPage);
+          if (data.length > controller.ui.itemsPerPage) {
+              var start = (controller.ui.page - 1) * controller.ui.itemsPerPage;
+              var end = start + controller.ui.itemsPerPage;
+              return data.slice(start, end);
+          } else return data;
       };
 
-      controller.paginate = function(data) {
-        if (controller.ui.listView === false) {
-          controller.ui.itemsPerPage = 6;
-        }
-
-        controller.ui.sort.pages = Math.ceil(data.length / controller.ui.itemsPerPage);
-
-        if (data.length > controller.ui.itemsPerPage) {
-          var start = (controller.ui.sort.page - 1) * controller.ui.itemsPerPage;
-          var end = start + controller.ui.itemsPerPage;
-          return data.slice(start, end);
-        } else {
-          return data;
-        }
+      controller.previousPage = function () {
+          controller.ui.page = controller.ui.page - 1;
+          controller.teamListData = controller.paginate(controller.teamData);
       };
-
-      controller.previousPage = function(viewName) {
-        controller.ui.sort.page = controller.ui.sort.page - 1;
-        controller.casterListData = controller.paginate(controller.casterData);
-      };
-
-      controller.nextPage = function(viewName) {
-        controller.ui.sort.page = controller.ui.sort.page + 1;
-        controller.casterListData = controller.paginate(controller.casterData);
+      controller.nextPage = function () {
+          controller.ui.page = controller.ui.page + 1;
+          controller.teamListData = controller.paginate(controller.teamData);
       };
     }
   ]);
