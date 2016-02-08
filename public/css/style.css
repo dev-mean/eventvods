@@ -151,6 +151,27 @@ a img {
 }
 /* colors */
 /* layout */
+input.parsley-success,
+select.parsley-success,
+textarea.parsley-success {
+  color: #468847;
+  background-color: #DFF0D8;
+  border: 1px solid #D6E9C6;
+}
+input.parsley-error,
+select.parsley-error,
+textarea.parsley-error {
+  color: #B94A48;
+  background-color: #F2DEDE;
+  border: 1px solid #EED3D7;
+}
+.parsley-errors-list {
+  margin: 2px 0 3px;
+  padding: 0;
+  list-style-type: none;
+  display: block;
+  order: 3;
+}
 /* global elements + box sizing */
 html {
   background: url(/assets/images/backend-background.jpg) no-repeat center center fixed;
@@ -368,7 +389,6 @@ nav a i.fa {
   position: relative;
   background: #3c405c;
   padding: 24px;
-  padding-top: 0;
   margin-top: 0;
 }
 .section h2 {
@@ -679,8 +699,10 @@ table.standard td.icon img {
   border-bottom: 1px solid #3c405c;
   border-left: 1px solid #3c405c;
 }
-.filters input,
-.tabs input {
+.filters {
+  padding: 16px;
+}
+.filters input {
   border-radius: 2px;
   outline: none;
   line-height: 14px;
@@ -696,37 +718,29 @@ table.standard td.icon img {
   transition: all 0.25s ease-in-out;
   width: 100%;
 }
-.filters input:focus,
-.tabs input:focus {
+.filters input:focus {
   border-color: #a4abc1;
   color: #d3d7e3;
 }
-.filters input::-webkit-input-placeholder,
-.tabs input::-webkit-input-placeholder {
+.filters input::-webkit-input-placeholder {
   font-size: 14px;
   line-height: 16px;
   color: #8690af;
 }
-.filters input::-moz-placeholder,
-.tabs input::-moz-placeholder {
+.filters input::-moz-placeholder {
   font-size: 14px;
   line-height: 16px;
   color: #8690af;
 }
-.filters input:-moz-placeholder,
-.tabs input:-moz-placeholder {
+.filters input:-moz-placeholder {
   font-size: 14px;
   line-height: 16px;
   color: #8690af;
 }
-.filters input:-ms-input-placeholder,
-.tabs input:-ms-input-placeholder {
+.filters input:-ms-input-placeholder {
   font-size: 14px;
   line-height: 16px;
   color: #8690af;
-}
-.filters {
-  padding: 16px;
 }
 .tabs {
   display: -webkit-inline-flex;
@@ -756,6 +770,19 @@ table.standard td.icon img {
 .tabs span.selected {
   background: #3c405c;
   text-decoration: underline;
+}
+.tabs span i {
+  padding-left: 2px;
+}
+.errors {
+  padding: 24px;
+  background: #3c405c;
+}
+.errors ul {
+  padding-left: 24px;
+}
+.errors ul li {
+  color: red;
 }
 /* event listing */
 .row-list {

@@ -4,6 +4,7 @@
 @import "elements.less";
 @import "flexbox.less";
 @import "variables.less";
+@import "parsley.less";
 @import url(https://fonts.googleapis.com/css?family=Open+Sans);
 
 /* global elements + box sizing */
@@ -160,7 +161,6 @@ nav {
 	position: relative;
 	background: @default;
 	padding: @gutter;
-	padding-top: 0;
 	margin-top: 0;
 	h2 {
 		padding: @padding-sm - 6 0;
@@ -409,13 +409,13 @@ table.standard {
 	width: 100%;
 	border-bottom: 1px solid @default;
 	border-left: 1px solid @default;
+}
+.filters {
+	padding: @padding-sm;
 	input {
 		.form-style;
 		width: 100%;
 	}
-}
-.filters {
-	padding: @padding-sm;
 }
 .tabs {
 	.flex-display(inline-flex);
@@ -431,8 +431,21 @@ table.standard {
 			background: @default;
 			text-decoration: underline;
 		}
+		i {
+			padding-left: 2px;
+		}
 	}
-}	
+}
+.errors {
+	padding: @gutter;
+	background: @default;
+	ul {
+		padding-left: @gutter;
+		li {
+			color: red;
+		}
+	}
+}
 
 /* event listing */
 

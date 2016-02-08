@@ -1,11 +1,18 @@
 (function() {
     'use strict';
     angular.module('eventApp').controller('newEventController', ['eventService',
-        function(eventFormService) {
+        function(eventService) {
             var controller = this;
             controller.ui = {
                 stage: 1,
-                errors: [],
+                errors: {
+                    s1: true,
+                    s2: false,
+                    s3: false,
+                    s4: false,
+                    s5: false,
+                    s6: false
+                },
                 data: {},
             };
             controller.options = {
@@ -16,6 +23,10 @@
             };
             controller.prevSection = function() {
                 if (controller.ui.stage > 1) controller.ui.stage--;
+            };
+            controller.test = function() {
+                var parsley = $('#newEventForm').parsley();
+                console.log(parsley.validate());
             }
         }
     ]);

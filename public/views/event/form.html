@@ -5,7 +5,7 @@
         </h1>
     </div>
     <div class="rightSide">
-        <a class="btn lg solid">
+        <a class="btn lg solid" ng-click="newEventController.test()">
             <span>
                 Save Draft
             </span>
@@ -20,83 +20,85 @@
 <div class="tabs">
     <span ng-class="{selected: newEventController.ui.stage == 1}" ng-click="newEventController.ui.stage = 1">
         Tournament Details
+        <i class="fa fa-check-circle" ng-show="newEventController.ui.errors.s1"></i>
+        <i class="fa fa-fw fa-exclamation-circle" ng-show="!newEventController.ui.errors.s1"></i>
     </span>
     <span ng-class="{selected: newEventController.ui.stage == 2}" ng-click="newEventController.ui.stage = 2">
         Media
+        <i class="fa fa-check-circle" ng-show="newEventController.ui.errors.s2"></i>
+        <i class="fa fa-fw fa-exclamation-circle" ng-show="!newEventController.ui.errors.s2"></i>
     </span>
     <span ng-class="{selected: newEventController.ui.stage == 3}" ng-click="newEventController.ui.stage = 3">
         Staff
+        <i class="fa fa-check-circle" ng-show="newEventController.ui.errors.s3"></i>
+        <i class="fa fa-fw fa-exclamation-circle" ng-show="!newEventController.ui.errors.s3"></i>
     </span>
     <span ng-class="{selected: newEventController.ui.stage == 4}" ng-click="newEventController.ui.stage = 4">
         Teams
+        <i class="fa fa-check-circle" ng-show="newEventController.ui.errors.s4"></i>
+        <i class="fa fa-fw fa-exclamation-circle" ng-show="!newEventController.ui.errors.s4"></i>
     </span>
     <span ng-class="{selected: newEventController.ui.stage == 5}" ng-click="newEventController.ui.stage = 5">
         Brackets
+        <i class="fa fa-check-circle" ng-show="newEventController.ui.errors.s5"></i>
+        <i class="fa fa-fw fa-exclamation-circle" ng-show="!newEventController.ui.errors.s5"></i>
     </span>
     <span ng-class="{selected: newEventController.ui.stage == 6}" ng-click="newEventController.ui.stage = 6">
         Image
+        <i class="fa fa-check-circle" ng-show="newEventController.ui.errors.s6"></i>
+        <i class="fa fa-fw fa-question-circle" ng-show="!newEventController.ui.errors.s6"></i>
     </span>
 </div>
-<form name="form" ng-cloak>
-    <div id="errors" ng-show="newEventController.ui.errors.length >0" class="errors">
-        <ul>
-            <li ng-repeat="error in newEventController.ui.errors">
-                {{error.message}}
-            </li>
-        </ul>
-    </div>
+<form name="form" id="newEventForm" ng-cloak data-parsley-validate >
     <!-- Form page 1 -->
     <div id="info" ng-show="newEventController.ui.stage == 1" class="section">
-        <h2>
-            Tournament Information
-        </h2>
         <div class="standard group">
             <label>
                 Event Title
             </label>
-            <input type="text" ng-model="newEventController.data.eventTitle" required="required"/>
+            <input type="text" ng-model="newEventController.data.eventTitle" data-parsley-group="1" data-parsley-trigger="keyup" required/>
         </div>
         <div class="standard group">
             <label>
                 Event Game
             </label>
-            <input type="text" ng-model="newEventController.data.eventGame" required="required"/>
+            <input type="text" ng-model="newEventController.data.eventGame" data-parsley-group="1" data-parsley-trigger="keyup" required/>
         </div>
         <div class="standard group">
             <label>
                 Event Location
             </label>
-            <input type="text" ng-model="newEventController.data.eventLocation" required="required"/>
+            <input type="text" ng-model="newEventController.data.eventLocation" data-parsley-group="1" data-parsley-trigger="keyup" required/>
         </div>
         <div class="standard group">
             <label>
                 Event Permalink
             </label>
-            <input type="text" ng-model="newEventController.data.eventPermaLink" required="required"/>
+            <input type="text" ng-model="newEventController.data.eventPermaLink" data-parsley-group="1" data-parsley-trigger="keyup" required/>
         </div>
         <div class="standard group">
             <label>
                 Event Abbrev
             </label>
-            <input type="text" ng-model="newEventController.data.eventAbbreviation" required="required"/>
+            <input type="text" ng-model="newEventController.data.eventAbbreviation" data-parsley-group="1" data-parsley-trigger="keyup" required/>
         </div>
         <div class="standard group">
             <label>
                 Event Priority
             </label>
-            <input type="text" ng-model="newEventController.data.eventPriority" required="required"/>
+            <input type="text" ng-model="newEventController.data.eventPriority" data-parsley-group="1" data-parsley-trigger="keyup" required/>
         </div>
         <div class="standard group">
             <label>
                 Event Start
             </label>
-            <input type="text" ng-model="newEventController.data.eventStartDate" pick-a-date="date" placeholder="Select Date" pick-a-date-options="dateOpts" required="required"/>
+            <input type="text" ng-model="newEventController.data.eventStartDate" pick-a-date="date" placeholder="Select Date" pick-a-date-options="dateOpts" data-parsley-group="1" data-parsley-trigger="change" required/>
         </div>
         <div class="standard group">
             <label>
                 Event End
             </label>
-            <input type="text" ng-model="newEventController.data.eventEndDate" pick-a-date="date" placeholder="Select Date" pick-a-date-options="dateOpts" required="required"/>
+            <input type="text" ng-model="newEventController.data.eventEndDate" pick-a-date="date" placeholder="Select Date" pick-a-date-options="dateOpts" data-parsley-group="1" data-parsley-trigger="change" required/>
         </div>
     </div>
     <div id="image" ng-show="newEventController.ui.stage == 6" class="section">
@@ -117,3 +119,5 @@
         </a>
     </div>
 </form>
+<script src="/assets/lib/parsleyjs/dist/parsley.min.js">
+</script>
