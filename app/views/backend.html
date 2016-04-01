@@ -16,6 +16,7 @@
         <link href="/assets/lib/angular-native-picker/build/themes/default.time.css" rel="stylesheet"/>
         <link href="/assets/lib/dropzone/dist/min/dropzone.min.css" rel="stylesheet"/>
         <link href="/assets/lib/toastr/toastr.min.css" rel="stylesheet"/>
+        <link href="/assets/lib/angular-loading-bar/build/loading-bar.min.css" rel="stylesheet"/>
     </head>
     <body>
         <div class="container" ng-app="eventApp">
@@ -77,7 +78,7 @@
                 </nav>
             </div>
             <div class="rightView">
-                <ng-view>
+                <ng-view id="fragmentViewer">
                 </ng-view>
             </div>
         </div>
@@ -90,6 +91,8 @@
         <script src="/assets/lib/angular-resource/angular-resource.min.js">
         </script>
         <script src="/assets/lib/angular-route/angular-route.min.js">
+        </script>
+        <script src="/assets/lib/angular-loading-bar/build/loading-bar.min.js">
         </script>
         <script src="/assets/lib/angular-native-picker/build/angular-datepicker.js">
         </script>
@@ -132,8 +135,6 @@
         <script src="/assets/js/controllers/mapListController.js">
         </script>
         <script src="/assets/js/services/mapService.js">
-        </script>
-        <script src="/assets/js/controllers/layoutController.js">
         </script>
     </body>
 </html>

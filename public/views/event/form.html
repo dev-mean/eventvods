@@ -20,33 +20,45 @@
 <div class="tabs">
     <span ng-class="{selected: newEventController.ui.stage == 1}" ng-click="newEventController.ui.stage = 1">
         Tournament Details
-        <i class="fa fa-check-circle" ng-show="newEventController.ui.errors.s1"></i>
-        <i class="fa fa-fw fa-exclamation-circle" ng-show="!newEventController.ui.errors.s1"></i>
+        <i class="fa fa-check-circle" ng-show="newEventController.ui.errors.s1">
+        </i>
+        <i class="fa fa-fw fa-exclamation-circle" ng-show="!newEventController.ui.errors.s1">
+        </i>
     </span>
     <span ng-class="{selected: newEventController.ui.stage == 2}" ng-click="newEventController.ui.stage = 2">
         Media
-        <i class="fa fa-check-circle" ng-show="newEventController.ui.errors.s2"></i>
-        <i class="fa fa-fw fa-exclamation-circle" ng-show="!newEventController.ui.errors.s2"></i>
+        <i class="fa fa-check-circle" ng-show="newEventController.ui.errors.s2">
+        </i>
+        <i class="fa fa-fw fa-exclamation-circle" ng-show="!newEventController.ui.errors.s2">
+        </i>
     </span>
     <span ng-class="{selected: newEventController.ui.stage == 3}" ng-click="newEventController.ui.stage = 3">
         Staff
-        <i class="fa fa-check-circle" ng-show="newEventController.ui.errors.s3"></i>
-        <i class="fa fa-fw fa-exclamation-circle" ng-show="!newEventController.ui.errors.s3"></i>
+        <i class="fa fa-check-circle" ng-show="newEventController.ui.errors.s3">
+        </i>
+        <i class="fa fa-fw fa-exclamation-circle" ng-show="!newEventController.ui.errors.s3">
+        </i>
     </span>
     <span ng-class="{selected: newEventController.ui.stage == 4}" ng-click="newEventController.ui.stage = 4">
         Teams
-        <i class="fa fa-check-circle" ng-show="newEventController.ui.errors.s4"></i>
-        <i class="fa fa-fw fa-exclamation-circle" ng-show="!newEventController.ui.errors.s4"></i>
+        <i class="fa fa-check-circle" ng-show="newEventController.ui.errors.s4">
+        </i>
+        <i class="fa fa-fw fa-exclamation-circle" ng-show="!newEventController.ui.errors.s4">
+        </i>
     </span>
     <span ng-class="{selected: newEventController.ui.stage == 5}" ng-click="newEventController.ui.stage = 5">
         Brackets
-        <i class="fa fa-check-circle" ng-show="newEventController.ui.errors.s5"></i>
-        <i class="fa fa-fw fa-exclamation-circle" ng-show="!newEventController.ui.errors.s5"></i>
+        <i class="fa fa-check-circle" ng-show="newEventController.ui.errors.s5">
+        </i>
+        <i class="fa fa-fw fa-exclamation-circle" ng-show="!newEventController.ui.errors.s5">
+        </i>
     </span>
     <span ng-class="{selected: newEventController.ui.stage == 6}" ng-click="newEventController.ui.stage = 6">
         Image
-        <i class="fa fa-check-circle" ng-show="newEventController.ui.errors.s6"></i>
-        <i class="fa fa-fw fa-question-circle" ng-show="!newEventController.ui.errors.s6"></i>
+        <i class="fa fa-check-circle" ng-show="newEventController.ui.errors.s6">
+        </i>
+        <i class="fa fa-fw fa-question-circle" ng-show="!newEventController.ui.errors.s6">
+        </i>
     </span>
 </div>
 <form name="form" id="newEventForm" ng-cloak data-parsley-validate >
@@ -56,50 +68,94 @@
             <label>
                 Event Title
             </label>
-            <input type="text" ng-model="newEventController.data.eventTitle" data-parsley-group="1" data-parsley-trigger="keyup" required/>
+            <input type="text" ng-model="newEventController.ui.data.eventTitle" data-parsley-group="s1" data-parsley-trigger="keyup" data-parsley-type="alphanum" required/>
         </div>
         <div class="standard group">
             <label>
                 Event Game
             </label>
-            <input type="text" ng-model="newEventController.data.eventGame" data-parsley-group="1" data-parsley-trigger="keyup" required/>
+            <input type="text" ng-model="newEventController.ui.data.eventGame" data-parsley-group="s1" data-parsley-trigger="keyup" data-parsley-type="alphanum"required/>
         </div>
         <div class="standard group">
             <label>
                 Event Location
             </label>
-            <input type="text" ng-model="newEventController.data.eventLocation" data-parsley-group="1" data-parsley-trigger="keyup" required/>
+            <input type="text" ng-model="newEventController.ui.data.eventLocation" data-parsley-group="s1" data-parsley-trigger="keyup" data-parsley-type="alphanum" required/>
         </div>
         <div class="standard group">
             <label>
                 Event Permalink
             </label>
-            <input type="text" ng-model="newEventController.data.eventPermaLink" data-parsley-group="1" data-parsley-trigger="keyup" required/>
+            <input type="text" ng-model="newEventController.ui.data.eventPermaLink" data-parsley-group="s1" data-parsley-trigger="keyup" required/>
         </div>
         <div class="standard group">
             <label>
                 Event Abbrev
             </label>
-            <input type="text" ng-model="newEventController.data.eventAbbreviation" data-parsley-group="1" data-parsley-trigger="keyup" required/>
+            <input type="text" ng-model="newEventController.ui.data.eventAbbreviation" data-parsley-group="s1" data-parsley-trigger="keyup" data-parsley-type="alphanum" required/>
         </div>
         <div class="standard group">
             <label>
                 Event Priority
             </label>
-            <input type="text" ng-model="newEventController.data.eventPriority" data-parsley-group="1" data-parsley-trigger="keyup" required/>
+            <input type="text" ng-model="newEventController.ui.data.eventPriority" data-parsley-group="s1" data-parsley-trigger="keyup" data-parsley-type="alphanum" required/>
         </div>
         <div class="standard group">
             <label>
                 Event Start
             </label>
-            <input type="text" ng-model="newEventController.data.eventStartDate" pick-a-date="date" placeholder="Select Date" pick-a-date-options="dateOpts" data-parsley-group="1" data-parsley-trigger="change" required/>
+            <input type="text" ng-model="newEventController.ui.data.eventStartDate" pick-a-date="date" placeholder="Select Date" pick-a-date-options="dateOpts" data-parsley-group="s1" data-parsley-trigger="change" required/>
         </div>
         <div class="standard group">
             <label>
                 Event End
             </label>
-            <input type="text" ng-model="newEventController.data.eventEndDate" pick-a-date="date" placeholder="Select Date" pick-a-date-options="dateOpts" data-parsley-group="1" data-parsley-trigger="change" required/>
+            <input type="text" ng-model="newEventController.ui.data.eventEndDate" pick-a-date="date" placeholder="Select Date" pick-a-date-options="dateOpts" data-parsley-group="s1" data-parsley-trigger="change" required/>
         </div>
+    </div>
+    <div id="media" ng-show="newEventController.ui.stage == 2" class="section">
+        <table class="standard sub">
+            <tr>
+                <th>
+                    Media Type
+                </th>
+                <th>
+                    Media Name
+                </th>
+                <th>
+                    Media URL
+                </th>
+                <th>
+                    <a class="btn icon" ng-click="newEventController.addMedia()">
+                        <i class="fa fa-plus-circle">
+                        </i>
+                        <span>
+                            Add Media
+                        </span>
+                    </a>
+                </th>
+            </tr>
+            <tbody>
+                <tr ng-repeat="item in newEventController.ui.data.media track by $index">
+                    <td>
+                        <input type="text" ng-model="newEventController.ui.data.media[$index].type" data-parsley-group="s2" data-parsley-trigger="change" required/>
+                    </td>
+                    <td>
+                        <input type="text" ng-model="newEventController.ui.data.media[$index].name" data-parsley-group="s2" data-parsley-trigger="change" required/>
+                    </td>
+                    <td>
+                        <input type="text" ng-model="newEventController.ui.data.media[$index].url" data-parsley-group="s2" data-parsley-trigger="change" required/>
+                    </td>
+                    <td>
+                        <a class="btn icon" ng-click="newEventController.removeMedia($index)">
+                            <i class="fa fa-minus-circle">
+                            </i>
+                            <span>Remove</span>
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
     <div id="image" ng-show="newEventController.ui.stage == 6" class="section">
         <h2>

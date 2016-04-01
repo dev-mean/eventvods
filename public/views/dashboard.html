@@ -2,146 +2,225 @@
     <h1 class="title">
         Dashboard
     </h1>
-    <!-- Recent events -->
-    <div class="section" ng-cloak="ng-cloak">
-        <h2 class="title">
-            Recent Events
-        </h2>
-        <div class="row-list" ng-repeat="event in overviewController.overviewData.recent | orderBy: '-eventEndDate'">
-            <div class="item">
-                <div class="imageContain">
-                    <img class="eventImage" src="/assets/images/event-image-sm.jpg"/>
-                    <div class="overlay">
-                    </div>
+    <div class="tile-container dashboard">
+        <div class="tile-row">
+                <div class="tile-cell">
+                    <h3>
+                        Upcoming Events
+                    </h3>
+                    <p>
+                        {{overviewController.overviewData.upcoming}}
+                    </p>
                 </div>
-                <div class="eventDate">
-                    {{event.eventStartDate | date : "dd MMM"}}
+                <div class="tile-cell">
+                    <h3>
+                        Ongoing Events
+                    </h3>
+                    <p>
+                        {{overviewController.overviewData.ongoing}}
+                    </p>
                 </div>
-                <div class="eventDate">
-                    {{event.eventEndDate | date : "dd MMM"}}
+                <div class="tile-cell">
+                    <h3>
+                        Finished Events
+                    </h3>
+                    <p>
+                        {{overviewController.overviewData.finished}}
+                    </p>
                 </div>
-                <div class="eventGame">
-                    {{event.game}}
+        </div>
+        <div class="tile-row">
+                <div class="tile-cell">
+                    <h3>
+                        Staff
+                    </h3>
+                    <p>
+                        {{overviewController.overviewData.staff}}
+                    </p>
                 </div>
-                <div class="eventTitle">
-                    {{event.eventTitle | limitTo: 75}}
+                <div class="tile-cell">
+                    <h3>
+                        Teams
+                    </h3>
+                    <p>
+                        {{overviewController.overviewData.teams}}
+                    </p>
                 </div>
-                <div class="eventStatus">
-                    {{event.status}}
+                <div class="tile-cell">
+                    <h3>
+                        Maps
+                    </h3>
+                    <p>
+                        {{overviewController.overviewData.maps}}
+                    </p>
                 </div>
-            </div>
-            <p ng-show="overviewController.overviewData.recent.length == 0">
-                No recent events.
-            </p>
+        </div>
+        <div class="tile-row">
+                <div class="tile-cell">
+                    <h3>
+                        Users
+                    </h3>
+                    <p>
+                        {{overviewController.overviewData.users}}
+                    </p>
+                </div>
+                <div class="tile-cell">
+                    <h3>
+                        Updaters
+                    </h3>
+                    <p>
+                        {{overviewController.overviewData.updaters}}
+                    </p>
+                </div>
+                <div class="tile-cell">
+                    <h3>
+                        Admins
+                    </h3>
+                    <p>
+                        {{overviewController.overviewData.admins}}
+                    </p>
+                </div>
         </div>
     </div>
-    <!-- Ongoing events -->
-    <div class="section" ng-cloak="ng-cloak">
-        <h2 class="title">
-            Ongoing Events
-        </h2>
-        <div class="row-list" ng-repeat="event in overviewController.overviewData.ongoing">
-            <div class="item">
-                <div class="imageContain">
-                    <img class="eventImage" src="/assets/images/event-image-sm.jpg"/>
-                    <div class="overlay">
-                    </div>
-                </div>
-                <div class="eventDate">
-                    {{event.eventStartDate | date : "dd MMM"}}
-                </div>
-                <div class="eventDate">
-                    {{event.eventEndDate | date : "dd MMM"}}
-                </div>
-                <div class="eventGame">
-                    {{event.game}}
-                </div>
-                <div class="eventTitle">
-                    {{event.eventTitle | limitTo: 75}}
-                </div>
-                <div class="eventTitle">
-                    {{event.eventTitle | limitTo: 75}}
-                </div>
-                <div class="eventStatus">
-                    {{event.status}}
-                </div>
-            </div>
-            <p ng-show="overviewController.overviewData.ongoing.length == 0">
-                No ongoing events.
-            </p>
-        </div>
-    </div>
-    <!-- Upcoming events -->
-    <div class="section" ng-cloak="ng-cloak">
-        <h2 class="title">
-            Upcoming Events
-        </h2>
-        <div class="row-list" ng-repeat="event in overviewController.overviewData.upcoming">
-            <div class="item">
-                <div class="imageContain">
-                    <img class="eventImage" src="/assets/images/event-image-sm.jpg"/>
-                    <div class="overlay">
-                    </div>
-                </div>
-                <div class="eventDate">
-                    {{event.eventStartDate | date : "dd MMM"}}
-                </div>
-                <div class="eventDate">
-                    {{event.eventEndDate | date : "dd MMM"}}
-                </div>
-                <div class="eventGame">
-                    {{event.game}}
-                </div>
-                <div class="eventTitle">
-                    {{event.eventTitle | limitTo: 75}}
-                </div>
-                <div class="eventStatus">
-                    {{event.status}}
-                </div>
-            </div>
-        </div>
-        <p ng-show="overviewController.overviewData.upcoming.length == 0">
-            No upcoming events.
-        </p>
-    </div>
-    <div class="section">
-        <!-- Data manager -->
-        <div class="section" ng-cloak="ng-cloak">
+    <!--
+        Previous Layout
+        <div class="section dashboard" ng-cloak="ng-cloak">
             <h2 class="title">
-                Data Manager
+                Recent Events
             </h2>
-            <div class="box">
-                <span class="data">
-                    Casters
-                </span>
-                <span class="count">
-                    {{overviewController.overviewData.casters}}
-                </span>
+            <!--
+                <div class="row-list" ng-repeat="event in overviewController.overviewData.recent | orderBy: '-eventEndDate'">
+                    <div class="item">
+                        <div class="imageContain">
+                            <img class="eventImage" src="/assets/images/event-image-sm.jpg"/>
+                            <div class="overlay">
+                            </div>
+                        </div>
+                        <div class="eventDate">
+                            {{event.eventStartDate | date : "dd MMM"}}
+                        </div>
+                        <div class="eventDate">
+                            {{event.eventEndDate | date : "dd MMM"}}
+                        </div>
+                        <div class="eventGame">
+                            {{event.game}}
+                        </div>
+                        <div class="eventTitle">
+                            {{event.eventTitle | limitTo: 75}}
+                        </div>
+                        <div class="eventStatus">
+                            {{event.status}}
+                        </div>
+                    </div>
+                    <p ng-show="overviewController.overviewData.recent.length == 0">
+                        No recent events.
+                    </p>
+                </div>
             </div>
-            <div class="box">
-                <span class="data">
-                    Maps
-                </span>
-                <span class="count">
-                    {{overviewController.overviewData.maps}}
-                </span>
+            <div class="section" ng-cloak="ng-cloak">
+                <h2 class="title">
+                    Ongoing Events
+                </h2>
+                <div class="row-list" ng-repeat="event in overviewController.overviewData.ongoing">
+                    <div class="item">
+                        <div class="imageContain">
+                            <img class="eventImage" src="/assets/images/event-image-sm.jpg"/>
+                            <div class="overlay">
+                            </div>
+                        </div>
+                        <div class="eventDate">
+                            {{event.eventStartDate | date : "dd MMM"}}
+                        </div>
+                        <div class="eventDate">
+                            {{event.eventEndDate | date : "dd MMM"}}
+                        </div>
+                        <div class="eventGame">
+                            {{event.game}}
+                        </div>
+                        <div class="eventTitle">
+                            {{event.eventTitle | limitTo: 75}}
+                        </div>
+                        <div class="eventTitle">
+                            {{event.eventTitle | limitTo: 75}}
+                        </div>
+                        <div class="eventStatus">
+                            {{event.status}}
+                        </div>
+                    </div>
+                    <p ng-show="overviewController.overviewData.ongoing.length == 0">
+                        No ongoing events.
+                    </p>
+                </div>
             </div>
-            <div class="box">
-                <span class="data">
-                    Teams
-                </span>
-                <span class="count">
-                    {{overviewController.overviewData.teams}}
-                </span>
+            <div class="section" ng-cloak="ng-cloak">
+                <h2 class="title">
+                    Upcoming Events
+                </h2>
+                <div class="row-list" ng-repeat="event in overviewController.overviewData.upcoming">
+                    <div class="item">
+                        <div class="imageContain">
+                            <img class="eventImage" src="/assets/images/event-image-sm.jpg"/>
+                            <div class="overlay">
+                            </div>
+                        </div>
+                        <div class="eventDate">
+                            {{event.eventStartDate | date : "dd MMM"}}
+                        </div>
+                        <div class="eventDate">
+                            {{event.eventEndDate | date : "dd MMM"}}
+                        </div>
+                        <div class="eventGame">
+                            {{event.game}}
+                        </div>
+                        <div class="eventTitle">
+                            {{event.eventTitle | limitTo: 75}}
+                        </div>
+                        <div class="eventStatus">
+                            {{event.status}}
+                        </div>
+                    </div>
+                </div>
+                <p ng-show="overviewController.overviewData.upcoming.length == 0">
+                    No upcoming events.
+                </p>
             </div>
-        </div>
+            <div class="section">
+                <div class="section" ng-cloak="ng-cloak">
+                    <h2 class="title">
+                        Data Manager
+                    </h2>
+                    <div class="box">
+                        <span class="data">
+                            Casters
+                        </span>
+                        <span class="count">
+                            {{overviewController.overviewData.casters}}
+                        </span>
+                    </div>
+                    <div class="box">
+                        <span class="data">
+                            Maps
+                        </span>
+                        <span class="count">
+                            {{overviewController.overviewData.maps}}
+                        </span>
+                    </div>
+                    <div class="box">
+                        <span class="data">
+                            Teams
+                        </span>
+                        <span class="count">
+                            {{overviewController.overviewData.teams}}
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="section">
+                <div class="section" ng-cloak="ng-cloak">
+                    <h2 class="title">
+                        User Manager
+                    </h2>
+                </div>
+            </div>
+        -->
     </div>
-    <div class="section">
-        <!-- User manager -->
-        <div class="section" ng-cloak="ng-cloak">
-            <h2 class="title">
-                User Manager
-            </h2>
-        </div>
-    </div>
-</div>
