@@ -3,6 +3,10 @@
   "version": "0.0.1",
   "description": "EventVODS website",
   "main": "server.js",
+  "engines": {
+    "node": "4.2.4",
+    "npm": "3.5.3"
+  },
   "dependencies": {
     "async": "^1.4.0",
     "body-parser": "^1.13.1",
