@@ -568,6 +568,7 @@ table.standard td.icon img {
   justify-content: space-between;
   padding: 16px 24px;
   min-height: 423px;
+  background: #474c6c;
 }
 .tile-row {
   height: 33%;
