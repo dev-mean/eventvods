@@ -22,11 +22,12 @@
             <label>
                 Game Alias
             </label>
-            <input type="text" class="force-caps" placeholder="e.g. LOL" ng-model="addGameController.data.gameAlias" data-parsley-trigger="keyup" data-parsley-type="alphanum" required/>
+            <input type="text" class="force-caps" placeholder="e.g. LOL" ng-model="addGameController.data.gameAlias" data-parsley-trigger="keyup" data-parsley-type="alphanum"
+            data-parsley-remote="/api/validate/gameAlias/{value}" data-parsley-remote-message="Alias already in use." required/>
         </div>
         <br />
         <div class="standard group">
-            <a class="btn lg solid icon" ng-click="addGameController.test()">
+            <a class="btn lg solid icon" ng-click="addGameController.submit()">
                 <i class="fa fa-gamepad">
                 </i>
                 <span>
