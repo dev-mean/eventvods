@@ -5,11 +5,11 @@
         <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
         <meta content="width=device-width, initial-scale=1" name="viewport"/>
         <title>
-            eventVODS Dashboard
+            eventVODS - Dashboard
         </title>
         <link href="/assets/images/favicon.png" rel="icon" type="image/x-icon"/>
         <base href="/"/>
-        <link href="/assets/css/style.css" rel="stylesheet"/>
+        <link href="/assets/css/backend.css" rel="stylesheet"/>
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet"/>
         <link href="/assets/lib/angular-native-picker/build/themes/default.css" rel="stylesheet"/>
         <link href="/assets/lib/angular-native-picker/build/themes/default.date.css" rel="stylesheet"/>
@@ -17,6 +17,26 @@
         <link href="/assets/lib/dropzone/dist/min/dropzone.min.css" rel="stylesheet"/>
         <link href="/assets/lib/toastr/toastr.min.css" rel="stylesheet"/>
         <link href="/assets/lib/angular-loading-bar/build/loading-bar.min.css" rel="stylesheet"/>
+        <script src="/assets/lib/jquery/dist/jquery.min.js">
+        </script>
+        <script src="/assets/lib/angular/angular.min.js">
+        </script>
+        <script src="/assets/lib/angular-animate/angular-animate.min.js">
+        </script>
+        <script src="/assets/lib/angular-resource/angular-resource.min.js">
+        </script>
+        <script src="/assets/lib/angular-route/angular-route.min.js">
+        </script>
+        <script src="/assets/lib/angular-loading-bar/build/loading-bar.min.js">
+        </script>
+        <script src="/assets/lib/angular-native-picker/build/angular-datepicker.js">
+        </script>
+        <script src="/assets/lib/toastr/toastr.min.js">
+        </script>
+        <script src="/assets/js/app.js">
+        </script>
+        <script src="/assets/js/common/notifier.js">
+        </script>
     </head>
     <body>
         <div class="container" ng-app="eventApp">
@@ -31,6 +51,20 @@
                         </i>
                         <span class="text">
                             Dashboard
+                        </span>
+                    </a>
+                    <a href="#games">
+                        <i class="fa fa-gamepad fa-lg fa-fw">
+                        </i>
+                        <span class="text">
+                            Games
+                        </span>
+                    </a>
+                    <a href="#leagues">
+                        <i class="fa fa-line-chart fa-lg fa-fw">
+                        </i>
+                        <span class="text">
+                            Leagues
                         </span>
                     </a>
                     <a href="#events">
@@ -82,37 +116,20 @@
                 </ng-view>
             </div>
         </div>
-        <script src="/assets/lib/jquery/dist/jquery.min.js">
+        <script src="/assets/js/overviewController.js">
         </script>
-        <script src="/assets/lib/angular/angular.min.js">
+        <script src="/assets/js/games/gamesService.js">
         </script>
-        <script src="/assets/lib/angular-animate/angular-animate.min.js">
+        <script src="/assets/js/games/gamesListController.js">
         </script>
-        <script src="/assets/lib/angular-resource/angular-resource.min.js">
+        <script src="/assets/js/games/addGameController.js">
         </script>
-        <script src="/assets/lib/angular-route/angular-route.min.js">
+        <!-- vv refactor -->
+        <script src="/assets/js/events/eventService.js">
         </script>
-        <script src="/assets/lib/angular-loading-bar/build/loading-bar.min.js">
+        <script src="/assets/js/events/eventListController.js">
         </script>
-        <script src="/assets/lib/angular-native-picker/build/angular-datepicker.js">
-        </script>
-        <script src="/assets/lib/toastr/toastr.min.js">
-        </script>
-        <script src="/assets/js/app.js">
-        </script>
-        <script src="/assets/js/resources/overviewResource.js">
-        </script>
-        <script src="/assets/js/services/overviewService.js">
-        </script>
-        <script src="/assets/js/controllers/overviewController.js">
-        </script>
-        <script src="/assets/js/resources/eventResource.js">
-        </script>
-        <script src="/assets/js/services/eventService.js">
-        </script>
-        <script src="/assets/js/controllers/eventListController.js">
-        </script>
-        <script src="/assets/js/controllers/eventFormController.js">
+        <script src="/assets/js/events/addEventController.js">
         </script>
         <script src="/assets/js/resources/mapResource.js">
         </script>

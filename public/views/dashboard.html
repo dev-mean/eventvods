@@ -1,85 +1,107 @@
+<div class="contextHead">
+    <div class="leftSide">
+        <h1 class="title">
+            Dashboard
+        </h1>
+    </div>
+</div>
 <div class="content">
-    <h1 class="title">
-        Dashboard
-    </h1>
     <div class="tile-container dashboard">
         <div class="tile-row">
-                <div class="tile-cell">
-                    <h3>
-                        Upcoming Events
-                    </h3>
-                    <p>
+            <div class="tile-cell">
+                <div class="badge-wrapper">
+                    <span class="badge">
                         {{overviewController.overviewData.upcoming}}
+                    </span>
+                    <p>
+                        Upcoming Events
                     </p>
                 </div>
-                <div class="tile-cell">
-                    <h3>
-                        Ongoing Events
-                    </h3>
-                    <p>
+            </div>
+            <div class="tile-cell">
+                <div class="badge-wrapper">
+                    <span class="badge">
                         {{overviewController.overviewData.ongoing}}
+                    </span>
+                    <p>
+                        Ongoing Events
                     </p>
                 </div>
-                <div class="tile-cell">
-                    <h3>
-                        Finished Events
-                    </h3>
-                    <p>
+            </div>
+            <div class="tile-cell">
+                <div class="badge-wrapper">
+                    <span class="badge">
                         {{overviewController.overviewData.finished}}
+                    </span>
+                    <p>
+                        Finished Events
                     </p>
                 </div>
+            </div>
         </div>
         <div class="tile-row">
-                <div class="tile-cell">
-                    <h3>
-                        Staff
-                    </h3>
-                    <p>
+            <div class="tile-cell">
+                <div class="badge-wrapper">
+                    <span class="badge">
                         {{overviewController.overviewData.staff}}
+                    </span>
+                    <p>
+                        Staff
                     </p>
                 </div>
-                <div class="tile-cell">
-                    <h3>
-                        Teams
-                    </h3>
-                    <p>
+            </div>
+            <div class="tile-cell">
+                <div class="badge-wrapper">
+                    <span class="badge">
                         {{overviewController.overviewData.teams}}
-                    </p>
-                </div>
-                <div class="tile-cell">
-                    <h3>
-                        Maps
-                    </h3>
+                    </span>
                     <p>
-                        {{overviewController.overviewData.maps}}
+                        Teams
                     </p>
                 </div>
+            </div>
+            <div class="tile-cell">
+                <div class="badge-wrapper">
+                    <span class="badge">
+                        {{overviewController.overviewData.maps}}
+                    </span>
+                    <p>
+                        Maps
+                    </p>
+                </div>
+            </div>
         </div>
         <div class="tile-row">
-                <div class="tile-cell">
-                    <h3>
-                        Users
-                    </h3>
-                    <p>
+            <div class="tile-cell">
+                <div class="badge-wrapper">
+                    <span class="badge">
                         {{overviewController.overviewData.users}}
+                    </span>
+                    <p>
+                        Users
                     </p>
                 </div>
-                <div class="tile-cell">
-                    <h3>
-                        Updaters
-                    </h3>
-                    <p>
+            </div>
+            <div class="tile-cell">
+                <div class="badge-wrapper">
+                    <span class="badge">
                         {{overviewController.overviewData.updaters}}
-                    </p>
-                </div>
-                <div class="tile-cell">
-                    <h3>
-                        Admins
-                    </h3>
+                    </span>
                     <p>
-                        {{overviewController.overviewData.admins}}
+                        Updaters
                     </p>
                 </div>
+            </div>
+            <div class="tile-cell">
+                <div class="badge-wrapper">
+                    <span class="badge">
+                        {{overviewController.overviewData.admins}}
+                    </span>
+                    <p>
+                        Admins
+                    </p>
+                </div>
+            </div>
         </div>
     </div>
     <!--
@@ -184,43 +206,44 @@
                     No upcoming events.
                 </p>
             </div>
-            <div class="section">
-                <div class="section" ng-cloak="ng-cloak">
-                    <h2 class="title">
-                        Data Manager
-                    </h2>
-                    <div class="box">
-                        <span class="data">
-                            Casters
-                        </span>
-                        <span class="count">
-                            {{overviewController.overviewData.casters}}
-                        </span>
-                    </div>
-                    <div class="box">
-                        <span class="data">
-                            Maps
-                        </span>
-                        <span class="count">
-                            {{overviewController.overviewData.maps}}
-                        </span>
-                    </div>
-                    <div class="box">
-                        <span class="data">
-                            Teams
-                        </span>
-                        <span class="count">
-                            {{overviewController.overviewData.teams}}
-                        </span>
-                    </div>
+        </div>
+        <div class="section">
+            <div class="section" ng-cloak="ng-cloak">
+                <h2 class="title">
+                    Data Manager
+                </h2>
+                <div class="box">
+                    <span class="data">
+                        Casters
+                    </span>
+                    <span class="count">
+                        {{overviewController.overviewData.casters}}
+                    </span>
+                </div>
+                <div class="box">
+                    <span class="data">
+                        Maps
+                    </span>
+                    <span class="count">
+                        {{overviewController.overviewData.maps}}
+                    </span>
+                </div>
+                <div class="box">
+                    <span class="data">
+                        Teams
+                    </span>
+                    <span class="count">
+                        {{overviewController.overviewData.teams}}
+                    </span>
                 </div>
             </div>
-            <div class="section">
-                <div class="section" ng-cloak="ng-cloak">
-                    <h2 class="title">
-                        User Manager
-                    </h2>
-                </div>
+        </div>
+        <div class="section">
+            <div class="section" ng-cloak="ng-cloak">
+                <h2 class="title">
+                    User Manager
+                </h2>
             </div>
-        -->
-    </div>
+        </div>
+    -->
+</div>

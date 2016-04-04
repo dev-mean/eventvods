@@ -1,14 +1,23 @@
 (function() {
     'use strict';
-    angular.module('eventApp', ['ngAnimate', 'ngResource', 'ngRoute', 'angular-datepicker','angular-loading-bar'])
+    angular.module('eventApp', ['ngAnimate', 'ngResource', 'ngRoute', 'angular-datepicker', 'angular-loading-bar'])
         .constant('eventConstants', {
             baseUri: '/api/'
         })
+        .constant('API_BASE_URL', '/api')
+        // Set up titles on ngroute pages
         .run(['$rootScope', '$route', function($rootScope, $route) {
             $rootScope.$on('$routeChangeSuccess', function() {
                 document.title = "eventVODs - " + $route.current.title;
             });
         }])
+        // Offset filter for paging lists
+        .filter('offset', function() {
+            return function(input, start) {
+                start = parseInt(start, 10);
+                return input.slice(start);
+            };
+        })
         .config(function($routeProvider) {
             $routeProvider
             // route for the home page
@@ -17,6 +26,24 @@
                     controller: 'overviewController',
                     controllerAs: 'overviewController',
                     title: "Dashboard"
+                })
+                .when('/games', {
+                    templateUrl: '/assets/views/game/list.html',
+                    controller: 'gamesListController',
+                    controllerAs: 'gamesListController',
+                    title: "Games"
+                })
+                .when('/games/new', {
+                    templateUrl: '/assets/views/game/form.html',
+                    controller: 'addGameController',
+                    controllerAs: 'addGameController',
+                    title: "Add Game"
+                })
+                .when('/leagues', {
+                    templateUrl: '/assets/views/league/list.html',
+                    controller: 'leagueListController',
+                    controllerAs: 'gameListController',
+                    title: "Leagues"
                 })
                 .when('/events', {
                     templateUrl: '/assets/views/event/list.html',

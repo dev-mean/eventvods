@@ -1,5 +1,5 @@
 module.exports = {
-	databaseUrl: 'nkane:password@ds031627.mongolab.com:31627/eventvods',
+	databaseUrl: 'simon_dev:password@ds015690.mlab.com:15690/ev_dev',
 	port: process.env.PORT || 5000,
 	ip: null,
 	secret: 'eventvods_dev',

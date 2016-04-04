@@ -63,7 +63,7 @@ app.locals.pretty = true;
 var backend = require('./app/routes/backend');
 var api = require('./app/routes/api');
 var auth = require('./app/routes/auth.js');
-//app.use('/user', auth);
+app.use('/user', auth);
 app.use('/api', api);
 app.use('/', backend);
 // 404 handler

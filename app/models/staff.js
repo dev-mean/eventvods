@@ -16,7 +16,7 @@ var staffSchema = new Schema({
 	staffRole: String
 });
 
-var Staff = mongoose.model('staff', staffSchema);
+var Staff = mongoose.model('Staff', staffSchema);
 
 module.exports = Staff;
 module.exports.schema = staffSchema;

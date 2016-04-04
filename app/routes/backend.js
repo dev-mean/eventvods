@@ -6,13 +6,12 @@ var User = require('../models/user');
 var path = require('path');
 
 
-// Sets up local user data for templating
 router.all('/*', function (req, res, next) {
 	// Dev logic, auto login user
 	if (process.env.NODE_ENV === 'development' || app.get('env') == 'development') {
-		if (!req.isAuthenticated || !req.isAuthenticated()) {
+		if (!req.isAuthenticated()) {
 			console.log('No user detected, trying to authenticate');
-			User.authenticate()('devAdmin', 'test', function (err, user, options) {
+			User.authenticate()('simon_dev', 'password', function (err, user, options) {
 				if (err) console.log(err);
 				if (user === false) {
 					console.log('ERROR: Set up dev admin account!');
@@ -36,7 +35,7 @@ router.all('/*', function (req, res, next) {
 });
 
 router.get('/', auth.updater(), function (req, res) {
-	res.sendFile(path.resolve(__dirname + '../../../app/views/backend.html'));
+	res.sendFile(path.resolve(__dirname + '/../../app/views/backend.html'));
 });
 
 

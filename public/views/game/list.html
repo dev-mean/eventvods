@@ -1,0 +1,89 @@
+<div class="contextHead">
+    <div class="leftSide">
+        <h1 class="title">
+            Games
+        </h1>
+    </div>
+    <div class="rightSide">
+        <a href="#games/new" class="btn lg solid icon">
+            <i class="fa fa-gamepad">
+            </i>
+            <span>
+                Add Game
+            </span>
+        </a>
+    </div>
+</div>
+<div class="filters">
+    <input type="text" ng-model="gamesListController.search" placeholder="Search Games" tabindex="1"/>
+</div>
+<div class="listView events">
+    <table class="standard">
+        <thead>
+            <tr>
+                <th>
+                    <a href="" ng-click="gamesListController.setSort('gameName')">
+                        Game
+                    </a>
+                    <span ng-show="gamesListController.sort.sortField == 'gameName' && !gamesListController.sort.sortReverse" class="caret-down">
+                    </span>
+                    <span ng-show="gamesListController.sort.sortField == 'gameName' && gamesListController.sort.sortReverse" class="caret-up">
+                    </span>
+                    <span ng-show="gamesListController.sort.sortField != 'gameName'" class="fa fa-unsorted">
+                    </span>
+                </th>
+                <th>
+                    <a href="" ng-click="gamesListController.setSort('gameAlias')">
+                        Alias
+                    </a>
+                    <span ng-show="gamesListController.sort.sortField == 'gameAlias' && !gamesListController.sort.sortReverse" class="caret-down">
+                    </span>
+                    <span ng-show="gamesListController.sort.sortField == 'gameAlias' && gamesListController.sort.sortReverse" class="caret-up">
+                    </span>
+                    <span ng-show="gamesListController.sort.sortField != 'gameAlias'" class="fa fa-unsorted">
+                    </span>
+                </th>
+                <th>
+                </th>
+                <th>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="game in gamesListController.filterData = (gamesListController.gameData | filter: gamesListController.search) | orderBy: gamesListController.sort.sortField:gamesListController.sort.sortReverse | offset: (gamesListController.paging.page - 1) * gamesListController.paging.itemsPerPage | limitTo: gamesListController.paging.itemsPerPage">
+                <td>
+                    {{game.gameName}}
+                </td>
+                <td class="date">
+                    {{game.gameAlias | uppercase}}
+                </td>
+                <td class="edit">
+                    <a ng-href="/game/{{game._id}}/edit">
+                        <i class="fa fa-edit fa-fw">
+                        </i>
+                    </a>
+                </td>
+                <td class="url">
+                    <a ng-href="../game/{{game._id}}">
+                        <i class="fa fa-external-link fa-fw">
+                        </i>
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<span class="empty" ng-show="gamesListController.filterData.length == 0 && gamesListController.gameData.length > 0">
+    No games match those criteria.
+</span>
+<div class="pagination">
+    <a ng-style="{visibility: gamesListController.paging.page >1 && 'visible' || 'hidden'}" ng-click="gamesListController.previousPage()" class="btn">
+        Prev Page
+    </a>
+    <p>
+        Page {{gamesListController.paging.page}} of {{gamesListController.paging.pages()}}
+    </p>
+    <a ng-style="{visibility: (gamesListController.paging.pages() >1 && gamesListController.paging.page < gamesListController.paging.pages()) && 'visible' || 'hidden'}" ng-click="gamesListController.nextPage()" class="btn">
+        Next Page
+    </a>
+</div>

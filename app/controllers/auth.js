@@ -52,7 +52,7 @@ function errorNoPermission(req, res, next) {
 
 module.exports.logged_in = function (skipEmailCheck) {
 	return function (req, res, next) {
-		if (!req.isAuthenticated || !req.isAuthenticated())
+		if (!req.isAuthenticated())
 			loginRedirect(req, res);
 		else if (req.user.emailConfirmed || skipEmailCheck)
 			next();
@@ -62,7 +62,8 @@ module.exports.logged_in = function (skipEmailCheck) {
 };
 module.exports.updater = function () {
 	return function (req, res, next) {
-		if (!req.isAuthenticated || !req.isAuthenticated())
+		console.log('Updater auth: '+req.isAuthenticated());
+		if (!req.isAuthenticated())
 			loginRedirect(req, res);
 		else if (req.user.userRights >= constants.updater)
 			next();
@@ -72,7 +73,7 @@ module.exports.updater = function () {
 };
 module.exports.admin = function () {
 	return function (req, res, next) {
-		if (!req.isAuthenticated || !req.isAuthenticated())
+		if (	!req.isAuthenticated())
 			loginRedirect(req, res);
 		else if (req.user.userRights >= constants.admin)
 			next();

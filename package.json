@@ -1,63 +1,56 @@
 {
-  "name": "EventVODS",
-  "version": "0.0.1",
-  "description": "EventVODS website",
-  "main": "server.js",
-  "engines": {
-    "node": "4.2.4",
-    "npm": "3.5.3"
-  },
-  "dependencies": {
-    "async": "^1.4.0",
-    "body-parser": "^1.13.1",
-    "bower": "^1.7.1",
-    "bristol": "^0.3.3",
-    "connect-redis": "^3.0.1",
-    "express": "^4.12.4",
-    "express-redis-cache": "^0.2.0",
-    "express-session": "^1.12.1",
-    "gulp": "^3.9.0",
-    "gulp-concat": "^2.5.2",
-    "gulp-jshint": "^1.11.0",
-    "gulp-less": "^3.0.3",
-    "gulp-nodemon": "^2.0.3",
-    "gulp-plumber": "^1.0.1",
-    "gulp-rename": "^1.2.2",
-    "gulp-uglify": "^1.2.0",
-    "gulp-util": "^3.0.5",
-    "indicative": "^2.0.2",
-    "jade": "^1.11.0",
-    "jshint-stylish": "^2.0.0",
-    "keygenerator": "^1.0.4",
-    "lodash": "^3.10.1",
-    "loggly": "^1.0.9",
-    "mongoose": "^4.0.5",
-    "morgan": "^1.6.1",
-    "multer": "^1.0.6",
-    "ng-resource": "^1.3.2",
-    "nodemailer": "^1.11.0",
-    "nodemailer-smtp-transport": "^1.1.0",
-    "nodemon": "^1.8.1",
-    "passport": "^0.2.2",
-    "passport-local": "^1.0.0",
-    "passport-local-mongoose": "^1.0.1",
-    "ratelimit.js": "^1.7.0",
-    "redis": "^2.4.2",
-    "serve-favicon": "^2.3.0"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/EventVODS/EventVODS.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/EventVODS/EventVODS/issues"
-  },
-  "homepage": "https://github.com/EventVODS/EventVODS",
-  "scripts": {
-    "dependencies": "npm install --prefix ./app",
-    "postinstall": "bower install",
-    "start": "npm install && nodemon server.js"
-  }
+    "name": "EventVODS",
+    "version": "0.0.1",
+    "description": "EventVODS website",
+    "main": "server.js",
+    "engines": {
+        "node": "5.10.0",
+        "npm": "3.5.3"
+    },
+    "dependencies": {
+        "async": "*",
+        "body-parser": "*",
+        "bower": "*",
+        "bristol": "*",
+        "connect-redis": "*",
+        "express": "*",
+        "express-redis-cache": "*",
+        "express-session": "*",
+        "indicative": "*",
+        "jade": "*",
+        "keygenerator": "*",
+        "lodash": "*",
+        "loggly": "*",
+        "mongoose": "*",
+        "morgan": "*",
+        "multer": "*",
+        "nodemailer": "*",
+        "nodemailer-smtp-transport": "*",
+        "passport": "*",
+        "passport-local": "*",
+        "passport-local-mongoose": "*",
+        "ratelimit.js": "*",
+        "redis": "*",
+        "serve-favicon": "*"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/EventVODS/EventVODS.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/EventVODS/EventVODS/issues"
+    },
+    "homepage": "https://github.com/EventVODS/EventVODS",
+    "scripts": {
+        "postinstall": "bower install",
+        "start": "node server.js"
+    },
+    "devDependencies": {
+        "gulp": "*",
+        "gulp-less": "*",
+        "gulp-plumber": "*",
+        "gulp-util": "*"
+    }
 }

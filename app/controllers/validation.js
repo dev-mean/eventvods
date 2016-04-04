@@ -9,7 +9,7 @@ module.exports.messages = {
     array: '{{ field }} should be an array of data.',
     boolean: '{{ field }} should be either true or false.',
     //specific field messages
-    'Username.alpha_numeric': 'Usernames can only contain alphanumeric characters.',
+    'Username.alpha_numeric': 'Usernames can only contain alphanumeric characters.'
 };
 module.exports.register = {
     Username: 'required|min:3|max:16',
@@ -21,6 +21,14 @@ module.exports.api = {
     Name: 'required|alpha_numeric',
     Email: 'required|email',
     URL: 'required|url'
+};
+module.exports.game = {
+    gameName: 'required',
+    gameAlias: 'required|alpha_numeric'
+}
+module.exports.league = {
+    leagueName: 'required',
+    leagueGame: 'required'
 };
 module.exports.event = {
     eventGame: 'required|alpha_numeric',
@@ -36,15 +44,12 @@ module.exports.event = {
     eventEndDate: 'required|date'
 };
 module.exports.staff = {
-    casterName: 'required|alpha_numeric',
-    casterAlias: 'requred|alpha_numeric',
-    casterMedia: 'array',
-    casterCountry: 'alpha_numeric',
-    casterImage: 'alpha_numeric'
+    staffName: 'required',
+    staffAlias: 'required'
 };
 module.exports.link = {
-    linkText: 'required|alpha_numeric|',
-    linkURL: 'required|alpha_numeric',
+    linkText: 'required',
+    linkURL: 'required|url',
     linkSpoiler: 'required|boolean'
 };
 module.exports.map = {

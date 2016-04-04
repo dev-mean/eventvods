@@ -21,6 +21,8 @@ var Validators = require('../controllers/validation');
 var Indicative = require('indicative');
 var logger = require('bristol');
 var APIKey = require('../models/APIKey');
+var League = require('../models/league');
+var Game = require('../models/game');
 var keygen = require('keygenerator');
 var config = require('../../config/config');
 // Redis is magic basically
@@ -38,7 +40,10 @@ var cache = require('express-redis-cache')({
     prefix: ':cache',
     expire: 43200
 });
-// Set up ratelimit middleware
+cache.on('error', function(err) {
+        logger.error(err);
+    })
+    // Set up ratelimit middleware
 var RateLimitjs = require('ratelimit.js')
     .RateLimit;
 var ExpressMiddleware = require('ratelimit.js')
@@ -98,7 +103,33 @@ router.all('*', function(req, res, next) {
         next();
     }
 });
-// api routes
+router.all('*', function(req, res, next) {
+        if (process.env.NODE_ENV === 'development' || app.get('env') == 'development') {
+            if (!req.isAuthenticated()) {
+                console.log('No user detected, trying to authenticate');
+                User.authenticate()('simon_dev', 'password', function(err, user, options) {
+                    if (err) console.log(err);
+                    if (user === false) {
+                        console.log('ERROR: Set up dev admin account!');
+                    } else {
+                        req.login(user, function(err) {
+                            if (err) console.log(err);
+                            console.log('Dev login success!');
+                            res.locals.user = user;
+                            return next();
+                        });
+                    }
+                });
+            } else {
+                res.locals.user = req.user;
+                return next();
+            }
+        } else {
+            res.locals.user = req.user;
+            return next();
+        }
+    })
+    // api routes
 router.get('/test', function(req, res, next) {
     cache.get(function(err, entries) {
         res.json(entries);
@@ -209,6 +240,157 @@ router.get('/overview', auth.public_api(), rateLimit, cache.route('overview', 36
         else res.json(results);
     });
 });
+//Games
+router.route('/games')
+    .get(auth.public_api(), rateLimit, cache.route('games'), function(req, res, next) {
+        Game.find(function(err, games) {
+            if (err) next(err);
+            else res.json(games);
+        });
+    })
+    .post(auth.updater(), function(req, res, next) {
+        Indicative.validateAll(req.body, Validators.game, Validators.messages)
+            .then(function() {
+                Game.create(req.body, function(err, game) {
+                    if (err) console.log(err);
+                    if (err) next(err);
+                    else res.json(game);
+                });
+            })
+            .catch(function(errors) {
+                console.log('catch triggered');
+                var err = new Error("Bad Request");
+                err.status = 400;
+                err.errors = errors;
+                next(err);
+            });
+    });
+router.route('/game/:game_id')
+    .get(auth.public_api(), rateLimit, cache.route('game'), function(req, res, next) {
+        Game.findById(req.params.game_id, function(err, game) {
+            if (err) next(err);
+            if (!game) {
+                err = new Error("Game Not Found");
+                err.status = 404;
+                next(err);
+            }
+            res.json(game);
+        });
+    })
+    .delete(auth.updater(), function(req, res, next) {
+        Game.remove({
+            _id: req.params.game_id
+        }, function(err) {
+            if (err) next(err);
+            else res.sendStatus(204);
+        });
+    })
+    .put(auth.updater(), function(req, res, next) {
+        Indicative.validateAll(req.body, Validators.game, Validators.messages)
+            .then(function() {
+                Game.findByIdAndUpdate(req.params.game_id, req.body, function(err, game) {
+                    if (err) next(err);
+                    if (!game) {
+                        err = new Error("Game not found");
+                        err.status = 404;
+                        next(err);
+                    } else res.json(game);
+                });
+            })
+            .catch(function(errors) {
+                var err = new Error("Bad Request");
+                err.status = 400;
+                err.errors = errors;
+                next(err);
+            });
+    });
+//Leagues
+router.route('/leagues')
+    .get(auth.public_api(), rateLimit, cache.route(), function(req, res, next) {
+        League.find()
+            .populate('leagueGame')
+            .exec(function(err, leagues) {
+                if (err) next(err);
+                else res.json(leagues);
+            });
+    })
+    .post(auth.updater(), function(req, res, next) {
+        Indicative.validateAll(req.body, Validators.league, Validators.messages)
+            .then(function() {
+                League.create(req.body, function(err, league) {
+                    if (err) console.log(err);
+                    if (err) next(err);
+                    else res.json(league);
+                });
+            })
+            .catch(function(errors) {
+                console.log('catch triggered');
+                var err = new Error("Bad Request");
+                err.status = 400;
+                err.errors = errors;
+                next(err);
+            });
+    });
+router.get('/leagues/game/:game_id', auth.public_api(), rateLimit, cache.route(), function(req, res, next) {
+    Game.findOne({
+        gameAlias: req.params.game_id
+    }, function(err, game) {
+        if (err) next(err);
+        if (!game) {
+            err = new Error("League Not Found");
+            err.status = 404;
+            next(err);
+        }
+        League.find({
+                leagueGame: game._id
+            })
+            .exec(function(err, leagues) {
+                if (err) next(err);
+                res.json(leagues);
+            });
+    })
+});
+router.route('/league/:league_id')
+    .get(auth.public_api(), rateLimit, cache.route('league'), function(req, res, next) {
+        League.findById(req.params.league_id)
+            .populate('leagueGame')
+            .exec(function(err, league) {
+                if (err) next(err);
+                if (!league) {
+                    err = new Error("League Not Found");
+                    err.status = 404;
+                    next(err);
+                }
+                res.json(league);
+            });
+    })
+    .delete(auth.updater(), function(req, res, next) {
+        League.remove({
+            _id: req.params.league_id
+        }, function(err) {
+            if (err) next(err);
+            else res.sendStatus(204);
+        });
+    })
+    .put(auth.updater(), function(req, res, next) {
+        Indicative.validateAll(req.body, Validators.league, Validators.messages)
+            .then(function() {
+                League.findByIdAndUpdate(req.params.league_id, req.body, function(err, league) {
+                    if (err) next(err);
+                    if (!league) {
+                        err = new Error("League not found");
+                        err.status = 404;
+                        next(err);
+                    } else res.json(league);
+                });
+            })
+            .catch(function(errors) {
+                var err = new Error("Bad Request");
+                err.status = 400;
+                err.errors = errors;
+                next(err);
+            });
+    });
 //EVENTS
 router.route('/events')
     .get(auth.public_api(), rateLimit, cache.route('events'), function(req, res, next) {

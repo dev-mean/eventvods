@@ -1,11 +1,6 @@
 var gulp 			= require('gulp');
 var gutil 		= require('gulp-util');
-var jshint 		= require('gulp-jshint');
-var concat 		= require('gulp-concat');
-var uglify 		= require('gulp-uglify');
-var rename 		= require('gulp-rename');
 var less 			= require('gulp-less');
-var nodemon 	= require('gulp-nodemon');
 var plumber 	= require('gulp-plumber');
 
 gulp.task('watch', function(){
@@ -18,7 +13,7 @@ gulp.task('default', ['build']);
 gulp.task('build', ['less-compile']);
 
 gulp.task('less-compile', function () {
-	return gulp.src('public/less/style.less')
+	return gulp.src('public/less/backend.less')
 		.pipe(plumber({
 			errorHandler: function (error) {
 				gutil.log(
