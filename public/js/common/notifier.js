@@ -6,11 +6,9 @@
     angular.module('eventApp').service('notificationService', function (evToastr) {
         var service = this;
 
-            service.success = function (text) {
-                evToastr.success(text);
-            };
-            service.error = function (text) {
-                evToastr.error(text);
-            };
+            service.success = evToastr.success;
+            service.error = evToastr.error;
+
+            service.warning = evToastr.warning;
     });
 } ());

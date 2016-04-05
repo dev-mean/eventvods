@@ -146,6 +146,16 @@ router.get( '/validate/gameAlias/:alias', auth.public_api(), rateLimit, cache.ro
             else return res.sendStatus( '200' );
         } )
 } );
+router.get( '/validate/gameAlias/:alias/:id', auth.public_api(), rateLimit, cache.route(), function( req, res, next ) {
+    Game.findOne( {
+        gameAlias: req.params.alias
+    }, function( err, doc ) {
+        if ( err ) next( err );
+        if ( !doc ) return res.sendStatus( '200' );
+        else if ( doc._id == req.params.id ) return res.sendStatus( '200' );
+        else return res.sendStatus( '409' );
+    } )
+} );
 //OVERVIEW
 router.get( '/overview', auth.public_api(), rateLimit, cache.route( 'overview', 3600 ), function( req, res, next ) {
     var today = new Date()

@@ -1,3 +1,23 @@
+<script type="text/ng-template" id="confirmDeleteTemplate">
+    <center>
+    <p>
+        Are you sure you want to delete that?
+    </p><br />
+    <a class="btn lg solid icon warning" ng-click="delete()">
+        <i class="fa fa-trash">
+        </i>
+        <span>
+            Confirm Delete
+        </span>
+    </a>
+    <a class="btn lg solid icon" ng-click="closeThisDialog()">
+        <i class="fa fa-undo">
+        </i>
+        <span>
+            Cancel
+        </span>
+    </a></center>
+</script>
 <div class="contextHead">
     <div class="leftSide">
         <h1 class="title">
@@ -47,6 +67,8 @@
                 </th>
                 <th>
                 </th>
+                <th>
+                </th>
             </tr>
         </thead>
         <tbody>
@@ -58,8 +80,14 @@
                     {{game.gameAlias | uppercase}}
                 </td>
                 <td class="edit">
-                    <a ng-href="/game/{{game._id}}/edit">
+                    <a ng-href="#/game/{{game._id}}/edit">
                         <i class="fa fa-edit fa-fw">
+                        </i>
+                    </a>
+                </td>
+                <td class="delete">
+                    <a ng-click="gamesListController.delete(game._id)">
+                        <i class="fa fa-trash fa-fw">
                         </i>
                     </a>
                 </td>
@@ -73,7 +101,7 @@
         </tbody>
     </table>
 </div>
-<span class="empty" ng-show="gamesListController.filterData.length == 0 && gamesListController.gameData.length > 0">
+<span class="empty" ng-show="gamesListController.filterData.length == 0 && gamesListController.gameData.length >0">
     No games match those criteria.
 </span>
 <div class="pagination">

@@ -1,6 +1,6 @@
 (function() {
     'use strict';
-    angular.module('eventApp', ['ngAnimate', 'ngResource', 'ngRoute', 'angular-datepicker', 'angular-loading-bar'])
+    angular.module('eventApp', ['ngAnimate', 'ngResource', 'ngRoute', 'angular-datepicker', 'angular-loading-bar','ngDialog'])
         .constant('eventConstants', {
             baseUri: '/api/'
         })
@@ -36,8 +36,14 @@
                 .when('/games/new', {
                     templateUrl: '/assets/views/game/form.html',
                     controller: 'addGameController',
-                    controllerAs: 'addGameController',
+                    controllerAs: 'gameFormController',
                     title: "Add Game"
+                })
+                .when('/game/:id/edit', {
+                    templateUrl: '/assets/views/game/form.html',
+                    controller: 'editGameController',
+                    controllerAs: 'gameFormController',
+                    title: "Edit Game"
                 })
                 .when('/leagues', {
                     templateUrl: '/assets/views/league/list.html',

@@ -1,14 +1,13 @@
 <div class="contextHead">
     <div class="leftSide">
-        <h1>
-            Add Game
+        <h1 ng-bind="gameFormController.title">
         </h1>
     </div>
 </div>
-<form name="form" id="addGameForm" ng-cloak data-parsley-validate >
-    <div class="errors" ng-show="addGameController.errors.length > 0">
+<form name="form" id="addGameForm" ng-cloak>
+    <div class="errors" ng-show="gameFormController.errors.length > 0">
         <ul>
-            <li ng-repeat="error in addGameController.errors">{{error.message}}</li>
+            <li ng-repeat="error in gameFormController.errors">{{error.message}}</li>
         </ul>
     </div>
     <div class="section">
@@ -16,22 +15,20 @@
             <label>
                 Game Name
             </label>
-            <input type="text" placeholder="e.g. League of Legends" ng-model="addGameController.data.gameName" data-parsley-trigger="keyup"  required/>
+            <input type="text" placeholder="e.g. League of Legends" ng-model="gameFormController.data.gameName" data-parsley-trigger="keyup"  required/>
         </div>
         <div class="standard group">
             <label>
                 Game Alias
             </label>
-            <input type="text" class="force-caps" placeholder="e.g. LOL" ng-model="addGameController.data.gameAlias" data-parsley-trigger="keyup" data-parsley-type="alphanum"
-            data-parsley-remote="/api/validate/gameAlias/{value}" data-parsley-remote-message="Alias already in use." required/>
+            <input type="text" class="force-caps" placeholder="e.g. LOL" ng-model="gameFormController.data.gameAlias" data-parsley-trigger="keyup" data-parsley-type="alphanum" data-parsley-remote-message="Alias already in use." required/>
         </div>
         <br />
         <div class="standard group">
-            <a class="btn lg solid icon" ng-click="addGameController.submit()">
+            <a class="btn lg solid icon" ng-click="gameFormController.submit()">
                 <i class="fa fa-gamepad">
                 </i>
-                <span>
-                    Add Game
+                <span ng-bind="gameFormController.title">
                 </span>
             </a>
         </div>
