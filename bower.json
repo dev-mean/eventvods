@@ -4,7 +4,7 @@
     "authors": [ "Simon Poole <simon@eventvodscom>" ],
     "description": "Event VOD catalogue service",
     "moduleType": [ "node" ],
-    "license": "MIT",
+    "license": "Unlicensed",
     "private": true,
     "ignore": [ "**/.*", "node_modules", "bower_components", "test", "tests" ],
     "dependencies": {
