@@ -12,7 +12,11 @@ var leagueSchema = new Schema({
 		ref: 'Game',
 		required: true
 	},
-	leagueSponsors: [Sponsor]
+	leagueStartDate: Date,
+	leagueEndDate: Date,
+	leagueSponsors: [Sponsor],
+	leagueLogo: String,
+	leagueBanner: String,
 });
 
 var League = mongoose.model('League', leagueSchema);

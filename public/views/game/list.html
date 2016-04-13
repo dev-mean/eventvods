@@ -105,10 +105,10 @@
         </tbody>
     </table>
 </div>
-<span class="empty" ng-show="gamesListController.filterData.length == 0 && gamesListController.gameData.length >0">
+<span class="empty" ng-show="gamesListController.loaded && (gamesListController.filterData.length == 0 || gamesListController.gameData.length == 0)">
     No games match those criteria.
 </span>
-<div class="pagination" ng-cloak>
+<div class="pagination" ng-show="gamesListController.filterData.length > 0">
     <a ng-style="{visibility: gamesListController.paging.page >1 && 'visible' || 'hidden'}" ng-click="gamesListController.previousPage()" class="btn">
         Prev Page
     </a>

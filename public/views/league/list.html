@@ -1,86 +1,70 @@
+<script type="text/ng-template" id="confirmDeleteTemplate">
+    <center>
+    <p>
+        Are you sure you want to delete that?
+    </p><br />
+    <a class="btn lg solid icon warning" ng-click="delete()">
+        <i class="fa fa-trash">
+        </i>
+        <span>
+            Confirm Delete
+        </span>
+    </a>
+    <a class="btn lg solid icon" ng-click="closeThisDialog()">
+        <i class="fa fa-undo">
+        </i>
+        <span>
+            Cancel
+        </span>
+    </a></center>
+</script>
 <div class="contextHead">
     <div class="leftSide">
-        <a href="#events/new" class="btn lg solid icon">
-            <i class="fa fa-plus-circle">
-            </i>
-            <span>
-                Create Event
-            </span>
-        </a>
+        <h1 class="title">
+            Leagues
+        </h1>
     </div>
     <div class="rightSide">
-        <a class="btn lg solid icon" ng-click="eventListController.ui.showFilters = !eventListController.ui.showFilters">
-            <i class="fa fa-arrow-down" ng-show="eventListController.ui.showFilters">
-            </i>
-            <i class="fa fa-arrow-right" ng-show="!eventListController.ui.showFilters">
+        <a href="/manage/#leagues/new" class="btn lg solid icon">
+            <i class="fa fa-line-chart">
             </i>
             <span>
-                Toggle Filter Controls
+                Add League
             </span>
         </a>
     </div>
 </div>
-<div ng-show="eventListController.ui.showFilters" class="filters">
-    <input type="text" ng-model="eventListController.ui.search" ng-change="eventListController.filterChange()" placeholder="Enter Event Title"/>
+<div class="filters">
+    <input type="text" ng-model="leaguesListController.search" placeholder="Search Leagues" tabindex="1"/>
 </div>
 <div class="listView events">
     <table class="standard">
         <thead>
             <tr>
+                <th></th>
                 <th>
-                    <a href="" ng-click="eventListController.setSort('eventStartDate')">
-                        Start Date
-                    </a>
-                    <span ng-show="eventListController.ui.sortType == 'eventStartDate' && !eventListController.ui.sortReverse" class="caret-down">
-                    </span>
-                    <span ng-show="eventListController.ui.sortType == 'eventStartDate' && eventListController.ui.sortReverse" class="caret-up">
-                    </span>
-                    <span ng-show="eventListController.ui.sortType != 'eventStartDate'" class="fa fa-unsorted">
-                    </span>
-                </th>
-                <th>
-                    <a href="" ng-click="eventListController.setSort('eventEndDate')">
-                        End Date
-                    </a>
-                    <span ng-show="eventListController.ui.sortType == 'eventEndDate' && !eventListController.ui.sortReverse" class="caret-down">
-                    </span>
-                    <span ng-show="eventListController.ui.sortType == 'eventEndDate' && eventListController.ui.sortReverse" class="caret-up">
-                    </span>
-                    <span ng-show="eventListController.ui.sortType != 'eventEndDate'" class="fa fa-unsorted">
-                    </span>
-                </th>
-                <th>
-                    <a href="" ng-click="eventListController.setSort('eventTitle')">
-                        Title
-                    </a>
-                    <span ng-show="eventListController.ui.sortType == 'eventTitle' && !eventListController.ui.sortReverse" class="caret-down">
-                    </span>
-                    <span ng-show="eventListController.ui.sortType == 'eventTitle' && eventListController.ui.sortReverse" class="caret-up">
-                    </span>
-                    <span ng-show="eventListController.ui.sortType != 'eventTitle'" class="fa fa-unsorted">
-                    </span>
-                </th>
-                <th>
-                    <a href="" ng-click="eventListController.setSort('eventGame')">
+                    <a href="" ng-click="leaguesListController.setSort('leagueGame.gameAlias')">
                         Game
                     </a>
-                    <span ng-show="eventListController.ui.sortType == 'eventGame' && !eventListController.ui.sortReverse" class="caret-down">
+                    <span ng-show="leaguesListController.sort.sortField == 'leagueGame.gameAlias' && !leaguesListController.sort.sortReverse" class="caret-down">
                     </span>
-                    <span ng-show="eventListController.ui.sortType == 'eventGame' && eventListController.ui.sortReverse" class="caret-up">
+                    <span ng-show="leaguesListController.sort.sortField == 'leagueGame.gameAlias' && leaguesListController.sort.sortReverse" class="caret-up">
                     </span>
-                    <span ng-show="eventListController.ui.sortType != 'eventGame'" class="fa fa-unsorted">
+                    <span ng-show="leaguesListController.sort.sortField != 'leagueGame.gameAlias'" class="fa fa-unsorted">
                     </span>
                 </th>
                 <th>
-                    <a href="" ng-click="eventListController.setSort('eventStatus')">
-                        Status
+                    <a href="" ng-click="leaguesListController.setSort('leagueName')">
+                        League Name
                     </a>
-                    <span ng-show="eventListController.ui.sortType == 'eventStatus' && !eventListController.ui.sortReverse" class="caret-down">
+                    <span ng-show="leaguesListController.sort.sortField == 'leagueName' && !leaguesListController.sort.sortReverse" class="caret-down">
                     </span>
-                    <span ng-show="eventListController.ui.sortType == 'eventStatus' && eventListController.ui.sortReverse" class="caret-up">
+                    <span ng-show="leaguesListController.sort.sortField == 'leagueName' && leaguesListController.sort.sortReverse" class="caret-up">
                     </span>
-                    <span ng-show="eventListController.ui.sortType != 'eventStatus'" class="fa fa-unsorted">
+                    <span ng-show="leaguesListController.sort.sortField != 'leagueName'" class="fa fa-unsorted">
                     </span>
+                </th>
+                <th>
                 </th>
                 <th>
                 </th>
@@ -89,31 +73,30 @@
             </tr>
         </thead>
         <tbody>
-            <!--  | orderBy: eventListController.ui.sortType : eventListController.ui.sortReverse -->
-            <tr ng-repeat="event in eventListController.listData">
-                <td class="date">
-                    {{event.eventStartDate | date : "dd MMM yyyy"}}
+            <tr ng-repeat="league in leaguesListController.filterData = (leaguesListController.leagueData | filter: leaguesListController.search) | orderBy: leaguesListController.sort.sortField:leaguesListController.sort.sortReverse | offset: (leaguesListController.paging.page - 1) * leaguesListController.paging.itemsPerPage | limitTo: leaguesListController.paging.itemsPerPage">
+                <td>
+                    <img ng-src="{{league.leagueGame.gameIcon}}" class="image-icon" />
                 </td>
-                 <td class="date">
-                    {{event.eventEndDate | date : "dd MMM yyyy"}}
+                <td>
+                    {{league.leagueGame.gameAlias | uppercase}}
                 </td>
-                <td class="title">
-                    {{event.eventTitle}}
-                </td>
-                <td class="game">
-                    {{event.eventGame}}
-                </td>
-                <td class="status draft">
-                    {{event.eventStatus}}
+                <td>
+                    {{league.leagueName}}
                 </td>
                 <td class="edit">
-                    <a ng-href="/event/{{event._id}}/edit">
+                    <a ng-href="/manage/#/league/{{league._id}}/edit">
                         <i class="fa fa-edit fa-fw">
                         </i>
                     </a>
                 </td>
+                <td class="delete">
+                    <a ng-click="leaguesListController.delete(league._id)">
+                        <i class="fa fa-trash fa-fw">
+                        </i>
+                    </a>
+                </td>
                 <td class="url">
-                    <a ng-href="/event/{{event._id}}">
+                    <a ng-href="../league/{{league._id}}">
                         <i class="fa fa-external-link fa-fw">
                         </i>
                     </a>
@@ -122,17 +105,17 @@
         </tbody>
     </table>
 </div>
-<span ng-show="(eventListController.ui.listData == null || eventListController.ui.listData.length == 0) && (eventListController.ui.loaded == true)">
-    No events match those criteria.
+<span class="empty" ng-show="leaguesListController.loaded && (leaguesListController.filterData.length == 0 || leaguesListController.leagueData == 0)">
+    No leagues match those criteria.
 </span>
-<div ng-show="eventListController.ui.pages > 1" class="pagination">
-    <a ng-style="{visibility: eventListController.ui.page > 1 && 'visible' || 'hidden'}" ng-click="eventListController.previousPage()" class="btn">
+<div class="pagination" ng-show="leaguesListController.filterData.length > 0">
+    <a ng-style="{visibility: leaguesListController.paging.page >1 && 'visible' || 'hidden'}" ng-click="leaguesListController.previousPage()" class="btn">
         Prev Page
     </a>
     <p>
-        Page {{eventListController.ui.page}} of {{eventListController.ui.pages}}
+        Page {{leaguesListController.paging.page}} of {{leaguesListController.paging.pages()}}
     </p>
-    <a ng-style="{visibility: (eventListController.ui.pages > 1 && eventListController.ui.page < eventListController.ui.pages) && 'visible' || 'hidden'}" ng-click="eventListController.nextPage()" class="btn">
+    <a ng-style="{visibility: (leaguesListController.paging.pages() >1 && leaguesListController.paging.page < leaguesListController.paging.pages()) && 'visible' || 'hidden'}" ng-click="leaguesListController.nextPage()" class="btn">
         Next Page
     </a>
 </div>

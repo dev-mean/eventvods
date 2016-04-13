@@ -270,6 +270,7 @@ p {
   flex-direction: column;
   width: 270px;
   background: #343850;
+  border-right: 1px solid #3c405c;
 }
 .container .rightView {
   display: -webkit-flex;
@@ -406,7 +407,6 @@ nav a i.fa {
   background: #343850;
   height: 97px;
   width: 100%;
-  border-left: 1px solid #3c405c;
   display: -webkit-flex;
   display: -moz-flex;
   display: -ms-flexbox;
@@ -476,7 +476,6 @@ nav a i.fa {
 table.standard {
   width: 100%;
   font-size: 14px;
-  border-left: 1px solid #3c405c;
 }
 table.standard thead {
   background: #474c6c;
@@ -678,7 +677,6 @@ table.standard td.icon img {
   background: #474c6c;
   width: 100%;
   border-bottom: 1px solid #3c405c;
-  border-left: 1px solid #3c405c;
 }
 .filters input {
   border-radius: 2px;
@@ -775,7 +773,6 @@ table.standard td.icon img {
   width: 100%;
   text-align: center;
   padding: 16px;
-  border-left: 1px solid #3c405c;
 }
 /* event listing */
 .row-list {
@@ -989,6 +986,8 @@ form .group label {
 }
 .group.standard {
   margin-bottom: 6px;
+  /* awesomplete */
+  /* Pointer */
 }
 .group.standard input[type=text],
 .group.standard div.image-drop {
@@ -1212,6 +1211,92 @@ form .group label {
 }
 .group.standard div.image-drop input[type=file] {
   display: none;
+}
+.group.standard [hidden] {
+  display: none;
+}
+.group.standard .visually-hidden {
+  position: absolute;
+  clip: rect(0, 0, 0, 0);
+}
+.group.standard span.caret-down {
+  order: 3;
+  position: relative;
+  left: -30px;
+  cursor: pointer;
+}
+.group.standard div.awesomplete {
+  display: inline-block;
+  position: relative;
+  margin-right: 10px;
+  order: 2;
+  -webkit-flex-grow: 1;
+  -moz-flex-grow: 1;
+  -ms-flex-grow: 1;
+  flex-grow: 1;
+}
+.group.standard div.awesomplete > input {
+  display: block;
+  width: 100%;
+}
+.group.standard div.awesomplete > ul:not(.parsley-errors-list) {
+  position: absolute;
+  left: 0;
+  z-index: 1;
+  min-width: 100%;
+  box-sizing: border-box;
+  list-style: none;
+  padding: 0;
+  border-radius: .3em;
+  margin: .2em 0 0;
+  background: #474c6c;
+  box-shadow: 0.05em 0.2em 0.6em rgba(0, 0, 0, 0.2);
+  text-shadow: none;
+}
+.group.standard div.awesomplete > ul[hidden]:not(.parsley-errors-list),
+.group.standard div.awesomplete > ul:empty:not(.parsley-errors-list) {
+  display: none;
+}
+@supports (transform: scale(0)) {
+  .group.standard div.awesomplete > ul:not(.parsley-errors-list) {
+    transition: 0.3s cubic-bezier(0.4, 0.2, 0.5, 1.4);
+    transform-origin: 1.43em -0.43em;
+  }
+  .group.standard div.awesomplete > ul[hidden]:not(.parsley-errors-list),
+  .group.standard div.awesomplete > ul:empty:not(.parsley-errors-list) {
+    opacity: 0;
+    transform: scale(0);
+    display: block;
+    transition-timing-function: ease;
+  }
+}
+.group.standard div.awesomplete > ul:not(.parsley-errors-list):before {
+  content: "";
+  position: absolute;
+  top: -0.43em;
+  left: 1em;
+  width: 0;
+  height: 0;
+  padding: .4em;
+  background: #474c6c;
+  border: inherit;
+  border-right: 0;
+  border-bottom: 0;
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+.group.standard div.awesomplete > ul:not(.parsley-errors-list) > li {
+  position: relative;
+  padding: .2em .5em;
+  cursor: pointer;
+}
+.group.standard div.awesomplete > ul:not(.parsley-errors-list) > li:hover {
+  background: #b8d3e0;
+  color: black;
+}
+.group.standard div.awesomplete mark {
+  background: inherit;
+  text-decoration: underline;
 }
 .stacked.group {
   width: 100%;
