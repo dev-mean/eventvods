@@ -13,9 +13,6 @@ var User = require('./app/models/user');
 var config = require('./config/config');
 var RedisStore = require('connect-redis')(session);
 var favicon = require('serve-favicon');
-//server config
-app.set('env', 'development');
-process.env.NODE_ENV = 'development';
 app.use(morgan('dev'));
 //Set up logging
 var logger = require('bristol');
@@ -30,9 +27,8 @@ app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(bodyParser.urlencoded({
     'extended': 'true'
 }));
-app.use(bodyParser.json());
 app.use(bodyParser.json({
-    type: 'application/vnd.api+json'
+    limit: '50mb',
 }));
 app.use(session({
     secret: config.secret,
@@ -65,7 +61,7 @@ var api = require('./app/routes/api');
 var auth = require('./app/routes/auth.js');
 app.use('/user', auth);
 app.use('/api', api);
-app.use('/', backend);
+app.use('/manage', backend);
 // 404 handler
 app.use(function(req, res, next) {
     var err = new Error("404 - Page Not Found");
@@ -76,7 +72,7 @@ app.use(function(req, res, next) {
 app.use(function(err, req, res, next) {
     res.status(err.status || 500);
     logger.error(err);
-    if (process.env.NODE_ENV == "development" || app.get('env') == "development") res.render('error', {
+    if (process.env.NODE_ENV == "development") res.render('error', {
         message: err.message,
         stack: err.stack
     });
@@ -84,6 +80,7 @@ app.use(function(err, req, res, next) {
         message: err.message
     });
 });
+logger.info('NODE_ENV: '+process.env.NODE_ENV);
 //listens
 var port = config.port;
 var db = config.databaseUrl;

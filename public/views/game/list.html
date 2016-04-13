@@ -25,7 +25,7 @@
         </h1>
     </div>
     <div class="rightSide">
-        <a href="#games/new" class="btn lg solid icon">
+        <a href="/manage/#games/new" class="btn lg solid icon">
             <i class="fa fa-gamepad">
             </i>
             <span>
@@ -41,6 +41,7 @@
     <table class="standard">
         <thead>
             <tr>
+                <th></th>
                 <th>
                     <a href="" ng-click="gamesListController.setSort('gameName')">
                         Game
@@ -74,6 +75,9 @@
         <tbody>
             <tr ng-repeat="game in gamesListController.filterData = (gamesListController.gameData | filter: gamesListController.search) | orderBy: gamesListController.sort.sortField:gamesListController.sort.sortReverse | offset: (gamesListController.paging.page - 1) * gamesListController.paging.itemsPerPage | limitTo: gamesListController.paging.itemsPerPage">
                 <td>
+                    <img ng-src="{{game.gameIcon}}" class="image-icon" />
+                </td>
+                <td>
                     {{game.gameName}}
                 </td>
                 <td class="date">
@@ -104,7 +108,7 @@
 <span class="empty" ng-show="gamesListController.filterData.length == 0 && gamesListController.gameData.length >0">
     No games match those criteria.
 </span>
-<div class="pagination">
+<div class="pagination" ng-cloak>
     <a ng-style="{visibility: gamesListController.paging.page >1 && 'visible' || 'hidden'}" ng-click="gamesListController.previousPage()" class="btn">
         Prev Page
     </a>

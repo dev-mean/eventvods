@@ -9,7 +9,9 @@ var gameSchema = new Schema({
         type: String,
         required: true,
         unique: true
-    }
+    },
+    gameIcon: String,
+    gameBanner: String,
 });
 var Game = mongoose.model('Game', gameSchema);
 module.exports = Game;

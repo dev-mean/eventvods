@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="/assets/lib/dropzone/dist/min/basic.min.css" />
 <div class="contextHead">
     <div class="leftSide">
         <h1 ng-bind="gameFormController.title">
@@ -23,6 +24,18 @@
             </label>
             <input type="text" class="force-caps" placeholder="e.g. LOL" ng-model="gameFormController.data.gameAlias" data-parsley-trigger="keyup" data-parsley-type="alphanum" data-parsley-remote-message="Alias already in use." required/>
         </div>
+        <div class="standard group">
+            <label>
+                Game Icon (optional)
+            </label>
+            <image-drop model="gameFormController.data.gameIcon" preview-width="64" preview-height="64" />
+        </div>
+        <div class="standard group">
+            <label>
+                Game Banner (optional)
+            </label>
+            <image-drop model="gameFormController.data.gameBanner" preview-width="300" preview-height="100" />
+        </div>
         <br />
         <div class="standard group">
             <a class="btn lg solid icon" ng-click="gameFormController.submit()">
@@ -35,4 +48,6 @@
     </div>
 </form>
 <script src="/assets/lib/parsleyjs/dist/parsley.min.js">
+</script>
+<script src="/assets/lib/dropzone/dist/min/dropzone.min.js">
 </script>

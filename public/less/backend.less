@@ -32,7 +32,13 @@ a {
 p {
     padding-left: 15px;
 }
-
+.text-sm {
+    font-size: 80%;
+}
+.image-icon {
+    width: 32px;
+    height: 32px;
+}
 .form-style {
     border-radius: @input-radius;
     outline: none;
@@ -538,7 +544,7 @@ table.standard {
 form {
     .group {
         .flex-display;
-        input {
+        input[type=text], p {
             .flex-order(2);
             .flex-grow(1);
         }
@@ -623,7 +629,7 @@ form {
 
 .group.standard {
     margin-bottom: 6px;
-    input {
+    input[type=text], div.image-drop {
         .form-style;
         margin-right: @padding;
         &.force-caps:valid {
@@ -639,6 +645,52 @@ form {
     }
     input:focus + label {
         color: @silver-light;
+    }
+    div.image-drop {
+        order: 2;
+        .flex-grow(1);
+        .flex-shrink(1);
+        .flex-display;
+        .flex-direction(row);
+        &.dragOver {
+            background: @default-light;
+        }
+        div {
+            text-align: center;
+        }
+        div.image-container {
+            order: 1;
+            .flex-display;
+            .flex-grow(1);
+            .flex-direction(column);
+            .justify-content(center);
+            img.preview {
+                margin: auto;
+                border: 2px solid @default-light;
+            }
+        }
+        div.controls-container {
+            order: 2;
+            .flex-display;
+            .justify-content(space-between);
+            .flex-direction(column);
+            p {
+                .flex-display;
+                .flex-direction(column);
+                .justify-content(center);
+                padding: 15px;
+                a {
+
+                    .btn;
+                    .solid;
+                    .icon;
+                    margin: auto;
+                }
+            }
+        }
+        input[type=file]{
+            display: none;
+        }
     }
 }
 

@@ -194,6 +194,13 @@ a {
 p {
   padding-left: 15px;
 }
+.text-sm {
+  font-size: 80%;
+}
+.image-icon {
+  width: 32px;
+  height: 32px;
+}
 .form-style {
   border-radius: 2px;
   outline: none;
@@ -891,7 +898,8 @@ form .group {
   display: -ms-flex;
   display: flex;
 }
-form .group input {
+form .group input[type=text],
+form .group p {
   -webkit-order: 2;
   -moz-order: 2;
   -ms-order: 2;
@@ -982,7 +990,8 @@ form .group label {
 .group.standard {
   margin-bottom: 6px;
 }
-.group.standard input {
+.group.standard input[type=text],
+.group.standard div.image-drop {
   border-radius: 2px;
   outline: none;
   line-height: 14px;
@@ -998,31 +1007,37 @@ form .group label {
   transition: all 0.25s ease-in-out;
   margin-right: 20px;
 }
-.group.standard input:focus {
+.group.standard input[type=text]:focus,
+.group.standard div.image-drop:focus {
   border-color: #a4abc1;
   color: #d3d7e3;
 }
-.group.standard input::-webkit-input-placeholder {
+.group.standard input[type=text]::-webkit-input-placeholder,
+.group.standard div.image-drop::-webkit-input-placeholder {
   font-size: 14px;
   line-height: 16px;
   color: #8690af;
 }
-.group.standard input::-moz-placeholder {
+.group.standard input[type=text]::-moz-placeholder,
+.group.standard div.image-drop::-moz-placeholder {
   font-size: 14px;
   line-height: 16px;
   color: #8690af;
 }
-.group.standard input:-moz-placeholder {
+.group.standard input[type=text]:-moz-placeholder,
+.group.standard div.image-drop:-moz-placeholder {
   font-size: 14px;
   line-height: 16px;
   color: #8690af;
 }
-.group.standard input:-ms-input-placeholder {
+.group.standard input[type=text]:-ms-input-placeholder,
+.group.standard div.image-drop:-ms-input-placeholder {
   font-size: 14px;
   line-height: 16px;
   color: #8690af;
 }
-.group.standard input.force-caps:valid {
+.group.standard input[type=text].force-caps:valid,
+.group.standard div.image-drop.force-caps:valid {
   text-transform: uppercase;
 }
 .group.standard label {
@@ -1037,6 +1052,166 @@ form .group label {
 }
 .group.standard input:focus + label {
   color: #d3d7e3;
+}
+.group.standard div.image-drop {
+  order: 2;
+  -webkit-flex-grow: 1;
+  -moz-flex-grow: 1;
+  -ms-flex-grow: 1;
+  flex-grow: 1;
+  -webkit-flex-shrink: 1;
+  -moz-flex-shrink: 1;
+  -ms-flex-shrink: 1;
+  flex-shrink: 1;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: -ms-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+  -moz-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+.group.standard div.image-drop.dragOver {
+  background: #474c6c;
+}
+.group.standard div.image-drop div {
+  text-align: center;
+}
+.group.standard div.image-drop div.image-container {
+  order: 1;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: -ms-flex;
+  display: flex;
+  -webkit-flex-grow: 1;
+  -moz-flex-grow: 1;
+  -ms-flex-grow: 1;
+  flex-grow: 1;
+  -webkit-flex-direction: column;
+  -moz-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-justify-content: center;
+  -moz-justify-content: center;
+  -ms-justify-content: center;
+  justify-content: center;
+}
+.group.standard div.image-drop div.image-container img.preview {
+  margin: auto;
+  border: 2px solid #474c6c;
+}
+.group.standard div.image-drop div.controls-container {
+  order: 2;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: -ms-flex;
+  display: flex;
+  -webkit-justify-content: space-between;
+  -moz-justify-content: space-between;
+  -ms-justify-content: space-between;
+  justify-content: space-between;
+  -webkit-flex-direction: column;
+  -moz-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+.group.standard div.image-drop div.controls-container p {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: -ms-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  -moz-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-justify-content: center;
+  -moz-justify-content: center;
+  -ms-justify-content: center;
+  justify-content: center;
+  padding: 15px;
+}
+.group.standard div.image-drop div.controls-container p a {
+  line-height: 1em;
+  font-family: arial, sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  border: 2px solid #3cff85;
+  color: #3cff85;
+  margin: 0;
+  padding: 6px 14px;
+  border-radius: 24px;
+  box-sizing: border-box;
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+  touch-action: manipulation;
+  cursor: pointer;
+  width: auto;
+  white-space: nowrap;
+  background: #3cff85;
+  color: #343850;
+  position: relative;
+  margin: auto;
+}
+.group.standard div.image-drop div.controls-container p a:hover {
+  background-color: rgba(60, 255, 133, 0.12);
+  color: #6fffa5;
+}
+.group.standard div.image-drop div.controls-container p a.solid {
+  background: #3cff85;
+  color: #343850;
+}
+.group.standard div.image-drop div.controls-container p a.solid:hover {
+  background-color: #22ff75;
+  color: #2a2d3e;
+}
+.group.standard div.image-drop div.controls-container p a.icon {
+  position: relative;
+}
+.group.standard div.image-drop div.controls-container p a.icon i {
+  position: absolute;
+  left: 14px;
+  line-height: 14px;
+  font-size: 18px;
+}
+.group.standard div.image-drop div.controls-container p a.icon span {
+  padding-left: 22px;
+  display: block;
+}
+.group.standard div.image-drop div.controls-container p a.lg {
+  padding: 9px 20px;
+}
+.group.standard div.image-drop div.controls-container p a.small {
+  font-size: 11px;
+  padding: 2px 6px;
+}
+.group.standard div.image-drop div.controls-container p a.warning {
+  color: red;
+}
+.group.standard div.image-drop div.controls-container p a.warning:hover {
+  color: darkred;
+}
+.group.standard div.image-drop div.controls-container p a:hover {
+  background-color: #22ff75;
+  color: #2a2d3e;
+}
+.group.standard div.image-drop div.controls-container p a i {
+  position: absolute;
+  left: 14px;
+  line-height: 14px;
+  font-size: 18px;
+}
+.group.standard div.image-drop div.controls-container p a span {
+  padding-left: 22px;
+  display: block;
+}
+.group.standard div.image-drop input[type=file] {
+  display: none;
 }
 .stacked.group {
   width: 100%;
