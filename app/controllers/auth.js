@@ -86,7 +86,7 @@ module.exports.admin = function () {
 module.exports.public_api = function () {
 	return function (req, res, next) {
 		var key = req.query.apikey || req.get('X-Eventvods-Authorization');
-		if (process.env.NODE_ENV == "development" || app.get('env') == "development" ||
+		if (process.env.NODE_ENV == "development" ||
 			(req.isAuthenticated && req.isAuthenticated() && req.user.userRights >= constants.updater))
 			key = config.secret;
 		if (typeof key === "undefined" || key === null || key === "") {

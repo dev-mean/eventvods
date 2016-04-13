@@ -104,7 +104,7 @@ router.all( '*', function( req, res, next ) {
     }
 } );
 router.all( '*', function( req, res, next ) {
-    if ( process.env.NODE_ENV === 'development' || app.get( 'env' ) == 'development' ) {
+    if ( process.env.NODE_ENV === 'development' ) {
         if ( !req.isAuthenticated() ) {
             console.log( 'No user detected, trying to authenticate' );
             User.authenticate()( 'simon_dev', 'password', function( err, user, options ) {
