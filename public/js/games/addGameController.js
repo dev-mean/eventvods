@@ -21,7 +21,7 @@
                             if ( response.status == 500 ) vm.errors.push( {
                                 message: 'Game alias must be unique, and a game already exists with that alias.'
                             } );
-                            else vm.errors = response.errors;
+                            else vm.errors = response.data.errors;
                         } );
                 }
             }

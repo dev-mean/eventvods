@@ -2,7 +2,7 @@ var app = require( 'express' );
 var router = app.Router();
 var auth = require( '../controllers/auth' );
 var path = require( 'path' );
-var image = require( '../controllers/image' );
+var Image = require( '../controllers/image' );
 var Staff = require( '../models/staff' );
 var Event = require( '../models/event' );
 var Link = require( '../models/link' );
@@ -15,7 +15,6 @@ var SocialMedia = require( '../models/socialmedia' );
 var Sponsor = require( '../models/sponsor' );
 var Team = require( '../models/team' );
 var User = require( '../models/user' );
-var multer = require( 'multer' );
 var async = require( 'async' );
 var Validators = require( '../controllers/validation' );
 var Indicative = require( 'indicative' );
@@ -264,7 +263,7 @@ router.route( '/games' )
             else res.json( games );
         } );
     } )
-    .post( auth.updater(), function( req, res, next ) {
+    .post( auth.updater(), Image.handleUpload( [ 'gameIcon', 'gameBanner' ] ), function( req, res, next ) {
         Indicative.validateAll( req.body, Validators.game, Validators.messages )
             .then( function() {
                 Game.create( req.body, function( err, game ) {
@@ -301,7 +300,7 @@ router.route( '/game/:game_id' )
             else res.sendStatus( 204 );
         } );
     } )
-    .put( auth.updater(), function( req, res, next ) {
+    .put( auth.updater(), Image.handleUpload( [ 'gameIcon', 'gameBanner' ] ), function( req, res, next ) {
         Indicative.validateAll( req.body, Validators.game, Validators.messages )
             .then( function() {
                 Game.findByIdAndUpdate( req.params.game_id, req.body, function( err, game ) {
@@ -1098,11 +1097,6 @@ router.route( '/users/:user_id' )
                 err.errors = errors;
                 next( err );
             } );
-    } );
-router.route( '/images/events/:event_id' )
-    .post( image.upload.single( 'file' ), function( req, res, next ) {
-        console.log( "File uploaded for eventid " + req.params.event_id + ": " + req.file );
-        return res.sendStatus( 200 );
     } );
 // 404 handler
 router.use( function( req, res, next ) {
