@@ -10,7 +10,7 @@ const WEB_BASE = '/assets/images';
 
 function handleImage( fileData ) {
     var $promise = Q.defer();
-    if ( typeof fileData.image == "undefined" || !fileData.image.match( 'base64' ) ) $promise.resolve( fileData );
+    if ( typeof fileData.image == "undefined"  || fileData.image == null || !fileData.image.match( 'base64' ) ) $promise.resolve( fileData );
     else {
         fileData.image = fileData.image.split( ";base64," )[ 1 ];
         var file = new Buffer( fileData.image, 'base64' );
