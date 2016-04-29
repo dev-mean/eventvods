@@ -24,3 +24,4 @@ public/lib/
 
 # Simon IDE settings
 .brackets.json
+config.js

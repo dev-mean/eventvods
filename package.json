@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "async": "*",
+    "aws-sdk": "^2.3.7",
     "body-parser": "*",
     "bower": "*",
     "bristol": "*",
