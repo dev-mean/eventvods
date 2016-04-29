@@ -21,6 +21,9 @@ module.exports = {
 		"host": "pub-redis-12018.us-east-1-3.7.ec2.redislabs.com",
 		"port": "12018",
 		"auth": "Testing123",
+	},
+	aws: {
+		"id": "AKIAI4A3ZWN2AEGBEQPQ",
+		"secret": "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"
 	}
-
 };
