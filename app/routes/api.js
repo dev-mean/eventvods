@@ -2,7 +2,7 @@ var app = require( 'express' );
 var router = app.Router();
 var auth = require( '../controllers/auth' );
 var path = require( 'path' );
-var Image = require( '../controllers/image' );
+var AWS = require( '../controllers/aws' );
 var Staff = require( '../models/staff' );
 var Event = require( '../models/event' );
 var Link = require( '../models/link' );
@@ -24,6 +24,8 @@ var League = require( '../models/league' );
 var Game = require( '../models/game' );
 var keygen = require( 'keygenerator' );
 var config = require( '../../config/config' );
+var moment = require( 'moment' );
+var Q = require( 'q' );
 // Redis is magic basically
 var redis = require( 'redis' )
     .createClient( config.redis.port, config.redis.host, {
@@ -103,37 +105,32 @@ router.all( '*', function( req, res, next ) {
     }
 } );
 router.all( '*', function( req, res, next ) {
-    if ( process.env.NODE_ENV === 'development' ) {
-        if ( !req.isAuthenticated() ) {
-            console.log( 'No user detected, trying to authenticate' );
-            User.authenticate()( 'simon_dev', 'password', function( err, user, options ) {
-                if ( err ) console.log( err );
-                if ( user === false ) {
-                    console.log( 'ERROR: Set up dev admin account!' );
-                } else {
-                    req.login( user, function( err ) {
-                        if ( err ) console.log( err );
-                        console.log( 'Dev login success!' );
-                        res.locals.user = user;
-                        return next();
-                    } );
-                }
-            } );
+        if ( process.env.NODE_ENV === 'development' ) {
+            if ( !req.isAuthenticated() ) {
+                console.log( 'No user detected, trying to authenticate' );
+                User.authenticate()( 'simon_dev', 'password', function( err, user, options ) {
+                    if ( err ) console.log( err );
+                    if ( user === false ) {
+                        console.log( 'ERROR: Set up dev admin account!' );
+                    } else {
+                        req.login( user, function( err ) {
+                            if ( err ) console.log( err );
+                            console.log( 'Dev login success!' );
+                            res.locals.user = user;
+                            return next();
+                        } );
+                    }
+                } );
+            } else {
+                res.locals.user = req.user;
+                return next();
+            }
         } else {
             res.locals.user = req.user;
             return next();
         }
-    } else {
-        res.locals.user = req.user;
-        return next();
-    }
-} )
-router.get( '/delete/:cache', function( req, res, next ) {
-    cache.del( req.params.cache, function( err, count ) {
-        res.send( count + " entries deleted." );
-    } );
-} );
-//Specific validation routes
+    } )
+    //Specific validation routes
 router.get( '/validate/gameAlias/:alias', auth.public_api(), rateLimit, cache.route(), function( req, res, next ) {
     Game.find( {
             gameAlias: req.params.alias
@@ -157,8 +154,11 @@ router.get( '/validate/gameAlias/:alias/:id', auth.public_api(), rateLimit, cach
 } );
 //OVERVIEW
 router.get( '/overview', auth.public_api(), rateLimit, cache.route( 'overview', 3600 ), function( req, res, next ) {
-    var today = new Date()
-        .toISOString();
+    var today = moment()
+        .format();
+    var last_week = moment()
+        .subtract( 7, 'days' )
+        .format();
     async.parallel( {
         upcoming: function( callback ) {
             Event.find( {
@@ -167,10 +167,10 @@ router.get( '/overview', auth.public_api(), rateLimit, cache.route( 'overview', 
                     }
                 } )
                 .sort( '-eventStartDate' )
-                .count()
-                .exec( function( err, count ) {
+                .limit( 1 )
+                .exec( function( err, docs ) {
                     if ( err ) callback( err );
-                    else callback( null, count );
+                    else callback( null, docs );
                 } );
         },
         ongoing: function( callback ) {
@@ -183,10 +183,9 @@ router.get( '/overview', auth.public_api(), rateLimit, cache.route( 'overview', 
                     }
                 } )
                 .sort( 'eventStartDate' )
-                .count()
-                .exec( function( err, count ) {
+                .exec( function( err, docs ) {
                     if ( err ) callback( err );
-                    else callback( null, count );
+                    else callback( null, docs );
                 } );
         },
         finished: function( callback ) {
@@ -196,10 +195,10 @@ router.get( '/overview', auth.public_api(), rateLimit, cache.route( 'overview', 
                     }
                 } )
                 .sort( 'eventEndDate' )
-                .count()
-                .exec( function( err, count ) {
+                .limit( 1 )
+                .exec( function( err, docs ) {
                     if ( err ) callback( err );
-                    else callback( null, count );
+                    else callback( null, docs );
                 } );
         },
         staff: function( callback ) {
@@ -225,6 +224,18 @@ router.get( '/overview', auth.public_api(), rateLimit, cache.route( 'overview', 
                 if ( err ) callback( err );
                 else callback( null, count );
             } );
+        },
+        registrations: function( callback ) {
+            User.find( {
+                    "signupDate": {
+                        $gte: last_week
+                    }
+                } )
+                .count()
+                .exec( function( err, count ) {
+                    if ( err ) callback( err );
+                    else callback( null, count );
+                } );
         },
         updaters: function( callback ) {
             User.find( {
@@ -263,7 +274,7 @@ router.route( '/games' )
             else res.json( games );
         } );
     } )
-    .post( auth.updater(), Image.handleUpload( [ 'gameIcon', 'gameBanner' ] ), function( req, res, next ) {
+    .post( auth.updater(), AWS.handleUpload( [ 'gameIcon', 'gameBanner' ] ), function( req, res, next ) {
         Indicative.validateAll( req.body, Validators.game, Validators.messages )
             .then( function() {
                 Game.create( req.body, function( err, game ) {
@@ -293,14 +304,19 @@ router.route( '/game/:game_id' )
         } );
     } )
     .delete( auth.updater(), function( req, res, next ) {
-        Game.remove( {
-            _id: req.params.game_id
-        }, function( err ) {
-            if ( err ) next( err );
-            else res.sendStatus( 204 );
+        Game.findById( req.params.game_id, function( err, doc ) {
+            Q.all( [ AWS.deleteImage( doc.gameIcon ), AWS.deleteImage( doc.gameBanner ) ] )
+                .then( function() {
+                    doc.remove( function( err ) {
+                        if ( err ) next( err );
+                        else res.sendStatus( 204 );
+                    } )
+                }, function( err ) {
+                    next( err );
+                } )
         } );
     } )
-    .put( auth.updater(), Image.handleUpload( [ 'gameIcon', 'gameBanner' ] ), function( req, res, next ) {
+    .put( auth.updater(), AWS.handleUpload( [ 'gameIcon', 'gameBanner' ] ), function( req, res, next ) {
         Indicative.validateAll( req.body, Validators.game, Validators.messages )
             .then( function() {
                 Game.findByIdAndUpdate( req.params.game_id, req.body, function( err, game ) {

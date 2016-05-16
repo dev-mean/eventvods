@@ -333,40 +333,20 @@ table.standard {
 }
 
 .tile-row {
-    height: 33%;
-    min-height: 100px;
-    .flex-display;
-    .flex-direction(row);
-    .justify-content(space-around);
-}
-
-.tile-title {
-    text-align: center;
-    font-size: 150%;
-}
-
-.tile-cell {
-    text-align: left;
-    width: 33%;
     background: @default-dark;
-    padding-left: @padding-sm;
+    padding: @padding-sm;
     .flex-display;
     .flex-direction(column);
-    .justify-content(space-around);
-    .badge, p {
-        text-align: center;
-        padding: @padding-sm;
-        display: inline-block;
-        vertical-align: middle;
+    .justify-content(space-between);
+    h2 {
+        float: left;
     }
-    .badge {
-        font-size: 150%;
-        width: 76px;
-        background: @default-light;
-        .rounded(5px);
-        color: @green-bright;
+    .content {
+        width: 100%;
+        .flex-grow(2);
     }
 }
+
 
 .pagination {
     padding: @padding-sm @padding;

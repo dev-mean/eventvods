@@ -1,3 +1,6 @@
+<script type="text/javascript">
+  google.charts.load('current', {packages: ['corechart','timeline']});
+</script>
 <div class="contextHead">
     <div class="leftSide">
         <h1 class="title">
@@ -8,36 +11,8 @@
 <div class="content">
     <div class="tile-container dashboard">
         <div class="tile-row">
-            <div class="tile-cell">
-                <div class="badge-wrapper">
-                    <span class="badge">
-                        {{overviewController.overviewData.upcoming}}
-                    </span>
-                    <p>
-                        Upcoming Events
-                    </p>
-                </div>
-            </div>
-            <div class="tile-cell">
-                <div class="badge-wrapper">
-                    <span class="badge">
-                        {{overviewController.overviewData.ongoing}}
-                    </span>
-                    <p>
-                        Ongoing Events
-                    </p>
-                </div>
-            </div>
-            <div class="tile-cell">
-                <div class="badge-wrapper">
-                    <span class="badge">
-                        {{overviewController.overviewData.finished}}
-                    </span>
-                    <p>
-                        Finished Events
-                    </p>
-                </div>
-            </div>
+            <h2>Events</h2>
+            <div class="content"></div>
         </div>
         <div class="tile-row">
             <div class="tile-cell">

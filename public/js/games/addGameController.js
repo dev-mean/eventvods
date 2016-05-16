@@ -19,7 +19,7 @@
                             $location.path( '/games' );
                         }, function( response ) {
                             if ( response.status == 500 ) vm.errors.push( {
-                                message: 'Game alias must be unique, and a game already exists with that alias.'
+                                message: 'Unexpected error. Please pass this on to the developers.'
                             } );
                             else vm.errors = response.data.errors;
                         } );

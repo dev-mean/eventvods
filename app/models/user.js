@@ -13,6 +13,10 @@ var userSchema = new Schema({
 		type: Date,
 		default: Date.now
 	},
+	signupDate: {
+		type: Date,
+		default: Date.now
+	},
 	signupIP: String,
 	lastIP: String,
 	userRights: {

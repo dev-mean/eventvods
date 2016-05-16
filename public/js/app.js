@@ -62,7 +62,7 @@
                 readAsDataUrl: readAsDataURL
             };
         } ] )
-        .directive( "imageDrop", [ 'fileReader', function( fileReader) {
+        .directive( "imageDrop", [ 'fileReader', function( fileReader ) {
             return {
                 restrict: "E",
                 replace: true,
@@ -72,15 +72,12 @@
                 },
                 link: function( $scope, $element, $attrs ) {
                     $scope.dom = {
-                        preview: $element
-                            .children('.image-container')
+                        preview: $element.children( '.image-container' )
                             .children( '.preview' ),
-                        input: $element
-                            .children('.controls-container')
+                        input: $element.children( '.controls-container' )
                             .children( 'p' )
                             .children( 'input' ),
-                        btn: $element
-                            .children('.controls-container')
+                        btn: $element.children( '.controls-container' )
                             .children( 'p' )
                             .children( 'a' )
                     };
@@ -90,11 +87,11 @@
                         width: width + "px",
                         height: height + "px",
                     } );
-                    $scope.dom.preview.attr('src', ($scope.model || "http://placehold.it/"+width+"x"+height ));
-                    $scope.dom.btn.on('click', function(e){
+                    $scope.dom.preview.attr( 'src', ( $scope.model || "http://placehold.it/" + width + "x" + height ) );
+                    $scope.dom.btn.on( 'click', function( e ) {
                         e.preventDefault();
-                        $scope.dom.input.trigger('click');
-                    })
+                        $scope.dom.input.trigger( 'click' );
+                    } )
                     $( 'body' )
                         .on( 'dragover dragleave drop', function( e ) {
                             e.preventDefault();
@@ -117,21 +114,33 @@
                         var file = e.target.files[ 0 ];
                         loadFile( file );
                     } );
-                    $scope.$watch('model', function(){
-                        $scope.dom.preview.attr('src', $scope.model);
-                    })
+                    $scope.$watch( 'model', function() {
+                        if ( typeof $scope.model === "string" ) $scope.dom.preview.attr( 'src', $scope.model );
+                        else if(typeof $scope.model === "object" && $scope.model.changed) $scope.dom.preview.attr( 'src', $scope.model.data );
+                    } )
                     var loadFile = function( file ) {
                         fileReader.readAsDataUrl( file, $scope )
                             .then( function( data ) {
                                 $scope.dom.preview.attr( 'src', data );
-                                $scope.model = data;
+                                if ( typeof $scope.model === "string" ) {
+                                    var old = $scope.model;
+                                    $scope.model = {
+                                        oldURL: old,
+                                        data: data,
+                                        changed: true,
+                                    }
+                                } else if ( typeof $scope.model === "undefined" ) {
+                                    $scope.model = {
+                                        data: data
+                                    }
+                                } else $scope.model.data = data;
                             } )
                     };
                 }
             };
         } ] )
         .config( function( $routeProvider, $locationProvider ) {
-            $locationProvider.html5Mode(true);
+            $locationProvider.html5Mode( true );
             $routeProvider
             // route for the home page
                 .when( '/', {

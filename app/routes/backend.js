@@ -34,7 +34,7 @@ router.all('/*', function (req, res, next) {
 	}
 });
 
-router.get('/', auth.updater(), function (req, res) {
+router.get('/*', auth.updater(), function (req, res) {
 	res.sendFile(path.resolve(__dirname + '/../../app/views/backend.html'));
 });
 
