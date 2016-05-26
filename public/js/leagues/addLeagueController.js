@@ -41,6 +41,7 @@
                     vm.data.leagueGame = vm.games[$('#game').val()];
                 }
                 vm.submit = function() {
+                    console.log(vm.data);
                     if ( vm.parsley.validate() ) Leagues.create( vm.data )
                         .then( function( response ) {
                             toastr.success( 'League added.', {
