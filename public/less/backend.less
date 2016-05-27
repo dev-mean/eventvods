@@ -37,9 +37,32 @@ p {
     font-size: 80%;
 }
 
-.image-icon {
-    width: 48px;
-    height: 48px;
+img.icon {
+    &-48 {
+        width: 48px;
+        height: 48px;
+        &:not([src]){
+            display: none;
+        }
+    }
+    &-32 {
+        width: 32px;
+        height: 32px;
+        &:not([src]){
+            display: none;
+        }
+    }
+    &-16 {
+        width: 16px;
+        height: 16px;
+        &:not([src]){
+            display: none;
+        }
+    }
+    &-text-align {
+        position: relative;
+        top: 2px;
+    }
 }
 
 .form-style {
@@ -261,40 +284,31 @@ table.standard {
     }
     td {
         padding: @padding-cell;
-        border-bottom: 1px solid @default;
         line-height: @font-size;
         font-size: @font-size;
+        height: 76px;
+        border-bottom: 1px solid @default-light;
         &.edit, &.url, &.delete {
             padding: 0;
             margin: 0;
             width: 48px;
-            overflow: hidden;
+            border-left: 1px solid @default-light;
             a {
+                cursor: pointer; 
                 display: block;
-                border-left: 1px solid @default;
-                line-height: 14px;
+                line-height: 76px;
                 font-size: 20px;
                 width: 46px;
-                height: 46px;
+                height: 76px;
                 text-align: center;
                 color: @silver-darker;
-                padding: @padding-cell + 1;
                 .transition;
-                &:hover {
-                    background: @default;
-                    color: @blue;
+                i {
+                    padding-left: 5px;
                 }
             }
-        }
-        &.url i {
-            padding-left: 2px;
-        }
-        &.icon {
-            padding-top: 6px;
-            img {
-                max-height: 32px;
-                position: absolute;
-                margin-top: -13px;
+            &:hover {
+                background: @default-light;
             }
         }
     }

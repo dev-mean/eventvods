@@ -41,7 +41,6 @@
     <table class="standard">
         <thead>
             <tr>
-                <th></th>
                 <th>
                     <a href="" ng-click="leaguesListController.setSort('leagueGame.gameAlias')">
                         Game
@@ -53,7 +52,9 @@
                     <span ng-show="leaguesListController.sort.sortField != 'leagueGame.gameAlias'" class="fa fa-unsorted">
                     </span>
                 </th>
-                <th></th>
+                <th>
+                    League Logo
+                </th>
                 <th>
                     <a href="" ng-click="leaguesListController.setSort('leagueName')">
                         League Name
@@ -76,13 +77,11 @@
         <tbody>
             <tr ng-repeat="league in leaguesListController.filterData = (leaguesListController.leagueData | filter: leaguesListController.search) | orderBy: leaguesListController.sort.sortField:leaguesListController.sort.sortReverse | offset: (leaguesListController.paging.page - 1) * leaguesListController.paging.itemsPerPage | limitTo: leaguesListController.paging.itemsPerPage">
                 <td>
-                    <img ng-src="{{league.leagueGame.gameIcon}}" class="image-icon" />
-                </td>
-                <td>
+                    <img ng-src="{{league.leagueGame.gameIcon}}" class="icon-16 icon-text-align" />
                     {{league.leagueGame.gameAlias | uppercase}}
                 </td>
                 <td>
-                    <img ng-src="{{league.leagueLogo}}" class="image-icon" />
+                    <img ng-src="{{league.leagueLogo}}" class="icon-48" />
                 </td>
                 <td>
                     {{league.leagueName}}

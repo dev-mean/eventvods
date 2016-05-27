@@ -75,7 +75,7 @@
         <tbody>
             <tr ng-repeat="game in gamesListController.filterData = (gamesListController.gameData | filter: gamesListController.search) | orderBy: gamesListController.sort.sortField:gamesListController.sort.sortReverse | offset: (gamesListController.paging.page - 1) * gamesListController.paging.itemsPerPage | limitTo: gamesListController.paging.itemsPerPage">
                 <td>
-                    <img ng-src="{{game.gameIcon}}" class="image-icon" />
+                    <img ng-src="{{game.gameIcon}}" class="icon-48" />
                 </td>
                 <td>
                     {{game.gameName}}

@@ -197,9 +197,30 @@ p {
 .text-sm {
   font-size: 80%;
 }
-.image-icon {
+img.icon-48 {
   width: 48px;
   height: 48px;
+}
+img.icon-48:not([src]) {
+  display: none;
+}
+img.icon-32 {
+  width: 32px;
+  height: 32px;
+}
+img.icon-32:not([src]) {
+  display: none;
+}
+img.icon-16 {
+  width: 16px;
+  height: 16px;
+}
+img.icon-16:not([src]) {
+  display: none;
+}
+img.icon-text-align {
+  position: relative;
+  top: 2px;
 }
 .form-style {
   border-radius: 2px;
@@ -496,9 +517,10 @@ table.standard th.sortable.sort-asc {
 }
 table.standard td {
   padding: 12px;
-  border-bottom: 1px solid #3c405c;
   line-height: 14px;
   font-size: 14px;
+  height: 76px;
+  border-bottom: 1px solid #474c6c;
 }
 table.standard td.edit,
 table.standard td.url,
@@ -506,41 +528,33 @@ table.standard td.delete {
   padding: 0;
   margin: 0;
   width: 48px;
-  overflow: hidden;
+  border-left: 1px solid #474c6c;
 }
 table.standard td.edit a,
 table.standard td.url a,
 table.standard td.delete a {
+  cursor: pointer;
   display: block;
-  border-left: 1px solid #3c405c;
-  line-height: 14px;
+  line-height: 76px;
   font-size: 20px;
   width: 46px;
-  height: 46px;
+  height: 76px;
   text-align: center;
   color: #8690af;
-  padding: 13px;
   -webkit-transition: all 0.25s ease-in-out;
   -moz-transition: all 0.25s ease-in-out;
   -o-transition: all 0.25s ease-in-out;
   transition: all 0.25s ease-in-out;
 }
-table.standard td.edit a:hover,
-table.standard td.url a:hover,
-table.standard td.delete a:hover {
-  background: #3c405c;
-  color: #0371d4;
+table.standard td.edit a i,
+table.standard td.url a i,
+table.standard td.delete a i {
+  padding-left: 5px;
 }
-table.standard td.url i {
-  padding-left: 2px;
-}
-table.standard td.icon {
-  padding-top: 6px;
-}
-table.standard td.icon img {
-  max-height: 32px;
-  position: absolute;
-  margin-top: -13px;
+table.standard td.edit:hover,
+table.standard td.url:hover,
+table.standard td.delete:hover {
+  background: #474c6c;
 }
 .caret-up {
   width: 0;
