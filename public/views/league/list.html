@@ -53,6 +53,7 @@
                     <span ng-show="leaguesListController.sort.sortField != 'leagueGame.gameAlias'" class="fa fa-unsorted">
                     </span>
                 </th>
+                <th></th>
                 <th>
                     <a href="" ng-click="leaguesListController.setSort('leagueName')">
                         League Name
@@ -79,6 +80,9 @@
                 </td>
                 <td>
                     {{league.leagueGame.gameAlias | uppercase}}
+                </td>
+                <td>
+                    <img ng-src="{{league.leagueLogo}}" class="image-icon" />
                 </td>
                 <td>
                     {{league.leagueName}}

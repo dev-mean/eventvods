@@ -1,7 +1,6 @@
 var app = require('express');
 var router = app.Router();
 var auth = require('../controllers/auth');
-var Event = require('../models/event');
 var User = require('../models/user');
 var path = require('path');
 

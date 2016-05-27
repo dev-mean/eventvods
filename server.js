@@ -1,3 +1,8 @@
+//dev config
+require('dotenv')
+    .config({
+        silent: true
+    });
 //server setup
 var express = require('express');
 var app = express();
@@ -6,7 +11,8 @@ var path = require('path');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var passport = require('passport');
-var LocalStrategy = require('passport-local').Strategy;
+var LocalStrategy = require('passport-local')
+    .Strategy;
 var morgan = require('morgan'); //Logger
 var session = require('express-session');
 var User = require('./app/models/user');
@@ -16,11 +22,14 @@ var favicon = require('serve-favicon');
 app.use(morgan('dev'));
 //Set up logging
 var logger = require('bristol');
-//logger.addTarget('loggly', config.logs)
-//.withFormatter('json')
-//.withLowestSeverity('warn');
-logger.addTarget('console').withFormatter('human');
-//.withHighestSeverity('trace');
+if (process.env.NODE_ENV == "development") {
+    logger.addTarget('console')
+        .withFormatter('human')
+} else {
+    logger.addTarget('loggly', config.logs)
+        .withFormatter('json')
+        .withLowestSeverity('warn');
+}
 //Static file at the top, prevents all the code below being run for static files.
 app.use('/assets', express.static(path.join(__dirname, 'public')));
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -28,7 +37,7 @@ app.use(bodyParser.urlencoded({
     'extended': 'true'
 }));
 app.use(bodyParser.json({
-    limit: '50mb',
+    "limit": "100mb",
 }));
 app.use(session({
     secret: config.secret,
@@ -57,11 +66,13 @@ app.set('view engine', 'jade');
 app.locals.pretty = true;
 //routes
 var backend = require('./app/routes/backend');
+var frontend = require('./app/routes/frontend');
 var api = require('./app/routes/api');
 var auth = require('./app/routes/auth.js');
 app.use('/user', auth);
 app.use('/api', api);
 app.use('/manage', backend);
+app.use('/', frontend);
 // 404 handler
 app.use(function(req, res, next) {
     var err = new Error("404 - Page Not Found");
@@ -80,13 +91,7 @@ app.use(function(err, req, res, next) {
         message: err.message
     });
 });
-logger.info('NODE_ENV: '+process.env.NODE_ENV);
+logger.info('NODE_ENV: ' + process.env.NODE_ENV);
 //listens
-var port = config.port;
-var db = config.databaseUrl;
-if (config.ip) {
-    app.listen(port, config.ip);
-} else {
-    app.listen(port);
-}
-logger.info('App listening on ' + (config.ip || 'localhost') + ':' + port);
+app.listen(config.port);
+logger.info('App listening on localhost:' + config.port);

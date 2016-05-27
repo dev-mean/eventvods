@@ -29,6 +29,7 @@
     "toastr": "~2.1.2",
     "angular-loading-bar": "*",
     "ng-dialog": "*",
-    "awesomplete": "^1.1.0"
+    "Materialize": "materialize#^0.97.6",
+    "ng-typeahead": "git://github.com/raymondmuller/ng-typeahead.git"
   }
 }

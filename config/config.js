@@ -1,7 +1,6 @@
 module.exports = {
 	"databaseUrl": process.env.DB || '',
 	"port": process.env.PORT || 5000,
-	"ip": null,
 	"secret": process.env.SECRET || '',
 	"smtp": {
 		"host": process.env.SMTP_HOST || '',

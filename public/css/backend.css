@@ -198,8 +198,8 @@ p {
   font-size: 80%;
 }
 .image-icon {
-  width: 32px;
-  height: 32px;
+  width: 48px;
+  height: 48px;
 }
 .form-style {
   border-radius: 2px;
@@ -867,7 +867,8 @@ form .group {
   display: flex;
 }
 form .group input[type=text],
-form .group p {
+form .group p,
+form .group ng-typeahead {
   -webkit-order: 2;
   -moz-order: 2;
   -ms-order: 2;
@@ -957,11 +958,10 @@ form .group label {
 }
 .group.standard {
   margin-bottom: 6px;
-  /* awesomplete */
-  /* Pointer */
 }
 .group.standard input[type=text],
-.group.standard div.image-drop {
+.group.standard div.image-drop,
+.group.standard ng-typeahead > input {
   border-radius: 2px;
   outline: none;
   line-height: 14px;
@@ -978,37 +978,46 @@ form .group label {
   margin-right: 20px;
 }
 .group.standard input[type=text]:focus,
-.group.standard div.image-drop:focus {
+.group.standard div.image-drop:focus,
+.group.standard ng-typeahead > input:focus {
   border-color: #a4abc1;
   color: #d3d7e3;
 }
 .group.standard input[type=text]::-webkit-input-placeholder,
-.group.standard div.image-drop::-webkit-input-placeholder {
+.group.standard div.image-drop::-webkit-input-placeholder,
+.group.standard ng-typeahead > input::-webkit-input-placeholder {
   font-size: 14px;
   line-height: 16px;
   color: #8690af;
 }
 .group.standard input[type=text]::-moz-placeholder,
-.group.standard div.image-drop::-moz-placeholder {
+.group.standard div.image-drop::-moz-placeholder,
+.group.standard ng-typeahead > input::-moz-placeholder {
   font-size: 14px;
   line-height: 16px;
   color: #8690af;
 }
 .group.standard input[type=text]:-moz-placeholder,
-.group.standard div.image-drop:-moz-placeholder {
+.group.standard div.image-drop:-moz-placeholder,
+.group.standard ng-typeahead > input:-moz-placeholder {
   font-size: 14px;
   line-height: 16px;
   color: #8690af;
 }
 .group.standard input[type=text]:-ms-input-placeholder,
-.group.standard div.image-drop:-ms-input-placeholder {
+.group.standard div.image-drop:-ms-input-placeholder,
+.group.standard ng-typeahead > input:-ms-input-placeholder {
   font-size: 14px;
   line-height: 16px;
   color: #8690af;
 }
 .group.standard input[type=text].force-caps:valid,
-.group.standard div.image-drop.force-caps:valid {
+.group.standard div.image-drop.force-caps:valid,
+.group.standard ng-typeahead > input.force-caps:valid {
   text-transform: uppercase;
+}
+.group.standard ng-typeahead {
+  margin-right: 20px;
 }
 .group.standard label {
   line-height: 28px;
@@ -1183,92 +1192,6 @@ form .group label {
 .group.standard div.image-drop input[type=file] {
   display: none;
 }
-.group.standard [hidden] {
-  display: none;
-}
-.group.standard .visually-hidden {
-  position: absolute;
-  clip: rect(0, 0, 0, 0);
-}
-.group.standard span.caret-down {
-  order: 3;
-  position: relative;
-  left: -30px;
-  cursor: pointer;
-}
-.group.standard div.awesomplete {
-  display: inline-block;
-  position: relative;
-  margin-right: 10px;
-  order: 2;
-  -webkit-flex-grow: 1;
-  -moz-flex-grow: 1;
-  -ms-flex-grow: 1;
-  flex-grow: 1;
-}
-.group.standard div.awesomplete > input {
-  display: block;
-  width: 100%;
-}
-.group.standard div.awesomplete > ul:not(.parsley-errors-list) {
-  position: absolute;
-  left: 0;
-  z-index: 1;
-  min-width: 100%;
-  box-sizing: border-box;
-  list-style: none;
-  padding: 0;
-  border-radius: .3em;
-  margin: .2em 0 0;
-  background: #474c6c;
-  box-shadow: 0.05em 0.2em 0.6em rgba(0, 0, 0, 0.2);
-  text-shadow: none;
-}
-.group.standard div.awesomplete > ul[hidden]:not(.parsley-errors-list),
-.group.standard div.awesomplete > ul:empty:not(.parsley-errors-list) {
-  display: none;
-}
-@supports (transform: scale(0)) {
-  .group.standard div.awesomplete > ul:not(.parsley-errors-list) {
-    transition: 0.3s cubic-bezier(0.4, 0.2, 0.5, 1.4);
-    transform-origin: 1.43em -0.43em;
-  }
-  .group.standard div.awesomplete > ul[hidden]:not(.parsley-errors-list),
-  .group.standard div.awesomplete > ul:empty:not(.parsley-errors-list) {
-    opacity: 0;
-    transform: scale(0);
-    display: block;
-    transition-timing-function: ease;
-  }
-}
-.group.standard div.awesomplete > ul:not(.parsley-errors-list):before {
-  content: "";
-  position: absolute;
-  top: -0.43em;
-  left: 1em;
-  width: 0;
-  height: 0;
-  padding: .4em;
-  background: #474c6c;
-  border: inherit;
-  border-right: 0;
-  border-bottom: 0;
-  -webkit-transform: rotate(45deg);
-  transform: rotate(45deg);
-}
-.group.standard div.awesomplete > ul:not(.parsley-errors-list) > li {
-  position: relative;
-  padding: .2em .5em;
-  cursor: pointer;
-}
-.group.standard div.awesomplete > ul:not(.parsley-errors-list) > li:hover {
-  background: #b8d3e0;
-  color: black;
-}
-.group.standard div.awesomplete mark {
-  background: inherit;
-  text-decoration: underline;
-}
 .stacked.group {
   width: 100%;
   display: block;
@@ -1351,47 +1274,6 @@ form .group label {
 }
 .btn.warning:hover {
   color: darkred;
-}
-div.section#image .dropzone#image_upload {
-  background: transparent!important;
-  padding: 0!important;
-}
-div.section#image .dropzone#image_upload .dz-message {
-  height: 150px;
-  line-height: 150px;
-  margin: 0;
-}
-div.section#image .dropzone#image_upload #image_thumbnail {
-  float: left;
-}
-div.section#image .dropzone#image_upload #image_thumbnail .dz-preview {
-  margin: 15px;
-  background: transparent;
-}
-div.section#image .dropzone#image_upload #image_thumbnail .dz-preview:hover .dz-image img {
-  filter: default!;
-  -webkit-filter: default;
-}
-div.section#image .dropzone#image_upload #image_thumbnail .dz-preview:hover .dz-error-mark {
-  opacity: 1;
-  margin-top: -88px;
-}
-div.section#image .dropzone#image_upload #image_thumbnail .dz-preview.dz-processing .dz-remove {
-  display: none;
-}
-div.section#image .dropzone#image_upload #image_thumbnail .dz-details,
-div.section#image .dropzone#image_upload #image_thumbnail .dz-progress,
-div.section#image .dropzone#image_upload #image_thumbnail .dz-error-message,
-div.section#image .dropzone#image_upload #image_thumbnail .dz-success-mark {
-  display: none;
-}
-div.section#image .dropzone#image_upload #image_thumbnail .dz-remove {
-  height: 120px;
-  width: 120px;
-  background: transparent;
-  position: relative;
-  top: -120px;
-  z-index: 501;
 }
 @-webkit-keyframes ngdialog-flyin {
   0% {
@@ -1537,4 +1419,53 @@ div.section#image .dropzone#image_upload #image_thumbnail .dz-remove {
     -webkit-animation: none;
     animation: none;
   }
+}
+/* typeahead */
+.ng-typeahead-wrapper {
+  position: relative;
+  width: 100%;
+}
+.ng-typeahead-input {
+  width: 100%;
+}
+.ng-typeahead-list {
+  background: #3c405c;
+  border-bottom: 1px solid grey;
+  border-left: 1px solid grey;
+  border-right: 1px solid grey;
+  border-top: #0fc461 2px solid;
+  list-style: none;
+  margin-top: 0;
+  padding: 0;
+  position: absolute;
+  width: 100%;
+  z-index: 999;
+}
+.ng-typeahead-list:before {
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid #3cff85;
+  content: "";
+  display: block;
+  height: 0;
+  left: 10px;
+  position: absolute;
+  width: 0;
+}
+.ng-typeahead-list-item {
+  padding: 6px 15px;
+}
+.ng-typeahead-list-item.active {
+  background: #3cff85;
+  color: #3c405c !important;
+}
+.ng-typeahead-list-item.active .ng-typeahead-highlight {
+  color: #3c405c;
+  font-weight: bold;
+}
+.ng-typeahead-highlight {
+  color: #3cff85;
+}
+.typeahead-error {
+  order: 3;
 }

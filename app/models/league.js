@@ -16,7 +16,7 @@ var leagueSchema = new Schema({
 	leagueEndDate: Date,
 	leagueSponsors: [Sponsor],
 	leagueLogo: String,
-	leagueBanner: String,
+	leagueHeader: String,
 });
 
 var League = mongoose.model('League', leagueSchema);

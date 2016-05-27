@@ -4,7 +4,7 @@
         </h1>
     </div>
 </div>
-<form name="form" id="addLeagueForm" ng-cloak>
+<form name="form" id="addLeagueForm" autocomplete="false" ng-cloak>
     <div class="errors" ng-show="leagueFormController.errors.length > 0">
         <ul>
             <li ng-repeat="error in leagueFormController.errors">{{error.message}}</li>
@@ -21,8 +21,9 @@
             <label>
                 Game Name
             </label>
-            <input type="text" id="game" placeholder="e.g. LOL" data-parsley-trigger="keyup" required/><span class="caret-down" id="game-caret"></span>
-            <input type="hidden" ng-model="leagueFormController.data.leagueGame" />
+            <ng-typeahead data-id="leagueGame" placeholder="e.g. LOL" ng-model="leagueFormController.data.leagueGame" data="leagueFormController.games" container="#leagueGameError" force-selection="true" required/>
+            <div id="leagueGameError" class="typeahead-error">
+            </div>
         </div>
         <div class="standard group">
             <label>
@@ -48,6 +49,4 @@
     </div>
 </form>
 <script src="/assets/lib/parsleyjs/dist/parsley.min.js">
-</script>
-<script src="/assets/lib/awesomplete/awesomplete.min.js">
 </script>

@@ -1,39 +1,46 @@
-( function() {
+(function() {
     'use strict';
-    angular.module( 'eventApp' )
-        .controller( 'editGameController', [ 'gamesService', '$location', 'notificationService', '$routeParams', 'API_BASE_URL',
-            function( Games, $location, toastr, $routeParams, API_BASE_URL ) {
+    angular.module('eventApp')
+        .controller('editLeagueController', ['leaguesService', '$location', 'notificationService', 'API_BASE_URL', 'gamesService', '$routeParams',
+            function(Leagues, $location, toastr, API_BASE_URL, Games, $routeParams) {
                 var vm = this;
-                vm.title = "Edit Game";
+                vm.title = "Edit League";
                 vm.errors = [];
-                Games.findById( $routeParams.id )
-                    .then( function( response ) {
+                vm.data = {};
+                var parsley = $('#addLeagueForm')
+                    .parsley();
+                Games.find()
+                    .then(function(response) {
+                        vm.games = response.data.map(function(obj) {
+                            return {
+                                "label": obj.gameAlias + " - " + obj.gameName,
+                                "value": obj._id
+                            }
+                        })
+                    });
+                Leagues.findById($routeParams.id)
+                    .then(function(response) {
                         vm.data = response.data;
-                        $( 'input.force-caps' )
-                            .attr( 'data-parsley-remote', API_BASE_URL + '/validate/gameAlias/{value}/' + $routeParams.id )
-                        vm.parsley = $( '#addGameForm' )
-                            .parsley();
-                    }, function( response ) {
-                        toastr.error( 'Invalid Game ID.', {
+                        jQuery('#leagueGame').val(response.data.leagueGame.gameAlias + " - " + response.data.leagueGame.gameName);
+                        vm.data.leagueGame = response.data.leagueGame._id;
+                    }, function(response) {
+                        toastr.error('Invalid League ID.', {
                             closeButton: true
-                        } );
-                        $location.path( '/games' );
-                    } );
+                        });
+                        $location.path('/leagues');
+                    });
                 vm.submit = function() {
-                    console.log( 'submitted' );
-                    if ( vm.parsley.validate() ) Games.update( $routeParams.id, vm.data )
-                        .then( function( response ) {
-                            toastr.success( 'Game edited.', {
+                    console.log(vm.data);
+                    if (parsley.validate()) Leagues.update($routeParams.id, vm.data)
+                        .then(function(response) {
+                            toastr.success('League edited.', {
                                 closeButton: true
-                            } );
-                            $location.path( '/games' );
-                        }, function( response ) {
-                            if ( response.status == 500 ) vm.errors.push( {
-                                message: 'Game alias must be unique, and a game already exists with that alias.'
-                            } );
-                            else vm.errors = response.data.errors;
-                        } );
+                            });
+                            $location.path('/leagues');
+                        }, function(response) {
+                            vm.errors = response.data.errors;
+                        });
                 }
             }
-        ] );
-}() );
+        ]);
+}());

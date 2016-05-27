@@ -21,7 +21,7 @@ var S3 = new aws.S3();
 
 function handleImage( fileData ) {
     var $promise = Q.defer();
-    if ( typeof fileData.image == "undefined" || typeof fileData.image === "string" ) $promise.resolve( fileData );
+    if ( typeof fileData.image == "undefined" || typeof fileData.image === "string" || fileData.image == null ) $promise.resolve( fileData );
     else {
         fileData.image.data = fileData.image.data.split( ";base64," )[ 1 ];
         var data = new Buffer( fileData.image.data, 'base64' );
