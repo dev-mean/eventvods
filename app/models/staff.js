@@ -1,9 +1,14 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-var SocialMedia = require('./socialmedia').schema;
+var SocialMedia = require('./socialmedia')
+	.schema;
 
 var staffSchema = new Schema({
-	staffName: {
+	staffForename: {
+		type: String,
+		required: true
+	},
+	staffSurname: {
 		type: String,
 		required: true
 	},
@@ -12,9 +17,21 @@ var staffSchema = new Schema({
 		required: true
 	},
 	staffMedia: [SocialMedia],
-	staffCountry: String,
-	staffRole: String
+	staffRole: String,
+	staffPhoto: String
+}, {
+	toObject: {
+		virtuals: true
+	},
+	toJSON: {
+		virtuals: true
+	}
 });
+
+staffSchema.virtual('staffName')
+	.get(function() {
+		return this.staffForename + ' ' + this.staffSurname;
+	});
 
 var Staff = mongoose.model('Staff', staffSchema);
 

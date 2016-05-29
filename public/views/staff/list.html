@@ -1,0 +1,125 @@
+<script type="text/ng-template" id="confirmDeleteTemplate">
+    <center>
+    <p>
+        Are you sure you want to delete that?
+    </p><br />
+    <a class="btn lg solid icon warning" ng-click="delete()">
+        <i class="fa fa-trash">
+        </i>
+        <span>
+            Confirm Delete
+        </span>
+    </a>
+    <a class="btn lg solid icon" ng-click="closeThisDialog()">
+        <i class="fa fa-undo">
+        </i>
+        <span>
+            Cancel
+        </span>
+    </a></center>
+</script>
+<div class="contextHead">
+    <div class="leftSide">
+        <h1 class="title">
+            Staff
+        </h1>
+    </div>
+    <div class="rightSide">
+        <a href="/manage/staff/new" class="btn lg solid icon">
+            <i class="fa fa-commenting">
+            </i>
+            <span>
+                Add Staff
+            </span>
+        </a>
+    </div>
+</div>
+<div class="filters">
+    <input type="text" ng-model="staffListController.search" placeholder="Search Staff" tabindex="1"/>
+</div>
+<div class="listView events">
+    <table class="standard">
+        <thead>
+            <tr>
+                <th></th>
+                <th>
+                    <a href="" ng-click="staffListController.setSort('staffName')">
+                        Name
+                    </a>
+                    <span ng-show="staffListController.sort.sortField == 'staffName' && !staffListController.sort.sortReverse" class="caret-down">
+                    </span>
+                    <span ng-show="staffListController.sort.sortField == 'staffName' && staffListController.sort.sortReverse" class="caret-up">
+                    </span>
+                    <span ng-show="staffListController.sort.sortField != 'staffName'" class="fa fa-unsorted">
+                    </span>
+                </th>
+                <th>
+                    <a href="" ng-click="staffListController.setSort('staffAlias')">
+                        Alias
+                    </a>
+                    <span ng-show="staffListController.sort.sortField == 'staffAlias' && !staffListController.sort.sortReverse" class="caret-down">
+                    </span>
+                    <span ng-show="staffListController.sort.sortField == 'staffAlias' && staffListController.sort.sortReverse" class="caret-up">
+                    </span>
+                    <span ng-show="staffListController.sort.sortField != 'staffAlias'" class="fa fa-unsorted">
+                    </span>
+                </th>
+                <th>
+                    <a href="" ng-click="staffListController.setSort('staffRole')">
+                        Role
+                    </a>
+                    <span ng-show="staffListController.sort.sortField == 'staffRole' && !staffListController.sort.sortReverse" class="caret-down">
+                    </span>
+                    <span ng-show="staffListController.sort.sortField == 'staffRole' && staffListController.sort.sortReverse" class="caret-up">
+                    </span>
+                    <span ng-show="staffListController.sort.sortField != 'staffRole'" class="fa fa-unsorted">
+                    </span>
+                </th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="staff in staffListController.filterData = (staffListController.staffData | filter: staffListController.search) | orderBy: staffListController.sort.sortField:staffListController.sort.sortReverse | offset: (staffListController.paging.page - 1) * staffListController.paging.itemsPerPage | limitTo: staffListController.paging.itemsPerPage">
+                <td>
+                    <img ng-src="{{staff.staffPhoto}}" class="icon-48" />
+                </td>
+                <td>
+                    {{staff.staffName}}
+                </td>
+                <td>
+                    {{staff.staffAlias}}
+                </td>
+                <td>
+                    {{staff.staffRole}}
+                </td>
+                <td class="edit">
+                    <a ng-href="/manage/staff/{{staff._id}}/edit">
+                        <i class="fa fa-edit fa-fw">
+                        </i>
+                    </a>
+                </td>
+                <td class="delete">
+                    <a ng-click="staffListController.delete(staff._id)">
+                        <i class="fa fa-trash fa-fw">
+                        </i>
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<span class="empty" ng-show="staffListController.loaded && (staffListController.filterData.length == 0 || staffListController.staffData.length == 0)">
+    No staff match those criteria.
+</span>
+<div class="pagination" ng-show="staffListController.filterData.length > 0">
+    <a ng-style="{visibility: staffListController.paging.page >1 && 'visible' || 'hidden'}" ng-click="staffListController.previousPage()" class="btn">
+        Prev Page
+    </a>
+    <p>
+        Page {{staffListController.paging.page}} of {{staffListController.paging.pages()}}
+    </p>
+    <a ng-style="{visibility: (staffListController.paging.pages() >1 && staffListController.paging.page < staffListController.paging.pages()) && 'visible' || 'hidden'}" ng-click="staffListController.nextPage()" class="btn">
+        Next Page
+    </a>
+</div>

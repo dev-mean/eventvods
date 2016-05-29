@@ -130,7 +130,8 @@ router.all('*', function(req, res, next) {
             return next();
         }
     })
-    //Specific validation routes
+
+//Specific validation routes
 router.get('/validate/gameAlias/:alias', auth.public_api(), rateLimit, cache.route(), function(req, res, next) {
     Game.find({
             gameAlias: req.params.alias
@@ -152,6 +153,12 @@ router.get('/validate/gameAlias/:alias/:id', auth.public_api(), rateLimit, cache
         else return res.sendStatus('409');
     })
 });
+
+//Specific static data
+router.get('/data/staffRoles', auth.public_api(), function(req, res, next){
+    res.json(config.staffRoles);
+});
+
 //OVERVIEW
 router.get('/overview', auth.public_api(), rateLimit, cache.route('overview', 3600), function(req, res, next) {
     var today = moment()
@@ -548,7 +555,7 @@ router.route('/staff')
             res.json(staff);
         });
     })
-    .post(auth.updater(), function(req, res, next) {
+    .post(auth.updater(), AWS.handleUpload(['staffPhoto']), function(req, res, next) {
         Indicative.validateAll(req.body, Validators.staff, Validators.messages)
             .then(function() {
                 Staff.create(req.body, function(err, staff) {
@@ -565,11 +572,16 @@ router.route('/staff')
     });
 router.route('/staff/:staff_id')
     .delete(auth.updater(), function(req, res, next) {
-        Staff.remove({
-            _id: req.params.staff_id
-        }, function(err, staff) {
-            if (err) next(err);
-            else res.sendStatus(204);
+        Staff.findById(req.params.staff_id, function(err, doc) {
+            AWS.deleteImage(doc.staffPhoto)
+                .then(function() {
+                    doc.remove(function(err) {
+                        if (err) next(err);
+                        else res.sendStatus(204);
+                    })
+                }, function(err) {
+                    next(err);
+                })
         });
     })
     .get(auth.public_api(), function(req, res, next) {
@@ -583,7 +595,7 @@ router.route('/staff/:staff_id')
             res.json(staff);
         });
     })
-    .put(auth.updater(), function(req, res, next) {
+    .put(auth.updater(), AWS.handleUpload(['staffPhoto']),  function(req, res, next) {
         Indicative.validateAll(req.body, Validators.staff, Validators.messages)
             .then(function() {
                 Staff.findByIdAndUpdate(req.params.staff_id, req.body, function(err, staff) {

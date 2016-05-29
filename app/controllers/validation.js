@@ -44,8 +44,10 @@ module.exports.event = {
     eventEndDate: 'required|date'
 };
 module.exports.staff = {
-    staffName: 'required',
-    staffAlias: 'required'
+    staffForename: 'required',
+    staffSurname: 'required',
+    staffAlias: 'required',
+    staffRole: 'required'
 };
 module.exports.link = {
     linkText: 'required',

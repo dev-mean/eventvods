@@ -26,5 +26,7 @@ module.exports = {
 		"secret": process.env.AWS_SECRET || "",
 		"bucket": process.env.AWS_BUCKET || "",
 		"cdn": process.env.AWS_CDN || ""
-	}
+	},
+	"staffRoles": ['Analyst', 'Caster', 'Coach', 'Host', 'Translator', 'Player', 'Mixed', 'Other'],
+	"mediaTypes": ['Website', 'Twitter', 'Facebook', 'Twitch', 'Youtube', 'Stream', 'Other']
 };

@@ -353,10 +353,22 @@
                     title: "New Event"
                 })
                 .when('/staff', {
-                    templateUrl: '/assets/views/staff.html',
+                    templateUrl: '/assets/views/staff/list.html',
                     controller: 'staffListController',
                     controllerAs: 'staffListController',
                     title: "Staff"
+                })
+                .when('/staff/new', {
+                    templateUrl: '/assets/views/staff/form.html',
+                    controller: 'addStaffController',
+                    controllerAs: 'staffFormController',
+                    title: "New Staff"
+                })
+                .when('/staff/:id/edit', {
+                    templateUrl: '/assets/views/staff/form.html',
+                    controller: 'editStaffController',
+                    controllerAs: 'staffFormController',
+                    title: "Edit Staff"
                 })
                 .when('/maps', {
                     templateUrl: '/assets/views/maps.html',
