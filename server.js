@@ -3,6 +3,14 @@ require('dotenv')
     .config({
         silent: true
     });
+//keymetrics
+var pmx = require('pmx').init({
+    http: true,
+    network: true,
+    custom_probes: true,
+    errors: true,
+    alert_enabled: false
+});
 //server setup
 var express = require('express');
 var app = express();

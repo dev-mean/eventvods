@@ -1,0 +1,105 @@
+<div class="contextHead">
+    <div class="leftSide">
+        <h1 class="title">
+            Maps
+        </h1>
+    </div>
+    <div class="rightSide">
+        <a href="/manage/maps/new" class="btn lg solid icon">
+            <i class="fa fa-commenting">
+            </i>
+            <span>
+                Add Maps
+            </span>
+        </a>
+    </div>
+</div>
+<div class="filters">
+    <input type="text" ng-model="mapsListController.search" placeholder="Search Maps" tabindex="1"/>
+</div>
+<div class="listView events">
+    <table class="standard">
+        <thead>
+            <tr>
+                <th></th>
+                <th>
+                    <a href="" ng-click="mapsListController.setSort('mapsName')">
+                        Name
+                    </a>
+                    <span ng-show="mapsListController.sort.sortField == 'mapsName' && !mapsListController.sort.sortReverse" class="caret-down">
+                    </span>
+                    <span ng-show="mapsListController.sort.sortField == 'mapsName' && mapsListController.sort.sortReverse" class="caret-up">
+                    </span>
+                    <span ng-show="mapsListController.sort.sortField != 'mapsName'" class="fa fa-unsorted">
+                    </span>
+                </th>
+                <th>
+                    <a href="" ng-click="mapsListController.setSort('mapsAlias')">
+                        Alias
+                    </a>
+                    <span ng-show="mapsListController.sort.sortField == 'mapsAlias' && !mapsListController.sort.sortReverse" class="caret-down">
+                    </span>
+                    <span ng-show="mapsListController.sort.sortField == 'mapsAlias' && mapsListController.sort.sortReverse" class="caret-up">
+                    </span>
+                    <span ng-show="mapsListController.sort.sortField != 'mapsAlias'" class="fa fa-unsorted">
+                    </span>
+                </th>
+                <th>
+                    <a href="" ng-click="mapsListController.setSort('mapsRole')">
+                        Role
+                    </a>
+                    <span ng-show="mapsListController.sort.sortField == 'mapsRole' && !mapsListController.sort.sortReverse" class="caret-down">
+                    </span>
+                    <span ng-show="mapsListController.sort.sortField == 'mapsRole' && mapsListController.sort.sortReverse" class="caret-up">
+                    </span>
+                    <span ng-show="mapsListController.sort.sortField != 'mapsRole'" class="fa fa-unsorted">
+                    </span>
+                </th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="maps in mapsListController.filterData = (mapsListController.mapsData | filter: mapsListController.search) | orderBy: mapsListController.sort.sortField:mapsListController.sort.sortReverse | offset: (mapsListController.paging.page - 1) * mapsListController.paging.itemsPerPage | limitTo: mapsListController.paging.itemsPerPage">
+                <td>
+                    <img ng-src="{{maps.mapsPhoto}}" class="icon-48" />
+                </td>
+                <td>
+                    {{maps.mapsName}}
+                </td>
+                <td>
+                    {{maps.mapsAlias}}
+                </td>
+                <td>
+                    {{maps.mapsRole}}
+                </td>
+                <td class="edit">
+                    <a ng-href="/manage/maps/{{maps._id}}/edit">
+                        <i class="fa fa-edit fa-fw">
+                        </i>
+                    </a>
+                </td>
+                <td class="delete">
+                    <a ng-click="mapsListController.delete(maps._id)">
+                        <i class="fa fa-trash fa-fw">
+                        </i>
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<span class="empty" ng-show="mapsListController.loaded && (mapsListController.filterData.length == 0 || mapsListController.mapsData.length == 0)">
+    No maps match those criteria.
+</span>
+<div class="pagination" ng-show="mapsListController.filterData.length > 0">
+    <a ng-style="{visibility: mapsListController.paging.page >1 && 'visible' || 'hidden'}" ng-click="mapsListController.previousPage()" class="btn">
+        Prev Page
+    </a>
+    <p>
+        Page {{mapsListController.paging.page}} of {{mapsListController.paging.pages()}}
+    </p>
+    <a ng-style="{visibility: (mapsListController.paging.pages() >1 && mapsListController.paging.page < mapsListController.paging.pages()) && 'visible' || 'hidden'}" ng-click="mapsListController.nextPage()" class="btn">
+        Next Page
+    </a>
+</div>

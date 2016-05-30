@@ -275,7 +275,7 @@ router.get('/overview', auth.public_api(), rateLimit, cache.route('overview', 36
 });
 //Games
 router.route('/games')
-    .get(auth.public_api(), rateLimit, cache.route('games'), function(req, res, next) {
+    .get(auth.public_api(), rateLimit, cache.route(), function(req, res, next) {
         Game.find(function(err, games) {
             if (err) next(err);
             else res.json(games);
@@ -299,7 +299,7 @@ router.route('/games')
             });
     });
 router.route('/game/:game_id')
-    .get(auth.public_api(), rateLimit, cache.route('game'), function(req, res, next) {
+    .get(auth.public_api(), rateLimit, cache.route(), function(req, res, next) {
         Game.findById(req.params.game_id, function(err, game) {
             if (err) next(err);
             if (!game) {
@@ -389,7 +389,7 @@ router.get('/leagues/game/:game_id', auth.public_api(), rateLimit, cache.route()
     })
 });
 router.route('/league/:league_id')
-    .get(auth.public_api(), rateLimit, cache.route('league'), function(req, res, next) {
+    .get(auth.public_api(), rateLimit, cache.route(), function(req, res, next) {
         League.findById(req.params.league_id)
             .populate('leagueGame')
             .exec(function(err, league) {
@@ -458,7 +458,7 @@ router.route('/events')
             });
     });
 router.route('/event/:event_id')
-    .get(auth.public_api(), rateLimit, cache.route('event'), function(req, res, next) {
+    .get(auth.public_api(), rateLimit, cache.route(), function(req, res, next) {
         Event.findById(req.params.event_id, function(err, event) {
             if (err) next(err);
             if (!event) {
@@ -584,7 +584,7 @@ router.route('/staff/:staff_id')
                 })
         });
     })
-    .get(auth.public_api(), function(req, res, next) {
+    .get(auth.public_api(), rateLimit, cache.route(), function(req, res, next) {
         Staff.findById(req.params.staff_id, function(err, staff) {
             if (err) next(err);
             if (!staff) {

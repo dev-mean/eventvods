@@ -18,6 +18,9 @@
                 return input.slice(start);
             };
         })
+        .run(["$templateCache", function($templateCache) {
+            $templateCache.put("confirmDeleteTemplate", "<center>\r\n    <p>\r\n        Are you sure you want to delete that?\r\n    </p><br />\r\n    <a class=\"btn lg solid icon warning\" ng-click=\"delete()\">\r\n        <i class=\"fa fa-trash\">\r\n        </i>\r\n        <span>\r\n            Confirm Delete\r\n        </span>\r\n    </a>\r\n    <a class=\"btn lg solid icon\" ng-click=\"closeThisDialog()\">\r\n        <i class=\"fa fa-undo\">\r\n        </i>\r\n        <span>\r\n            Cancel\r\n        </span>\r\n    </a></center>");
+        }])
         // ng-typeahead adapted from
         // https://github.com/raymondmuller/ng-typeahead
         .filter("highlight", function($sce) {
@@ -269,7 +272,7 @@
                         loadFile(file);
                     });
                     $scope.$watch('model', function() {
-                        if($scope.model == null) return;
+                        if ($scope.model == null) return;
                         else if (typeof $scope.model === "string") $scope.dom.preview.attr('src', $scope.model);
                         else if (typeof $scope.model === "object" && $scope.model.changed) $scope.dom.preview.attr('src', $scope.model.data);
                     })
@@ -371,10 +374,22 @@
                     title: "Edit Staff"
                 })
                 .when('/maps', {
-                    templateUrl: '/assets/views/maps.html',
-                    controller: 'mapListController',
-                    controllerAs: 'mapListController',
+                    templateUrl: '/assets/views/maps/list.html',
+                    controller: 'mapsListController',
+                    controllerAs: 'mapsListController',
                     title: "Maps"
+                })
+                .when('/maps/new', {
+                    templateUrl: '/assets/views/maps/form.html',
+                    controller: 'addStaffController',
+                    controllerAs: 'mapsFormController',
+                    title: "New Maps"
+                })
+                .when('/maps/:id/edit', {
+                    templateUrl: '/assets/views/maps/form.html',
+                    controller: 'editStaffController',
+                    controllerAs: 'mapsFormController',
+                    title: "Edit Maps"
                 })
                 .when('/teams', {
                     templateUrl: '/assets/views/teams.html',

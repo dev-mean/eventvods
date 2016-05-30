@@ -32,6 +32,7 @@
     "passport": "*",
     "passport-local": "*",
     "passport-local-mongoose": "*",
+    "pmx": "^0.6.2",
     "q": "^1.4.1",
     "ratelimit.js": "*",
     "redis": "*",
