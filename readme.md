@@ -16,6 +16,8 @@ This project contains the web front and back end to the EventVODs website projec
         - uploads
         - views
             - backend.html      <!-- backend angular view -->
+            - frontend.html 	<!-- frontend angular view -->
+            <jade templates>
     - config
         - config.js
     - node_modules 				<!-- created by npm install -->
@@ -25,17 +27,16 @@ This project contains the web front and back end to the EventVODs website projec
         - images
         - js
             - common
-            - controllers
-            - resources
-            - services
+            - <page sections>
             - app.js
         - less
         - libs                  <!-- created by bower install -->
         - views                 <!-- contains angular view fragments -->
         - favicon.ico           <!-- favicon -->
+    - .env 					<!-- environment variables config (not in git) -->
     - .bowerrc 					<!-- tells bower where to put files (public/libs) -->
     - bower.json 				<!-- tells bower which files we need -->
     - package.json 				<!-- tells npm which packages we need -->
-	- gulp.js					<!-- gulp task file -->
+    - gulpfile.js				<!-- gulp task file -->
     - server.js 				<!-- set up our node application -->
-	- readme.md					<!-- project official read me -->
+    - readme.md					<!-- project official read me -->
