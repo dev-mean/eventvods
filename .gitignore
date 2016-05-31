@@ -25,3 +25,5 @@ public/lib/
 # Simon IDE settings
 .brackets.json
 .env
+ssl.key
+ssl.cert

@@ -116,6 +116,7 @@
                     }
                     scope.$watch("search", function(v) {
                         scope.index = 0;
+                        if(!scope.forceSelection) ngModel.$setViewValue(v);
                         if (v === selectedLabel) {
                             return;
                         }
@@ -135,6 +136,7 @@
                     };
                     scope.$onSelect = function(item) {
                         selecting = true;
+                        if(typeof item == undefined) return;
                         selectedLabel = item.label;
                         scope.search = item.label;
                         ngModel.$setViewValue(item.value);
@@ -381,13 +383,13 @@
                 })
                 .when('/maps/new', {
                     templateUrl: '/assets/views/maps/form.html',
-                    controller: 'addStaffController',
+                    controller: 'addMapController',
                     controllerAs: 'mapsFormController',
                     title: "New Maps"
                 })
                 .when('/maps/:id/edit', {
                     templateUrl: '/assets/views/maps/form.html',
-                    controller: 'editStaffController',
+                    controller: 'editMapController',
                     controllerAs: 'mapsFormController',
                     title: "Edit Maps"
                 })

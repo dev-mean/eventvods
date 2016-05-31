@@ -1,7 +1,7 @@
 //dev config
 require('dotenv')
     .config({
-        silent: true
+        silent: false
     });
 //keymetrics
 var pmx = require('pmx').init({

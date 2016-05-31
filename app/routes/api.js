@@ -668,12 +668,14 @@ router.route('/links/:link_id')
 //Map routes
 router.route('/maps')
     .get(auth.public_api(), rateLimit, cache.route('maps'), function(req, res, next) {
-        Map.find(function(err, map) {
-            if (err) next(err);
-            res.json(map);
-        });
+        Map.find()
+            .populate('mapGame')
+            .exec(function(err, maps) {
+                if (err) next(err);
+                else res.json(maps);
+            });
     })
-    .post(auth.updater(), function(req, res, next) {
+    .post(auth.updater(), AWS.handleUpload(['mapImage']), function(req, res, next) {
         Indicative.validateAll(req.body, Validators.map, Validators.messages)
             .then(function() {
                 Map.create(req.body, function(err, map) {
@@ -698,17 +700,19 @@ router.route('/maps/:map_id')
         });
     })
     .get(auth.public_api(), function(req, res, next) {
-        Map.findById(req.params.map_id, function(err, map) {
+        Map.findById(req.params.map_id)
+        .populate('mapGame')
+        .exec(function(err, map) {
             if (err) next(err);
             if (!map) {
                 err = new Error("Map Not Found");
                 err.status = 404;
-                next(err);
+                return next(err);
             }
             res.json(map);
         });
     })
-    .put(auth.updater(), function(req, res, next) {
+    .put(auth.updater(), AWS.handleUpload(['mapImage']), function(req, res, next) {
         Indicative.validateAll(req.body, Validators.map, Validators.messages)
             .then(function() {
                 Map.findByIdAndUpdate(req.params.map_id, req.body, function(err, map) {

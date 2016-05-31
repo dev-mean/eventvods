@@ -1,29 +1,29 @@
 ( function() {
     'use strict';
     angular.module( 'eventApp' )
-        .controller( 'addStaffController', [ 'staffService', '$location', 'notificationService', 'API_BASE_URL',
-            function( Staff, $location, toastr, API_BASE_URL ) {
+        .controller( 'addMapController', [ 'mapsService', '$location', 'notificationService', 'API_BASE_URL', 'gamesService',
+            function( Maps, $location, toastr, API_BASE_URL, Games ) {
                 var vm = this;
-                vm.title = "Add Staff";
+                vm.title = "Add Map";
                 vm.errors = [];
-                var parsley = $( '#addStaffForm' )
+                var parsley = $( '#addMapForm' )
                     .parsley();
-                Staff.getRoles()
-                    .then(function(res){
-                        vm.staffRoles = res.data.map(function(item){
+                Games.find()
+                    .then(function(response) {
+                        vm.games = response.data.map(function(obj) {
                             return {
-                                label: item,
-                                value: item
-                            };
-                        });
+                                "label": obj.gameAlias + " - " + obj.gameName,
+                                "value": obj._id
+                            }
+                        })
                     });
                 vm.submit = function() {
-                    if ( parsley.validate() ) Staff.create( vm.data )
+                    if ( parsley.validate() ) Maps.create( vm.data )
                         .then( function( response ) {
-                            toastr.success( 'Staff added.', {
+                            toastr.success( 'Map added.', {
                                 closeButton: true
                             } );
-                            $location.path( '/staff' );
+                            $location.path( '/maps' );
                         }, function( response ) {
                             if ( response.status == 500 ) vm.errors.push( {
                                 message: 'Unexpected error. Please pass this on to the developers.'

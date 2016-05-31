@@ -1,30 +1,39 @@
 ( function() {
     'use strict';
     angular.module( 'eventApp' )
-        .controller( 'editStaffController', [ 'staffService', '$location', 'notificationService', '$routeParams', 'API_BASE_URL',
-            function( Staff, $location, toastr, $routeParams, API_BASE_URL ) {
+        .controller( 'editMapController', [ 'mapsService', '$location', 'notificationService', '$routeParams', 'API_BASE_URL', 'gamesService',
+            function( Maps, $location, toastr, $routeParams, API_BASE_URL, Games ) {
                 var vm = this;
-                vm.title = "Edit Staff";
+                vm.title = "Edit Map";
                 vm.errors = [];
-                var parsley = $( '#addStaffForm' )
+                var parsley = $( '#addMapForm' )
                             .parsley();
-                Staff.findById( $routeParams.id )
+                Maps.findById( $routeParams.id )
                     .then( function( response ) {
                         vm.data = response.data;
-                        $('#staffRole').val(response.data.staffRole);
+                        $('#mapGame').val(response.data.mapGame.gameAlias + " - " + response.data.mapGame.gameName);
                     }, function( response ) {
-                        toastr.error( 'Invalid Staff ID.', {
+                        toastr.error( 'Invalid Map ID.', {
                             closeButton: true
                         } );
-                        $location.path( '/staff' );
+                        $location.path( '/maps' );
                     } );
+                Games.find()
+                    .then(function(response) {
+                        vm.games = response.data.map(function(obj) {
+                            return {
+                                "label": obj.gameAlias + " - " + obj.gameName,
+                                "value": obj._id
+                            }
+                        })
+                    });
                 vm.submit = function() {
-                    if ( parsley.validate() ) Staff.update( $routeParams.id, vm.data )
+                    if ( parsley.validate() ) Maps.update( $routeParams.id, vm.data )
                         .then( function( response ) {
-                            toastr.success( 'Staff edited.', {
+                            toastr.success( 'Map edited.', {
                                 closeButton: true
                             } );
-                            $location.path( '/staff' );
+                            $location.path( '/maps' );
                         }, function( response ) {
                             if ( response.status == 500 ) vm.errors.push( {
                                 message: 'Unexpected error. Please pass this on to the developers.'

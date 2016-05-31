@@ -1,8 +1,8 @@
 ( function() {
     'use strict';
     angular.module( 'eventApp' )
-        .controller( 'editStaffController', [ 'staffService', '$location', 'notificationService', '$routeParams', 'API_BASE_URL',
-            function( Staff, $location, toastr, $routeParams, API_BASE_URL ) {
+        .controller( 'editStaffController', [ 'staffService', '$location', 'notificationService', '$routeParams', 'API_BASE_URL', 'gamesService',
+            function( Staff, $location, toastr, $routeParams, API_BASE_URL, Games ) {
                 var vm = this;
                 vm.title = "Edit Staff";
                 vm.errors = [];
@@ -18,6 +18,15 @@
                         } );
                         $location.path( '/staff' );
                     } );
+                Staff.getRoles()
+                    .then(function(res){
+                        vm.staffRoles = res.data.map(function(item){
+                            return {
+                                label: item,
+                                value: item
+                            };
+                        });
+                    });
                 vm.submit = function() {
                     if ( parsley.validate() ) Staff.update( $routeParams.id, vm.data )
                         .then( function( response ) {

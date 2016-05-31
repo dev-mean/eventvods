@@ -1,14 +1,14 @@
 (function() {
     'use strict';
     angular.module('eventApp')
-        .controller('staffListController', ['staffService', 'ngDialog', '$rootScope',
-            function(Staff, dialog, $rootScope) {
+        .controller('mapsListController', ['mapsService', 'ngDialog', '$rootScope',
+            function(Maps, dialog, $rootScope) {
                 var vm = this;
                 vm.loaded = false;
-                vm.staffData = [];
+                vm.mapsData = [];
                 vm.filter = {};
                 vm.sort = {
-                    sortField: 'staffName',
+                    sortField: 'mapName',
                     sortReverse: false
                 };
                 vm.paging = {
@@ -20,10 +20,10 @@
                     },
                     page: 1
                 };
-                Staff.find()
+                Maps.find()
                     .then(function(response) {
                         vm.loaded = true;
-                        vm.staffData = response.data;
+                        vm.mapsData = response.data;
                     });
 
                 vm.setSort = function(sortField) {
@@ -40,24 +40,24 @@
                     dialog.open({
                         template: 'confirmDeleteTemplate',
                         className: 'ngdialog-ev',
-                        controller: ['$scope', '$location', 'staffService', 'notificationService', '$rootScope', function($scope, $location, Staff, toastr, $rootScope) {
+                        controller: ['$scope', '$location', 'mapsService', 'notificationService', '$rootScope', function($scope, $location, Maps, toastr, $rootScope) {
                             $scope.delete = function() {
-                                Staff.delete($scope.ngDialogData.staffID)
+                                Maps.delete($scope.ngDialogData.mapID)
                                     .then(function() {
-                                        toastr.success('Staff deleted.');
+                                        toastr.success('Map deleted.');
                                         $scope.closeThisDialog();
-                                        $rootScope.$broadcast('staffUpdated');
+                                        $rootScope.$broadcast('mapUpdated');
                                     })
                             }
                         }],
                         data: {
-                            staffID: id,
+                            mapID: id,
                         }
                     });
-                    $rootScope.$on('staffUpdated', function() {
-                        Staff.find()
+                    $rootScope.$on('mapUpdated', function() {
+                        Maps.find()
                             .then(function(response) {
-                                vm.staffData = response.data;
+                                vm.mapsData = response.data;
                             });
                     });
                 }

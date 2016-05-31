@@ -55,8 +55,7 @@ module.exports.link = {
     linkSpoiler: 'required|boolean'
 };
 module.exports.map = {
-    mapImage: 'alpha_numeric',
-    mapGame: 'required|alpha_numeric',
+    mapGame: 'required',
     mapName: 'required'
 };
 module.exports.match = {
