@@ -27,7 +27,7 @@ var User = require('./app/models/user');
 var config = require('./config/config');
 var RedisStore = require('connect-redis')(session);
 var favicon = require('serve-favicon');
-app.use(morgan('dev'));
+app.use(morgan('tiny'));
 //Set up logging
 var logger = require('bristol');
 if (process.env.NODE_ENV == "development") {

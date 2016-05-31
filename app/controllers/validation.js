@@ -89,10 +89,7 @@ module.exports.sponsor = {
 };
 module.exports.team = {
     teamName: 'required',
-    teamTag: 'required|max:4',
-    teamGame: 'required',
-    teamMedia: 'array',
-    teamCountry: 'required'
+    teamTag: 'required|max:4'
 };
 module.exports.module = {
     moduleTitle: 'required',

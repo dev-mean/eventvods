@@ -77,11 +77,27 @@ var rateLimit = middlewareFactory.middleware({
     err.status = 429;
     next(err);
 });
+function rateLimitCheck(req, res, next){
+    if(req.ignoreRatelimit){
+        next();
+    } else {
+        return rateLimit;
+    }
+};
+function time(name, end){
+    return function (req, res, next){
+        if(!end) req.timer = new Date();
+        var time = new Date() - req.timer;
+        if(end) console.log(name + ' = ' +time+'ms');
+        return next();
+    };
+}
 // This router is mounted at /api....so /events here translates to /api/events
 // Enable CORS for /api routing.
 // TODO: Consider whitelist / blacklisting domains?
 router.all('*', function(req, res, next) {
     var oneof = false;
+    req.ignoreRatelimit = true;
     if (req.headers.origin) {
         res.header('Access-Control-Allow-Origin', req.headers.origin);
         oneof = true;
@@ -105,6 +121,7 @@ router.all('*', function(req, res, next) {
     }
 });
 router.all('*', function(req, res, next) {
+    var time = new Date();
         if (process.env.NODE_ENV === 'development') {
             if (!req.isAuthenticated()) {
                 console.log('No user detected, trying to authenticate');
@@ -116,7 +133,6 @@ router.all('*', function(req, res, next) {
                         req.login(user, function(err) {
                             if (err) console.log(err);
                             console.log('Dev login success!');
-                            res.locals.user = user;
                             return next();
                         });
                     }
@@ -132,7 +148,7 @@ router.all('*', function(req, res, next) {
     })
 
 //Specific validation routes
-router.get('/validate/gameAlias/:alias', auth.public_api(), rateLimit, cache.route(), function(req, res, next) {
+router.get('/validate/gameAlias/:alias', auth.public_api(), rateLimitCheck, cache.route(), function(req, res, next) {
     Game.find({
             gameAlias: req.params.alias
         })
@@ -160,7 +176,7 @@ router.get('/data/staffRoles', auth.public_api(), function(req, res, next){
 });
 
 //OVERVIEW
-router.get('/overview', auth.public_api(), rateLimit, cache.route('overview', 3600), function(req, res, next) {
+router.get('/overview', time(), auth.public_api(), time('auth public', true), time(), rateLimitCheck, time('rateLimit', true), time(), cache.route('overview', 3600), time('cache', true), function(req, res, next) {
     var today = moment()
         .format();
     var last_week = moment()
@@ -270,15 +286,23 @@ router.get('/overview', auth.public_api(), rateLimit, cache.route('overview', 36
         },
     }, function(err, results) {
         if (err) next(err);
-        else res.json(results);
+        else {
+            res.json(results);
+        }
     });
 });
 //Games
 router.route('/games')
     .get(auth.public_api(), rateLimit, cache.route(), function(req, res, next) {
+        var time = new Date();
         Game.find(function(err, games) {
             if (err) next(err);
-            else res.json(games);
+            else {
+                var diff = new Date() - req.time;
+                req.time = new Date();
+                console.log('DB games time: '+diff);
+                res.json(games);
+            }
         });
     })
     .post(auth.updater(), AWS.handleUpload(['gameIcon', 'gameBanner']), function(req, res, next) {
@@ -692,11 +716,16 @@ router.route('/maps')
     });
 router.route('/maps/:map_id')
     .delete(auth.updater(), function(req, res, next) {
-        Map.remove({
-            _id: req.params.map_id
-        }, function(err, map) {
-            if (err) next(err);
-            else res.sendStatus(204);
+        Map.findById(req.params.map_id, function(err, doc) {
+            AWS.deleteImage(doc.mapImage)
+                .then(function() {
+                    doc.remove(function(err) {
+                        if (err) next(err);
+                        else res.sendStatus(204);
+                    })
+                }, function(err) {
+                    next(err);
+                })
         });
     })
     .get(auth.public_api(), function(req, res, next) {

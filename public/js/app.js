@@ -394,10 +394,22 @@
                     title: "Edit Maps"
                 })
                 .when('/teams', {
-                    templateUrl: '/assets/views/teams.html',
-                    controller: 'teamListController',
-                    controllerAs: 'teamListController',
+                    templateUrl: '/assets/views/teams/list.html',
+                    controller: 'teamsListController',
+                    controllerAs: 'teamsListController',
                     title: "Teams"
+                })
+                .when('/teams/new', {
+                    templateUrl: '/assets/views/teams/form.html',
+                    controller: 'addTeamController',
+                    controllerAs: 'teamsFormController',
+                    title: "New Teams"
+                })
+                .when('/teams/:id/edit', {
+                    templateUrl: '/assets/views/teams/form.html',
+                    controller: 'editMapController',
+                    controllerAs: 'teamsFormController',
+                    title: "Edit Teams"
                 })
         })
 }());

@@ -21,6 +21,7 @@ node_modules/
 .sass-cache/
 .idea/
 public/lib/
+designs/
 
 # Simon IDE settings
 .brackets.json

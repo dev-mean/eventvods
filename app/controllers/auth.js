@@ -17,7 +17,7 @@ function key_generate_recurse(req, res, callback) {
 	APIKey.count({
 			apiKey: key
 		},
-		function (err, count) {
+		function(err, count) {
 			if (err) next(err);
 			if (count === 0) {
 				APIKey.create({
@@ -27,7 +27,7 @@ function key_generate_recurse(req, res, callback) {
 						url: req.body.URL
 					},
 					apiKey: key
-				}, function (err, key) {
+				}, function(err, key) {
 					if (err) callback(err);
 					callback(null, key);
 				});
@@ -50,8 +50,8 @@ function errorNoPermission(req, res, next) {
 	next(err);
 }
 
-module.exports.logged_in = function (skipEmailCheck) {
-	return function (req, res, next) {
+module.exports.logged_in = function(skipEmailCheck) {
+	return function(req, res, next) {
 		if (!req.isAuthenticated())
 			loginRedirect(req, res);
 		else if (req.user.emailConfirmed || skipEmailCheck)
@@ -60,9 +60,9 @@ module.exports.logged_in = function (skipEmailCheck) {
 			res.redirect('/user/verifyemail');
 	};
 };
-module.exports.updater = function () {
-	return function (req, res, next) {
-		console.log('Updater auth: '+req.isAuthenticated());
+module.exports.updater = function() {
+	return function(req, res, next) {
+		console.log('Updater auth: ' + req.isAuthenticated());
 		if (!req.isAuthenticated())
 			loginRedirect(req, res);
 		else if (req.user.userRights >= constants.updater)
@@ -71,9 +71,9 @@ module.exports.updater = function () {
 			errorNoPermission(req, res, next);
 	};
 };
-module.exports.admin = function () {
-	return function (req, res, next) {
-		if (	!req.isAuthenticated())
+module.exports.admin = function() {
+	return function(req, res, next) {
+		if (!req.isAuthenticated())
 			loginRedirect(req, res);
 		else if (req.user.userRights >= constants.admin)
 			next();
@@ -83,8 +83,8 @@ module.exports.admin = function () {
 };
 
 // Auth for API, doesn't try to redirect or anything fancy, as the user should never see these errors
-module.exports.public_api = function () {
-	return function (req, res, next) {
+module.exports.public_api = function() {
+	return function(req, res, next) {
 		var key = req.query.apikey || req.get('X-Eventvods-Authorization');
 		if (process.env.NODE_ENV == "development" ||
 			(req.isAuthenticated && req.isAuthenticated() && req.user.userRights >= constants.updater))
@@ -96,10 +96,13 @@ module.exports.public_api = function () {
 			return next(err);
 		}
 		req.apiKey = key;
+		if (key == config.secret) {
+			return next();
+		}
 		APIKey.count({
 			apiKey: key
-		}, function (err, count) {
-			if (count > 0 || key == config.secret)
+		}, function(err, count) {
+			if (count > 0) 
 				next();
 			else {
 				err = new Error("Forbidden");
