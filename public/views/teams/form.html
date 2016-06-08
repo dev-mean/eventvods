@@ -1,0 +1,44 @@
+<div class="contextHead">
+    <div class="leftSide">
+        <h1 ng-bind="teamsFormController.title">
+        </h1>
+    </div>
+</div>
+<form name="form" id="addTeamForm" ng-cloak>
+    <div class="errors" ng-show="teamsFormController.errors.length > 0">
+        <ul>
+            <li ng-repeat="error in teamsFormController.errors">{{error.message}}</li>
+        </ul>
+    </div>
+    <div class="section">
+        <div class="standard group">
+            <label>
+                Team Name
+            </label>
+            <input type="text" placeholder="e.g. Fnatic" ng-model="teamsFormController.data.teamName" data-parsley-trigger="keyup"  required/>
+        </div>
+        <div class="standard group">
+            <label>
+                Team Tag
+            </label>
+            <input type="text" class="force-caps" placeholder="e.g. FNC" ng-model="teamsFormController.data.teamTag" data-parsley-trigger="keyup"  required/>
+        </div>
+        <div class="standard group">
+            <label>
+                Team Icon (optional)
+            </label>
+            <image-drop model="teamsFormController.data.teamImage" preview-width="60" preview-height="25" />
+        </div>
+        <br />
+        <div class="standard group">
+            <a class="btn lg solid icon" ng-click="teamsFormController.submit()">
+                <i class="fa fa-trophy">
+                </i>
+                <span ng-bind="teamsFormController.title">
+                </span>
+            </a>
+        </div>
+    </div>
+</form>
+<script src="/assets/lib/parsleyjs/dist/parsley.min.js">
+</script>

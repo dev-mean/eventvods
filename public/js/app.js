@@ -407,7 +407,7 @@
                 })
                 .when('/teams/:id/edit', {
                     templateUrl: '/assets/views/teams/form.html',
-                    controller: 'editMapController',
+                    controller: 'editTeamController',
                     controllerAs: 'teamsFormController',
                     title: "Edit Teams"
                 })
