@@ -39,6 +39,147 @@ p {
 .force-caps {
     text-transform: uppercase;
 }
+.text-cutoff {
+    text-overflow: ellipsis;
+}
+// Preloader
+.container {
+    opacity: 0;
+    -webkit-transition: opacity 1s ease-in-out;
+    -moz-transition: opacity 1s ease-in-out;
+    -ms-transition: opacity 1s ease-in-out;
+    -o-transition: opacity 1s ease-in-out;
+}
+.initialising {
+    #loading-bar, #loading-bar-spinner {
+        display: none!important;
+    }
+}
+.loaded {
+    .loader-wrapper {
+        opacity: 0;
+        pointer-events: none;
+    }
+    .container {
+        opacity: 1;
+    }
+}
+.loader-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    text-align: center;
+    .flex-display;
+    .flex-direction(column);
+    .justify-content(space-around);
+    z-index: 1005;
+    -webkit-transition: opacity 1s ease-in-out;
+    -moz-transition: opacity 1s ease-in-out;
+    -ms-transition: opacity 1s ease-in-out;
+    -o-transition: opacity 1s ease-in-out;
+    opacity: 1;
+    .sk-folding-cube {
+      margin: 40px auto;
+      width: 80px;
+      height: 80px;
+      position: relative;
+      -webkit-transform: rotateZ(45deg);
+              transform: rotateZ(45deg);
+    }
+
+    .sk-folding-cube .sk-cube {
+      float: left;
+      width: 50%;
+      height: 50%;
+      position: relative;
+      -webkit-transform: scale(1.1);
+          -ms-transform: scale(1.1);
+              transform: scale(1.1); 
+    }
+    .sk-folding-cube .sk-cube:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #fff;
+      opacity: 0.7;
+      -webkit-animation: sk-foldCubeAngle 2.4s infinite linear both;
+              animation: sk-foldCubeAngle 2.4s infinite linear both;
+      -webkit-transform-origin: 100% 100%;
+          -ms-transform-origin: 100% 100%;
+              transform-origin: 100% 100%;
+    }
+    .sk-folding-cube .sk-cube2 {
+      -webkit-transform: scale(1.1) rotateZ(90deg);
+              transform: scale(1.1) rotateZ(90deg);
+    }
+    .sk-folding-cube .sk-cube3 {
+      -webkit-transform: scale(1.1) rotateZ(180deg);
+              transform: scale(1.1) rotateZ(180deg);
+    }
+    .sk-folding-cube .sk-cube4 {
+      -webkit-transform: scale(1.1) rotateZ(270deg);
+              transform: scale(1.1) rotateZ(270deg);
+    }
+    .sk-folding-cube .sk-cube2:before {
+      -webkit-animation-delay: 0.3s;
+              animation-delay: 0.3s;
+    }
+    .sk-folding-cube .sk-cube3:before {
+      -webkit-animation-delay: 0.6s;
+              animation-delay: 0.6s; 
+    }
+    .sk-folding-cube .sk-cube4:before {
+      -webkit-animation-delay: 0.9s;
+              animation-delay: 0.9s;
+    }
+    @-webkit-keyframes sk-foldCubeAngle {
+      0%, 10% {
+        -webkit-transform: perspective(140px) rotateX(-180deg);
+                transform: perspective(140px) rotateX(-180deg);
+        opacity: 0; 
+      } 25%, 75% {
+        -webkit-transform: perspective(140px) rotateX(0deg);
+                transform: perspective(140px) rotateX(0deg);
+        opacity: 1; 
+      } 90%, 100% {
+        -webkit-transform: perspective(140px) rotateY(180deg);
+                transform: perspective(140px) rotateY(180deg);
+        opacity: 0; 
+      } 
+    }
+
+    @keyframes sk-foldCubeAngle {
+      0%, 10% {
+        -webkit-transform: perspective(140px) rotateX(-180deg);
+                transform: perspective(140px) rotateX(-180deg);
+        opacity: 0; 
+      } 25%, 75% {
+        -webkit-transform: perspective(140px) rotateX(0deg);
+                transform: perspective(140px) rotateX(0deg);
+        opacity: 1; 
+      } 90%, 100% {
+        -webkit-transform: perspective(140px) rotateY(180deg);
+                transform: perspective(140px) rotateY(180deg);
+        opacity: 0; 
+      }
+    }
+}
+.ng-fade.ng-hide {
+  opacity: 0;
+}
+
+.ng-fade.ng-hide-remove {
+  transition: all linear 1000ms;
+}
+
+.ng-fade.ng-hide-add {
+  transition: all linear 500ms;
+}
 img.icon {
     &-48 {
         width: 48px;
@@ -64,6 +205,13 @@ img.icon {
     &-text-align {
         position: relative;
         top: 2px;
+    }
+    &-team {
+        width: 60px;
+        height: 25px;
+        &:not([src]){
+            display: none;
+        }
     }
 }
 
@@ -119,7 +267,7 @@ img.icon {
         .flex-direction(column);
         width: @sidebarWidth;
         background: @default-dark;
-        border-right: 1px solid @default;
+        border-right: 1px solid @default-light;
     }
     .rightView {
         .flex-display;
@@ -142,34 +290,37 @@ header.logo {
     }
 }
 
-.userBlock {
-    background: @default-darker;
-    a {
+.leftUser {
+    .flex-display;
+    border: 0;
+    border-top: 1px solid @default-light;
+    border-bottom: 1px solid @default-light;
+    padding: 0;
+    margin-top: 1px;
+    > .userDetails {
+        .flex-grow(1);
+        padding-left: 5px;
+        padding-right: 5px;
+        text-align: center;
+        a {
+            max-width: 170px;
+            overflow: hidden;
+        }
+    }
+    > div {
         .flex-display;
-        .align-items(center);
-        .transition;
-        padding: @padding-sm @gutter;
-        img {
-            border-radius: 50%;
-        }
-        span {
-            padding-left: @gutter;
-        }
-        .arrow {
-            .triangle(down, 3px, @silver);
-            margin-left: auto;
-            .transition;
-        }
-        &:hover {
-            color: @green-icon-light;
-            .arrow {
-                .triangle(down, 3px, @green-icon-light);
+        .flex-direction(column);
+        .justify-content(center);
+        > a {
+            float: right;
+            &:hover {
+                color: @green;
             }
         }
     }
 }
 
-nav {
+nav.leftNavigation {
     .flex-display;
     .flex-direction(column);
     padding-bottom: @gutter;
@@ -339,29 +490,6 @@ table.standard {
 
 /* overview tiles */
 
-.tile-container {
-    .flex-display;
-    .flex-direction(column);
-    .justify-content(space-between);
-    padding: 16px 24px;
-    min-height: 423px;
-    background: @default-light;
-}
-
-.tile-row {
-    background: @default-dark;
-    padding: @padding-sm;
-    .flex-display;
-    .flex-direction(column);
-    .justify-content(space-between);
-    h2 {
-        float: left;
-    }
-    .content {
-        width: 100%;
-        .flex-grow(2);
-    }
-}
 
 
 .pagination {
@@ -395,6 +523,7 @@ table.standard {
     background: @default-light;
     width: 100%;
     border-bottom: 1px solid @default;
+    height: 50px;
 }
 
 .filters {

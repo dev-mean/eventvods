@@ -175,8 +175,19 @@ router.get('/data/staffRoles', auth.public_api(), function(req, res, next){
     res.json(config.staffRoles);
 });
 
+//User sessions
+router.get('/session', function(req, res, next){
+    console.log(req.isAuthenticated());
+    if(!req.isAuthenticated()) res.sendStatus('401');
+    else res.json({
+        "uid": req.user._id,
+        "username": req.user.username,
+        "rights": req.user.userRights
+    });
+})
+
 //OVERVIEW
-router.get('/overview', time(), auth.public_api(), time('auth public', true), time(), rateLimitCheck, time('rateLimit', true), time(), cache.route('overview', 3600), time('cache', true), function(req, res, next) {
+router.get('/overview', auth.public_api(), rateLimitCheck, cache.route('overview', 3600), function(req, res, next) {
     var today = moment()
         .format();
     var last_week = moment()
@@ -297,12 +308,7 @@ router.route('/games')
         var time = new Date();
         Game.find(function(err, games) {
             if (err) next(err);
-            else {
-                var diff = new Date() - req.time;
-                req.time = new Date();
-                console.log('DB games time: '+diff);
-                res.json(games);
-            }
+            else res.json(games);
         });
     })
     .post(auth.updater(), AWS.handleUpload(['gameIcon', 'gameBanner']), function(req, res, next) {
@@ -640,7 +646,7 @@ router.route('/staff/:staff_id')
     });
 //Link routes
 router.route('/links')
-    .get(auth.public_api(), rateLimit, cache.route('links'), function(req, res, next) {
+    .get(auth.public_api(), rateLimit, cache.route(), function(req, res, next) {
         Link.find(function(err, links) {
             if (err) next(err);
             res.json(links);
@@ -691,7 +697,7 @@ router.route('/links/:link_id')
     });
 //Map routes
 router.route('/maps')
-    .get(auth.public_api(), rateLimit, cache.route('maps'), function(req, res, next) {
+    .get(auth.public_api(), rateLimit, cache.route(), function(req, res, next) {
         Map.find()
             .populate('mapGame')
             .exec(function(err, maps) {
@@ -762,7 +768,7 @@ router.route('/maps/:map_id')
     });
 //Match routes
 router.route('/matches')
-    .get(auth.public_api(), rateLimit, cache.route('matches'), function(req, res, next) {
+    .get(auth.public_api(), rateLimit, cache.route(), function(req, res, next) {
         Match.find(function(err, matches) {
             if (err) next(err);
             res.json(matches);
@@ -813,7 +819,7 @@ router.route('/matches/:match_id')
     });
 //Organization routes
 router.route('/organizations')
-    .get(auth.public_api(), rateLimit, cache.route('organizations'), function(req, res, next) {
+    .get(auth.public_api(), rateLimit, cache.route(), function(req, res, next) {
         Organization.find(function(err, organizations) {
             if (err) next(err);
             res.json(organizations);
@@ -864,7 +870,7 @@ router.route('/organizations/:organization_id')
     });
 //Round routes
 router.route('/rounds')
-    .get(auth.public_api(), rateLimit, cache.route('rounds'), function(req, res, next) {
+    .get(auth.public_api(), rateLimit, cache.route(), function(req, res, next) {
         Round.find(function(err, rounds) {
             if (err) next(err);
             res.json(rounds);
@@ -915,7 +921,7 @@ router.route('/rounds/:round_id')
     });
 //Social media routes
 router.route('/socialmedia')
-    .get(auth.public_api(), rateLimit, cache.route('socialmedia'), function(req, res, next) {
+    .get(auth.public_api(), rateLimit, cache.route(), function(req, res, next) {
         SocialMedia.find(function(err, socialmedia) {
             if (err) next(err);
             res.json(socialmedia);
@@ -966,7 +972,7 @@ router.route('/socialmedia/:socialmedia_id')
     });
 //Sponsor routes
 router.route('/sponsors')
-    .get(auth.public_api(), rateLimit, cache.route('sponsors'), function(req, res, next) {
+    .get(auth.public_api(), rateLimit, cache.route(), function(req, res, next) {
         Sponsor.find(function(err, sponsors) {
             if (err) next(err);
             res.json(sponsors);
@@ -1017,13 +1023,13 @@ router.route('/sponsors/:sponsor_id')
     });
 //Team routes
 router.route('/teams')
-    .get(auth.public_api(), rateLimit, cache.route('teams'), function(req, res, next) {
+    .get(auth.public_api(), rateLimit, cache.route(), function(req, res, next) {
         Team.find(function(err, teams) {
             if (err) next(err);
             res.json(teams);
         });
     })
-    .post(auth.updater(), function(req, res, next) {
+    .post(auth.updater(), AWS.handleUpload(['teamIcon']), function(req, res, next) {
         Indicative.validateAll(req.body, Validators.team, Validators.messages)
             .then(function() {
                 Team.create(req.body, function(err, team) {
@@ -1040,11 +1046,16 @@ router.route('/teams')
     });
 router.route('/teams/:team_id')
     .delete(auth.updater(), function(req, res, next) {
-        Team.remove({
-            _id: req.params.team_id
-        }, function(err) {
-            if (err) next(err);
-            res.sendStatus(204);
+        Team.findById(req.params.team_id, function(err, doc) {
+            AWS.deleteImage(doc.teamIcon)
+                .then(function() {
+                    doc.remove(function(err) {
+                        if (err) next(err);
+                        else res.sendStatus(204);
+                    })
+                }, function(err) {
+                    next(err);
+                })
         });
     })
     .get(auth.public_api(), function(req, res, next) {
@@ -1058,7 +1069,7 @@ router.route('/teams/:team_id')
             res.json(team);
         });
     })
-    .put(auth.updater(), function(req, res, next) {
+    .put(auth.updater(), AWS.handleUpload(['teamIcon']), function(req, res, next) {
         Indicative.validateAll(req.body, Validators.team, Validators.messages)
             .then(function() {
                 Team.findByIdAndUpdate(req.params.team_id, req.body, function(err, team) {
@@ -1079,7 +1090,7 @@ router.route('/teams/:team_id')
     });
 //Event module routes
 router.route('/eventmodules')
-    .get(auth.public_api(), rateLimit, cache.route('modules'), function(req, res, next) {
+    .get(auth.public_api(), rateLimit, cache.route(), function(req, res, next) {
         EventModule.find(function(err, eventmodules) {
             if (err) next(err);
             res.json(eventmodules);

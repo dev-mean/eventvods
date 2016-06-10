@@ -5,7 +5,8 @@ constants = {
 	"end_user": 0,
 	"logged_in": 1,
 	"updater": 2,
-	"admin": 3
+	"admin": 3,
+	"dev": 4
 };
 module.exports.constants = constants;
 

@@ -51,7 +51,7 @@
         <tbody>
             <tr ng-repeat="team in teamsListController.filterData = (teamsListController.teamsData | filter: teamsListController.search) | orderBy: teamsListController.sort.sortField:teamsListController.sort.sortReverse | offset: (teamsListController.paging.page - 1) * teamsListController.paging.itemsPerPage | limitTo: teamsListController.paging.itemsPerPage">
                 <td>
-                    <img ng-src="{{team.teamImage}}" class="icon-48" />
+                    <img ng-src="{{team.teamIcon}}" class="icon-team" />
                 </td>
                 <td>
                     {{team.teamTag | uppercase}}

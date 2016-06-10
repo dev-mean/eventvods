@@ -5,7 +5,7 @@
         <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
         <meta content="width=device-width, initial-scale=1" name="viewport"/>
         <title>
-            eventVODS - Dashboard
+            EventVods
         </title>
         <link href="/assets/images/favicon.png" rel="icon" type="image/x-icon"/>
         <base href="/manage/"/>
@@ -35,15 +35,34 @@
         <script src="/assets/js/common/notifier.js">
         </script>
     </head>
-    <body>
-        <div class="container" ng-app="eventApp">
+    <body ng-app="eventApp" ng-controller="navController as Nav" ng-class="Nav.class">
+        <div class="loader-wrapper">
+            <div class="sk-folding-cube">
+                <div class="sk-cube1 sk-cube"></div>
+                <div class="sk-cube2 sk-cube"></div>
+                <div class="sk-cube4 sk-cube"></div>
+                <div class="sk-cube3 sk-cube"></div>
+            </div>
+        </div>
+        <div class="container">
             <div class="leftSidebar">
                 <header class="logo">
                     <a href="/manage/">
                     </a>
                 </header>
+                <div class="leftUser">
+                    <img class="icon-48" src="http://placehold.it/48" />
+                    <div class="userDetails">
+                        <span class="text-sm">Welcome back</span>
+                        <a ng-href="/user/{{Nav.user.username}}" ng-bind="Nav.user.username" class="text-cutoff"></a>
+                    </div>
+                    <div>
+                        <a class="fa fa-sign-out fa-lg fa-fw" ng-href="/user/logout">
+                        </a>
+                    </div>
+                </div>
                 <nav class="leftNavigation">
-                    <a href="/manage/  ">
+                    <a href="/manage/">
                         <i class="fa fa-tachometer fa-lg fa-fw">
                         </i>
                         <span class="text">
@@ -92,18 +111,11 @@
                             Teams
                         </span>
                     </a>
-                    <a href="/manage/users">
+                    <a href="/manage/users" ng-show="Nav.isAdmin">
                         <i class="fa fa-users fa-lg fa-fw">
                         </i>
                         <span class="text">
                             Users
-                        </span>
-                    </a>
-                    <a href="/manage/api">
-                        <i class="fa fa-key fa-lg fa-fw">
-                        </i>
-                        <span class="text">
-                            API
                         </span>
                     </a>
                 </nav>
@@ -113,6 +125,8 @@
                 </ng-view>
             </div>
         </div>
+        <script src="/assets/js/common/navController.js">
+        </script>
         <script src="/assets/js/overviewController.js">
         </script>
         <script src="/assets/js/games/gamesService.js">
