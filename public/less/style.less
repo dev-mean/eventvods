@@ -1,0 +1,66 @@
+//imports
+
+@import "frontend/variables.less";
+
+//Navbar blur
+nav.nav-blur {
+	-webkit-filter: blur(5px);
+	background: transparent;
+	margin-bottom: -64px;
+	position: relative;
+	z-index: 4;
+}
+
+//Navbar
+nav.nav-main {
+	background: rgba(0,0,0, 0.6);
+	border-bottom: 2px solid @default;
+	z-index: 5;
+	a.brand-logo img {
+		margin-top: 4px;
+		height: 54px;
+	}
+	i.left {
+		margin-right: 0;
+	}
+	ul a {
+		transition: all .3s;
+		letter-spacing: 0.5px;
+	}
+	ul a.btn {
+		background: transparent;
+		border: 2px solid @accent-green;
+		height: 40px;
+		line-height: 40px;
+		padding-left: 40px;
+		padding-right: 40px;
+		margin-top: -6px;
+	}
+	ul a:hover:not(.btn) {
+		color: @accent-green;
+	}
+}
+.text {
+	&-accent {
+		color: @accent-green;
+	}
+}
+#banner {
+	top: -64px;
+	z-index: 0;
+	div.pad-top {
+		margin-top: 64px;
+		
+	}
+	.indicators {
+		position: relative;
+		top: -50px;
+		z-index: 1000;
+		.indicator-item {
+			background-color: @accent-white;
+			&.active {
+				background-color: @accent-green;
+			}
+		}
+	}
+}

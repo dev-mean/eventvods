@@ -1,0 +1,70 @@
+@accent-green:			#0CD97E;
+@accent-white:			#fff;
+
+@parallax-height: 		500px;
+
+/* old colors */
+@darkbg: 				#1f2336;
+@default-lighter: 		#535a83;
+@default-light: 		#474c6c; 
+@default: 				#3c405c;
+@default-dark: 			#343850;
+@default-darker: 		#2a2d3e;
+@silver-lighter: 		#eff5ff;
+@silver-light: 			#d3d7e3;
+@silver: 				#aeb8d6;
+@silver-dark: 			#a4abc1;
+@silver-darker: 		#8690af;
+
+@blue: 					#0371d4;
+@blue-light: 			#0b93ea;
+@blue-icon-light: 		#4bbcf1;
+@blue-icon-dark: 		#1b5d87;
+@green: 				#0fc461;
+@green-light: 			#0cdb6a;
+@green-bright: 			#3cff85;
+@green-icon-light: 		#58e799;
+@green-icon-dark: 		#10854f;
+@green-transparent: 	rgba(60, 255, 133, 0.12);
+@red: 					#d4213f;
+@red-light: 			#d53548;
+@red-icon-light: 		#ff7081;
+@red-icon-dark: 		#a80014;
+@yellow: 				#f1c40f;
+@orange: 				#f39c12;
+
+@gradient-1-top: 		@blue;
+@gradient-1-btm: 		@green-light;
+@gradient-2-top: 		#cf123c;
+@gradient-2-btm: 		#5d0bc7;
+@gradient-3-top: 		@orange;
+@gradient-3-btm: 		@red; 
+@gradient-4-top: 		#f39c12;
+@gradient-4-btm: 		@blue;
+
+/* layout */
+@containerWidth: 		1200px;
+@sidebarWidth: 			270px;
+
+@padding-cell: 			12px; 
+@padding-sm: 			16px;
+@padding: 				20px;
+@gutter: 				24px;
+@padding-lg: 			30px;
+@padding-xl: 			36px;
+
+@font-size: 			14px;
+@font-size-btn: 		@font-size;
+@btn-radius: 			@gutter;
+@btn-padding: 			6px; 
+
+.black-gradient-right() {
+	background: rgba(255,255,255,0);
+	background: -moz-linear-gradient(left, rgba(255,255,255,0) 0%, rgba(0,0,0,0.6) 100%);
+	background: -webkit-gradient(left top, right top, color-stop(0%, rgba(255,255,255,0)), color-stop(100%, rgba(0,0,0,0.6)));
+	background: -webkit-linear-gradient(left, rgba(255,255,255,0) 0%, rgba(0,0,0,0.6) 100%);
+	background: -o-linear-gradient(left, rgba(255,255,255,0) 0%, rgba(0,0,0,0.6) 100%);
+	background: -ms-linear-gradient(left, rgba(255,255,255,0) 0%, rgba(0,0,0,0.6) 100%);
+	background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(0,0,0,0.6) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#000000', GradientType=1 );
+}
