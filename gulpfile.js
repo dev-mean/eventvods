@@ -4,7 +4,7 @@ var less 			= require('gulp-less');
 var plumber 	= require('gulp-plumber');
 
 gulp.task('watch', function(){
-	gulp.watch('public/less/*.less', ['less-compile']);
+	gulp.watch('public/less/**/*.less', ['less-compile']);
 });
 
 gulp.task('default', ['build']);
@@ -13,7 +13,7 @@ gulp.task('default', ['build']);
 gulp.task('build', ['less-compile']);
 
 gulp.task('less-compile', function () {
-	return gulp.src('public/less/backend.less')
+	return gulp.src(['public/less/backend.less','public/less/style.less'])
 		.pipe(plumber({
 			errorHandler: function (error) {
 				gutil.log(

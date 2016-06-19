@@ -7,42 +7,54 @@
   <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
   <base href="/"/>
   <title>Eventvods</title>
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link href="/assets/lib/Materialize/dist/css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
   <link href="/assets/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
   <link href="/assets/images/favicon.png" rel="icon" type="image/x-icon"/>
 </head>
 <body>
-  <nav class="white" role="navigation">
-    <div class="nav-wrapper container">
-      <a id="logo-container" href="#" class="brand-logo">Logo</a>
-      <ul class="right hide-on-med-and-down">
-        <li><a href="#">Navbar Link</a></li>
-      </ul>
-
-      <ul id="nav-mobile" class="side-nav">
-        <li><a href="#">Navbar Link</a></li>
-      </ul>
-      <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
-    </div>
+  <nav class="nav-blur" role="display">
   </nav>
+  <div class="navbar-fixed navbar-main">
+    <nav class="nav-main" role="navigation">
+      <div class="nav-wrapper container">
+        <a href="#" class="brand-logo"><img src='/assets/images/logo.png' id="logo-image" /></a>
+        <ul class="right hide-on-med-and-down">
+          <li><a href="/games"><i class="material-icons left">expand_more</i>GAMES</a></li>
+          <li><a href="/leagues"><i class="material-icons left">expand_more</i>LEAGUES</a></li>
+          <li><a href="/tournaments"><i class="material-icons left">expand_more</i>TOURNAMENTS</a></li>
+          <li><a href="/blog">BLOG</a></li>
+          <li><a class="waves-effect waves-light btn" href="/login">LOGIN</a></li>
+        </ul>
 
-  <div id="index-banner" class="parallax-container">
-    <div class="section no-pad-bot">
-      <div class="container">
-        <br><br>
-        <h1 class="header center teal-text text-lighten-2">Parallax Template</h1>
-        <div class="row center">
-          <h5 class="header col s12 light">A modern responsive front-end framework based on Material Design</h5>
-        </div>
-        <div class="row center">
-          <a href="http://materializecss.com/getting-started.html" id="download-button" class="btn-large waves-effect waves-light teal lighten-1">Get Started</a>
-        </div>
-        <br><br>
-
+        <ul id="nav-mobile" class="side-nav">
+          <li><a href="/games"><i class="material-icons left">expand_more</i>GAMES</a></li>
+          <li><a href="/leagues"><i class="material-icons left">expand_more</i>LEAGUES</a></li>
+          <li><a href="/tournaments"><i class="material-icons left">expand_more</i>TOURNAMENTS</a></li>
+          <li><a href="/blog">BLOG</a></li>
+          <li><a class="waves-effect waves-light btn" href="/login">LOGIN</a></li>
+        </ul>
+        <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
       </div>
-    </div>
-    <div class="parallax"><img src="/assets/images/backgrounds/1.jpg" alt="Unsplashed background img 1"></div>
+    </nav>
+  </div>
+<div class="slider parallax-container" id="banner">
+    <ul class="slides">
+      <li>
+        <img src="/assets/images/backgrounds/1.jpg"> <!-- random image -->
+        <div class="caption right-align">
+          <h3>This is our big Tagline!</h3>
+          <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+        </div>
+      </li>
+      <li>
+        <img src="/assets/images/backgrounds/2.jpg"> <!-- random image -->
+        <div class="caption left-align">
+          <h3>Left Aligned Caption</h3>
+          <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+        </div>
+      </li>
+    </ul>
   </div>
 
 
@@ -160,11 +172,12 @@
   <!--  Scripts-->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
-  <script src="/assets/lib/Materialize/dist/js/materialize.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
   <script>
     $(document).ready(function(){
       $('.button-collapse').sideNav();
-      $('.parallax').parallax();
+      $('.slider').slider({full_width: true})
+      //$('.parallax').parallax();
     });
   </script>
   </body>

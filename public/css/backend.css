@@ -478,9 +478,11 @@ header.logo {
 }
 header.logo a {
   display: block;
-  background: url(/assets/images/logo-medium.png);
-  width: 216px;
+  background: url(/assets/images/logo.png);
+  width: 175px;
   height: 48px;
+  background-size: cover;
+  margin: auto;
 }
 .leftUser {
   display: -webkit-flex;

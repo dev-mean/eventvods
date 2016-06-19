@@ -14,6 +14,8 @@ var pmx = require('pmx').init({
 //server setup
 var express = require('express');
 var app = express();
+//Trust remote proxy header from Nginx
+app.set('trust proxy', true);
 var fs = require('fs');
 var path = require('path');
 var mongoose = require('mongoose');

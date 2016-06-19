@@ -8,7 +8,6 @@
                 .then(function(res){
                     vm.user = res.data;
                     vm.isAdmin = (vm.user.rights >= 3);
-                    vm.user.username="superduperduperduperduperlongadhasdahname";
                     $timeout(function(){
                         vm.class="loaded";
                     }, 1000);

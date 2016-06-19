@@ -41,14 +41,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/EventVODS/EventVODS.git"
+    "url": "https://github.com/simon--poole/EventVODS.git"
   },
   "author": "",
   "license": "UNLICENSED",
   "bugs": {
-    "url": "https://github.com/EventVODS/EventVODS/issues"
+    "url": "https://github.com/simon--poole/EventVODS/issues"
   },
-  "homepage": "https://github.com/EventVODS/EventVODS",
+  "homepage": "https://github.com/simon--poole/EventVODS",
   "scripts": {
     "postinstall": "bower install",
     "start": "node server.js"
