@@ -8,7 +8,7 @@ var leagueSchema = new Schema({
 		required: true
 	},
 	leagueGame: {
-		type: mongoose.Schema.Types.ObjectId, 
+		type: mongoose.Schema.Types.ObjectId,
 		ref: 'Game',
 		required: true
 	},

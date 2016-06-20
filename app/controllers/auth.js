@@ -103,7 +103,7 @@ module.exports.public_api = function() {
 		APIKey.count({
 			apiKey: key
 		}, function(err, count) {
-			if (count > 0) 
+			if (count > 0)
 				next();
 			else {
 				err = new Error("Forbidden");

@@ -80,11 +80,11 @@ router.get('/verifyemail', auth.logged_in(true), function (req, res, next) {
 	var transporter = nodemailer.createTransport(smtpTransport(config.smtp));
 	//Please forgive me
 	var mailOptions = {
-		from: 'EventVODS.com <no-reply@eventvods.com>', // sender address 
-		to: "", //list of receivers 
-		subject: 'EventVODS Email Confirmation', // Subject line 
-		text: 'Hello ' + req.user.username + ', \r\n\r\nThis is an automated email from EventVODS.com to confirm your email address.\r\nTo confirm your email address, please click here: http://eventvods.com/user/verifyemail/confirm/' + req.user.emailConfirmation + '\r\n\r\n Alternatively, you can visit http://eventvods.com/user/emailverify and manually enter your verification code below:\r\n' + req.user.emailConfirmation + '.\r\n\r\nThanks! - The EventVODS Team', // plaintext body 
-		html: 'Hello ' + req.user.username + ', <br /><br />This is an automated email from EventVODS.com to confirm your email address.<br />To confirm your email address, please click here: <a href="http://eventvods.com/user/verifyemail/confirm/' + req.user.emailConfirmation + '">verify email</a>.<br /><br /> Alternatively, you can visit http://eventvods.com/user/emailverify and manually enter your verification code below:<br />' + req.user.emailConfirmation + '.<br /><br />Thanks! - The EventVODS Team' // html body 
+		from: 'EventVODS.com <no-reply@eventvods.com>', // sender address
+		to: "", //list of receivers
+		subject: 'EventVODS Email Confirmation', // Subject line
+		text: 'Hello ' + req.user.username + ', \r\n\r\nThis is an automated email from EventVODS.com to confirm your email address.\r\nTo confirm your email address, please click here: http://eventvods.com/user/verifyemail/confirm/' + req.user.emailConfirmation + '\r\n\r\n Alternatively, you can visit http://eventvods.com/user/emailverify and manually enter your verification code below:\r\n' + req.user.emailConfirmation + '.\r\n\r\nThanks! - The EventVODS Team', // plaintext body
+		html: 'Hello ' + req.user.username + ', <br /><br />This is an automated email from EventVODS.com to confirm your email address.<br />To confirm your email address, please click here: <a href="http://eventvods.com/user/verifyemail/confirm/' + req.user.emailConfirmation + '">verify email</a>.<br /><br /> Alternatively, you can visit http://eventvods.com/user/emailverify and manually enter your verification code below:<br />' + req.user.emailConfirmation + '.<br /><br />Thanks! - The EventVODS Team' // html body
 	};
 	User.findById(req.user._id, function (err, user) {
 		res.locals.user = user;

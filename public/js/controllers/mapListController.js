@@ -26,7 +26,7 @@
       function cleanResponse(resp) {
         return JSON.parse(angular.toJson(resp));
       }
-      
+
       controller.setMapSort = function(sortType) {
         controller.ui.sortType = sortType;
         controller.ui.sortReverse = !controller.ui.sortReverse;

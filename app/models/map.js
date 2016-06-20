@@ -4,7 +4,7 @@ var Schema = mongoose.Schema;
 var mapSchema = new Schema({
 	mapImage: String,
 	mapGame: {
-		type: mongoose.Schema.Types.ObjectId, 
+		type: mongoose.Schema.Types.ObjectId,
 		ref: 'Game',
 		required: true
 	},

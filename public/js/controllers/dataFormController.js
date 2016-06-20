@@ -5,7 +5,7 @@
         'dataFormService', '$window', 'notificationService', 'dataListService',
         function (dataFormService, $window, notificationService, dataListService) {
             var controller = this;
-            
+
             //Edit mode --> TODO: Refactor with Route/RouteParams
             var isEdit = $window.location.href.indexOf('edit') > 0; //Check for id on model instead?
 
