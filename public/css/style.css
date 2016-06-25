@@ -1,12 +1,5 @@
 /* old colors */
 /* layout */
-nav.nav-blur {
-  -webkit-filter: blur(5px);
-  background: transparent;
-  margin-bottom: -64px;
-  position: relative;
-  z-index: 4;
-}
 nav.nav-main {
   background: rgba(0, 0, 0, 0.6);
   border-bottom: 2px solid #3c405c;
@@ -39,20 +32,28 @@ nav.nav-main ul a:hover:not(.btn) {
   color: #0CD97E;
 }
 #banner {
+  position: relative;
   top: -64px;
+  width: 100%;
+  height: 664px;
   z-index: 0;
 }
-#banner div.pad-top {
-  margin-top: 64px;
+#banner .image {
+  opacity: 0;
 }
-#banner .indicators {
-  position: relative;
-  top: -50px;
-  z-index: 1000;
+#banner .image:first-child {
+  opacity: 1;
 }
-#banner .indicators .indicator-item {
-  background-color: #fff;
+#banner img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  max-width: 100%;
 }
-#banner .indicators .indicator-item.active {
-  background-color: #0CD97E;
+#banner,
+#banner .images,
+#banner .image {
+  width: 100%;
+  height: 664px;
+  overflow-y: hidden;
 }

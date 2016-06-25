@@ -34,9 +34,9 @@ html(lang='en')
 				nav.leftNavigation
 					each navsection in ["Dashboard", "Events", "Data", "Users"]
 						a(id=navsection, href="/" + navsection.toLowerCase(), class=currentPage == navsection ? 'active' : '')
-							span.text= navsection 
+							span.text= navsection
 			div.rightView
-				block content 
+				block content
 		script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js')
 		script(src='/assets/js/angular.min.js')
 		script(src='/assets/js/angular-datepicker.js')

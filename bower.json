@@ -30,6 +30,7 @@
     "angular-loading-bar": "*",
     "ng-dialog": "*",
     "Materialize": "materialize#^0.97.6",
-    "ng-typeahead": "git://github.com/raymondmuller/ng-typeahead.git"
+    "ng-typeahead": "git://github.com/raymondmuller/ng-typeahead.git",
+    "Blur.js": "blurjs#^0.2.0"
   }
 }
