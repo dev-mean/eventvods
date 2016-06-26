@@ -80,9 +80,10 @@ nav.nav-main ul.dropdown-content li.divider {
   z-index: 0;
   overflow: hidden;
 }
-.evSlider img {
+.evSlider .main img,
+.evSlider .blur img {
   pointer-events: none;
-  max-width: 200%;
+  width: 100%;
 }
 .evSlider .images,
 .evSlider .image,

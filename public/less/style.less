@@ -84,9 +84,9 @@ nav.nav-main {
 	height: @banner-slider-height + @nav-height;
 	z-index: 0;
 	overflow: hidden;
-	img {
+	.main img, .blur img {
 		pointer-events: none;
-		max-width: 200%;
+		width: 100%;
 	}
 	.images, .image, div.overlay {
 		width: 100%;
@@ -102,7 +102,6 @@ nav.nav-main {
 		.transition(opacity, 2s, ease-in-out);
 		&.active {
 			opacity: 1;
-			//pointer-events: auto;
 			.overlay.left .container,
 			.overlay.right .container {
 				.translate-x(0);
