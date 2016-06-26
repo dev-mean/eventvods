@@ -8,7 +8,7 @@
         // Set up titles on ngroute pages
         .run(['$rootScope', '$route', function($rootScope, $route) {
             $rootScope.$on('$routeChangeSuccess', function() {
-                document.title = "eventVODs - " + $route.current.title;
+                document.title = "Eventvods - " + $route.current.title;
             });
         }])
         // Offset filter for paging lists
