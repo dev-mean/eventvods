@@ -30,6 +30,9 @@ nav.nav-main {
 		margin-top: 4px;
 		height: 54px;
 		pointer-events: none;
+		@media screen and (max-width: 600px){
+			margin-top: 0;
+		}
 	}
 	i.left {
 		margin-right: 0;
@@ -86,7 +89,12 @@ nav.nav-main {
 	overflow: hidden;
 	.main img, .blur img {
 		pointer-events: none;
-		width: 100%;
+		@media screen and (min-width: 1920px){
+			width: 100%;
+		}
+	}
+	.main img {
+		min-height: 600px;
 	}
 	.images, .image, div.overlay {
 		width: 100%;

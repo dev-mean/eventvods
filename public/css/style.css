@@ -30,6 +30,11 @@ nav.nav-main a.brand-logo img {
   height: 54px;
   pointer-events: none;
 }
+@media screen and (max-width: 600px) {
+  nav.nav-main a.brand-logo img {
+    margin-top: 0;
+  }
+}
 nav.nav-main i.left {
   margin-right: 0;
 }
@@ -83,7 +88,15 @@ nav.nav-main ul.dropdown-content li.divider {
 .evSlider .main img,
 .evSlider .blur img {
   pointer-events: none;
-  width: 100%;
+}
+@media screen and (min-width: 1920px) {
+  .evSlider .main img,
+  .evSlider .blur img {
+    width: 100%;
+  }
+}
+.evSlider .main img {
+  min-height: 600px;
 }
 .evSlider .images,
 .evSlider .image,
