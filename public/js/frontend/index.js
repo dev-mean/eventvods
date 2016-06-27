@@ -18,7 +18,7 @@
         this.find('.image').eq(settings.index++).addClass('active');
 
         //Continued functions
-        $('.indicator').click(function(el){
+        $('.indicator').click(function(){
         	settings.index = $(this).attr('data-index');
         	$('.active').removeClass('active');
         	settings.el.find('.indicator').eq(settings.index).addClass('active');
