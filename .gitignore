@@ -4,7 +4,7 @@
 # Logs and databases #
 ######################
 *.log
-
+.vscode/
 # OS generated files #
 ######################
 .DS_Store
