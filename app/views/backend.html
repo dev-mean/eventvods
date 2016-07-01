@@ -11,29 +11,9 @@
         <base href="/manage/"/>
         <link href="/assets/css/backend.css" rel="stylesheet"/>
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet"/>
-        <link href="/assets/lib/toastr/toastr.min.css" rel="stylesheet"/>
-        <link href="/assets/lib/angular-loading-bar/build/loading-bar.min.css" rel="stylesheet"/>
-        <link href="/assets/lib/ng-dialog/css/ngDialog.min.css" rel="stylesheet"/>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js">
-        </script>
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js">
-        </script>
-        <script src="/assets/lib/angular-animate/angular-animate.min.js">
-        </script>
-        <script src="/assets/lib/angular-resource/angular-resource.min.js">
-        </script>
-        <script src="/assets/lib/angular-route/angular-route.min.js">
-        </script>
-        <script src="/assets/lib/angular-loading-bar/build/loading-bar.min.js">
-        </script>
-        <script src="/assets/lib/toastr/toastr.min.js">
-        </script>
-        <script src="/assets/lib/ng-dialog/js/ngDialog.min.js">
-        </script>
-        <script src="/assets/js/backend/app.js">
-        </script>
-        <script src="/assets/js/backend/common/notifier.js">
-        </script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.2/toastr.min.css" rel="stylesheet"/>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/angular-loading-bar/0.9.0/loading-bar.min.css" rel="stylesheet"/>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/ng-dialog/0.6.2/css/ngDialog.min.css" rel="stylesheet"/>
     </head>
     <body ng-app="eventApp" ng-controller="navController as Nav" ng-class="Nav.class">
         <div class="loader-wrapper">
@@ -125,6 +105,26 @@
                 </ng-view>
             </div>
         </div>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js">
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.7/angular.min.js">
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.7/angular-animate.min.js">
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.7/angular-resource.min.js.map">
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.7/angular-route.min.js.map">
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-loading-bar/0.9.0/loading-bar.min.js">
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.2/toastr.min.js">
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/ng-dialog/0.6.2/js/ngDialog.min.js">
+        </script>
+        <script src="/assets/js/backend/app.js">
+        </script>
+        <script src="/assets/js/backend/common/notifier.js">
+        </script>
         <script src="/assets/js/backend/common/navController.js">
         </script>
         <script src="/assets/js/backend/overviewController.js">
