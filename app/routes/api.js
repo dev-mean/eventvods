@@ -1,5 +1,11 @@
 var app = require('express');
 var router = app.Router();
+var validateRouter = require('./validateRouter.js');
+var authRouter = require('./authRouter.js');
+
+router.use('/validate', validateRouter);
+router.use('/auth', authRouter);
+
 var auth = require('../controllers/auth');
 var path = require('path');
 var AWS = require('../controllers/aws');
@@ -83,7 +89,7 @@ function rateLimitCheck(req, res, next){
     } else {
         return rateLimit;
     }
-};
+}
 function time(name, end){
     return function (req, res, next){
         if(!end) req.timer = new Date();
@@ -120,7 +126,7 @@ router.all('*', function(req, res, next) {
         next();
     }
 });
-router.all('*', function(req, res, next) {
+/*router.all('*', function(req, res, next) {
     var time = new Date();
         if (process.env.NODE_ENV === 'development') {
             if (!req.isAuthenticated()) {
@@ -145,30 +151,7 @@ router.all('*', function(req, res, next) {
             res.locals.user = req.user;
             return next();
         }
-    })
-
-//Specific validation routes
-router.get('/validate/gameAlias/:alias', auth.public_api(), rateLimitCheck, cache.route(), function(req, res, next) {
-    Game.find({
-            gameAlias: req.params.alias
-        })
-        .count()
-        .exec(function(err, count) {
-            if (err) next(err);
-            if (count > 0) return res.sendStatus('409');
-            else return res.sendStatus('200');
-        })
-});
-router.get('/validate/gameAlias/:alias/:id', auth.public_api(), rateLimit, cache.route(), function(req, res, next) {
-    Game.findOne({
-        gameAlias: req.params.alias
-    }, function(err, doc) {
-        if (err) next(err);
-        if (!doc) return res.sendStatus('200');
-        else if (doc._id == req.params.id) return res.sendStatus('200');
-        else return res.sendStatus('409');
-    })
-});
+    });*/
 
 //Specific static data
 router.get('/data/staffRoles', auth.public_api(), function(req, res, next){

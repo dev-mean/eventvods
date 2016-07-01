@@ -304,109 +304,109 @@
             $routeProvider
             // route for the home page
                 .when('/', {
-                    templateUrl: '/assets/views/dashboard.html',
+                    templateUrl: '/assets/views/backend/dashboard.html',
                     controller: 'overviewController',
                     controllerAs: 'overviewController',
                     title: "Dashboard"
                 })
                 .when('/games', {
-                    templateUrl: '/assets/views/game/list.html',
+                    templateUrl: '/assets/views/backend/game/list.html',
                     controller: 'gamesListController',
                     controllerAs: 'gamesListController',
                     title: "Games"
                 })
                 .when('/games/new', {
-                    templateUrl: '/assets/views/game/form.html',
+                    templateUrl: '/assets/views/backend/game/form.html',
                     controller: 'addGameController',
                     controllerAs: 'gameFormController',
                     title: "Add Game"
                 })
                 .when('/game/:id/edit', {
-                    templateUrl: '/assets/views/game/form.html',
+                    templateUrl: '/assets/views/backend/game/form.html',
                     controller: 'editGameController',
                     controllerAs: 'gameFormController',
                     title: "Edit Game"
                 })
                 .when('/leagues', {
-                    templateUrl: '/assets/views/league/list.html',
+                    templateUrl: '/assets/views/backend/league/list.html',
                     controller: 'leaguesListController',
                     controllerAs: 'leaguesListController',
                     title: "Leagues"
                 })
                 .when('/leagues/new', {
-                    templateUrl: '/assets/views/league/form.html',
+                    templateUrl: '/assets/views/backend/league/form.html',
                     controller: 'addLeagueController',
                     controllerAs: 'leagueFormController',
                     title: "Add League"
                 })
                 .when('/league/:id/edit', {
-                    templateUrl: '/assets/views/league/form.html',
+                    templateUrl: '/assets/views/backend/league/form.html',
                     controller: 'editLeagueController',
                     controllerAs: 'leagueFormController',
                     title: "Edit League"
                 })
                 .when('/events', {
-                    templateUrl: '/assets/views/event/list.html',
+                    templateUrl: '/assets/views/backend/event/list.html',
                     controller: 'eventListController',
                     controllerAs: 'eventListController',
                     title: "Events"
                 })
                 .when('/events/new', {
-                    templateUrl: '/assets/views/event/form.html',
+                    templateUrl: '/assets/views/backend/event/form.html',
                     controller: 'newEventController',
                     controllerAs: 'newEventController',
                     title: "New Event"
                 })
                 .when('/staff', {
-                    templateUrl: '/assets/views/staff/list.html',
+                    templateUrl: '/assets/views/backend/staff/list.html',
                     controller: 'staffListController',
                     controllerAs: 'staffListController',
                     title: "Staff"
                 })
                 .when('/staff/new', {
-                    templateUrl: '/assets/views/staff/form.html',
+                    templateUrl: '/assets/views/backend/staff/form.html',
                     controller: 'addStaffController',
                     controllerAs: 'staffFormController',
                     title: "New Staff"
                 })
                 .when('/staff/:id/edit', {
-                    templateUrl: '/assets/views/staff/form.html',
+                    templateUrl: '/assets/views/backend/staff/form.html',
                     controller: 'editStaffController',
                     controllerAs: 'staffFormController',
                     title: "Edit Staff"
                 })
                 .when('/maps', {
-                    templateUrl: '/assets/views/maps/list.html',
+                    templateUrl: '/assets/views/backend/maps/list.html',
                     controller: 'mapsListController',
                     controllerAs: 'mapsListController',
                     title: "Maps"
                 })
                 .when('/maps/new', {
-                    templateUrl: '/assets/views/maps/form.html',
+                    templateUrl: '/assets/views/backend/maps/form.html',
                     controller: 'addMapController',
                     controllerAs: 'mapsFormController',
                     title: "New Maps"
                 })
                 .when('/maps/:id/edit', {
-                    templateUrl: '/assets/views/maps/form.html',
+                    templateUrl: '/assets/views/backend/maps/form.html',
                     controller: 'editMapController',
                     controllerAs: 'mapsFormController',
                     title: "Edit Maps"
                 })
                 .when('/teams', {
-                    templateUrl: '/assets/views/teams/list.html',
+                    templateUrl: '/assets/views/backend/teams/list.html',
                     controller: 'teamsListController',
                     controllerAs: 'teamsListController',
                     title: "Teams"
                 })
                 .when('/teams/new', {
-                    templateUrl: '/assets/views/teams/form.html',
+                    templateUrl: '/assets/views/backend/teams/form.html',
                     controller: 'addTeamController',
                     controllerAs: 'teamsFormController',
                     title: "New Teams"
                 })
                 .when('/teams/:id/edit', {
-                    templateUrl: '/assets/views/teams/form.html',
+                    templateUrl: '/assets/views/backend/teams/form.html',
                     controller: 'editTeamController',
                     controllerAs: 'teamsFormController',
                     title: "Edit Teams"

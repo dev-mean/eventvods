@@ -3,12 +3,7 @@ var Schema = mongoose.Schema;
 var passportLocalMongoose = require('passport-local-mongoose');
 
 var userSchema = new Schema({
-	username: {
-		type: String,
-		required: true,
-		unique: true
-	},
-	userEmail: String,
+
 	lastLogin: {
 		type: Date,
 		default: Date.now
@@ -29,7 +24,17 @@ var userSchema = new Schema({
 	emailSent: Boolean
 });
 
-userSchema.plugin(passportLocalMongoose);
+userSchema.plugin(passportLocalMongoose, {
+    usernameField: 'email',
+    limitAttempts: true,
+    maxAttempts: 10,
+    usernameLowerCase: true,
+    errorMessages: {
+        IncorrectUsernameError: "Incorrect username or password",
+        IncorrectPasswordError: "Incorrect username or password",
+        UserExistsError: "That email is already registered"
+    }
+});
 
 var User = mongoose.model('users', userSchema);
 

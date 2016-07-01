@@ -10,14 +10,14 @@ body {
   background: linear-gradient(to bottom, #3c3c62 17%, #27273f 100%);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#3c3c62', endColorstr='#27273f', GradientType=0);
 }
-a.btn {
-  background: transparent;
-  border: 2px solid #0CD97E;
-  height: 40px;
-  line-height: 40px;
+.text-accent {
+  color: #0CD97E;
 }
-a.btn:hover {
-  background: #0CD97E;
+#banner {
+  top: -64px;
+}
+.input-field label {
+  text-transform: uppercase;
 }
 nav.nav-main {
   position: relative;
@@ -75,8 +75,14 @@ nav.nav-main ul.dropdown-content li a {
 nav.nav-main ul.dropdown-content li.divider {
   background: #0CD97E;
 }
-.text-accent {
-  color: #0CD97E;
+nav.nav-main a.btn {
+  background: transparent;
+  border: 2px solid #0CD97E;
+  height: 40px;
+  line-height: 40px;
+}
+nav.nav-main a.btn:hover {
+  background: #0CD97E;
 }
 .evSlider {
   position: relative;
@@ -235,8 +241,81 @@ nav.nav-main ul.dropdown-content li.divider {
 .evSlider .indicators .indicator.active {
   background-color: #0CD97E;
 }
-#banner {
-  top: -64px;
+.modal {
+  border-radius: 0;
+  overflow-y: visible;
+  max-height: none;
+  background: transparent;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  text-align: center;
+}
+.modal .tabs {
+  background: #3C3C62;
+}
+.modal .tabs a {
+  color: #fff;
+}
+.modal .tabs a:hover {
+  color: #0CD97E;
+}
+.modal .tabs .indicator {
+  background-color: #0CD97E;
+  height: 5px;
+}
+.modal > img {
+  margin: auto;
+  max-height: 100px;
+}
+.modal > .modal-wrapper {
+  background: #fff;
+  border-bottom: 5px solid #0CD97E;
+  color: #3C3C62;
+}
+.modal h5 {
+  padding-bottom: 20px;
+}
+.modal .buttons {
+  padding-top: 25px;
+}
+.modal .btn {
+  width: 100%;
+  font-size: 18px;
+  background: #0CD97E;
+}
+.modal .btn.modal-close {
+  background: #3C3C62;
+}
+.modal label {
+  color: #3C3C62;
+}
+.modal .input-field label.click-through {
+  pointer-events: none;
+}
+.modal p label.snug {
+  top: -30px;
+}
+.modal p label.snug.left {
+  float: left;
+}
+.modal p label.snug.right {
+  float: right;
+}
+.modal p label.snug:before {
+  top: 2px!important;
+}
+.modal p label.snug:after {
+  top: 2px!important;
+  border-color: #0CD97E;
+  background-color: #0CD97E;
+}
+.lean-overlay {
+  background: url("/assets/images/modal.jpg");
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
 }
 footer.page-footer {
   background: #3C3C62;

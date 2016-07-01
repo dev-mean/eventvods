@@ -1,0 +1,75 @@
+.modal {
+    border-radius: 0;
+    overflow-y: visible;
+    max-height: none;
+    background: transparent;
+    .box-shadow-none();
+    text-align: center;
+    .tabs {
+        background: @default-blue;
+        a {
+            color: @accent-white;
+            &:hover {
+                color: @accent-green;
+            }
+        }
+        .indicator {
+            background-color: @accent-green;
+            height: 5px;
+        }
+    }
+    > img {
+        margin: auto;
+        max-height: 100px;
+    }
+    > .modal-wrapper {
+        background: @accent-white;
+        border-bottom: 5px solid @accent-green;
+        color: @default-blue;
+    }
+    h5 {
+        padding-bottom: 20px;
+    }
+    .buttons {
+        padding-top: 25px;
+    }
+    .btn {
+        width: 100%;
+        font-size: 18px;
+        background: @accent-green;
+        &.modal-close {
+            background: @default-blue;
+        }
+    }
+    label {
+        color: @default-blue;
+    }
+    .input-field label.click-through {
+        pointer-events: none;
+    }
+    p label.snug {
+        top: -30px;
+        &.left {
+            float: left;
+        }
+        &.right {
+            float: right;
+        }
+        &:before {
+            top: 2px!important;
+        }
+        &:after {
+            top: 2px!important;
+            border-color: @accent-green;
+            background-color: @accent-green;
+        }
+    }
+}
+
+.lean-overlay {
+    background: url("/assets/images/modal.jpg");
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}

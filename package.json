@@ -17,6 +17,7 @@
     "dotenv": "^2.0.0",
     "express": "*",
     "express-redis-cache": "*",
+    "express-seojs": "0.0.5",
     "express-session": "*",
     "file-type": "^3.8.0",
     "indicative": "*",

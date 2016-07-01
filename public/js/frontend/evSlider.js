@@ -20,7 +20,7 @@
         //Continued functions
         $('.indicator').click(function(){
         	settings.index = $(this).attr('data-index');
-        	$('.active').removeClass('active');
+        	$('.evSlider .active').removeClass('active');
         	settings.el.find('.indicator').eq(settings.index).addClass('active');
         	settings.el.find('.image').eq(settings.index++).addClass('active');
         	clearInterval(settings.interval);
@@ -30,7 +30,7 @@
         	if(settings.index == settings.max) settings.index = 0;
             var hover = this.find('.image.active').find('.overlay').first().mouseIsOver();
             if(!hover){
-            	$('.active').removeClass('active');
+            	$('.evSlider .active').removeClass('active');
             	this.find('.indicator').eq(settings.index).addClass('active');
             	this.find('.image').eq(settings.index++).addClass('active');
 	        }

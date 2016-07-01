@@ -29,6 +29,8 @@ var User = require('./app/models/user');
 var config = require('./config/config');
 var RedisStore = require('connect-redis')(session);
 var favicon = require('serve-favicon');
+var seojs = require('express-seojs');
+app.use(seojs(process.env.SEOJS));
 app.use(morgan('tiny'));
 //Set up logging
 var logger = require('bristol');
@@ -63,7 +65,7 @@ app.use(session({
 /* Passport setup */
 app.use(passport.initialize());
 app.use(passport.session());
-passport.use(new LocalStrategy(User.authenticate()));
+passport.use(User.createStrategy());
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 mongoose.connect(config.databaseUrl, function(err) {

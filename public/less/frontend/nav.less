@@ -1,0 +1,63 @@
+nav.nav-main {
+	position: relative;
+	background: rgba(0,0,0, 0.3);
+	border-bottom: 2px solid @default;
+	z-index: 998;
+	a.brand-logo img {
+		margin-top: 4px;
+		height: 54px;
+		pointer-events: none;
+		@media screen and (max-width: 600px){
+			margin-top: 0;
+		}
+	}
+	i.left {
+		margin-right: 0;
+	}
+	ul a {
+		transition: all .3s;
+		letter-spacing: 0.5px;
+	}
+	ul a.btn {
+		padding-left: 40px;
+		padding-right: 40px;
+		margin-top: -6px;
+	}
+	ul a:hover:not(.btn) {
+		color: @accent-green;
+	}
+	ul.side-nav {
+		background: @default-blue;
+		border-right: 3px solid @accent-green;
+		li a {
+			color: @accent-white;
+			&.btn {
+				margin-top: 0;
+			}
+		}
+	}
+	ul.dropdown-content {
+		border-top: 2px solid @accent-green;
+		margin-top: -2px;
+		background: @default-blue;
+		li {
+			background: transparent;
+			border: 1px solid @border-blue;
+			a {
+				color: @accent-white;
+			}
+			&.divider {
+				background: @accent-green;
+			}
+		}
+	}
+    a.btn {
+        background: transparent;
+        border: 2px solid @accent-green;
+        height: 40px;
+        line-height: 40px;
+        &:hover {
+            background: @accent-green;
+        }
+    }
+}
