@@ -2,375 +2,379 @@
 <html lang="en">
 
 <head>
-    <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
-    <meta content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no" name="viewport" />
-    <meta charset="utf-8" />
-    <meta content="IE=edge" http-equiv="X-UA-Compatible" />
-    <meta name="fragment" content="!">
-    <base href="/" />
-    <title>
-        Eventvods
-    </title>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.css" media="screen,projection" rel="stylesheet" type="text/css" />
-    <link href="/assets/css/style.css" media="screen,projection" rel="stylesheet" type="text/css" />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/angular-loading-bar/0.9.0/loading-bar.min.css" rel="stylesheet" />
-    <link href="/assets/images/favicon.png" rel="icon" type="image/x-icon" />
+	<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+	<meta content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no" name="viewport" />
+	<meta charset="utf-8" />
+	<meta content="IE=edge" http-equiv="X-UA-Compatible" />
+	<meta name="fragment" content="!">
+	<base href="/" />
+	<title>
+		Eventvods
+	</title>
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.css" media="screen,projection" rel="stylesheet" type="text/css" />
+	<link href="/assets/css/style.css" media="screen,projection" rel="stylesheet" type="text/css" />
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/angular-loading-bar/0.9.0/loading-bar.min.css" rel="stylesheet" />
+	<link href="/assets/images/favicon.png" rel="icon" type="image/x-icon" />
 </head>
 
 <body ng-app="eventvods">
-    <div class="modal" id="loginRegister" ng-controller="loginRegisterController as LR">
-        <img class="modal-logo" src="/assets/images/logo.png" />
-        <div class="modal-wrapper z-depth-4">
-            <div>
-                <ul tabs>
-                    <li class="tab col s6">
-                        <a class="active" ng-click="LR.register = false">Login</a>
-                    </li>
-                    <li class="tab col s6">
-                        <a ng-click="LR.register = true">Create Account</a>
-                    </li>
-                </ul>
-            </div>
-            <div class="modal-content flow-text">
-                <div class="row">
-                    <div class="col s12 m10 offset-m1 center-align">
-                        <h5>
+	<div class="modal" id="loginRegister" ng-controller="loginRegisterController as LR">
+		<img class="modal-logo" src="/assets/images/logo.png" />
+		<div class="modal-wrapper z-depth-4">
+			<div>
+				<ul tabs>
+					<li class="tab col s6">
+						<a class="active" ng-click="LR.register = false">Login</a>
+					</li>
+					<li class="tab col s6">
+						<a ng-click="LR.register = true">Create Account</a>
+					</li>
+				</ul>
+			</div>
+			<div class="modal-content flow-text">
+				<div class="row">
+					<div class="col s12 m10 offset-m1 center-align">
+						<h5>
                             LOGIN TO YOUR <strong>ACCOUNT</strong> TO FOLLOW YOUR FAVOURITE <strong>LEAGUES & TOURNAMENTS</strong>
                         </h5>
-                    </div>
-                    <div ng-show="!LR.register" class="col s6 offset-s3 center-align">
-                        <input-field>
-                            <input type="text" ng-model="dummyInputs.inputFieldInput">
-                            <label class="click-through">Email</label>
-                        </input-field>
-                        <input-field>
-                            <input type="password" ng-model="dummyInputs.inputFieldInput">
-                            <label class="click-through">Password</label>
-                        </input-field>
-                        <p>
-                            <input type="checkbox" class="filled-in" id="remember-me" checked="checked" />
-                            <label class="snug right" for="remember-me">Remember Me</label>
-                        </p>
-                        <div class="row buttons">
-                            <div class="col s6">
-                                <a class="waves-effect waves-light btn modal-close">Cancel</a>
-                            </div>
-                            <div class="col s6">
-                                <a class="waves-effect waves-light btn submit">Login</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div ng-show="LR.register" class="col s12 center-align">
-                        <div class="row">
-                            <div class="col s6">
-                                <input-field>
-                                    <input type="text" ng-model="dummyInputs.inputFieldInput">
-                                    <label class="click-through">Email</label>
-                                </input-field>
-                            </div>
-                            <div class="col s6">
-                                <input-field>
-                                    <input type="text" ng-model="dummyInputs.inputFieldInput">
-                                    <label class="click-through">Password</label>
-                                </input-field>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col s6">
-                                <input-field>
-                                    <input type="text" ng-model="dummyInputs.inputFieldInput">
-                                    <label class="click-through">Display Name</label>
-                                </input-field>
-                            </div>
-                            <div class="col s6">
-                                <input-field>
-                                    <input type="text" ng-model="dummyInputs.inputFieldInput">
-                                    <label class="click-through">Confirm Password</label>
-                                </input-field>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <p class="col s6">
-                                <input type="checkbox" class="filled-in" id="tos-agree" />
-                                <label class="snug left" for="tos-agree">I agree to the <a href="/about/tos" target="_blank">TOS</a></label>
-                            </p>
-                            <p class="col s6">
-                                <input type="checkbox" class="filled-in" id="register-me" checked="checked" />
-                                <label class="snug right" for="register-me">Remember Me</label>
-                            </p>
-                        </div>
-                        <div class="row buttons col s6 offset-s3">
-                            <div class="col s6">
-                                <a class="waves-effect waves-light btn modal-close">Cancel</a>
-                            </div>
-                            <div class="col s6">
-                                <a class="waves-effect waves-light btn submit">Signup</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+					</div>
+					<div ng-show="!LR.register" class="col s6 offset-s3 center-align" id="login">
+						<div class="row">
+							<div class="col s12">
+								<input-field>
+									<input type="text" ng-model="dummyInputs.inputFieldInput">
+									<label class="click-through">Email</label>
+								</input-field>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col s12">
+								<input-field>
+									<input type="password" ng-model="dummyInputs.inputFieldInput">
+									<label class="click-through">Password</label>
+								</input-field>
+							</div>
+						</div>
+						<p>
+							<input type="checkbox" id="remember-me" checked="checked" />
+							<label class="snug right" for="remember-me">Remember Me</label>
+						</p>
+						<div class="row buttons">
+							<div class="col s6">
+								<a class="waves-effect waves-light btn modal-close">Cancel</a>
+							</div>
+							<div class="col s6">
+								<a class="waves-effect waves-light btn submit">Login</a>
+							</div>
+						</div>
+					</div>
+					<div ng-show="LR.register" class="col s12 center-align" id="register">
+						<div class="row">
+							<div class="col s6">
+								<input-field>
+									<input type="text" ng-model="dummyInputs.inputFieldInput">
+									<label class="click-through">Email</label>
+								</input-field>
+							</div>
+							<div class="col s6">
+								<input-field>
+									<input type="text" ng-model="dummyInputs.inputFieldInput">
+									<label class="click-through">Password</label>
+								</input-field>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col s6">
+								<input-field>
+									<input type="text" ng-model="dummyInputs.inputFieldInput">
+									<label class="click-through">Display Name</label>
+								</input-field>
+							</div>
+							<div class="col s6">
+								<input-field>
+									<input type="text" ng-model="dummyInputs.inputFieldInput">
+									<label class="click-through">Confirm Password</label>
+								</input-field>
+							</div>
+						</div>
+						<p>
+							<input type="checkbox" id="tos-agree" />
+							<label class="snug left" for="tos-agree">I agree to the <a href="/about/tos" target="_blank">TOS</a></label>
+							<input type="checkbox" id="register-me" checked="checked" />
+							<label class="snug right" for="register-me">Remember Me</label>
+						</p>
+						<div class="row buttons col s6 offset-s3">
+							<div class="col s6">
+								<a class="waves-effect waves-light btn modal-close">Cancel</a>
+							</div>
+							<div class="col s6">
+								<a class="waves-effect waves-light btn submit">Signup</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
-    <div id="contents">
-        <ul class="dropdown-content" id="games_dd">
-            <li>
-                <a href="#!">
-                    <i class="material-icons left">
+	<div id="contents">
+		<ul class="dropdown-content" id="games_dd">
+			<li>
+				<a href="#!">
+					<i class="material-icons left">
                             add
                         </i> one
-                </a>
-            </li>
-            <li>
-                <a href="#!">
-                    <i class="material-icons left">
+				</a>
+			</li>
+			<li>
+				<a href="#!">
+					<i class="material-icons left">
                             add
                         </i> one
-                </a>
-            </li>
-            <li>
-                <a href="#!">
-                    <i class="material-icons left">
+				</a>
+			</li>
+			<li>
+				<a href="#!">
+					<i class="material-icons left">
                             add
                         </i> one
-                </a>
-            </li>
-        </ul>
-        <nav class="nav-main" role="navigation">
-            <div class="nav-wrapper container">
-                <a class="brand-logo" href="#">
-                    <img id="logo-image" src="/assets/images/logo.png" />
-                </a>
-                <ul class="right hide-on-med-and-down">
-                    <li>
-                        <a class="dropdown-button" data-activates="games_dd" href="/games">
-                            <i class="material-icons left">
+				</a>
+			</li>
+		</ul>
+		<nav class="nav-main" role="navigation">
+			<div class="nav-wrapper container">
+				<a class="brand-logo" href="#">
+					<img id="logo-image" src="/assets/images/logo.png" />
+				</a>
+				<ul class="right hide-on-med-and-down">
+					<li>
+						<a class="dropdown-button" data-activates="games_dd" href="/games">
+							<i class="material-icons left">
                                     expand_more
                                 </i> GAMES
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/leagues">
-                            <i class="material-icons left">
+						</a>
+					</li>
+					<li>
+						<a href="/leagues">
+							<i class="material-icons left">
                                     expand_more
                                 </i> LEAGUES
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/tournaments">
-                            <i class="material-icons left">
+						</a>
+					</li>
+					<li>
+						<a href="/tournaments">
+							<i class="material-icons left">
                                     expand_more
                                 </i> TOURNAMENTS
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/blog">
+						</a>
+					</li>
+					<li>
+						<a href="/blog">
                                 BLOG
                             </a>
-                    </li>
-                    <li>
-                        <a class="waves-effect waves-light btn" href="#loginRegister" modal opacity="1" enable-tabs="true" in-duration="500" out-duration="300">
+					</li>
+					<li>
+						<a class="waves-effect waves-light btn" href="#loginRegister" modal opacity="1" enable-tabs="true" in-duration="500" out-duration="300">
                                 LOGIN
                             </a>
-                    </li>
-                </ul>
-                <ul class="side-nav" id="nav-mobile">
-                    <li>
-                        <a href="/games">
-                            <i class="material-icons left">
+					</li>
+				</ul>
+				<ul class="side-nav" id="nav-mobile">
+					<li>
+						<a href="/games">
+							<i class="material-icons left">
                                     expand_more
                                 </i> GAMES
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/leagues">
-                            <i class="material-icons left">
+						</a>
+					</li>
+					<li>
+						<a href="/leagues">
+							<i class="material-icons left">
                                     expand_more
                                 </i> LEAGUES
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/tournaments">
-                            <i class="material-icons left">
+						</a>
+					</li>
+					<li>
+						<a href="/tournaments">
+							<i class="material-icons left">
                                     expand_more
                                 </i> TOURNAMENTS
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/blog">
+						</a>
+					</li>
+					<li>
+						<a href="/blog">
                                 BLOG
                             </a>
-                    </li>
-                    <li>
-                        <a class="waves-effect waves-light btn modal-trigger" href="#loginRegister">
+					</li>
+					<li>
+						<a class="waves-effect waves-light btn modal-trigger" href="#loginRegister">
                                 LOGIN
                             </a>
-                    </li>
-                </ul>
-                <a class="button-collapse" data-activates="nav-mobile" href="#">
-                    <i class="material-icons">
+					</li>
+				</ul>
+				<a class="button-collapse" data-activates="nav-mobile" href="#">
+					<i class="material-icons">
                             menu
                         </i>
-                </a>
-            </div>
-        </nav>
-        <div class="evSlider" id="banner">
-            <div class="images">
-                <div class="image">
-                    <div class="main">
-                        <img src="/assets/images/backgrounds/1.jpg" />
-                    </div>
-                    <div class="blur">
-                        <img src="/assets/images/backgrounds/1b.jpg" />
-                    </div>
-                    <div class="overlay right">
-                        <div class="container">
-                            <img src="/assets/images/eulcs.png" />
-                            <h4>League of Legends</h4>
-                            <h3>Follow the EU LCS!</h3>
-                            <h4>2016 Summer Split</h4>
-                            <a class="waves-effect waves-light btn">View League</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="image">
-                    <div class="main">
-                        <img src="/assets/images/backgrounds/2.jpg" />
-                    </div>
-                    <div class="blur">
-                        <img src="/assets/images/backgrounds/2b.jpg" />
-                    </div>
-                    <div class="overlay left">
-                        <div class="container">
-                            <img src="/assets/images/eulcs.png" />
-                            <h4>League of Legends</h4>
-                            <h3>Follow the NA LCS!</h3>
-                            <h4>2016 Summer Split</h4>
-                            <a class="waves-effect waves-light btn">View League</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <footer class="page-footer">
-            <div class="container">
-                <div class="row center-align">
-                    <div class="col l4 s12">
-                        <h5 class="white-text">
+				</a>
+			</div>
+		</nav>
+		<div class="evSlider" id="banner">
+			<div class="images">
+				<div class="image">
+					<div class="main">
+						<img src="/assets/images/backgrounds/1.jpg" />
+					</div>
+					<div class="blur">
+						<img src="/assets/images/backgrounds/1b.jpg" />
+					</div>
+					<div class="overlay right">
+						<div class="container">
+							<img src="/assets/images/eulcs.png" />
+							<h4>League of Legends</h4>
+							<h3>Follow the EU LCS!</h3>
+							<h4>2016 Summer Split</h4>
+							<a class="waves-effect waves-light btn">View League</a>
+						</div>
+					</div>
+				</div>
+				<div class="image">
+					<div class="main">
+						<img src="/assets/images/backgrounds/2.jpg" />
+					</div>
+					<div class="blur">
+						<img src="/assets/images/backgrounds/2b.jpg" />
+					</div>
+					<div class="overlay left">
+						<div class="container">
+							<img src="/assets/images/eulcs.png" />
+							<h4>League of Legends</h4>
+							<h3>Follow the NA LCS!</h3>
+							<h4>2016 Summer Split</h4>
+							<a class="waves-effect waves-light btn">View League</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<footer class="page-footer">
+			<div class="container">
+				<div class="row center-align">
+					<div class="col l4 s12">
+						<h5 class="white-text">
                                 Follow Us
                             </h5>
-                        <div class="spacer">
-                            <div class="social-media">
-                                <a class="facebook" href="http://facebook.com/eventvods">
-                                </a>
-                                <a class="twitter" href="http://twitter.com/eventvods">
-                                </a>
-                                <a class="linked-in" href="https://www.linkedin.com/company/5389991">
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col l4 s12">
-                        <h5 class="white-text">
+						<div class="spacer">
+							<div class="social-media">
+								<a class="facebook" href="http://facebook.com/eventvods">
+								</a>
+								<a class="twitter" href="http://twitter.com/eventvods">
+								</a>
+								<a class="linked-in" href="https://www.linkedin.com/company/5389991">
+								</a>
+							</div>
+						</div>
+					</div>
+					<div class="col l4 s12">
+						<h5 class="white-text">
                                 SiteMap
                             </h5>
-                        <div class="spacer">
-                            <div class="sitemap">
-                                <a href="/">
+						<div class="spacer">
+							<div class="sitemap">
+								<a href="/">
                                         Home
                                     </a>
-                                <a href="/blog">
+								<a href="/blog">
                                         Blog
                                     </a>
-                                <a href="/user/login">
+								<a href="/user/login">
                                         Login
                                     </a>
-                                <a href="/contact">
+								<a href="/contact">
                                         Contact
                                     </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col l4 s12">
-                        <h5 class="white-text">
+							</div>
+						</div>
+					</div>
+					<div class="col l4 s12">
+						<h5 class="white-text">
                                 Our Sponsors
                             </h5>
-                        <ul>
-                            <li>
-                                <a class="white-text" href="#!">
+						<ul>
+							<li>
+								<a class="white-text" href="#!">
                                         Link 1
                                     </a>
-                            </li>
-                            <li>
-                                <a class="white-text" href="#!">
+							</li>
+							<li>
+								<a class="white-text" href="#!">
                                         Link 2
                                     </a>
-                            </li>
-                            <li>
-                                <a class="white-text" href="#!">
+							</li>
+							<li>
+								<a class="white-text" href="#!">
                                         Link 3
                                     </a>
-                            </li>
-                            <li>
-                                <a class="white-text" href="#!">
+							</li>
+							<li>
+								<a class="white-text" href="#!">
                                         Link 4
                                     </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="footer-copyright">
-                <div class="container center-align">
-                    We provide spoiler-free VODs of competitive esports matches.
-                    <br/>
-                    <span class="copyright">
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="footer-copyright">
+				<div class="container center-align">
+					We provide spoiler-free VODs of competitive esports matches.
+					<br/>
+					<span class="copyright">
                             © Eventvods - 2016
                         </span>
-                </div>
-            </div>
-        </footer>
-        <!--  Scripts-->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js">
-        </script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.7/angular.min.js">
-        </script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.7/angular-animate.min.js">
-        </script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.7/angular-route.min.js">
-        </script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js">
-        </script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-materialize/0.1.9/angular-materialize.min.js">
-        </script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-loading-bar/0.9.0/loading-bar.min.js">
-        </script>
-        <script src="/assets/js/frontend/evSlider.js">
-        </script>
-        <script src="/assets/js/frontend/app.js">
-        </script>
-        <script src="/assets/js/frontend/controllers/loginRegister.js">
-        </script>
-        <script>
-            $(document).ready(function() {
-                $('.button-collapse').sideNav();
-                $('#banner').evSlider({
-                    delay: 5000
-                });
-                $('.dropdown-button').dropdown({
-                    hover: false,
-                    belowOrigin: true,
-                    alignment: "right",
-                    constrainwidth: false
-                });
-                $('.modal-trigger').leanModal({
-                    opacity: 1
-                });
-            });
-        </script>
-    </div>
+				</div>
+			</div>
+		</footer>
+		<!--  Scripts-->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js">
+		</script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.7/angular.min.js">
+		</script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.7/angular-animate.min.js">
+		</script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.7/angular-route.min.js">
+		</script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js">
+		</script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-materialize/0.1.9/angular-materialize.min.js">
+		</script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-loading-bar/0.9.0/loading-bar.min.js">
+		</script>
+		<script src="/assets/js/frontend/evSlider.js">
+		</script>
+		<script src="/assets/js/frontend/app.js">
+		</script>
+		<script src="/assets/js/frontend/controllers/loginRegister.js">
+		</script>
+		<script>
+			$(document).ready(function() {
+				$('.button-collapse').sideNav();
+				$('#banner').evSlider({
+					delay: 5000
+				});
+				$('.dropdown-button').dropdown({
+					hover: false,
+					belowOrigin: true,
+					alignment: "right",
+					constrainwidth: false
+				});
+				$('.modal-trigger').leanModal({
+					opacity: 1
+				});
+			});
+		</script>
+	</div>
 </body>
 
 </html>

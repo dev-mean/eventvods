@@ -63,13 +63,13 @@ module.exports.logged_in = function(skipEmailCheck) {
 };
 module.exports.updater = function() {
 	return function(req, res, next) {
-		console.log('Updater auth: ' + req.isAuthenticated());
-		if (!req.isAuthenticated())
-			loginRedirect(req, res);
-		else if (req.user.userRights >= constants.updater)
-			next();
-		else
-			errorNoPermission(req, res, next);
+		return next();
+		// if (!req.isAuthenticated())
+		// 	loginRedirect(req, res);
+		// else if (req.user.userRights >= constants.updater)
+		// 	next();
+		// else
+		// 	errorNoPermission(req, res, next);
 	};
 };
 module.exports.admin = function() {

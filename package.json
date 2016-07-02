@@ -23,13 +23,11 @@
     "indicative": "*",
     "intimidate": "^1.2.0",
     "jade": "*",
-    "keygenerator": "*",
+    "keygenerator": "^1.0.4",
     "loggly": "*",
     "moment": "^2.13.0",
     "mongoose": "*",
     "morgan": "*",
-    "nodemailer": "*",
-    "nodemailer-smtp-transport": "*",
     "passport": "*",
     "passport-local": "*",
     "passport-local-mongoose": "*",
@@ -51,7 +49,6 @@
   },
   "homepage": "https://github.com/simon--poole/EventVODS",
   "scripts": {
-    "postinstall": "bower install",
     "start": "node server.js"
   },
   "devDependencies": {

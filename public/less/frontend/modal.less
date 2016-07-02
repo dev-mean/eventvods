@@ -9,6 +9,7 @@
         background: @default-blue;
         a {
             color: @accent-white;
+			cursor: pointer;
             &:hover {
                 color: @accent-green;
             }
@@ -21,6 +22,7 @@
     > img {
         margin: auto;
         max-height: 100px;
+		pointer-events: none;
     }
     > .modal-wrapper {
         background: @accent-white;
@@ -30,7 +32,7 @@
     h5 {
         padding-bottom: 20px;
     }
-    .buttons {
+    #login .buttons {
         padding-top: 25px;
     }
     .btn {
@@ -47,19 +49,20 @@
     .input-field label.click-through {
         pointer-events: none;
     }
-    p label.snug {
+	p.snug {
+		margin-top: 5px;
+		margin-bottom: -25px;
+	}
+    label.snug {
         top: -30px;
+		padding-left: 25px;
         &.left {
             float: left;
         }
         &.right {
             float: right;
         }
-        &:before {
-            top: 2px!important;
-        }
         &:after {
-            top: 2px!important;
             border-color: @accent-green;
             background-color: @accent-green;
         }

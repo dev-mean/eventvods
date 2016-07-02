@@ -29,8 +29,7 @@ var User = require('./app/models/user');
 var config = require('./config/config');
 var RedisStore = require('connect-redis')(session);
 var favicon = require('serve-favicon');
-var seojs = require('express-seojs');
-app.use(seojs(process.env.SEOJS));
+var redis = require('./app/controllers/redis');
 app.use(morgan('tiny'));
 //Set up logging
 var logger = require('bristol');
@@ -54,11 +53,13 @@ app.use(bodyParser.json({
 app.use(session({
 	secret: config.secret,
 	resave: false,
-	saveUninitialized: true,
+	saveUninitialized: false,
+	cookie: {
+		secure: true
+	},
 	store: new RedisStore({
-		host: config.redis.host,
-		port: config.redis.port,
-		pass: config.redis.auth,
+		client: redis,
+		prefix: ':session',
 		ttl: 604800
 	})
 }));
@@ -80,8 +81,6 @@ app.locals.pretty = true;
 var backend = require('./app/routes/backend');
 var frontend = require('./app/routes/frontend');
 var api = require('./app/routes/api');
-var auth = require('./app/routes/auth.js');
-app.use('/user', auth);
 app.use('/api', api);
 app.use('/manage', backend);
 app.use('/', frontend);

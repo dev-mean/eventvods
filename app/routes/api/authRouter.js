@@ -1,5 +1,5 @@
 var router = require('express').Router();
-var User = require('../models/user');
+var User = require('../../models/user');
 
 router.get('/session', function(req, res) {
     if (!req.isAuthenticated())
@@ -18,6 +18,5 @@ router.post('/login', function(req, res, next) {
         });
     });
 });
-
 
 module.exports = router;

@@ -1,5 +1,5 @@
 var router = require('express').Router();
-var Game = require('../models/game');
+var Game = require('../../models/game');
 
 router.get('/gameAlias/:alias', function(req, res, next) {
     Game.find({
@@ -22,6 +22,5 @@ router.get('/gameAlias/:alias/:id', function(req, res, next) {
         else return res.sendStatus('409');
     });
 });
-
 
 module.exports = router;
