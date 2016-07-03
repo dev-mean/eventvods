@@ -5,7 +5,7 @@ var logger = require('bristol');
 var cache = require('express-redis-cache')({
 	client: redis,
 	prefix: ':cache',
-	expire: 43200
+	expire: 900
 });
 cache.on('error', function(err) {
 		logger.error(err);

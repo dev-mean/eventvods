@@ -12,10 +12,10 @@ module.exports.messages = {
     'Username.alpha_numeric': 'Usernames can only contain alphanumeric characters.'
 };
 module.exports.register = {
-    Username: 'required|min:3|max:16',
-    Email: 'required|email',
-    Password: 'required|min:6',
-    Password_confirm: 'same:Password'
+	displayName: 'required|max:20',
+    email: 'required|email',
+    password: 'required|min:6',
+    password_confirm: 'same:password'
 };
 module.exports.api = {
     Name: 'required|alpha_numeric',
@@ -25,7 +25,7 @@ module.exports.api = {
 module.exports.game = {
     gameName: 'required',
     gameAlias: 'required|alpha_numeric'
-}
+};
 module.exports.league = {
     leagueName: 'required',
     leagueGame: 'required'

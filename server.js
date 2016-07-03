@@ -54,21 +54,18 @@ app.use(session({
 	secret: config.secret,
 	resave: false,
 	saveUninitialized: false,
-	cookie: {
-		secure: true
-	},
 	store: new RedisStore({
 		client: redis,
-		prefix: ':session',
+		prefix: ':session:',
 		ttl: 604800
 	})
 }));
 /* Passport setup */
-app.use(passport.initialize());
-app.use(passport.session());
 passport.use(User.createStrategy());
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
+app.use(passport.initialize());
+app.use(passport.session());
 mongoose.connect(config.databaseUrl, function(err) {
 	if (err) logger.error(err);
 	else logger.info("MongoDB server online.");

@@ -4,7 +4,8 @@ var logger = require('bristol');
 var redis = require('redis')
 	.createClient(config.redis.port, config.redis.host, {
 		auth_pass: config.redis.auth,
-		prefix: 'ev'
+		prefix: 'ev',
+		enable_offline_queue: false
 	});
 redis.on('connect', function() {
 	logger.info('Redis server online.');

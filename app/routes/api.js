@@ -27,6 +27,9 @@ var Validators = require('../controllers/validation');
 var Indicative = require('indicative');
 var APIKey = require('../models/APIKey');
 
+router.get('/test', ratelimit, function(req, res, next){
+	res.send('Not ratelimited');
+});
 
 // This router is mounted at /api....so /events here translates to /api/events
 // Enable CORS for /api routing.
