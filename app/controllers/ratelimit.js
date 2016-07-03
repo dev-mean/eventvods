@@ -14,7 +14,9 @@ var factory = new ExpressMiddleware(limiter, {
 	}
 });
 var middleware = factory.middleware(function(req, res, next){
-	res.sendStatus(429);
+	var err = new Error("Too Many Requests");
+ 	err.status = 429;
+ 	next(err);
 })
 
 module.exports = function(req, res, next) {
