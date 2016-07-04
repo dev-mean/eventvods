@@ -104,7 +104,9 @@
 						$('#loginRegister').closeModal();
 					})
 					.catch(function(err) {
-						vm.data.errors = [err];
+						vm.data.errors = [{
+							message: err
+						}];
 					});
 			};
 			vm.signup = function() {
