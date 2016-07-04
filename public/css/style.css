@@ -3,6 +3,9 @@
 html {
   min-height: 100%;
 }
+[ng-cloak] {
+  display: none !important;
+}
 body {
   background: #3c3c62;
   background: -moz-linear-gradient(top, #3c3c62 17%, #27273f 100%);
@@ -13,11 +16,28 @@ body {
 .text-accent {
   color: #0CD97E;
 }
+.text-red {
+  color: darkred;
+}
 #banner {
   top: -64px;
 }
 .input-field label {
   text-transform: uppercase;
+}
+#loading-bar .bar {
+  background: #0CD97E !important;
+  height: 5px!important;
+}
+#loading-bar-spinner {
+  top: 16px!important;
+  left: 16px!important;
+}
+#loading-bar-spinner .spinner-icon {
+  width: 32px!important;
+  height: 32px!important;
+  border-top-color: #0CD97E !important;
+  border-left-color: #0CD97E !important;
 }
 nav.nav-main {
   position: relative;
@@ -49,6 +69,70 @@ nav.nav-main ul a.btn {
 }
 nav.nav-main ul a:hover:not(.btn) {
   color: #0CD97E;
+}
+nav.nav-main li.no-transition {
+  -webkit-transition: all 0s linear;
+  -moz-transition: all 0s linear;
+  -ms-transition: all 0s linear;
+  -o-transition: all 0s linear;
+  transition: all 0s linear;
+  outline: 0!important;
+}
+nav.nav-main li.no-transition a {
+  -webkit-transition: all 0s linear;
+  -moz-transition: all 0s linear;
+  -ms-transition: all 0s linear;
+  -o-transition: all 0s linear;
+  transition: all 0s linear;
+}
+nav.nav-main li.user-details:hover > svg {
+  opacity: 1;
+  -webkit-transition: opacity 0.3s ease-in-out;
+  -moz-transition: opacity 0.3s ease-in-out;
+  -ms-transition: opacity 0.3s ease-in-out;
+  -o-transition: opacity 0.3s ease-in-out;
+  transition: opacity 0.3s ease-in-out;
+}
+nav.nav-main li.user-details > svg {
+  opacity: 0.8;
+  height: 54px;
+  width: 54px;
+  position: relative;
+  top: 4px;
+  outline: 0!important;
+  border-radius: 50%;
+  float: left;
+  left: 54px;
+  pointer-events: none;
+}
+nav.nav-main li.user-details > svg > img {
+  height: 46px;
+  width: 46px;
+  position: relative;
+  top: 4px;
+  left: 4px;
+  outline: 0!important;
+  -webkit-clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+  pointer-events: none;
+}
+nav.nav-main li.user-details > a {
+  color: #0CD97E;
+  text-transform: uppercase;
+  padding-left: 59px;
+  padding-right: 0;
+  min-width: 165px;
+  text-align: right;
+}
+nav.nav-main li.user-details > a > i.right {
+  margin-left: 0;
+}
+nav.nav-main .dropdown-content a {
+  text-transform: uppercase;
+  text-align: left;
+}
+nav.nav-main .dropdown-content a > i.left {
+  margin-right: 15px;
 }
 nav.nav-main ul.side-nav {
   background: #3C3C62;
@@ -244,7 +328,6 @@ nav.nav-main a.btn:hover {
 .modal {
   border-radius: 0;
   overflow-y: visible;
-  max-height: none;
   background: transparent;
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
@@ -294,6 +377,7 @@ nav.nav-main a.btn:hover {
 }
 .modal .input-field label.click-through {
   pointer-events: none;
+  width: auto;
 }
 .modal p.snug {
   margin-top: 5px;

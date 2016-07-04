@@ -1,0 +1,105 @@
+<div class="modal" id="loginRegister">
+	<img class="modal-logo" src="/assets/images/logo.png" />
+	<div class="modal-wrapper z-depth-4">
+		<div>
+			<ul class="tabs">
+				<li class="tab col s6">
+					<a ng-click="User.data.errors =[];User.register = false">Login</a>
+				</li>
+				<li class="tab col s6">
+					<a ng-click="User.data.errors =[];User.register = true">Create Account</a>
+				</li>
+			</ul>
+		</div>
+		<div class="modal-content flow-text">
+			<div class="row">
+				<div class="col s12 m10 offset-m1 center-align">
+					<h5>
+                            LOGIN TO YOUR <strong>ACCOUNT</strong> TO FOLLOW YOUR FAVOURITE <strong>LEAGUES & TOURNAMENTS</strong>
+                        </h5>
+				</div>
+				<div class="center-align" ng-show="User.data.errors.length > 0">
+					<span class="text-red" ng-repeat-start="error in User.data.errors">
+						{{error.message | capitalize}}
+					</span>
+					<br ng-repeat-end/>
+				</div>
+				<div ng-show="!User.register" class="col s6 offset-s3 center-align" id="login">
+					<div class="row">
+						<div class="col s12">
+							<input-field>
+								<input type="email" ng-model="User.data.login.email" class="validate" required />
+								<label class="click-through">Email</label>
+							</input-field>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col s12">
+							<input-field>
+								<input type="password" ng-model="User.data.login.password" class="validate" required/>
+								<label class="click-through">Password</label>
+							</input-field>
+						</div>
+					</div>
+					<p>
+						<input type="checkbox" id="remember-me" checked="checked" ng-model="User.data.login.remember" />
+						<label tooltipped class="snug right" for="remember-me" data-position="bottom" data-tooltip="Use cookies to securely remember your account details.">Remember Me</label>
+					</p>
+					<div class="row buttons">
+						<div class="col s6">
+							<a class="waves-effect waves-light btn modal-close">Cancel</a>
+						</div>
+						<div class="col s6">
+							<a class="waves-effect waves-light btn submit" ng-click="User.login()">Login</a>
+						</div>
+					</div>
+				</div>
+				<div ng-show="User.register" class="col s12 center-align" id="register">
+					<div class="row">
+						<div class="col s6">
+							<input-field>
+								<input id="email" tooltipped type="email" ng-model="User.data.register.email" required class="validate" data-position="bottom" data-tooltip="Must be a valid email." />
+								<label class="click-through">Email</label>
+							</input-field>
+						</div>
+						<div class="col s6">
+							<input-field>
+								<input id="password" tooltipped type="password" ng-model="User.data.register.password" class="validate" pattern=".{6,50}"  data-position="bottom" data-tooltip="Minimum 6 characters."
+								onchange="if(this.checkValidity()) document.getElementById('password_confirm').pattern = this.value" />
+								<label class="click-through">Password</label>
+							</input-field>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col s6">
+							<input-field>
+								<input id="name" tooltipped type="text" ng-model="User.data.register.displayName" class="validate" pattern=".{1,30}" data-position="bottom" data-tooltip="Name to display on your profile. You can change this later.">
+								<label class="click-through">Display Name</label>
+							</input-field>
+						</div>
+						<div class="col s6">
+							<input-field>
+								<input id="password_confirm" tooltipped type="password" id="password_confirm" ng-model="User.data.register.password_confirm" class="validate" pattern=".{6,50}" data-position="bottom" data-tooltip="Must match password.">
+								<label class="click-through">Confirm Password</label>
+							</input-field>
+						</div>
+					</div>
+					<p>
+						<input ng-model="User.data.register.tos" type="checkbox" id="tos-agree" required />
+						<label tooltipped class="snug left" for="tos-agree" data-position="bottom" data-tooltip="You must accept the terms of service to sign up.">I agree to the <a href="/about/tos" target="_blank">TOS</a></label>
+						<input ng-model="User.data.register.remember" type="checkbox" id="register-me" checked="checked" />
+						<label tooltipped class="snug right" for="register-me" data-position="bottom" data-tooltip="Use cookies to securely remember your account details.">Remember Me</label>
+					</p>
+					<div class="row buttons col s6 offset-s3">
+						<div class="col s6">
+							<a class="waves-effect waves-light btn modal-close">Cancel</a>
+						</div>
+						<div class="col s6">
+							<a class="waves-effect waves-light btn submit" ng-click="User.signup()">Signup</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

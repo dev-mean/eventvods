@@ -5,18 +5,20 @@ var Validators = require('../../controllers/validation');
 
 router.get('/session', function(req, res) {
     if (!req.isAuthenticated())
-        res.json({
-			success: false,
-			error: "Not Authenticated"
-		});
+        res.sendStatus('204');
     else
-        res.json(req.user);
+		res.json(req.user);
+});
+
+router.get('/logout', function(req, res){
+	req.logout();
+	res.sendStatus('200');
 });
 
 router.post('/login', function(req, res, next) {
     User.authenticate()(req.body.email, req.body.password, function(err, user, code) {
         if (err) next(err);
-        else if (user === false) res.status('400').json(code);
+        else if (user === false) res.status('400').send(code.message);
         else req.login(user, function(err) {
             if (err) next(err);
             res.redirect('/api/auth/session');
@@ -41,10 +43,12 @@ router.post('/register', function(req, res, next){
 				});
 			})
 			.catch(function(errors) {
-				var err = new Error("Bad Request");
-				err.status = 400;
-				err.errors = errors;
-				next(err);
+				console.log(errors);
+				res.status('400').json(errors);
+				// var err = new Error("Bad Request");
+				// err.status = 400;
+				// err.errors = errors;
+				// next(err);
 			});
 });
 

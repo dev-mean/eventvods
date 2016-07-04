@@ -19,105 +19,8 @@
 </head>
 
 <body ng-app="eventvods" ng-controller="UserController as User">
-	<div class="modal" id="loginRegister">
-		<img class="modal-logo" src="/assets/images/logo.png" />
-		<div class="modal-wrapper z-depth-4">
-			<div>
-				<ul tabs>
-					<li class="tab col s6">
-						<a class="active" ng-click="User.register = false">Login</a>
-					</li>
-					<li class="tab col s6">
-						<a ng-click="User.register = true">Create Account</a>
-					</li>
-				</ul>
-			</div>
-			<div class="modal-content flow-text">
-				<div class="row">
-					<div class="col s12 m10 offset-m1 center-align">
-						<h5>
-                            LOGIN TO YOUR <strong>ACCOUNT</strong> TO FOLLOW YOUR FAVOURITE <strong>LEAGUES & TOURNAMENTS</strong>
-                        </h5>
-					</div>
-					<div ng-show="!User.register" class="col s6 offset-s3 center-align" id="login">
-						<div class="row">
-							<div class="col s12">
-								<input-field>
-									<input type="text" ng-model="dummyInputs.inputFieldInput">
-									<label class="click-through">Email</label>
-								</input-field>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col s12">
-								<input-field>
-									<input type="password" ng-model="dummyInputs.inputFieldInput">
-									<label class="click-through">Password</label>
-								</input-field>
-							</div>
-						</div>
-						<p>
-							<input type="checkbox" id="remember-me" checked="checked" />
-							<label class="snug right" for="remember-me">Remember Me</label>
-						</p>
-						<div class="row buttons">
-							<div class="col s6">
-								<a class="waves-effect waves-light btn modal-close">Cancel</a>
-							</div>
-							<div class="col s6">
-								<a class="waves-effect waves-light btn submit">Login</a>
-							</div>
-						</div>
-					</div>
-					<div ng-show="User.register" class="col s12 center-align" id="register">
-						<div class="row">
-							<div class="col s6">
-								<input-field>
-									<input type="text" ng-model="dummyInputs.inputFieldInput">
-									<label class="click-through">Email</label>
-								</input-field>
-							</div>
-							<div class="col s6">
-								<input-field>
-									<input type="text" ng-model="dummyInputs.inputFieldInput">
-									<label class="click-through">Password</label>
-								</input-field>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col s6">
-								<input-field>
-									<input type="text" ng-model="dummyInputs.inputFieldInput">
-									<label class="click-through">Display Name</label>
-								</input-field>
-							</div>
-							<div class="col s6">
-								<input-field>
-									<input type="text" ng-model="dummyInputs.inputFieldInput">
-									<label class="click-through">Confirm Password</label>
-								</input-field>
-							</div>
-						</div>
-						<p>
-							<input type="checkbox" id="tos-agree" />
-							<label class="snug left" for="tos-agree">I agree to the <a href="/about/tos" target="_blank">TOS</a></label>
-							<input type="checkbox" id="register-me" checked="checked" />
-							<label class="snug right" for="register-me">Remember Me</label>
-						</p>
-						<div class="row buttons col s6 offset-s3">
-							<div class="col s6">
-								<a class="waves-effect waves-light btn modal-close">Cancel</a>
-							</div>
-							<div class="col s6">
-								<a class="waves-effect waves-light btn submit">Signup</a>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
+	<ng-include src="'/assets/views/dialogs/loginRegister.html'" ng-if="User.session == false" ng-cloak onload="User.init()"></ng-include>
+	<ng-include src="'/assets/views/dialogs/userSettings.html'" ng-if="!User.session == false" ng-cloak onload="User.init()"></ng-include>
 	<div id="contents">
 		<ul class="dropdown-content" id="games_dd">
 			<li>
@@ -144,7 +47,7 @@
 		</ul>
 		<nav class="nav-main" role="navigation">
 			<div class="nav-wrapper container">
-				<a class="brand-logo" href="#">
+				<a class="brand-logo" href="/">
 					<img id="logo-image" src="/assets/images/logo.png" />
 				</a>
 				<ul class="right hide-on-med-and-down">
@@ -174,46 +77,36 @@
                                 BLOG
                             </a>
 					</li>
-					<li ng-show="User.session() == null">
+					<li class="no-transition" ng-if="User.session == false" ng-cloak>
 						<a class="waves-effect waves-light btn" href="#loginRegister" modal opacity="1" enable-tabs="true" in-duration="500" out-duration="300">
                                 LOGIN
                             </a>
 					</li>
-					<li ng-show="User.session() != null">
-						Logged In
+					<li class="no-transition user-details" ng-show="User.session != false" ng-cloak>
+						<svg viewbox="1 1 8 8">
+							<defs>
+								<pattern id="profilePicture" patternUnits="userSpaceOnUse" width="10" height="10">
+									<image ng-attr-href="{{User.session.profilePicture}}" x="0" y="0"
+										width="10" height="10" />
+								</pattern>
+							</defs>
+							<path fix-fill fill="url(#profilePicture)" stroke="#0CD97E" stroke-width="0.35" d="M5.5 1.5 L8.5 4.5 Q9 5 8.5 5.5 L5.5 8.5 Q5 9 4.5 8.5 L 1.5 5.5 Q1 5 1.5 4.5 L4.5 1.5 Q 5 1 5.5 1.5z" />
+						</svg>
+						<a class="dropdown-button" data-activates="profile_dd">
+							{{User.session.displayName}}
+							<i class="material-icons right">
+                                    expand_more
+                                </i>
+						</a>
 					</li>
 				</ul>
 				<ul class="side-nav" id="nav-mobile">
 					<li>
-						<a href="/games">
+						<a href="#">
 							<i class="material-icons left">
                                     expand_more
-                                </i> GAMES
+                                </i> TODO
 						</a>
-					</li>
-					<li>
-						<a href="/leagues">
-							<i class="material-icons left">
-                                    expand_more
-                                </i> LEAGUES
-						</a>
-					</li>
-					<li>
-						<a href="/tournaments">
-							<i class="material-icons left">
-                                    expand_more
-                                </i> TOURNAMENTS
-						</a>
-					</li>
-					<li>
-						<a href="/blog">
-                                BLOG
-                            </a>
-					</li>
-					<li>
-						<a class="waves-effect waves-light btn modal-trigger" href="#loginRegister">
-                                LOGIN
-                            </a>
 					</li>
 				</ul>
 				<a class="button-collapse" data-activates="nav-mobile" href="#">
@@ -260,6 +153,8 @@
 					</div>
 				</div>
 			</div>
+		</div>
+		<div>
 		</div>
 		<footer class="page-footer">
 			<div class="container">
@@ -354,28 +249,13 @@
 		</script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-loading-bar/0.9.0/loading-bar.min.js">
 		</script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.15.0/jquery.validate.min.js">
+		</script>
 		<script src="/assets/js/frontend/evSlider.js">
 		</script>
 		<script src="/assets/js/frontend/app.js">
 		</script>
-		<script src="/assets/js/frontend/controllers/loginRegister.js">
-		</script>
-		<script>
-			$(document).ready(function() {
-				$('.button-collapse').sideNav();
-				$('#banner').evSlider({
-					delay: 5000
-				});
-				$('.dropdown-button').dropdown({
-					hover: false,
-					belowOrigin: true,
-					alignment: "right",
-					constrainwidth: false
-				});
-				$('.modal-trigger').leanModal({
-					opacity: 1
-				});
-			});
+		<script src="/assets/js/frontend/controllers/SessionManager.js">
 		</script>
 	</div>
 </body>

@@ -1,6 +1,9 @@
 html {
 	min-height: 100%;
 }
+[ng-cloak] {
+  display: none !important;
+}
 body {
 	background: rgb(60,60,98);
 	background: -moz-linear-gradient(top,  rgba(60,60,98,1) 17%, rgba(39,39,63,1) 100%);
@@ -12,6 +15,9 @@ body {
 	&-accent {
 		color: @accent-green;
 	}
+	&-red {
+		color: darkred;
+	}
 }
 
 #banner {
@@ -19,4 +25,18 @@ body {
 }
 .input-field label {
     text-transform: uppercase;
+}
+#loading-bar .bar {
+	background: @accent-green!important;
+	height: 5px!important;
+}
+#loading-bar-spinner {
+	top: 16px!important;
+	left: 16px!important;
+	.spinner-icon {
+		width: 32px!important;
+		height: 32px!important;
+		border-top-color: @accent-green!important;
+		border-left-color: @accent-green!important;
+	}
 }

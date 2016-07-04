@@ -29,18 +29,56 @@ var userSchema = new Schema({
 			type: Boolean,
 			default: false
 		}
+	},
+	profilePicture: {
+		type: String,
+		default: "http://i.imgur.com/tep1kEd.png",
+	},
+	settings: {
+		notifications: {
+			game: {
+				type: Boolean,
+				default: false
+			},
+			league: {
+				type: Boolean,
+				default: false
+			},
+			team: {
+				type: Boolean,
+				default: false
+			}
+		},
+		emails: {
+			daily: {
+				type: Boolean,
+				default: false
+			},
+			weekly: {
+				type: Boolean,
+				default: false
+			},
+			monthly: {
+				type: Boolean,
+				default: false
+			},
+			featured: {
+				type: Boolean,
+				default: false
+			},
+		}
 	}
 });
 
 userSchema.plugin(passportLocalMongoose, {
 	usernameField: 'email',
 	limitAttempts: true,
-	maxAttempts: 10,
+	maxAttempts: 5,
 	usernameLowerCase: true,
 	errorMessages: {
-		IncorrectUsernameError: "Incorrect username or password",
-		IncorrectPasswordError: "Incorrect username or password",
-		UserExistsError: "That email is already registered"
+		IncorrectUsernameError: "Incorrect email or password.",
+		IncorrectPasswordError: "Incorrect email or password.",
+		UserExistsError: "That email is already registered."
 	}
 });
 

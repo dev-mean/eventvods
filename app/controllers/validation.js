@@ -12,10 +12,11 @@ module.exports.messages = {
     'Username.alpha_numeric': 'Usernames can only contain alphanumeric characters.'
 };
 module.exports.register = {
-	displayName: 'required|max:20',
+	displayName: 'required|max:30',
     email: 'required|email',
     password: 'required|min:6',
-    password_confirm: 'same:password'
+    password_confirm: 'same:password',
+	tos: "required|truthy"
 };
 module.exports.api = {
     Name: 'required|alpha_numeric',
