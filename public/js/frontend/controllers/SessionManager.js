@@ -112,7 +112,7 @@
 			vm.signup = function() {
 				vm.data.errors = [];
 				var $tos = $('#register #tos-agree');
-				if($tos.is(':checked'))
+				if ($tos.is(':checked'))
 					$tos.removeClass('invalid').addClass('valid');
 				else
 					$tos.removeClass('valid').addClass('invalid');
@@ -138,12 +138,22 @@
 			vm.logout = function() {
 				SessionManager.logout();
 			};
-			vm.focus = function(){
-				$timeout(function(){
-					if(vm.register)
+			vm.focus = function() {
+				$timeout(function() {
+					if (vm.register)
 						$('#register input').first().focus();
 					else
 						$('#login input').first().focus();
+					$('#register input').keydown(function(e) {
+						if (e.which == 13) {
+							vm.signup();
+						}
+					});
+					$('#login input').keydown(function(e) {
+						if (e.which == 13) {
+							vm.login();
+						}
+					});
 				}, 500);
 			};
 			vm.init = function() {
