@@ -80,7 +80,7 @@
 			}
 			svc.load();
 		}])
-		.controller('UserController', ['SessionManager', '$rootScope', function(SessionManager, $rootScope) {
+		.controller('UserController', ['SessionManager', '$rootScope', '$timeout', function(SessionManager, $rootScope, $timeout) {
 			var vm = this;
 			//false = login, true = register
 			vm.register = false;
@@ -111,6 +111,11 @@
 			};
 			vm.signup = function() {
 				vm.data.errors = [];
+				var $tos = $('#register #tos-agree');
+				if($tos.is(':checked'))
+					$tos.removeClass('invalid').addClass('valid');
+				else
+					$tos.removeClass('valid').addClass('invalid');
 				var valid = (
 					$('#register #email')[0].checkValidity() &&
 					$('#register #password')[0].checkValidity() &&
@@ -129,18 +134,22 @@
 					.catch(function(errors) {
 						vm.data.errors = errors;
 					});
-
 			};
 			vm.logout = function() {
 				SessionManager.logout();
+			};
+			vm.focus = function(){
+				$timeout(function(){
+					if(vm.register)
+						$('#register input').first().focus();
+					else
+						$('#login input').first().focus();
+				}, 500);
 			};
 			vm.init = function() {
 				$('.button-collapse').sideNav();
 				$('#banner').evSlider({
 					delay: 5000
-				});
-				$('.modal-trigger').leanModal({
-					opacity: 1
 				});
 				$('.dropdown-button').dropdown({
 					hover: true,
