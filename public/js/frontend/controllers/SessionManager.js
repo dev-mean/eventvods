@@ -139,6 +139,7 @@
 				SessionManager.logout();
 			};
 			vm.focus = function() {
+				$('.tabs').tabs();
 				$timeout(function() {
 					if (vm.register)
 						$('#register input').first().focus();
