@@ -116,6 +116,11 @@
 					$tos.removeClass('invalid').addClass('valid');
 				else
 					$tos.removeClass('valid').addClass('invalid');
+				$('#register input[type!=checkbox]').each(function(){
+					if($(this).val() == ""){
+						$(this).addClass('invalid');
+					}
+				});
 				var valid = (
 					$('#register #email')[0].checkValidity() &&
 					$('#register #password')[0].checkValidity() &&
@@ -125,7 +130,6 @@
 				);
 				if (!valid) {
 					$('#register .invalid:first').focus();
-					$('#register .invalid').trigger('mouseenter');
 				} else
 					SessionManager.register(vm.data.register)
 					.then(function() {
@@ -140,6 +144,11 @@
 			};
 			vm.focus = function() {
 				$('.tabs').tabs();
+				$('#register input[type!=checkbox]').blur(function(){
+					if($(this).val() == ""){
+						$(this).addClass('invalid');
+					}
+				});
 				$timeout(function() {
 					if (vm.register)
 						$('#register input').first().focus();

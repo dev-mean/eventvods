@@ -18,6 +18,10 @@ module.exports.register = {
     password_confirm: 'same:password',
 	tos: "required|accepted"
 };
+module.exports.login = {
+	email: 'required|email',
+	password: 'required|min:6'
+}
 module.exports.api = {
     Name: 'required|alpha_numeric',
     Email: 'required|email',
