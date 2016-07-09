@@ -1,6 +1,6 @@
 (function() {
 	'use strict';
-	angular.module('eventvods', ['ngAnimate', 'ngRoute', 'angular-loading-bar', 'ui.materialize'])
+	angular.module('eventvods', ['ngAnimate', 'ngRoute', 'ngCookies', 'angular-loading-bar', 'ui.materialize'])
 		.constant('API_BASE_URL', '/api')
 		.config(['$locationProvider', function($locationProvider) {
 

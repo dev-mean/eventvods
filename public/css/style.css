@@ -3,7 +3,8 @@
 html {
   min-height: 100%;
 }
-[ng-cloak] {
+[ng-cloak],
+img:not([src]) {
   display: none !important;
 }
 body {
@@ -19,8 +20,38 @@ body {
 .text-red {
   color: darkred;
 }
+.icon-24 {
+  width: 24px;
+  height: 24px;
+  vertical-align: middle;
+}
 #banner {
   top: -64px;
+  margin-bottom: -64px;
+}
+.contents {
+  border-top: 5px solid #0CD97E;
+  -webkit-transition: all 0.3s linear;
+  -moz-transition: all 0.3s linear;
+  -ms-transition: all 0.3s linear;
+  -o-transition: all 0.3s linear;
+  transition: all 0.3s linear;
+  text-align: center;
+  padding: 50px;
+}
+.contents.light {
+  background: url('/assets/images/backgrounds/light.png') #fff;
+  background-position: center -300px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: #3C3C62;
+}
+.contents.dark {
+  background: url('/assets/images/backgrounds/dark.png') #3C3C62;
+  background-position: center -300px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: #fff;
 }
 .input-field label {
   text-transform: uppercase;
@@ -126,6 +157,46 @@ nav.nav-main li.user-details > a {
 }
 nav.nav-main li.user-details > a > i.right {
   margin-left: 0;
+}
+nav.nav-main li.content-switch {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+nav.nav-main li.content-switch .switch label {
+  color: white;
+}
+nav.nav-main li.content-switch .switch label input[type=checkbox]:checked + .lever {
+  background-color: #077846;
+}
+nav.nav-main li.content-switch .switch label input[type=checkbox]:checked + .lever:after {
+  background-color: #0CD97E;
+}
+nav.nav-main .dropdown-content.wide {
+  width: auto!important;
+}
+nav.nav-main .dropdown-content.wide.grouped li {
+  border: 0;
+  border-left: 1px solid #323256;
+  border-right: 1px solid #323256;
+}
+nav.nav-main .dropdown-content.wide.grouped li img {
+  display: none;
+}
+nav.nav-main .dropdown-content.wide.grouped li.border-top {
+  border-top: 2px solid #323256;
+}
+nav.nav-main .dropdown-content.wide.grouped li.border-top img {
+  display: inline-block;
+}
+nav.nav-main .dropdown-content.wide .icon {
+  min-width: 48px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: -14px 10px -14px -5px;
+  padding-right: 2px;
+  height: 50px;
+  border-right: 2px solid #323256;
 }
 nav.nav-main .dropdown-content a {
   text-transform: uppercase;
@@ -406,28 +477,40 @@ nav.nav-main a.btn:hover {
 }
 footer.page-footer {
   background: #3C3C62;
+  margin-top: 0;
+  border-top: 5px solid #323256;
 }
 footer.page-footer h5 {
   text-transform: uppercase;
+}
+footer.page-footer .spaced-row {
+  display: flex;
+  align-items: stretch;
+  flex-wrap: wrap;
+}
+@media (min-width: 992px) {
+  footer.page-footer .sborders {
+    border-left: 5px solid #323256;
+    border-right: 5px solid #323256;
+  }
 }
 footer.page-footer .spacer {
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  height: 116px;
+  margin-top: -10px;
+  margin-bottom: 20px;
 }
 footer.page-footer .social-media {
-  display: flex;
-  justify-content: space-between;
-  padding-left: 50px;
-  padding-right: 50px;
+  width: 100%;
 }
 footer.page-footer .social-media a {
-  width: 48px;
-  height: 48px;
+  width: 36px;
+  height: 36px;
   display: inline-block;
   background-size: contain!important;
+  margin: 10px 15px;
 }
 footer.page-footer .social-media a.facebook {
   background: url('/assets/images/icons/facebook.png');
@@ -436,38 +519,24 @@ footer.page-footer .social-media a.twitter {
   background: url('/assets/images/icons/twitter.png');
 }
 footer.page-footer .social-media a.linked-in {
-  background: url('/assets/images/icons/linked-in.png');
+  background: url('/assets/images/icons/linkedin.png');
+}
+footer.page-footer .social-media a.patreon {
+  background: url('/assets/images/icons/patreon.png');
 }
 footer.page-footer .social-media a:hover {
   opacity: 0.7;
 }
-footer.page-footer .sitemap {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  flex-wrap: wrap;
-  align-items: center;
-}
-footer.page-footer .sitemap a {
-  display: block;
-  background: #27273F;
-  width: 150px;
-  height: 48px;
-  line-height: 48px;
-  color: #FFF;
-  text-transform: uppercase;
-  font-size: 16px;
-  margin: 5px 15px 5px 15px;
-  padding: 0 10px 0 10px;
-  border: 1px solid #27273F;
-}
-footer.page-footer .sitemap a:hover {
-  color: #0CD97E;
-  border: 1px solid #0CD97E;
+footer.page-footer .btn {
+  background: #323256;
+  margin: 10px 15px;
+  padding: 0;
+  width: 120px;
+  letter-spacing: 0.5px;
 }
 footer.page-footer .footer-copyright {
   letter-spacing: 0.5px;
-  background: #27273F;
+  background: #323256;
   height: auto;
 }
 footer.page-footer .footer-copyright .copyright {

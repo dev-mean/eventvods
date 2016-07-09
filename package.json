@@ -36,7 +36,8 @@
     "redis": "*",
     "redis-rate-limiter": "*",
     "serve-favicon": "*",
-    "shortid": "*"
+    "shortid": "*",
+    "slug": "^0.9.1"
   },
   "repository": {
     "type": "git",

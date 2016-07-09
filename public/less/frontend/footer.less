@@ -1,25 +1,37 @@
 footer.page-footer {
 	background: @default-blue;
+	margin-top: 0;
+	border-top: 5px solid @border-blue;
 	h5 {
 		text-transform: uppercase;
+	}
+	.spaced-row {
+		display: flex;
+		align-items: stretch;
+		flex-wrap: wrap;
+	}
+	.sborders {
+		@media (min-width: 992px){
+			border-left: 5px solid @border-blue;
+			border-right: 5px solid @border-blue;
+		}
 	}
 	.spacer {
 		height: 100%;
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
-		height: 116px;
+		margin-top: -10px;
+		margin-bottom: 20px;
 	}
 	.social-media {
-		display: flex;
-		justify-content: space-between;
-		padding-left: 50px;
-		padding-right: 50px;
+		width: 100%;
 		a {
-			width: 48px;
-			height: 48px;
+			width: 36px;
+			height: 36px;
 			display: inline-block;
 			background-size: contain!important;
+			margin: 10px 15px;
 			&.facebook {
 				background: url('/assets/images/icons/facebook.png');
 			}
@@ -27,41 +39,27 @@ footer.page-footer {
 				background: url('/assets/images/icons/twitter.png');
 			}
 			&.linked-in {
-				background: url('/assets/images/icons/linked-in.png');
+				background: url('/assets/images/icons/linkedin.png');
+			}
+			&.patreon {
+				background: url('/assets/images/icons/patreon.png');
 			}
 			&:hover {
 				opacity: 0.7;
 			}
 		}
 	}
-	.sitemap {
-		display: flex;
-		flex-direction: row;
-		justify-content: center;
-		flex-wrap: wrap;
-		align-items: center;
-		a {
-			display: block;
-			background: @dark-blue;
-			width: 150px;
-			height: 48px;
-			line-height: 48px;
-			color: #FFF;
-			text-transform: uppercase;
-			font-size: 16px;
-			margin: 5px 15px 5px 15px;
-			padding: 0 10px 0 10px;
-			border: 1px solid @dark-blue;
-			&:hover {
-				color: @accent-green;
-				border: 1px solid @accent-green;
-
-			}
-		}
+	.btn {
+		background: @border-blue;
+		margin: 10px 15px;
+		padding: 0;
+		width: 120px;
+		letter-spacing: 0.5px;
 	}
+
 	.footer-copyright {
 		letter-spacing: 0.5px;
-		background: @dark-blue;
+		background: @border-blue;
 		height: auto;
 		.copyright {
 			text-transform: uppercase;

@@ -80,8 +80,14 @@
 			}
 			svc.load();
 		}])
-		.controller('UserController', ['SessionManager', '$rootScope', '$timeout', function(SessionManager, $rootScope, $timeout) {
+		.controller('PageController', ['SessionManager', '$rootScope', '$timeout', '$cookies', function(SessionManager, $rootScope, $timeout, $cookies) {
 			var vm = this;
+			//Dark / light mode cookie
+			vm.contentClass = $cookies.get('contentMode') || "light";
+			vm.contentClassSet = function(){
+				$cookies.put('contentMode', vm.contentClass);
+			};
+			//Login Register dialog
 			//false = login, true = register
 			vm.register = false;
 			vm.session = SessionManager.get();
@@ -99,7 +105,19 @@
 			});
 			vm.login = function() {
 				vm.data.errors = [];
-				SessionManager.login(vm.data.login)
+				$('#login input[type!=checkbox]').each(function() {
+					if ($(this).val() == "") {
+						$(this).addClass('invalid');
+					}
+				});
+				var valid = (
+					$('#login input[type=email]')[0].checkValidity() &&
+					$('#login input[type=password]')[0].checkValidity()
+				);
+				if (!valid) {
+					$('#login .invalid:first').focus();
+				} else
+					SessionManager.login(vm.data.login)
 					.then(function() {
 						$('#loginRegister').closeModal();
 					})
@@ -116,8 +134,8 @@
 					$tos.removeClass('invalid').addClass('valid');
 				else
 					$tos.removeClass('valid').addClass('invalid');
-				$('#register input[type!=checkbox]').each(function(){
-					if($(this).val() == ""){
+				$('#register input[type!=checkbox]').each(function() {
+					if ($(this).val() == "") {
 						$(this).addClass('invalid');
 					}
 				});
@@ -144,37 +162,20 @@
 			};
 			vm.focus = function() {
 				$('.tabs').tabs();
-				$('#register input[type!=checkbox]').blur(function(){
-					if($(this).val() == ""){
+				$('#register input[type!=checkbox], #login input[type!=checkbox]').blur(function() {
+					if ($(this).val() == "") {
 						$(this).addClass('invalid');
 					}
 				});
-				$timeout(function() {
-					if (vm.register)
-						$('#register input').first().focus();
-					else
-						$('#login input').first().focus();
-					$('#register input').keydown(function(e) {
-						if (e.which == 13) {
-							vm.signup();
-						}
-					});
-					$('#login input').keydown(function(e) {
-						if (e.which == 13) {
-							vm.login();
-						}
-					});
-				}, 500);
-			};
-			vm.init = function() {
-				$('.button-collapse').sideNav();
-				$('#banner').evSlider({
-					delay: 5000
+				$('#register input').keydown(function(e) {
+					if (e.which == 13) {
+						vm.signup();
+					}
 				});
-				$('.dropdown-button').dropdown({
-					hover: true,
-					belowOrigin: true,
-					alignment: "right"
+				$('#login input').keydown(function(e) {
+					if (e.which == 13) {
+						vm.login();
+					}
 				});
 				$('input[type!=checkbox]').on('focus', function() {
 					$(this).trigger('mouseenter');
@@ -187,6 +188,24 @@
 				});
 				$('input[type=checkbox]').on('focusout', function() {
 					$(this).next('label').trigger('mouseleave');
+				});
+				$timeout(function() {
+					if (vm.register)
+						$('#register input').first().focus();
+					else
+						$('#login input').first().focus();
+
+				}, 500);
+			};
+			vm.init = function() {
+				$('.button-collapse').sideNav();
+				$('#banner').evSlider({
+					delay: 5000
+				});
+				$('.dropdown-button').dropdown({
+					hover: true,
+					belowOrigin: true,
+					alignment: "right"
 				});
 			};
 		}]);

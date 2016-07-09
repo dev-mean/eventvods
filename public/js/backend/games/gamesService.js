@@ -7,16 +7,16 @@
                     return $http.get( API_BASE_URL + '/games' );
                 },
                 findById: function( id ) {
-                    return $http.get( API_BASE_URL + '/game/' + id );
+                    return $http.get( API_BASE_URL + '/games/' + id );
                 },
                 create: function( data ) {
                     return $http.post( API_BASE_URL + '/games', data );
                 },
                 update: function( id, data ) {
-                    return $http.put( API_BASE_URL + '/game/' + id, data );
+                    return $http.put( API_BASE_URL + '/games/' + id, data );
                 },
                 delete: function( id ) {
-                    return $http.delete( API_BASE_URL + '/game/' + id );
+                    return $http.delete( API_BASE_URL + '/games/' + id );
                 }
             }
         } ] );

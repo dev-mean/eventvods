@@ -7,16 +7,16 @@
                     return $http.get( API_BASE_URL + '/leagues' );
                 },
                 findById: function( id ) {
-                    return $http.get( API_BASE_URL + '/league/' + id );
+                    return $http.get( API_BASE_URL + '/leagues/' + id );
                 },
                 create: function( data ) {
                     return $http.post( API_BASE_URL + '/leagues', data );
                 },
                 update: function( id, data ) {
-                    return $http.put( API_BASE_URL + '/league/' + id, data );
+                    return $http.put( API_BASE_URL + '/leagues/' + id, data );
                 },
                 delete: function( id ) {
-                    return $http.delete( API_BASE_URL + '/league/' + id );
+                    return $http.delete( API_BASE_URL + '/leagues/' + id );
                 }
             }
         } ] );

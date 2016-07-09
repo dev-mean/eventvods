@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 	<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
 	<meta content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no" name="viewport" />
@@ -18,246 +17,292 @@
 	<link href="/assets/images/favicon.png" rel="icon" type="image/x-icon" />
 </head>
 
-<body ng-app="eventvods" ng-controller="UserController as User">
-	<ng-include src="'/assets/views/dialogs/loginRegister.html'" ng-if="User.session == false" ng-cloak onload="User.init()"></ng-include>
-	<ng-include src="'/assets/views/dialogs/userSettings.html'" ng-if="!User.session == false" ng-cloak onload="User.init()"></ng-include>
-	<div id="contents">
-		<ul class="dropdown-content" id="games_dd">
-			<li>
-				<a href="#!">
-					<i class="material-icons left">
-                            add
-                        </i> one
-				</a>
-			</li>
-			<li>
-				<a href="#!">
-					<i class="material-icons left">
-                            add
-                        </i> one
-				</a>
-			</li>
-			<li>
-				<a href="#!">
-					<i class="material-icons left">
-                            add
-                        </i> one
+<body ng-app="eventvods" ng-controller="PageController as Page">
+	<ng-include src="'/assets/views/dialogs/loginRegister.html'" ng-if="Page.session == false" ng-cloak onload="Page.init()"></ng-include>
+	<ng-include src="'/assets/views/dialogs/userSettings.html'" ng-if="!Page.session == false" ng-cloak onload="Page.init()"></ng-include>
+	<nav class="nav-main" role="navigation" ng-controller="NavController as Nav">
+		<ul class="dropdown-content wide" id="games_dd">
+			<li ng-repeat="game in Nav.links.games">
+				<a ng-href="/game/{{game.gameAlias}}">
+					<i class="material-icons left icon">
+						<img ng-src="{{game.gameIcon}}" class="icon-24"/>
+						&nbsp;
+					</i>
+					{{game.gameName}}
 				</a>
 			</li>
 		</ul>
-		<nav class="nav-main" role="navigation">
-			<div class="nav-wrapper container">
-				<a class="brand-logo" href="/">
-					<img id="logo-image" src="/assets/images/logo.png" />
+		<ul class="dropdown-content wide grouped" id="leagues_dd">
+			<li ng-repeat="league in Nav.links.leagues | orderBy: league.leagueGame.gameAlias track by $index" ng-class="Nav.leagueClass($index)">
+				<a ng-href="/league/{{league.leagueSlug}}">
+					<i class="material-icons left icon border-right">
+						<img ng-src="{{league.leagueGame.gameIcon}}" class="icon-24"/>
+						&nbsp;
+					</i>
+					{{league.leagueName}}
 				</a>
-				<ul class="right hide-on-med-and-down">
-					<li>
-						<a class="dropdown-button" data-activates="games_dd" href="/games">
-							<i class="material-icons left">
+			</li>
+		</ul>
+		<div class="nav-wrapper container">
+			<a class="brand-logo" href="/">
+				<img id="logo-image" src="/assets/images/logo.png" />
+			</a>
+			<ul class="right hide-on-med-and-down">
+				<li>
+					<a class="dropdown-button" data-activates="games_dd" href="/games">
+						<i class="material-icons left">
                                     expand_more
                                 </i> GAMES
-						</a>
-					</li>
-					<li>
-						<a href="/leagues">
-							<i class="material-icons left">
+					</a>
+				</li>
+				<li>
+					<a class="dropdown-button" data-activates="leagues_dd" href="/leagues">
+						<i class="material-icons left">
                                     expand_more
                                 </i> LEAGUES
-						</a>
-					</li>
-					<li>
-						<a href="/tournaments">
-							<i class="material-icons left">
+					</a>
+				</li>
+				<li>
+					<a href="/tournaments">
+						<i class="material-icons left">
                                     expand_more
                                 </i> TOURNAMENTS
-						</a>
-					</li>
-					<li>
-						<a href="/blog">
+					</a>
+				</li>
+				<li>
+					<a href="/blog">
                                 BLOG
                             </a>
-					</li>
-					<li class="no-transition" ng-if="User.session == false" ng-cloak>
-						<a class="waves-effect waves-light btn" href="#loginRegister" modal opacity="1" enable-tabs="true" in-duration="500" out-duration="300" ready="User.focus()">
+				</li>
+				<li class="no-transition" ng-if="Page.session == false" ng-cloak>
+					<a class="waves-effect waves-light btn" href="#loginRegister" modal opacity="1" enable-tabs="true" in-duration="500" out-duration="300" ready="Page.focus()">
                                 LOGIN
                             </a>
-					</li>
-					<li class="no-transition user-details" ng-show="User.session != false" ng-cloak>
-						<svg viewbox="1 1 8 8">
+				</li>
+				<li class="no-transition user-details" ng-show="Page.session != false" ng-cloak>
+					<svg viewbox="1 1 8 8">
 							<defs>
 								<pattern id="profilePicture" patternUnits="userSpaceOnUse" width="10" height="10">
-									<image ng-attr-href="{{User.session.profilePicture}}" x="0" y="0"
+									<image ng-attr-href="{{Page.session.profilePicture}}" x="0" y="0"
 										width="10" height="10" />
 								</pattern>
 							</defs>
 							<path fix-fill fill="url(#profilePicture)" stroke="#0CD97E" stroke-width="0.35" d="M5.5 1.5 L8.5 4.5 Q9 5 8.5 5.5 L5.5 8.5 Q5 9 4.5 8.5 L 1.5 5.5 Q1 5 1.5 4.5 L4.5 1.5 Q 5 1 5.5 1.5z" />
 						</svg>
-						<a class="dropdown-button" data-activates="profile_dd">
-							{{User.session.displayName}}
+					<a class="dropdown-button" data-activates="profile_dd">
+							{{Page.session.displayName}}
 							<i class="material-icons right">
                                     expand_more
                                 </i>
 						</a>
-					</li>
-				</ul>
-				<ul class="side-nav" id="nav-mobile">
-					<li>
-						<a href="#">
-							<i class="material-icons left">
+				</li>
+				<li class="no-transition content-switch">
+					<div class="switch">
+						<label>
+							Light
+							<input type="checkbox" ng-model="Page.contentClass" ng-true-value="'dark'" ng-false-value="'light'" ng-change="Page.contentClassSet()">
+							<span class="lever"></span>
+							Dark
+						</label>
+					</div>
+				</li>
+			</ul>
+			<ul class="side-nav" id="nav-mobile">
+				<li>
+					<a href="#">
+						<i class="material-icons left">
                                     expand_more
                                 </i> TODO
-						</a>
-					</li>
-				</ul>
-				<a class="button-collapse" data-activates="nav-mobile" href="#">
-					<i class="material-icons">
+					</a>
+				</li>
+			</ul>
+			<a class="button-collapse" data-activates="nav-mobile" href="#">
+				<i class="material-icons">
                             menu
                         </i>
-				</a>
-			</div>
-		</nav>
-		<div class="evSlider" id="banner">
-			<div class="images">
-				<div class="image">
-					<div class="main">
-						<img src="/assets/images/backgrounds/1.jpg" />
-					</div>
-					<div class="blur">
-						<img src="/assets/images/backgrounds/1b.jpg" />
-					</div>
-					<div class="overlay right">
-						<div class="container">
-							<img src="/assets/images/eulcs.png" />
-							<h4>League of Legends</h4>
-							<h3>Follow the EU LCS!</h3>
-							<h4>2016 Summer Split</h4>
-							<a class="waves-effect waves-light btn">View League</a>
-						</div>
+			</a>
+		</div>
+	</nav>
+	<div class="evSlider" id="banner">
+		<div class="images">
+			<div class="image">
+				<div class="main">
+					<img src="/assets/images/backgrounds/1.jpg" />
+				</div>
+				<div class="blur">
+					<img src="/assets/images/backgrounds/1b.jpg" />
+				</div>
+				<div class="overlay right">
+					<div class="container">
+						<img src="/assets/images/eulcs.png" />
+						<h4>League of Legends</h4>
+						<h3>Follow the EU LCS!</h3>
+						<h4>2016 Summer Split</h4>
+						<a class="waves-effect waves-light btn">View League</a>
 					</div>
 				</div>
-				<div class="image">
-					<div class="main">
-						<img src="/assets/images/backgrounds/2.jpg" />
-					</div>
-					<div class="blur">
-						<img src="/assets/images/backgrounds/2b.jpg" />
-					</div>
-					<div class="overlay left">
-						<div class="container">
-							<img src="/assets/images/eulcs.png" />
-							<h4>League of Legends</h4>
-							<h3>Follow the NA LCS!</h3>
-							<h4>2016 Summer Split</h4>
-							<a class="waves-effect waves-light btn">View League</a>
-						</div>
+			</div>
+			<div class="image">
+				<div class="main">
+					<img src="/assets/images/backgrounds/2.jpg" />
+				</div>
+				<div class="blur">
+					<img src="/assets/images/backgrounds/2b.jpg" />
+				</div>
+				<div class="overlay left">
+					<div class="container">
+						<img src="/assets/images/eulcs.png" />
+						<h4>League of Legends</h4>
+						<h3>Follow the NA LCS!</h3>
+						<h4>2016 Summer Split</h4>
+						<a class="waves-effect waves-light btn">View League</a>
 					</div>
 				</div>
 			</div>
 		</div>
-		<div>
-		</div>
-		<footer class="page-footer">
-			<div class="container">
-				<div class="row center-align">
-					<div class="col l4 s12">
-						<h5 class="white-text">
+	</div>
+	<div class="contents" ng-class="Page.contentClass">
+		<br /> Contents
+		<br /> Contents
+		<br /> Contents
+		<br /> Contents
+		<br /> Contents
+		<br /> Contents
+		<br /> Contents
+		<br /> Contents
+		<br /> Contents
+		<br /> Contents
+		<br /> Contents
+		<br /> Contents
+		<br /> Contents
+		<br /> Contents
+		<br /> Contents
+		<br /> Contents
+		<br /> Contents
+		<br /> Contents
+		<br /> Contents
+		<br /> Contents
+		<br /> Contents
+		<br /> Contents
+		<br /> Contents
+		<br /> Contents
+		<br /> Contents
+		<br /> Contents
+		<br /> Contents
+		<br /> Contents
+		<br /> Contents
+		<br /> Contents
+		<br /> Contents
+		<br /> Contents
+		<br /> Contents
+		<br /> Contents
+		<br /> Contents
+		<br /> Contents
+		<br /> Contents
+		<br /> Contents
+		<br /> Contents
+		<br /> Contents
+		<br /> Contents
+		<br /> Contents
+		<br /> Contents
+		<br /> Contents
+		<br /> Contents
+		<br /> Contents
+		<br /> Contents
+		<br /> Contents
+	</div>
+	<footer class="page-footer">
+		<div class="container">
+			<div class="row center-align spaced-row">
+				<div class="col l4 s12">
+					<h5 class="white-text">
                                 Follow Us
                             </h5>
-						<div class="spacer">
-							<div class="social-media">
-								<a class="facebook" href="http://facebook.com/eventvods">
-								</a>
-								<a class="twitter" href="http://twitter.com/eventvods">
-								</a>
-								<a class="linked-in" href="https://www.linkedin.com/company/5389991">
-								</a>
-							</div>
+					<div class="spacer">
+						<div class="social-media center-align">
+							<a class="facebook" href="http://facebook.com/eventvods">
+							</a>
+							<a class="twitter" href="http://twitter.com/eventvods">
+							</a>
+							<a class="linked-in" href="https://www.linkedin.com/company/5389991">
+							</a>
+							<a class="patreon" href="http://patreon.com/eventvods">
+							</a>
 						</div>
 					</div>
-					<div class="col l4 s12">
-						<h5 class="white-text">
+				</div>
+				<div class="col l4 s12 sborders">
+					<h5 class="white-text">
                                 SiteMap
                             </h5>
-						<div class="spacer">
-							<div class="sitemap">
-								<a href="/">
+					<div class="spacer">
+						<div class="sitemap center-align">
+							<a class="waves-effect waves-light btn" href="/">
                                         Home
                                     </a>
-								<a href="/blog">
+							<a class="waves-effect waves-light btn" href="/blog">
                                         Blog
                                     </a>
-								<a href="/user/login">
+							<a class="waves-effect waves-light btn" href="/user/login">
                                         Login
                                     </a>
-								<a href="/contact">
+							<a class="waves-effect waves-light btn" href="/contact">
                                         Contact
                                     </a>
-							</div>
 						</div>
 					</div>
-					<div class="col l4 s12">
-						<h5 class="white-text">
+				</div>
+				<div class="col l4 s12">
+					<h5 class="white-text">
                                 Our Sponsors
                             </h5>
-						<ul>
-							<li>
-								<a class="white-text" href="#!">
-                                        Link 1
+					<div class="spacer">
+						<div class="sponsors center-align">
+							<a class="waves-effect waves-light btn" href="/contact">
+                                        Get In Touch
                                     </a>
-							</li>
-							<li>
-								<a class="white-text" href="#!">
-                                        Link 2
-                                    </a>
-							</li>
-							<li>
-								<a class="white-text" href="#!">
-                                        Link 3
-                                    </a>
-							</li>
-							<li>
-								<a class="white-text" href="#!">
-                                        Link 4
-                                    </a>
-							</li>
-						</ul>
+						</div>
 					</div>
 				</div>
 			</div>
-			<div class="footer-copyright">
-				<div class="container center-align">
-					We provide spoiler-free VODs of competitive esports matches.
-					<br/>
-					<span class="copyright">
+		</div>
+		<div class="footer-copyright">
+			<div class="container center-align">
+				We provide spoiler-free VODs of competitive esports matches.
+				<br/>
+				<span class="copyright">
                             © Eventvods - 2016
                         </span>
-				</div>
 			</div>
-		</footer>
-		<!--  Scripts-->
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js">
-		</script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.7/angular.min.js">
-		</script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.7/angular-animate.min.js">
-		</script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.7/angular-route.min.js">
-		</script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js">
-		</script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-materialize/0.1.9/angular-materialize.min.js">
-		</script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-loading-bar/0.9.0/loading-bar.min.js">
-		</script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.15.0/jquery.validate.min.js">
-		</script>
-		<script src="/assets/js/frontend/evSlider.js">
-		</script>
-		<script src="/assets/js/frontend/app.js">
-		</script>
-		<script src="/assets/js/frontend/controllers/SessionManager.js">
-		</script>
-	</div>
+		</div>
+	</footer>
+	<!--  Scripts-->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js">
+	</script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.7/angular.min.js">
+	</script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.7/angular-animate.min.js">
+	</script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.7/angular-route.min.js">
+	</script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.7/angular-cookies.min.js">
+	</script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js">
+	</script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-materialize/0.1.9/angular-materialize.min.js">
+	</script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-loading-bar/0.9.0/loading-bar.min.js">
+	</script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.15.0/jquery.validate.min.js">
+	</script>
+	<script src="/assets/js/frontend/evSlider.js">
+	</script>
+	<script src="/assets/js/frontend/app.js">
+	</script>
+	<script src="/assets/js/frontend/controllers/PageController.js">
+	</script>
+	<script src="/assets/js/frontend/controllers/NavController.js">
+	</script>
 </body>
 
 </html>

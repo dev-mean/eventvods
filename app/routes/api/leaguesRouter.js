@@ -7,7 +7,7 @@ var cache = require('../../controllers/cache');
 var Indicative = require('indicative');
 var Validators = require('../../controllers/validation');
 var Q = require('q');
-
+var slug = require('slug');
 router.route('/')
 	.get(auth.public_api(), ratelimit, cache, function(req, res, next) {
 		League.find()
@@ -20,6 +20,7 @@ router.route('/')
 	.post(auth.updater(), AWS.handleUpload(['leagueLogo', 'leagueHeader']), function(req, res, next) {
 		Indicative.validateAll(req.body, Validators.league, Validators.messages)
 			.then(function() {
+				req.body.leagueSlug = slug(req.body.leagueName);
 				League.create(req.body, function(err, league) {
 					if (err) console.log(err);
 					if (err) next(err);
@@ -83,6 +84,7 @@ router.route('/:league_id')
 	.put(auth.updater(), AWS.handleUpload(['leagueLogo', 'leagueHeader']), function(req, res, next) {
 		Indicative.validateAll(req.body, Validators.league, Validators.messages)
 			.then(function() {
+				req.body.leagueSlug = slug(req.body.leagueName);
 				League.findByIdAndUpdate(req.params.league_id, req.body, function(err, league) {
 					if (err) next(err);
 					if (!league) {

@@ -1,6 +1,6 @@
 <ul class="dropdown-content" id="profile_dd">
 	<li>
-		<a ng-href="/user/{{User.session._id}}">
+		<a ng-href="/user/{{Page.session._id}}">
 			<i class="material-icons left">
                             account_circle
                         </i> Profile
@@ -13,8 +13,15 @@
                         </i> Settings
 		</a>
 	</li>
+	<li ng-if="Page.session.userRights > 1">
+		<a href="/manage/" target="_self">
+			<i class="material-icons left">
+                            dashboard
+                        </i> Manage
+		</a>
+	</li>
 	<li>
-		<a ng-click="User.logout()">
+		<a ng-click="Page.logout()">
 			<i class="material-icons left">
                             exit_to_app
                         </i> Log Out

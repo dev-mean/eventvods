@@ -1,11 +1,13 @@
 var app = require('express');
 var router = app.Router();
 var logger = require('bristol');
+var async = require('async');
 
 //General routes
 router.use('/validate', require('./api/validateRouter'));
 router.use('/auth', require('./api/authRouter'));
 router.use('/data', require('./api/staticRouter'));
+router.use('/nav', require('./api/navRouter'));
 
 //Model CRUD Routes
 router.use('/overview', require('./api/overviewRouter'));
@@ -58,6 +60,7 @@ router.all('*', function(req, res, next) {
 		next();
 	}
 });
+
 
 //EVENTS
 router.route('/events')

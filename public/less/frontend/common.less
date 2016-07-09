@@ -1,9 +1,10 @@
 html {
 	min-height: 100%;
 }
-[ng-cloak] {
+[ng-cloak], img:not([src])  {
   display: none !important;
 }
+
 body {
 	background: rgb(60,60,98);
 	background: -moz-linear-gradient(top,  rgba(60,60,98,1) 17%, rgba(39,39,63,1) 100%);
@@ -20,8 +21,35 @@ body {
 	}
 }
 
+.icon-24 {
+	width: 24px;
+	height: 24px;
+	vertical-align: middle;
+}
+
 #banner {
 	top: -@nav-height;
+	margin-bottom: -@nav-height;
+}
+.contents {
+	border-top: 5px solid @accent-green;
+	.transition(all, 0.3s, linear);
+	text-align: center;
+	padding: 50px;
+	&.light{
+		background: url('/assets/images/backgrounds/light.png') #fff;
+		background-position: center -300px;
+		background-repeat: no-repeat;
+		background-size: cover;
+		color: @default-blue;
+	}
+	&.dark{
+		background: url('/assets/images/backgrounds/dark.png') @default-blue;
+		background-position: center -300px;
+		background-repeat: no-repeat;
+		background-size: cover;
+		color: @accent-white;
+	}
 }
 .input-field label {
     text-transform: uppercase;
