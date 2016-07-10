@@ -14,10 +14,10 @@
 			vm.leagueClass = function($index){
 				console.log($index);
 				return (
-					$index != 0 &&
+					$index !== 0 &&
 					vm.links.leagues[$index-1].leagueGame.gameIcon === vm.links.leagues[$index].leagueGame.gameIcon
 					) ? "" : "border-top";
-			}
+			};
 			NavService.get()
 				.then(function(res){
 					vm.links = res.data;

@@ -19,7 +19,7 @@
 
 <body ng-app="eventvods" ng-controller="PageController as Page">
 	<ng-include src="'/assets/views/dialogs/loginRegister.html'" ng-if="Page.session == false" ng-cloak onload="Page.init()"></ng-include>
-	<ng-include src="'/assets/views/dialogs/userSettings.html'" ng-if="!Page.session == false" ng-cloak onload="Page.init()"></ng-include>
+	<ng-include src="'/assets/views/dialogs/userSettings.html'" ng-if="Page.session != false && Page.session != null" ng-cloak onload="Page.init()"></ng-include>
 	<nav class="nav-main" role="navigation" ng-controller="NavController as Nav">
 		<ul class="dropdown-content wide" id="games_dd">
 			<li ng-repeat="game in Nav.links.games">
@@ -79,7 +79,7 @@
                                 LOGIN
                             </a>
 				</li>
-				<li class="no-transition user-details" ng-show="Page.session != false" ng-cloak>
+				<li class="no-transition user-details" ng-show="Page.session != false && Page.session != null" ng-cloak>
 					<svg viewbox="1 1 8 8">
 							<defs>
 								<pattern id="profilePicture" patternUnits="userSpaceOnUse" width="10" height="10">
