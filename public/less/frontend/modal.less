@@ -1,78 +1,140 @@
 .modal {
-    border-radius: 0;
-    overflow-y: visible;
-    background: transparent;
-    .box-shadow-none();
-    text-align: center;
-    .tabs {
-        background: @default-blue;
-        a {
-            color: @accent-white;
+	border-radius: 0;
+	overflow-y: visible;
+	background: transparent;
+	.box-shadow-none();
+	text-align: center;
+	.gotham-med();
+	.tabs {
+		background: @default-blue;
+		color: @accent-white;
+		a {
+			color: @accent-white;
 			cursor: pointer;
-            &:hover {
-                color: @accent-green;
-            }
-        }
-        .indicator {
-            background-color: @accent-green;
-            height: 5px;
-        }
-    }
-    > img {
-        margin: auto;
-        max-height: 100px;
+			&:hover {
+				color: @accent-green;
+			}
+		}
+		.indicator {
+			background-color: @accent-green;
+			height: 5px;
+		}
+	}
+	> img {
+		margin: auto;
+		max-height: 100px;
 		pointer-events: none;
-    }
-    > .modal-wrapper {
-        background: @accent-white;
-        border-bottom: 5px solid @accent-green;
-        color: @default-blue;
-    }
-    h5 {
-        padding-bottom: 20px;
-    }
-    #login .buttons {
-        padding-top: 25px;
-    }
-    .btn {
-        width: 100%;
-        font-size: 18px;
-        background: @accent-green;
-        &.modal-close {
-            background: @default-blue;
-        }
-    }
-    label {
-        color: @default-blue;
-    }
-    .input-field label.click-through {
-        pointer-events: none;
-		width: auto;
-    }
+	}
+	> .modal-wrapper {
+		background: @accent-white;
+		border-bottom: 5px solid @accent-green;
+		color: @default-blue;
+	}
+	h5 {
+		padding-bottom: 20px;
+	}
+	#login .buttons {
+		padding-top: 25px;
+	}
+	.btn {
+		width: 100%;
+		font-size: 18px;
+		background: @accent-green;
+		&.modal-close {
+			background: @default-blue;
+		}
+	}
+	label {
+		color: @default-blue!important;
+	}
+	.input-field label {
+		width: 100%;
+		text-align: left;
+		&:after {
+			top: 45px;
+		}
+		&.active:after {
+			opacity: 0!important;
+		}
+		&.click-through {
+			pointer-events: none;
+		}
+	}
 	p.snug {
 		margin-top: 5px;
 		margin-bottom: -25px;
 	}
-    label.snug {
-        top: -30px;
+	label.snug {
+		top: -30px;
 		padding-left: 25px;
-        &.left {
-            float: left;
-        }
-        &.right {
-            float: right;
-        }
-        &:after {
-            border-color: @accent-green;
-            background-color: @accent-green;
-        }
-    }
+		&.left {
+			float: left;
+		}
+		&.right {
+			float: right;
+		}
+		&:after {
+			border-color: @accent-green;
+			background-color: @accent-green;
+		}
+	}
+	&#settings {
+		svg {
+			width: 128px;
+			height: 128px;
+			.transition(opacity, 0.3s, linear);
+			&> path:hover {
+				opacity: 0.8;
+				cursor: pointer;
+			}
+		}
+		.account-header {
+			display: inline-block;
+			vertical-align: top;
+			padding: 0 15px;
+			text-transform: uppercase;
+			i.material-icons {
+				position: relative;
+				top: 2px;
+			}
+			span.title {
+				border-bottom: 2px solid @accent-green;
+				font-size: larger;
+			}
+			span.name {
+				font-weight: bolder;
+				font-size: larger;
+			}
+		}
+	}
+	.editable,
+	.editable-empty,
+	.editable-click,
+	.editable-input {
+		color: inherit!important;
+		font-style: inherit;
+	}
+	.editable-click {
+		cursor: pointer;
+	}
+	.editable-input {
+		text-transform: uppercase;
+		font-size: larger;
+		font-weight: bolder;
+		color: inherit;
+		border-bottom: 0!important;
+		box-shadow: none!important;
+	}
+	.editable-error {
+		color: darkred;
+		font-size: medium;
+	}
 }
 
 .lean-overlay {
-    background: url("/assets/images/modal.jpg");
-    background-position: center top;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-size: cover;
+	background: url("/assets/images/modal.jpg");
+	background-position: center top;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-size: cover;
 }

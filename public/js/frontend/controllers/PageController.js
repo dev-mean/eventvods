@@ -2,7 +2,7 @@
 	'use strict';
 
 	function repositionWithinScreen(x, y, width, height) {
-		var newX = x
+		var newX = x;
 		var newY = y;
 
 		if (newX < 0) {
@@ -70,14 +70,15 @@
 						q.reject(errs.data);
 					});
 				return q.promise;
-			}
+			};
 			svc.logout = function() {
 				$http.get(URL + '/auth/logout')
 					.finally(function() {
 						session = false;
 						$rootScope.$broadcast('sessionUpdate');
 					});
-			}
+			};
+			$rootScope.$on('triggerSessionUpdate', svc.load);
 			svc.load();
 		}])
 		.controller('PageController', ['SessionManager', '$rootScope', '$timeout', '$cookies', function(SessionManager, $rootScope, $timeout, $cookies) {
@@ -98,6 +99,7 @@
 				register: {
 					remember: true,
 				},
+				settings: {},
 				errors: []
 			};
 			$rootScope.$on('sessionUpdate', function() {
@@ -106,7 +108,7 @@
 			vm.login = function() {
 				vm.data.errors = [];
 				$('#login input[type!=checkbox]').each(function() {
-					if ($(this).val() == "") {
+					if ($(this).val() === "") {
 						$(this).addClass('invalid');
 					}
 				});
@@ -122,9 +124,9 @@
 						$('#loginRegister').closeModal();
 					})
 					.catch(function(err) {
-						vm.data.errors = [{
-							message: err
-						}];
+						$('#login #password').focus();
+						$('#login #password').removeClass('valid').addClass('invalid').val('');
+						$('#login #password_label').attr('data-error','Incorrect email or password.').removeClass('active');
 					});
 			};
 			vm.signup = function() {
@@ -135,7 +137,7 @@
 				else
 					$tos.removeClass('valid').addClass('invalid');
 				$('#register input[type!=checkbox]').each(function() {
-					if ($(this).val() == "") {
+					if ($(this).val() === "") {
 						$(this).addClass('invalid');
 					}
 				});
@@ -160,10 +162,19 @@
 			vm.logout = function() {
 				SessionManager.logout();
 			};
-			vm.focus = function() {
+			vm.focus = function(){
+				$timeout(function() {
+					if (vm.register)
+						$('#register input').first().focus();
+					else
+						$('#login input').first().focus();
+
+				}, 500);
+			}
+			vm.loginDialogOpen = function() {
 				$('.tabs').tabs();
 				$('#register input[type!=checkbox], #login input[type!=checkbox]').blur(function() {
-					if ($(this).val() == "") {
+					if ($(this).val() === "") {
 						$(this).addClass('invalid');
 					}
 				});
@@ -189,13 +200,7 @@
 				$('input[type=checkbox]').on('focusout', function() {
 					$(this).next('label').trigger('mouseleave');
 				});
-				$timeout(function() {
-					if (vm.register)
-						$('#register input').first().focus();
-					else
-						$('#login input').first().focus();
-
-				}, 500);
+				vm.focus();
 			};
 			vm.init = function() {
 				$('.button-collapse').sideNav();

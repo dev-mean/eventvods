@@ -30,7 +30,7 @@ router.post('/register', function(req, res, next){
 			.then(function() {
 				var newUser = new User({
 					"email": req.body.email,
-					"displayName": req.body.displayName,
+					"displayName": req.body.displayName.toUpperCase(),
 					"signup.IP": req.ip,
 					"userRights": 5
 				});

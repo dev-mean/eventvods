@@ -21,7 +21,10 @@ module.exports.register = {
 module.exports.login = {
 	email: 'required|email',
 	password: 'required|min:6'
-}
+};
+module.exports.name = {
+	"Name": 'required|max:30',
+};
 module.exports.api = {
     Name: 'required|alpha_numeric',
     Email: 'required|email',

@@ -1,5 +1,6 @@
 var router = require('express').Router();
 var Game = require('../../models/game');
+var User = require('../../models/user');
 
 router.get('/gameAlias/:alias', function(req, res, next) {
     Game.find({
@@ -21,6 +22,17 @@ router.get('/gameAlias/:alias/:id', function(req, res, next) {
         else if (doc._id == req.params.id) return res.sendStatus('200');
         else return res.sendStatus('409');
     });
+});
+
+router.get('/displayName/:name', function(req, res, next){
+	if(req.params.name == req.user.displayName) res.sendStatus('204');
+	User.count({
+		displayName: req.params.name.toUpperCase()
+	}, function(err, count){
+		if(err) next(err);
+		if(count > 0) res.sendStatus('409');
+		else res.sendStatus('204');
+	});
 });
 
 module.exports = router;

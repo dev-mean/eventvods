@@ -14,6 +14,7 @@
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.css" media="screen,projection" rel="stylesheet" type="text/css" />
 	<link href="/assets/css/style.css" media="screen,projection" rel="stylesheet" type="text/css" />
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/angular-loading-bar/0.9.0/loading-bar.min.css" rel="stylesheet" />
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/angular-xeditable/0.2.0/css/xeditable.min.css" rel="stylesheet" />
 	<link href="/assets/images/favicon.png" rel="icon" type="image/x-icon" />
 </head>
 
@@ -75,7 +76,7 @@
                             </a>
 				</li>
 				<li class="no-transition" ng-if="Page.session == false" ng-cloak>
-					<a class="waves-effect waves-light btn" href="#loginRegister" modal opacity="1" enable-tabs="true" in-duration="500" out-duration="300" ready="Page.focus()">
+					<a class="waves-effect waves-light btn" href="#loginRegister" modal opacity="1" enable-tabs="true" in-duration="500" out-duration="300" ready="Page.loginDialogOpen()">
                                 LOGIN
                             </a>
 				</li>
@@ -277,7 +278,7 @@
 		</div>
 	</footer>
 	<!--  Scripts-->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js">
 	</script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.7/angular.min.js">
 	</script>
@@ -293,7 +294,7 @@
 	</script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-loading-bar/0.9.0/loading-bar.min.js">
 	</script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.15.0/jquery.validate.min.js">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-xeditable/0.2.0/js/xeditable.min.js">
 	</script>
 	<script src="/assets/js/frontend/evSlider.js">
 	</script>
@@ -302,6 +303,8 @@
 	<script src="/assets/js/frontend/controllers/PageController.js">
 	</script>
 	<script src="/assets/js/frontend/controllers/NavController.js">
+	</script>
+	<script src="/assets/js/frontend/controllers/SettingsController.js">
 	</script>
 </body>
 

@@ -4,7 +4,10 @@ var passportLocalMongoose = require('passport-local-mongoose');
 var shortid = require('shortid');
 
 var userSchema = new Schema({
-	displayName: String,
+	displayName: {
+		type: String,
+		uppercase: true
+	},
 	signup: {
 		date: {
 			type: Date,
@@ -42,11 +45,11 @@ var userSchema = new Schema({
 			},
 			league: {
 				type: Boolean,
-				default: false
+				default: true
 			},
 			team: {
 				type: Boolean,
-				default: false
+				default: true
 			}
 		},
 		emails: {
@@ -56,11 +59,11 @@ var userSchema = new Schema({
 			},
 			weekly: {
 				type: Boolean,
-				default: false
+				default: true
 			},
 			monthly: {
 				type: Boolean,
-				default: false
+				default: true
 			},
 			featured: {
 				type: Boolean,

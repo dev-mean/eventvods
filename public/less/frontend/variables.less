@@ -62,6 +62,34 @@
 @btn-radius: 			@gutter;
 @btn-padding: 			6px;
 
+@font-face {
+	font-family: 'Gotham';
+	src: url('/assets/fonts/Gotham-Light.eot');
+	src: url('/assets/fonts/Gotham-Light.eot?#iefix') format('embedded-opentype'),
+		url('/assets/fonts/Gotham-Light.woff') format('woff'),
+		url('/assets/fonts/Gotham-Light.ttf') format('truetype');
+	font-weight: 300;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Gotham';
+	src: url('/assets/fonts/Gotham-Medium.eot');
+	src: url('/assets/fonts/Gotham-Medium.eot?#iefix') format('embedded-opentype'),
+		url('/assets/fonts/Gotham-Medium.woff') format('woff'),
+		url('/assets/fonts/Gotham-Medium.ttf') format('truetype');
+	font-weight: 500;
+	font-style: normal;
+}
+.gotham-thin(){
+	font-family: Gotham;
+	font-weight: 300;
+}
+.gotham-med(){
+	font-family: Gotham;
+	font-weight: 500;
+}
+
 .black-gradient-right() {
 	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#000000+0,000000+100&0+0,0.8+60 */
 	background: -moz-linear-gradient(left,  rgba(0,0,0,0) 0%, rgba(0,0,0,0.8) 60%, rgba(0,0,0,0.8) 100%); /* FF3.6-15 */

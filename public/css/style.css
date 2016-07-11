@@ -1,5 +1,19 @@
 /* old colors */
 /* layout */
+@font-face {
+  font-family: 'Gotham';
+  src: url('/assets/fonts/Gotham-Light.eot');
+  src: url('/assets/fonts/Gotham-Light.eot?#iefix') format('embedded-opentype'), url('/assets/fonts/Gotham-Light.woff') format('woff'), url('/assets/fonts/Gotham-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Gotham';
+  src: url('/assets/fonts/Gotham-Medium.eot');
+  src: url('/assets/fonts/Gotham-Medium.eot?#iefix') format('embedded-opentype'), url('/assets/fonts/Gotham-Medium.woff') format('woff'), url('/assets/fonts/Gotham-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
 html {
   min-height: 100%;
 }
@@ -21,6 +35,7 @@ body {
   color: darkred;
 }
 .icon-24 {
+  pointer-events: none;
   width: 24px;
   height: 24px;
   vertical-align: middle;
@@ -75,6 +90,8 @@ nav.nav-main {
   background: rgba(0, 0, 0, 0.3);
   border-bottom: 2px solid #3c405c;
   z-index: 998;
+  font-family: Gotham;
+  font-weight: 500;
 }
 nav.nav-main a.brand-logo img {
   margin-top: 4px;
@@ -219,6 +236,8 @@ nav.nav-main ul.dropdown-content {
   border-top: 2px solid #0CD97E;
   margin-top: -2px;
   background: #3C3C62;
+  font-family: Gotham;
+  font-weight: 300;
 }
 nav.nav-main ul.dropdown-content li {
   background: transparent;
@@ -308,6 +327,8 @@ nav.nav-main a.btn:hover {
   z-index: 17;
   color: white;
   pointer-events: all;
+  font-family: Gotham;
+  font-weight: 500;
 }
 .evSlider div.overlay .container {
   -webkit-transition: all 2s ease-in-out;
@@ -404,9 +425,12 @@ nav.nav-main a.btn:hover {
   -moz-box-shadow: none;
   box-shadow: none;
   text-align: center;
+  font-family: Gotham;
+  font-weight: 500;
 }
 .modal .tabs {
   background: #3C3C62;
+  color: #fff;
 }
 .modal .tabs a {
   color: #fff;
@@ -444,11 +468,20 @@ nav.nav-main a.btn:hover {
   background: #3C3C62;
 }
 .modal label {
-  color: #3C3C62;
+  color: #3C3C62 !important;
+}
+.modal .input-field label {
+  width: 100%;
+  text-align: left;
+}
+.modal .input-field label:after {
+  top: 45px;
+}
+.modal .input-field label.active:after {
+  opacity: 0!important;
 }
 .modal .input-field label.click-through {
   pointer-events: none;
-  width: auto;
 }
 .modal p.snug {
   margin-top: 5px;
@@ -467,6 +500,59 @@ nav.nav-main a.btn:hover {
 .modal label.snug:after {
   border-color: #0CD97E;
   background-color: #0CD97E;
+}
+.modal#settings svg {
+  width: 128px;
+  height: 128px;
+  -webkit-transition: opacity 0.3s linear;
+  -moz-transition: opacity 0.3s linear;
+  -ms-transition: opacity 0.3s linear;
+  -o-transition: opacity 0.3s linear;
+  transition: opacity 0.3s linear;
+}
+.modal#settings svg > path:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}
+.modal#settings .account-header {
+  display: inline-block;
+  vertical-align: top;
+  padding: 0 15px;
+  text-transform: uppercase;
+}
+.modal#settings .account-header i.material-icons {
+  position: relative;
+  top: 2px;
+}
+.modal#settings .account-header span.title {
+  border-bottom: 2px solid #0CD97E;
+  font-size: larger;
+}
+.modal#settings .account-header span.name {
+  font-weight: bolder;
+  font-size: larger;
+}
+.modal .editable,
+.modal .editable-empty,
+.modal .editable-click,
+.modal .editable-input {
+  color: inherit!important;
+  font-style: inherit;
+}
+.modal .editable-click {
+  cursor: pointer;
+}
+.modal .editable-input {
+  text-transform: uppercase;
+  font-size: larger;
+  font-weight: bolder;
+  color: inherit;
+  border-bottom: 0!important;
+  box-shadow: none!important;
+}
+.modal .editable-error {
+  color: darkred;
+  font-size: medium;
 }
 .lean-overlay {
   background: url("/assets/images/modal.jpg");
@@ -499,7 +585,7 @@ footer.page-footer .spacer {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-top: -10px;
+  margin-top: -20px;
   margin-bottom: 20px;
 }
 footer.page-footer .social-media {
@@ -538,6 +624,8 @@ footer.page-footer .footer-copyright {
   letter-spacing: 0.5px;
   background: #323256;
   height: auto;
+  font-family: Gotham;
+  font-weight: 300;
 }
 footer.page-footer .footer-copyright .copyright {
   text-transform: uppercase;
