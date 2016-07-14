@@ -4,10 +4,10 @@
 		<div>
 			<ul class="tabs">
 				<li class="tab col s6">
-					<a ng-click="Page.register = false;Page.focus()">Login</a>
+					<a ng-click="Page.show='login';Page.focus()">Login</a>
 				</li>
 				<li class="tab col s6">
-					<a ng-click="Page.register = true;Page.focus()">Create Account</a>
+					<a ng-click="Page.show='register';Page.focus()">Create Account</a>
 				</li>
 			</ul>
 		</div>
@@ -18,33 +18,31 @@
                             LOGIN TO YOUR <strong>ACCOUNT</strong> TO FOLLOW YOUR FAVOURITE <strong>LEAGUES & TOURNAMENTS</strong>
                         </h5>
 				</div>
-				<div class="center-align" ng-show="Page.data.errors.length > 0">
-					<span class="text-red" ng-repeat-start="error in Page.data.errors">
-						{{error.message | capitalize}}
-					</span>
-					<br ng-repeat-end/>
-				</div>
-				<div ng-show="!Page.register" class="col s6 offset-s3 center-align" id="login">
+				<div ng-show="Page.show == 'login'" class="col s6 offset-s3 center-align" id="login">
 					<div class="row">
 						<div class="col s12">
 							<input-field>
 								<input type="email" ng-model="Page.data.login.email" class="validate" required tabindex="0" />
-								<label class="click-through" data-error="Please enter your email.">Email</label>
+								<label class="click-through" data-error="Please enter your email address.">Email</label>
 							</input-field>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col s12">
 							<input-field>
-								<input id="password" type="password" ng-model="Page.data.login.password" class="validate" required tabindex="0"/>
+								<input id="password" type="password" ng-model="Page.data.login.password" class="validate" required tabindex="0" />
 								<label id="password_label" class="click-through" data-error="Please enter your password.">Password</label>
 							</input-field>
 						</div>
 					</div>
-					<p>
-						<input type="checkbox" id="remember-me" checked="checked" ng-model="Page.data.login.remember" tabindex="1" />
-						<label tooltipped class="snug right" for="remember-me" data-position="bottom" data-tooltip="Use cookies to securely remember your account details.">Remember Me</label>
-					</p>
+					<div class="row">
+						<div class="col s12">
+							<input-field>
+								<input type="checkbox" id="remember-me" checked="checked" ng-model="Page.data.login.remember" tabindex="1" />
+								<label class="center-label" for="remember-me">Remember Me</label>
+							</input-field>
+						</div>
+					</div>
 					<div class="row buttons">
 						<div class="col s6">
 							<a class="waves-effect waves-light btn modal-close">Cancel</a>
@@ -54,42 +52,43 @@
 						</div>
 					</div>
 				</div>
-				<div ng-show="Page.register" class="col s12 center-align" id="register">
+				<div ng-show="Page.show == 'register'" class="col s12 center-align" id="register">
 					<div class="row">
 						<div class="col s6">
 							<input-field>
-								<input id="email" tooltipped type="email" ng-model="Page.data.register.email" required class="validate" data-position="bottom" data-tooltip="Must be a valid email." />
-								<label class="click-through">Email</label>
+								<input id="email" type="email" ng-model="Page.data.register.email" required class="validate" />
+								<label class="click-through" data-error="Please enter your email address.">Email</label>
 							</input-field>
 						</div>
 						<div class="col s6">
 							<input-field>
-								<input id="name" tooltipped type="text" ng-model="Page.data.register.displayName" class="validate" pattern=".{1,30}" data-position="bottom" data-tooltip="Name to display on your profile. You can change this later." length="30">
-								<label class="click-through">Display Name</label>
+								<input id="name" type="text" ng-model="Page.data.register.displayName" class="validate" pattern=".{1,30}" length="30" />
+								<label class="click-through" data-error="Please enter a display name.">Display Name</label>
 							</input-field>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col s6">
 							<input-field>
-								<input id="password" tooltipped type="password" ng-model="Page.data.register.password" class="validate" required pattern=".{6,50}"  data-position="bottom" data-tooltip="Minimum 6 characters."
-								onchange="document.getElementById('password_confirm').pattern = this.value" />
-								<label class="click-through">Password</label>
+								<input id="password" type="password" ng-model="Page.data.register.password" class="validate" required pattern=".{6,50}" onchange="document.getElementById('password_confirm').pattern = this.value" />
+								<label class="click-through" data-error="Please enter a password.">Password</label>
 							</input-field>
 						</div>
 						<div class="col s6">
 							<input-field>
-								<input id="password_confirm" tooltipped type="password" id="password_confirm" ng-model="Page.data.register.password_confirm" class="validate" required pattern=".{6,50}" data-position="bottom" data-tooltip="Must match password.">
-								<label class="click-through">Confirm Password</label>
+								<input id="password_confirm" type="password" id="password_confirm" ng-model="Page.data.register.password_confirm" class="validate" required pattern=".{6,50}" />
+								<label class="click-through" data-error="Password confirmation must match.">Confirm Password</label>
 							</input-field>
 						</div>
 					</div>
-					<p>
-						<input ng-model="Page.data.register.tos" type="checkbox" id="tos-agree" required />
-						<label tooltipped class="snug left" for="tos-agree" data-position="bottom" data-tooltip="You must accept the terms of service to sign up.">I agree to the <a href="/about/tos" target="_blank" tabindex="99">Terms of Service</a></label>
-						<input ng-model="Page.data.register.remember" type="checkbox" id="register-me" checked="checked" />
-						<label tooltipped class="snug right" for="register-me" data-position="bottom" data-tooltip="Use cookies to securely remember your account details.">Remember Me</label>
-					</p>
+					<div class="row extra-margin-top">
+						<div class="col s12">
+							<input-field class="center-align">
+								<input ng-model="Page.data.register.tos" type="checkbox" id="tos-agree" class="validate" required />
+								<label class="center-label" for="tos-agree">I agree to the <a ng-click="Page.show = 'tos';" tabindex="99">Terms of Service</a></label>
+							</input-field>
+						</div>
+					</div>
 					<div class="row buttons col s6 offset-s3">
 						<div class="col s6">
 							<a class="waves-effect waves-light btn modal-close">Cancel</a>
@@ -99,7 +98,44 @@
 						</div>
 					</div>
 				</div>
+				<div ng-show="Page.show == 'tos'" class="col s12 center-align" id="tos" >
+					<div class="row">
+						<div class="col s12">
+							<input-field>
+								<textarea class="materialize-textarea" readonly="true">
+Blah blah TOS go here
+Blah blah TOS go here
+Blah blah TOS go here
+Blah blah TOS go here
+Blah blah TOS go here
+v
+Blah blah TOS go here
+Blah blah TOS go here
+Blah blah TOS go here
+Blah blah TOS go here
+Blah blah TOS go here
+Blah blah TOS go here
+Blah blah TOS go here
+Blah blah TOS go here
+Blah blah TOS go here
+Blah blah TOS go here
+Blah blah TOS go here
+									</textarea>
+								<label>Terms of Service</label>
+							</input-field>
+						</div>
+					</div>
+					<div class="row buttons col s6 offset-s3">
+						<div class="col s6">
+							<a class="waves-effect waves-light btn cancel" ng-click="Page.show='register';">Back</a>
+						</div>
+						<div class="col s6">
+							<a class="waves-effect waves-light btn submit" ng-click="Page.data.register.tos=true;Page.show='register';">Agree</a>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
 </div>
+<ng-include src="'/assets/views/dialogs/emailConfirmation.html'" ng-if="Page.register" ng-cloak></ng-include>

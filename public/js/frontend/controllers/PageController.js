@@ -89,8 +89,7 @@
 				$cookies.put('contentMode', vm.contentClass);
 			};
 			//Login Register dialog
-			//false = login, true = register
-			vm.register = false;
+			vm.show = 'login';
 			vm.session = SessionManager.get();
 			vm.data = {
 				login: {
@@ -99,14 +98,12 @@
 				register: {
 					remember: true,
 				},
-				settings: {},
-				errors: []
+				settings: {}
 			};
 			$rootScope.$on('sessionUpdate', function() {
 				vm.session = SessionManager.get();
 			});
 			vm.login = function() {
-				vm.data.errors = [];
 				$('#login input[type!=checkbox]').each(function() {
 					if ($(this).val() === "") {
 						$(this).addClass('invalid');
@@ -116,9 +113,7 @@
 					$('#login input[type=email]')[0].checkValidity() &&
 					$('#login input[type=password]')[0].checkValidity()
 				);
-				if (!valid) {
-					$('#login .invalid:first').focus();
-				} else
+				if (valid)
 					SessionManager.login(vm.data.login)
 					.then(function() {
 						$('#loginRegister').closeModal();
@@ -130,12 +125,11 @@
 					});
 			};
 			vm.signup = function() {
-				vm.data.errors = [];
 				var $tos = $('#register #tos-agree');
 				if ($tos.is(':checked'))
-					$tos.removeClass('invalid').addClass('valid');
+					$tos.removeClass('invalid');
 				else
-					$tos.removeClass('valid').addClass('invalid');
+					$tos.addClass('invalid').focus();
 				$('#register input[type!=checkbox]').each(function() {
 					if ($(this).val() === "") {
 						$(this).addClass('invalid');
@@ -148,29 +142,30 @@
 					$('#register #password_confirm')[0].checkValidity() &&
 					$('#register #tos-agree').is(':checked')
 				);
-				if (!valid) {
-					$('#register .invalid:first').focus();
-				} else
-					SessionManager.register(vm.data.register)
+				if (valid) SessionManager.register(vm.data.register)
 					.then(function() {
 						$('#loginRegister').closeModal();
+						$('#emailConfirm').showModal();
 					})
-					.catch(function(errors) {
-						vm.data.errors = errors;
+					.catch(function(errs){
+						errs.forEach(function(err) {
+							$(err.field).val('').removeClass('valid').addClass('invalid').next('label').attr('data-error', err.message).removeClass('active');
+						});
 					});
+				else $('.invalid').val('').next('label').removeClass('active');
 			};
 			vm.logout = function() {
 				SessionManager.logout();
 			};
 			vm.focus = function(){
 				$timeout(function() {
-					if (vm.register)
+					if (vm.show == 'login')
 						$('#register input').first().focus();
-					else
+					else if(vm.show == 'register')
 						$('#login input').first().focus();
 
 				}, 500);
-			}
+			};
 			vm.loginDialogOpen = function() {
 				$('.tabs').tabs();
 				$('#register input[type!=checkbox], #login input[type!=checkbox]').blur(function() {

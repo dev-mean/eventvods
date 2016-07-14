@@ -33,14 +33,11 @@
 	h5 {
 		padding-bottom: 20px;
 	}
-	#login .buttons {
-		padding-top: 25px;
-	}
 	.btn {
 		width: 100%;
 		font-size: 18px;
 		background: @accent-green;
-		&.modal-close {
+		&.modal-close, &.cancel {
 			background: @default-blue;
 		}
 	}
@@ -59,24 +56,19 @@
 		&.click-through {
 			pointer-events: none;
 		}
+		&.center-label {
+			width: auto;
+		}
 	}
-	p.snug {
-		margin-top: 5px;
-		margin-bottom: -25px;
+	.input-field input[type="checkbox"]:not(:checked) + label {
+		color: @accent-error!important;
 	}
-	label.snug {
-		top: -30px;
-		padding-left: 25px;
-		&.left {
-			float: left;
-		}
-		&.right {
-			float: right;
-		}
-		&:after {
-			border-color: @accent-green;
-			background-color: @accent-green;
-		}
+	textarea {
+		min-height: 150px;
+		max-height: 300px;
+		height: auto!important;
+		margin-top: 10px;
+		overflow-y: scroll;
 	}
 	&#settings {
 		svg {

@@ -1,0 +1,51 @@
+<div class="modal" id="emailConfirm">
+	<img class="modal-logo" src="/assets/images/logo.png" />
+	<div class="modal-wrapper z-depth-4">
+		<div>
+			<ul class="tabs">
+				<li class="tab col s12">
+					Confirm Email
+				</li>
+			</ul>
+		</div>
+		<div class="modal-content flow-text">
+			<div class="row">
+				<div class="col s12 m10 offset-m1 center-align">
+					<h5>
+                            CONFIRM YOUR EMAIL TO ENABLE OPTIONAL NOTIFICATIONS WHEN YOUR FAVOURITE TEAMS, LEAGUES AND TOURNAMENTS HAVE NEW MATCHES.
+                        </h5>
+				</div>
+				<div class="col s6 offset-s3 center-align" id="email">
+					<div class="row">
+						<div class="col s12">
+							<input-field>
+								<input type="email" ng-model="Page.data.login.email" class="validate" required tabindex="0" />
+								<label class="click-through" data-error="Please enter your email.">Email</label>
+							</input-field>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col s12">
+							<input-field>
+								<input id="password" type="password" ng-model="Page.data.login.password" class="validate" required tabindex="0" />
+								<label id="password_label" class="click-through" data-error="Please enter your password.">Password</label>
+							</input-field>
+						</div>
+					</div>
+					<p>
+						<input type="checkbox" id="remember-me" checked="checked" ng-model="Page.data.login.remember" tabindex="1" />
+						<label tooltipped class="snug right" for="remember-me" data-position="bottom" data-tooltip="Use cookies to securely remember your account details.">Remember Me</label>
+					</p>
+					<div class="row buttons">
+						<div class="col s6">
+							<a class="waves-effect waves-light btn modal-close">Cancel</a>
+						</div>
+						<div class="col s6">
+							<a class="waves-effect waves-light btn submit" ng-click="Page.login()" tabindex="1">Login</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

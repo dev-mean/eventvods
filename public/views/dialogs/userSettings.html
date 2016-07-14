@@ -13,6 +13,13 @@
                         </i> Settings
 		</a>
 	</li>
+	<li>
+		<a href="#emailConfirm" modal opacity="1" in-duration="500" out-duration="300">
+			<i class="material-icons left">
+                            email
+                        </i> Confirm
+		</a>
+	</li>
 	<li ng-if="Page.session.userRights > 1">
 		<a href="/manage/" target="_self">
 			<i class="material-icons left">
@@ -63,3 +70,4 @@
 		text-transform: uppercase;
 	}
 </style>
+<ng-include src="'/assets/views/dialogs/emailConfirmation.html'" ng-if="Page.session != false && Page.session.emailConfirmation.confirmed == false" ng-cloak onload="Page.init()"></ng-include>

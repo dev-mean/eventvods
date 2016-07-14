@@ -28,7 +28,7 @@ body {
   color: #0CD97E;
 }
 .text-red {
-  color: darkred;
+  color: #F44336;
 }
 .icon-24 {
   pointer-events: none;
@@ -416,15 +416,13 @@ nav.nav-main a.btn:hover {
 .modal h5 {
   padding-bottom: 20px;
 }
-.modal #login .buttons {
-  padding-top: 25px;
-}
 .modal .btn {
   width: 100%;
   font-size: 18px;
   background: #0CD97E;
 }
-.modal .btn.modal-close {
+.modal .btn.modal-close,
+.modal .btn.cancel {
   background: #3C3C62;
 }
 .modal label {
@@ -443,23 +441,18 @@ nav.nav-main a.btn:hover {
 .modal .input-field label.click-through {
   pointer-events: none;
 }
-.modal p.snug {
-  margin-top: 5px;
-  margin-bottom: -25px;
+.modal .input-field label.center-label {
+  width: auto;
 }
-.modal label.snug {
-  top: -30px;
-  padding-left: 25px;
+.modal .input-field input[type="checkbox"]:not(:checked) + label {
+  color: #F44336 !important;
 }
-.modal label.snug.left {
-  float: left;
-}
-.modal label.snug.right {
-  float: right;
-}
-.modal label.snug:after {
-  border-color: #0CD97E;
-  background-color: #0CD97E;
+.modal textarea {
+  min-height: 150px;
+  max-height: 300px;
+  height: auto!important;
+  margin-top: 10px;
+  overflow-y: scroll;
 }
 .modal#settings svg {
   width: 128px;
