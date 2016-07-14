@@ -23,10 +23,6 @@ img:not([src]) {
 }
 body {
   background: #3c3c62;
-  background: -moz-linear-gradient(top, #3c3c62 17%, #27273f 100%);
-  background: -webkit-linear-gradient(top, #3c3c62 17%, #27273f 100%);
-  background: linear-gradient(to bottom, #3c3c62 17%, #27273f 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#3c3c62', endColorstr='#27273f', GradientType=0);
 }
 .text-accent {
   color: #0CD97E;
@@ -46,10 +42,6 @@ body {
 }
 .contents {
   border-top: 5px solid #0CD97E;
-  -webkit-transition: all 0.3s linear;
-  -moz-transition: all 0.3s linear;
-  -ms-transition: all 0.3s linear;
-  -o-transition: all 0.3s linear;
   transition: all 0.3s linear;
   text-align: center;
   padding: 50px;
@@ -67,6 +59,12 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
   color: #fff;
+}
+.input-field label,
+.input-field input {
+  color: #3C3C62;
+  font-family: Gotham;
+  font-weight: 500;
 }
 .input-field label {
   text-transform: uppercase;
@@ -90,8 +88,6 @@ nav.nav-main {
   background: rgba(0, 0, 0, 0.3);
   border-bottom: 2px solid #3c405c;
   z-index: 998;
-  font-family: Gotham;
-  font-weight: 500;
 }
 nav.nav-main a.brand-logo img {
   margin-top: 4px;
@@ -119,26 +115,14 @@ nav.nav-main ul a:hover:not(.btn) {
   color: #0CD97E;
 }
 nav.nav-main li.no-transition {
-  -webkit-transition: all 0s linear;
-  -moz-transition: all 0s linear;
-  -ms-transition: all 0s linear;
-  -o-transition: all 0s linear;
   transition: all 0s linear;
   outline: 0!important;
 }
 nav.nav-main li.no-transition a {
-  -webkit-transition: all 0s linear;
-  -moz-transition: all 0s linear;
-  -ms-transition: all 0s linear;
-  -o-transition: all 0s linear;
   transition: all 0s linear;
 }
 nav.nav-main li.user-details:hover > svg {
   opacity: 1;
-  -webkit-transition: opacity 0.3s ease-in-out;
-  -moz-transition: opacity 0.3s ease-in-out;
-  -ms-transition: opacity 0.3s ease-in-out;
-  -o-transition: opacity 0.3s ease-in-out;
   transition: opacity 0.3s ease-in-out;
 }
 nav.nav-main li.user-details > svg {
@@ -153,17 +137,6 @@ nav.nav-main li.user-details > svg {
   left: 54px;
   pointer-events: none;
 }
-nav.nav-main li.user-details > svg > img {
-  height: 46px;
-  width: 46px;
-  position: relative;
-  top: 4px;
-  left: 4px;
-  outline: 0!important;
-  -webkit-clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
-  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
-  pointer-events: none;
-}
 nav.nav-main li.user-details > a {
   color: #0CD97E;
   text-transform: uppercase;
@@ -171,6 +144,7 @@ nav.nav-main li.user-details > a {
   padding-right: 0;
   min-width: 165px;
   text-align: right;
+  font-family: Gotham;
 }
 nav.nav-main li.user-details > a > i.right {
   margin-left: 0;
@@ -178,6 +152,8 @@ nav.nav-main li.user-details > a > i.right {
 nav.nav-main li.content-switch {
   padding-left: 10px;
   padding-right: 10px;
+  font-family: Gotham;
+  font-weight: 500;
 }
 nav.nav-main li.content-switch .switch label {
   color: white;
@@ -207,9 +183,15 @@ nav.nav-main .dropdown-content.wide.grouped li.border-top img {
 }
 nav.nav-main .dropdown-content.wide .icon {
   min-width: 48px;
+  display: -webkit-flex;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
   margin: -14px 10px -14px -5px;
   padding-right: 2px;
   height: 50px;
@@ -236,8 +218,6 @@ nav.nav-main ul.dropdown-content {
   border-top: 2px solid #0CD97E;
   margin-top: -2px;
   background: #3C3C62;
-  font-family: Gotham;
-  font-weight: 300;
 }
 nav.nav-main ul.dropdown-content li {
   background: transparent;
@@ -291,10 +271,6 @@ nav.nav-main a.btn:hover {
   position: absolute;
   top: 0;
   -webkit-backface-visibility: hidden;
-  -webkit-transition: opacity 2s ease-in-out;
-  -moz-transition: opacity 2s ease-in-out;
-  -ms-transition: opacity 2s ease-in-out;
-  -o-transition: opacity 2s ease-in-out;
   transition: opacity 2s ease-in-out;
 }
 .evSlider .image.active {
@@ -302,11 +278,9 @@ nav.nav-main a.btn:hover {
 }
 .evSlider .image.active .overlay.left .container,
 .evSlider .image.active .overlay.right .container {
-  transform: translate(0, 0px);
   -webkit-transform: translate(0, 0px);
-  -moz-transform: translate(0, 0px);
-  -o-transform: translate(0, 0px);
-  -ms-transform: translate(0, 0px);
+      -ms-transform: translate(0, 0px);
+          transform: translate(0, 0px);
 }
 .evSlider .image div.blur {
   height: 64px;
@@ -331,17 +305,11 @@ nav.nav-main a.btn:hover {
   font-weight: 500;
 }
 .evSlider div.overlay .container {
-  -webkit-transition: all 2s ease-in-out;
-  -moz-transition: all 2s ease-in-out;
-  -ms-transition: all 2s ease-in-out;
-  -o-transition: all 2s ease-in-out;
   transition: all 2s ease-in-out;
 }
 .evSlider div.overlay.right {
   /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#000000+0,000000+100&0+0,0.8+60 */
-  background: -moz-linear-gradient(left, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.8) 60%, rgba(0, 0, 0, 0.8) 100%);
   /* FF3.6-15 */
-  background: -webkit-linear-gradient(left, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.8) 60%, rgba(0, 0, 0, 0.8) 100%);
   /* Chrome10-25,Safari5.1-6 */
   background: linear-gradient(to right, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.8) 60%, rgba(0, 0, 0, 0.8) 100%);
   /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
@@ -350,17 +318,13 @@ nav.nav-main a.btn:hover {
   text-align: right;
 }
 .evSlider div.overlay.right .container {
-  transform: translate(1000px, 0px);
   -webkit-transform: translate(1000px, 0px);
-  -moz-transform: translate(1000px, 0px);
-  -o-transform: translate(1000px, 0px);
-  -ms-transform: translate(1000px, 0px);
+      -ms-transform: translate(1000px, 0px);
+          transform: translate(1000px, 0px);
 }
 .evSlider div.overlay.left {
   /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#000000+0,000000+100&0.8+40,0+100 */
-  background: -moz-linear-gradient(left, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.8) 40%, rgba(0, 0, 0, 0) 100%);
   /* FF3.6-15 */
-  background: -webkit-linear-gradient(left, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.8) 40%, rgba(0, 0, 0, 0) 100%);
   /* Chrome10-25,Safari5.1-6 */
   background: linear-gradient(to right, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.8) 40%, rgba(0, 0, 0, 0) 100%);
   /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
@@ -369,11 +333,9 @@ nav.nav-main a.btn:hover {
   text-align: left;
 }
 .evSlider div.overlay.left .container {
-  transform: translate(-1000px, 0px);
   -webkit-transform: translate(-1000px, 0px);
-  -moz-transform: translate(-1000px, 0px);
-  -o-transform: translate(-1000px, 0px);
-  -ms-transform: translate(-1000px, 0px);
+      -ms-transform: translate(-1000px, 0px);
+          transform: translate(-1000px, 0px);
 }
 .evSlider div.overlay img {
   position: relative;
@@ -398,8 +360,12 @@ nav.nav-main a.btn:hover {
   top: -50px;
   height: 50px;
   z-index: 998;
+  display: -webkit-flex;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 .evSlider .indicators .indicator {
   background: #fff;
@@ -408,10 +374,6 @@ nav.nav-main a.btn:hover {
   margin: 15px;
   border-radius: 50%;
   cursor: pointer;
-  -webkit-transition: all 2s ease-in-out;
-  -moz-transition: all 2s ease-in-out;
-  -ms-transition: all 2s ease-in-out;
-  -o-transition: all 2s ease-in-out;
   transition: all 2s ease-in-out;
 }
 .evSlider .indicators .indicator.active {
@@ -421,8 +383,6 @@ nav.nav-main a.btn:hover {
   border-radius: 0;
   overflow-y: visible;
   background: transparent;
-  -webkit-box-shadow: none;
-  -moz-box-shadow: none;
   box-shadow: none;
   text-align: center;
   font-family: Gotham;
@@ -504,10 +464,6 @@ nav.nav-main a.btn:hover {
 .modal#settings svg {
   width: 128px;
   height: 128px;
-  -webkit-transition: opacity 0.3s linear;
-  -moz-transition: opacity 0.3s linear;
-  -ms-transition: opacity 0.3s linear;
-  -o-transition: opacity 0.3s linear;
   transition: opacity 0.3s linear;
 }
 .modal#settings svg > path:hover {
@@ -570,9 +526,15 @@ footer.page-footer h5 {
   text-transform: uppercase;
 }
 footer.page-footer .spaced-row {
+  display: -webkit-flex;
+  display: -ms-flexbox;
   display: flex;
-  align-items: stretch;
-  flex-wrap: wrap;
+  -webkit-align-items: stretch;
+      -ms-flex-align: stretch;
+          align-items: stretch;
+  -webkit-flex-wrap: wrap;
+      -ms-flex-wrap: wrap;
+          flex-wrap: wrap;
 }
 @media (min-width: 992px) {
   footer.page-footer .sborders {
@@ -582,9 +544,15 @@ footer.page-footer .spaced-row {
 }
 footer.page-footer .spacer {
   height: 100%;
+  display: -webkit-flex;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   margin-top: -20px;
   margin-bottom: 20px;
 }
@@ -625,9 +593,11 @@ footer.page-footer .footer-copyright {
   background: #323256;
   height: auto;
   font-family: Gotham;
-  font-weight: 300;
+  font-weight: 500;
 }
 footer.page-footer .footer-copyright .copyright {
   text-transform: uppercase;
   font-weight: bold;
 }
+
+/*# sourceMappingURL=style.css.map */

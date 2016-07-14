@@ -144,9 +144,6 @@ a img {
   clear: both;
 }
 .no-transition {
-  -moz-transition: none;
-  -webkit-transition: none;
-  -o-transition: color 0 ease-in;
   transition: none;
 }
 /* colors */
@@ -170,7 +167,9 @@ textarea.parsley-error {
   padding: 0;
   list-style-type: none;
   display: block;
-  order: 3;
+  -webkit-order: 3;
+      -ms-flex-order: 3;
+          order: 3;
 }
 /* global elements + box sizing */
 html {
@@ -240,7 +239,8 @@ p {
   -webkit-justify-content: space-around;
   -moz-justify-content: space-around;
   -ms-justify-content: space-around;
-  justify-content: space-around;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
   z-index: 1005;
   -webkit-transition: opacity 1s ease-in-out;
   -moz-transition: opacity 1s ease-in-out;
@@ -254,7 +254,8 @@ p {
   height: 80px;
   position: relative;
   -webkit-transform: rotateZ(45deg);
-  transform: rotateZ(45deg);
+  -ms-transform: rotate(45deg);
+      transform: rotateZ(45deg);
 }
 .loader-wrapper .sk-folding-cube .sk-cube {
   float: left;
@@ -282,15 +283,18 @@ p {
 }
 .loader-wrapper .sk-folding-cube .sk-cube2 {
   -webkit-transform: scale(1.1) rotateZ(90deg);
-  transform: scale(1.1) rotateZ(90deg);
+  -ms-transform: scale(1.1) rotate(90deg);
+      transform: scale(1.1) rotateZ(90deg);
 }
 .loader-wrapper .sk-folding-cube .sk-cube3 {
   -webkit-transform: scale(1.1) rotateZ(180deg);
-  transform: scale(1.1) rotateZ(180deg);
+  -ms-transform: scale(1.1) rotate(180deg);
+      transform: scale(1.1) rotateZ(180deg);
 }
 .loader-wrapper .sk-folding-cube .sk-cube4 {
   -webkit-transform: scale(1.1) rotateZ(270deg);
-  transform: scale(1.1) rotateZ(270deg);
+  -ms-transform: scale(1.1) rotate(270deg);
+      transform: scale(1.1) rotateZ(270deg);
 }
 .loader-wrapper .sk-folding-cube .sk-cube2:before {
   -webkit-animation-delay: 0.3s;
@@ -395,9 +399,6 @@ img.icon-team:not([src]) {
   background: transparent;
   border: 2px solid #535a83;
   color: #a4abc1;
-  -webkit-transition: all 0.25s ease-in-out;
-  -moz-transition: all 0.25s ease-in-out;
-  -o-transition: all 0.25s ease-in-out;
   transition: all 0.25s ease-in-out;
 }
 .form-style:focus {
@@ -429,8 +430,6 @@ img.icon-team:not([src]) {
   width: 1200px;
   background: #3c405c;
   margin: 60px auto;
-  -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-  -moz-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
   display: -webkit-flex;
   display: -moz-flex;
@@ -469,7 +468,8 @@ img.icon-team:not([src]) {
   -webkit-flex-grow: 1;
   -moz-flex-grow: 1;
   -ms-flex-grow: 1;
-  flex-grow: 1;
+  -ms-flex-positive: 1;
+      flex-grow: 1;
   background: #343850;
 }
 /* leftSidebar */
@@ -500,7 +500,8 @@ header.logo a {
   -webkit-flex-grow: 1;
   -moz-flex-grow: 1;
   -ms-flex-grow: 1;
-  flex-grow: 1;
+  -ms-flex-positive: 1;
+      flex-grow: 1;
   padding-left: 5px;
   padding-right: 5px;
   text-align: center;
@@ -522,7 +523,8 @@ header.logo a {
   -webkit-justify-content: center;
   -moz-justify-content: center;
   -ms-justify-content: center;
-  justify-content: center;
+  -ms-flex-pack: center;
+      justify-content: center;
 }
 .leftUser > div > a {
   float: right;
@@ -547,9 +549,6 @@ nav.leftNavigation a {
   padding-left: 54px;
   margin-bottom: 1px;
   border-left: 5px solid #3c405c;
-  -webkit-transition: all 0.25s ease-in-out;
-  -moz-transition: all 0.25s ease-in-out;
-  -o-transition: all 0.25s ease-in-out;
   transition: all 0.25s ease-in-out;
 }
 nav.leftNavigation a span {
@@ -567,9 +566,6 @@ nav.leftNavigation a.active {
 nav.leftNavigation a i.fa {
   position: relative;
   left: -25px;
-  -webkit-transition: all 0.25s ease-in-out;
-  -moz-transition: all 0.25s ease-in-out;
-  -o-transition: all 0.25s ease-in-out;
   transition: all 0.25s ease-in-out;
 }
 .section {
@@ -594,7 +590,8 @@ nav.leftNavigation a i.fa {
   -webkit-justify-content: space-between;
   -moz-justify-content: space-between;
   -ms-justify-content: space-between;
-  justify-content: space-between;
+  -ms-flex-pack: justify;
+      justify-content: space-between;
 }
 .contextHead .leftSide,
 .contextHead .rightSide {
@@ -630,16 +627,10 @@ nav.leftNavigation a i.fa {
   display: block;
   text-align: center;
   color: #8690af;
-  -webkit-transition: all 0.25s ease-in-out;
-  -moz-transition: all 0.25s ease-in-out;
-  -o-transition: all 0.25s ease-in-out;
   transition: all 0.25s ease-in-out;
 }
 .contextHead .rightSide .viewSelect > div span,
 .contextHead .rightSide .tabs > div span {
-  -webkit-transition: all 0.25s ease-in-out;
-  -moz-transition: all 0.25s ease-in-out;
-  -o-transition: all 0.25s ease-in-out;
   transition: all 0.25s ease-in-out;
   color: #a4abc1;
 }
@@ -699,9 +690,6 @@ table.standard td.delete a {
   height: 76px;
   text-align: center;
   color: #8690af;
-  -webkit-transition: all 0.25s ease-in-out;
-  -moz-transition: all 0.25s ease-in-out;
-  -o-transition: all 0.25s ease-in-out;
   transition: all 0.25s ease-in-out;
 }
 table.standard td.edit a i,
@@ -746,13 +734,13 @@ table.standard td.delete:hover {
   -ms-flex-direction: row;
   flex-direction: row;
   -webkit-flex-wrap: nowrap;
-  -moz-flex-wrap: nowrap;
   -ms-flex-wrap: nowrap;
   flex-wrap: nowrap;
   -webkit-justify-content: space-between;
   -moz-justify-content: space-between;
   -ms-justify-content: space-between;
-  justify-content: space-between;
+  -ms-flex-pack: justify;
+      justify-content: space-between;
 }
 .pagination .btn {
   color: #0b93ea;
@@ -787,12 +775,7 @@ table.standard td.delete:hover {
   background: transparent;
   border: 2px solid #535a83;
   color: #a4abc1;
-  -webkit-transition: all 0.25s ease-in-out;
-  -moz-transition: all 0.25s ease-in-out;
-  -o-transition: all 0.25s ease-in-out;
   transition: all 0.25s ease-in-out;
-  -webkit-border-radius: 0;
-  -moz-border-radius: 0;
   border-radius: 0;
   width: 100%;
   padding: 16px;
@@ -834,13 +817,13 @@ table.standard td.delete:hover {
   -ms-flex-direction: row;
   flex-direction: row;
   -webkit-flex-wrap: nowrap;
-  -moz-flex-wrap: nowrap;
   -ms-flex-wrap: nowrap;
   flex-wrap: nowrap;
   -webkit-justify-content: stretch;
   -moz-justify-content: stretch;
   -ms-justify-content: stretch;
-  justify-content: stretch;
+  -ms-flex-pack: stretch;
+      justify-content: stretch;
 }
 .tabs span {
   padding: 16px;
@@ -886,9 +869,6 @@ table.standard td.delete:hover {
   margin: 1px 0 0;
   overflow: hidden;
   zoom: 1;
-  -webkit-transition: all 0.25s ease-in-out;
-  -moz-transition: all 0.25s ease-in-out;
-  -o-transition: all 0.25s ease-in-out;
   transition: all 0.25s ease-in-out;
   cursor: pointer;
 }
@@ -901,9 +881,6 @@ table.standard td.delete:hover {
   clear: both;
 }
 .row-list .item div {
-  -webkit-transition: all 0.25s ease-in-out;
-  -moz-transition: all 0.25s ease-in-out;
-  -o-transition: all 0.25s ease-in-out;
   transition: all 0.25s ease-in-out;
   padding: 15px;
   position: relative;
@@ -919,8 +896,6 @@ table.standard td.delete:hover {
   position: absolute;
   opacity: .35;
   -webkit-transform: translate(0, -50%);
-  -moz-transform: translate(0, -50%);
-  -o-transform: translate(0, -50%);
   -ms-transform: translate(0, -50%);
   transform: translate(0, -50%);
 }
@@ -931,9 +906,6 @@ table.standard td.delete:hover {
   left: 0;
   background-color: transparent;
   background-repeat: no-repeat;
-  background-image: -webkit-gradient(linear, left top, right top, from(rgba(0, 0, 0, 0)), to(#343850));
-  background-image: -webkit-linear-gradient(right center, rgba(0, 0, 0, 0), #343850);
-  background-image: -moz-linear-gradient(right center, rgba(0, 0, 0, 0), #343850);
   background-image: -o-linear-gradient(left, rgba(0, 0, 0, 0), #343850);
   background-image: -khtml-gradient(linear, left top, right top, from(rgba(0, 0, 0, 0)), to(#343850));
   filter: progid:DXImageTransform.Microsoft.Gradient(StartColorStr='rgba(0, 0, 0, 0)', EndColorStr='#343850', GradientType=1);
@@ -952,8 +924,6 @@ table.standard td.delete:hover {
   font-weight: 600;
 }
 .row-list .item:hover {
-  -webkit-box-shadow: inset 400px 0 0 #0fc461;
-  -moz-box-shadow: inset 400px 0 0 #0fc461;
   box-shadow: inset 400px 0 0 #0fc461;
   border: 1px solid #0fc461;
 }
@@ -971,7 +941,6 @@ table.standard td.delete:hover {
   display: -ms-flex;
   display: flex;
   -webkit-flex-wrap: wrap;
-  -moz-flex-wrap: wrap;
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
 }
@@ -1000,21 +969,25 @@ form .group ng-typeahead {
   -webkit-order: 2;
   -moz-order: 2;
   -ms-order: 2;
-  order: 2;
+  -ms-flex-order: 2;
+      order: 2;
   -webkit-flex-grow: 1;
   -moz-flex-grow: 1;
   -ms-flex-grow: 1;
-  flex-grow: 1;
+  -ms-flex-positive: 1;
+      flex-grow: 1;
 }
 form .group label {
   -webkit-order: 1;
   -moz-order: 1;
   -ms-order: 1;
-  order: 1;
+  -ms-flex-order: 1;
+      order: 1;
   -webkit-flex-grow: 1;
   -moz-flex-grow: 1;
   -ms-flex-grow: 1;
-  flex-grow: 1;
+  -ms-flex-positive: 1;
+      flex-grow: 1;
   max-width: 20%;
 }
 /* form ui variables */
@@ -1038,9 +1011,6 @@ form .group label {
   display: inline-block;
   padding: 2px;
   margin: 2px 8px -2px 0;
-  -webkit-transition: all 0.25s ease-in-out;
-  -moz-transition: all 0.25s ease-in-out;
-  -o-transition: all 0.25s ease-in-out;
   transition: all 0.25s ease-in-out;
 }
 .group.checkbox input + label:before,
@@ -1055,9 +1025,6 @@ form .group label {
   height: 20px;
   width: 20px;
   border: 2px solid #535a83;
-  -webkit-transition: all 0.25s ease-in-out;
-  -moz-transition: all 0.25s ease-in-out;
-  -o-transition: all 0.25s ease-in-out;
   transition: all 0.25s ease-in-out;
 }
 .group.checkbox input + label:hover,
@@ -1099,9 +1066,6 @@ form .group label {
   background: transparent;
   border: 2px solid #535a83;
   color: #a4abc1;
-  -webkit-transition: all 0.25s ease-in-out;
-  -moz-transition: all 0.25s ease-in-out;
-  -o-transition: all 0.25s ease-in-out;
   transition: all 0.25s ease-in-out;
   margin-right: 20px;
 }
@@ -1152,24 +1116,24 @@ form .group label {
   color: #a4abc1;
   font-size: 14px;
   cursor: pointer;
-  -webkit-transition: all 0.25s ease-in-out;
-  -moz-transition: all 0.25s ease-in-out;
-  -o-transition: all 0.25s ease-in-out;
   transition: all 0.25s ease-in-out;
 }
 .group.standard input:focus + label {
   color: #d3d7e3;
 }
 .group.standard div.image-drop {
-  order: 2;
+  -webkit-order: 2;
+      -ms-flex-order: 2;
+          order: 2;
   -webkit-flex-grow: 1;
   -moz-flex-grow: 1;
   -ms-flex-grow: 1;
-  flex-grow: 1;
-  -webkit-flex-shrink: 1;
-  -moz-flex-shrink: 1;
+  -ms-flex-positive: 1;
+      flex-grow: 1;
   -ms-flex-shrink: 1;
-  flex-shrink: 1;
+  -webkit-flex-shrink: 1;
+      -ms-flex-negative: 1;
+          flex-shrink: 1;
   display: -webkit-flex;
   display: -moz-flex;
   display: -ms-flexbox;
@@ -1187,7 +1151,9 @@ form .group label {
   text-align: center;
 }
 .group.standard div.image-drop div.image-container {
-  order: 1;
+  -webkit-order: 1;
+      -ms-flex-order: 1;
+          order: 1;
   display: -webkit-flex;
   display: -moz-flex;
   display: -ms-flexbox;
@@ -1196,7 +1162,8 @@ form .group label {
   -webkit-flex-grow: 1;
   -moz-flex-grow: 1;
   -ms-flex-grow: 1;
-  flex-grow: 1;
+  -ms-flex-positive: 1;
+      flex-grow: 1;
   -webkit-flex-direction: column;
   -moz-flex-direction: column;
   -ms-flex-direction: column;
@@ -1204,14 +1171,17 @@ form .group label {
   -webkit-justify-content: center;
   -moz-justify-content: center;
   -ms-justify-content: center;
-  justify-content: center;
+  -ms-flex-pack: center;
+      justify-content: center;
 }
 .group.standard div.image-drop div.image-container img.preview {
   margin: auto;
   border: 2px solid #474c6c;
 }
 .group.standard div.image-drop div.controls-container {
-  order: 2;
+  -webkit-order: 2;
+      -ms-flex-order: 2;
+          order: 2;
   display: -webkit-flex;
   display: -moz-flex;
   display: -ms-flexbox;
@@ -1220,7 +1190,8 @@ form .group label {
   -webkit-justify-content: space-between;
   -moz-justify-content: space-between;
   -ms-justify-content: space-between;
-  justify-content: space-between;
+  -ms-flex-pack: justify;
+      justify-content: space-between;
   -webkit-flex-direction: column;
   -moz-flex-direction: column;
   -ms-flex-direction: column;
@@ -1239,7 +1210,8 @@ form .group label {
   -webkit-justify-content: center;
   -moz-justify-content: center;
   -ms-justify-content: center;
-  justify-content: center;
+  -ms-flex-pack: center;
+      justify-content: center;
   padding: 15px;
 }
 .group.standard div.image-drop div.controls-container p a {
@@ -1256,7 +1228,8 @@ form .group label {
   display: inline-block;
   text-align: center;
   vertical-align: middle;
-  touch-action: manipulation;
+  -ms-touch-action: manipulation;
+      touch-action: manipulation;
   cursor: pointer;
   width: auto;
   white-space: nowrap;
@@ -1360,7 +1333,8 @@ form .group label {
   display: inline-block;
   text-align: center;
   vertical-align: middle;
-  touch-action: manipulation;
+  -ms-touch-action: manipulation;
+      touch-action: manipulation;
   cursor: pointer;
   width: auto;
   white-space: nowrap;
@@ -1595,5 +1569,9 @@ form .group label {
   color: #3cff85;
 }
 .typeahead-error {
-  order: 3;
+  -webkit-order: 3;
+      -ms-flex-order: 3;
+          order: 3;
 }
+
+/*# sourceMappingURL=backend.css.map */

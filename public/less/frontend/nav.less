@@ -3,7 +3,6 @@ nav.nav-main {
 	background: rgba(0, 0, 0, 0.3);
 	border-bottom: 2px solid @default;
 	z-index: 998;
-	.gotham-med();
 	a.brand-logo img {
 		margin-top: 4px;
 		height: 54px;
@@ -50,17 +49,6 @@ nav.nav-main {
 			float: left;
 			left: 54px;
 			pointer-events: none;
-			> img {
-				height: 46px;
-				width: 46px;
-				position: relative;
-				top: 4px;
-				left: 4px;
-				outline: 0!important;
-				-webkit-clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
-				clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
-				pointer-events: none;
-			}
 		}
 		> a {
 			color: @accent-green;
@@ -69,6 +57,7 @@ nav.nav-main {
 			padding-right: 0;
 			min-width: 165px;
 			text-align: right;
+			font-family: Gotham;
 			> i.right {
 				margin-left: 0;
 			}
@@ -77,6 +66,7 @@ nav.nav-main {
 	li.content-switch {
 		padding-left: 10px;
 		padding-right: 10px;
+		.gotham-med();
 		.switch label {
 			color: white;
 			input[type=checkbox]:checked + .lever {
@@ -135,7 +125,6 @@ nav.nav-main {
 		border-top: 2px solid @accent-green;
 		margin-top: -2px;
 		background: @default-blue;
-		.gotham-thin();
 		li {
 			background: transparent;
 			border: 1px solid @border-blue;
