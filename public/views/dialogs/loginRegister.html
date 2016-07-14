@@ -71,7 +71,7 @@
 						<div class="col s6">
 							<input-field>
 								<input id="password" type="password" ng-model="Page.data.register.password" class="validate" required pattern=".{6,50}" onchange="document.getElementById('password_confirm').pattern = this.value" />
-								<label class="click-through" data-error="Please enter a password.">Password</label>
+								<label class="click-through" data-error="Password must be at least 6 characters.">Password</label>
 							</input-field>
 						</div>
 						<div class="col s6">
@@ -84,8 +84,8 @@
 					<div class="row extra-margin-top">
 						<div class="col s12">
 							<input-field class="center-align">
-								<input ng-model="Page.data.register.tos" type="checkbox" id="tos-agree" class="validate" required />
-								<label class="center-label" for="tos-agree">I agree to the <a ng-click="Page.show = 'tos';" tabindex="99">Terms of Service</a></label>
+								<input  ng-model="Page.data.register.tos" type="checkbox" id="tos-agree" class="validate" required />
+								<label tooltipped class="center-label" for="tos-agree" data-position="top" data-tooltip="You must accept the terms of service." >I agree to the <a ng-click="Page.show = 'tos';" tabindex="99">Terms of Service</a></label>
 							</input-field>
 						</div>
 					</div>
@@ -108,7 +108,6 @@ Blah blah TOS go here
 Blah blah TOS go here
 Blah blah TOS go here
 Blah blah TOS go here
-v
 Blah blah TOS go here
 Blah blah TOS go here
 Blah blah TOS go here
@@ -139,3 +138,12 @@ Blah blah TOS go here
 	</div>
 </div>
 <ng-include src="'/assets/views/dialogs/emailConfirmation.html'" ng-if="Page.register" ng-cloak></ng-include>
+<style>
+	.material-tooltip {
+		padding-top: 20px;
+		color: #F44336;
+	}
+	.material-tooltip .backdrop {
+		display: none!important;
+	}
+</style>
