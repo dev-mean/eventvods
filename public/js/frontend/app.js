@@ -7,12 +7,17 @@
 			editableOptions.theme = 'default';
 			editableThemes.default.buttonsClass = 'btn waves-effect waves-light';
 		})
-		.config(['$locationProvider', function($locationProvider) {
-
+		.config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
+            $routeProvider
+                .when('/', {
+                    templateUrl: '/assets/views/frontend/home.html',
+                    controller: 'NavController'
+                });
 			$locationProvider.html5Mode({
 				enabled: true,
 				requireBase: true
 			});
+
 
 		}])
 		.filter('capitalize', function() {

@@ -17,8 +17,16 @@
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/angular-xeditable/0.2.0/css/xeditable.min.css" rel="stylesheet" />
 	<link href="/assets/images/favicon.png" rel="icon" type="image/x-icon" />
 </head>
-
 <body ng-app="eventvods" ng-controller="PageController as Page">
+    <div class="cookie_disclaimer" ng-class="{show: Page.cookiesAccepted === false}">
+        <div class="container">
+            <h5>Cookie Disclaimer</h5>
+            <p>
+                <a href="#" ng-click="Page.cookiesAccepted=true;Page.acceptCookies()" class="btn-large waves-effect waves-light">Accept & Close</a>
+                Eventvods.com uses cookies. --more text--
+            </p>
+        </div>
+    </div>
 	<ng-include src="'/assets/views/dialogs/loginRegister.html'" ng-if="Page.session == false" ng-cloak onload="Page.init()"></ng-include>
 	<ng-include src="'/assets/views/dialogs/userSettings.html'" ng-if="Page.session != false && Page.session != null" ng-cloak onload="Page.init()"></ng-include>
 	<nav class="nav-main" role="navigation" ng-controller="NavController as Nav">
@@ -124,94 +132,7 @@
 			</a>
 		</div>
 	</nav>
-	<div class="evSlider" id="banner">
-		<div class="images">
-			<div class="image">
-				<div class="main">
-					<img src="/assets/images/backgrounds/1.jpg" />
-				</div>
-				<div class="blur">
-					<img src="/assets/images/backgrounds/1b.jpg" />
-				</div>
-				<div class="overlay right">
-					<div class="container">
-						<img src="/assets/images/eulcs.png" />
-						<h4>League of Legends</h4>
-						<h3>Follow the EU LCS!</h3>
-						<h4>2016 Summer Split</h4>
-						<a class="waves-effect waves-light btn">View League</a>
-					</div>
-				</div>
-			</div>
-			<div class="image">
-				<div class="main">
-					<img src="/assets/images/backgrounds/2.jpg" />
-				</div>
-				<div class="blur">
-					<img src="/assets/images/backgrounds/2b.jpg" />
-				</div>
-				<div class="overlay left">
-					<div class="container">
-						<img src="/assets/images/eulcs.png" />
-						<h4>League of Legends</h4>
-						<h3>Follow the NA LCS!</h3>
-						<h4>2016 Summer Split</h4>
-						<a class="waves-effect waves-light btn">View League</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="contents" ng-class="Page.contentClass">
-		<br /> Contents
-		<br /> Contents
-		<br /> Contents
-		<br /> Contents
-		<br /> Contents
-		<br /> Contents
-		<br /> Contents
-		<br /> Contents
-		<br /> Contents
-		<br /> Contents
-		<br /> Contents
-		<br /> Contents
-		<br /> Contents
-		<br /> Contents
-		<br /> Contents
-		<br /> Contents
-		<br /> Contents
-		<br /> Contents
-		<br /> Contents
-		<br /> Contents
-		<br /> Contents
-		<br /> Contents
-		<br /> Contents
-		<br /> Contents
-		<br /> Contents
-		<br /> Contents
-		<br /> Contents
-		<br /> Contents
-		<br /> Contents
-		<br /> Contents
-		<br /> Contents
-		<br /> Contents
-		<br /> Contents
-		<br /> Contents
-		<br /> Contents
-		<br /> Contents
-		<br /> Contents
-		<br /> Contents
-		<br /> Contents
-		<br /> Contents
-		<br /> Contents
-		<br /> Contents
-		<br /> Contents
-		<br /> Contents
-		<br /> Contents
-		<br /> Contents
-		<br /> Contents
-		<br /> Contents
-	</div>
+    <div id="main" ng-view></div>
 	<footer class="page-footer">
 		<div class="container">
 			<div class="row center-align spaced-row">

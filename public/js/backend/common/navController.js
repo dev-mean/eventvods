@@ -1,7 +1,7 @@
 (function() {
     'use strict';
     angular.module('eventApp')
-        .controller('navController', function($http, $timeout, API_BASE_URL) {
+        .controller('navController', function($http, $timeout, API_BASE_URL, $window) {
             var vm = this;
             vm.class = "initialising";
             $http.get(API_BASE_URL + "/auth/session")
@@ -11,6 +11,12 @@
                     $timeout(function(){
                         vm.class="loaded";
                     }, 1000);
-                })
+                });
+            vm.logout = function(){
+                $http.get(API_BASE_URL + '/auth/logout')
+                    .finally(function(){
+                        $window.location = '/';
+                    });
+            };
         });
 }());
