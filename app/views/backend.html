@@ -27,17 +27,17 @@
         <div class="container">
             <div class="leftSidebar">
                 <header class="logo">
-                    <a href="/manage/">
+                    <a href="/">
                     </a>
                 </header>
                 <div class="leftUser">
-                    <img class="icon-48" src="http://placehold.it/48" />
+                    <img class="icon-48" ng-src="{{Nav.user.profilePicture}}" />
                     <div class="userDetails">
                         <span class="text-sm">Welcome back</span>
-                        <a ng-href="/user/{{Nav.user.username}}" ng-bind="Nav.user.username" class="text-cutoff"></a>
+                        <a ng-href="/user/{{Nav.user._id}}" ng-bind="Nav.user.displayName" class="text-cutoff"></a>
                     </div>
                     <div>
-                        <a class="fa fa-sign-out fa-lg fa-fw" ng-href="/user/logout">
+                        <a href="#"" class="fa fa-sign-out fa-lg fa-fw" ng-click="Nav.logout()">
                         </a>
                     </div>
                 </div>

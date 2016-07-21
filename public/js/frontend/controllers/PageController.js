@@ -85,9 +85,14 @@
 			var vm = this;
 			//Dark / light mode cookie
 			vm.contentClass = $cookies.get('contentMode') || "light";
+            vm.cookiesAccepted = ($cookies.get('cookieDisclaimer') === "true");
+            console.log(vm.cookiesAccepted);
 			vm.contentClassSet = function(){
 				$cookies.put('contentMode', vm.contentClass);
 			};
+            vm.acceptCookies = function(){
+                $cookies.put('cookieDisclaimer', true);
+            }
 			//Login Register dialog
 			vm.show = 'login';
 			vm.session = SessionManager.get();
@@ -202,11 +207,11 @@
 				$('#banner').evSlider({
 					delay: 5000
 				});
-				$('.dropdown-button').dropdown({
-					hover: true,
-					belowOrigin: true,
-					alignment: "right"
-				});
+                $('.dropdown-button').dropdown({
+                    hover: true,
+                    belowOrigin: true,
+                    alignment: "left"
+                });
 			};
 		}]);
 }());

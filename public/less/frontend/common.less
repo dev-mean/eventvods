@@ -73,3 +73,26 @@ body {
 		border-left-color: @accent-green!important;
 	}
 }
+
+.cookie_disclaimer {
+    position: fixed;
+    z-index: 1001;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-top: 5px solid @accent-green;
+    color: @accent-white;
+    background: @default-blue;
+    .transition(all, 1s, linear);
+    .translate-y(100%);
+    opacity: 0;
+    &.show {
+        .translate-y(0);
+        opacity: 1;
+    }
+   a.btn-large {
+       display: inline-block;
+       vertical-align: middle;
+       margin-right: 20px;
+   }
+}
