@@ -86,13 +86,12 @@
 			//Dark / light mode cookie
 			vm.contentClass = $cookies.get('contentMode') || "light";
             vm.cookiesAccepted = ($cookies.get('cookieDisclaimer') === "true");
-            console.log(vm.cookiesAccepted);
 			vm.contentClassSet = function(){
 				$cookies.put('contentMode', vm.contentClass);
 			};
             vm.acceptCookies = function(){
                 $cookies.put('cookieDisclaimer', true);
-            }
+            };
 			//Login Register dialog
 			vm.show = 'login';
 			vm.session = SessionManager.get();
@@ -204,8 +203,8 @@
 			};
 			vm.init = function() {
 				$('.button-collapse').sideNav();
-				$('#banner').evSlider({
-					delay: 5000
+				$('.evSlider.multiple').evSlider({
+					delay: 2500
 				});
                 $('.dropdown-button').dropdown({
                     hover: true,

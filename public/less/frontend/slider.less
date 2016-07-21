@@ -4,6 +4,12 @@
 	height: @banner-slider-height + @nav-height;
 	z-index: 0;
 	overflow: hidden;
+	&.single {
+		.image {
+			opacity: 1;
+		}
+		height: @banner-slider-height + @nav-height - 100px;
+	}
 	.main img, .blur img {
 		pointer-events: none;
 		@media screen and (min-width: 1920px){
@@ -68,6 +74,10 @@
 			.container {
 				.translate-x(-1000px);
 			}
+		}
+		&.middle {
+			text-align: center;
+			background: rgba(0,0,0,0.7);
 		}
 		img {
 			position: relative;

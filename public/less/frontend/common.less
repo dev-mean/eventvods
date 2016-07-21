@@ -18,12 +18,27 @@ body {
 		color: @accent-error;
 	}
 }
+.force {
+
+	&-uppercase {
+		text-transform: uppercase!important;
+	}
+	&-lowercase {
+		text-transform: lowercase!important;
+	}
+	&-normal {
+		text-transform: none!important;
+	}
+}
 
 .icon-24 {
 	pointer-events: none;
 	width: 24px;
 	height: 24px;
 	vertical-align: middle;
+}
+.icon-text-large {
+	font-size: 128px;
 }
 
 #banner {
@@ -34,20 +49,47 @@ body {
 	border-top: 5px solid @accent-green;
 	.transition(all, 0.3s, linear);
 	text-align: center;
-	padding: 50px;
+	padding-bottom: 50px;
+	a {
+	color: @accent-green;
+		&:hover {
+			text-decoration: underline;
+		}
+	}
 	&.light{
-		background: url('/assets/images/backgrounds/light.png') #fff;
+		background: url('/assets/images/backgrounds/light.jpg') #fff;
 		background-position: center -300px;
 		background-repeat: no-repeat;
 		background-size: cover;
 		color: @default-blue;
+		.container {
+			background: @accent-white;
+		}
 	}
 	&.dark{
-		background: url('/assets/images/backgrounds/dark.png') @default-blue;
+		background: url('/assets/images/backgrounds/dark.jpg') #1A192B;
 		background-position: center -300px;
 		background-repeat: no-repeat;
 		background-size: cover;
 		color: @accent-white;
+		.container {
+			background: @dark-blue;
+		}
+	}
+	.container {
+		.transition(all, 0.3s, linear);
+		.gotham-med();
+		padding: 50px;
+		margin-bottom: 50px;
+		border-bottom: 5px solid @accent-green;
+		h3.title {
+			width: 100%;
+			text-align: center;
+			text-transform: uppercase;
+			color: @accent-green;
+			border-bottom: 5px solid @accent-green;
+			padding-bottom: 10px;
+		}
 	}
 }
 .input-field {

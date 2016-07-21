@@ -30,11 +30,23 @@ body {
 .text-red {
   color: #F44336;
 }
+.force-uppercase {
+  text-transform: uppercase!important;
+}
+.force-lowercase {
+  text-transform: lowercase!important;
+}
+.force-normal {
+  text-transform: none!important;
+}
 .icon-24 {
   pointer-events: none;
   width: 24px;
   height: 24px;
   vertical-align: middle;
+}
+.icon-text-large {
+  font-size: 128px;
 }
 #banner {
   top: -64px;
@@ -44,21 +56,49 @@ body {
   border-top: 5px solid #0CD97E;
   transition: all 0.3s linear;
   text-align: center;
-  padding: 50px;
+  padding-bottom: 50px;
+}
+.contents a {
+  color: #0CD97E;
+}
+.contents a:hover {
+  text-decoration: underline;
 }
 .contents.light {
-  background: url('/assets/images/backgrounds/light.png') #fff;
+  background: url('/assets/images/backgrounds/light.jpg') #fff;
   background-position: center -300px;
   background-repeat: no-repeat;
   background-size: cover;
   color: #3C3C62;
 }
+.contents.light .container {
+  background: #fff;
+}
 .contents.dark {
-  background: url('/assets/images/backgrounds/dark.png') #3C3C62;
+  background: url('/assets/images/backgrounds/dark.jpg') #1A192B;
   background-position: center -300px;
   background-repeat: no-repeat;
   background-size: cover;
   color: #fff;
+}
+.contents.dark .container {
+  background: #27273F;
+}
+.contents .container {
+  transition: all 0.3s linear;
+  font-family: Gotham;
+  font-weight: 500;
+  padding: 50px;
+  margin-bottom: 50px;
+  border-bottom: 5px solid #0CD97E;
+}
+.contents .container h3.title {
+  width: 100%;
+  text-align: center;
+  text-transform: uppercase;
+  color: #0CD97E;
+  border-bottom: 5px solid #0CD97E;
+  padding-bottom: 10px;
 }
 .input-field label,
 .input-field input {
@@ -127,6 +167,7 @@ nav.nav-main a.brand-logo img {
 }
 nav.nav-main i.left {
   margin-right: 0;
+  margin-top: -1px;
 }
 nav.nav-main ul a {
   transition: all .3s;
@@ -271,6 +312,12 @@ nav.nav-main a.btn:hover {
   z-index: 0;
   overflow: hidden;
 }
+.evSlider.single {
+  height: 364px;
+}
+.evSlider.single .image {
+  opacity: 1;
+}
 .evSlider .main img,
 .evSlider .blur img {
   pointer-events: none;
@@ -362,6 +409,10 @@ nav.nav-main a.btn:hover {
   -webkit-transform: translate(-1000px, 0px);
       -ms-transform: translate(-1000px, 0px);
           transform: translate(-1000px, 0px);
+}
+.evSlider div.overlay.middle {
+  text-align: center;
+  background: rgba(0, 0, 0, 0.7);
 }
 .evSlider div.overlay img {
   position: relative;
@@ -543,6 +594,8 @@ footer.page-footer {
 }
 footer.page-footer h5 {
   text-transform: uppercase;
+  font-family: Gotham;
+  font-weight: 500;
 }
 footer.page-footer .spaced-row {
   display: -webkit-flex;

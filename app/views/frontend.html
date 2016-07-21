@@ -17,7 +17,7 @@
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/angular-xeditable/0.2.0/css/xeditable.min.css" rel="stylesheet" />
 	<link href="/assets/images/favicon.png" rel="icon" type="image/x-icon" />
 </head>
-<body ng-app="eventvods" ng-controller="PageController as Page">
+<body ng-app="eventvods" ng-controller="PageController as Page" id="top">
     <div class="cookie_disclaimer" ng-class="{show: Page.cookiesAccepted === false}">
         <div class="container">
             <h5>Cookie Disclaimer</h5>
@@ -60,21 +60,21 @@
 				<li>
 					<a class="dropdown-button" data-activates="games_dd" href="/games">
 						<i class="material-icons left">
-                                    expand_more
+                                    &#xE5C5;
                                 </i> GAMES
 					</a>
 				</li>
 				<li>
 					<a class="dropdown-button" data-activates="leagues_dd" href="/leagues">
 						<i class="material-icons left">
-                                    expand_more
+                                    &#xE5C5;
                                 </i> LEAGUES
 					</a>
 				</li>
 				<li>
 					<a href="/tournaments">
 						<i class="material-icons left">
-                                    expand_more
+                                    &#xE5C5;
                                 </i> TOURNAMENTS
 					</a>
 				</li>
@@ -101,7 +101,7 @@
 					<a class="dropdown-button" data-activates="profile_dd">
 							{{Page.session.displayName}}
 							<i class="material-icons right">
-                                    expand_more
+                                    &#xE5C5;
                                 </i>
 						</a>
 				</li>
@@ -132,7 +132,7 @@
 			</a>
 		</div>
 	</nav>
-    <div id="main" ng-view></div>
+    <div id="main" ng-view onload="Page.init()"></div>
 	<footer class="page-footer">
 		<div class="container">
 			<div class="row center-align spaced-row">
@@ -165,8 +165,8 @@
 							<a class="waves-effect waves-light btn" href="/blog">
                                         Blog
                                     </a>
-							<a class="waves-effect waves-light btn" href="/user/login">
-                                        Login
+							<a class="waves-effect waves-light btn" href="/about/cookies">
+                                        Cookies
                                     </a>
 							<a class="waves-effect waves-light btn" href="/contact">
                                         Contact
@@ -180,9 +180,7 @@
                             </h5>
 					<div class="spacer">
 						<div class="sponsors center-align">
-							<a class="waves-effect waves-light btn" href="/contact">
-                                        Get In Touch
-                                    </a>
+							<!-- sponsors-->
 						</div>
 					</div>
 				</div>
