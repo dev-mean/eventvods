@@ -127,14 +127,25 @@ body {
     background: @default-blue;
     .transition(all, 1s, linear);
     .translate-y(100%);
+	.gotham-med();
     opacity: 0;
     &.show {
         .translate-y(0);
         opacity: 1;
     }
+	h5 {
+		text-transform: uppercase;
+	}
    a.btn-large {
        display: inline-block;
        vertical-align: middle;
        margin-right: 20px;
+   }
+   .disclaimer {
+	   display: flex;
+	   align-items: center;
+	   p {
+		   flex-grow: 1;
+	   }
    }
 }
