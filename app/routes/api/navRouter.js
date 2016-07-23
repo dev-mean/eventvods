@@ -18,7 +18,7 @@ router.get('/', function(req, res, next){
 			League
 				.find({})
 				.select('leagueName leagueSlug leagueGame -_id')
-				.populate('leagueGame','gameIcon -_id')
+				.populate('leagueGame','gameIcon -_id gameName')
 				.exec(function(err, docs){
 					if(err) cb(err, null);
 					else cb(null, docs);

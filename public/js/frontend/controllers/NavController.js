@@ -12,10 +12,9 @@
 			var vm = this;
 			vm.links = null;
 			vm.leagueClass = function($index){
-				return (
-					$index !== 0 &&
-					vm.links.leagues[$index-1].leagueGame.gameIcon === vm.links.leagues[$index].leagueGame.gameIcon
-					) ? "" : "border-top";
+				if($index === 0 ||
+					vm.links.orderedLeagues[$index].leagueGame.gameIcon !== vm.links.orderedLeagues[$index-1].leagueGame.gameIcon) return "border-top";
+				else return "";
 			};
 			NavService.get()
 				.then(function(res){

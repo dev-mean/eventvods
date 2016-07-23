@@ -13,8 +13,7 @@
 		.config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
             $routeProvider
                 .when('/', {
-                    templateUrl: '/assets/views/frontend/home.html',
-                    controller: 'NavController'
+                    templateUrl: '/assets/views/frontend/home.html'
                 })
 				.when('/about/cookies', {
                     templateUrl: '/assets/views/frontend/cookies.html'

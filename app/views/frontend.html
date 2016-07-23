@@ -18,121 +18,123 @@
 	<link href="/assets/images/favicon.png" rel="icon" type="image/x-icon" />
 </head>
 <body ng-app="eventvods" ng-controller="PageController as Page" id="top">
-    <div class="cookie_disclaimer" ng-class="{show: Page.cookiesAccepted === false}">
-        <div class="container">
-            <h5>Cookie Disclaimer</h5>
-            <div class="disclaimer">
-                <a ng-click="Page.cookiesAccepted=true;Page.acceptCookies()" class="btn-large waves-effect waves-light">Accept & Close</a>
-                <p>Eventvods.com uses cookies to enhance your experience, collect usage stats to improve our services and store certain settings.<br />
-				For more details, please read our <a href="/about/cookies">Cookie Policy</a>.</p>
-            </div>
-        </div>
-    </div>
-	<ng-include src="'/assets/views/dialogs/loginRegister.html'" ng-if="Page.session == false" ng-cloak onload="Page.init()"></ng-include>
-	<ng-include src="'/assets/views/dialogs/userSettings.html'" ng-if="Page.session != false && Page.session != null" ng-cloak onload="Page.init()"></ng-include>
-	<nav class="nav-main" role="navigation" ng-controller="NavController as Nav">
-		<ul class="dropdown-content wide" id="games_dd">
-			<li ng-repeat="game in Nav.links.games">
-				<a ng-href="/game/{{game.gameAlias}}">
-					<i class="material-icons left icon">
-						<img ng-src="{{game.gameIcon}}" class="icon-24"/>
-						&nbsp;
-					</i>
-					{{game.gameName}}
-				</a>
-			</li>
-		</ul>
-		<ul class="dropdown-content wide grouped" id="leagues_dd">
-			<li ng-repeat="league in Nav.links.leagues | orderBy: league.leagueGame.gameAlias track by $index" ng-class="Nav.leagueClass($index)">
-				<a ng-href="/league/{{league.leagueSlug}}">
-					<i class="material-icons left icon border-right">
-						<img ng-src="{{league.leagueGame.gameIcon}}" class="icon-24"/>
-						&nbsp;
-					</i>
-					{{league.leagueName}}
-				</a>
-			</li>
-		</ul>
-		<div class="nav-wrapper container">
-			<a class="brand-logo" href="/">
-				<img id="logo-image" src="/assets/images/logo.png" />
-			</a>
-			<ul class="right hide-on-med-and-down">
-				<li>
-					<a class="dropdown-button" data-activates="games_dd" href="/games">
-						<i class="material-icons left">
-                                    &#xE5C5;
-                                </i> GAMES
-					</a>
-				</li>
-				<li>
-					<a class="dropdown-button" data-activates="leagues_dd" href="/leagues">
-						<i class="material-icons left">
-                                    &#xE5C5;
-                                </i> LEAGUES
-					</a>
-				</li>
-				<li>
-					<a href="/tournaments">
-						<i class="material-icons left">
-                                    &#xE5C5;
-                                </i> TOURNAMENTS
-					</a>
-				</li>
-				<li>
-					<a href="/blog">
-                                BLOG
-                            </a>
-				</li>
-				<li class="no-transition" ng-if="Page.session == false" ng-cloak>
-					<a class="waves-effect waves-light btn" href="#loginRegister" modal opacity="1" enable-tabs="true" in-duration="500" out-duration="300" ready="Page.loginDialogOpen()">
-                                LOGIN
-                            </a>
-				</li>
-				<li class="no-transition user-details" ng-show="Page.session != false && Page.session != null" ng-cloak>
-					<svg viewbox="1 1 8 8">
-							<defs>
-								<pattern id="profilePicture" patternUnits="userSpaceOnUse" width="10" height="10">
-									<image ng-attr-href="{{Page.session.profilePicture}}" x="0" y="0"
-										width="10" height="10" />
-								</pattern>
-							</defs>
-							<path fix-fill fill="url(#profilePicture)" stroke="#0CD97E" stroke-width="0.35" d="M5.5 1.5 L8.5 4.5 Q9 5 8.5 5.5 L5.5 8.5 Q5 9 4.5 8.5 L 1.5 5.5 Q1 5 1.5 4.5 L4.5 1.5 Q 5 1 5.5 1.5z" />
-						</svg>
-					<a class="dropdown-button" data-activates="profile_dd">
-							{{Page.session.displayName}}
-							<i class="material-icons right">
-                                    &#xE5C5;
-                                </i>
-						</a>
-				</li>
-				<li class="no-transition content-switch">
-					<div class="switch">
-						<label>
-							Light
-							<input type="checkbox" ng-model="Page.contentClass" ng-true-value="'dark'" ng-false-value="'light'" ng-change="Page.contentClassSet()">
-							<span class="lever"></span>
-							Dark
-						</label>
-					</div>
-				</li>
-			</ul>
-			<ul class="side-nav" id="nav-mobile">
-				<li>
-					<a href="#">
-						<i class="material-icons left">
-                                    expand_more
-                                </i> TODO
-					</a>
-				</li>
-			</ul>
-			<a class="button-collapse" data-activates="nav-mobile" href="#">
-				<i class="material-icons">
-                            menu
-                        </i>
-			</a>
+	<header ng-controller="LoginRegisterController as LR">
+		<div class="cookie_disclaimer" ng-class="{show: Page.cookiesAccepted === false}">
+			<div class="container">
+				<h5>Cookie Disclaimer</h5>
+				<div class="disclaimer">
+					<a ng-click="Page.cookiesAccepted=true;Page.acceptCookies()" class="btn-large waves-effect waves-light">Accept & Close</a>
+					<p>Eventvods.com uses cookies to enhance your experience, collect usage stats to improve our services and store certain settings.<br />
+					For more details, please read our <a href="/about/cookies">Cookie Policy</a>.</p>
+				</div>
+			</div>
 		</div>
-	</nav>
+		<ng-include src="'/assets/views/dialogs/loginRegister.html'" ng-if="Page.session == false" ng-cloak></ng-include>
+		<ng-include src="'/assets/views/dialogs/userSettings.html'" ng-if="Page.session != false && Page.session != null" ng-cloak></ng-include>
+		<nav class="nav-main" role="navigation" ng-controller="NavController as Nav">
+			<ul class="dropdown-content wide" id="games_dd">
+				<li ng-repeat="game in Nav.links.games">
+					<a ng-href="/game/{{game.gameAlias}}">
+						<i class="material-icons left icon">
+							<img ng-src="{{game.gameIcon}}" class="icon-24"/>
+							&nbsp;
+						</i>
+						{{game.gameName}}
+					</a>
+				</li>
+			</ul>
+			<ul class="dropdown-content wide grouped" id="leagues_dd">
+				<li ng-repeat="league in Nav.links.orderedLeagues = (Nav.links.leagues | orderBy:'leagueGame.gameName') track by $index" ng-class="Nav.leagueClass($index)">
+					<a ng-href="/league/{{league.leagueSlug}}">
+						<i class="material-icons left icon border-right">
+							<img ng-src="{{league.leagueGame.gameIcon}}" class="icon-24"/>
+							&nbsp;
+						</i>
+						{{league.leagueName}}
+					</a>
+				</li>
+			</ul>
+			<div class="nav-wrapper container">
+				<a class="brand-logo" href="/">
+					<img id="logo-image" src="/assets/images/logo.png" />
+				</a>
+				<ul class="right hide-on-med-and-down">
+					<li>
+						<a class="dropdown-button" data-activates="games_dd" href="/games">
+							<i class="material-icons left">
+										&#xE5C5;
+									</i> GAMES
+						</a>
+					</li>
+					<li>
+						<a class="dropdown-button" data-activates="leagues_dd" href="/leagues">
+							<i class="material-icons left">
+										&#xE5C5;
+									</i> LEAGUES
+						</a>
+					</li>
+					<li>
+						<a href="/tournaments">
+							<i class="material-icons left">
+										&#xE5C5;
+									</i> TOURNAMENTS
+						</a>
+					</li>
+					<li>
+						<a href="/blog">
+									BLOG
+								</a>
+					</li>
+					<li class="no-transition" ng-if="Page.session == false" ng-cloak>
+						<a class="waves-effect waves-light btn" href="#loginRegister" modal opacity="1" enable-tabs="true" in-duration="500" out-duration="300" ready="LR.loginDialogOpen()">
+									LOGIN
+								</a>
+					</li>
+					<li class="no-transition user-details" ng-show="Page.session != false && Page.session != null" ng-cloak>
+						<svg viewbox="1 1 8 8">
+								<defs>
+									<pattern id="profilePicture" patternUnits="userSpaceOnUse" width="10" height="10">
+										<image ng-attr-href="{{Page.session.profilePicture}}" x="0" y="0"
+											width="10" height="10" />
+									</pattern>
+								</defs>
+								<path fix-fill fill="url(#profilePicture)" stroke="#0CD97E" stroke-width="0.35" d="M5.5 1.5 L8.5 4.5 Q9 5 8.5 5.5 L5.5 8.5 Q5 9 4.5 8.5 L 1.5 5.5 Q1 5 1.5 4.5 L4.5 1.5 Q 5 1 5.5 1.5z" />
+							</svg>
+						<a class="dropdown-button" id="userProfile" data-activates="profile_dd">
+								{{Page.session.displayName}}
+								<i class="material-icons right">
+										&#xE5C5;
+									</i>
+							</a>
+					</li>
+					<li class="no-transition content-switch">
+						<div class="switch">
+							<label>
+								Light
+								<input type="checkbox" ng-model="Page.contentClass" ng-true-value="'dark'" ng-false-value="'light'" ng-change="Page.contentClassSet()">
+								<span class="lever"></span>
+								Dark
+							</label>
+						</div>
+					</li>
+				</ul>
+				<ul class="side-nav" id="nav-mobile">
+					<li>
+						<a href="#">
+							<i class="material-icons left">
+										expand_more
+									</i> TODO
+						</a>
+					</li>
+				</ul>
+				<a class="button-collapse" data-activates="nav-mobile" href="#">
+					<i class="material-icons">
+								menu
+							</i>
+				</a>
+			</div>
+		</nav>
+	</header>
     <div id="main" ng-view onload="Page.init()"></div>
 	<footer class="page-footer">
 		<div class="container">
@@ -220,7 +222,11 @@
 	</script>
 	<script src="/assets/js/frontend/app.js">
 	</script>
+	<script src="/assets/js/frontend/services/SessionManager.js">
+	</script>
 	<script src="/assets/js/frontend/controllers/PageController.js">
+	</script>
+	<script src="/assets/js/frontend/controllers/LoginRegister.js">
 	</script>
 	<script src="/assets/js/frontend/controllers/NavController.js">
 	</script>
