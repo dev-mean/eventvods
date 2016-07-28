@@ -11,12 +11,14 @@ router.use('/nav', require('./api/navRouter'));
 
 //Model CRUD Routes
 router.use('/overview', require('./api/overviewRouter'));
+router.use('/featured', require('./api/featuredRouter'));
 router.use('/games', require('./api/gamesRouter'));
 router.use('/leagues', require('./api/leaguesRouter'));
 router.use('/staff', require('./api/staffRouter'));
 router.use('/teams', require('./api/teamsRouter'));
 router.use('/maps', require('./api/mapsRouter'));
 router.use('/users', require('./api/usersRouter'));
+
 //Refactored
 var auth = require('../controllers/auth');
 var ratelimit = require('../controllers/ratelimit');
@@ -24,8 +26,6 @@ var AWS = require('../controllers/aws');
 var cache = require('../controllers/cache');
 
 //TODO
-
-var Event = require('../models/event');
 var Validators = require('../controllers/validation');
 var Indicative = require('indicative');
 var APIKey = require('../models/APIKey');
@@ -63,68 +63,6 @@ router.all('*', function(req, res, next) {
 });
 
 
-//EVENTS
-router.route('/events')
-	.get(auth.public_api(), ratelimit, cache, function(req, res, next) {
-		Event.find(function(err, events) {
-			if (err) next(err);
-			else res.json(events);
-		});
-	})
-	.post(auth.updater(), function(req, res, next) {
-		Indicative.validateAll(req.body, Validators.event, Validators.messages)
-			.then(function() {
-				Event.create(req.body, function(err, event) {
-					if (err) next(err);
-					else res.json(event);
-				});
-			})
-			.catch(function(errors) {
-				var err = new Error("Bad Request");
-				err.status = 400;
-				err.errors = errors;
-				next(err);
-			});
-	});
-router.route('/event/:event_id')
-	.get(auth.public_api(), ratelimit, cache, function(req, res, next) {
-		Event.findById(req.params.event_id, function(err, event) {
-			if (err) next(err);
-			if (!event) {
-				err = new Error("Event Not Found");
-				err.status = 404;
-				next(err);
-			}
-			res.json(event);
-		});
-	})
-	.delete(auth.updater(), function(req, res, next) {
-		Event.remove({
-			_id: req.params.event_id
-		}, function(err) {
-			if (err) next(err);
-			else res.sendStatus(204);
-		});
-	})
-	.put(auth.updater(), function(req, res, next) {
-		Indicative.validateAll(req.body, Validators.event, Validators.messages)
-			.then(function() {
-				Event.findByIdAndUpdate(req.params.event_id, req.body, function(err, event) {
-					if (err) next(err);
-					if (!event) {
-						err = new Error("Event not found");
-						err.status = 404;
-						next(err);
-					} else res.json(event);
-				});
-			})
-			.catch(function(errors) {
-				var err = new Error("Bad Request");
-				err.status = 400;
-				err.errors = errors;
-				next(err);
-			});
-	});
 //APIKEYS
 router.route('/keys')
 	.get(auth.admin(), function(req, res, next) {

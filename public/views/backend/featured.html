@@ -1,0 +1,42 @@
+<div class="contextHead">
+    <div class="leftSide">
+        <h1>
+            Featured Content
+        </h1>
+    </div>
+    <div class="rightSide">
+        <a class="btn lg solid" ng-click="featuredSelectController.save()">
+            <span>
+				Save
+            </span>
+        </a>
+    </div>
+</div>
+<div class="tabs">
+    <span ng-class="{selected: featuredSelectController.tab == 1}" ng-click="featuredSelectController.tab = 1">
+        Games
+    </span>
+    <span ng-class="{selected: featuredSelectController.tab == 2}" ng-click="featuredSelectController.tab = 2">
+        Leagues
+    </span>
+    <span ng-class="{selected: featuredSelectController.tab == 3}" ng-click="featuredSelectController.tab = 3">
+        Tournaments
+    </span>
+</div>
+<div class="sortable-container" sv-root sv-part="featuredSelectController.data.games" sv-on-sort="featuredSelectController.reOrder()">
+	<div>
+		<select ng-options="game.gameName for game in featuredSelectController.games" ng-model="featuredSelectController.selectedGame">
+		</select>
+		<a class="btn lg icon-only float-right" ng-click="featuredSelectController.addGame()">
+			<i class="fa fa-plus fa-lg fa-fw">
+			</i>
+		</a>
+	</div>
+	<div ng-repeat="game in featuredSelectController.data.games track by $index" sv-element>
+		<span>{{$index + 1}}. {{game.gameName}}</span>
+		<a class="btn lg icon-only float-right del" ng-click="featuredSelectController.deleteGame($index)">
+			<i class="fa fa-minus-circle fa-lg fa-fw">
+        </i>
+	</a>
+	</div>
+</div>

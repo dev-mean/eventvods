@@ -42,6 +42,12 @@ p {
 .text-cutoff {
     text-overflow: ellipsis;
 }
+.float-right {
+	float: right;
+}
+.margin-right {
+	margin-right: 25px!important;
+}
 // Preloader
 .container {
     opacity: 0;
@@ -96,7 +102,7 @@ p {
       position: relative;
       -webkit-transform: scale(1.1);
           -ms-transform: scale(1.1);
-              transform: scale(1.1); 
+              transform: scale(1.1);
     }
     .sk-folding-cube .sk-cube:before {
       content: '';
@@ -131,7 +137,7 @@ p {
     }
     .sk-folding-cube .sk-cube3:before {
       -webkit-animation-delay: 0.6s;
-              animation-delay: 0.6s; 
+              animation-delay: 0.6s;
     }
     .sk-folding-cube .sk-cube4:before {
       -webkit-animation-delay: 0.9s;
@@ -141,31 +147,31 @@ p {
       0%, 10% {
         -webkit-transform: perspective(140px) rotateX(-180deg);
                 transform: perspective(140px) rotateX(-180deg);
-        opacity: 0; 
+        opacity: 0;
       } 25%, 75% {
         -webkit-transform: perspective(140px) rotateX(0deg);
                 transform: perspective(140px) rotateX(0deg);
-        opacity: 1; 
+        opacity: 1;
       } 90%, 100% {
         -webkit-transform: perspective(140px) rotateY(180deg);
                 transform: perspective(140px) rotateY(180deg);
-        opacity: 0; 
-      } 
+        opacity: 0;
+      }
     }
 
     @keyframes sk-foldCubeAngle {
       0%, 10% {
         -webkit-transform: perspective(140px) rotateX(-180deg);
                 transform: perspective(140px) rotateX(-180deg);
-        opacity: 0; 
+        opacity: 0;
       } 25%, 75% {
         -webkit-transform: perspective(140px) rotateX(0deg);
                 transform: perspective(140px) rotateX(0deg);
-        opacity: 1; 
+        opacity: 1;
       } 90%, 100% {
         -webkit-transform: perspective(140px) rotateY(180deg);
                 transform: perspective(140px) rotateY(180deg);
-        opacity: 0; 
+        opacity: 0;
       }
     }
 }
@@ -180,6 +186,7 @@ p {
 .ng-fade.ng-hide-add {
   transition: all linear 500ms;
 }
+
 img.icon {
     &-48 {
         width: 48px;
@@ -449,7 +456,7 @@ table.standard {
             width: 48px;
             border-left: 1px solid @default-light;
             a {
-                cursor: pointer; 
+                cursor: pointer;
                 display: block;
                 line-height: 76px;
                 font-size: 20px;
@@ -545,6 +552,12 @@ table.standard {
     .flex-wrap(nowrap);
     .justify-content(stretch);
     span {
+		.flex-grow(1);
+		border-left: 1px solid @default;
+		border-right: 1px solid @default;
+		text-align: center;
+		align-content: center;
+		line-height: 100%;
         padding: @padding-sm;
         &:hover {
             background: @default;
@@ -901,10 +914,19 @@ form {
             padding-left: 22px;
             display: block;
         }
-        &:hover {
-            //todo: effect
-        }
     }
+	&.icon-only {
+		width: 39px;
+		padding: 10px 0!important;
+		> i {
+			position: relative;
+			top: 1px;
+		}
+	}
+	&.del {
+		color: red;
+		border: 2px solid red;
+	}
     &.lg {
         padding: @btn-padding + 3 @btn-padding + 14;
     }
@@ -1124,4 +1146,24 @@ form {
 }
 .typeahead-error {
     order: 3;
+}
+.sortable-container {
+	padding: 50px;
+	div {
+		margin: 20px auto;
+		padding: 5px 25px;
+		background: @default;
+		border-radius: 5px;
+		.flex-display;
+		align-content: center;
+		justify-content: space-between;
+		span {
+			line-height: 40px;
+		}
+		select {
+			background: @default;
+			border: 0;
+			color: white;
+		}
+	}
 }

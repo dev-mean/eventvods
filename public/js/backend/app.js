@@ -1,6 +1,6 @@
 (function() {
     'use strict';
-    angular.module('eventApp', ['ngAnimate', 'ngResource', 'ngRoute', 'angular-loading-bar', 'ngDialog'])
+    angular.module('eventApp', ['ngAnimate', 'ngResource', 'ngRoute', 'angular-loading-bar', 'ngDialog','angular-sortable-view'])
         .constant('eventConstants', {
             baseUri: '/api/'
         })
@@ -345,18 +345,6 @@
                     controllerAs: 'leagueFormController',
                     title: "Edit League"
                 })
-                .when('/events', {
-                    templateUrl: '/assets/views/backend/event/list.html',
-                    controller: 'eventListController',
-                    controllerAs: 'eventListController',
-                    title: "Events"
-                })
-                .when('/events/new', {
-                    templateUrl: '/assets/views/backend/event/form.html',
-                    controller: 'newEventController',
-                    controllerAs: 'newEventController',
-                    title: "New Event"
-                })
                 .when('/staff', {
                     templateUrl: '/assets/views/backend/staff/list.html',
                     controller: 'staffListController',
@@ -410,6 +398,30 @@
                     controller: 'editTeamController',
                     controllerAs: 'teamsFormController',
                     title: "Edit Teams"
+                })
+				.when('/events', {
+                    templateUrl: '/assets/views/backend/event/list.html',
+                    controller: 'eventListController',
+                    controllerAs: 'eventListController',
+                    title: "Events"
+                })
+                .when('/events/new', {
+                    templateUrl: '/assets/views/backend/event/form.html',
+                    controller: 'newEventController',
+                    controllerAs: 'newEventController',
+                    title: "New Event"
+                })
+				.when('/featured', {
+                    templateUrl: '/assets/views/backend/featured.html',
+                    controller: 'featuredSelectController',
+                    controllerAs: 'featuredSelectController',
+                    title: "Featured Content"
+                })
+                .when('/events/new', {
+                    templateUrl: '/assets/views/backend/event/form.html',
+                    controller: 'newEventController',
+                    controllerAs: 'newEventController',
+                    title: "New Event"
                 })
         })
 }());

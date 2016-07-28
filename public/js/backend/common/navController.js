@@ -7,10 +7,10 @@
             $http.get(API_BASE_URL + "/auth/session")
                 .then(function(res){
                     vm.user = res.data;
-                    vm.isAdmin = (vm.user.rights >= 3);
+                    vm.isAdmin = (vm.user.userRights >= 3);
                     $timeout(function(){
                         vm.class="loaded";
-                    }, 1000);
+                    }, 1500);
                 });
             vm.logout = function(){
                 $http.get(API_BASE_URL + '/auth/logout')

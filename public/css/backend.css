@@ -202,6 +202,12 @@ p {
 .text-cutoff {
   text-overflow: ellipsis;
 }
+.float-right {
+  float: right;
+}
+.margin-right {
+  margin-right: 25px!important;
+}
 .container {
   opacity: 0;
   -webkit-transition: opacity 1s ease-in-out;
@@ -826,6 +832,18 @@ table.standard td.delete:hover {
       justify-content: stretch;
 }
 .tabs span {
+  -webkit-flex-grow: 1;
+  -moz-flex-grow: 1;
+  -ms-flex-grow: 1;
+  -ms-flex-positive: 1;
+      flex-grow: 1;
+  border-left: 1px solid #3c405c;
+  border-right: 1px solid #3c405c;
+  text-align: center;
+  -webkit-align-content: center;
+      -ms-flex-line-pack: center;
+          align-content: center;
+  line-height: 100%;
   padding: 16px;
 }
 .tabs span:hover {
@@ -1263,6 +1281,18 @@ form .group label {
   padding-left: 22px;
   display: block;
 }
+.group.standard div.image-drop div.controls-container p a.icon-only {
+  width: 39px;
+  padding: 10px 0!important;
+}
+.group.standard div.image-drop div.controls-container p a.icon-only > i {
+  position: relative;
+  top: 1px;
+}
+.group.standard div.image-drop div.controls-container p a.del {
+  color: red;
+  border: 2px solid red;
+}
 .group.standard div.image-drop div.controls-container p a.lg {
   padding: 9px 20px;
 }
@@ -1363,6 +1393,18 @@ form .group label {
 .btn.icon span {
   padding-left: 22px;
   display: block;
+}
+.btn.icon-only {
+  width: 39px;
+  padding: 10px 0!important;
+}
+.btn.icon-only > i {
+  position: relative;
+  top: 1px;
+}
+.btn.del {
+  color: red;
+  border: 2px solid red;
 }
 .btn.lg {
   padding: 9px 20px;
@@ -1572,6 +1614,34 @@ form .group label {
   -webkit-order: 3;
       -ms-flex-order: 3;
           order: 3;
+}
+.sortable-container {
+  padding: 50px;
+}
+.sortable-container div {
+  margin: 20px auto;
+  padding: 5px 25px;
+  background: #3c405c;
+  border-radius: 5px;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: -ms-flex;
+  display: flex;
+  -webkit-align-content: center;
+      -ms-flex-line-pack: center;
+          align-content: center;
+  -webkit-justify-content: space-between;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+.sortable-container div span {
+  line-height: 40px;
+}
+.sortable-container div select {
+  background: #3c405c;
+  border: 0;
+  color: white;
 }
 
 /*# sourceMappingURL=backend.css.map */
