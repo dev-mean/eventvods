@@ -27,3 +27,4 @@ designs/
 .env
 ssl.key
 ssl.cert
+dhparams.pem
