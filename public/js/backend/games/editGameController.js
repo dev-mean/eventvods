@@ -10,7 +10,7 @@
                     .then( function( response ) {
                         vm.data = response.data;
                          $( '#slug' )
-                    		.attr( 'data-parsley-remote', API_BASE_URL + '/validate/gameSlug/{value}'  + $routeParams.id );
+                    		.attr( 'data-parsley-remote', API_BASE_URL + '/validate/gameSlug/{value}/'  + $routeParams.id );
                         vm.parsley = $( '#addGameForm' )
                             .parsley();
                     }, function( response ) {

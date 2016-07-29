@@ -25,7 +25,7 @@
 </div>
 <div class="sortable-container" sv-root sv-part="featuredSelectController.data.games" ng-show="featuredSelectController.tab == 1">
 	<div>
-		<select ng-options="game.gameName for game in featuredSelectController.games" ng-model="featuredSelectController.selectedGame">
+		<select ng-options="game.name for game in featuredSelectController.games" ng-model="featuredSelectController.selectedGame">
 		</select>
 		<a class="btn lg icon-only float-right" ng-click="featuredSelectController.addGame()">
 			<i class="fa fa-plus fa-lg fa-fw">
@@ -33,7 +33,7 @@
 		</a>
 	</div>
 	<div ng-repeat="game in featuredSelectController.data.games track by $index" sv-element>
-		<span><i class="fa fa-lg fa-fw fa-sort"></i>{{$index + 1}} {{game.gameName}}</span>
+		<span><i class="fa fa-lg fa-fw fa-sort"></i>{{$index + 1}} {{game.name}}</span>
 		<a class="btn lg icon-only float-right del" ng-click="featuredSelectController.deleteGame($index)">
 			<i class="fa fa-minus-circle fa-lg fa-fw">
 			</i>

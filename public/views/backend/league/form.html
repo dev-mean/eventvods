@@ -15,13 +15,24 @@
             <label>
                 League Name
             </label>
-            <input type="text" placeholder="e.g. League Championship Series" ng-model="leagueFormController.data.leagueName" data-parsley-trigger="keyup"  required/>
+            <input type="text" placeholder="e.g. League Championship Series" ng-model="leagueFormController.data.name" data-parsley-trigger="keyup"  required/>
         </div>
+		<div class="standard group">
+            <label>
+                URL Slug
+            </label>
+            <input id="slug" type="text" placeholder="e.g. lcs-2016" ng-model="leagueFormController.data.slug" data-parsley-trigger="keyup" data-parsley-remote-message="Slug already in use." required/>
+        </div>
+		<div class="standard group">
+            <label class="full">
+				League will be accessible at eventvods.com/league/{{leagueFormController.data.slug}}
+            </label>
+		</div>
         <div class="standard group">
             <label>
-                Game Name
+                Game
             </label>
-            <ng-typeahead data-id="leagueGame" placeholder="e.g. LOL" ng-model="leagueFormController.data.leagueGame" data="leagueFormController.games" container="#leagueGameError" force-selection="true" required/>
+            <ng-typeahead data-id="leagueGame" placeholder="e.g. LOL" ng-model="leagueFormController.data.game" data="leagueFormController.games" container="#leagueGameError" force-selection="true" required/>
             <div id="leagueGameError" class="typeahead-error">
             </div>
         </div>
@@ -29,13 +40,13 @@
             <label>
                 League Logo (optional)
             </label>
-            <image-drop model="leagueFormController.data.leagueLogo" preview-width="128" preview-height="128" />
+            <image-drop model="leagueFormController.data.logo" preview-width="128" preview-height="128" />
         </div>
         <div class="standard group">
             <label>
                 League Header (optional)
             </label>
-            <image-drop model="leagueFormController.data.leagueHeader" preview-width="300" preview-height="100" />
+            <image-drop model="leagueFormController.data.header" preview-width="300" preview-height="100" />
         </div>
         <br />
         <div class="standard group">
@@ -48,5 +59,3 @@
         </div>
     </div>
 </form>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.4.3/parsley.min.js">
-</script>

@@ -7,19 +7,19 @@
                 vm.title = "Add League";
                 vm.errors = [];
                 vm.data = {};
+				$( '#slug' ).attr( 'data-parsley-remote', API_BASE_URL + '/validate/leagueSlug/{value}');
                 var parsley = $('#addLeagueForm')
                     .parsley();
                 Games.find()
                     .then(function(response) {
                         vm.games = response.data.map(function(obj) {
                             return {
-                                "label": obj.gameAlias + " - " + obj.gameName,
+                                "label": obj.slug + " - " + obj.name,
                                 "value": obj._id
-                            }
-                        })
+                            };
+                        });
                     });
                 vm.submit = function() {
-                    console.log(vm.data);
                     if (parsley.validate()) Leagues.create(vm.data)
                         .then(function(response) {
                             toastr.success('League added.', {
@@ -29,7 +29,7 @@
                         }, function(response) {
                             vm.errors = response.data.errors;
                         });
-                }
+                };
             }
         ]);
 }());

@@ -8,7 +8,7 @@
                 vm.gameData = [];
                 vm.filter = {};
                 vm.sort = {
-                    sortField: 'gameName',
+                    sortField: 'name',
                     sortReverse: false
                 };
                 vm.paging = {

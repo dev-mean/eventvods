@@ -8,7 +8,7 @@
                 vm.leagueData = [];
                 vm.filter = {};
                 vm.sort = {
-                    sortField: 'leagueName',
+                    sortField: 'name',
                     sortReverse: false
                 };
                 vm.paging = {

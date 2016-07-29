@@ -7,7 +7,7 @@ router.get('/', function(req, res, next){
 	.populate({
 		path: 'games',
 		model: 'Game',
-		select: 'gameName gameAlias'
+		select: 'name slug'
 	})
 	.populate({
 		path: 'leagues',

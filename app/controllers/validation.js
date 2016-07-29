@@ -32,11 +32,12 @@ module.exports.api = {
 };
 module.exports.game = {
     name: 'required',
-    slug: 'required|alpha_numeric'
+    slug: 'required'
 };
 module.exports.league = {
-    leagueName: 'required',
-    leagueGame: 'required'
+    name: 'required',
+    game: 'required',
+	slug: 'required'
 };
 module.exports.event = {
     eventGame: 'required|alpha_numeric',

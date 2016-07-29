@@ -22,30 +22,41 @@
         <thead>
             <tr>
                 <th>
-                    <a href="" ng-click="leaguesListController.setSort('leagueGame.gameAlias')">
+                    <a href="" ng-click="leaguesListController.setSort('game.slug')">
                         Game
                     </a>
-                    <span ng-show="leaguesListController.sort.sortField == 'leagueGame.gameAlias' && !leaguesListController.sort.sortReverse" class="caret-down">
+                    <span ng-show="leaguesListController.sort.sortField == 'game.slug' && !leaguesListController.sort.sortReverse" class="caret-down">
                     </span>
-                    <span ng-show="leaguesListController.sort.sortField == 'leagueGame.gameAlias' && leaguesListController.sort.sortReverse" class="caret-up">
+                    <span ng-show="leaguesListController.sort.sortField == 'game.slug' && leaguesListController.sort.sortReverse" class="caret-up">
                     </span>
-                    <span ng-show="leaguesListController.sort.sortField != 'leagueGame.gameAlias'" class="fa fa-unsorted">
+                    <span ng-show="leaguesListController.sort.sortField != 'game.slug'" class="fa fa-unsorted">
                     </span>
                 </th>
                 <th>
                     League Logo
                 </th>
                 <th>
-                    <a href="" ng-click="leaguesListController.setSort('leagueName')">
+                    <a href="" ng-click="leaguesListController.setSort('name')">
                         League Name
                     </a>
-                    <span ng-show="leaguesListController.sort.sortField == 'leagueName' && !leaguesListController.sort.sortReverse" class="caret-down">
+                    <span ng-show="leaguesListController.sort.sortField == 'name' && !leaguesListController.sort.sortReverse" class="caret-down">
                     </span>
-                    <span ng-show="leaguesListController.sort.sortField == 'leagueName' && leaguesListController.sort.sortReverse" class="caret-up">
+                    <span ng-show="leaguesListController.sort.sortField == 'name' && leaguesListController.sort.sortReverse" class="caret-up">
                     </span>
-                    <span ng-show="leaguesListController.sort.sortField != 'leagueName'" class="fa fa-unsorted">
+                    <span ng-show="leaguesListController.sort.sortField != 'name'" class="fa fa-unsorted">
                     </span>
                 </th>
+				<th>
+					<a href="" ng-click="leaguesListController.setSort('slug')">
+                        URL Slug
+                    </a>
+                    <span ng-show="leaguesListController.sort.sortField == 'slug' && !leaguesListController.sort.sortReverse" class="caret-down">
+                    </span>
+                    <span ng-show="leaguesListController.sort.sortField == 'slug' && leaguesListController.sort.sortReverse" class="caret-up">
+                    </span>
+                    <span ng-show="leaguesListController.sort.sortField != 'slug'" class="fa fa-unsorted">
+                    </span>
+				</th>
                 <th>
                 </th>
                 <th>
@@ -57,15 +68,18 @@
         <tbody>
             <tr ng-repeat="league in leaguesListController.filterData = (leaguesListController.leagueData | filter: leaguesListController.search) | orderBy: leaguesListController.sort.sortField:leaguesListController.sort.sortReverse | offset: (leaguesListController.paging.page - 1) * leaguesListController.paging.itemsPerPage | limitTo: leaguesListController.paging.itemsPerPage">
                 <td>
-                    <img ng-src="{{league.leagueGame.gameIcon}}" class="icon-16 icon-text-align" />
-                    {{league.leagueGame.gameAlias | uppercase}}
+                    <img ng-src="{{league.game.icon}}" class="icon-16 icon-text-align" />
+                    {{league.game.name}}
                 </td>
                 <td>
-                    <img ng-src="{{league.leagueLogo}}" class="icon-48" />
+                    <img ng-src="{{league.logo}}" class="icon-48" />
                 </td>
                 <td>
-                    {{league.leagueName}}
+                    {{league.name}}
                 </td>
+				<td>
+					{{league.slug}}
+				</td>
                 <td class="edit">
                     <a ng-href="/manage/league/{{league._id}}/edit">
                         <i class="fa fa-edit fa-fw">

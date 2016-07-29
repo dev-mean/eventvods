@@ -4,25 +4,25 @@ var Sponsor = require('./sponsor').schema;
 var slug = require('slug');
 
 var leagueSchema = new Schema({
-	leagueName: {
+	name: {
 		type: String,
 		required: true
 	},
-	leagueGame: {
+	game: {
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'Game',
 		required: true
 	},
-	leagueSlug: {
+	slug: {
 		type: String,
 		required: true,
 		unique: true
 	},
-	leagueStartDate: Date,
-	leagueEndDate: Date,
-	leagueSponsors: [Sponsor],
-	leagueLogo: String,
-	leagueHeader: String,
+	startDate: Date,
+	endDate: Date,
+	sponsors: [Sponsor],
+	logo: String,
+	header: String,
 });
 
 var League = mongoose.model('League', leagueSchema);
