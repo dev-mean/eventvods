@@ -6,8 +6,8 @@
                 var vm = this;
                 vm.title = "Add Game";
                 vm.errors = [];
-                $( 'input.force-caps' )
-                    .attr( 'data-parsley-remote', API_BASE_URL + '/validate/gameAlias/{value}' )
+                $( '#slug' )
+                    .attr( 'data-parsley-remote', API_BASE_URL + '/validate/gameSlug/{value}' );
                 vm.parsley = $( '#addGameForm' )
                     .parsley();
                 vm.submit = function() {
@@ -23,7 +23,7 @@
                             } );
                             else vm.errors = response.data.errors;
                         } );
-                }
+                };
             }
         ] );
 }() );

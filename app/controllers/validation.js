@@ -31,8 +31,8 @@ module.exports.api = {
     URL: 'required|url'
 };
 module.exports.game = {
-    gameName: 'required',
-    gameAlias: 'required|alpha_numeric'
+    name: 'required',
+    slug: 'required|alpha_numeric'
 };
 module.exports.league = {
     leagueName: 'required',

@@ -9,8 +9,8 @@
                 Games.findById( $routeParams.id )
                     .then( function( response ) {
                         vm.data = response.data;
-                        $( 'input.force-caps' )
-                            .attr( 'data-parsley-remote', API_BASE_URL + '/validate/gameAlias/{value}/' + $routeParams.id )
+                         $( '#slug' )
+                    		.attr( 'data-parsley-remote', API_BASE_URL + '/validate/gameSlug/{value}'  + $routeParams.id );
                         vm.parsley = $( '#addGameForm' )
                             .parsley();
                     }, function( response ) {
@@ -32,7 +32,7 @@
                             } );
                             else vm.errors = response.data.errors;
                         } );
-                }
+                };
             }
         ] );
 }() );

@@ -2,9 +2,9 @@ var router = require('express').Router();
 var Game = require('../../models/game');
 var User = require('../../models/user');
 
-router.get('/gameAlias/:alias', function(req, res, next) {
+router.get('/gameSlug/:slug', function(req, res, next) {
     Game.find({
-            gameAlias: req.params.alias
+            slug: req.params.slug
         })
         .count()
         .exec(function(err, count) {
@@ -13,9 +13,9 @@ router.get('/gameAlias/:alias', function(req, res, next) {
             else return res.sendStatus('200');
         });
 });
-router.get('/gameAlias/:alias/:id', function(req, res, next) {
+router.get('/gameAlias/:slug/:id', function(req, res, next) {
     Game.findOne({
-        gameAlias: req.params.alias
+        slug: req.params.slug
     }, function(err, doc) {
         if (err) next(err);
         if (!doc) return res.sendStatus('200');

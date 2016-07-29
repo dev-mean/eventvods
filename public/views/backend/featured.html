@@ -23,7 +23,7 @@
         Tournaments
     </span>
 </div>
-<div class="sortable-container" sv-root sv-part="featuredSelectController.data.games" sv-on-sort="featuredSelectController.reOrder()">
+<div class="sortable-container" sv-root sv-part="featuredSelectController.data.games" ng-show="featuredSelectController.tab == 1">
 	<div>
 		<select ng-options="game.gameName for game in featuredSelectController.games" ng-model="featuredSelectController.selectedGame">
 		</select>
@@ -33,10 +33,27 @@
 		</a>
 	</div>
 	<div ng-repeat="game in featuredSelectController.data.games track by $index" sv-element>
-		<span>{{$index + 1}}. {{game.gameName}}</span>
+		<span><i class="fa fa-lg fa-fw fa-sort"></i>{{$index + 1}} {{game.gameName}}</span>
 		<a class="btn lg icon-only float-right del" ng-click="featuredSelectController.deleteGame($index)">
 			<i class="fa fa-minus-circle fa-lg fa-fw">
-        </i>
-	</a>
+			</i>
+		</a>
+	</div>
+</div>
+<div class="sortable-container" sv-root sv-part="featuredSelectController.data.leagues" ng-show="featuredSelectController.tab == 2">
+	<div>
+		<select ng-options="league.leagueName for league in featuredSelectController.leagues" ng-model="featuredSelectController.selectedLeague">
+		</select>
+		<a class="btn lg icon-only float-right" ng-click="featuredSelectController.addLeague()">
+			<i class="fa fa-plus fa-lg fa-fw">
+			</i>
+		</a>
+	</div>
+	<div ng-repeat="league in featuredSelectController.data.leagues track by $index" sv-element>
+		<span><i class="fa fa-lg fa-fw fa-sort"></i>{{$index + 1}} {{league.leagueName}}</span>
+		<a class="btn lg icon-only float-right del" ng-click="featuredSelectController.deleteLeague($index)">
+			<i class="fa fa-minus-circle fa-lg fa-fw">
+			</i>
+		</a>
 	</div>
 </div>

@@ -1,5 +1,6 @@
 var router = require('express').Router();
 var Featured = require('../../models/featuredContainer');
+var auth = require('../../controllers/auth');
 
 router.get('/', function(req, res, next){
 	Featured.findOne()
@@ -8,15 +9,20 @@ router.get('/', function(req, res, next){
 		model: 'Game',
 		select: 'gameName gameAlias'
 	})
+	.populate({
+		path: 'leagues',
+		model: 'League',
+		select: 'leagueName leagueSlug'
+	})
 	.exec(function(err, featuredContent){
 		if(err) next(err);
 		res.json(featuredContent);
 	});
 });
-router.get('/create', function(req, res, next){
-	Featured.findOne(function(err, featuredContent){
+router.post('/', auth.updater(), function(req, res, next){
+	Featured.findOneAndUpdate({}, req.body, {}, function(err){
 		if(err) next(err);
-		featuredContent.save();
+		else res.sendStatus('204');
 	});
 });
 

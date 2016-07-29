@@ -210,10 +210,7 @@ p {
 }
 .container {
   opacity: 0;
-  -webkit-transition: opacity 1s ease-in-out;
-  -moz-transition: opacity 1s ease-in-out;
-  -ms-transition: opacity 1s ease-in-out;
-  -o-transition: opacity 1s ease-in-out;
+  transition: opacity 1s ease-in-out;
 }
 .initialising #loading-bar,
 .initialising #loading-bar-spinner {
@@ -362,6 +359,9 @@ p {
 }
 .ng-fade.ng-hide-add {
   transition: all linear 500ms;
+}
+img.icon {
+  opacity: 1;
 }
 img.icon-48 {
   width: 48px;
@@ -1007,6 +1007,9 @@ form .group label {
   -ms-flex-positive: 1;
       flex-grow: 1;
   max-width: 20%;
+}
+form .group label.full {
+  max-width: 100%;
 }
 /* form ui variables */
 /* unfortunate hack to get precise vertical alignment */

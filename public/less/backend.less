@@ -51,10 +51,7 @@ p {
 // Preloader
 .container {
     opacity: 0;
-    -webkit-transition: opacity 1s ease-in-out;
-    -moz-transition: opacity 1s ease-in-out;
-    -ms-transition: opacity 1s ease-in-out;
-    -o-transition: opacity 1s ease-in-out;
+	transition: opacity 1s ease-in-out;
 }
 .initialising {
     #loading-bar, #loading-bar-spinner {
@@ -188,6 +185,7 @@ p {
 }
 
 img.icon {
+	opacity: 1;
     &-48 {
         width: 48px;
         height: 48px;
@@ -692,6 +690,9 @@ form {
             .flex-order(1);
             .flex-grow(1);
             max-width: 20%;
+			&.full {
+				max-width: 100%;
+			}
         }
     }
 }

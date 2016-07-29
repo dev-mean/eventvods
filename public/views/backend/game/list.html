@@ -23,25 +23,25 @@
             <tr>
                 <th></th>
                 <th>
-                    <a href="" ng-click="gamesListController.setSort('gameName')">
+                    <a href="" ng-click="gamesListController.setSort('name')">
                         Game
                     </a>
-                    <span ng-show="gamesListController.sort.sortField == 'gameName' && !gamesListController.sort.sortReverse" class="caret-down">
+                    <span ng-show="gamesListController.sort.sortField == 'name' && !gamesListController.sort.sortReverse" class="caret-down">
                     </span>
-                    <span ng-show="gamesListController.sort.sortField == 'gameName' && gamesListController.sort.sortReverse" class="caret-up">
+                    <span ng-show="gamesListController.sort.sortField == 'name' && gamesListController.sort.sortReverse" class="caret-up">
                     </span>
-                    <span ng-show="gamesListController.sort.sortField != 'gameName'" class="fa fa-unsorted">
+                    <span ng-show="gamesListController.sort.sortField != 'name'" class="fa fa-unsorted">
                     </span>
                 </th>
                 <th>
-                    <a href="" ng-click="gamesListController.setSort('gameAlias')">
-                        Alias
+                    <a href="" ng-click="gamesListController.setSort('slug')">
+                        URL Slug
                     </a>
-                    <span ng-show="gamesListController.sort.sortField == 'gameAlias' && !gamesListController.sort.sortReverse" class="caret-down">
+                    <span ng-show="gamesListController.sort.sortField == 'slug' && !gamesListController.sort.sortReverse" class="caret-down">
                     </span>
-                    <span ng-show="gamesListController.sort.sortField == 'gameAlias' && gamesListController.sort.sortReverse" class="caret-up">
+                    <span ng-show="gamesListController.sort.sortField == 'slug' && gamesListController.sort.sortReverse" class="caret-up">
                     </span>
-                    <span ng-show="gamesListController.sort.sortField != 'gameAlias'" class="fa fa-unsorted">
+                    <span ng-show="gamesListController.sort.sortField != 'slug'" class="fa fa-unsorted">
                     </span>
                 </th>
                 <th>
@@ -55,13 +55,13 @@
         <tbody>
             <tr ng-repeat="game in gamesListController.filterData = (gamesListController.gameData | filter: gamesListController.search) | orderBy: gamesListController.sort.sortField:gamesListController.sort.sortReverse | offset: (gamesListController.paging.page - 1) * gamesListController.paging.itemsPerPage | limitTo: gamesListController.paging.itemsPerPage">
                 <td>
-                    <img ng-src="{{game.gameIcon}}" class="icon-48" />
+                    <img ng-src="{{game.icon}}" class="icon-48" />
                 </td>
                 <td>
-                    {{game.gameName}}
+                    {{game.name}}
                 </td>
                 <td class="date">
-                    {{game.gameAlias | uppercase}}
+                    {{game.slug}}
                 </td>
                 <td class="edit">
                     <a ng-href="/manage/game/{{game._id}}/edit">

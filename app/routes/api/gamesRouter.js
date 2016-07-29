@@ -16,7 +16,7 @@ router.route('/')
 			else res.json(games);
 		});
 	})
-	.post(auth.updater(), AWS.handleUpload(['gameIcon', 'gameBanner']), function(req, res, next) {
+	.post(auth.updater(), AWS.handleUpload(['icon', 'banner']), function(req, res, next) {
 		Indicative.validateAll(req.body, Validators.game, Validators.messages)
 			.then(function() {
 				Game.create(req.body, function(err, game) {
@@ -47,18 +47,18 @@ router.route('/:game_id')
 	})
 	.delete(auth.updater(), function(req, res, next) {
 		Game.findById(req.params.game_id, function(err, doc) {
-			Q.all([AWS.deleteImage(doc.gameIcon), AWS.deleteImage(doc.gameBanner)])
+			Q.all([AWS.deleteImage(doc.icon), AWS.deleteImage(doc.banner)])
 				.then(function() {
 					doc.remove(function(err) {
 						if (err) next(err);
 						else res.sendStatus(204);
-					})
+					});
 				}, function(err) {
 					next(err);
-				})
+				});
 		});
 	})
-	.put(auth.updater(), AWS.handleUpload(['gameIcon', 'gameBanner']), function(req, res, next) {
+	.put(auth.updater(), AWS.handleUpload(['icon', 'banner']), function(req, res, next) {
 		Indicative.validateAll(req.body, Validators.game, Validators.messages)
 			.then(function() {
 				Game.findByIdAndUpdate(req.params.game_id, req.body, function(err, game) {

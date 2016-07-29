@@ -15,25 +15,30 @@
             <label>
                 Game Name
             </label>
-            <input type="text" placeholder="e.g. League of Legends" ng-model="gameFormController.data.gameName" data-parsley-trigger="keyup"  required/>
+            <input type="text" placeholder="e.g. League of Legends" ng-model="gameFormController.data.name" data-parsley-trigger="keyup" required/>
         </div>
         <div class="standard group">
             <label>
-                Game Alias
+                URL Slug
             </label>
-            <input type="text" class="force-caps" placeholder="e.g. LOL" ng-model="gameFormController.data.gameAlias" data-parsley-trigger="keyup" data-parsley-type="alphanum" data-parsley-remote-message="Alias already in use." required/>
+            <input type="text" id="slug" placeholder="e.g. lol" ng-model="gameFormController.data.slug" data-parsley-trigger="keyup" data-parsley-type="alphanum" data-parsley-remote-message="Slug already in use." required/>
+        </div>
+		<div class="standard group">
+            <label class="full">
+				Game will be accessible at eventvods.com/game/{{gameFormController.data.slug}}
+            </label>
+		</div>
+        <div class="standard group">
+            <label>
+                Icon (optional)
+            </label>
+            <image-drop model="gameFormController.data.icon" preview-width="64" preview-height="64" />
         </div>
         <div class="standard group">
             <label>
-                Game Icon (optional)
+                Banner (optional)
             </label>
-            <image-drop model="gameFormController.data.gameIcon" preview-width="64" preview-height="64" />
-        </div>
-        <div class="standard group">
-            <label>
-                Game Banner (optional)
-            </label>
-            <image-drop model="gameFormController.data.gameBanner" preview-width="300" preview-height="100" />
+            <image-drop model="gameFormController.data.banner" preview-width="300" preview-height="100" />
         </div>
         <br />
         <div class="standard group">
