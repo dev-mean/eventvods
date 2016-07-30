@@ -557,6 +557,7 @@ table.standard {
 		align-content: center;
 		line-height: 100%;
         padding: @padding-sm;
+		cursor: pointer;
         &:hover {
             background: @default;
         }
@@ -681,6 +682,7 @@ form {
     .group {
         .flex-display;
         input[type=text],
+		input[type=date],
         p,
         ng-typeahead {
             .flex-order(2);
@@ -770,7 +772,9 @@ form {
 
 .group.standard {
     margin-bottom: 6px;
+	min-height: 30px;
     input[type=text],
+	input[type=date],
     div.image-drop,
     ng-typeahead > input {
         .form-style;
@@ -916,6 +920,16 @@ form {
             display: block;
         }
     }
+	&.icon-right {
+		i {
+			left: auto;
+			right: 14px;
+		}
+		span {
+			padding-left: 0;
+			padding-right: 22px;
+		}
+	}
 	&.icon-only {
 		width: 39px;
 		padding: 10px 0!important;
@@ -941,6 +955,10 @@ form {
             color: darkred;
         }
     }
+	&.float-right {
+		right: 25px;
+		position: absolute;
+	}
 }
 
 @-webkit-keyframes ngdialog-flyin {

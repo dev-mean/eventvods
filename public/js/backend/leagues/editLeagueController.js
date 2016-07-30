@@ -7,7 +7,10 @@
                 vm.title = "Edit League";
                 vm.errors = [];
                 vm.data = {};
+				vm.tab = 1;
 				$( '#slug' ).attr( 'data-parsley-remote', API_BASE_URL + '/validate/leagueSlug/{value}/'  + $routeParams.id );
+				var startDate= new Pikaday({field: $('#startDate')[0], format: "dddd Do MMMM, YYYY" });
+				var endDate = new Pikaday({field: $('#endDate')[0], format: "dddd Do MMMM, YYYY"  });
                 var parsley = $('#addLeagueForm')
                     .parsley();
                 Games.find()
@@ -16,14 +19,16 @@
                             return {
                                 "label": obj.slug + " - " + obj.name,
                                 "value": obj._id
-                            }
-                        })
+                            };
+                        });
                     });
                 Leagues.findById($routeParams.id)
                     .then(function(response) {
                         vm.data = response.data;
                         jQuery('#leagueGame').val(response.data.game.slug + " - " + response.data.game.name);
                         vm.data.game = response.data.game._id;
+						startDate.setDate(response.data.startDate);
+						endDate.setDate(response.data.endDate);
                     }, function(response) {
                         toastr.error('Invalid League ID.', {
                             closeButton: true
@@ -31,6 +36,8 @@
                         $location.path('/leagues');
                     });
                 vm.submit = function() {
+					vm.data.startDate = startDate.getDate();
+					vm.data.endDate = endDate.getDate();
                     if (parsley.validate()) Leagues.update($routeParams.id, vm.data)
                         .then(function(response) {
                             toastr.success('League edited.', {
@@ -40,7 +47,7 @@
                         }, function(response) {
                             vm.errors = response.data.errors;
                         });
-                }
+                };
             }
         ]);
 }());

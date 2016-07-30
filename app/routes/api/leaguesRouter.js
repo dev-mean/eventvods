@@ -19,9 +19,11 @@ router.route('/')
 			});
 	})
 	.post(auth.updater(), AWS.handleUpload(['logo', 'header']), function(req, res, next) {
+		req.body.startDate = Date.parse(req.body.startDate);
+		req.body.endDate = Date.parse(req.body.endDate);
 		Indicative.validateAll(req.body, Validators.league, Validators.messages)
 			.then(function() {
-				req.body.slog = slug(req.body.slug);
+				req.body.slug = slug(req.body.slug);
 				League.create(req.body, function(err, league) {
 					if (err) console.log(err);
 					if (err) next(err);
@@ -52,7 +54,7 @@ router.get('/game/:slug', auth.public_api(), ratelimit, cache, function(req, res
 				if (err) next(err);
 				res.json(leagues);
 			});
-	})
+	});
 });
 router.route('/:league_id')
 	.get(auth.public_api(), ratelimit, cache, function(req, res, next) {
@@ -75,16 +77,18 @@ router.route('/:league_id')
 					doc.remove(function(err) {
 						if (err) next(err);
 						else res.sendStatus(204);
-					})
+					});
 				}, function(err) {
 					next(err);
 				});
 		});
 	})
 	.put(auth.updater(), AWS.handleUpload(['logo', 'header']), function(req, res, next) {
+		req.body.startDate = Date.parse(req.body.startDate);
+		req.body.endDate = Date.parse(req.body.endDate);
 		Indicative.validateAll(req.body, Validators.league, Validators.messages)
 			.then(function() {
-				req.body.slog = slug(req.body.slug);
+				req.body.slug = slug(req.body.slug);
 				League.findByIdAndUpdate(req.params.league_id, req.body, function(err, league) {
 					if (err) next(err);
 					if (!league) {

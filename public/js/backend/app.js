@@ -102,6 +102,7 @@
                     scope.required = attrs.required ? true : false;
                     scope.container = (typeof attrs.container == "undefined") ? false : attrs.container;
                     scope.id = (typeof attrs.id == "undefined") ? "" : attrs.id;
+					scope.group = (typeof attrs.group == "undefined") ? "" : attrs.group;
                     if (scope.startFilter === void 0) {
                         scope.startFilter = true;
                     }
@@ -157,14 +158,12 @@
                                 } else {
                                     return scope.index = scope.suggestions.length - 1;
                                 }
-                                break;
                             case KEY.DOWN:
                                 if (scope.index < (scope.suggestions.length - 1)) {
                                     return scope.index++;
                                 } else {
                                     return scope.index = 0;
                                 }
-                                break;
                             case KEY.ENTER:
                                 return scope.$onSelect(scope.suggestions[scope.index]);
                             case KEY.TAB:
@@ -174,7 +173,7 @@
                         }
                     };
                 },
-                template: "<input id=\"{{id}}\" ng-model=\"search\" placeholder=\"{{placeholder}}\" ng-keydown=\"$onKeyDown($event)\" ng-model-options=\"{ debounce: delay }\" ng-blur=\"$onBlur()\" class=\"ng-typeahead-input\" data-parsley-required=\"{{required}}\" data-parsley-errors-container=\"{{container}}\" autocomplete=\"off\"/>\n<div class=\"ng-typeahead-wrapper\">\n  <ul class=\"ng-typeahead-list\" ng-show=\"showSuggestions\">\n    <li class=\"ng-typeahead-list-item\" ng-repeat=\"item in suggestions = (data | filter:search | startsWith:search:startFilter |limitTo: limit | highlight:search)\" ng-mousedown=\"$onSelect(item)\" ng-class=\"{'active': $index == index}\" ng-bind-html=\"item.html\"></li>\n    </ul>\n</div>\n<div ng-transclude>"
+                template: "<input id=\"{{id}}\" ng-model=\"search\" placeholder=\"{{placeholder}}\" ng-keydown=\"$onKeyDown($event)\" ng-model-options=\"{ debounce: delay }\" ng-blur=\"$onBlur()\" class=\"ng-typeahead-input\" data-parsley-required=\"{{required}}\" data-parsley-errors-container=\"{{container}}\" data-parsley-group=\"{{group}}\" autocomplete=\"off\"/>\n<div class=\"ng-typeahead-wrapper\">\n  <ul class=\"ng-typeahead-list\" ng-show=\"showSuggestions\">\n    <li class=\"ng-typeahead-list-item\" ng-repeat=\"item in suggestions = (data | filter:search | startsWith:search:startFilter |limitTo: limit | highlight:search)\" ng-mousedown=\"$onSelect(item)\" ng-class=\"{'active': $index == index}\" ng-bind-html=\"item.html\"></li>\n    </ul>\n</div>\n<div ng-transclude>"
             };
         })
         // File upload handling adapted from

@@ -845,6 +845,7 @@ table.standard td.delete:hover {
           align-content: center;
   line-height: 100%;
   padding: 16px;
+  cursor: pointer;
 }
 .tabs span:hover {
   background: #3c405c;
@@ -982,6 +983,7 @@ form .group {
   display: flex;
 }
 form .group input[type=text],
+form .group input[type=date],
 form .group p,
 form .group ng-typeahead {
   -webkit-order: 2;
@@ -1074,8 +1076,10 @@ form .group label.full {
 }
 .group.standard {
   margin-bottom: 6px;
+  min-height: 30px;
 }
 .group.standard input[type=text],
+.group.standard input[type=date],
 .group.standard div.image-drop,
 .group.standard ng-typeahead > input {
   border-radius: 2px;
@@ -1091,12 +1095,14 @@ form .group label.full {
   margin-right: 20px;
 }
 .group.standard input[type=text]:focus,
+.group.standard input[type=date]:focus,
 .group.standard div.image-drop:focus,
 .group.standard ng-typeahead > input:focus {
   border-color: #a4abc1;
   color: #d3d7e3;
 }
 .group.standard input[type=text]::-webkit-input-placeholder,
+.group.standard input[type=date]::-webkit-input-placeholder,
 .group.standard div.image-drop::-webkit-input-placeholder,
 .group.standard ng-typeahead > input::-webkit-input-placeholder {
   font-size: 14px;
@@ -1104,6 +1110,7 @@ form .group label.full {
   color: #8690af;
 }
 .group.standard input[type=text]::-moz-placeholder,
+.group.standard input[type=date]::-moz-placeholder,
 .group.standard div.image-drop::-moz-placeholder,
 .group.standard ng-typeahead > input::-moz-placeholder {
   font-size: 14px;
@@ -1111,6 +1118,7 @@ form .group label.full {
   color: #8690af;
 }
 .group.standard input[type=text]:-moz-placeholder,
+.group.standard input[type=date]:-moz-placeholder,
 .group.standard div.image-drop:-moz-placeholder,
 .group.standard ng-typeahead > input:-moz-placeholder {
   font-size: 14px;
@@ -1118,6 +1126,7 @@ form .group label.full {
   color: #8690af;
 }
 .group.standard input[type=text]:-ms-input-placeholder,
+.group.standard input[type=date]:-ms-input-placeholder,
 .group.standard div.image-drop:-ms-input-placeholder,
 .group.standard ng-typeahead > input:-ms-input-placeholder {
   font-size: 14px;
@@ -1125,6 +1134,7 @@ form .group label.full {
   color: #8690af;
 }
 .group.standard input[type=text].force-caps:valid,
+.group.standard input[type=date].force-caps:valid,
 .group.standard div.image-drop.force-caps:valid,
 .group.standard ng-typeahead > input.force-caps:valid {
   text-transform: uppercase;
@@ -1284,6 +1294,14 @@ form .group label.full {
   padding-left: 22px;
   display: block;
 }
+.group.standard div.image-drop div.controls-container p a.icon-right i {
+  left: auto;
+  right: 14px;
+}
+.group.standard div.image-drop div.controls-container p a.icon-right span {
+  padding-left: 0;
+  padding-right: 22px;
+}
 .group.standard div.image-drop div.controls-container p a.icon-only {
   width: 39px;
   padding: 10px 0!important;
@@ -1308,6 +1326,10 @@ form .group label.full {
 }
 .group.standard div.image-drop div.controls-container p a.warning:hover {
   color: darkred;
+}
+.group.standard div.image-drop div.controls-container p a.float-right {
+  right: 25px;
+  position: absolute;
 }
 .group.standard div.image-drop div.controls-container p a:hover {
   background-color: #22ff75;
@@ -1397,6 +1419,14 @@ form .group label.full {
   padding-left: 22px;
   display: block;
 }
+.btn.icon-right i {
+  left: auto;
+  right: 14px;
+}
+.btn.icon-right span {
+  padding-left: 0;
+  padding-right: 22px;
+}
 .btn.icon-only {
   width: 39px;
   padding: 10px 0!important;
@@ -1421,6 +1451,10 @@ form .group label.full {
 }
 .btn.warning:hover {
   color: darkred;
+}
+.btn.float-right {
+  right: 25px;
+  position: absolute;
 }
 @-webkit-keyframes ngdialog-flyin {
   0% {

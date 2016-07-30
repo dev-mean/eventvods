@@ -20,7 +20,7 @@ router.route('/')
 	.post(auth.updater(), AWS.handleUpload(['icon', 'banner']), function(req, res, next) {
 		Indicative.validateAll(req.body, Validators.game, Validators.messages)
 			.then(function() {
-				req.body.slog = slug(req.body.slug);
+				req.body.slug = slug(req.body.slug);
 				Game.create(req.body, function(err, game) {
 					if (err) console.log(err);
 					if (err) next(err);
@@ -63,7 +63,7 @@ router.route('/:game_id')
 	.put(auth.updater(), AWS.handleUpload(['icon', 'banner']), function(req, res, next) {
 		Indicative.validateAll(req.body, Validators.game, Validators.messages)
 			.then(function() {
-				req.body.slog = slug(req.body.slug);
+				req.body.slug = slug(req.body.slug);
 				Game.findByIdAndUpdate(req.params.game_id, req.body, function(err, game) {
 					if (err) next(err);
 					if (!game) {

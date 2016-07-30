@@ -19,6 +19,7 @@ app.set('trust proxy', true);
 var fs = require('fs');
 var path = require('path');
 var mongoose = require('mongoose');
+mongoose.Promise = require('q').Promise;
 var bodyParser = require('body-parser');
 var passport = require('passport');
 var LocalStrategy = require('passport-local')

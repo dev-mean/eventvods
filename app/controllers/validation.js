@@ -37,7 +37,9 @@ module.exports.game = {
 module.exports.league = {
     name: 'required',
     game: 'required',
-	slug: 'required'
+	slug: 'required',
+	startDate: 'required',
+	endDate: 'required'
 };
 module.exports.event = {
     eventGame: 'required|alpha_numeric',
