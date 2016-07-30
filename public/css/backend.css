@@ -1329,7 +1329,6 @@ form .group label.full {
 }
 .group.standard div.image-drop div.controls-container p a.float-right {
   right: 25px;
-  position: absolute;
 }
 .group.standard div.image-drop div.controls-container p a:hover {
   background-color: #22ff75;
@@ -1454,7 +1453,6 @@ form .group label.full {
 }
 .btn.float-right {
   right: 25px;
-  position: absolute;
 }
 @-webkit-keyframes ngdialog-flyin {
   0% {
