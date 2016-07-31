@@ -6,12 +6,13 @@
                 var vm = this;
                 vm.title = "Edit Staff";
                 vm.errors = [];
+				$( '#slug' ).attr( 'data-parsley-remote', API_BASE_URL + '/validate/staffSlug/{value}/'  + $routeParams.id );
                 var parsley = $( '#addStaffForm' )
                             .parsley();
                 Staff.findById( $routeParams.id )
                     .then( function( response ) {
                         vm.data = response.data;
-                        $('#staffRole').val(response.data.staffRole);
+                        $('#staffRole').val(response.data.role);
                     }, function( response ) {
                         toastr.error( 'Invalid Staff ID.', {
                             closeButton: true

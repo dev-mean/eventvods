@@ -7,7 +7,6 @@ var async = require('async');
 router.use('/validate', require('./api/validateRouter'));
 router.use('/auth', require('./api/authRouter'));
 router.use('/data', require('./api/staticRouter'));
-router.use('/nav', require('./api/navRouter'));
 
 //Model CRUD Routes
 router.use('/overview', require('./api/overviewRouter'));
@@ -29,39 +28,6 @@ var cache = require('../controllers/cache');
 var Validators = require('../controllers/validation');
 var Indicative = require('indicative');
 var APIKey = require('../models/APIKey');
-
-router.get('/test', ratelimit, function(req, res, next){
-	res.send('Not ratelimited');
-});
-
-// This router is mounted at /api....so /events here translates to /api/events
-// Enable CORS for /api routing.
-// TODO: Consider whitelist / blacklisting domains?
-router.all('*', function(req, res, next) {
-	var oneof = false;
-	if (req.headers.origin) {
-		res.header('Access-Control-Allow-Origin', req.headers.origin);
-		oneof = true;
-	}
-	if (req.headers['access-control-request-method']) {
-		res.header('Access-Control-Allow-Methods', req.headers['access-control-request-method']);
-		oneof = true;
-	}
-	if (req.headers['access-control-request-headers']) {
-		res.header('Access-Control-Allow-Headers', req.headers['access-control-request-headers']);
-		oneof = true;
-	}
-	if (oneof) {
-		res.header('Access-Control-Max-Age', 60 * 60 * 24 * 31);
-	}
-	// intercept OPTIONS method for pre-flight CORS check
-	if (oneof && req.method == 'OPTIONS') {
-		res.send(200);
-	} else {
-		next();
-	}
-});
-
 
 //APIKEYS
 router.route('/keys')

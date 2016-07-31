@@ -33,7 +33,7 @@
 		</a>
 	</div>
 	<div ng-repeat="game in featuredSelectController.data.games track by $index" sv-element>
-		<span><i class="fa fa-lg fa-fw fa-sort"></i>{{$index + 1}} {{game.name}}</span>
+		<span><i sv-handle class="fa fa-lg fa-fw fa-bars"></i>{{$index + 1}} {{game.name}}</span>
 		<a class="btn lg icon-only float-right del" ng-click="featuredSelectController.deleteGame($index)">
 			<i class="fa fa-minus-circle fa-lg fa-fw">
 			</i>
@@ -50,7 +50,7 @@
 		</a>
 	</div>
 	<div ng-repeat="league in featuredSelectController.data.leagues track by $index" sv-element>
-		<span><i class="fa fa-lg fa-fw fa-sort"></i>{{$index + 1}} {{league.name}}</span>
+		<span><i sv-handle class="fa fa-lg fa-fw fa-bars"></i>{{$index + 1}} {{league.name}}</span>
 		<a class="btn lg icon-only float-right del" ng-click="featuredSelectController.deleteLeague($index)">
 			<i class="fa fa-minus-circle fa-lg fa-fw">
 			</i>

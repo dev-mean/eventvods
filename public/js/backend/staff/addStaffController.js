@@ -6,6 +6,7 @@
                 var vm = this;
                 vm.title = "Add Staff";
                 vm.errors = [];
+				$('#slug').attr('data-parsley-remote', API_BASE_URL + '/validate/staffSlug/{value}');
                 var parsley = $( '#addStaffForm' )
                     .parsley();
                 Staff.getRoles()

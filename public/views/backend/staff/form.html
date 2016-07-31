@@ -13,35 +13,51 @@
     <div class="section">
         <div class="standard group">
             <label>
-                Staff Forename
+                Forename
             </label>
-            <input type="text" placeholder="e.g. Paul" ng-model="staffFormController.data.staffForename" data-parsley-trigger="keyup"  required/>
+            <input type="text" placeholder="e.g. Paul" ng-model="staffFormController.data.forename" data-parsley-trigger="keyup"  required/>
         </div>
         <div class="standard group">
             <label>
-                Staff Surname
+                Surname
             </label>
-            <input type="text" placeholder="e.g. Chaloner" ng-model="staffFormController.data.staffSurname" data-parsley-trigger="keyup"  required/>
+            <input type="text" placeholder="e.g. Chaloner" ng-model="staffFormController.data.surname" data-parsley-trigger="keyup"  required/>
         </div>
         <div class="standard group">
             <label>
-                Staff Alias
+                Alias
             </label>
-            <input type="text" placeholder="e.g. ReDeYe" ng-model="staffFormController.data.staffAlias" data-parsley-trigger="keyup"  required/>
+            <input type="text" placeholder="e.g. ReDeYe" ng-model="staffFormController.data.alias" data-parsley-trigger="keyup"  required/>
+        </div>
+		<div class="standard group">
+            <label class="full">
+            	Displayed as <b>{{staffFormController.data.forename}} "{{staffFormController.data.alias}}" {{staffFormController.data.surname}}</b>
+            </label>
+        </div>
+		<div class="standard group">
+            <label>
+                URL Slug
+            </label>
+            <input id="slug" type="text" placeholder="e.g. ReDeYe" ng-model="staffFormController.data.slug" data-parsley-trigger="keyup" data-parsley-remote-message="Slug already in use." required/>
+        </div>
+		<div class="standard group">
+            <label class="full">
+            	Staff will be accessible at eventvods.com/staff/{{staffFormController.data.slug}}
+            </label>
         </div>
         <div class="standard group">
             <label>
-                Staff Role
+                Default Role
             </label>
-            <ng-typeahead data-id="staffRole" placeholder="e.g. Caster" ng-model="staffFormController.data.staffRole" data="staffFormController.staffRoles" container="#staffRoleError" required/>
+            <ng-typeahead data-id="staffRole" placeholder="e.g. Caster" ng-model="staffFormController.data.role" data="staffFormController.staffRoles" container="#staffRoleError" required/>
             <div id="staffRoleError" class="typeahead-error">
             </div>
         </div>
         <div class="standard group">
             <label>
-                Staff Photo (optional)
+                Photo (optional)
             </label>
-            <image-drop model="staffFormController.data.staffPhoto" preview-width="64" preview-height="64" />
+            <image-drop model="staffFormController.data.photo" preview-width="64" preview-height="64" />
         </div>
         <br />
         <div class="standard group">

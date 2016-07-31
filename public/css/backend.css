@@ -208,6 +208,9 @@ p {
 .margin-right {
   margin-right: 25px!important;
 }
+i.fa-bars {
+  margin-right: 10px;
+}
 .container {
   opacity: 0;
   transition: opacity 1s ease-in-out;
@@ -1327,8 +1330,9 @@ form .group label.full {
 .group.standard div.image-drop div.controls-container p a.warning:hover {
   color: darkred;
 }
-.group.standard div.image-drop div.controls-container p a.float-right {
+.group.standard div.image-drop div.controls-container p a.pull-right {
   right: 25px;
+  position: absolute;
 }
 .group.standard div.image-drop div.controls-container p a:hover {
   background-color: #22ff75;
@@ -1451,8 +1455,9 @@ form .group label.full {
 .btn.warning:hover {
   color: darkred;
 }
-.btn.float-right {
+.btn.pull-right {
   right: 25px;
+  position: absolute;
 }
 @-webkit-keyframes ngdialog-flyin {
   0% {

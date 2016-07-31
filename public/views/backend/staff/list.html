@@ -23,36 +23,47 @@
             <tr>
                 <th></th>
                 <th>
-                    <a href="" ng-click="staffListController.setSort('staffName')">
+                    <a href="" ng-click="staffListController.setSort('name')">
                         Name
                     </a>
-                    <span ng-show="staffListController.sort.sortField == 'staffName' && !staffListController.sort.sortReverse" class="caret-down">
+                    <span ng-show="staffListController.sort.sortField == 'name' && !staffListController.sort.sortReverse" class="caret-down">
                     </span>
-                    <span ng-show="staffListController.sort.sortField == 'staffName' && staffListController.sort.sortReverse" class="caret-up">
+                    <span ng-show="staffListController.sort.sortField == 'name' && staffListController.sort.sortReverse" class="caret-up">
                     </span>
-                    <span ng-show="staffListController.sort.sortField != 'staffName'" class="fa fa-unsorted">
+                    <span ng-show="staffListController.sort.sortField != 'name'" class="fa fa-unsorted">
                     </span>
                 </th>
                 <th>
-                    <a href="" ng-click="staffListController.setSort('staffAlias')">
+                    <a href="" ng-click="staffListController.setSort('alias')">
                         Alias
                     </a>
-                    <span ng-show="staffListController.sort.sortField == 'staffAlias' && !staffListController.sort.sortReverse" class="caret-down">
+                    <span ng-show="staffListController.sort.sortField == 'alias' && !staffListController.sort.sortReverse" class="caret-down">
                     </span>
-                    <span ng-show="staffListController.sort.sortField == 'staffAlias' && staffListController.sort.sortReverse" class="caret-up">
+                    <span ng-show="staffListController.sort.sortField == 'alias' && staffListController.sort.sortReverse" class="caret-up">
                     </span>
-                    <span ng-show="staffListController.sort.sortField != 'staffAlias'" class="fa fa-unsorted">
+                    <span ng-show="staffListController.sort.sortField != 'alias'" class="fa fa-unsorted">
+                    </span>
+                </th>
+				<th>
+                    <a href="" ng-click="staffListController.setSort('slug')">
+                        URL Slug
+                    </a>
+                    <span ng-show="staffListController.sort.sortField == 'slug' && !staffListController.sort.sortReverse" class="caret-down">
+                    </span>
+                    <span ng-show="staffListController.sort.sortField == 'slug' && staffListController.sort.sortReverse" class="caret-up">
+                    </span>
+                    <span ng-show="staffListController.sort.sortField != 'slug'" class="fa fa-unsorted">
                     </span>
                 </th>
                 <th>
-                    <a href="" ng-click="staffListController.setSort('staffRole')">
+                    <a href="" ng-click="staffListController.setSort('role')">
                         Role
                     </a>
-                    <span ng-show="staffListController.sort.sortField == 'staffRole' && !staffListController.sort.sortReverse" class="caret-down">
+                    <span ng-show="staffListController.sort.sortField == 'role' && !staffListController.sort.sortReverse" class="caret-down">
                     </span>
-                    <span ng-show="staffListController.sort.sortField == 'staffRole' && staffListController.sort.sortReverse" class="caret-up">
+                    <span ng-show="staffListController.sort.sortField == 'role' && staffListController.sort.sortReverse" class="caret-up">
                     </span>
-                    <span ng-show="staffListController.sort.sortField != 'staffRole'" class="fa fa-unsorted">
+                    <span ng-show="staffListController.sort.sortField != 'role'" class="fa fa-unsorted">
                     </span>
                 </th>
                 <th></th>
@@ -62,16 +73,19 @@
         <tbody>
             <tr ng-repeat="staff in staffListController.filterData = (staffListController.staffData | filter: staffListController.search) | orderBy: staffListController.sort.sortField:staffListController.sort.sortReverse | offset: (staffListController.paging.page - 1) * staffListController.paging.itemsPerPage | limitTo: staffListController.paging.itemsPerPage">
                 <td>
-                    <img ng-src="{{staff.staffPhoto}}" class="icon-48" />
+                    <img ng-src="{{staff.photo}}" class="icon-48" />
                 </td>
                 <td>
-                    {{staff.staffName}}
+                    {{staff.name}}
                 </td>
                 <td>
-                    {{staff.staffAlias}}
+                    {{staff.alias}}
+                </td>
+				<td>
+                    {{staff.slug}}
                 </td>
                 <td>
-                    {{staff.staffRole}}
+                    {{staff.role}}
                 </td>
                 <td class="edit">
                     <a ng-href="/manage/staff/{{staff._id}}/edit">

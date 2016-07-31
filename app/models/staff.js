@@ -4,24 +4,29 @@ var SocialMedia = require('./socialmedia')
 	.schema;
 
 var staffSchema = new Schema({
-	staffForename: {
+	forename: {
 		type: String,
 		required: true
 	},
-	staffSurname: {
+	surname: {
 		type: String,
 		required: true
 	},
-	staffAlias: {
+	alias: {
 		type: String,
 		required: true
 	},
-	staffMedia: [SocialMedia],
-	staffRole: {
+	slug: {
+		type: String,
+		required: true,
+		unique: true
+	},
+	media: [SocialMedia],
+	role: {
 		type: String,
 		required: true
 	},
-	staffPhoto: String
+	photo: String
 }, {
 	toObject: {
 		virtuals: true
@@ -31,9 +36,9 @@ var staffSchema = new Schema({
 	}
 });
 
-staffSchema.virtual('staffName')
+staffSchema.virtual('name')
 	.get(function() {
-		return this.staffForename + ' ' + this.staffSurname;
+		return this.forename + ' "' + this.alias + '" ' + this.surname;
 	});
 
 var Staff = mongoose.model('Staff', staffSchema);

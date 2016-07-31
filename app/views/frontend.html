@@ -34,24 +34,30 @@
 		<nav class="nav-main" role="navigation" ng-controller="NavController as Nav">
 			<ul class="dropdown-content wide" id="games_dd">
 				<li ng-repeat="game in Nav.links.games">
-					<a ng-href="/game/{{game.gameAlias}}">
+					<a ng-href="/game/{{game.slug}}">
 						<i class="material-icons left icon">
-							<img ng-src="{{game.gameIcon}}" class="icon-24"/>
+							<img ng-src="{{game.icon}}" class="icon-24"/>
 							&nbsp;
 						</i>
-						{{game.gameName}}
+						{{game.name}}
 					</a>
+				</li>
+				<li class="border-top">
+					<a href="/games">All Games</a>
 				</li>
 			</ul>
 			<ul class="dropdown-content wide grouped" id="leagues_dd">
-				<li ng-repeat="league in Nav.links.orderedLeagues = (Nav.links.leagues | orderBy:'leagueGame.gameName') track by $index" ng-class="Nav.leagueClass($index)">
-					<a ng-href="/league/{{league.leagueSlug}}">
+				<li ng-repeat="league in Nav.links.orderedLeagues = (Nav.links.leagues | orderBy:'game.name') track by $index" ng-class="Nav.leagueClass($index)">
+					<a ng-href="/league/{{league.slug}}">
 						<i class="material-icons left icon border-right">
-							<img ng-src="{{league.leagueGame.gameIcon}}" class="icon-24"/>
+							<img ng-src="{{league.game.icon}}" class="icon-24"/>
 							&nbsp;
 						</i>
-						{{league.leagueName}}
+						{{league.name}}
 					</a>
+				</li>
+				<li class="border-top">
+					<a href="/leagues">All Leagues</a>
 				</li>
 			</ul>
 			<div class="nav-wrapper container">

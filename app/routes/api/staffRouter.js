@@ -14,7 +14,7 @@ router.route('/')
 			res.json(staff);
 		});
 	})
-	.post(auth.updater(), AWS.handleUpload(['staffPhoto']), function(req, res, next) {
+	.post(auth.updater(), AWS.handleUpload(['photo']), function(req, res, next) {
 		Indicative.validateAll(req.body, Validators.staff, Validators.messages)
 			.then(function() {
 				Staff.create(req.body, function(err, staff) {
@@ -32,7 +32,7 @@ router.route('/')
 router.route('/:staff_id')
 	.delete(auth.updater(), function(req, res, next) {
 		Staff.findById(req.params.staff_id, function(err, doc) {
-			AWS.deleteImage(doc.staffPhoto)
+			AWS.deleteImage(doc.photo)
 				.then(function() {
 					doc.remove(function(err) {
 						if (err) next(err);
@@ -54,7 +54,7 @@ router.route('/:staff_id')
 			res.json(staff);
 		});
 	})
-	.put(auth.updater(), AWS.handleUpload(['staffPhoto']), function(req, res, next) {
+	.put(auth.updater(), AWS.handleUpload(['photo']), function(req, res, next) {
 		Indicative.validateAll(req.body, Validators.staff, Validators.messages)
 			.then(function() {
 				Staff.findByIdAndUpdate(req.params.staff_id, req.body, function(err, staff) {

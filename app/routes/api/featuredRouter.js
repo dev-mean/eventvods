@@ -7,12 +7,17 @@ router.get('/', function(req, res, next){
 	.populate({
 		path: 'games',
 		model: 'Game',
-		select: 'name slug'
+		select: 'name slug icon'
 	})
 	.populate({
 		path: 'leagues',
 		model: 'League',
-		select: 'name slug'
+		select: 'name slug game',
+		populate: {
+			path: 'game',
+			model: 'Game',
+			select: 'name icon'
+		}
 	})
 	.exec(function(err, featuredContent){
 		if(err) next(err);
