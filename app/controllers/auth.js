@@ -10,6 +10,11 @@ constants = {
 };
 module.exports.constants = constants;
 
+function check_use_cache(req){
+	if (req.isAuthenticated() && req.user.userRights >= constants.admin)
+		req.use_express_redis_cache = false;
+	return req;
+}
 function key_generate_recurse(req, res, callback) {
 	var key = keygen._({
 		length: 24,
@@ -53,6 +58,7 @@ function errorNoPermission(req, res, next) {
 
 module.exports.logged_in = function(skipEmailCheck) {
 	return function(req, res, next) {
+		req = check_use_cache(req);
 		if (!req.isAuthenticated())
 			loginRedirect(req, res);
 		else if (req.user.emailConfirmed || skipEmailCheck)
@@ -63,6 +69,7 @@ module.exports.logged_in = function(skipEmailCheck) {
 };
 module.exports.updater = function() {
 	return function(req, res, next) {
+		req = check_use_cache(req);
 		return next();
 		// if (!req.isAuthenticated())
 		// 	loginRedirect(req, res);
@@ -74,6 +81,7 @@ module.exports.updater = function() {
 };
 module.exports.admin = function() {
 	return function(req, res, next) {
+		req = check_use_cache(req);
 		if (!req.isAuthenticated())
 			loginRedirect(req, res);
 		else if (req.user.userRights >= constants.admin)
@@ -86,6 +94,7 @@ module.exports.admin = function() {
 // Auth for API, doesn't try to redirect or anything fancy, as the user should never see these errors
 module.exports.public_api = function() {
 	return function(req, res, next) {
+		req = check_use_cache(req);
 		var key = req.query.apikey || req.get('X-Eventvods-Authorization');
 		if (process.env.NODE_ENV == "development" ||
 			(req.isAuthenticated && req.isAuthenticated() && req.user.userRights >= constants.updater))

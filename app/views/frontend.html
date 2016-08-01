@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="eventvods">
 <head>
 	<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
 	<meta content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no" name="viewport" />
@@ -7,8 +7,8 @@
 	<meta content="IE=edge" http-equiv="X-UA-Compatible" />
 	<meta name="fragment" content="!">
 	<base href="/" />
-	<title>
-		Eventvods
+	<title ng-bind="meta.title">
+		Eventvods - Esports on Demand
 	</title>
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.css" media="screen,projection" rel="stylesheet" type="text/css" />
@@ -16,8 +16,14 @@
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/angular-loading-bar/0.9.0/loading-bar.min.css" rel="stylesheet" />
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/angular-xeditable/0.2.0/css/xeditable.min.css" rel="stylesheet" />
 	<link href="/assets/images/favicon.png" rel="icon" type="image/x-icon" />
+	<meta name="description" content="{{meta.description}}" />
+	<meta property="og:title" content="{{meta.title}}" />
+	<meta property="og:type"" content="website" />
+	<meta property="og:image"" content="/public/snapshot.png" />
+	<meta property="og:url"" content="{{meta.url}}" />
+	<meta property="og:description"" content="{{meta.description}}" />
 </head>
-<body ng-app="eventvods" ng-controller="PageController as Page" id="top">
+<body id="top"  ng-controller="PageController as Page" >
 	<header ng-controller="LoginRegisterController as LR">
 		<div class="cookie_disclaimer" ng-class="{show: Page.cookiesAccepted === false}">
 			<div class="container">
