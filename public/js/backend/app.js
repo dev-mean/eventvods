@@ -310,6 +310,7 @@
 						});
 					$scope.$add = function(){
 						$scope.model.push(Object.create($scope.data.selectedStaff));
+						$scope.data.filter = "";
 					}
 					$scope.$remove = function($index){
 						$scope.model.splice($index, 1);
@@ -318,7 +319,7 @@
 						console.log($scope);
 					}
 				},
-				template: '<div class="sortable-container" sv-root sv-part="model"><div><span><select ng-options="staffMember.name for staffMember in data.staff" ng-model="data.selectedStaff"></select></span><button-right icon="fa-plus" ng-click="$add()" /></div><div sv-element ng-repeat="staff in model track by $index"><span><i sv-h2andle class="fa fa-lg fa-fw fa-bars"></i>{{$index + 1}}.</span><span editable-text="staff.name" ng-bind="staff.name"></span><span editable-text="staff.role" ng-bind="staff.role"></span><button-right class="del" icon="fa-minus" ng-click="$remove($index)" /></div></div>'
+				template: '<div class="sortable-container" sv-root sv-part="model"><div><span><select ng-options="staffMember.name for staffMember in data.staff | filter:data.filter" ng-model="data.selectedStaff"></select><input class="form-style" placeholder="Filter Staff" ng-model="data.filter" /></span><button-right icon="fa-plus" ng-click="$add()" /></div><div sv-element ng-repeat="staff in model track by $index"><span><i sv-h2andle class="fa fa-lg fa-fw fa-bars"></i>{{$index + 1}}.</span><span editable-text="staff.name" ng-bind="staff.name"></span><span editable-text="staff.role" ng-bind="staff.role"></span><button-right class="del" icon="fa-minus" ng-click="$remove($index)" /></div></div>'
 			};
 		})
 		.directive('buttonRight', function() {

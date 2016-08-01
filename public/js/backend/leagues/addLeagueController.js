@@ -15,11 +15,21 @@
 				$('#slug').attr('data-parsley-remote', API_BASE_URL + '/validate/leagueSlug/{value}');
 				var startDate = new Pikaday({
 					field: $('#startDate')[0],
-					format: "dddd Do MMMM, YYYY"
+					format: "dddd Do MMMM, YYYY",
+					onClose: function(){
+						setTimeout(function(){
+							$('#startDate').focus();
+						}, 0);
+					}
 				});
 				var endDate = new Pikaday({
 					field: $('#endDate')[0],
-					format: "dddd Do MMMM, YYYY"
+					format: "dddd Do MMMM, YYYY",
+					onClose: function(){
+						setTimeout(function(){
+							$('#endDate').focus();
+						}, 0);
+					}
 				});
 				var parsley = $('#addLeagueForm').parsley();
 				Games.find()
