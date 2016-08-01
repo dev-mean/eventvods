@@ -42,6 +42,7 @@ if (process.env.NODE_ENV == "development") {
 		.withFormatter('json')
 		.withLowestSeverity('warn');
 }
+app.use(require('prerender-node').set('prerenderToken', config.prerender));
 //Static file at the top, prevents all the code below being run for static files.
 app.use('/assets', express.static(path.join(__dirname, 'public')));
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));

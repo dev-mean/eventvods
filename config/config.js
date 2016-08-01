@@ -27,6 +27,7 @@ module.exports = {
 		"bucket": process.env.AWS_BUCKET || "",
 		"cdn": process.env.AWS_CDN || ""
 	},
+	"prerender": process.env.PRERENDER_TOKEN,
 	"staffRoles": ['Analyst', 'Caster', 'Coach', 'Host', 'Translator', 'Player', 'Mixed', 'Other'],
 	"mediaTypes": ['Website', 'Twitter', 'Facebook', 'Twitch', 'Youtube', 'Stream', 'Other']
 };

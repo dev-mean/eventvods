@@ -35,6 +35,7 @@
     "passport-local": "*",
     "passport-local-mongoose": "*",
     "pmx": "*",
+    "prerender-node": "^2.3.0",
     "q": "*",
     "ratelimit.js": "^1.7.0",
     "redis": "*",
