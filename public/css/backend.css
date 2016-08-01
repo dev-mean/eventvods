@@ -189,6 +189,7 @@ body {
 a {
   color: inherit;
   text-decoration: none;
+  cursor: pointer;
 }
 p {
   padding-left: 15px;
@@ -577,13 +578,15 @@ nav.leftNavigation a i.fa {
   left: -25px;
   transition: all 0.25s ease-in-out;
 }
-.section {
+.section,
+.sortable-container {
   position: relative;
   background: #3c405c;
   padding: 24px;
   margin-top: 0;
 }
-.section h2 {
+.section h2,
+.sortable-container h2 {
   padding: 10px 0;
 }
 /* context header */
@@ -682,7 +685,8 @@ table.standard td {
 }
 table.standard td.edit,
 table.standard td.url,
-table.standard td.delete {
+table.standard td.delete,
+table.standard td.update {
   padding: 0;
   margin: 0;
   width: 48px;
@@ -690,7 +694,8 @@ table.standard td.delete {
 }
 table.standard td.edit a,
 table.standard td.url a,
-table.standard td.delete a {
+table.standard td.delete a,
+table.standard td.update a {
   cursor: pointer;
   display: block;
   line-height: 76px;
@@ -703,12 +708,14 @@ table.standard td.delete a {
 }
 table.standard td.edit a i,
 table.standard td.url a i,
-table.standard td.delete a i {
+table.standard td.delete a i,
+table.standard td.update a i {
   padding-left: 5px;
 }
 table.standard td.edit:hover,
 table.standard td.url:hover,
-table.standard td.delete:hover {
+table.standard td.delete:hover,
+table.standard td.update:hover {
   background: #474c6c;
 }
 .caret-up {
@@ -1655,13 +1662,10 @@ form .group label.full {
       -ms-flex-order: 3;
           order: 3;
 }
-.sortable-container {
-  padding: 50px;
-}
 .sortable-container div {
   margin: 20px auto;
   padding: 5px 25px;
-  background: #3c405c;
+  background: #474c6c;
   border-radius: 5px;
   display: -webkit-flex;
   display: -moz-flex;
@@ -1682,6 +1686,56 @@ form .group label.full {
   background: #3c405c;
   border: 0;
   color: white;
+}
+.sortable-container span.editable-click {
+  color: #a4abc1 !important;
+  border-bottom: 1px dashed transparent;
+  -webkit-flex-grow: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  -webkit-flex-basis: 0px;
+      -ms-flex-preferred-size: 0px;
+          flex-basis: 0px;
+  margin-left: 15px;
+}
+.sortable-container span.editable-click:hover {
+  border-bottom: 1px dashed #a4abc1 !important;
+}
+.sortable-container .editable-input {
+  border-radius: 2px;
+  outline: none;
+  line-height: 14px;
+  font-size: 14px;
+  font-weight: normal;
+  padding: 4px 5px;
+  background: transparent;
+  border: 2px solid #535a83;
+  color: #a4abc1;
+  transition: all 0.25s ease-in-out;
+}
+.sortable-container .editable-input:focus {
+  border-color: #a4abc1;
+  color: #d3d7e3;
+}
+.sortable-container .editable-input::-webkit-input-placeholder {
+  font-size: 14px;
+  line-height: 16px;
+  color: #8690af;
+}
+.sortable-container .editable-input::-moz-placeholder {
+  font-size: 14px;
+  line-height: 16px;
+  color: #8690af;
+}
+.sortable-container .editable-input:-moz-placeholder {
+  font-size: 14px;
+  line-height: 16px;
+  color: #8690af;
+}
+.sortable-container .editable-input:-ms-input-placeholder {
+  font-size: 14px;
+  line-height: 16px;
+  color: #8690af;
 }
 .pika-single {
   border: 2px solid #a4abc1;

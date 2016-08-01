@@ -67,7 +67,7 @@ module.exports.handleUpload = function( fields ) {
 }
 module.exports.deleteImage = function( key ) {
     var $promise = Q.defer();
-    if ( typeof key === "undefined" ) $promise.resolve();
+    if ( typeof key === "undefined" || key == null) $promise.resolve();
     else {
         key = key.replace( config.aws.cdn, "" );
         S3.deleteObject( {

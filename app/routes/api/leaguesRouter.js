@@ -12,7 +12,7 @@ var slug = require('slug');
 router.route('/')
 	.get(auth.public_api(), ratelimit, cache, function(req, res, next) {
 		League.find()
-			.populate('game')
+			.populate('game staff')
 			.exec(function(err, leagues) {
 				if (err) next(err);
 				else res.json(leagues);
@@ -21,6 +21,7 @@ router.route('/')
 	.post(auth.updater(), AWS.handleUpload(['logo', 'header']), function(req, res, next) {
 		req.body.startDate = Date.parse(req.body.startDate);
 		req.body.endDate = Date.parse(req.body.endDate);
+		console.log(req.body.staff);
 		Indicative.validateAll(req.body, Validators.league, Validators.messages)
 			.then(function() {
 				req.body.slug = slug(req.body.slug);
@@ -59,7 +60,7 @@ router.get('/game/:slug', auth.public_api(), ratelimit, cache, function(req, res
 router.route('/:league_id')
 	.get(auth.public_api(), ratelimit, cache, function(req, res, next) {
 		League.findById(req.params.league_id)
-			.populate('game')
+			.populate('game staff')
 			.exec(function(err, league) {
 				if (err) next(err);
 				if (!league) {

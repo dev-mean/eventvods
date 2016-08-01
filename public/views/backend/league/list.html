@@ -22,7 +22,7 @@
         <thead>
             <tr>
                 <th>
-                    <a href="" ng-click="leaguesListController.setSort('game.slug')">
+                    <a ng-click="leaguesListController.setSort('game.slug')">
                         Game
                     </a>
                     <span ng-show="leaguesListController.sort.sortField == 'game.slug' && !leaguesListController.sort.sortReverse" class="caret-down">
@@ -36,7 +36,7 @@
                     League Logo
                 </th>
                 <th>
-                    <a href="" ng-click="leaguesListController.setSort('name')">
+                    <a ng-click="leaguesListController.setSort('name')">
                         League Name
                     </a>
                     <span ng-show="leaguesListController.sort.sortField == 'name' && !leaguesListController.sort.sortReverse" class="caret-down">
@@ -47,7 +47,7 @@
                     </span>
                 </th>
 				<th>
-					<a href="" ng-click="leaguesListController.setSort('slug')">
+					<a ng-click="leaguesListController.setSort('slug')">
                         URL Slug
                     </a>
                     <span ng-show="leaguesListController.sort.sortField == 'slug' && !leaguesListController.sort.sortReverse" class="caret-down">
@@ -57,6 +57,7 @@
                     <span ng-show="leaguesListController.sort.sortField != 'slug'" class="fa fa-unsorted">
                     </span>
 				</th>
+				<th></th>
                 <th>
                 </th>
                 <th>
@@ -79,6 +80,12 @@
                 </td>
 				<td>
 					/league/{{league.slug}}
+				</td>
+				<td class="update">
+					<a ng-href="/manage/league/{{league._id}}/update">
+                        <i class="fa fa-list fa-fw">
+                        </i>
+                    </a>
 				</td>
                 <td class="edit">
                     <a ng-href="/manage/league/{{league._id}}/edit">

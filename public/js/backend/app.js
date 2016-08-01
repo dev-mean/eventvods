@@ -1,6 +1,6 @@
 (function() {
 	'use strict';
-	angular.module('eventApp', ['ngAnimate', 'ngResource', 'ngRoute', 'angular-loading-bar', 'ngDialog', 'angular-sortable-view'])
+	angular.module('eventApp', ['ngAnimate', 'ngResource', 'ngRoute', 'angular-loading-bar', 'ngDialog', 'angular-sortable-view','xeditable'])
 		.constant('eventConstants', {
 			baseUri: '/api/'
 		})
@@ -305,18 +305,23 @@
 					model: '='
 				},
 				link: function($scope){
+					$scope.data = {};
 					staffService.find()
 						.then(function(res){
-							$scope.staff = res.data;
+							$scope.data.staff = res.data;
+							$scope.data.selectedStaff = res.data[0];
 						});
 					$scope.$add = function(){
-						$scope.model.push($scope.staff[0]);
+						$scope.model.push(Object.create($scope.data.selectedStaff));
 					}
 					$scope.$remove = function($index){
 						$scope.model.splice($index, 1);
 					}
+					$scope.$log = function(){
+						console.log($scope);
+					}
 				},
-				template: '<div class="sortable-container" sv-root sv-part="model"><div><span>Add Staff</span><button-right icon="fa-plus" ng-click="$add()" /></div><div sv-element ng-repeat="staff in model track by $index"><span><i sv-h2andle class="fa fa-lg fa-fw fa-bars"></i>{{$index + 1}}. {{staff.name}}</span><button-right class="del" icon="fa-minus" ng-click="$remove($index)" /></div></div>'
+				template: '<div class="sortable-container" sv-root sv-part="model"><div><span><select ng-options="staffMember.name for staffMember in data.staff" ng-model="data.selectedStaff"></select></span><button-right icon="fa-plus" ng-click="$add()" /></div><div sv-element ng-repeat="staff in model track by $index"><span><i sv-h2andle class="fa fa-lg fa-fw fa-bars"></i>{{$index + 1}}.</span><span editable-text="staff.name" ng-bind="staff.name"></span><span editable-text="staff.role" ng-bind="staff.role"></span><button-right class="del" icon="fa-minus" ng-click="$remove($index)" /></div></div>'
 			};
 		})
 		.directive('buttonRight', function() {

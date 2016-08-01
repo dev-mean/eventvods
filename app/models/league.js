@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-var Sponsor = require('./sponsor').schema;
+var Staff = require('./staff').schema;
 var slug = require('slug');
 
 var leagueSchema = new Schema({
@@ -20,7 +20,7 @@ var leagueSchema = new Schema({
 	},
 	startDate: Date,
 	endDate: Date,
-	sponsors: [Sponsor],
+	staff: [Staff],
 	logo: String,
 	header: String,
 });

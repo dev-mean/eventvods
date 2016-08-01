@@ -12,11 +12,6 @@
 					teams: []
 				};
 				vm.tab = 1;
-				vm.data.staff = [{
-					name: 'Test'
-				}, {
-					name: 'Test2'
-				}];
 				$('#slug').attr('data-parsley-remote', API_BASE_URL + '/validate/leagueSlug/{value}');
 				var startDate = new Pikaday({
 					field: $('#startDate')[0],
@@ -61,6 +56,14 @@
 						}, function(response) {
 							vm.errors = response.data.errors;
 						});
+					else for (var i = 1; i < 4; i++) {
+						console.log(i);
+						if (!parsley.validate({
+								group: i
+							})) {
+							return vm.tab = i;
+						}
+					};
 				};
 			}
 		]);

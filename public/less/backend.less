@@ -27,6 +27,7 @@ body {
 a {
     color: inherit;
     text-decoration: none;
+	cursor: pointer;
 }
 
 p {
@@ -360,7 +361,7 @@ nav.leftNavigation {
     }
 }
 
-.section {
+.section, .sortable-container {
     position: relative;
     background: @default;
     padding: @gutter;
@@ -451,7 +452,7 @@ table.standard {
         font-size: @font-size;
         height: 76px;
         border-bottom: 1px solid @default-light;
-        &.edit, &.url, &.delete {
+        &.edit, &.url, &.delete, &.update {
             padding: 0;
             margin: 0;
             width: 48px;
@@ -1170,11 +1171,10 @@ form {
     order: 3;
 }
 .sortable-container {
-	padding: 50px;
 	div {
 		margin: 20px auto;
 		padding: 5px 25px;
-		background: @default;
+		background: @default-light;
 		border-radius: 5px;
 		.flex-display;
 		align-content: center;
@@ -1187,6 +1187,19 @@ form {
 			border: 0;
 			color: white;
 		}
+	}
+	span.editable-click {
+		color: @silver-dark!important;
+		border-bottom: 1px dashed transparent;
+		flex-grow: 1;
+		flex-basis: 0px;
+		margin-left: 15px;
+		&:hover {
+			border-bottom: 1px dashed @silver-dark!important
+		}
+	}
+	.editable-input{
+		.form-style;
 	}
 }
 .pika-single {

@@ -8,7 +8,7 @@
                 vm.staffData = [];
                 vm.filter = {};
                 vm.sort = {
-                    sortField: 'staffName',
+                    sortField: 'name',
                     sortReverse: false
                 };
                 vm.paging = {
