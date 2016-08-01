@@ -6,5 +6,8 @@ var auth = require('../../controllers/auth');
 router.get('/staffRoles', auth.public_api(), function(req, res, next){
     res.json(config.staffRoles);
 });
+router.get('/mediaTypes', auth.public_api(), function(req, res, next){
+    res.json(config.mediaTypes);
+});
 
 module.exports = router;

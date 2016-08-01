@@ -315,11 +315,38 @@
 					$scope.$remove = function($index){
 						$scope.model.splice($index, 1);
 					}
-					$scope.$log = function(){
-						console.log($scope);
+				},
+				template: '<div class="sortable-container" sv-root sv-part="model"><div><span><select ng-options="staffMember.name for staffMember in data.staff | filter:data.filter" ng-model="data.selectedStaff"></select><input class="form-style" placeholder="Filter Staff" ng-model="data.filter" /></span><button-right icon="fa-plus" ng-click="$add()" /></div><div sv-element ng-repeat="staff in model track by $index"><span><i sv-handle class="fa fa-lg fa-fw fa-bars"></i>{{$index + 1}}.</span><span editable-text="staff.name" ng-bind="staff.name"></span><span editable-text="staff.role" ng-bind="staff.role"></span><button-right class="del" icon="fa-minus" ng-click="$remove($index)" /></div></div>'
+			};
+		})
+		.directive('mediaList', function($http, API_BASE_URL) {
+			return {
+				restrict: 'E',
+				scope: {
+					model: '='
+				},
+				link: function($scope){
+					$http.get(API_BASE_URL+'/data/mediaTypes')
+						.then(function(res){
+							$scope.types = res.data;
+							$scope.data.type = res.data[0];
+						});
+					$scope.data = {};
+					$scope.$add = function(){
+						$scope.model.push({
+							name: $scope.data.name,
+							link: $scope.data.link,
+							type: $scope.data.type
+						});
+						$scope.data = {
+							type: $scope.types[0]
+						}
+					}
+					$scope.$remove = function($index){
+						$scope.model.splice($index, 1);
 					}
 				},
-				template: '<div class="sortable-container" sv-root sv-part="model"><div><span><select ng-options="staffMember.name for staffMember in data.staff | filter:data.filter" ng-model="data.selectedStaff"></select><input class="form-style" placeholder="Filter Staff" ng-model="data.filter" /></span><button-right icon="fa-plus" ng-click="$add()" /></div><div sv-element ng-repeat="staff in model track by $index"><span><i sv-h2andle class="fa fa-lg fa-fw fa-bars"></i>{{$index + 1}}.</span><span editable-text="staff.name" ng-bind="staff.name"></span><span editable-text="staff.role" ng-bind="staff.role"></span><button-right class="del" icon="fa-minus" ng-click="$remove($index)" /></div></div>'
+				template: '<div class="sortable-container" sv-root sv-part="model"><div><span><input type="text" placeholder="Media Name" ng-model="data.name" /></span><span><input type="text" placeholder="Media Link" ng-model="data.link" /></span><span><select ng-options="t as t for t in types" ng-model="data.type"></select></span><button-right icon="fa-plus" ng-click="$add()" /></div><div sv-element ng-repeat="media in model track by $index"><span class="no-grow"><i sv-handle class="fa fa-lg fa-fw fa-bars"></i>{{$index + 1}}.</span><span editable-text="media.name" ng-bind="media.name"></span><span editable-text="media.link" ng-bind="media.link"></span><span class="center"><select ng-options="t as t for t in types" ng-model="media.type"></select></span><button-right class="del" icon="fa-minus" ng-click="$remove($index)" /></div></div>'
 			};
 		})
 		.directive('buttonRight', function() {

@@ -21,7 +21,6 @@ router.route('/')
 	.post(auth.updater(), AWS.handleUpload(['logo', 'header']), function(req, res, next) {
 		req.body.startDate = Date.parse(req.body.startDate);
 		req.body.endDate = Date.parse(req.body.endDate);
-		console.log(req.body.staff);
 		Indicative.validateAll(req.body, Validators.league, Validators.messages)
 			.then(function() {
 				req.body.slug = slug(req.body.slug);

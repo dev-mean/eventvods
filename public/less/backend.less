@@ -1181,11 +1181,19 @@ form {
 		justify-content: space-between;
 		span {
 			line-height: 40px;
-		}
-		select {
-			background: @default;
-			border: 0;
-			color: white;
+			flex-grow: 1;
+			overflow-x: hidden;
+			text-overflow: ellipsis;
+			input, select {
+				.form-style;
+				background: @default;
+			}
+			&.center {
+				text-align: center;
+			}
+			&.no-grow {
+				flex-grow: 0;
+			}
 		}
 	}
 	span.editable-click {
@@ -1198,8 +1206,12 @@ form {
 			border-bottom: 1px dashed @silver-dark!important
 		}
 	}
+	select {
+		flex-grow: 1;
+	}
 	.editable-input{
 		.form-style;
+		background: @default;
 	}
 }
 .pika-single {

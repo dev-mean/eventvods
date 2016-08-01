@@ -29,5 +29,5 @@ module.exports = {
 	},
 	"prerender": process.env.PRERENDER_TOKEN,
 	"staffRoles": ['Analyst', 'Caster', 'Coach', 'Host', 'Translator', 'Player', 'Mixed', 'Other'],
-	"mediaTypes": ['Website', 'Twitter', 'Facebook', 'Twitch', 'Youtube', 'Stream', 'Other']
+	"mediaTypes": ['Website', 'Twitter', 'Facebook', 'Twitch', 'Youtube', 'Stream (Other)', 'Other','Wiki']
 };

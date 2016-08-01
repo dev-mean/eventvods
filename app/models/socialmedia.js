@@ -2,15 +2,15 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var socialMediaSchema = new Schema({
-	mediaType: {
+	type: {
 		type: String,
 		required: true
 	},
-	mediaName: {
+	name: {
 		type: String,
 		required: true
 	},
-	mediaURL: {
+	link: {
 		type: String,
 		required: true
 	}

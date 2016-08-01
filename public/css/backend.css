@@ -1681,11 +1681,62 @@ form .group label.full {
 }
 .sortable-container div span {
   line-height: 40px;
+  -webkit-flex-grow: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
 }
-.sortable-container div select {
+.sortable-container div span input,
+.sortable-container div span select {
+  border-radius: 2px;
+  outline: none;
+  line-height: 14px;
+  font-size: 14px;
+  font-weight: normal;
+  padding: 4px 5px;
+  background: transparent;
+  border: 2px solid #535a83;
+  color: #a4abc1;
+  transition: all 0.25s ease-in-out;
   background: #3c405c;
-  border: 0;
-  color: white;
+}
+.sortable-container div span input:focus,
+.sortable-container div span select:focus {
+  border-color: #a4abc1;
+  color: #d3d7e3;
+}
+.sortable-container div span input::-webkit-input-placeholder,
+.sortable-container div span select::-webkit-input-placeholder {
+  font-size: 14px;
+  line-height: 16px;
+  color: #8690af;
+}
+.sortable-container div span input::-moz-placeholder,
+.sortable-container div span select::-moz-placeholder {
+  font-size: 14px;
+  line-height: 16px;
+  color: #8690af;
+}
+.sortable-container div span input:-moz-placeholder,
+.sortable-container div span select:-moz-placeholder {
+  font-size: 14px;
+  line-height: 16px;
+  color: #8690af;
+}
+.sortable-container div span input:-ms-input-placeholder,
+.sortable-container div span select:-ms-input-placeholder {
+  font-size: 14px;
+  line-height: 16px;
+  color: #8690af;
+}
+.sortable-container div span.center {
+  text-align: center;
+}
+.sortable-container div span.no-grow {
+  -webkit-flex-grow: 0;
+      -ms-flex-positive: 0;
+          flex-grow: 0;
 }
 .sortable-container span.editable-click {
   color: #a4abc1 !important;
@@ -1701,6 +1752,11 @@ form .group label.full {
 .sortable-container span.editable-click:hover {
   border-bottom: 1px dashed #a4abc1 !important;
 }
+.sortable-container select {
+  -webkit-flex-grow: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+}
 .sortable-container .editable-input {
   border-radius: 2px;
   outline: none;
@@ -1712,6 +1768,7 @@ form .group label.full {
   border: 2px solid #535a83;
   color: #a4abc1;
   transition: all 0.25s ease-in-out;
+  background: #3c405c;
 }
 .sortable-container .editable-input:focus {
   border-color: #a4abc1;
