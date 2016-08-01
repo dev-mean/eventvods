@@ -1,9 +1,6 @@
 (function() {
 	'use strict';
-	angular.module('eventApp', ['ngAnimate', 'ngResource', 'ngRoute', 'angular-loading-bar', 'ngDialog', 'angular-sortable-view','xeditable'])
-		.constant('eventConstants', {
-			baseUri: '/api/'
-		})
+	angular.module('eventApp', ['ngAnimate', 'ngRoute', 'angular-loading-bar', 'ngDialog', 'angular-sortable-view','xeditable'])
 		.constant('API_BASE_URL', '/api')
 		// Set up titles on ngroute pages
 		.run(['$rootScope', '$route', function($rootScope, $route) {

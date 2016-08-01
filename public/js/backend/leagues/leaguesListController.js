@@ -27,7 +27,7 @@
                     } );
                 vm.setSort = function( sortField ) {
                     vm.sort.sortField = sortField;
-                    if ( vm.sort.sortField == sortField ) vm.sort.sortReverse = !vm.sort.sortReverse;
+                    vm.sort.sortReverse = !vm.sort.sortReverse;
                 };
                 vm.previousPage = function() {
                     vm.paging.page--;
