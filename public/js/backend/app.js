@@ -309,14 +309,38 @@
 							$scope.data.selectedStaff = res.data[0];
 						});
 					$scope.$add = function(){
-						$scope.model.push(Object.create($scope.data.selectedStaff));
+						$scope.model.push($.extend(true, {}, $scope.data.selectedStaff));
 						$scope.data.filter = "";
 					}
 					$scope.$remove = function($index){
 						$scope.model.splice($index, 1);
 					}
 				},
-				template: '<div class="sortable-container" sv-root sv-part="model"><div><span><select ng-options="staffMember.name for staffMember in data.staff | filter:data.filter" ng-model="data.selectedStaff"></select><input class="form-style" placeholder="Filter Staff" ng-model="data.filter" /></span><button-right icon="fa-plus" ng-click="$add()" /></div><div sv-element ng-repeat="staff in model track by $index"><span><i sv-handle class="fa fa-lg fa-fw fa-bars"></i>{{$index + 1}}.</span><span editable-text="staff.name" ng-bind="staff.name"></span><span editable-text="staff.role" ng-bind="staff.role"></span><button-right class="del" icon="fa-minus" ng-click="$remove($index)" /></div></div>'
+				template: '<div class="sortable-container" sv-root sv-part="model"><div><span><select ng-options="staffMember.name for staffMember in data.staff | filter:data.filter" ng-model="data.selectedStaff"></select><input class="form-style" placeholder="Filter Staff" ng-model="data.filter" /></span><button-right icon="fa-plus" ng-click="$add()" /></div><div sv-element ng-repeat="staff in model track by $index"><span class="no-grow"><i sv-handle class="fa fa-lg fa-fw fa-bars"></i>{{$index + 1}}.</span><span editable-text="staff.name" ng-bind="staff.name"></span><span editable-text="staff.role" ng-bind="staff.role"></span><button-right class="del" icon="fa-minus" ng-click="$remove($index)" /></div></div>'
+			};
+		})
+		.directive('teamSelect', function(teamsService) {
+			return {
+				restrict: 'E',
+				scope: {
+					model: '='
+				},
+				link: function($scope){
+					$scope.data = {};
+					teamsService.find()
+						.then(function(res){
+							$scope.data.teams = res.data;
+							$scope.data.selectedTeam = res.data[0];
+						});
+					$scope.$add = function(){
+						$scope.model.push($.extend(true, {}, $scope.data.selectedTeam));
+						$scope.data.filter = "";
+					}
+					$scope.$remove = function($index){
+						$scope.model.splice($index, 1);
+					}
+				},
+				template: '<div class="sortable-container" sv-root sv-part="model"><div><span><select ng-options="team.name for team in data.teams | filter:data.filter" ng-model="data.selectedTeam"></select><input class="form-style" placeholder="Filter Teams" ng-model="data.filter" /></span><button-right icon="fa-plus" ng-click="$add()" /></div><div sv-element ng-repeat="team in model track by $index"><span class="no-grow"><i sv-handle class="fa fa-lg fa-fw fa-bars"></i>{{$index + 1}}.</span><span class="no-grow"><img class="team-icon" ng-src="{{team.icon}}" /></span><span editable-text="team.tag" ng-bind="team.tag"></span><span editable-text="team.name" ng-bind="team.name"></span><button-right class="del" icon="fa-minus" ng-click="$remove($index)" /></div></div>'
 			};
 		})
 		.directive('mediaList', function($http, API_BASE_URL) {

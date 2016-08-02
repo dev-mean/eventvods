@@ -15,7 +15,6 @@ router.use('/games', require('./api/gamesRouter'));
 router.use('/leagues', require('./api/leaguesRouter'));
 router.use('/staff', require('./api/staffRouter'));
 router.use('/teams', require('./api/teamsRouter'));
-router.use('/maps', require('./api/mapsRouter'));
 router.use('/users', require('./api/usersRouter'));
 
 //Refactored

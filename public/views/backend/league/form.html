@@ -18,7 +18,7 @@
         4. Teams
     </span>
 </div>
-<form name="form" id="addLeagueForm" autocomplete="false" ng-cloak editable-form>
+<form name="form" id="addLeagueForm" autocomplete="false" ng-cloak>
 	<div class="errors" ng-show="leagueFormController.errors.length > 0">
 		<ul>
 			<li ng-repeat="error in leagueFormController.errors">{{error.message}}</li>
@@ -127,7 +127,8 @@
 	</div>
 </div>
 <div class="section" ng-show="leagueFormController.tab == 4">
-	Teams
+	<team-select model="leagueFormController.data.teams">
+	</team-select>
 	<div class="standard group">
 		<a class="btn lg solid icon" ng-click="leagueFormController.goToTab(3)">
 			<i class="fa fa-chevron-left">

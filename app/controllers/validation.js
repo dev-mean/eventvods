@@ -41,19 +41,6 @@ module.exports.league = {
 	startDate: 'required',
 	endDate: 'required'
 };
-module.exports.event = {
-    eventGame: 'required|alpha_numeric',
-    eventTitle: 'required|alpha_numeric',
-    eventPermaLink: 'required',
-    eventAbbreviation: 'required|alpha_numeric',
-    eventType: 'required|alpha_numeric',
-    eventModules: 'array',
-    eventLocation: 'required|alpha_numeric',
-    eventMedia: 'array',
-    eventSponsors: 'array',
-    eventStartDate: 'required|date',
-    eventEndDate: 'required|date'
-};
 module.exports.staff = {
     forename: 'required',
     surname: 'required',
@@ -70,43 +57,10 @@ module.exports.map = {
     mapGame: 'required',
     mapName: 'required'
 };
-module.exports.match = {
-    matchStatus: 'required|in:Upcoming,Live,Finished',
-    matchDate: 'required|date',
-    matchType: 'alpha_numeric',
-    matchRounds: 'array',
-    matchTeam1: 'required',
-    matchTeam2: 'required',
-    matchTeam1Wins: 'required|integer',
-    matchTeam2Wins: 'required|integer',
-    matchWinner: 'required_when:matchStatus,Finished'
-};
-module.exports.organization = {
-    organizationName: 'required',
-    organizationMedia: 'array'
-};
-module.exports.round = {
-    roundTeam1: 'required',
-    roundTeam2: 'required',
-    roundlinks: 'array'
-};
-module.exports.socialMedia = {
-    mediaType: 'required|in:Website,Twitter,Facebook,Twitch,Youtube,Stream,Other',
-    mediaName: 'required',
-    mediaURL: 'required|url'
-};
-module.exports.sponsor = {
-    sponsorName: 'required',
-    sponsorWebsite: 'required|url'
-};
 module.exports.team = {
-    teamName: 'required',
-    teamTag: 'required|max:4'
-};
-module.exports.module = {
-    moduleTitle: 'required',
-    moduleMatches: 'array',
-    moduleTeams: 'array'
+    name: 'required',
+    tag: 'required',
+	slug: 'required'
 };
 module.exports.user = {
     username: 'required|min:3|max:16',

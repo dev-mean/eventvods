@@ -1,44 +1,73 @@
 <div class="contextHead">
-    <div class="leftSide">
-        <h1 ng-bind="teamsFormController.title">
+	<div class="leftSide">
+		<h1 ng-bind="teamsFormController.title">
         </h1>
-    </div>
+	</div>
+</div>
+<div class="tabs">
+	<span ng-class="{selected: teamsFormController.tab == 1}" ng-click="teamsFormController.tab = 1">
+        1. Team Details
+    </span>
+	<span ng-class="{selected: teamsFormController.tab == 2}" ng-click="teamsFormController.tab = 2">
+        2. Social Media
+    </span>
 </div>
 <form name="form" id="addTeamForm" ng-cloak>
-    <div class="errors" ng-show="teamsFormController.errors.length > 0">
-        <ul>
-            <li ng-repeat="error in teamsFormController.errors">{{error.message}}</li>
-        </ul>
-    </div>
-    <div class="section">
-        <div class="standard group">
-            <label>
+	<div class="errors" ng-show="teamsFormController.errors.length > 0">
+		<ul>
+			<li ng-repeat="error in teamsFormController.errors">{{error.message}}</li>
+		</ul>
+	</div>
+	<div class="section" ng-show="teamsFormController.tab == 1">
+		<div class="standard group">
+			<label>
                 Team Name
             </label>
-            <input type="text" placeholder="e.g. Fnatic" ng-model="teamsFormController.data.teamName" data-parsley-trigger="keyup"  required/>
-        </div>
-        <div class="standard group">
-            <label>
+			<input type="text" placeholder="e.g. Fnatic" ng-model="teamsFormController.data.name" data-parsley-trigger="keyup" required/>
+		</div>
+		<div class="standard group">
+			<label>
                 Team Tag
             </label>
-            <input type="text" class="force-caps" placeholder="e.g. FNC" ng-model="teamsFormController.data.teamTag" data-parsley-trigger="keyup"  required/>
-        </div>
-        <div class="standard group">
-            <label>
+			<input type="text" placeholder="e.g. FNC" ng-model="teamsFormController.data.tag" data-parsley-trigger="keyup" required/>
+		</div>
+		<div class="standard group">
+			<label>
+                URL Slug
+            </label>
+			<input id="slug" type="text" placeholder="e.g. fnc" ng-model="teamsFormController.data.slug" data-parsley-trigger="keyup" data-parsley-remote-message="Slug already in use." required/>
+		</div>
+		<div class="standard group">
+			<label>
                 Team Icon (optional)
             </label>
-            <image-drop model="teamsFormController.data.teamIcon" preview-width="60" preview-height="25" />
-        </div>
-        <br />
-        <div class="standard group">
-            <a class="btn lg solid icon" ng-click="teamsFormController.submit()">
-                <i class="fa fa-trophy">
+			<image-drop model="teamsFormController.data.icon" preview-width="60" preview-height="25" />
+		</div>
+		<br />
+		<div class="standard group">
+			<a class="btn lg solid icon iron-right pull-right" ng-click="teamsFormController.tab = 2">
+				<i class="fa fa-chevron-right">
                 </i>
-                <span ng-bind="teamsFormController.title">
-                </span>
-            </a>
-        </div>
-    </div>
+				<span>Social Media</span>
+			</a>
+		</div>
+	</div>
 </form>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.4.3/parsley.min.js">
-</script>
+<div class="section" ng-show="teamsFormController.tab == 2">
+	<media-list model="teamsFormController.data.media">
+	</media-list>
+	<div class="standard group">
+		<a class="btn lg solid icon" ng-click="teamsFormController.tab = 1">
+			<i class="fa fa-chevron-left">
+				</i>
+			<span>
+				Team Details
+			</span>
+		</a>
+		<a class="btn lg solid icon icon-right pull-right" ng-click="teamsFormController.submit()">
+			<i class="fa fa-flag">
+				</i>
+			<span ng-bind="teamsFormController.title"></span>
+		</a>
+	</div>
+</div>

@@ -5,16 +5,13 @@ var SocialMedia = require('./socialmedia')
 
 var staffSchema = new Schema({
 	forename: {
-		type: String,
-		required: true
+		type: String
 	},
 	surname: {
-		type: String,
-		required: true
+		type: String
 	},
 	alias: {
-		type: String,
-		required: true
+		type: String
 	},
 	slug: {
 		type: String,
@@ -23,8 +20,7 @@ var staffSchema = new Schema({
 	},
 	media: [SocialMedia],
 	role: {
-		type: String,
-		required: true
+		type: String
 	},
 	photo: String
 }, {
@@ -33,7 +29,8 @@ var staffSchema = new Schema({
 	},
 	toJSON: {
 		virtuals: true
-	}
+	},
+	id: false
 });
 
 staffSchema.virtual('name')

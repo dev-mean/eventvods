@@ -6,6 +6,11 @@
                 var vm = this;
                 vm.title = "Add Team";
                 vm.errors = [];
+				vm.tab = 1;
+				vm.data = {
+					media: []
+				}
+				$('#slug').attr('data-parsley-remote', API_BASE_URL + '/validate/teamSlug/{value}');
                 var parsley = $( '#addTeamForm' )
                     .parsley();
                 vm.submit = function() {
@@ -21,6 +26,7 @@
                             } );
                             else vm.errors = response.data.errors;
                         } );
+					else vm.tab = 1;
                 }
             }
         ] );

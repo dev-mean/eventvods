@@ -3,6 +3,8 @@ var Game = require('../../models/game');
 var User = require('../../models/user');
 var League = require('../../models/league');
 var Staff = require('../../models/staff');
+var Team = require('../../models/team');
+
 router.get('/gameSlug/:slug', function(req, res, next) {
     Game.find({
             slug: req.params.slug
@@ -60,6 +62,27 @@ router.get('/staffSlug/:slug', function(req, res, next) {
 });
 router.get('/staffSlug/:slug/:id', function(req, res, next) {
     Staff.findOne({
+        slug: req.params.slug
+    }, function(err, doc) {
+        if (err) next(err);
+        if (!doc) return res.sendStatus('200');
+        else if (doc._id == req.params.id) return res.sendStatus('200');
+        else return res.sendStatus('409');
+    });
+});
+router.get('/teamSlug/:slug', function(req, res, next) {
+    Team.find({
+            slug: req.params.slug
+        })
+        .count()
+        .exec(function(err, count) {
+            if (err) next(err);
+            if (count > 0) return res.sendStatus('409');
+            else return res.sendStatus('200');
+        });
+});
+router.get('/teamSlug/:slug/:id', function(req, res, next) {
+    Team.findOne({
         slug: req.params.slug
     }, function(err, doc) {
         if (err) next(err);

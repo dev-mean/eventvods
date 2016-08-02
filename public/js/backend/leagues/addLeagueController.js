@@ -57,6 +57,7 @@
 				vm.submit = function() {
 					vm.data.startDate = startDate.getDate();
 					vm.data.endDate = endDate.getDate();
+					console.log(vm.data.teams);
 					if (parsley.validate()) Leagues.create(vm.data)
 						.then(function(response) {
 							toastr.success('League added.', {

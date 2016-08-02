@@ -8,7 +8,7 @@
                 vm.teamsData = [];
                 vm.filter = {};
                 vm.sort = {
-                    sortField: 'teamName',
+                    sortField: 'tag',
                     sortReverse: false
                 };
                 vm.paging = {

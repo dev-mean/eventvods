@@ -14,7 +14,7 @@ router.route('/')
 			res.json(teams);
 		});
 	})
-	.post(auth.updater(), AWS.handleUpload(['teamIcon']), function(req, res, next) {
+	.post(auth.updater(), AWS.handleUpload(['icon']), function(req, res, next) {
 		Indicative.validateAll(req.body, Validators.team, Validators.messages)
 			.then(function() {
 				Team.create(req.body, function(err, team) {
@@ -32,7 +32,7 @@ router.route('/')
 router.route('/:team_id')
 	.delete(auth.updater(), function(req, res, next) {
 		Team.findById(req.params.team_id, function(err, doc) {
-			AWS.deleteImage(doc.teamIcon)
+			AWS.deleteImage(doc.icon)
 				.then(function() {
 					doc.remove(function(err) {
 						if (err) next(err);
@@ -54,7 +54,7 @@ router.route('/:team_id')
 			res.json(team);
 		});
 	})
-	.put(auth.updater(), AWS.handleUpload(['teamIcon']), function(req, res, next) {
+	.put(auth.updater(), AWS.handleUpload(['icon']), function(req, res, next) {
 		Indicative.validateAll(req.body, Validators.team, Validators.messages)
 			.then(function() {
 				Team.findByIdAndUpdate(req.params.team_id, req.body, function(err, team) {

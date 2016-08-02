@@ -3,16 +3,13 @@ var Schema = mongoose.Schema;
 
 var socialMediaSchema = new Schema({
 	type: {
-		type: String,
-		required: true
+		type: String
 	},
 	name: {
-		type: String,
-		required: true
+		type: String
 	},
 	link: {
-		type: String,
-		required: true
+		type: String
 	}
 });
 

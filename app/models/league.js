@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var Staff = require('./staff').schema;
 var Media = require('./socialmedia').schema;
+var Team = require('./team').schema;
 var slug = require('slug');
 
 var leagueSchema = new Schema({
@@ -23,6 +24,7 @@ var leagueSchema = new Schema({
 	endDate: Date,
 	staff: [Staff],
 	media: [Media],
+	teams: [Team],
 	logo: String,
 	header: String,
 });

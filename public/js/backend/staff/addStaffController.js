@@ -6,6 +6,10 @@
                 var vm = this;
                 vm.title = "Add Staff";
                 vm.errors = [];
+				vm.data = {
+					media: []
+				};
+				vm.tab = 1;
 				$('#slug').attr('data-parsley-remote', API_BASE_URL + '/validate/staffSlug/{value}');
                 var parsley = $( '#addStaffForm' )
                     .parsley();
@@ -31,6 +35,7 @@
                             } );
                             else vm.errors = response.data.errors;
                         } );
+					else vm.tab = 1;
                 }
             }
         ] );

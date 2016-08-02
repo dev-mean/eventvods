@@ -43,6 +43,12 @@ p {
 .text-cutoff {
     text-overflow: ellipsis;
 }
+.text-red {
+	color: red;
+}
+.text-yellow {
+	color: goldenrod;
+}
 .float-right {
 	float: right;
 }
@@ -282,7 +288,6 @@ img.icon {
         .flex-display;
         .flex-direction(column);
         .flex-grow(1);
-        background: @default-dark;
     }
 }
 
@@ -1193,6 +1198,10 @@ form {
 			}
 			&.no-grow {
 				flex-grow: 0;
+				width: 60px;
+			}
+			> img {
+				vertical-align: middle;
 			}
 		}
 	}
@@ -1205,9 +1214,6 @@ form {
 		&:hover {
 			border-bottom: 1px dashed @silver-dark!important
 		}
-	}
-	select {
-		flex-grow: 1;
 	}
 	.editable-input{
 		.form-style;

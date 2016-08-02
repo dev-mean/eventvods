@@ -1,18 +1,21 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-var SocialMedia = require('./socialmedia').schema;
+var Media = require('./socialmedia').schema;
 
 var teamSchema = new Schema({
-	teamName: {
-		type: String,
-		required: true
+	name: {
+		type: String
 	},
-	teamTag: {
-		type: String,
-		required: true
+	tag: {
+		type: String
 	},
-	teamMedia: [SocialMedia],
-	teamIcon: String
+	slug: {
+		type: String,
+		required: true,
+		unique: true
+	},
+	media: [Media],
+	icon: String
 });
 
 

@@ -1,7 +1,6 @@
 var router = require('express').Router();
 var User = require('../../models/user');
-var Map = require('../../models/staff');
-var Staff = require('../../models/map');
+var Staff = require('../../models/staff');
 var Team = require('../../models/team');
 var auth = require('../../controllers/auth');
 var ratelimit = require('../../controllers/ratelimit');
@@ -18,12 +17,6 @@ router.get('/', auth.public_api(), ratelimit, cache, function(req, res, next) {
 	async.parallel({
 		staff: function(callback) {
 			Staff.count(function(err, count) {
-				if (err) callback(err);
-				else callback(null, count);
-			});
-		},
-		maps: function(callback) {
-			Map.count(function(err, count) {
 				if (err) callback(err);
 				else callback(null, count);
 			});

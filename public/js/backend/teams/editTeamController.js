@@ -6,6 +6,8 @@
                 var vm = this;
                 vm.title = "Edit Team";
                 vm.errors = [];
+				vm.tab = 1;
+				$( '#slug' ).attr( 'data-parsley-remote', API_BASE_URL + '/validate/teamSlug/{value}/'  + $routeParams.id );
                 var parsley = $( '#addTeamForm' )
                             .parsley();
                 Teams.findById( $routeParams.id )
@@ -30,6 +32,7 @@
                             } );
                             else vm.errors = response.data.errors;
                         } );
+					else vm.tab = 1;
                 }
             }
         ] );
