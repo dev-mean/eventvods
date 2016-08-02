@@ -37,7 +37,7 @@
 			</div>
 		</div>
 		<ng-include src="'/assets/views/dialogs/loginRegister.html'" ng-if="Page.session == false" ng-cloak></ng-include>
-		<ng-include src="'/assets/views/dialogs/userSettings.html'" ng-if="Page.session != false && Page.session != null" ng-cloak></ng-include>
+		<ng-include src="'/assets/views/dialogs/userSettings.html'" ng-if="Page.session != false && Page.session != null" onload="Page.init()" ng-cloak></ng-include>
 		<nav class="nav-main" role="navigation" ng-controller="NavController as Nav">
 			<ul class="dropdown-content wide" id="games_dd">
 				<li ng-repeat="game in Nav.links.games">

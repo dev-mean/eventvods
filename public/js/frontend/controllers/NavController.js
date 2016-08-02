@@ -19,14 +19,17 @@
 			NavService.get()
 				.then(function(res){
 					vm.links = res.data;
-					$('.dropdown-button').dropdown({
-						hover: true,
-						belowOrigin: true,
-						alignment: "left"
-					});
+					vm.init();
 				})
 				.catch(function(){
 					vm.links = null;
 				});
+			vm.init = function(){
+				$('.dropdown-button').dropdown({
+						hover: true,
+						belowOrigin: true,
+						alignment: "left"
+					});
+			}
 		}]);
 }());

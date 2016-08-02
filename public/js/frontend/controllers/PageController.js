@@ -28,6 +28,11 @@
 				$('.evSlider.multiple').evSlider({
 					delay: 2500
 				});
+				$('.dropdown-button').dropdown({
+						hover: true,
+						belowOrigin: true,
+						alignment: "left"
+					});
 			};
 		}]);
 }());
