@@ -3,7 +3,7 @@ var router = app.Router();
 var logger = require('bristol');
 var async = require('async');
 
-router.all('*', function(req){
+router.all('*', function(req, res, next){
 	req.use_express_redis_cache = false;
 	next();
 })
