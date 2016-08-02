@@ -11,8 +11,7 @@ var teamSchema = new Schema({
 	},
 	slug: {
 		type: String,
-		required: true,
-		unique: true
+		required: true
 	},
 	media: [Media],
 	icon: String

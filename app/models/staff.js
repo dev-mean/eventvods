@@ -15,8 +15,7 @@ var staffSchema = new Schema({
 	},
 	slug: {
 		type: String,
-		required: true,
-		unique: true
+		required: true
 	},
 	media: [SocialMedia],
 	role: {
