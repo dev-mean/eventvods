@@ -13,14 +13,12 @@
 					});
 			};
 			vm.deleteGame = function(index) {
-				console.log(index);
 				vm.data.games.splice(index, 1);
 			};
 			vm.addGame = function() {
 				vm.data.games.push(vm.selectedGame);
 			};
 			vm.deleteLeague = function(index) {
-				console.log(index);
 				vm.data.leagues.splice(index, 1);
 			};
 			vm.addLeague = function() {
