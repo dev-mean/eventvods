@@ -693,7 +693,8 @@ form {
         input[type=text],
 		input[type=date],
         p,
-        ng-typeahead {
+        ng-typeahead,
+		tags-input {
             .flex-order(2);
             .flex-grow(1);
         }
@@ -705,6 +706,20 @@ form {
 				max-width: 100%;
 			}
         }
+		tags-input {
+			ul {
+				max-width: 80%;
+				display: inline;
+				li {
+					display: inline;
+					padding-right: 5px;
+				}
+			}
+			input {
+				transition: border 0.25s ease-in-out!important;
+				width: auto!important;
+			}
+		}
     }
 }
 

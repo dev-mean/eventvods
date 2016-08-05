@@ -1,5 +1,5 @@
 var router = require('express').Router();
-var Game = require('../../models/game');
+var Article = require('../../models/article');
 var auth = require('../../controllers/auth');
 var ratelimit = require('../../controllers/ratelimit');
 var AWS = require('../../controllers/aws');
@@ -12,19 +12,19 @@ var slug = require('slug');
 router.route('/')
 	.get(auth.public_api(), ratelimit, cache, function(req, res, next) {
 		var time = new Date();
-		Game.find(function(err, games) {
+		Article.find(function(err, articles) {
 			if (err) next(err);
-			else res.json(games);
+			else res.json(articles);
 		});
 	})
-	.post(auth.updater(), AWS.handleUpload(['icon', 'banner']), function(req, res, next) {
-		Indicative.validateAll(req.body, Validators.game, Validators.messages)
+	.post(auth.updater(), AWS.handleUpload(['header']), function(req, res, next) {
+		Indicative.validateAll(req.body, Validators.article, Validators.messages)
 			.then(function() {
 				req.body.slug = slug(req.body.slug);
-				Game.create(req.body, function(err, game) {
+				Article.create(req.body, function(err, article) {
 					if (err) console.log(err);
 					if (err) next(err);
-					else res.json(game);
+					else res.json(article);
 				});
 			})
 			.catch(function(errors) {
@@ -34,21 +34,21 @@ router.route('/')
 				next(err);
 			});
 	});
-router.route('/:game_id')
+router.route('/:article_id')
 	.get(auth.public_api(), ratelimit, cache, function(req, res, next) {
-		Game.findById(req.params.game_id, function(err, game) {
+		Article.findById(req.params.article_id, function(err, article) {
 			if (err) next(err);
-			if (!game) {
-				err = new Error("Game Not Found");
+			if (!article) {
+				err = new Error("Article Not Found");
 				err.status = 404;
 				next(err);
 			}
-			res.json(game);
+			res.json(article);
 		});
 	})
 	.delete(auth.updater(), function(req, res, next) {
-		Game.findById(req.params.game_id, function(err, doc) {
-			Q.all([AWS.deleteImage(doc.icon), AWS.deleteImage(doc.banner)])
+		Article.findById(req.params.article_id, function(err, doc) {
+			AWS.deleteImage(doc.header)
 				.then(function() {
 					doc.remove(function(err) {
 						if (err) next(err);
@@ -59,17 +59,17 @@ router.route('/:game_id')
 				});
 		});
 	})
-	.put(auth.updater(), AWS.handleUpload(['icon', 'banner']), function(req, res, next) {
-		Indicative.validateAll(req.body, Validators.game, Validators.messages)
+	.put(auth.updater(), AWS.handleUpload(['header']), function(req, res, next) {
+		Indicative.validateAll(req.body, Validators.article, Validators.messages)
 			.then(function() {
 				req.body.slug = slug(req.body.slug);
-				Game.findByIdAndUpdate(req.params.game_id, req.body, function(err, game) {
+				Article.findByIdAndUpdate(req.params.article_id, req.body, function(err, article) {
 					if (err) next(err);
-					if (!game) {
-						err = new Error("Game not found");
+					if (!article) {
+						err = new Error("Article not found");
 						err.status = 404;
 						next(err);
-					} else res.json(game);
+					} else res.json(article);
 				});
 			})
 			.catch(function(errors) {

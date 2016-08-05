@@ -1000,7 +1000,8 @@ form .group {
 form .group input[type=text],
 form .group input[type=date],
 form .group p,
-form .group ng-typeahead {
+form .group ng-typeahead,
+form .group tags-input {
   -webkit-order: 2;
   -moz-order: 2;
   -ms-order: 2;
@@ -1027,6 +1028,18 @@ form .group label {
 }
 form .group label.full {
   max-width: 100%;
+}
+form .group tags-input ul {
+  max-width: 80%;
+  display: inline;
+}
+form .group tags-input ul li {
+  display: inline;
+  padding-right: 5px;
+}
+form .group tags-input input {
+  transition: border 0.25s ease-in-out !important;
+  width: auto!important;
 }
 /* form ui variables */
 /* unfortunate hack to get precise vertical alignment */

@@ -1,6 +1,6 @@
 (function() {
 	'use strict';
-	angular.module('eventApp', ['ngAnimate', 'ngRoute', 'angular-loading-bar', 'ngDialog', 'angular-sortable-view','xeditable'])
+	angular.module('eventApp', ['ngAnimate', 'ngRoute', 'angular-loading-bar', 'ngDialog', 'angular-sortable-view','xeditable','ngTagsInput'])
 		.constant('API_BASE_URL', '/api')
 		// Set up titles on ngroute pages
 		.run(['$rootScope', '$route', function($rootScope, $route) {
@@ -448,24 +448,6 @@
 					controllerAs: 'staffFormController',
 					title: "Edit Staff"
 				})
-				.when('/maps', {
-					templateUrl: '/assets/views/backend/maps/list.html',
-					controller: 'mapsListController',
-					controllerAs: 'mapsListController',
-					title: "Maps"
-				})
-				.when('/maps/new', {
-					templateUrl: '/assets/views/backend/maps/form.html',
-					controller: 'addMapController',
-					controllerAs: 'mapsFormController',
-					title: "New Maps"
-				})
-				.when('/maps/:id/edit', {
-					templateUrl: '/assets/views/backend/maps/form.html',
-					controller: 'editMapController',
-					controllerAs: 'mapsFormController',
-					title: "Edit Maps"
-				})
 				.when('/teams', {
 					templateUrl: '/assets/views/backend/teams/list.html',
 					controller: 'teamsListController',
@@ -476,25 +458,31 @@
 					templateUrl: '/assets/views/backend/teams/form.html',
 					controller: 'addTeamController',
 					controllerAs: 'teamsFormController',
-					title: "New Teams"
+					title: "New Team"
 				})
 				.when('/teams/:id/edit', {
 					templateUrl: '/assets/views/backend/teams/form.html',
 					controller: 'editTeamController',
 					controllerAs: 'teamsFormController',
-					title: "Edit Teams"
+					title: "Edit Team"
 				})
-				.when('/events', {
-					templateUrl: '/assets/views/backend/event/list.html',
-					controller: 'eventListController',
-					controllerAs: 'eventListController',
-					title: "Events"
+				.when('/articles', {
+					templateUrl: '/assets/views/backend/articles/list.html',
+					controller: 'articlesListController',
+					controllerAs: 'articlesListController',
+					title: "Articles"
 				})
-				.when('/events/new', {
-					templateUrl: '/assets/views/backend/event/form.html',
-					controller: 'newEventController',
-					controllerAs: 'newEventController',
-					title: "New Event"
+				.when('/articles/new', {
+					templateUrl: '/assets/views/backend/articles/form.html',
+					controller: 'addArticleController',
+					controllerAs: 'articlesFormController',
+					title: "New Article"
+				})
+				.when('/articles/:id/edit', {
+					templateUrl: '/assets/views/backend/articles/form.html',
+					controller: 'editArticleController',
+					controllerAs: 'articlesFormController',
+					title: "Edit Article"
 				})
 				.when('/featured', {
 					templateUrl: '/assets/views/backend/featured.html',

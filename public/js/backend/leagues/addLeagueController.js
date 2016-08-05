@@ -42,13 +42,13 @@
 						});
 					});
 				vm.goToTab = function(tabNumber) {
-					// for (var i = 1; i < tabNumber; i++) {
-					// 	if (!parsley.validate({
-					// 			group: i
-					// 		})) {
-					// 		return vm.tab = i;
-					// 	}
-					// }
+					for (var i = 1; i < tabNumber; i++) {
+						if (!parsley.validate({
+								group: i
+							})) {
+							return vm.tab = i;
+						}
+					}
 					vm.tab = tabNumber;
 				}
 				vm.test = function(){

@@ -11,6 +11,12 @@ module.exports.messages = {
     //specific field messages
     'Username.alpha_numeric': 'Usernames can only contain alphanumeric characters.'
 };
+module.exports.article = {
+	title: 'required',
+	content: 'required',
+	slug: 'required',
+	author: 'required'
+}
 module.exports.register = {
 	displayName: 'required|max:30',
     email: 'required|email',

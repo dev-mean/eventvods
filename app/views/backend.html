@@ -16,6 +16,7 @@
         <link href="https://cdnjs.cloudflare.com/ajax/libs/ng-dialog/0.6.2/css/ngDialog.min.css" rel="stylesheet"/>
 		<link href="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.4.0/css/pikaday.min.css" rel="stylesheet"/>
 		<link href="https://cdnjs.cloudflare.com/ajax/libs/angular-xeditable/0.2.0/css/xeditable.min.css" rel="stylesheet" />
+		<linkk href="https://cdnjs.cloudflare.com/ajax/libs/ng-tags-input/3.1.1/ng-tags-input.min.css" rel="stylesheet" />
     </head>
     <body ng-app="eventApp" ng-controller="navController as Nav" ng-class="Nav.class">
         <div class="loader-wrapper">
@@ -68,7 +69,7 @@
                     <a href="/manage/leagues">
                         <i class="fa fa-line-chart fa-lg fa-fw">
                         </i>
-                        <span class="text text-yellow">
+                        <span class="text">
                             Leagues
                         </span>
                     </a>
@@ -98,6 +99,13 @@
                         </i>
                         <span class="text text-red">
                             Modmail
+                        </span>
+                    </a>
+					<a href="/manage/articles">
+                        <i class="fa fa-pencil-square-o fa-lg fa-fw">
+                        </i>
+                        <span class="text text-yellow">
+                            Articles
                         </span>
                     </a>
                     <a href="/manage/users" ng-show="Nav.isAdmin">
@@ -138,6 +146,8 @@
 		</script>
 		<script src="/assets/js/angular-sortable-view.min.js">
 		</script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/ng-tags-input/3.1.1/ng-tags-input.min.js">
+		</script>
         <script src="/assets/js/backend/app.js">
         </script>
         <script src="/assets/js/backend/common/notifier.js">
@@ -172,13 +182,13 @@
         </script>
         <script src="/assets/js/backend/staff/editStaffController.js">
         </script>
-        <script src="/assets/js/backend/maps/mapsService.js">
+        <script src="/assets/js/backend/articles/articlesService.js">
         </script>
-        <script src="/assets/js/backend/maps/mapsListController.js">
+        <script src="/assets/js/backend/articles/articlesListController.js">
         </script>
-        <script src="/assets/js/backend/maps/addMapController.js">
+        <script src="/assets/js/backend/articles/addArticleController.js">
         </script>
-        <script src="/assets/js/backend/maps/editMapController.js">
+        <script src="/assets/js/backend/articles/editArticleController.js">
         </script>
         <script src="/assets/js/backend/teams/teamsService.js">
         </script>

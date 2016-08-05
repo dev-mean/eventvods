@@ -35,6 +35,16 @@
                         });
                         $location.path('/leagues');
                     });
+				vm.goToTab = function(tabNumber) {
+					for (var i = 1; i < tabNumber; i++) {
+						if (!parsley.validate({
+								group: i
+							})) {
+							return vm.tab = i;
+						}
+					}
+					vm.tab = tabNumber;
+				}
                 vm.submit = function() {
 					vm.data.startDate = startDate.getDate();
 					vm.data.endDate = endDate.getDate();
@@ -47,6 +57,14 @@
                         }, function(response) {
                             vm.errors = response.data.errors;
                         });
+					else for (var i = 1; i < 4; i++) {
+						console.log(i);
+						if (!parsley.validate({
+								group: i
+							})) {
+							return vm.tab = i;
+						}
+					};
                 };
             }
         ]);

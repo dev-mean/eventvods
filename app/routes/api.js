@@ -16,6 +16,7 @@ router.use('/data', require('./api/staticRouter'));
 //Model CRUD Routes
 router.use('/overview', require('./api/overviewRouter'));
 router.use('/featured', require('./api/featuredRouter'));
+router.use('/articles', require('./api/articlesRouter'));
 router.use('/games', require('./api/gamesRouter'));
 router.use('/leagues', require('./api/leaguesRouter'));
 router.use('/staff', require('./api/staffRouter'));
