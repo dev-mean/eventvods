@@ -392,9 +392,9 @@
 			"s": "<s>$1</s>", // Strikethrough text
 			"br": "<br />",
 			"hr": "<hr />",
-			"center": "<center>$1</center", //Center text
-			"left": "<left>$1</left", //Center text
-			"right": "<right>$1</right", //Center text
+			"center": "<center>$1</center>", //Center text
+			"left": "<left>$1</left>", //Center text
+			"right": "<right>$1</right>", //Center text
 			"h1": "<h1>$1</h1>",
 			"h2": "<h2>$1</h2>",
 			"h3": "<h3>$1</h3>",
