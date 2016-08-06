@@ -19,6 +19,16 @@ router.get('/', function(req, res, next){
 			select: 'name icon'
 		}
 	})
+	.populate({
+		path: 'tournaments',
+		model: 'Tournament',
+		select: 'name slug game',
+		populate: {
+			path: 'game',
+			model: 'Game',
+			select: 'name icon'
+		}
+	})
 	.exec(function(err, featuredContent){
 		if(err) next(err);
 		res.json(featuredContent);

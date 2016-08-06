@@ -57,3 +57,20 @@
 		</a>
 	</div>
 </div>
+<div class="sortable-container" sv-root sv-part="featuredSelectController.data.tournaments" ng-show="featuredSelectController.tab == 3">
+	<div>
+		<span><select ng-options="tournament.name for tournament in featuredSelectController.tournaments" ng-model="featuredSelectController.selectedTournament">
+		</select></span>
+		<a class="btn lg icon-only float-right" ng-click="featuredSelectController.addTournament()">
+			<i class="fa fa-plus fa-lg fa-fw">
+			</i>
+		</a>
+	</div>
+	<div ng-repeat="tournament in featuredSelectController.data.tournaments track by $index" sv-element>
+		<span><i sv-handle class="fa fa-lg fa-fw fa-bars"></i>{{$index + 1}} {{tournament.name}}</span>
+		<a class="btn lg icon-only float-right del" ng-click="featuredSelectController.deleteTournament($index)">
+			<i class="fa fa-minus-circle fa-lg fa-fw">
+			</i>
+		</a>
+	</div>
+</div>
