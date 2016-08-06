@@ -18,10 +18,11 @@ router.use('/overview', require('./api/overviewRouter'));
 router.use('/featured', require('./api/featuredRouter'));
 router.use('/articles', require('./api/articlesRouter'));
 router.use('/games', require('./api/gamesRouter'));
-router.use('/leagues', require('./api/leaguesRouter'));
 router.use('/staff', require('./api/staffRouter'));
 router.use('/teams', require('./api/teamsRouter'));
 router.use('/users', require('./api/usersRouter'));
+router.use('/leagues', require('./api/leaguesRouter'));
+router.use('/tournaments', require('./api/tournamentsRouter'));
 
 //Refactored
 var auth = require('../controllers/auth');

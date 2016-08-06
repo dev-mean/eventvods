@@ -414,7 +414,7 @@
 						var contents = $element.html().replace(/^\s+|\s+$/i, '');
 
 						for (var i in snippets) {
-							var regexp = new RegExp('\\[' + i + '\\](.+?)\\[\/' + i.replace(/[^a-z]/g, '') + '\\]', 'gi');
+							var regexp = new RegExp('\\[' + i + '\\](.+?)\\[\/' + i.replace(/[^a-z0-9]/g, '') + '\\]', 'gi');
 
 							contents = contents.replace(regexp, snippets[i]);
 						}
@@ -485,6 +485,24 @@
 					controllerAs: 'leagueFormController',
 					title: "Edit League"
 				})
+				.when('/tournaments', {
+					templateUrl: '/assets/views/backend/tournament/list.html',
+					controller: 'tournamentsListController',
+					controllerAs: 'tournamentsListController',
+					title: "Tournaments"
+				})
+				.when('/tournaments/new', {
+					templateUrl: '/assets/views/backend/tournament/form.html',
+					controller: 'addTournamentController',
+					controllerAs: 'tournamentFormController',
+					title: "Add Tournament"
+				})
+				.when('/tournament/:id/edit', {
+					templateUrl: '/assets/views/backend/tournament/form.html',
+					controller: 'editTournamentController',
+					controllerAs: 'tournamentFormController',
+					title: "Edit Tournament"
+				})
 				.when('/staff', {
 					templateUrl: '/assets/views/backend/staff/list.html',
 					controller: 'staffListController',
@@ -544,12 +562,6 @@
 					controller: 'featuredSelectController',
 					controllerAs: 'featuredSelectController',
 					title: "Featured Content"
-				})
-				.when('/events/new', {
-					templateUrl: '/assets/views/backend/event/form.html',
-					controller: 'newEventController',
-					controllerAs: 'newEventController',
-					title: "New Event"
 				})
 		})
 }());
