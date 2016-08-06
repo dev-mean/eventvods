@@ -594,6 +594,16 @@ nav.leftNavigation a i.fa {
 .sortable-container h2 {
   padding: 10px 0;
 }
+.section .col-1-2,
+.sortable-container .col-1-2 {
+  -webkit-flex-basis: 0px;
+      -ms-flex-preferred-size: 0px;
+          flex-basis: 0px;
+  -webkit-flex-grow: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  padding: 24px;
+}
 /* context header */
 .contextHead {
   background: #343850;
@@ -852,6 +862,10 @@ table.standard td.update:hover {
   -ms-flex-grow: 1;
   -ms-flex-positive: 1;
       flex-grow: 1;
+  -ms-flex-basis: 0px;
+  -webkit-flex-basis: 0px;
+      -ms-flex-preferred-size: 0px;
+          flex-basis: 0px;
   border-left: 1px solid #3c405c;
   border-right: 1px solid #3c405c;
   text-align: center;
@@ -1102,6 +1116,12 @@ form .group tags-input input {
 .group.radio input + label:before {
   border-radius: 50%;
 }
+.no-pad {
+  padding: 0;
+}
+.no-pad .standard.group:not(.flex) {
+  margin: 24px;
+}
 .group.standard {
   margin-bottom: 6px;
   min-height: 30px;
@@ -1179,6 +1199,20 @@ form .group tags-input input {
 }
 .group.standard input:focus + label {
   color: #d3d7e3;
+}
+.group.standard.flex {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  padding: 0;
+}
+.group.standard textarea,
+.group.standard #article-preview {
+  width: 100%;
+  min-height: 400px;
 }
 .group.standard div.image-drop {
   -webkit-order: 2;

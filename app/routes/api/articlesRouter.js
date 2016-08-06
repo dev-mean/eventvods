@@ -12,12 +12,15 @@ var slug = require('slug');
 router.route('/')
 	.get(auth.public_api(), ratelimit, cache, function(req, res, next) {
 		var time = new Date();
-		Article.find(function(err, articles) {
+		Article.find()
+		.populate('author','displayName')
+		.exec(function(err, articles) {
 			if (err) next(err);
 			else res.json(articles);
 		});
 	})
 	.post(auth.updater(), AWS.handleUpload(['header']), function(req, res, next) {
+		req.body.author = req.user._id;
 		Indicative.validateAll(req.body, Validators.article, Validators.messages)
 			.then(function() {
 				req.body.slug = slug(req.body.slug);
@@ -36,7 +39,9 @@ router.route('/')
 	});
 router.route('/:article_id')
 	.get(auth.public_api(), ratelimit, cache, function(req, res, next) {
-		Article.findById(req.params.article_id, function(err, article) {
+		Article.findById(req.params.article_id)
+		.populate('author', 'displayName')
+		.exec(function(err, article) {
 			if (err) next(err);
 			if (!article) {
 				err = new Error("Article Not Found");

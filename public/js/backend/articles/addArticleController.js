@@ -8,7 +8,7 @@
                 vm.errors = [];
 				vm.tab = 1;
 				vm.data = {
-					media: []
+					content: "test content"
 				}
 				$('#slug').attr('data-parsley-remote', API_BASE_URL + '/validate/articleSlug/{value}');
                 var parsley = $( '#addArticleForm' )

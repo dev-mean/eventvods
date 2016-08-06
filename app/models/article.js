@@ -6,14 +6,16 @@ var articleSchema = new Schema({
 		required: true
 	},
 	author: {
-		type: [Schema.Types.ObjectId],
-		ref: 'User'
+		type: Schema.Types.ObjectId,
+		ref: 'Users'
 	},
 	slug: {
 		type: String,
 		required: true
 	},
-	tags: [String],
+	tags: [{
+		text: String
+	}],
 	content: String,
 	header: String
 

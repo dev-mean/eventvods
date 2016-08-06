@@ -1,6 +1,6 @@
 (function() {
 	'use strict';
-	angular.module('eventApp', ['ngAnimate', 'ngRoute', 'angular-loading-bar', 'ngDialog', 'angular-sortable-view','xeditable','ngTagsInput'])
+	angular.module('eventApp', ['ngAnimate', 'ngRoute', 'angular-loading-bar', 'ngDialog', 'angular-sortable-view', 'xeditable', 'ngTagsInput'])
 		.constant('API_BASE_URL', '/api')
 		// Set up titles on ngroute pages
 		.run(['$rootScope', '$route', function($rootScope, $route) {
@@ -301,18 +301,18 @@
 				scope: {
 					model: '='
 				},
-				link: function($scope){
+				link: function($scope) {
 					$scope.data = {};
 					staffService.find()
-						.then(function(res){
+						.then(function(res) {
 							$scope.data.staff = res.data;
 							$scope.data.selectedStaff = res.data[0];
 						});
-					$scope.$add = function(){
+					$scope.$add = function() {
 						$scope.model.push($.extend(true, {}, $scope.data.selectedStaff));
 						$scope.data.filter = "";
 					}
-					$scope.$remove = function($index){
+					$scope.$remove = function($index) {
 						$scope.model.splice($index, 1);
 					}
 				},
@@ -325,18 +325,18 @@
 				scope: {
 					model: '='
 				},
-				link: function($scope){
+				link: function($scope) {
 					$scope.data = {};
 					teamsService.find()
-						.then(function(res){
+						.then(function(res) {
 							$scope.data.teams = res.data;
 							$scope.data.selectedTeam = res.data[0];
 						});
-					$scope.$add = function(){
+					$scope.$add = function() {
 						$scope.model.push($.extend(true, {}, $scope.data.selectedTeam));
 						$scope.data.filter = "";
 					}
-					$scope.$remove = function($index){
+					$scope.$remove = function($index) {
 						$scope.model.splice($index, 1);
 					}
 				},
@@ -349,14 +349,14 @@
 				scope: {
 					model: '='
 				},
-				link: function($scope){
-					$http.get(API_BASE_URL+'/data/mediaTypes')
-						.then(function(res){
+				link: function($scope) {
+					$http.get(API_BASE_URL + '/data/mediaTypes')
+						.then(function(res) {
 							$scope.types = res.data;
 							$scope.data.type = res.data[0];
 						});
 					$scope.data = {};
-					$scope.$add = function(){
+					$scope.$add = function() {
 						$scope.model.push({
 							name: $scope.data.name,
 							link: $scope.data.link,
@@ -366,7 +366,7 @@
 							type: $scope.types[0]
 						}
 					}
-					$scope.$remove = function($index){
+					$scope.$remove = function($index) {
 						$scope.model.splice($index, 1);
 					}
 				},
@@ -384,6 +384,61 @@
 				template: '<a class="btn lg icon-only float-right {{class}}"><i class="fa fa-lg fa-fw {{icon}}"></i></a>'
 			};
 		})
+		// Available BB code snippets
+		.value('snippets', {
+			"b": "<b>$1</b>", // Bolded text
+			"u": "<u>$1</u>", // Underlined text
+			"i": "<i>$1</i>", // Italicized text
+			"s": "<s>$1</s>", // Strikethrough text
+			"br": "<br />",
+			"hr": "<hr />",
+			"center": "<center>$1</center", //Center text
+			"left": "<left>$1</left", //Center text
+			"right": "<right>$1</right", //Center text
+			"h1": "<h1>$1</h1>",
+			"h2": "<h2>$1</h2>",
+			"h3": "<h3>$1</h3>",
+			"h4": "<h4>$1</h4>",
+			"h5": "<h5>$1</h5>",
+			"img": "<img src=\"$1\" />", // Image without title
+			"img=([^\\[\\]<>]+?)": "<img src=\"$2\" width=\"$1\" />", // Image with width
+			"url": "<a href=\"$1\" target=\"_blank\" title=\"$1\">$1</a>", // Simple URL
+			"url=([^\\[\\]<>]+?)": "<a href=\"$1\" target=\"_blank\" title=\"$2\">$2</a>", // URL with title
+		})
+		// Format BB code
+		.directive('ksBbcode', ['snippets', function(snippets) {
+			return {
+				"restrict": "A",
+				"link": function($scope, $element, $attrs) {
+					$scope.$watch(function() {
+						var contents = $element.html().replace(/^\s+|\s+$/i, '');
+
+						for (var i in snippets) {
+							var regexp = new RegExp('\\[' + i + '\\](.+?)\\[\/' + i.replace(/[^a-z]/g, '') + '\\]', 'gi');
+
+							contents = contents.replace(regexp, snippets[i]);
+						}
+
+						$element.html(contents);
+					});
+				}
+			};
+		}])
+		// Format new lines
+		.directive('ksNl2br', [function() {
+			return {
+				"restrict": "A",
+				"link": function($scope, $element, $attrs) {
+					$scope.$watch(function() {
+						var contents = $element.html().replace(/^\s+|\s+$/i, '');
+
+						contents = contents.replace(/(?:\r\n|\n|\r)/gi, '<br>');
+
+						$element.html(contents);
+					});
+				}
+			};
+		}])
 		.config(function($routeProvider, $locationProvider) {
 			$locationProvider.html5Mode(true);
 			$routeProvider

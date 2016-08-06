@@ -374,6 +374,11 @@ nav.leftNavigation {
     h2 {
         padding: @padding-sm - 6 0;
     }
+	.col-1-2 {
+		flex-basis: 0px;
+		flex-grow: 1;
+		padding: 24px;
+	}
 }
 
 
@@ -560,6 +565,7 @@ table.standard {
     .justify-content(stretch);
     span {
 		.flex-grow(1);
+		.flex-basis(0px);
 		border-left: 1px solid @default;
 		border-right: 1px solid @default;
 		text-align: center;
@@ -793,7 +799,12 @@ form {
 .group.radio input + label:before {
     border-radius: 50%;
 }
-
+.no-pad {
+	padding: 0;
+	.standard.group:not(.flex){
+		margin: 24px;
+	}
+}
 .group.standard {
     margin-bottom: 6px;
 	min-height: 30px;
@@ -820,6 +831,15 @@ form {
     input:focus + label {
         color: @silver-light;
     }
+	&.flex {
+		display: flex;
+		justify-content: center;
+		padding: 0;
+	}
+	textarea, #article-preview {
+		width: 100%;
+		min-height: 400px;
+	}
     div.image-drop {
         order: 2;
         .flex-grow(1);
