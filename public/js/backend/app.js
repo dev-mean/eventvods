@@ -557,6 +557,18 @@
 					controllerAs: 'articlesFormController',
 					title: "Edit Article"
 				})
+				.when('/users', {
+					templateUrl: '/assets/views/backend/user/list.html',
+					controller: 'usersListController',
+					controllerAs: 'usersListController',
+					title: "Users"
+				})
+				.when('/user/:id/edit', {
+					templateUrl: '/assets/views/backend/user/form.html',
+					controller: 'editUserController',
+					controllerAs: 'userFormController',
+					title: "Edit User"
+				})
 				.when('/featured', {
 					templateUrl: '/assets/views/backend/featured.html',
 					controller: 'featuredSelectController',

@@ -148,4 +148,37 @@ router.get('/displayName/:name', function(req, res, next){
 	});
 });
 
+router.get('/displayName/:name/:id', function(req, res, next) {
+    User.findOne({
+        displayName: req.params.name.toUpperCase()
+    }, function(err, doc) {
+        if (err) next(err);
+        if (!doc) return res.sendStatus('200');
+        else if (doc._id == req.params.id) return res.sendStatus('200');
+        else return res.sendStatus('409');
+    });
+});
+
+router.get('/email/:email', function(req, res, next){
+	if(req.params.email == req.user.email) res.sendStatus('204');
+	User.count({
+		email: req.params.email
+	}, function(err, count){
+		if(err) next(err);
+		if(count > 0) res.sendStatus('409');
+		else res.sendStatus('204');
+	});
+});
+
+router.get('/email/:email/:id', function(req, res, next) {
+    User.findOne({
+        email: req.params.email
+    }, function(err, doc) {
+        if (err) next(err);
+        if (!doc) return res.sendStatus('200');
+        else if (doc._id == req.params.id) return res.sendStatus('200');
+        else return res.sendStatus('409');
+    });
+});
+
 module.exports = router;

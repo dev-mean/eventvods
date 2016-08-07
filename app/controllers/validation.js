@@ -69,9 +69,7 @@ module.exports.team = {
 	slug: 'required'
 };
 module.exports.user = {
-    username: 'required|min:3|max:16',
-    userEmail: 'required|email',
-    userRights: 'required|integer',
-    userPreferences: 'required',
-    emailConfirmed: 'required|boolean'
+    displayName: 'required',
+    email: 'required|email',
+    userRights: 'required'
 };

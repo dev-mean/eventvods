@@ -4,17 +4,21 @@ var config = require('../../config/config');
 constants = {
 	"end_user": 0,
 	"logged_in": 1,
-	"updater": 2,
-	"admin": 3,
-	"dev": 4
+	"writer": 2,
+	"updater": 3,
+	"admin": 4,
+	"dev": 5
 };
 module.exports.constants = constants;
+module.exports.roles = [
+	"Public User",
+	"Registered User",
+	"Writer",
+	"Updater",
+	"Administrator",
+	"Developer"
+];
 
-function check_use_cache(req){
-	if (req.isAuthenticated() && req.user.userRights >= constants.admin)
-		req.use_express_redis_cache = false;
-	return req;
-}
 function key_generate_recurse(req, res, callback) {
 	var key = keygen._({
 		length: 24,
@@ -46,42 +50,49 @@ function loginRedirect(req, res) {
 	if (req.session) {
 		req.session.returnTo = req.originalUrl || req.url;
 	}
-	return res.redirect('/user/login');
+	return res.redirect('/login');
 }
 
 function errorNoPermission(req, res, next) {
 	var err = new Error("Insufficient Permission");
 	err.status = 403;
 	Error.captureStackTrace(err);
+	res.use_express_redis_cache = false;
 	next(err);
 }
 
 module.exports.logged_in = function(skipEmailCheck) {
 	return function(req, res, next) {
-		req = check_use_cache(req);
 		if (!req.isAuthenticated())
 			loginRedirect(req, res);
 		else if (req.user.emailConfirmed || skipEmailCheck)
 			next();
 		else
-			res.redirect('/user/verifyemail');
+			res.redirect('/email');
+	};
+};
+module.exports.writer = function(){
+	return function(req, res, next) {
+		if (!req.isAuthenticated())
+			loginRedirect(req, res);
+		else if (req.user.userRights >= constants.writer)
+			next();
+		else
+			errorNoPermission(req, res, next);
 	};
 };
 module.exports.updater = function() {
 	return function(req, res, next) {
-		req = check_use_cache(req);
-		return next();
-		// if (!req.isAuthenticated())
-		// 	loginRedirect(req, res);
-		// else if (req.user.userRights >= constants.updater)
-		// 	next();
-		// else
-		// 	errorNoPermission(req, res, next);
+		if (!req.isAuthenticated())
+			loginRedirect(req, res);
+		else if (req.user.userRights >= constants.updater)
+			next();
+		else
+			errorNoPermission(req, res, next);
 	};
 };
 module.exports.admin = function() {
 	return function(req, res, next) {
-		req = check_use_cache(req);
 		if (!req.isAuthenticated())
 			loginRedirect(req, res);
 		else if (req.user.userRights >= constants.admin)
@@ -91,10 +102,8 @@ module.exports.admin = function() {
 	};
 };
 
-// Auth for API, doesn't try to redirect or anything fancy, as the user should never see these errors
 module.exports.public_api = function() {
 	return function(req, res, next) {
-		req = check_use_cache(req);
 		var key = req.query.apikey || req.get('X-Eventvods-Authorization');
 		if (process.env.NODE_ENV == "development" ||
 			(req.isAuthenticated && req.isAuthenticated() && req.user.userRights >= constants.updater))
@@ -105,7 +114,6 @@ module.exports.public_api = function() {
 			res.use_express_redis_cache = false;
 			return next(err);
 		}
-		req.apiKey = key;
 		if (key == config.secret) {
 			return next();
 		}
@@ -114,12 +122,7 @@ module.exports.public_api = function() {
 		}, function(err, count) {
 			if (count > 0)
 				next();
-			else {
-				err = new Error("Forbidden");
-				err.status = 403;
-				res.use_express_redis_cache = false;
-				next(err);
-			}
+			else errorNoPermission(req, res, next);
 		});
 	};
-};
+}

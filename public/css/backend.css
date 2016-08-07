@@ -1927,5 +1927,13 @@ td.is-selected > .pika-button {
 .pika-table td {
   padding: 3px!important;
 }
+select.form-style {
+  background: #3c405c;
+}
+.group select.form-style {
+  -webkit-order: 2;
+      -ms-flex-order: 2;
+          order: 2;
+}
 
 /*# sourceMappingURL=backend.css.map */

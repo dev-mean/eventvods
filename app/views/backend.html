@@ -47,53 +47,53 @@
                     <a href="/manage/">
                         <i class="fa fa-tachometer fa-lg fa-fw">
                         </i>
-                        <span class="text text-red">
+                        <span class="text">
                             Dashboard
                         </span>
                     </a>
-					<a href="/manage/featured/">
+					<a href="/manage/featured/" ng-show="Nav.isUpdater">
                         <i class="fa fa-star fa-lg fa-fw">
                         </i>
                         <span class="text">
                             Featured
                         </span>
                     </a>
-					<a href="/manage/articles">
+					<a href="/manage/articles" ng-show="Nav.isUpdater">
                         <i class="fa fa-pencil-square-o fa-lg fa-fw">
                         </i>
                         <span class="text">
                             Articles
                         </span>
                     </a>
-                    <a href="/manage/games">
+                    <a href="/manage/games" ng-show="Nav.isUpdater">
                         <i class="fa fa-gamepad fa-lg fa-fw">
                         </i>
                         <span class="text">
                             Games
                         </span>
                     </a>
-					<a href="/manage/staff">
+					<a href="/manage/staff" ng-show="Nav.isUpdater">
                         <i class="fa fa-commenting fa-lg fa-fw">
                         </i>
                         <span class="text">
                             Staff
                         </span>
                     </a>
-                    <a href="/manage/teams">
+                    <a href="/manage/teams" ng-show="Nav.isUpdater">
                         <i class="fa fa-flag fa-lg fa-fw">
                         </i>
                         <span class="text">
                             Teams
                         </span>
                     </a>
-                    <a href="/manage/leagues">
+                    <a href="/manage/leagues" ng-show="Nav.isUpdater">
                         <i class="fa fa-line-chart fa-lg fa-fw">
                         </i>
                         <span class="text">
                             Leagues
                         </span>
                     </a>
-                    <a href="/manage/tournaments">
+                    <a href="/manage/tournaments" ng-show="Nav.isUpdater">
                         <i class="fa fa-trophy fa-lg fa-fw">
                         </i>
                         <span class="text">
@@ -103,7 +103,7 @@
                     <a href="/manage/users" ng-show="Nav.isAdmin">
                         <i class="fa fa-users fa-lg fa-fw">
                         </i>
-                        <span class="text text-red">
+                        <span class="text">
                             Users
                         </span>
                     </a>
@@ -197,6 +197,12 @@
         <script src="/assets/js/backend/teams/addTeamController.js">
         </script>
         <script src="/assets/js/backend/teams/editTeamController.js">
+        </script>
+		<script src="/assets/js/backend/users/usersService.js">
+        </script>
+        <script src="/assets/js/backend/users/usersListController.js">
+        </script>
+        <script src="/assets/js/backend/users/editUserController.js">
         </script>
     </body>
 </html>

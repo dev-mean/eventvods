@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var passportLocalMongoose = require('passport-local-mongoose');
 var shortid = require('shortid');
+var auth = require('../controllers/auth');
 
 var userSchema = new Schema({
 	displayName: {
@@ -71,6 +72,14 @@ var userSchema = new Schema({
 			},
 		}
 	}
+}, {
+	id: false,
+	toObject: {
+		virtuals: true,
+	},
+	toJSON: {
+		virtuals: true,
+	}
 });
 
 userSchema.plugin(passportLocalMongoose, {
@@ -84,7 +93,9 @@ userSchema.plugin(passportLocalMongoose, {
 		UserExistsError: "That email is already registered."
 	}
 });
-
+userSchema.virtual('role').get(function () {
+	return auth.roles[this.userRights];
+});
 var User = mongoose.model('Users', userSchema);
 
 module.exports = User;

@@ -1,0 +1,57 @@
+<div class="contextHead">
+    <div class="leftSide">
+        <h1>Edit User
+        </h1>
+    </div>
+</div>
+<form name="form" id="addUserForm" ng-cloak>
+    <div class="errors" ng-show="userFormController.errors.length > 0">
+        <ul>
+            <li ng-repeat="error in userFormController.errors">{{error.message}}</li>
+        </ul>
+    </div>
+    <div class="section">
+        <div class="standard group">
+            <label>
+                Display Name
+            </label>
+            <input type="text" id="name" ng-model="userFormController.data.displayName" data-parsley-trigger="keyup" data-parsley-remote-message="Display name already in use."  required/>
+        </div>
+        <div class="standard group">
+            <label>
+                Email
+            </label>
+            <input type="text" id="email" ng-model="userFormController.data.email" data-parsley-trigger="keyup" data-parsley-remote-message="Email already in use." required/>
+        </div>
+		<div class="standard group">
+            <label>
+                User Rights
+            </label>
+            <select class="form-style" ng-model="userFormController.data.userRights" ng-options="opt.rights as opt.title for opt in userFormController.roleOptions">
+            </select>
+        </div>
+        <div class="standard group">
+            <label>
+                Profile Picture (optional)
+            </label>
+            <image-drop model="userFormController.data.profilePicture" preview-width="64" preview-height="64" />
+        </div>
+
+		<br />
+        <div class="standard group checkbox">
+			<input id="confirmation" type="checkbox" ng-model="userFormController.data.emailConfirmation.confirmed" name="confirmation" />
+            <label for="confirmation">
+                Email Verified
+            </label>
+        </div>
+        <br />
+        <div class="standard group">
+            <a class="btn lg solid icon" ng-click="userFormController.submit()">
+                <i class="fa fa-users">
+                </i>
+                <span>Edit User
+                </span>
+            </a>
+        </div>
+    </div>
+</form>

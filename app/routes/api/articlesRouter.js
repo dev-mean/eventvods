@@ -19,7 +19,7 @@ router.route('/')
 			else res.json(articles);
 		});
 	})
-	.post(auth.updater(), AWS.handleUpload(['header']), function(req, res, next) {
+	.post(auth.writer(), AWS.handleUpload(['header']), function(req, res, next) {
 		req.body.author = req.user._id;
 		Indicative.validateAll(req.body, Validators.article, Validators.messages)
 			.then(function() {
@@ -51,7 +51,7 @@ router.route('/:article_id')
 			res.json(article);
 		});
 	})
-	.delete(auth.updater(), function(req, res, next) {
+	.delete(auth.writer(), function(req, res, next) {
 		Article.findById(req.params.article_id, function(err, doc) {
 			AWS.deleteImage(doc.header)
 				.then(function() {
@@ -64,7 +64,7 @@ router.route('/:article_id')
 				});
 		});
 	})
-	.put(auth.updater(), AWS.handleUpload(['header']), function(req, res, next) {
+	.put(auth.writer(), AWS.handleUpload(['header']), function(req, res, next) {
 		Indicative.validateAll(req.body, Validators.article, Validators.messages)
 			.then(function() {
 				req.body.slug = slug(req.body.slug);

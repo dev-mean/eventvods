@@ -7,7 +7,8 @@
             $http.get(API_BASE_URL + "/auth/session")
                 .then(function(res){
                     vm.user = res.data;
-                    vm.isAdmin = (vm.user.userRights >= 3);
+                    vm.isAdmin = (vm.user.userRights >= 4);
+					vm.isUpdater = (vm.user.userRights >= 3);
                     $timeout(function(){
                         vm.class="loaded";
                     }, 1500);
