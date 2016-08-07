@@ -41,9 +41,9 @@
 		<nav class="nav-main" role="navigation" ng-controller="NavController as Nav">
 			<ul class="dropdown-content wide" id="games_dd">
 				<li ng-repeat="game in Nav.links.games">
-					<a ng-href="/game/{{game.slug}}">
+					<a ng-href="/games/{{game.slug}}">
 						<i class="material-icons left icon">
-							<img ng-src="{{game.icon}}" class="icon-24"/>
+							<img ng-src="{{game.icon}}" />
 							&nbsp;
 						</i>
 						{{game.name}}
@@ -55,9 +55,9 @@
 			</ul>
 			<ul class="dropdown-content wide grouped" id="leagues_dd">
 				<li ng-repeat="league in Nav.links.orderedLeagues = (Nav.links.leagues | orderBy:'game.name') track by $index" ng-class="Nav.leagueClass($index)">
-					<a ng-href="/league/{{league.slug}}">
+					<a ng-href="/leagues/{{league.slug}}">
 						<i class="material-icons left icon border-right">
-							<img ng-src="{{league.game.icon}}" class="icon-24"/>
+							<img ng-src="{{league.game.icon}}"/>
 							&nbsp;
 						</i>
 						{{league.name}}
@@ -65,6 +65,20 @@
 				</li>
 				<li class="border-top">
 					<a href="/leagues">All Leagues</a>
+				</li>
+			</ul>
+			<ul class="dropdown-content wide grouped" id="tournaments_dd">
+				<li ng-repeat="tournament in Nav.links.tournaments" class="border-top">
+					<a ng-href="/tournaments/{{tournament.slug}}">
+						<i class="material-icons left icon border-right">
+							<img ng-src="{{tournament.logo}}" />
+							&nbsp;
+						</i>
+						{{tournament.name}}
+					</a>
+				</li>
+				<li class="border-top">
+					<a href="/tournaments">All Tournaments</a>
 				</li>
 			</ul>
 			<div class="nav-wrapper container">
@@ -87,7 +101,7 @@
 						</a>
 					</li>
 					<li>
-						<a href="/tournaments">
+						<a class="dropdown-button" data-activates="tournaments_dd" href="/tournaments">
 							<i class="material-icons left">
 										&#xE5C5;
 									</i> TOURNAMENTS

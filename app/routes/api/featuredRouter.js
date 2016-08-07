@@ -22,12 +22,7 @@ router.get('/', function(req, res, next){
 	.populate({
 		path: 'tournaments',
 		model: 'Tournament',
-		select: 'name slug game',
-		populate: {
-			path: 'game',
-			model: 'Game',
-			select: 'name icon'
-		}
+		select: 'name slug logo'
 	})
 	.exec(function(err, featuredContent){
 		if(err) next(err);

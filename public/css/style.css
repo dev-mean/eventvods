@@ -282,6 +282,11 @@ nav.nav-main .dropdown-content.wide .icon {
   height: 50px;
   border-right: 2px solid #323256;
 }
+nav.nav-main .dropdown-content.wide .icon > img {
+  height: 24px;
+  pointer-events: none;
+  vertical-align: middle;
+}
 nav.nav-main .dropdown-content a {
   text-transform: uppercase;
   text-align: left;
