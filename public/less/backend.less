@@ -197,21 +197,18 @@ i.fa-bars {
 img.icon {
 	opacity: 1;
     &-48 {
-        width: 48px;
         height: 48px;
         &:not([src]){
             display: none;
         }
     }
     &-32 {
-        width: 32px;
         height: 32px;
         &:not([src]){
             display: none;
         }
     }
     &-16 {
-        width: 16px;
         height: 16px;
         &:not([src]){
             display: none;
@@ -228,6 +225,16 @@ img.icon {
             display: none;
         }
     }
+}
+
+#fragmentViewer {
+	height: 100%;
+	.content {
+		height: 100%;
+		position: relative;
+		top: -97px;
+		padding-top: 97px;
+	}
 }
 
 .form-style {
@@ -511,6 +518,49 @@ table.standard {
 
 /* overview tiles */
 
+.dashboard {
+	display: flex;
+	justify-content: space-around;
+	align-content: center;
+	flex-direction: column;
+	height: 100%;
+	.tile-row {
+		flex-basis: 0px;
+		flex-grow: 1;
+		display: flex;
+		justify-content: space-around;
+		align-content: center;
+		.tile-cell {
+			flex-basis: 0px;
+			flex-grow: 1;
+			text-align: center;
+			padding: 25px 50px;
+		}
+	}
+	.badge-wrapper {
+		width: 100%;
+		height: 100%;
+		background: @default-dark;
+		border-radius: 15px;
+		display: flex;
+		flex-direction: column;
+		.badge {
+			font-size: xx-large;
+			background: @default-light;
+			border-top-left-radius: 15px;
+			border-top-right-radius: 15px;
+			flex-grow: 1;
+			flex-basis: 0;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+		}
+	}
+	p {
+		padding: 10px;
+	}
+}
+
 
 
 .pagination {
@@ -664,34 +714,6 @@ table.standard {
     }
 }
 
-.content {
-    h1.title {
-        margin-left: 3px;
-        margin-top: @gutter + 5px;
-        margin-bottom: @gutter + 5px;
-        font-size: 1.5em;
-    }
-}
-
-
-/* forms + detail view */
-
-.content.form {
-    .flex-display;
-    .flex-wrap(wrap);
-    .leftSide {
-        min-width: 66%;
-    }
-    .rightSide {
-        min-width: 34%;
-    }
-    .saveBlock {
-        width: 100%;
-        border-top: 1px solid @default-dark;
-        padding-top: @padding-sm;
-        margin-top: @padding-sm;
-    }
-}
 
 form {
     .group {

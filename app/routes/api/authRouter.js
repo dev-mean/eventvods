@@ -62,7 +62,7 @@ router.post('/register', function(req, res, next){
 							"email": req.body.email,
 							"displayName": req.body.displayName.toUpperCase(),
 							"signup.IP": req.ip,
-							"userRights": 5
+							"userRights": require('../../controllers/auth').constants.logged_in
 						});
 						User.register(newUser, req.body.password, function(err, user){
 							if(err) next(err);

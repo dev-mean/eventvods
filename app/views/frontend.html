@@ -57,7 +57,7 @@
 				<li ng-repeat="league in Nav.links.orderedLeagues = (Nav.links.leagues | orderBy:'game.name') track by $index" ng-class="Nav.leagueClass($index)">
 					<a ng-href="/leagues/{{league.slug}}">
 						<i class="material-icons left icon border-right">
-							<img ng-src="{{league.game.icon}}"/>
+							<img ng-src="{{league.game.icon}}" />
 							&nbsp;
 						</i>
 						{{league.name}}
