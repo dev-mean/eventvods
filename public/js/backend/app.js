@@ -485,6 +485,12 @@
 					controllerAs: 'leagueFormController',
 					title: "Edit League"
 				})
+				.when('/league/:id/update', {
+					templateUrl: '/assets/views/backend/editor.html',
+					controller: 'updateLeagueController',
+					controllerAs: 'editorController',
+					title: "League Editor"
+				})
 				.when('/tournaments', {
 					templateUrl: '/assets/views/backend/tournament/list.html',
 					controller: 'tournamentsListController',
@@ -502,6 +508,12 @@
 					controller: 'editTournamentController',
 					controllerAs: 'tournamentFormController',
 					title: "Edit Tournament"
+				})
+				.when('/tournament/:id/update', {
+					templateUrl: '/assets/views/backend/editor.html',
+					controller: 'updateTournamentController',
+					controllerAs: 'editorController',
+					title: "Tournament Editor"
 				})
 				.when('/staff', {
 					templateUrl: '/assets/views/backend/staff/list.html',

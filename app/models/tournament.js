@@ -4,6 +4,7 @@ var Staff = require('./staff').schema;
 var Media = require('./socialmedia').schema;
 var Team = require('./team').schema;
 var slug = require('slug');
+var Section = require('./section').schema;
 
 var tournamentSchema = new Schema({
 	name: {
@@ -26,7 +27,8 @@ var tournamentSchema = new Schema({
 	media: [Media],
 	teams: [Team],
 	logo: String,
-	header: String
+	header: String,
+	contents: [Section]
 });
 
 var Tournament = mongoose.model('Tournament', tournamentSchema);

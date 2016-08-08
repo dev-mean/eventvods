@@ -4,7 +4,7 @@ var Staff = require('./staff').schema;
 var Media = require('./socialmedia').schema;
 var Team = require('./team').schema;
 var slug = require('slug');
-
+var Section = require('./section').schema;
 var leagueSchema = new Schema({
 	name: {
 		type: String,
@@ -27,6 +27,7 @@ var leagueSchema = new Schema({
 	teams: [Team],
 	logo: String,
 	header: String,
+	contents: [Section]
 });
 
 var League = mongoose.model('League', leagueSchema);

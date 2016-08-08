@@ -33,7 +33,6 @@
 			$http.get(API_BASE_URL + '/featured')
 				.then(function(res) {
 					vm.data = res.data;
-					console.log(res.data);
 				});
 			gamesService.find()
 				.then(function(res) {

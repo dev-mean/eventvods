@@ -402,9 +402,6 @@ img.icon-team {
 img.icon-team:not([src]) {
   display: none;
 }
-#fragmentViewer {
-  height: 100%;
-}
 #fragmentViewer .content {
   height: 100%;
   position: relative;
@@ -636,44 +633,14 @@ nav.leftNavigation a i.fa {
   font-weight: 300;
   line-height: 38px;
 }
-.contextHead .rightSide .viewSelect,
-.contextHead .rightSide .tabs {
-  display: -webkit-flex;
-  display: -moz-flex;
-  display: -ms-flexbox;
-  display: -ms-flex;
-  display: flex;
+.contextHead .rightSide {
+  display: inline-block;
 }
-.contextHead .rightSide .viewSelect > div,
-.contextHead .rightSide .tabs > div {
-  height: 97px;
-  width: 105px;
-  text-align: center;
-  background: #363a53;
-  padding-top: 20px;
-  font-size: 14px;
-  cursor: pointer;
-}
-.contextHead .rightSide .viewSelect > div i,
-.contextHead .rightSide .tabs > div i {
-  font-size: 24px;
-  display: block;
-  text-align: center;
-  color: #8690af;
-  transition: all 0.25s ease-in-out;
-}
-.contextHead .rightSide .viewSelect > div span,
-.contextHead .rightSide .tabs > div span {
-  transition: all 0.25s ease-in-out;
-  color: #a4abc1;
-}
-.contextHead .rightSide .viewSelect > div:hover *,
-.contextHead .rightSide .tabs > div:hover * {
-  color: #d3d7e3;
-}
-.contextHead .rightSide .viewSelect > div.active,
-.contextHead .rightSide .tabs > div.active {
-  background: #474c6c;
+.contextHead .rightSide h1,
+.contextHead .rightSide a {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 5px;
 }
 /* table standard */
 table.standard {
@@ -759,9 +726,6 @@ table.standard td.update:hover {
 }
 /* overview tiles */
 .dashboard {
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
   -webkit-justify-content: space-around;
       -ms-flex-pack: distribute;
           justify-content: space-around;
@@ -771,15 +735,11 @@ table.standard td.update:hover {
   -webkit-flex-direction: column;
       -ms-flex-direction: column;
           flex-direction: column;
-  height: 100%;
 }
 .dashboard .tile-row {
   -webkit-flex-basis: 0px;
       -ms-flex-preferred-size: 0px;
           flex-basis: 0px;
-  -webkit-flex-grow: 1;
-      -ms-flex-positive: 1;
-          flex-grow: 1;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
@@ -802,7 +762,6 @@ table.standard td.update:hover {
 }
 .dashboard .badge-wrapper {
   width: 100%;
-  height: 100%;
   background: #343850;
   border-radius: 15px;
   display: -webkit-flex;
@@ -817,12 +776,6 @@ table.standard td.update:hover {
   background: #474c6c;
   border-top-left-radius: 15px;
   border-top-right-radius: 15px;
-  -webkit-flex-grow: 1;
-      -ms-flex-positive: 1;
-          flex-grow: 1;
-  -webkit-flex-basis: 0;
-      -ms-flex-preferred-size: 0;
-          flex-basis: 0;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
@@ -832,6 +785,7 @@ table.standard td.update:hover {
   -webkit-justify-content: center;
       -ms-flex-pack: center;
           justify-content: center;
+  padding: 25px;
 }
 .dashboard p {
   padding: 10px;
@@ -921,6 +875,18 @@ table.standard td.update:hover {
   line-height: 16px;
   color: #8690af;
 }
+.filters > span {
+  line-height: 50px;
+  height: 50px;
+  padding: 16px;
+}
+.filters a.btn {
+  top: -3px;
+  left: 10px;
+}
+.filters a.btn i {
+  padding-top: 1px;
+}
 .tabs {
   display: -webkit-inline-flex;
   display: -moz-inline-flex;
@@ -965,10 +931,10 @@ table.standard td.update:hover {
 }
 .tabs span.selected {
   background: #3c405c;
-  text-decoration: underline;
 }
-.tabs span i {
-  padding-left: 2px;
+.tabs span i.fa-rotate-90 {
+  padding-right: 5px;
+  vertical-align: middle;
 }
 .errors {
   padding: 16px;
@@ -1386,6 +1352,9 @@ form .group tags-input input {
   position: relative;
   margin: auto;
 }
+.group.standard div.image-drop div.controls-container p a > * {
+  pointer-events: none;
+}
 .group.standard div.image-drop div.controls-container p a:hover {
   background-color: rgba(60, 255, 133, 0.12);
   color: #6fffa5;
@@ -1510,6 +1479,9 @@ form .group tags-input input {
   cursor: pointer;
   width: auto;
   white-space: nowrap;
+}
+.btn > * {
+  pointer-events: none;
 }
 .btn:hover {
   background-color: rgba(60, 255, 133, 0.12);
@@ -1769,7 +1741,7 @@ form .group tags-input input {
       -ms-flex-order: 3;
           order: 3;
 }
-.sortable-container div {
+.sortable-container > div {
   margin: 20px auto;
   padding: 5px 25px;
   background: #474c6c;
@@ -1786,7 +1758,12 @@ form .group tags-input input {
       -ms-flex-pack: justify;
           justify-content: space-between;
 }
-.sortable-container div span {
+.sortable-container > div form {
+  -webkit-flex-grow: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+}
+.sortable-container > div > span {
   line-height: 40px;
   -webkit-flex-grow: 1;
       -ms-flex-positive: 1;
@@ -1794,8 +1771,8 @@ form .group tags-input input {
   overflow-x: hidden;
   text-overflow: ellipsis;
 }
-.sortable-container div span input,
-.sortable-container div span select {
+.sortable-container > div > span input,
+.sortable-container > div > span select {
   border-radius: 2px;
   outline: none;
   line-height: 14px;
@@ -1808,48 +1785,57 @@ form .group tags-input input {
   transition: all 0.25s ease-in-out;
   background: #3c405c;
 }
-.sortable-container div span input:focus,
-.sortable-container div span select:focus {
+.sortable-container > div > span input:focus,
+.sortable-container > div > span select:focus {
   border-color: #a4abc1;
   color: #d3d7e3;
 }
-.sortable-container div span input::-webkit-input-placeholder,
-.sortable-container div span select::-webkit-input-placeholder {
+.sortable-container > div > span input::-webkit-input-placeholder,
+.sortable-container > div > span select::-webkit-input-placeholder {
   font-size: 14px;
   line-height: 16px;
   color: #8690af;
 }
-.sortable-container div span input::-moz-placeholder,
-.sortable-container div span select::-moz-placeholder {
+.sortable-container > div > span input::-moz-placeholder,
+.sortable-container > div > span select::-moz-placeholder {
   font-size: 14px;
   line-height: 16px;
   color: #8690af;
 }
-.sortable-container div span input:-moz-placeholder,
-.sortable-container div span select:-moz-placeholder {
+.sortable-container > div > span input:-moz-placeholder,
+.sortable-container > div > span select:-moz-placeholder {
   font-size: 14px;
   line-height: 16px;
   color: #8690af;
 }
-.sortable-container div span input:-ms-input-placeholder,
-.sortable-container div span select:-ms-input-placeholder {
+.sortable-container > div > span input:-ms-input-placeholder,
+.sortable-container > div > span select:-ms-input-placeholder {
   font-size: 14px;
   line-height: 16px;
   color: #8690af;
 }
-.sortable-container div span.center {
+.sortable-container > div > span.center {
   text-align: center;
 }
-.sortable-container div span.no-grow {
+.sortable-container > div > span.no-grow {
   -webkit-flex-grow: 0;
       -ms-flex-positive: 0;
           flex-grow: 0;
   width: 60px;
 }
-.sortable-container div span > img {
+.sortable-container > div > span.no-grow.no-width {
+  width: auto;
+}
+.sortable-container > div > span.no-grow a.btn {
+  vertical-align: 2px;
+}
+.sortable-container > div > span.no-grow a.btn i {
+  left: 1px;
+}
+.sortable-container > div > span > img {
   vertical-align: middle;
 }
-.sortable-container span.editable-click {
+.sortable-container .editable-click {
   color: #a4abc1 !important;
   border-bottom: 1px dashed transparent;
   -webkit-flex-grow: 1;
@@ -1860,7 +1846,7 @@ form .group tags-input input {
           flex-basis: 0px;
   margin-left: 15px;
 }
-.sortable-container span.editable-click:hover {
+.sortable-container .editable-click:hover {
   border-bottom: 1px dashed #a4abc1 !important;
 }
 .sortable-container .editable-input {
@@ -1900,6 +1886,11 @@ form .group tags-input input {
   line-height: 16px;
   color: #8690af;
 }
+.sortable-container h1 {
+  font-size: 20px;
+  font-weight: 300;
+  line-height: 38px;
+}
 .pika-single {
   border: 2px solid #a4abc1;
 }
@@ -1934,6 +1925,56 @@ select.form-style {
   -webkit-order: 2;
       -ms-flex-order: 2;
           order: 2;
+}
+.flex {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-justify-content: space-between;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.section-container a.btn {
+  height: 30px;
+}
+.module-container {
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+.module-container i.fa,
+.tabs i.fa {
+  cursor: pointer;
+}
+.module-container i.fa:hover,
+.tabs i.fa:hover {
+  color: #0fc461;
+}
+.module-container i.fa.del:hover,
+.tabs i.fa.del:hover {
+  color: red;
+}
+.tabs i.fa:not(.fa-rotate-90) {
+  vertical-align: top;
+}
+.columns input.editable-input,
+.matches input.editable-input {
+  height: 23px;
+  font-size: 12px;
+  line-height: 12px;
+}
+.columns .editable-click {
+  margin-left: 0;
+}
+.match .editable-click {
+  margin-left: 0;
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: inline-block;
 }
 
 /*# sourceMappingURL=backend.css.map */
