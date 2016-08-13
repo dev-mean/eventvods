@@ -1,0 +1,48 @@
+.input-field {
+	margin-bottom: 25px;
+	label, input {
+		.gotham-med();
+	}
+	label {
+		text-align: left;
+		transition: color 0.3s linear, transform 0.2s ease-out;
+		text-transform: uppercase;
+		&.active {
+			color: @accent-green!important;
+		}
+		&:after {
+			top: 45px;
+		}
+		&.active:after {
+			opacity: 0!important;
+		}
+		&.click-through {
+			pointer-events: none;
+		}
+		&.center-label {
+			width: auto;
+		}
+	}
+	input[type="checkbox"]:not(:checked) + label {
+		color: @accent-error!important;
+	}
+}
+.buttons {
+	margin-top: 25px;
+}
+.btn {
+	background-color: @accent-green;
+	&:hover {
+		background-color: lighten(@accent-green, 5%);
+	}
+}
+.contents.light {
+	.input-field label, .input-field input {
+		color: @default-blue;
+	}
+}
+.contents.dark {
+.input-field label, .input-field input {
+		color: white;
+	}
+}

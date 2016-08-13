@@ -3,7 +3,7 @@
 html {
 	min-height: 100%;
 }
-[ng-cloak], img:not([src])  {
+[ng-cloak], img:not([src]), .hide  {
   display: none !important;
 }
 
@@ -49,9 +49,8 @@ body {
 	border-top: 5px solid @accent-green;
 	.transition(all, 0.3s, linear);
 	text-align: center;
-	padding-bottom: 50px;
-	a {
-	color: @accent-green;
+	a:not(.btn) {
+		color: @accent-green;
 		&:hover {
 			text-decoration: underline;
 		}
@@ -80,8 +79,6 @@ body {
 		.transition(all, 0.3s, linear);
 		.gotham-med();
 		padding: 50px;
-		margin-bottom: 50px;
-		border-bottom: 5px solid @accent-green;
 		h3.title {
 			width: 100%;
 			text-align: center;
@@ -90,15 +87,6 @@ body {
 			border-bottom: 5px solid @accent-green;
 			padding-bottom: 10px;
 		}
-	}
-}
-.input-field {
-	label, input {
-		color: @default-blue;
-		.gotham-med();
-	}
-    label {
-		text-transform: uppercase;
 	}
 }
 #loading-bar .bar {

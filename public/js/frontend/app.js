@@ -14,6 +14,15 @@
 				}
 			});
 		})
+		.directive('fixFill', function($location) {
+			var absUrl = 'url(' + $location.absUrl() + '#';
+			return {
+				restrict: 'A',
+				link: function($scope, $element, $attrs) {
+					$attrs.$set('fill', $attrs.fill.replace(/url\(#/g, absUrl));
+				}
+			};
+		})
 		.config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
             $routeProvider
                 .when('/', {
@@ -23,10 +32,26 @@
 						description: 'Testing Meta Description'
 					}
                 })
+				.when('/login', {
+                    templateUrl: '/assets/views/frontend/login.html',
+					controller: 'LoginController',
+					controllerAs: 'LoginController',
+					meta: {
+						title: 'Login - Eventvods - Esports on Demand',
+						description: 'Meta Description'
+					}
+                })
 				.when('/about/cookies', {
                     templateUrl: '/assets/views/frontend/cookies.html',
 					meta: {
 						title: 'Cookie Policy - Eventvods - Esports on Demand',
+						description: 'Meta Description'
+					}
+                })
+				.when('/about/terms', {
+                    templateUrl: '/assets/views/frontend/tos.html',
+					meta: {
+						title: 'Terms of Service - Eventvods - Esports on Demand',
 						description: 'Meta Description'
 					}
                 });
@@ -36,14 +61,5 @@
 			});
 
 
-		}])
-		.directive('fixFill', function($location) {
-			var absUrl = 'url(' + $location.absUrl() + '#';
-			return {
-				restrict: 'A',
-				link: function($scope, $element, $attrs) {
-					$attrs.$set('fill', $attrs.fill.replace(/url\(#/g, absUrl));
-				}
-			};
-		});
+		}]);
 }());

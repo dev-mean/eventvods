@@ -36,7 +36,6 @@
 				</div>
 			</div>
 		</div>
-		<ng-include src="'/assets/views/dialogs/loginRegister.html'" ng-if="Page.session == false" ng-cloak></ng-include>
 		<ng-include src="'/assets/views/dialogs/userSettings.html'" ng-if="Page.session != false && Page.session != null" onload="Page.init()" ng-cloak></ng-include>
 		<nav class="nav-main" role="navigation" ng-controller="NavController as Nav">
 			<ul class="dropdown-content wide" id="games_dd">
@@ -113,7 +112,7 @@
 								</a>
 					</li>
 					<li class="no-transition" ng-if="Page.session == false" ng-cloak>
-						<a class="waves-effect waves-light btn" href="#loginRegister" modal opacity="1" enable-tabs="true" in-duration="500" out-duration="300" ready="LR.loginDialogOpen()">
+						<a href="/login" class="waves-effect waves-light btn">
 									LOGIN
 								</a>
 					</li>
@@ -253,11 +252,14 @@
 	</script>
 	<script src="/assets/js/frontend/controllers/PageController.js">
 	</script>
-	<script src="/assets/js/frontend/controllers/LoginRegister.js">
+	<script src="/assets/js/frontend/controllers/LoginController.js">
 	</script>
 	<script src="/assets/js/frontend/controllers/NavController.js">
 	</script>
 	<script src="/assets/js/frontend/controllers/SettingsController.js">
+	</script>
+	<!-- -->
+	<script src="/assets/js/frontend/controllers/LoginRegister.js">
 	</script>
 </body>
 

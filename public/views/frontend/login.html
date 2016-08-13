@@ -1,0 +1,83 @@
+<div class="evSlider single" id="banner">
+	<div class="images">
+		<div class="image">
+			<div class="main">
+				<img src="/assets/images/backgrounds/1.jpg" />
+			</div>
+			<div class="blur">
+				<img src="/assets/images/backgrounds/1b.jpg" />
+			</div>
+			<div class="overlay middle">
+				<div class="container">
+					<h1>User Login</h1>
+					<h4>Login to your account to follow your favourite leagues, tournaments and teams.</h4>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="contents" ng-class="Page.contentClass">
+	<div class="container center-align">
+		<div class="row">
+			<form autocomplete="false">
+				<input name="email" class="hide">
+				<input name="password" class="hide">
+				<div class="col s6 offset-s3 center-align" id="login">
+					<div class="row social-login">
+						<div class="col s6">
+							<a href="/login/facebook" target="_self">
+								<img class="responsive-img" src="/assets/images/icons/facebook_login.png" />
+							</a>
+						</div>
+						<div class="col s6">
+							<a href="/login/twitter" target="_self">
+								<img class="responsive-img" src="/assets/images/icons/twitter_login.png" />
+							</a>
+						</div>
+					</div>
+					<div class="row social-login">
+						<div class="col s6">
+							<a href="/login/google" target="_self">
+								<img class="responsive-img" src="/assets/images/icons/google_login.png" />
+							</a>
+						</div>
+						<div class="col s6">
+							<a href="/login/instagram" target="_self">
+								<img class="responsive-img" src="/assets/images/icons/instagram_login.png" />
+							</a>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col s12">
+							<input-field>
+								<input id="email" type="email" class="validate" ng-model="LoginController.data.email" required tabindex="0" />
+								<label class="click-through" data-error="Please enter your email address.">Email</label>
+							</input-field>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col s12">
+							<input-field>
+								<input id="password" type="password" class="validate" ng-model="LoginController.data.password" required tabindex="0" />
+								<label id="password_label" class="click-through" data-error="Please enter your password.">Password</label>
+							</input-field>
+						</div>
+					</div>
+					<div class="row buttons">
+						<div class="col s6">
+							<a class="waves-effect waves-light btn submit" ng-click="LoginController.login()" tabindex="1">Login</a>
+						</div>
+						<div class="col s6">
+							<a href="/register" class="waves-effect waves-light btn submit" tabindex="1">Register</a>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col s6 offset-s3">
+							<a href="/reset">Reset Password</a>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

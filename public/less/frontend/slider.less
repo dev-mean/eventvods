@@ -84,13 +84,18 @@
 			height: @banner-slider-height/3;
 			pointer-events: none;
 		}
-		h3, h4 {
+		h1, h2, h3, h4 {
 			text-transform: uppercase;
+		}
+		h3, h4 {
 			margin: 5px 0 5px 0;
 			letter-spacing: 1px;
 		}
 		h3 {
 			color: @accent-green;
+		}
+		h4 {
+			transform: scale(0.8);
 		}
 		a.btn {
 			background: @accent-green;
@@ -106,10 +111,9 @@
 	    justify-content: center;
 	    .indicator {
 	    	background: @accent-white;
-	    	width: 20px;
-	    	height: 20px;
+	    	width: 10px;
+	    	height: 10px;
 	    	margin: 15px;
-	    	border-radius: 50%;
 	    	cursor: pointer;
 	    	.transition(all, 2s, ease-in-out);
 	    	&.active {
