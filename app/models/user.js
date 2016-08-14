@@ -71,6 +71,20 @@ var userSchema = new Schema({
 				default: false
 			},
 		}
+	},
+	social: {
+		facebook: {
+			type: String,
+			select: false
+		},
+		twitter: {
+			type: String,
+			select: false
+		},
+		google: {
+			type: String,
+			select: false
+		}
 	}
 }, {
 	id: false,
@@ -87,6 +101,7 @@ userSchema.plugin(passportLocalMongoose, {
 	limitAttempts: true,
 	maxAttempts: 5,
 	usernameLowerCase: true,
+	selectFields: 'displayName _id social email userRights settings profilePicture',
 	errorMessages: {
 		IncorrectUsernameError: "Incorrect email or password.",
 		IncorrectPasswordError: "Incorrect email or password.",

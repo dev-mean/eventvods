@@ -40,6 +40,7 @@
     "ratelimit.js": "^1.7.0",
     "redis": "*",
     "redis-rate-limiter": "*",
+    "request": "^2.74.0",
     "serve-favicon": "*",
     "shortid": "*",
     "slug": "^0.9.1"

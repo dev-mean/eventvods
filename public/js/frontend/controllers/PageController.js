@@ -26,7 +26,7 @@
 			};
 			vm.init = function() {
 				$('.evSlider.multiple').evSlider({
-					delay: 2500
+					delay: 7500
 				});
 				$('.dropdown-button').dropdown({
 						hover: true,

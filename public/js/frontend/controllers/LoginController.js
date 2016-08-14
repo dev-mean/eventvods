@@ -29,7 +29,6 @@
 				}
 			};
 			$timeout(function() {
-				$('#login input').first().focus();
 				$('#login input[type!=checkbox]').blur(function() {
 					if ($(this).val() === "") {
 						$(this).addClass('invalid');

@@ -1,3 +1,15 @@
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    -webkit-transition: "color 9999s ease-out, background-color 9999s ease-out";
+    -webkit-transition-delay: 9999s;
+}
+
+input[type=checkbox]:not(:checked) + .err, input[type=checkbox]:not(:checked) + .err a {
+	transition: color 0.3s linear;
+	color: @accent-error!important;
+}
 .input-field {
 	margin-bottom: 25px;
 	label, input {
@@ -5,7 +17,7 @@
 	}
 	label {
 		text-align: left;
-		transition: color 0.3s linear, transform 0.2s ease-out;
+		transition: color 0.3s linear, transform 0.2s ease-out, font-size 0.2s ease-out;
 		text-transform: uppercase;
 		&.active {
 			color: @accent-green!important;

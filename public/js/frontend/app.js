@@ -25,6 +25,13 @@
 		})
 		.config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
             $routeProvider
+				.when('/_=_', {
+					templateUrl: '/assets/views/frontend/home.html',
+					meta: {
+						title: 'Eventvods - Esports on Demand',
+						description: 'Testing Meta Description'
+					}
+				})
                 .when('/', {
                     templateUrl: '/assets/views/frontend/home.html',
 					meta: {
@@ -38,6 +45,15 @@
 					controllerAs: 'LoginController',
 					meta: {
 						title: 'Login - Eventvods - Esports on Demand',
+						description: 'Meta Description'
+					}
+                })
+				.when('/register', {
+                    templateUrl: '/assets/views/frontend/register.html',
+					controller: 'RegisterController',
+					controllerAs: 'RegisterController',
+					meta: {
+						title: 'Register - Eventvods - Esports on Demand',
 						description: 'Meta Description'
 					}
                 })

@@ -692,6 +692,18 @@ footer.page-footer .footer-copyright .copyright {
   text-transform: uppercase;
   font-weight: bold;
 }
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-transition: "color 9999s ease-out, background-color 9999s ease-out";
+  -webkit-transition-delay: 9999s;
+}
+input[type=checkbox]:not(:checked) + .err,
+input[type=checkbox]:not(:checked) + .err a {
+  transition: color 0.3s linear;
+  color: #F44336 !important;
+}
 .input-field {
   margin-bottom: 25px;
 }
@@ -702,9 +714,9 @@ footer.page-footer .footer-copyright .copyright {
 }
 .input-field label {
   text-align: left;
-  transition: color 0.3s linear, -webkit-transform 0.2s ease-out;
-  transition: color 0.3s linear, transform 0.2s ease-out;
-  transition: color 0.3s linear, transform 0.2s ease-out, -webkit-transform 0.2s ease-out;
+  transition: color 0.3s linear, font-size 0.2s ease-out, -webkit-transform 0.2s ease-out;
+  transition: color 0.3s linear, transform 0.2s ease-out, font-size 0.2s ease-out;
+  transition: color 0.3s linear, transform 0.2s ease-out, font-size 0.2s ease-out, -webkit-transform 0.2s ease-out;
   text-transform: uppercase;
 }
 .input-field label.active {

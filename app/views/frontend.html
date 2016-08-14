@@ -25,7 +25,7 @@
 	<meta property="og:description"" content="{{meta.description}}" />
 </head>
 <body id="top"  ng-controller="PageController as Page" >
-	<header ng-controller="LoginRegisterController as LR">
+	<header">
 		<div class="cookie_disclaimer" ng-class="{show: Page.cookiesAccepted === false}">
 			<div class="container">
 				<h5>Cookie Disclaimer</h5>
@@ -254,12 +254,11 @@
 	</script>
 	<script src="/assets/js/frontend/controllers/LoginController.js">
 	</script>
+	<script src="/assets/js/frontend/controllers/RegisterController.js">
+	</script>
 	<script src="/assets/js/frontend/controllers/NavController.js">
 	</script>
 	<script src="/assets/js/frontend/controllers/SettingsController.js">
-	</script>
-	<!-- -->
-	<script src="/assets/js/frontend/controllers/LoginRegister.js">
 	</script>
 </body>
 
