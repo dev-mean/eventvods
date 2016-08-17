@@ -5,7 +5,11 @@ var Team = require('./team').schema;
 var matchSchema = {
 	team1: Team,
 	team2: Team,
-	links: [String]
+	links: [String],
+	spoiler: {
+		type: Boolean,
+		default: false
+	}
 }
 var moduleSchema = new Schema({
 	title: {

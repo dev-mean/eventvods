@@ -12,7 +12,7 @@
                     sortReverse: false
                 };
                 vm.paging = {
-                    itemsPerPage: 10,
+                    itemsPerPage: 6,
                     pages: function() {
                         var pages = Math.ceil(vm.filterData.length / vm.paging.itemsPerPage);
                         if (vm.paging.page > pages && pages > 0) vm.paging.page = pages;
