@@ -47,6 +47,10 @@ body {
 	border-top: 5px solid @accent-green;
 	.transition(all, 0.3s, linear);
 	text-align: center;
+	&.pad-bottom {
+		padding-top: 25px;
+		padding-bottom: 25px;
+	}
 	a:not(.btn) {
 		color: @accent-green;
 		&:hover {
@@ -72,6 +76,9 @@ body {
 		.container {
 			background: @dark-blue;
 		}
+		.collection-item {
+			background-color: transparent;
+		}
 	}
 	.container {
 		.transition(all, 0.3s, linear);
@@ -85,6 +92,13 @@ body {
 			border-bottom: 5px solid @accent-green;
 			padding-bottom: 10px;
 		}
+	}
+	> h1.container {
+		text-transform: uppercase;
+		border-bottom: 5px solid @accent-green;
+		.gotham-med();
+		padding: 25px;
+		background: transparent!important;
 	}
 }
 #loading-bar .bar {

@@ -17,7 +17,11 @@ var articleSchema = new Schema({
 		text: String
 	}],
 	content: String,
-	header: String
+	header: String,
+	published: {
+		type: Boolean,
+		default: false
+	}
 
 });
 var Article = mongoose.model('Article', articleSchema);

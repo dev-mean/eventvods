@@ -3,6 +3,13 @@
 		<h1 ng-bind="articlesFormController.title">
         </h1>
 	</div>
+	<div class="rightSide">
+		<a class="btn lg solid icon" ng-click="articlesFormController.submit()">
+			<i class="fa fa-save">
+				</i>
+			<span>Save</span>
+		</a>
+	</div>
 </div>
 <div class="tabs">
 	<span ng-class="{selected: articlesFormController.tab == 1}" ng-click="articlesFormController.tab = 1">
@@ -43,6 +50,14 @@
 			<tags-input ng-model="articlesFormController.data.tags">
 			</tags-input>
 		</div>
+		<br />
+		<div class="standard group checkbox">
+			<input id="published" type="checkbox" ng-model="articlesFormController.data.published" name="published" />
+			<label for="published">
+                Article Published
+            </label>
+		</div>
+		<br />
 		<div class="standard group">
 			<label>
                 Article Header
@@ -79,11 +94,6 @@
 			<span>
 				Article Details
 			</span>
-		</a>
-		<a class="btn lg solid icon icon-right pull-right" ng-click="articlesFormController.submit()">
-			<i class="fa fa-pencil-square-o">
-				</i>
-			<span ng-bind="articlesFormController.title"></span>
 		</a>
 	</div>
 </div>

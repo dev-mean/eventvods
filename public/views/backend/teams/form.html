@@ -3,6 +3,13 @@
 		<h1 ng-bind="teamsFormController.title">
         </h1>
 	</div>
+	<div class="rightSide">
+		<a class="btn lg solid icon" ng-click="teamsFormController.submit()">
+			<i class="fa fa-save">
+				</i>
+			<span>Save</span>
+		</a>
+	</div>
 </div>
 <div class="tabs">
 	<span ng-class="{selected: teamsFormController.tab == 1}" ng-click="teamsFormController.tab = 1">
@@ -63,11 +70,6 @@
 			<span>
 				Team Details
 			</span>
-		</a>
-		<a class="btn lg solid icon icon-right pull-right" ng-click="teamsFormController.submit()">
-			<i class="fa fa-flag">
-				</i>
-			<span ng-bind="teamsFormController.title"></span>
 		</a>
 	</div>
 </div>

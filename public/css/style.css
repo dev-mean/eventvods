@@ -58,6 +58,10 @@ body {
   transition: all 0.3s linear;
   text-align: center;
 }
+.contents.pad-bottom {
+  padding-top: 25px;
+  padding-bottom: 25px;
+}
 .contents a:not(.btn) {
   color: #0CD97E;
 }
@@ -84,6 +88,9 @@ body {
 .contents.dark .container {
   background: #27273F;
 }
+.contents.dark .collection-item {
+  background-color: transparent;
+}
 .contents .container {
   transition: all 0.3s linear;
   font-family: Gotham;
@@ -97,6 +104,14 @@ body {
   color: #0CD97E;
   border-bottom: 5px solid #0CD97E;
   padding-bottom: 10px;
+}
+.contents > h1.container {
+  text-transform: uppercase;
+  border-bottom: 5px solid #0CD97E;
+  font-family: Gotham;
+  font-weight: 500;
+  padding: 25px;
+  background: transparent!important;
 }
 #loading-bar .bar {
   background: #0CD97E !important;
@@ -330,6 +345,11 @@ nav.nav-main a.btn:hover {
 .evSlider.single .image {
   opacity: 1;
 }
+.evSlider.single h4 {
+  -webkit-transform: scale(0.8);
+      -ms-transform: scale(0.8);
+          transform: scale(0.8);
+}
 .evSlider .main img,
 .evSlider .blur img {
   pointer-events: none;
@@ -444,11 +464,6 @@ nav.nav-main a.btn:hover {
 }
 .evSlider div.overlay h3 {
   color: #0CD97E;
-}
-.evSlider div.overlay h4 {
-  -webkit-transform: scale(0.8);
-      -ms-transform: scale(0.8);
-          transform: scale(0.8);
 }
 .evSlider div.overlay a.btn {
   background: #0CD97E;
@@ -753,6 +768,103 @@ input[type=checkbox]:not(:checked) + .err a {
 .contents.dark .input-field label,
 .contents.dark .input-field input {
   color: white;
+}
+.element-container {
+  margin: 25px auto;
+  overflow: hidden;
+  -webkit-flex-wrap: nowrap;
+      -ms-flex-wrap: nowrap;
+          flex-wrap: nowrap;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 0!important;
+  border-bottom: 2px solid #0CD97E;
+}
+.element-container i.starred {
+  color: goldenrod!important;
+}
+.element-container .element-border {
+  -webkit-flex-basis: 0px;
+      -ms-flex-preferred-size: 0px;
+          flex-basis: 0px;
+  height: 200px;
+  -webkit-flex-grow: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  width: 33%;
+  -webkit-clip-path: url("../../../../#element");
+          clip-path: url("../../../../#element");
+  max-width: 600px;
+  position: relative;
+  left: 20px;
+  background: #3C3C62;
+}
+.element-container .element-border .element-background {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  height: 200px;
+  width: 100%;
+  background: url('/assets/images/element.jpg');
+  -webkit-clip-path: url("../../../../#element");
+          clip-path: url("../../../../#element");
+  position: relative;
+  padding-right: 10%;
+  left: -20px;
+}
+.element-container .element-border .element-background > img {
+  height: 80%;
+  vertical-align: middle;
+  pointer-events: none;
+}
+.element-container .element-info {
+  -webkit-flex-basis: 0;
+      -ms-flex-preferred-size: 0;
+          flex-basis: 0;
+  -webkit-flex-grow: 2;
+      -ms-flex-positive: 2;
+          flex-grow: 2;
+  height: 200px;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-justify-content: space-between;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+.element-container .element-info .element-title h4 {
+  margin: 4px auto;
+  font-weight: bolder;
+}
+.element-container .element-info .element-title span {
+  font-size: larger;
+}
+.element-container .element-info .element-buttons a {
+  margin: 0 25px;
+}
+.element-container .element-info .element-buttons a:first-child {
+  background: #3C3C62;
+}
+.element-container .element-info .element-footer,
+.element-container .element-info .element-dates,
+.element-container .element-info .element-title {
+  text-transform: uppercase;
 }
 
 /*# sourceMappingURL=style.css.map */

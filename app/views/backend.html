@@ -44,63 +44,63 @@
                     </div>
                 </div>
                 <nav class="leftNavigation">
-                    <a href="/manage/">
+                    <a href="/manage/" ng-class="{selected: Nav.current.match('/dashboard')}">
                         <i class="fa fa-tachometer fa-lg fa-fw">
                         </i>
                         <span class="text">
                             Dashboard
                         </span>
                     </a>
-					<a href="/manage/featured/" ng-show="Nav.isUpdater">
+					<a href="/manage/featured/" ng-show="Nav.isUpdater" ng-class="{selected: Nav.current.match('/featured')}">
                         <i class="fa fa-star fa-lg fa-fw">
                         </i>
                         <span class="text">
                             Featured
                         </span>
                     </a>
-					<a href="/manage/articles" ng-show="Nav.isUpdater">
+					<a href="/manage/articles" ng-show="Nav.isUpdater" ng-class="{selected: Nav.current.match('/article')}">
                         <i class="fa fa-pencil-square-o fa-lg fa-fw">
                         </i>
                         <span class="text">
                             Articles
                         </span>
                     </a>
-                    <a href="/manage/games" ng-show="Nav.isUpdater">
+                    <a href="/manage/games" ng-show="Nav.isUpdater" ng-class="{selected: Nav.current.match('/game')}">
                         <i class="fa fa-gamepad fa-lg fa-fw">
                         </i>
                         <span class="text">
                             Games
                         </span>
                     </a>
-					<a href="/manage/staff" ng-show="Nav.isUpdater">
+					<a href="/manage/staff" ng-show="Nav.isUpdater" ng-class="{selected: Nav.current.match('/staff')}">
                         <i class="fa fa-commenting fa-lg fa-fw">
                         </i>
                         <span class="text">
                             Staff
                         </span>
                     </a>
-                    <a href="/manage/teams" ng-show="Nav.isUpdater">
+                    <a href="/manage/teams" ng-show="Nav.isUpdater" ng-class="{selected: Nav.current.match('/team')}">
                         <i class="fa fa-flag fa-lg fa-fw">
                         </i>
                         <span class="text">
                             Teams
                         </span>
                     </a>
-                    <a href="/manage/leagues" ng-show="Nav.isUpdater">
+                    <a href="/manage/leagues" ng-show="Nav.isUpdater" ng-class="{selected: Nav.current.match('/league')}">
                         <i class="fa fa-line-chart fa-lg fa-fw">
                         </i>
                         <span class="text">
                             Leagues
                         </span>
                     </a>
-                    <a href="/manage/tournaments" ng-show="Nav.isUpdater">
+                    <a href="/manage/tournaments" ng-show="Nav.isUpdater" ng-class="{selected: Nav.current.match('/tournament')}">
                         <i class="fa fa-trophy fa-lg fa-fw">
                         </i>
                         <span class="text">
                             Tournaments
                         </span>
                     </a>
-                    <a href="/manage/users" ng-show="Nav.isAdmin">
+                    <a href="/manage/users" ng-show="Nav.isAdmin" ng-class="{selected: Nav.current.match('/user')}">
                         <i class="fa fa-users fa-lg fa-fw">
                         </i>
                         <span class="text">

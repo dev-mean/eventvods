@@ -103,7 +103,7 @@ router.get('/', auth.public_api(), ratelimit, cache, function(req, res, next) {
 		updaters: function(callback) {
 			User.find({
 					"userRights": {
-						$gte: 2
+						$gte: require('../../controllers/auth').constants.updater
 					}
 				})
 				.count()
@@ -115,7 +115,7 @@ router.get('/', auth.public_api(), ratelimit, cache, function(req, res, next) {
 		admins: function(callback) {
 			User.find({
 					"userRights": {
-						$gte: 3
+						$gte: require('../../controllers/auth').constants.admin
 					}
 				})
 				.count()
