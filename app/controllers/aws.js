@@ -28,7 +28,7 @@ function handleImage( fileData ) {
         var type = file_type( data );
         if ( type.mime.match( 'image' ) ) {
             var key;
-            if ( fileData.image.changed ) key = fileData.image.oldURL.replace( config.aws.cdn, "" );
+            if ( fileData.image.changed && fileData.image.oldURL.match(config.aws.cdn) ) key = fileData.image.oldURL.replace( config.aws.cdn, "" );
             else key = fileData.field + "/" + id.generate() + "/" + id.generate() + "." + type.ext;
             uploader.uploadBuffer( data, {
                 'Content-Type': type.mime,
