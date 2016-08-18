@@ -48,7 +48,7 @@
 			<label>
                 Game
             </label>
-			<select ng-model="teamsFormController.data.game" ng-options="game._id as game.name for game in teamsFormController.games" ng-change="teamsFormController.setGameName()">
+			<select ng-model="teamsFormController.data.game" ng-options="game._id as game.name for game in teamsFormController.games" ng-change="teamsFormController.setGameName()" required>
 				<option value="">Select Game</option>
 			</select>
 		</div>
