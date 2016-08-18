@@ -12,7 +12,7 @@ router.get('/', function(req, res, next){
 	.populate({
 		path: 'leagues',
 		model: 'League',
-		select: 'name slug game',
+		select: 'name slug game subtitle',
 		populate: {
 			path: 'game',
 			model: 'Game',

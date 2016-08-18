@@ -13,6 +13,11 @@ var teamSchema = new Schema({
 		type: String,
 		required: true
 	},
+	game: {
+		type: mongoose.Schema.Types.ObjectId,
+		ref: 'Game',
+		required: true
+	},
 	media: [Media],
 	icon: String
 });

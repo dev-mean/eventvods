@@ -9,6 +9,10 @@ var matchSchema = {
 	spoiler: {
 		type: Boolean,
 		default: false
+	},
+	placeholder: {
+		type: Boolean,
+		default: false
 	}
 }
 var moduleSchema = new Schema({

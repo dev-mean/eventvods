@@ -10,6 +10,7 @@ var leagueSchema = new Schema({
 		type: String,
 		required: true
 	},
+	subtitle: String,
 	game: {
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'Game',

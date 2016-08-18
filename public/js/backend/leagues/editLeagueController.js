@@ -15,17 +15,11 @@
                     .parsley();
                 Games.find()
                     .then(function(response) {
-                        vm.games = response.data.map(function(obj) {
-                            return {
-                                "label": obj.slug + " - " + obj.name,
-                                "value": obj._id
-                            };
-                        });
+                        vm.games = response.data;
                     });
                 Leagues.findById($routeParams.id)
                     .then(function(response) {
                         vm.data = response.data;
-                        jQuery('#leagueGame').val(response.data.game.slug + " - " + response.data.game.name);
                         vm.data.game = response.data.game._id;
 						startDate.setDate(response.data.startDate);
 						endDate.setDate(response.data.endDate);

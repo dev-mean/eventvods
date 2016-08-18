@@ -353,8 +353,10 @@
 					$http.get(API_BASE_URL + '/data/mediaTypes')
 						.then(function(res) {
 							$scope.types = res.data;
-							$scope.data.type = res.data[0];
+							//$scope.data.type = res.data[0];
+							$scope.data.type = "";
 						});
+					$scope.$name_changed = false;
 					$scope.data = {};
 					$scope.$add = function() {
 						$scope.model.push({
@@ -365,12 +367,20 @@
 						$scope.data = {
 							type: $scope.types[0]
 						}
+						$scope.$name_changed = false;
 					}
 					$scope.$remove = function($index) {
 						$scope.model.splice($index, 1);
 					}
+					$scope.$change = function(){
+						if( !$scope.$name_changed )
+							$scope.data.name = $scope.data.type;
+					}
+					$scope.$changed = function(){
+						$scope.$name_changed = true;
+					}
 				},
-				template: '<div class="sortable-container" sv-root sv-part="model"><div><span><input type="text" placeholder="Media Name" ng-model="data.name" /></span><span><input type="text" placeholder="Media Link" ng-model="data.link" /></span><span><select ng-options="t as t for t in types" ng-model="data.type"></select></span><button-right icon="fa-plus" ng-click="$add()" /></div><div sv-element ng-repeat="media in model track by $index"><span class="no-grow"><i sv-handle class="fa fa-lg fa-fw fa-bars"></i>{{$index + 1}}.</span><span editable-text="media.name" ng-bind="media.name"></span><span editable-text="media.link" ng-bind="media.link"></span><span class="center"><select ng-options="t as t for t in types" ng-model="media.type"></select></span><button-right class="del" icon="fa-minus" ng-click="$remove($index)" /></div></div>'
+				template: '<div class="sortable-container" sv-root sv-part="model"><div><span><select ng-options="t as t for t in types" ng-model="data.type" ng-change="$change()"><option value="">Select Type</option></select></span><span><input type="text" placeholder="Media Name" ng-model="data.name" ng-change="$changed()" /></span><span><input type="text" placeholder="Media Link" ng-model="data.link" /></span><button-right icon="fa-plus" ng-click="$add()" /></div><div sv-element ng-repeat="media in model track by $index"><span class="no-grow"><i sv-handle class="fa fa-lg fa-fw fa-bars"></i>{{$index + 1}}.</span><span editable-text="media.name" ng-bind="media.name"></span><span editable-text="media.link" ng-bind="media.link"></span><span class="center"><select ng-options="t as t for t in types" ng-model="media.type"></select></span><button-right class="del" icon="fa-minus" ng-click="$remove($index)" /></div></div>'
 			};
 		})
 		.directive('buttonRight', function() {

@@ -36,9 +36,15 @@
 	<div class="section" ng-show="leagueFormController.tab == 1">
 		<div class="standard group">
 			<label>
-                League Name
+                League Title
             </label>
 			<input type="text" placeholder="e.g. League Championship Series" ng-model="leagueFormController.data.name" data-parsley-trigger="keyup" data-parsley-group="1" required/>
+		</div>
+		<div class="standard group">
+			<label>
+                League Sub-title
+            </label>
+			<input type="text" placeholder="e.g. Summer Split" ng-model="leagueFormController.data.subtitle" />
 		</div>
 		<div class="standard group">
 			<label>
@@ -55,9 +61,9 @@
 			<label>
                 Game
             </label>
-			<ng-typeahead data-id="leagueGame" placeholder="e.g. LOL" ng-model="leagueFormController.data.game" data="leagueFormController.games" container="#leagueGameError" force-selection="true" group="1" required/>
-			<div id="leagueGameError" class="typeahead-error">
-			</div>
+			<select ng-model="leagueFormController.data.game" ng-options="game._id as game.name for game in leagueFormController.games" required>
+				<option value="">Select Game</option>
+			</select>
 		</div>
 		<div class="standard group">
 			<label>

@@ -6,6 +6,7 @@
                 var vm = this;
                 vm.title = "Add Staff";
                 vm.errors = [];
+				vm.slug_changed = false;
 				vm.data = {
 					media: []
 				};
@@ -22,6 +23,11 @@
                             };
                         });
                     });
+				vm.suggestSlug = function(){
+					if(!vm.slug_changed){
+						vm.data.slug = vm.data.alias.toLowerCase();
+					}
+				}
                 vm.submit = function() {
                     if ( parsley.validate() ) Staff.create( vm.data )
                         .then( function( response ) {

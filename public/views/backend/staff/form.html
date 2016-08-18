@@ -34,15 +34,15 @@
 		</div>
 		<div class="standard group">
 			<label>
-                Surname
+                Alias
             </label>
-			<input type="text" placeholder="e.g. Chaloner" ng-model="staffFormController.data.surname" data-parsley-trigger="keyup" required/>
+			<input type="text" placeholder="e.g. ReDeYe" ng-model="staffFormController.data.alias" ng-change="staffFormController.suggestSlug()" data-parsley-trigger="keyup" required/>
 		</div>
 		<div class="standard group">
 			<label>
-                Alias
+                Surname
             </label>
-			<input type="text" placeholder="e.g. ReDeYe" ng-model="staffFormController.data.alias" data-parsley-trigger="keyup" required/>
+			<input type="text" placeholder="e.g. Chaloner" ng-model="staffFormController.data.surname" data-parsley-trigger="keyup" required/>
 		</div>
 		<div class="standard group">
 			<label class="full">
@@ -53,7 +53,7 @@
 			<label>
                 URL Slug
             </label>
-			<input id="slug" type="text" placeholder="e.g. ReDeYe" ng-model="staffFormController.data.slug" data-parsley-trigger="keyup" data-parsley-remote-message="Slug already in use." required/>
+			<input id="slug" type="text" placeholder="e.g. ReDeYe" ng-model="staffFormController.data.slug" ng-change="staffFormController.slug_changed = true;" data-parsley-trigger="keyup" data-parsley-remote-message="Slug already in use." required/>
 		</div>
 		<div class="standard group">
 			<label class="full">

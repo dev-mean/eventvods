@@ -9,7 +9,9 @@ var Validators = require('../../controllers/validation');
 
 router.route('/')
 	.get(auth.public_api(), ratelimit, cache, function(req, res, next) {
-		Team.find(function(err, teams) {
+		Team.find()
+		.populate('game')
+		.exec(function(err, teams) {
 			if (err) next(err);
 			res.json(teams);
 		});
@@ -44,7 +46,9 @@ router.route('/:team_id')
 		});
 	})
 	.get(auth.public_api(), function(req, res, next) {
-		Team.findById(req.params.team_id, function(err, team) {
+		Team.findById(req.params.team_id)
+		.populate('game')
+		.exec(function(err, team) {
 			if (err) next(err);
 			if (!team) {
 				err = new Error("Team Not Found");

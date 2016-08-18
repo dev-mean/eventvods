@@ -71,7 +71,7 @@
                     {{team.name}}
                 </td>
 				<td>
-					{{team.slug}}
+					/team/{{team.slug}}{{team.game ? "/"+team.game.slug : ""}}
 				</td>
                 <td class="edit">
                     <a ng-href="/manage/teams/{{team._id}}/edit">

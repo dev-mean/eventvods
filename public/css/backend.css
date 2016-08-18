@@ -182,6 +182,9 @@ html {
 *:after {
   box-sizing: inherit;
 }
+.center {
+  text-align: center;
+}
 body {
   color: #d3d7e3;
   font-family: 'Open Sans', sans-serif !important;
@@ -446,9 +449,10 @@ img.icon-team:not([src]) {
 }
 /* basic layout */
 .container {
-  width: 1200px;
+  width: 80%;
+  max-width: 1600px;
   background: #3c405c;
-  margin: 60px auto;
+  margin: 0px auto;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
   display: -webkit-flex;
   display: -moz-flex;
@@ -705,6 +709,45 @@ table.standard td.url:hover,
 table.standard td.delete:hover,
 table.standard td.update:hover {
   background: #474c6c;
+}
+table.standard input[type=checkbox] {
+  display: none;
+}
+table.standard input[type=checkbox] + label {
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  box-shadow: inset 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+  border: 1px solid #343850;
+  border-radius: 3px;
+  transition: all 0.1s linear;
+  position: relative;
+}
+table.standard input[type=checkbox] + label:hover {
+  border-color: #474c6c;
+  cursor: pointer;
+}
+table.standard input[type=checkbox] + label:hover::after {
+  opacity: 0.5;
+}
+table.standard input[type=checkbox] + label::after {
+  opacity: 0;
+  content: '';
+  position: absolute;
+  width: 9px;
+  height: 5px;
+  background: transparent;
+  top: 5px;
+  left: 5px;
+  border: 3px solid #0cdb6a;
+  border-top: none;
+  border-right: none;
+  -webkit-transform: rotate(-45deg);
+      -ms-transform: rotate(-45deg);
+          transform: rotate(-45deg);
+}
+table.standard input[type=checkbox]:checked + label::after {
+  opacity: 1;
 }
 .caret-up {
   width: 0;
@@ -1036,7 +1079,8 @@ form .group input[type=text],
 form .group input[type=date],
 form .group p,
 form .group ng-typeahead,
-form .group tags-input {
+form .group tags-input,
+form .group select {
   -webkit-order: 2;
   -moz-order: 2;
   -ms-order: 2;
@@ -1047,6 +1091,44 @@ form .group tags-input {
   -ms-flex-grow: 1;
   -ms-flex-positive: 1;
       flex-grow: 1;
+}
+form .group select {
+  border-radius: 2px;
+  outline: none;
+  line-height: 14px;
+  font-size: 14px;
+  font-weight: normal;
+  padding: 4px 5px;
+  background: transparent;
+  border: 2px solid #535a83;
+  color: #a4abc1;
+  transition: all 0.25s ease-in-out;
+  background: #3c405c;
+  margin-right: 20px;
+}
+form .group select:focus {
+  border-color: #a4abc1;
+  color: #d3d7e3;
+}
+form .group select::-webkit-input-placeholder {
+  font-size: 14px;
+  line-height: 16px;
+  color: #8690af;
+}
+form .group select::-moz-placeholder {
+  font-size: 14px;
+  line-height: 16px;
+  color: #8690af;
+}
+form .group select:-moz-placeholder {
+  font-size: 14px;
+  line-height: 16px;
+  color: #8690af;
+}
+form .group select:-ms-input-placeholder {
+  font-size: 14px;
+  line-height: 16px;
+  color: #8690af;
 }
 form .group label {
   -webkit-order: 1;
@@ -1762,6 +1844,12 @@ form .group tags-input input {
   -webkit-flex-grow: 1;
       -ms-flex-positive: 1;
           flex-grow: 1;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 .sortable-container > div > span {
   line-height: 40px;
@@ -1925,6 +2013,7 @@ select.form-style {
   -webkit-order: 2;
       -ms-flex-order: 2;
           order: 2;
+  background: #3c405c;
 }
 .flex {
   display: -webkit-flex;

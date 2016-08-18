@@ -1,9 +1,9 @@
 ( function() {
     'use strict';
     angular.module( 'eventApp' )
-        .controller( 'editTeamController', [ 'teamsService', '$location', 'notificationService', '$routeParams', 'API_BASE_URL',
-            function( Teams, $location, toastr, $routeParams, API_BASE_URL ) {
-                var vm = this;
+        .controller( 'editTeamController', [ 'teamsService', '$location', 'notificationService', '$routeParams', 'API_BASE_URL', 'gamesService',
+            function( Teams, $location, toastr, $routeParams, API_BASE_URL, Games ) {
+                var vm = this, mappedGames;
                 vm.title = "Edit Team";
                 vm.errors = [];
 				vm.tab = 1;
@@ -13,12 +13,27 @@
                 Teams.findById( $routeParams.id )
                     .then( function( response ) {
                         vm.data = response.data;
+						vm.data.game = vm.data.game._id;
+						vm.setGameName();
                     }, function( response ) {
                         toastr.error( 'Invalid Team ID.', {
                             closeButton: true
                         } );
                         $location.path( '/teams' );
                     } );
+				Games.find()
+					.then(function(res){
+						vm.games = res.data;
+						mappedGames = res.data.reduce(function(result, item){
+							result[item._id] = item;
+							return result;
+						}, {});
+						vm.setGameName();
+					});
+				vm.setGameName = function(){
+					if(typeof vm.data.game === "undefined" || typeof mappedGames === "undefined") return "";
+					else vm.gameName="/" + mappedGames[vm.data.game].slug;
+				}
                 vm.submit = function() {
                     if ( parsley.validate() ) Teams.update( $routeParams.id, vm.data )
                         .then( function( response ) {

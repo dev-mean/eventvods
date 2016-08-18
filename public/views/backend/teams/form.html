@@ -46,6 +46,19 @@
 		</div>
 		<div class="standard group">
 			<label>
+                Game
+            </label>
+			<select ng-model="teamsFormController.data.game" ng-options="game._id as game.name for game in teamsFormController.games" ng-change="teamsFormController.setGameName()">
+				<option value="">Select Game</option>
+			</select>
+		</div>
+		<div class="standard group">
+			<label class="full">
+				League will be accessible at eventvods.com/team/{{teamsFormController.data.slug}}{{teamsFormController.gameName}}
+            </label>
+		</div>
+		<div class="standard group">
+			<label>
                 Team Icon (optional)
             </label>
 			<image-drop model="teamsFormController.data.icon" preview-width="60" preview-height="25" />

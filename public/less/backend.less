@@ -19,6 +19,10 @@ html {
     box-sizing: inherit;
 }
 
+.center {
+	text-align: center;
+}
+
 body {
     color: @silver-light;
     font-family: 'Open Sans', sans-serif!important;
@@ -277,9 +281,10 @@ img.icon {
 /* basic layout */
 
 .container {
-    width: @containerWidth;
+    width: 80%;
+	max-width: 1600px;
     background: @default;
-    margin: 60px auto;
+    margin: 0px auto;
     .drop-shadow(0, 6px, 12px, 0.1);
     .flex-display;
     .flex-direction(row);
@@ -470,6 +475,43 @@ table.standard {
             }
         }
     }
+	input[type=checkbox]{
+		display: none;
+	}
+	input[type=checkbox] + label {
+		width: 20px;
+		height: 20px;
+		display: inline-block;
+		box-shadow: inset 0px 0px 10px 0px rgba(0,0,0,0.75);
+		border: 1px solid @default-dark;
+		border-radius: 3px;
+		transition: all 0.1s linear;
+		position: relative;
+		&:hover {
+			border-color: @default-light;
+			cursor: pointer;
+			&::after {
+				opacity: 0.5;
+			}
+		}
+		&::after {
+			opacity: 0;
+			content: '';
+			position: absolute;
+			width: 9px;
+			height: 5px;
+			background: transparent;
+			top: 5px;
+			left: 5px;
+			border: 3px solid @green-light;
+			border-top: none;
+			border-right: none;
+			transform: rotate(-45deg);
+		}
+	}
+	input[type=checkbox]:checked + label::after {
+		opacity: 1;
+	}
 }
 
 .caret-up {
@@ -706,10 +748,16 @@ form {
 		input[type=date],
         p,
         ng-typeahead,
-		tags-input {
+		tags-input,
+		select {
             .flex-order(2);
             .flex-grow(1);
         }
+		select {
+			.form-style;
+			background: @default;
+			margin-right: 20px;
+		}
         label {
             .flex-order(1);
             .flex-grow(1);
@@ -1230,6 +1278,8 @@ form {
 		justify-content: space-between;
 		form {
 			flex-grow: 1;
+			display: flex;
+			align-items: center;
 		}
 		> span {
 			line-height: 40px;
@@ -1311,6 +1361,7 @@ select.form-style {
 }
 .group select.form-style {
 	order: 2;
+	background: @default;
 }
 .flex {
 	display: flex;

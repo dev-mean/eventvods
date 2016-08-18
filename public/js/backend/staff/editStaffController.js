@@ -7,6 +7,7 @@
                 vm.title = "Edit Staff";
                 vm.errors = [];
 				vm.tab = 1;
+				vm.slug_changed = false;
 				$( '#slug' ).attr( 'data-parsley-remote', API_BASE_URL + '/validate/staffSlug/{value}/'  + $routeParams.id );
                 var parsley = $( '#addStaffForm' )
                             .parsley();
@@ -29,6 +30,11 @@
                             };
                         });
                     });
+				vm.suggestSlug = function(){
+					if(!vm.slug_changed){
+						vm.data.slug = vm.data.alias.toLowerCase();
+					}
+				}
                 vm.submit = function() {
                     if ( parsley.validate() ) Staff.update( $routeParams.id, vm.data )
                         .then( function( response ) {

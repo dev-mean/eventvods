@@ -27,6 +27,12 @@
 					<span editable-text="column">{{column}} </span>
 					<i class="fa fa-lg fa-trash del" ng-show="$index > 1" ng-click="editorController.deleteColumn(module, $index)"></i>
 				</th>
+				<th class="center">
+					Spoiler
+				</th>
+				<th class="center">
+					Placeholder
+				</th>
 				<th></th>
 				<th>
 					<i class="fa fa-lg fa-plus" ng-click="editorController.addColumn($index)"></i>
@@ -36,10 +42,18 @@
 			<tr class="match" ng-repeat="match in module.matches track by $index">
 				<td><span editable-select="match.team1" e-ng-options="team.name for team in editorController.data.teams" e-placeholder="Select Team">{{match.team1.name || "Select Team"}}</span></td>
 				<td><span editable-select="match.team2" e-ng-options="team.name for team in editorController.data.teams" e-placeholder="Select Team">{{match.team2.name || "Select Team"}}</span></td>
-				<td ng-repeat="link in match.links track by $index">
-					<span editable-text="link">{{link || "Insert Link"}}</span>
+				<td ng-repeat="url in match.links track by $index">
+					<span editable-text="match.links[$index]">{{match.links[$index] || "Insert Link"}}</span>
 				</td>
-				<td>
+				<td class="center">
+					<input type="checkbox" ng-model="match.spoiler" ng-attr-id="sp_{{$index}}"/>
+					<label ng-attr-for="sp_{{$index}}"></label>
+				</td>
+				<td class="center">
+					<input type="checkbox" ng-model="match.placeholder" ng-attr-id="ph_{{$index}}"/>
+						<label ng-attr-for="ph_{{$index}}"></label>
+				</td>
+				<td class="center">
 					<i class="fa fa-lg fa-files-o" ng-click="editorController.duplicateMatch(module, $index)"></i>
 				</td>
 				<td>

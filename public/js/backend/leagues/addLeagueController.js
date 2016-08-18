@@ -34,12 +34,7 @@
 				var parsley = $('#addLeagueForm').parsley();
 				Games.find()
 					.then(function(response) {
-						vm.games = response.data.map(function(obj) {
-							return {
-								"label": obj.slug + " - " + obj.name,
-								"value": obj._id
-							};
-						});
+						vm.games = response.data;
 					});
 				vm.goToTab = function(tabNumber) {
 					for (var i = 1; i < tabNumber; i++) {
@@ -51,13 +46,9 @@
 					}
 					vm.tab = tabNumber;
 				}
-				vm.test = function(){
-					console.log(vm.data.staff);
-				}
 				vm.submit = function() {
 					vm.data.startDate = startDate.getDate();
 					vm.data.endDate = endDate.getDate();
-					console.log(vm.data.teams);
 					if (parsley.validate()) Leagues.create(vm.data)
 						.then(function(response) {
 							toastr.success('League added.', {
@@ -67,14 +58,7 @@
 						}, function(response) {
 							vm.errors = response.data.errors;
 						});
-					else for (var i = 1; i < 4; i++) {
-						console.log(i);
-						if (!parsley.validate({
-								group: i
-							})) {
-							return vm.tab = i;
-						}
-					};
+					else vm.tab = 1;
 				};
 			}
 		]);
