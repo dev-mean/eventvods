@@ -11,11 +11,6 @@ var tournamentSchema = new Schema({
 		type: String,
 		required: true
 	},
-	game: {
-		type: mongoose.Schema.Types.ObjectId,
-		ref: 'Game',
-		required: true
-	},
 	slug: {
 		type: String,
 		required: true,

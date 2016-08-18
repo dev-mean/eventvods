@@ -1,8 +1,8 @@
 (function() {
     'use strict';
     angular.module('eventApp')
-        .controller('editTournamentController', ['tournamentsService', '$location', 'notificationService', 'API_BASE_URL', 'gamesService', '$routeParams',
-            function(Tournaments, $location, toastr, API_BASE_URL, Games, $routeParams) {
+        .controller('editTournamentController', ['tournamentsService', '$location', 'notificationService', 'API_BASE_URL', '$routeParams',
+            function(Tournaments, $location, toastr, API_BASE_URL, $routeParams) {
                 var vm = this;
                 vm.title = "Edit Tournament";
                 vm.errors = [];
@@ -13,15 +13,6 @@
 				var endDate = new Pikaday({field: $('#endDate')[0], format: "dddd Do MMMM, YYYY"  });
                 var parsley = $('#addTournamentForm')
                     .parsley();
-                Games.find()
-                    .then(function(response) {
-                        vm.games = response.data.map(function(obj) {
-                            return {
-                                "label": obj.slug + " - " + obj.name,
-                                "value": obj._id
-                            };
-                        });
-                    });
                 Tournaments.findById($routeParams.id)
                     .then(function(response) {
                         vm.data = response.data;

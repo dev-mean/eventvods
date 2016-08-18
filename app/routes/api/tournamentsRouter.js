@@ -12,7 +12,7 @@ var slug = require('slug');
 router.route('/')
 	.get(auth.public_api(), ratelimit, cache, function(req, res, next) {
 		Tournament.find()
-			.populate('game staff')
+			.populate('staff')
 			.exec(function(err, tournaments) {
 				if (err) next(err);
 				else res.json(tournaments);
@@ -59,7 +59,7 @@ router.get('/game/:slug', auth.public_api(), ratelimit, cache, function(req, res
 router.route('/:tournament_id')
 	.get(auth.public_api(), ratelimit, cache, function(req, res, next) {
 		Tournament.findById(req.params.tournament_id)
-			.populate('game staff')
+			.populate('staff')
 			.exec(function(err, tournament) {
 				if (err) next(err);
 				if (!tournament) {

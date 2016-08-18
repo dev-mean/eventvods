@@ -1,8 +1,8 @@
 (function() {
 	'use strict';
 	angular.module('eventApp')
-		.controller('addTournamentController', ['tournamentsService', '$location', 'notificationService', 'API_BASE_URL', 'gamesService',
-			function(Tournaments, $location, toastr, API_BASE_URL, Games) {
+		.controller('addTournamentController', ['tournamentsService', '$location', 'notificationService', 'API_BASE_URL',
+			function(Tournaments, $location, toastr, API_BASE_URL) {
 				var vm = this;
 				vm.title = "Add Tournament";
 				vm.errors = [];
@@ -32,15 +32,6 @@
 					}
 				});
 				var parsley = $('#addTournamentForm').parsley();
-				Games.find()
-					.then(function(response) {
-						vm.games = response.data.map(function(obj) {
-							return {
-								"label": obj.slug + " - " + obj.name,
-								"value": obj._id
-							};
-						});
-					});
 				vm.goToTab = function(tabNumber) {
 					for (var i = 1; i < tabNumber; i++) {
 						if (!parsley.validate({
