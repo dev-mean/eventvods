@@ -16,8 +16,6 @@
                 Tournaments.findById($routeParams.id)
                     .then(function(response) {
                         vm.data = response.data;
-                        jQuery('#tournamentGame').val(response.data.game.slug + " - " + response.data.game.name);
-                        vm.data.game = response.data.game._id;
 						startDate.setDate(response.data.startDate);
 						endDate.setDate(response.data.endDate);
                     }, function(response) {

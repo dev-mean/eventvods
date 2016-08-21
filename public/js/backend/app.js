@@ -239,10 +239,10 @@
 					var width = $attrs.previewWidth;
 					var height = $attrs.previewHeight;
 					$scope.dom.preview.css({
-						width: width + "px",
-						height: height + "px",
+						"max-width": width + "px",
+						"max-height": height + "px"
 					});
-					$scope.dom.preview.attr('src', ($scope.model || "http://placehold.it/" + width + "x" + height));
+					$scope.dom.preview.attr('src', ($scope.model || "http://placehold.it/" + width + "x" + height+"?text=%20"));
 					$scope.dom.btn.on('click', function(e) {
 						e.preventDefault();
 						$scope.dom.input.trigger('click');

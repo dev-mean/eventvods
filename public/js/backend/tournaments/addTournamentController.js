@@ -42,9 +42,6 @@
 					}
 					vm.tab = tabNumber;
 				}
-				vm.test = function(){
-					console.log(vm.data.staff);
-				}
 				vm.submit = function() {
 					vm.data.startDate = startDate.getDate();
 					vm.data.endDate = endDate.getDate();
