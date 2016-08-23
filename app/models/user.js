@@ -85,6 +85,16 @@ var userSchema = new Schema({
 			type: String,
 			select: false
 		}
+	},
+	following: {
+		leagues: {
+			type: [mongoose.Schema.Types.ObjectId],
+			ref: 'League'
+		},
+		tournaments: {
+			type: [mongoose.Schema.Types.ObjectId],
+			ref: 'Tournament'
+		}
 	}
 }, {
 	id: false,
@@ -101,7 +111,7 @@ userSchema.plugin(passportLocalMongoose, {
 	limitAttempts: true,
 	maxAttempts: 5,
 	usernameLowerCase: true,
-	selectFields: 'displayName _id social email userRights settings profilePicture',
+	selectFields: 'displayName _id social email userRights settings profilePicture following',
 	errorMessages: {
 		IncorrectUsernameError: "Incorrect email or password.",
 		IncorrectPasswordError: "Incorrect email or password.",

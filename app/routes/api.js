@@ -21,6 +21,7 @@ router.use('/games', require('./api/gamesRouter'));
 router.use('/staff', require('./api/staffRouter'));
 router.use('/teams', require('./api/teamsRouter'));
 router.use('/users', require('./api/usersRouter'));
+router.use('/user', require('./api/userRouter'));
 router.use('/leagues', require('./api/leaguesRouter'));
 router.use('/tournaments', require('./api/tournamentsRouter'));
 

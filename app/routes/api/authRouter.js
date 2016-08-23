@@ -3,6 +3,7 @@ var User = require('../../models/user');
 var Indicative = require('indicative');
 var Validators = require('../../controllers/validation');
 var async = require('async');
+
 router.get('/session', function(req, res) {
     if (!req.isAuthenticated())
         res.sendStatus('204');

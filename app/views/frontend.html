@@ -38,9 +38,9 @@
 			</div>
 		</div>
 		<ng-include src="'/assets/views/dialogs/userSettings.html'" ng-if="Page.session != false && Page.session != null" onload="Page.init()" ng-cloak></ng-include>
-		<nav class="nav-main" role="navigation" ng-controller="NavController as Nav">
+		<nav class="nav-main" role="navigation" >
 			<ul class="dropdown-content wide" id="games_dd">
-				<li ng-repeat="game in Nav.links.games">
+				<li ng-repeat="game in Page.nav.games">
 					<a ng-href="/games/{{game.slug}}">
 						<i class="material-icons left icon">
 							<img ng-src="{{game.icon}}" />
@@ -53,7 +53,7 @@
 				</li>
 			</ul>
 			<ul class="dropdown-content wide grouped" id="leagues_dd">
-				<li ng-repeat="league in Nav.links.orderedLeagues = (Nav.links.leagues | orderBy:'game.name') track by $index" ng-class="Nav.leagueClass($index)">
+				<li ng-repeat="league in Page.nav.orderedLeagues = (Page.nav.leagues | orderBy:'game.name') track by $index" ng-class="Page.leagueClass($index)">
 					<a ng-href="/leagues/{{league.slug}}">
 						<i class="material-icons left icon border-right">
 							<img ng-src="{{league.game.icon}}" />
@@ -66,7 +66,7 @@
 				</li>
 			</ul>
 			<ul class="dropdown-content wide grouped" id="tournaments_dd">
-				<li ng-repeat="tournament in Nav.links.tournaments" class="border-top">
+				<li ng-repeat="tournament in Page.nav.tournaments" class="border-top">
 					<a ng-href="/tournaments/{{tournament.slug}}">
 						<i class="material-icons left icon border-right">
 							<img ng-src="{{tournament.logo}}" />
@@ -261,8 +261,6 @@
 	<script src="/assets/js/frontend/controllers/LoginController.js">
 	</script>
 	<script src="/assets/js/frontend/controllers/RegisterController.js">
-	</script>
-	<script src="/assets/js/frontend/controllers/NavController.js">
 	</script>
 	<script src="/assets/js/frontend/controllers/SettingsController.js">
 	</script>

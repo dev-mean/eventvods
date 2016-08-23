@@ -56,6 +56,11 @@
 						$rootScope.$broadcast('sessionUpdate');
 					});
 			};
+			svc.following = function(data) {
+				$http.post(URL + '/user/following', data, {
+					ignoreLoadingBar: true
+				});
+			}
 			$rootScope.$on('triggerSessionUpdate', svc.load);
 			svc.load();
 		}]);
