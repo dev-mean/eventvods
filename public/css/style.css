@@ -866,6 +866,7 @@ input[type=checkbox]:not(:checked) + .err a {
 }
 .element-container .element-info .element-buttons a {
   margin: 0 25px;
+  width: 240px;
   transition: width 0.3s linear;
 }
 .element-container .element-info .element-buttons a:first-child {
