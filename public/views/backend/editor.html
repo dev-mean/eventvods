@@ -46,12 +46,12 @@
 					<span editable-text="match.links[$index]">{{match.links[$index] || "Insert Link"}}</span>
 				</td>
 				<td class="center">
-					<input type="checkbox" ng-model="match.spoiler" ng-attr-id="sp_{{$index}}"/>
-					<label ng-attr-for="sp_{{$index}}"></label>
+					<input type="checkbox" ng-model="match.spoiler" ng-attr-id="sp_{{$parent.$parent.$id}}_{{$parent.$id}}_{{$id}}"/>
+					<label ng-attr-for="sp_{{$parent.$parent.$id}}_{{$parent.$id}}_{{$id}}"></label>
 				</td>
 				<td class="center">
-					<input type="checkbox" ng-model="match.placeholder" ng-attr-id="ph_{{$index}}"/>
-						<label ng-attr-for="ph_{{$index}}"></label>
+					<input type="checkbox" ng-model="match.placeholder" ng-attr-id="ph_{{$parent.$parent.$id}}_{{$parent.$id}}_{{$id}}"/>
+						<label ng-attr-for="ph_{{$parent.$parent.$id}}_{{$parent.$id}}_{{$id}}"></label>
 				</td>
 				<td class="center">
 					<i class="fa fa-lg fa-files-o" ng-click="editorController.duplicateMatch(module, $index)"></i>

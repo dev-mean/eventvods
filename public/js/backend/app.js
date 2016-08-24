@@ -285,7 +285,7 @@
 										data: data,
 										changed: true,
 									}
-								} else if (typeof $scope.model === "undefined") {
+								} else if (typeof $scope.model === "undefined" || $scope.model === null) {
 									$scope.model = {
 										data: data
 									}

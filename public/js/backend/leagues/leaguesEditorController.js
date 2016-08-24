@@ -30,6 +30,7 @@
 					columns: ["Team 1", "Team 2", "Picks & Bans", "Game Start"],
 					matches: []
 				});
+				console.log(vm.data.contents[vm.tab].modules);
 			}
 			vm.deleteModule = function($index){
 				vm.data.contents[vm.tab].modules.splice($index, 1);
@@ -56,7 +57,9 @@
 				module.matches.splice($index, 1);
 			}
 			vm.duplicateMatch = function(module, $index){
-				module.matches.splice($index, 0, $.extend({}, module.matches[$index]));
+				var newMatch = $.extend({}, module.matches[$index]);
+				newMatch.links = newMatch.links.slice(0);
+				module.matches.splice($index, 0, newMatch);
 			}
 			leaguesService.findById($routeParams.id)
 				.then(function(res) {

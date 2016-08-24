@@ -56,7 +56,9 @@
 				module.matches.splice($index, 1);
 			}
 			vm.duplicateMatch = function(module, $index){
-				module.matches.splice($index, 0, $.extend({}, module.matches[$index]));
+				var newMatch = $.extend({}, module.matches[$index]);
+				newMatch.links = newMatch.links.slice(0);
+				module.matches.splice($index, 0, newMatch);
 			}
 			tournamentsService.findById($routeParams.id)
 				.then(function(res) {
