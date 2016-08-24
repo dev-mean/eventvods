@@ -822,9 +822,12 @@ input[type=checkbox]:not(:checked) + .err a {
   left: -20px;
 }
 .element-container .element-border .element-background > img {
-  height: 80%;
+  max-height: 80%;
+  max-width: 70%;
   vertical-align: middle;
   pointer-events: none;
+  position: relative;
+  left: -10px;
 }
 .element-container .element-border .element-background.element-1 {
   background: url('/assets/images/elements/1.jpg');
