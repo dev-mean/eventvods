@@ -821,7 +821,7 @@ input[type=checkbox]:not(:checked) + .err a {
   padding-right: 10%;
   left: -20px;
 }
-.element-container .element-border .element-background > img {
+.element-container .element-border .element-background > a > img {
   max-height: 80%;
   max-width: 70%;
   vertical-align: middle;
