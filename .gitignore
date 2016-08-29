@@ -21,6 +21,7 @@ node_modules/
 .idea/
 public/lib/
 designs/
+tmp/
 
 # Simon IDE settings
 .brackets.json

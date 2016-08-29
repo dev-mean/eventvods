@@ -157,6 +157,10 @@ body {
   display: inline-block;
   vertical-align: middle;
   margin-right: 20px;
+  -webkit-flex-basis: 200px;
+      -ms-flex-preferred-size: 200px;
+          flex-basis: 200px;
+  padding: 0;
 }
 .cookie_disclaimer .disclaimer {
   display: -webkit-flex;
