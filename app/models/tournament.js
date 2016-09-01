@@ -24,6 +24,7 @@ var tournamentSchema = new Schema({
 	teams: [Team],
 	logo: String,
 	header: String,
+	header_blur: String,
 	contents: [Section]
 }, {
 	timestamps: true,

@@ -18,6 +18,7 @@ var articleSchema = new Schema({
 	}],
 	content: String,
 	header: String,
+	header_blur: String,
 	published: {
 		type: Boolean,
 		default: false
