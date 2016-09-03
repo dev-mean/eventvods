@@ -12,7 +12,7 @@ router.get('/', function(req, res, next){
 	.populate({
 		path: 'leagues',
 		model: 'League',
-		select: 'name slug game subtitle startDate endDate updatedAt createdAt updated logo',
+		select: 'name slug game shortTitle subtitle startDate endDate updatedAt createdAt updated logo header header_blur textOrientation',
 		populate: {
 			path: 'game',
 			model: 'Game',
@@ -22,7 +22,7 @@ router.get('/', function(req, res, next){
 	.populate({
 		path: 'tournaments',
 		model: 'Tournament',
-		select: 'name slug logo startDate endDate updatedAt createdAt updated'
+		select: 'name subtitle shortTitle slug logo startDate endDate updatedAt createdAt updated header header_blur textOrientation'
 	})
 	.exec(function(err, featuredContent){
 		if(err) next(err);

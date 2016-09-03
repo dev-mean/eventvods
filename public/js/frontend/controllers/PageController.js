@@ -40,9 +40,11 @@
 					SessionManager.logout();
 				};
 				vm.init = function() {
-					$('.evSlider.multiple').evSlider({
+					$timeout(function(){
+						$('.evSlider.multiple').evSlider({
 						delay: 7500
-					});
+						});
+					}, 5);
 					$('.dropdown-button').dropdown({
 						hover: true,
 						belowOrigin: true,
@@ -80,6 +82,17 @@
 				NavService.get()
 					.then(function(res) {
 						vm.nav = res.data;
+
+						vm.nav.all =
+							res.data.leagues.map(function(item){
+								item.type="League";
+								return item;
+							})
+							.concat(res.data.tournaments.map(function(item){
+								item.type="Tournament";
+								return item;
+							}));
+						console.log(vm.nav.all);
 						vm.init();
 					})
 					.catch(function() {

@@ -343,6 +343,9 @@ nav.nav-main a.btn:hover {
   z-index: 0;
   overflow: hidden;
 }
+.evSlider .images {
+  background: #1A192B;
+}
 .evSlider.single {
   height: 364px;
 }
@@ -361,7 +364,7 @@ nav.nav-main a.btn:hover {
 @media screen and (min-width: 1920px) {
   .evSlider .main img,
   .evSlider .blur img {
-    width: 100%;
+    min-width: 100%;
   }
 }
 .evSlider .main img {
@@ -484,6 +487,7 @@ nav.nav-main a.btn:hover {
   -webkit-justify-content: center;
       -ms-flex-pack: center;
           justify-content: center;
+  transition: all 2s ease-in-out;
 }
 .evSlider .indicators .indicator {
   background: #fff;

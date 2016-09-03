@@ -12,6 +12,9 @@ var tournamentSchema = new Schema({
 		type: String,
 		required: true
 	},
+	subtitle: String,
+	shortTitle: String,
+	textOrientation: String,
 	slug: {
 		type: String,
 		required: true,

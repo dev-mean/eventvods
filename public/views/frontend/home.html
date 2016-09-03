@@ -1,36 +1,20 @@
-<div class="evSlider multiple" id="banner">
+<div class="evSlider multiple" id="banner" ng-class="Page.contentClass">
 	<div class="images">
-		<div class="image">
+		<div class="image" ng-repeat="item in Page.nav.all track by $index">
 			<div class="main">
-				<img src="/assets/images/backgrounds/1.jpg" />
+				<img ng-src="{{item.header}}" />
 			</div>
 			<div class="blur">
-				<img src="/assets/images/backgrounds/1b.jpg" />
+				<img ng-src="{{item.header_blur}}" />
 			</div>
-			<div class="overlay right">
+			<div class="overlay" ng-class="item.textOrientation">
 				<div class="container">
-					<img src="/assets/images/eulcs.png" />
-					<h4>League of Legends</h4>
-					<h3>Follow the EU LCS!</h3>
-					<h4>2016 Summer Split</h4>
-					<a class="waves-effect waves-light btn">View League</a>
-				</div>
-			</div>
-		</div>
-		<div class="image">
-			<div class="main">
-				<img src="/assets/images/backgrounds/2.jpg" />
-			</div>
-			<div class="blur">
-				<img src="/assets/images/backgrounds/2b.jpg" />
-			</div>
-			<div class="overlay left">
-				<div class="container">
-					<img src="/assets/images/eulcs.png" />
-					<h4>League of Legends</h4>
-					<h3>Follow the NA LCS!</h3>
-					<h4>2016 Summer Split</h4>
-					<a class="waves-effect waves-light btn">View League</a>
+					<img ng-src="{{item.logo}}" />
+					<h4 ng-bind="item.game.name" ng-if="item.game.name !== undefined"></h4>
+					<h4 ng-bind="item.name" ng-if="item.game.name === undefined"></h4>
+					<h3>Follow {{item.type === "League" ? "the" : ""}} {{item.shortTitle}}</h3>
+					<h4 ng-bind="item.subtitle"></h4>
+					<a class="waves-effect waves-light btn">View {{item.type}}</a>
 				</div>
 			</div>
 		</div>

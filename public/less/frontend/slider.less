@@ -4,6 +4,9 @@
 	height: @banner-slider-height + @nav-height;
 	z-index: 0;
 	overflow: hidden;
+	.images {
+		background: #1A192B;
+	}
 	&.single {
 		.image {
 			opacity: 1;
@@ -16,7 +19,7 @@
 	.main img, .blur img {
 		pointer-events: none;
 		@media screen and (min-width: 1920px){
-			width: 100%;
+			min-width: 100%;
 		}
 	}
 	.main img {
@@ -109,6 +112,7 @@
 	    z-index: 998;
 	    display: flex;
 	    justify-content: center;
+		.transition(all, 2s, ease-in-out);
 	    .indicator {
 	    	background: @accent-white;
 	    	width: 10px;

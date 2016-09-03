@@ -25,6 +25,7 @@
 		var settings = $.extend(defaults, opts);
 		// Initialise stuff
 		clearableInterval.clear();
+		$('.evSlider .indicators').remove();
 		this.find('.images').after('<div class="indicators"></div>');
 		for (var i = 0; i < settings.max; i++)
 			this.find('.indicators').append('<span class="indicator" data-index="' + i + '">&nbsp;</span>');

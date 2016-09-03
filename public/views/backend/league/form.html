@@ -42,6 +42,12 @@
 		</div>
 		<div class="standard group">
 			<label>
+                League Short Title
+            </label>
+			<input type="text" placeholder="e.g. EU LCS" ng-model="leagueFormController.data.shortTitle" />
+		</div>
+		<div class="standard group">
+			<label>
                 League Sub-title
             </label>
 			<input type="text" placeholder="e.g. Summer Split" ng-model="leagueFormController.data.subtitle" />
@@ -76,6 +82,15 @@
                 End Date
             </label>
 			<input id="endDate" placeholder="Click to select date." type="text" data-parsley-trigger="input change" data-parsley-group="1" required/>
+		</div>
+		<div class="standard group">
+			<label>
+                Featured Orientation
+            </label>
+			<select class="form-style" ng-model="leagueFormController.data.textOrientation">
+				<option value="left">Left</option>
+				<option value="right">Right</option>
+			</select>
 		</div>
 		<div class="standard group">
 			<label>

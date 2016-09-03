@@ -21,7 +21,7 @@ var S3 = new aws.S3();
 function jpegify(opts){
 	var $promise = Q.defer();
 	gm(opts.data)
-		.setFormat("jpg")
+		.setFormat("jpeg")
 		.quality(95)
 		.toBuffer(function(err, res) {
 			if (err) $promise.reject(err);
@@ -33,7 +33,6 @@ function jpegify(opts){
 }
 function headerCrop(opts){
 	var $promise = Q.defer();
-	console.log(opts.data);
 	gm(opts.data)
 		.resize(2560)
 		.crop(2560, 600, 0, 0)
@@ -45,12 +44,13 @@ function headerCrop(opts){
 	return $promise.promise;
 }
 function uploadImageBuffer(opts) {
+	var key = opts.key + "." + opts.ext;
 	var $promise = Q.defer();
 	uploader.uploadBuffer(opts.data, {
 			'Content-Type': opts.type,
 			'x-amz-acl': 'public-read'
 		},
-		opts.key + "." + opts.ext,
+		key,
 		function(err) {
 			if (err) $promise.reject(err);
 			else $promise.resolve(opts);
@@ -61,7 +61,7 @@ function uploadImageBuffer(opts) {
 function headerBlur(opts) {
 	var $promise = Q.defer();
 	gm(opts.data)
-		.crop(opts.width, 100, 0, 0)
+		.crop(2560, 100, 0, 0)
 		.blur(25, 5)
 		.toBuffer(function(err, res) {
 			if (err) $promise.reject(err);
@@ -73,7 +73,6 @@ function headerBlur(opts) {
 }
 
 var deleteImage = function(key) {
-	console.log('Deleting: '+key);
 	var $promise = Q.defer();
 	if (typeof key === "undefined" || key == null) $promise.resolve();
 	else {
@@ -142,7 +141,7 @@ function handleImage(fileData, process) {
 				})
 				.then(deleteOldImages)
 				.then(function() {
-					fileData.image = config.aws.cdn + key + type.ext;
+					fileData.image = config.aws.cdn + key + "."+ type.ext;
 					$promise.resolve(fileData);
 				})
 		} else $promise.reject("Invalid or corrupt image provided for image: " + fileData.field);
