@@ -23,6 +23,18 @@ aws.config.update({
 });
 var S3 = new aws.S3();
 
+function jpegify(opts){
+	var $promise = Q.defer();
+	gm(opts.data)
+		.setFormat("jpg")
+		.toBuffer(function(err, res) {
+			if (err) $promise.reject(err);
+			opts.data = res;
+			opts.type="image/jpeg";
+			$promise.resolve(opts);
+		})
+	return $promise.promise;
+}
 
 function uploadImageBuffer(opts) {
 	var $promise = Q.defer();
@@ -37,7 +49,6 @@ function uploadImageBuffer(opts) {
 		});
 	return $promise.promise;
 }
-
 
 function headerBlur(opts) {
 	var $promise = Q.defer();
@@ -78,13 +89,13 @@ function handleImage(fileData, process) {
 			if (process) {
 				var opts ={
 					data: data,
-					type: type.mime,
 					key: key,
 					blur_key: fileData.field + "/" + filename + "_b." + type.ext,
 					oldURL: fileData.image.oldURL,
 					oldBlurURL: (typeof fileData.image.oldURL === "string") ? fileData.image.oldURL.replace(".", "_b.") : null
 				}
-				uploadImageBuffer(opts)
+				jpegify(opts)
+					.then(uploadImageBuffer)
 					.then(headerBlur)
 					.then(uploadImageBuffer)
 					.then(deleteOldImages)

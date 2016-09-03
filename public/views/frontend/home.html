@@ -47,8 +47,8 @@
 		<div class="element-info">
 			<div class="element-title">
 				<a ng-href="/league/{{league.slug}}">
-				<h4 ng-bind="league.name"></h4>
-				<span ng-bind="league.subtitle"></span>
+					<h4 ng-bind="league.name"></h4>
+					<span ng-bind="league.subtitle"></span>
 				</a>
 			</div>
 			<div class="element-dates">
@@ -57,8 +57,7 @@
 			</div>
 			<div class="element-buttons">
 				<a class="waves-effect waves-light btn" ng-click="Page.toggleFollow(league._id, 'leagues')">
-					<i class="material-icons left" ng-class="{starred: Page.following(league._id)}">star</i>
-					{{Page.following(league._id) ? "Following" : "Follow"}}
+					<i class="material-icons left" ng-class="{starred: Page.following(league._id)}">star</i> {{Page.following(league._id) ? "Following" : "Follow"}}
 				</a>
 				<a ng-href="/league/{{league.slug}}" class="waves-effect waves-light btn">View League</a>
 			</div>
@@ -85,8 +84,7 @@
 			</div>
 			<div class="element-buttons">
 				<a class="waves-effect waves-light btn" ng-click="Page.toggleFollow(tournament._id, 'tournaments')">
-					<i class="material-icons left" ng-class="{starred: Page.following(tournament._id)}">star</i>
-					{{Page.following(tournament._id) ? "Following" : "Follow"}}
+					<i class="material-icons left" ng-class="{starred: Page.following(tournament._id)}">star</i> {{Page.following(tournament._id) ? "Following" : "Follow"}}
 				</a>
 				<a ng-href="/tournament/{{tournament.slug}}" class="waves-effect waves-light btn">View tournament</a>
 			</div>
