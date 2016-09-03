@@ -60,7 +60,7 @@
 					else return "";
 				};
 				vm.elementClass = function($index) {
-					var img = element_images % ($index + 1) + 1;
+					var img = ($index % element_images) + 1;
 					return "element-" + img;
 				}
 				vm.following = function(id) {

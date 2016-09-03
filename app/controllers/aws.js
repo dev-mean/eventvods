@@ -82,7 +82,7 @@ function handleImage(fileData, process) {
 					key: key,
 					blur_key: fileData.field + "/" + filename + "_b." + type.ext,
 					oldURL: fileData.image.oldURL,
-					oldBlurURL: (typeof fileData.image.oldURL=== "string") ? fileData.image.oldURL.replace(".", "_b.") : null
+					oldBlurURL: (typeof fileData.image.oldURL === "string") ? fileData.image.oldURL.replace(".", "_b.") : null
 				}
 				uploadImageBuffer(opts)
 					.then(headerBlur)

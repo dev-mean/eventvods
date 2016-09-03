@@ -808,6 +808,17 @@ input[type=checkbox]:not(:checked) + .err a {
   background: #3C3C62;
 }
 .element-container .element-border .element-background {
+  height: 200px;
+  width: 100%;
+  -webkit-clip-path: url("../../../../#element");
+          clip-path: url("../../../../#element");
+  position: relative;
+  padding-right: 10%;
+  left: -20px;
+}
+.element-container .element-border .element-background > a {
+  height: 100%;
+  width: 100%;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
@@ -817,21 +828,12 @@ input[type=checkbox]:not(:checked) + .err a {
   -webkit-justify-content: center;
       -ms-flex-pack: center;
           justify-content: center;
-  height: 200px;
-  width: 100%;
-  -webkit-clip-path: url("../../../../#element");
-          clip-path: url("../../../../#element");
-  position: relative;
-  padding-right: 10%;
-  left: -20px;
 }
 .element-container .element-border .element-background > a > img {
-  max-height: 80%;
-  max-width: 70%;
   vertical-align: middle;
   pointer-events: none;
-  position: relative;
-  left: -10px;
+  max-height: 80%;
+  max-width: 70%;
 }
 .element-container .element-border .element-background.element-1 {
   background: url('/assets/images/elements/1.jpg');
@@ -862,6 +864,9 @@ input[type=checkbox]:not(:checked) + .err a {
   -webkit-flex-direction: column;
       -ms-flex-direction: column;
           flex-direction: column;
+}
+.element-container .element-info .element-title a {
+  color: inherit!important;
 }
 .element-container .element-info .element-title h4 {
   margin: 6px auto;

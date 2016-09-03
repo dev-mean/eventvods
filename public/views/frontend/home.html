@@ -46,8 +46,10 @@
 		</div>
 		<div class="element-info">
 			<div class="element-title">
+				<a ng-href="/league/{{league.slug}}">
 				<h4 ng-bind="league.name"></h4>
 				<span ng-bind="league.subtitle"></span>
+				</a>
 			</div>
 			<div class="element-dates">
 				<b>Starts </b><span ng-bind="league.startDate | date: 'EEEE, MMMM dd yyyy'"></span><br />
@@ -75,7 +77,7 @@
 		</div>
 		<div class="element-info">
 			<div class="element-title">
-				<h4 ng-bind="tournament.name"></h4>
+				<a ng-href="/tournament/{{tournament.slug}}"><h4 ng-bind="tournament.name"></h4></a>
 			</div>
 			<div class="element-dates">
 				<b>Starts </b><span ng-bind="tournament.startDate | date: 'EEEE, MMMM dd yyyy'"></span><br />
