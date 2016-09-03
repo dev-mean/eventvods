@@ -14,7 +14,7 @@
 					<h4 ng-bind="item.name" ng-if="item.game.name === undefined"></h4>
 					<h3>Follow {{item.type === "League" ? "the" : ""}} {{item.shortTitle}}</h3>
 					<h4 ng-bind="item.subtitle"></h4>
-					<a class="waves-effect waves-light btn">View {{item.type}}</a>
+					<a class="waves-effect waves-light btn" ng-href="{{item.slug}}">View {{item.type}}</a>
 				</div>
 			</div>
 		</div>
