@@ -1,4 +1,13 @@
 (function() {
+	function shuffleArray(array) {
+		for (var i = array.length - 1; i > 0; i--) {
+			var j = Math.floor(Math.random() * (i + 1));
+			var temp = array[i];
+			array[i] = array[j];
+			array[j] = temp;
+		}
+		return array;
+	}
 	'use strict';
 	angular.module('eventvods')
 		.factory('NavService', ['$http', 'API_BASE_URL', function($http, API_BASE_URL) {
@@ -92,7 +101,7 @@
 								item.type="Tournament";
 								return item;
 							}));
-						console.log(vm.nav.all);
+						shuffleArray(vm.nav.all);
 						vm.init();
 					})
 					.catch(function() {
