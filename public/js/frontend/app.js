@@ -1,11 +1,10 @@
 (function() {
 	'use strict';
 	angular.module('eventvods', ['ngAnimate', 'ngRoute', 'ngCookies', 'angular-loading-bar', 'ui.materialize','xeditable'])
-		.constant('DOMAIN', 'http://simon.eventvods.com')
+		.constant('DOMAIN', 'http://beta.eventvods.com')
 		.constant('API_BASE_URL', '/api')
 		.run(function(editableOptions, editableThemes, $rootScope, $anchorScroll, DOMAIN) {
 			editableOptions.theme = 'default';
-			editableThemes.default.buttonsClass = 'btn waves-effect waves-light';
 			$rootScope.$on('$routeChangeSuccess', function (evt, current, previous) {
 				$anchorScroll("top");
 				if(current != previous && typeof current !== "undefined"){
@@ -55,6 +54,14 @@
 					meta: {
 						title: 'Register - Eventvods - Esports on Demand',
 						description: 'Meta Description'
+					}
+                })
+				.when('/league/:slug', {
+                    templateUrl: '/assets/views/frontend/league.html',
+					controller: 'LeagueController',
+					controllerAs: 'League',
+					meta: {
+						title: 'View League - Eventvods - Esports on Demand'
 					}
                 })
 				.when('/about/cookies', {

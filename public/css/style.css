@@ -105,7 +105,7 @@ body {
   border-bottom: 5px solid #0CD97E;
   padding-bottom: 10px;
 }
-.contents > h1.container {
+.contents > h3.container {
   text-transform: uppercase;
   border-bottom: 5px solid #0CD97E;
   font-family: Gotham;
@@ -198,6 +198,8 @@ nav.nav-main i.left {
 nav.nav-main ul a {
   transition: all .3s;
   letter-spacing: 0.5px;
+  position: relative;
+  z-index: 5;
 }
 nav.nav-main ul a.btn {
   padding-left: 40px;
@@ -223,11 +225,13 @@ nav.nav-main li.user-details > svg {
   height: 54px;
   width: 54px;
   position: relative;
+  z-index: 0;
   top: 4px;
   outline: 0!important;
   border-radius: 50%;
   float: left;
-  left: 54px;
+  left: 59px;
+  margin-left: -54px;
   pointer-events: none;
 }
 nav.nav-main li.user-details > a {
@@ -349,7 +353,10 @@ nav.nav-main a.btn:hover {
 .evSlider.single {
   height: 364px;
 }
-.evSlider.single .image {
+.evSlider.single .image:not(.load-in) {
+  opacity: 1;
+}
+.evSlider.single .image.loaded {
   opacity: 1;
 }
 .evSlider.single h4 {
@@ -451,7 +458,13 @@ nav.nav-main a.btn:hover {
 }
 .evSlider div.overlay.middle {
   text-align: center;
-  background: rgba(0, 0, 0, 0.7);
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#000000+0,000000+100&0.3+0,0.8+30,0.8+70,0.3+100 */
+  /* FF3.6-15 */
+  /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.8) 30%, rgba(0, 0, 0, 0.8) 70%, rgba(0, 0, 0, 0.3) 100%);
+  /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#4d000000', endColorstr='#4d000000', GradientType=1);
+  /* IE6-9 */
 }
 .evSlider div.overlay img {
   position: relative;

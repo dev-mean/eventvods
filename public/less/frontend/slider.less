@@ -8,7 +8,10 @@
 		background: #1A192B;
 	}
 	&.single {
-		.image {
+		.image:not(.load-in) {
+			opacity: 1;
+		}
+		.image.loaded {
 			opacity: 1;
 		}
 		height: @banner-slider-height + @nav-height - 100px;
@@ -83,7 +86,7 @@
 		}
 		&.middle {
 			text-align: center;
-			background: rgba(0,0,0,0.7);
+			.black-gradient-middle();
 		}
 		img {
 			position: relative;
