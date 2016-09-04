@@ -48,10 +48,14 @@ app.use('/assets', express.static(path.join(__dirname, 'public')));
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(bodyParser.urlencoded({
 	"limit": "150mb",
-	'extended': 'true'
+	"extended": true,
+	"parameterLimit": 50000,
+	"type": 'application/x-www-form-urlencoding'
 }));
 app.use(bodyParser.json({
 	"limit": "150mb",
+	"parameterLimit": 50000,
+	"type": 'application/json'
 }));
 app.use(session({
 	secret: config.secret,
