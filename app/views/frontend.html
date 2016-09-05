@@ -26,7 +26,7 @@
 	<meta property="og:description"" content="{{meta.description}}" />
 </head>
 
-<body id="top" ng-controller="PageController as Page">
+<body id="top" ng-controller="PageController as Page" ng-class="Page.contentClass">
 	<header>
 		<div class="cookie_disclaimer" ng-class="{show: Page.cookiesAccepted === false}">
 			<div class="container">
@@ -159,7 +159,7 @@
 			</div>
 		</nav>
 	</header>
-	<div id="main" ng-view ng-cloak onload="Page.init()" ng-class="Page.contentClass"></div>
+	<div id="main" ng-view ng-cloak onload="Page.init()"></div>
 	<footer class="page-footer">
 		<div class="container">
 			<div class="row center-align spaced-row">
