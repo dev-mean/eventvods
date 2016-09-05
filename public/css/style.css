@@ -57,6 +57,11 @@ body {
   border-top: 5px solid #0CD97E;
   transition: all 0.3s linear;
   text-align: center;
+  background: url('/assets/images/backgrounds/light.jpg') #fff;
+  background-position: center -300px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: #3C3C62;
 }
 .contents.pad-bottom {
   padding-top: 25px;
@@ -68,34 +73,12 @@ body {
 .contents a:not(.btn):hover {
   text-decoration: underline;
 }
-.contents.light {
-  background: url('/assets/images/backgrounds/light.jpg') #fff;
-  background-position: center -300px;
-  background-repeat: no-repeat;
-  background-size: cover;
-  color: #3C3C62;
-}
-.contents.light .container {
-  background: #fff;
-}
-.contents.dark {
-  background: url('/assets/images/backgrounds/dark.jpg') #1A192B;
-  background-position: center -300px;
-  background-repeat: no-repeat;
-  background-size: cover;
-  color: #fff;
-}
-.contents.dark .container {
-  background: #27273F;
-}
-.contents.dark .collection-item {
-  background-color: transparent;
-}
 .contents .container {
   transition: all 0.3s linear;
   font-family: Gotham;
   font-weight: 500;
   padding: 50px;
+  background: #fff;
 }
 .contents .container h3.title {
   width: 100%;
@@ -112,6 +95,19 @@ body {
   font-weight: 500;
   padding: 25px;
   background: transparent!important;
+}
+.dark .contents {
+  background: url('/assets/images/backgrounds/dark.jpg') #1A192B;
+  background-position: center -300px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: #fff;
+}
+.dark .contents .container {
+  background: #27273F;
+}
+.dark .contents .collection-item {
+  background-color: transparent;
 }
 #loading-bar .bar {
   background: #0CD97E !important;

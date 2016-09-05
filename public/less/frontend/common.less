@@ -47,6 +47,11 @@ body {
 	border-top: 5px solid @accent-green;
 	.transition(all, 0.3s, linear);
 	text-align: center;
+	background: url('/assets/images/backgrounds/light.jpg') #fff;
+	background-position: center -300px;
+	background-repeat: no-repeat;
+	background-size: cover;
+	color: @default-blue;
 	&.pad-bottom {
 		padding-top: 25px;
 		padding-bottom: 25px;
@@ -57,33 +62,11 @@ body {
 			text-decoration: underline;
 		}
 	}
-	&.light{
-		background: url('/assets/images/backgrounds/light.jpg') #fff;
-		background-position: center -300px;
-		background-repeat: no-repeat;
-		background-size: cover;
-		color: @default-blue;
-		.container {
-			background: @accent-white;
-		}
-	}
-	&.dark{
-		background: url('/assets/images/backgrounds/dark.jpg') #1A192B;
-		background-position: center -300px;
-		background-repeat: no-repeat;
-		background-size: cover;
-		color: @accent-white;
-		.container {
-			background: @dark-blue;
-		}
-		.collection-item {
-			background-color: transparent;
-		}
-	}
 	.container {
 		.transition(all, 0.3s, linear);
 		.gotham-med();
 		padding: 50px;
+		background: @accent-white;
 		h3.title {
 			width: 100%;
 			text-align: center;
@@ -100,6 +83,19 @@ body {
 		padding: 25px;
 		background: transparent!important;
 	}
+}
+.dark .contents {
+	background: url('/assets/images/backgrounds/dark.jpg') #1A192B;
+		background-position: center -300px;
+		background-repeat: no-repeat;
+		background-size: cover;
+		color: @accent-white;
+		.container {
+			background: @dark-blue;
+		}
+		.collection-item {
+			background-color: transparent;
+		}
 }
 #loading-bar .bar {
 	background: @accent-green!important;

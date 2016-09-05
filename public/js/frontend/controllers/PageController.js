@@ -28,7 +28,7 @@
 				var cookieSettings = {
 					expires: exp
 				}
-				vm.contentClass = $cookies.get('contentMode') || "light";
+				vm.contentClass = "light";//$cookies.get('contentMode') || "light";
 				vm.cookiesAccepted = ($cookies.get('cookieDisclaimer') === "true");
 				vm.contentClassSet = function() {
 					$cookies.put('contentMode', vm.contentClass, cookieSettings);
@@ -91,7 +91,6 @@
 				NavService.get()
 					.then(function(res) {
 						vm.nav = res.data;
-
 						vm.nav.all =
 							res.data.leagues.map(function(item){
 								item.type="League";
@@ -103,9 +102,6 @@
 							}));
 						shuffleArray(vm.nav.all);
 						vm.init();
-					})
-					.catch(function() {
-						vm.nav = null;
 					});
 			}
 		]);
