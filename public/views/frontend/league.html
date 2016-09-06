@@ -10,7 +10,7 @@
 			<div class="overlay middle">
 				<img ng-src="{{League.data.logo}}" />
 				<h3 ng-bind="League.data.name"></h3>
-				<h4 ng-if="League.data.subtitle === undefined">&nbsp;</h4>
+				<h4 ng-if="League.data.subtitle === undefined || League.data.subtitle === \"\"">&nbsp;</h4>
 				<h4 ng-if="League.data.subtitle !== 'undefined'" ng-bind="League.data.subtitle"></h4>
 				<a class="waves-effect waves-light btn" ng-click="Page.toggleFollow(League.data._id, 'leagues')">
 					<i class="material-icons left" ng-class="{starred: Page.following(League.data._id)}">star</i> {{Page.following(League.data._id) ? "Following" : "Follow"}}
