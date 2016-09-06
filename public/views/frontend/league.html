@@ -11,14 +11,17 @@
 				<img ng-src="{{League.data.logo}}" />
 				<h3 ng-bind="League.data.name"></h3>
 				<h4 ng-bind="League.data.subtitle"></h4>
-				<a href="#" class="details-toggle" ng-click="showDetails = !showDetails">
-					<i class="material-icons">{{showDetails ? "&#xE5CE;" : "&#xE5CF;"}}</i> show {{showDetails ? "less" : "more"}} info
+				<a class="waves-effect waves-light btn" ng-click="Page.toggleFollow(League.data._id, 'leagues')">
+					<i class="material-icons left" ng-class="{starred: Page.following(League.data._id)}">star</i> {{Page.following(League.data._id) ? "Following" : "Follow"}}
 				</a>
 			</div>
 		</div>
 	</div>
 </div>
 <div class="contents pad-bottom">
+	<a class="details-toggle waves-effect waves-light btn" ng-click="showDetails = !showDetails">
+		<i class="material-icons left">{{showDetails ? "&#xE5CE;" : "&#xE5CF;"}}</i> show {{showDetails ? "less" : "more"}}
+	</a>
 	<div class="details slide-toggle" ng-class="{show: showDetails}">
 			<h4 class="container">Staff</h4>
 			<div class="icon-container container">

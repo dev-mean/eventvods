@@ -60,7 +60,7 @@ router.get('/slug/:slug', auth.public_api(), ratelimit, cache, function(req, res
 		League.findOne({
 			slug: req.params.slug
 		})
-		.select('-_id -__v -textOrientation')
+		.select('-__v -textOrientation')
 		.populate('game staff')
 		.exec(function(err, leagues) {
 			if (err) next(err);

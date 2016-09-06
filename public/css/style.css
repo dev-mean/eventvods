@@ -50,6 +50,9 @@ body {
 .text-red {
   color: #F44336;
 }
+i.starred {
+  color: goldenrod!important;
+}
 .force-uppercase {
   text-transform: uppercase!important;
 }
@@ -823,9 +826,6 @@ input[type=checkbox]:not(:checked) + .err a {
   padding: 0!important;
   border-bottom: 2px solid #0CD97E;
 }
-.element-container i.starred {
-  color: goldenrod!important;
-}
 .element-container .element-border {
   -webkit-flex-basis: 0px;
       -ms-flex-preferred-size: 0px;
@@ -926,28 +926,6 @@ input[type=checkbox]:not(:checked) + .err a {
 .element-container .element-info .element-dates,
 .element-container .element-info .element-title {
   text-transform: uppercase;
-}
-a.details-toggle {
-  -webkit-transform: scale(0.8);
-      -ms-transform: scale(0.8);
-          transform: scale(0.8);
-  text-transform: uppercase;
-  font-family: Gotham;
-  font-weight: 500;
-  color: white;
-  opacity: 0.8;
-  transition: opacity 0.3s linear;
-  border: 1px solid white;
-  padding: 3px 5px;
-}
-a.details-toggle:hover {
-  opacity: 1;
-}
-a.details-toggle i.material-icons {
-  vertical-align: middle;
-  position: relative;
-  top: -2px;
-  margin-left: -2px;
 }
 .slide-toggle {
   max-height: 0;
@@ -1061,6 +1039,29 @@ a.details-toggle i.material-icons {
 .icon-container .icon .icon-path:hover {
   stroke: #0CD97E;
   cursor: pointer;
+}
+.overlay.middle a.btn,
+a.btn.details-toggle {
+  transition: width 0.3s linear;
+  width: 250px;
+}
+.overlay.middle a.btn i,
+a.btn.details-toggle i {
+  transition: color 0.3s linear;
+}
+a.btn.details-toggle {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  position: relative;
+  top: -25px;
+  line-height: 39px;
+  font-family: Gotham;
+  font-weight: 500;
+  background: #3C3C62;
+}
+.overlay.middle a.btn {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
 }
 
 /*# sourceMappingURL=style.css.map */
