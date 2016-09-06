@@ -18,7 +18,7 @@
 			return {
 				restrict: 'A',
 				link: function($scope, $element, $attrs) {
-					$attrs.$set('fill', $attrs.fill.replace(/url\(#/g, absUrl));
+					$attrs.$set('fill', $attrs.fill.replace("url(#", absUrl));
 				}
 			};
 		})

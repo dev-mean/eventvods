@@ -43,6 +43,18 @@ function headerCrop(opts){
 		})
 	return $promise.promise;
 }
+function iconCrop(opts){
+	var $promise = Q.defer();
+	gm(opts.data)
+		.resize(300)
+		.crop(300, 300, 0, 0)
+		.toBuffer(function(err, res) {
+			if (err) $promise.reject(err);
+			opts.data = res;
+			$promise.resolve(opts);
+		})
+	return $promise.promise;
+}
 function uploadImageBuffer(opts) {
 	var key = opts.key + "." + opts.ext;
 	var $promise = Q.defer();
@@ -97,7 +109,7 @@ function deleteOldImages(opts){
 	);
 }
 
-function handleImage(fileData, process) {
+function handleImage(fileData, process, func) {
 	var $promise = Q.defer();
 	if (typeof fileData.image == "undefined" || typeof fileData.image === "string" || fileData.image == null) $promise.resolve(fileData);
 	else {
@@ -107,7 +119,7 @@ function handleImage(fileData, process) {
 		if (type.mime.match('image')) {
 			var filename = id.generate() + id.generate();
 			var key = fileData.field + "/" + filename;
-			if (process) {
+			if (process && func === "header") {
 				var opts ={
 					data: data,
 					key: key,
@@ -130,7 +142,30 @@ function handleImage(fileData, process) {
 					.catch(function(err) {
 						$promise.reject(err);
 					});
-			} else
+			}
+			else if (process && func === "photo"){
+				var filename = id.generate() + id.generate();
+				var key = fileData.field + "/" + filename;
+				var opts ={
+					data: data,
+					key: key,
+					ext: 'jpg',
+					oldURL: fileData.image.oldURL,
+					oldBlurURL: null
+				}
+				jpegify(opts)
+					.then(iconCrop)
+					.then(uploadImageBuffer)
+					.then(deleteOldImages)
+					.then(function() {
+						fileData.image = config.aws.cdn + key + ".jpg";
+						$promise.resolve(fileData);
+					})
+					.catch(function(err) {
+						$promise.reject(err);
+					});
+			}
+			else
 				uploadImageBuffer({
 					data: data,
 					key: key,
@@ -151,10 +186,23 @@ function handleImage(fileData, process) {
 module.exports.handleUpload = function(fields) {
 	return function(req, res, next) {
 		Q.all(fields.map(function(field) {
-				return handleImage({
-					field: field,
-					image: req.body[field]
-				}, (field === 'header') ? true : false)
+				switch(field){
+					case "header":
+						return handleImage({
+							field: field,
+							image: req.body[field]
+						}, true, "header");
+					case "photo":
+						return handleImage({
+							field: field,
+							image: req.body[field]
+						}, true, "photo");
+					default:
+						return handleImage({
+							field: field,
+							image: req.body[field]
+						}, false)
+				}
 			}))
 			.then(function(fileData) {
 				fileData.forEach(function(item) {

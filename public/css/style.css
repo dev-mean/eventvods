@@ -42,7 +42,7 @@ img:not([src]),
   display: none !important;
 }
 body {
-  background: #3c3c62;
+  background: white;
 }
 .text-accent {
   color: #0CD97E;
@@ -107,13 +107,16 @@ body {
   border-bottom: 5px solid #0CD97E;
   padding-bottom: 10px;
 }
-.contents > h3.container {
+.contents h3.container {
   text-transform: uppercase;
   border-bottom: 5px solid #0CD97E;
   font-family: Gotham;
   font-weight: 500;
   padding: 25px;
   background: transparent!important;
+}
+.dark {
+  background: #27273F;
 }
 .dark .contents {
   background: url('/assets/images/backgrounds/dark.jpg') #1A192B;
@@ -902,7 +905,7 @@ input[type=checkbox]:not(:checked) + .err a {
 }
 .element-container .element-info .element-title h4 {
   margin: 6px auto;
-  font-weight: bolder;
+  font-weight: 500;
   font-size: 2.1em;
 }
 .element-container .element-info .element-title span {
@@ -923,6 +926,141 @@ input[type=checkbox]:not(:checked) + .err a {
 .element-container .element-info .element-dates,
 .element-container .element-info .element-title {
   text-transform: uppercase;
+}
+a.details-toggle {
+  -webkit-transform: scale(0.8);
+      -ms-transform: scale(0.8);
+          transform: scale(0.8);
+  text-transform: uppercase;
+  font-family: Gotham;
+  font-weight: 500;
+  color: white;
+  opacity: 0.8;
+  transition: opacity 0.3s linear;
+  border: 1px solid white;
+  padding: 3px 5px;
+}
+a.details-toggle:hover {
+  opacity: 1;
+}
+a.details-toggle i.material-icons {
+  vertical-align: middle;
+  position: relative;
+  top: -2px;
+  margin-left: -2px;
+}
+.slide-toggle {
+  max-height: 0;
+  height: auto;
+  transition: all 0.5s linear;
+  opacity: 0;
+}
+.slide-toggle.show {
+  max-height: 5000px;
+  opacity: 1;
+}
+.details {
+  overflow: hidden;
+  margin-top: -25px;
+  margin-bottom: 25px;
+}
+.details h4.container {
+  text-transform: uppercase;
+  border-bottom: 3px solid #0CD97E;
+  font-family: Gotham;
+  font-weight: 500;
+  padding: 15px;
+  background: transparent!important;
+  margin-top: 25px;
+}
+.icon-container {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-flex-wrap: wrap;
+      -ms-flex-wrap: wrap;
+          flex-wrap: wrap;
+  background: transparent!important;
+  padding: 0!important;
+  margin-bottom: 25px;
+}
+.icon-container .icon {
+  font-family: Gotham;
+  font-weight: 500;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  overflow: hidden;
+  margin: 25px;
+  height: 250px;
+  width: 200px;
+  position: relative;
+}
+.icon-container .icon.team {
+  -webkit-justify-content: space-between;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  height: 200px;
+}
+.icon-container .icon .icon-image,
+.icon-container .icon .team-container {
+  width: 150px;
+}
+.icon-container .icon .two-lines {
+  height: 55px;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.icon-container .icon .team-container {
+  pointer-events: none;
+  height: 150px;
+  position: absolute;
+  top: 0;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.icon-container .icon .team-container > img {
+  max-width: 150px;
+  max-height: 150px;
+}
+.icon-container .icon .icon-role,
+.icon-container .icon .icon-alias {
+  text-transform: uppercase;
+  color: #0CD97E;
+}
+.icon-container .icon .icon-path {
+  stroke: #27273F;
+  transition: stroke 0.5s linear;
+}
+.icon-container .icon .icon-path.solid {
+  fill: #3C3C62;
+}
+.icon-container .icon .icon-path:hover {
+  stroke: #0CD97E;
+  cursor: pointer;
 }
 
 /*# sourceMappingURL=style.css.map */

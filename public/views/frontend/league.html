@@ -11,11 +11,49 @@
 				<img ng-src="{{League.data.logo}}" />
 				<h3 ng-bind="League.data.name"></h3>
 				<h4 ng-bind="League.data.subtitle"></h4>
+				<a href="#" class="details-toggle" ng-click="showDetails = !showDetails">
+					<i class="material-icons">{{showDetails ? "&#xE5CE;" : "&#xE5CF;"}}</i> show {{showDetails ? "less" : "more"}} info
+				</a>
 			</div>
 		</div>
 	</div>
 </div>
 <div class="contents pad-bottom">
+	<div class="details slide-toggle" ng-class="{show: showDetails}">
+			<h4 class="container">Staff</h4>
+			<div class="icon-container container">
+				<div class="icon" ng-repeat="staff in League.data.staff">
+					<svg viewbox="1 1 8 8" class="icon-image" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1">
+						<defs>
+							<pattern ng-attr-id="{{staff._id}}" patternUnits="userSpaceOnUse" width="10" height="10">
+								<image ng-attr-href="{{staff.photo}}" x="0" y="0"
+									width="10" height="10" />
+							</pattern>
+						</defs>
+						<a ng-href="/staff/{{staff.slug}}" xlink:href="">
+							<path class="icon-path" ng-attr-fill="url({{League.abs + '#' +staff._id}})" stroke-width="0.2" d="M5.5 1.5 L8.5 4.5 Q9 5 8.5 5.5 L5.5 8.5 Q5 9 4.5 8.5 L 1.5 5.5 Q1 5 1.5 4.5 L4.5 1.5 Q 5 1 5.5 1.5z" />
+						</a>
+					</svg>
+					<span class="icon-role" ng-bind="staff.role"></span>
+					<span>{{staff.forename + " " + staff.surname}}</span>
+					<a ng-href="/staff/{{staff.slug}}" class="icon-alias" ng-bind="staff.alias"></a>
+				</div>
+			</div>
+			<h4 class="container">Teams</h4>
+			<div class="icon-container container">
+				<div class="icon team" ng-repeat="team in League.data.teams">
+					<svg viewbox="1 1 8 8" class="icon-image" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1">
+						<a ng-href="/team/{{team.slug}}" xlink:href="">
+							<path class="icon-path solid" fill="url(http://localhost:5000/league/eulcs2#bg)" stroke-width="0.2" d="M5.5 1.5 L8.5 4.5 Q9 5 8.5 5.5 L5.5 8.5 Q5 9 4.5 8.5 L 1.5 5.5 Q1 5 1.5 4.5 L4.5 1.5 Q 5 1 5.5 1.5z" />
+						</a>
+					</svg>
+					<div class="team-container"><img ng-src="{{team.icon}}" class="icon-team" /></div>
+					<span class="two-lines">
+						<a ng-href="/team/{{team.slug}}" class="icon-alias" ng-bind="team.name"></a>
+					</span>
+				</div>
+			</div>
+	</div>
 	<h1 class="container">Featured Leagues</h1>
 	<div class="element-container container" ng-repeat="league in Page.nav.leagues track by $index">
 		<div class="element-border">
