@@ -1062,6 +1062,8 @@ a.btn.details-toggle {
 .overlay.middle a.btn {
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
+  position: relative;
+  bottom: -6px;
 }
 
 /*# sourceMappingURL=style.css.map */
