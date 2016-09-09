@@ -9,7 +9,7 @@
 			$http.get(API + '/leagues/slug/' + $routeParams.slug)
 				.then(function(res){
 					vm.data = res.data;
-					$('.evSlider .image').addClass('loaded');
+					$('.evSlider .image, .contents .details-toggle').addClass('loaded');
 				})
 
 		}]);

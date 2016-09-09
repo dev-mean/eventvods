@@ -73,6 +73,18 @@
 		</div>
 		<div class="standard group">
 			<label>
+                Patch
+            </label>
+			<input placeholder="e.g. 6.14" type="text" ng-model="leagueFormController.data.patch" data-parsley-trigger="input change" data-parsley-group="1" required/>
+		</div>
+		<div class="standard group">
+			<label>
+                League Format
+            </label>
+			<input placeholder="e.g. Round Robin" type="text" ng-model="leagueFormController.data.format" data-parsley-trigger="input change" data-parsley-group="1" required/>
+		</div>
+		<div class="standard group">
+			<label>
                 Start Date
             </label>
 			<input id="startDate" placeholder="Click to select date." type="text" data-parsley-trigger="input change" data-parsley-group="1" required/>

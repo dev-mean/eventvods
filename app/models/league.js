@@ -14,6 +14,14 @@ var leagueSchema = new Schema({
 	subtitle: String,
 	shortTitle: String,
 	textOrientation: String,
+	patch: {
+		type: String,
+		required: true
+	},
+	format: {
+		type: String,
+		required: true
+	},
 	game: {
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'Game',

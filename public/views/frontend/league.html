@@ -13,17 +13,35 @@
 				<h4 ng-if="League.data.subtitle === undefined || League.data.subtitle === ''">&nbsp;</h4>
 				<h4 ng-if="League.data.subtitle !== 'undefined'" ng-bind="League.data.subtitle"></h4>
 				<a class="waves-effect waves-light btn" ng-click="Page.toggleFollow(League.data._id, 'leagues')">
-					<i class="material-icons left" ng-class="{starred: Page.following(League.data._id)}">star</i> {{Page.following(League.data._id) ? "Following" : "Follow"}}
+					<i class="material-icons left" ng-class="{starred: Page.following(League.data._id)}">star</i>
+					{{Page.following(League.data._id) ? "Following" : "Follow"}}
 				</a>
 			</div>
 		</div>
 	</div>
 </div>
 <div class="contents pad-bottom">
-	<a class="details-toggle waves-effect waves-light btn" ng-click="showDetails = !showDetails">
-		<i class="material-icons left">{{showDetails ? "&#xE5CE;" : "&#xE5CF;"}}</i> show {{showDetails ? "less" : "more"}}
-	</a>
 	<div class="details slide-toggle" ng-class="{show: showDetails}">
+			<div class="container row info">
+				<div class="col m12 l4">
+					<i class="material-icons">&#xE417;</i>
+					<h6>Watch Online</h6>
+				</div>
+				<div class="col m12 l4">
+					<i class="material-icons">&#xE88F;</i>
+					<h6>Format</h6>
+					{{League.data.format}}
+					<h6>Patch</h6>
+					{{League.data.patch}}
+				</div>
+				<div class="col m12 l4">
+					<i class="material-icons">&#xE8DF;</i>
+					<h6>Start Date</h6>
+					{{League.data.startDate | date: 'EEEE, MMMM dd yyyy'}}
+					<h6>End Date</h6>
+					{{League.data.endDate | date: 'EEEE, MMMM dd yyyy'}}
+				</div>
+			</div>
 			<h4 class="container">Staff</h4>
 			<div class="icon-container container">
 				<div class="icon" ng-repeat="staff in League.data.staff">
@@ -58,6 +76,10 @@
 				</div>
 			</div>
 	</div>
+	<div class="details-bottom"></div>
+	<a class="details-toggle waves-effect waves-light btn" ng-click="showDetails = !showDetails">
+		<i class="material-icons left">{{showDetails ? "&#xE5CE;" : "&#xE5CF;"}}</i> {{showDetails ? "less" : "more"}} details
+	</a>
 	<h1 class="container">Featured Leagues</h1>
 	<div class="element-container container" ng-repeat="league in Page.nav.leagues track by $index">
 		<div class="element-border">

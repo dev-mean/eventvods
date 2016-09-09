@@ -45,7 +45,9 @@ module.exports.league = {
     game: 'required',
 	slug: 'required',
 	startDate: 'required',
-	endDate: 'required'
+	endDate: 'required',
+	patch: 'required',
+	format: 'required'
 };
 module.exports.staff = {
     forename: 'required',
