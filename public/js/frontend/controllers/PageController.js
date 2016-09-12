@@ -20,7 +20,7 @@
 		.controller('PageController', ['SessionManager', '$rootScope', '$timeout', '$cookies', '$window', 'NavService', '$location',
 			function(SessionManager, $rootScope, $timeout, $cookies, $window, NavService, $location) {
 				var vm = this;
-				var element_images = 3;
+				var element_images = 17;
 				vm.nav = null;
 				var now = new $window.Date(),
 					// this will set the expiration to 6 months

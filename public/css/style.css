@@ -36,6 +36,9 @@
 html {
   min-height: 100%;
 }
+[ng-click] {
+  cursor: pointer;
+}
 [ng-cloak],
 img:not([src]),
 .hide {
@@ -877,6 +880,48 @@ input[type=checkbox]:not(:checked) + .err a {
 .element-container .element-border .element-background.element-3 {
   background: url('/assets/images/elements/3.jpg');
 }
+.element-container .element-border .element-background.element-4 {
+  background: url('/assets/images/elements/4.jpg');
+}
+.element-container .element-border .element-background.element-5 {
+  background: url('/assets/images/elements/5.jpg');
+}
+.element-container .element-border .element-background.element-6 {
+  background: url('/assets/images/elements/6.jpg');
+}
+.element-container .element-border .element-background.element-7 {
+  background: url('/assets/images/elements/7.jpg');
+}
+.element-container .element-border .element-background.element-8 {
+  background: url('/assets/images/elements/8.jpg');
+}
+.element-container .element-border .element-background.element-9 {
+  background: url('/assets/images/elements/9.jpg');
+}
+.element-container .element-border .element-background.element-10 {
+  background: url('/assets/images/elements/10.jpg');
+}
+.element-container .element-border .element-background.element-11 {
+  background: url('/assets/images/elements/11.jpg');
+}
+.element-container .element-border .element-background.element-12 {
+  background: url('/assets/images/elements/12.jpg');
+}
+.element-container .element-border .element-background.element-13 {
+  background: url('/assets/images/elements/13.jpg');
+}
+.element-container .element-border .element-background.element-14 {
+  background: url('/assets/images/elements/14.jpg');
+}
+.element-container .element-border .element-background.element-15 {
+  background: url('/assets/images/elements/15.jpg');
+}
+.element-container .element-border .element-background.element-16 {
+  background: url('/assets/images/elements/16.jpg');
+}
+.element-container .element-border .element-background.element-17 {
+  background: url('/assets/images/elements/17.jpg');
+}
 .element-container .element-info {
   -webkit-flex-basis: 0;
       -ms-flex-preferred-size: 0;
@@ -925,6 +970,73 @@ input[type=checkbox]:not(:checked) + .err a {
 .element-container .element-info .element-title {
   text-transform: uppercase;
 }
+.load-in {
+  opacity: 0;
+  transition: opacity 0.3s linear;
+}
+.load-in.loaded {
+  opacity: 1;
+}
+.event-nav.container {
+  background: transparent!important;
+  padding: 0;
+}
+.event-nav.container .nav-row {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-align-content: center;
+      -ms-flex-line-pack: center;
+          align-content: center;
+  -webkit-flex-wrap: nowrap;
+      -ms-flex-wrap: nowrap;
+          flex-wrap: nowrap;
+  padding: 5px;
+}
+.event-nav.container .nav-row:first-child {
+  border-bottom: 3px solid #0CD97E;
+}
+.event-nav.container h3,
+.event-nav.container h4 {
+  text-transform: uppercase;
+  font-family: Gotham;
+  font-weight: 500;
+  padding-top: 0;
+  margin: 0 20px;
+  -webkit-flex-grow: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+}
+.event-nav.container .material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-size: 2.92rem;
+  margin: 0;
+  line-height: 110%;
+  transition: color 0.3s linear;
+  margin: 0 -25px;
+  -webkit-flex-grow: 0;
+      -ms-flex-positive: 0;
+          flex-grow: 0;
+  opacity: 1;
+}
+.event-nav.container .material-icons:hover {
+  color: #0CD97E;
+}
+.event-nav.container .material-icons.ng-hide-add,
+.event-nav.container .material-icons.ng-hide-remove {
+  transition: all 0.3s linear;
+}
+.event-nav.container .material-icons.ng-hide {
+  opacity: 0;
+}
+.event-nav.container h4 {
+  border-bottom: 0;
+  background: transparent!important;
+}
 .slide-toggle {
   max-height: 0px;
   height: auto;
@@ -946,6 +1058,11 @@ input[type=checkbox]:not(:checked) + .err a {
   padding: 15px;
   background: transparent!important;
   margin-top: 25px;
+}
+.details h3.container {
+  text-transform: uppercase;
+  font-family: Gotham;
+  font-weight: 500;
 }
 .details h4.container {
   text-transform: uppercase;
