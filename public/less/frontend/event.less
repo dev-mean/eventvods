@@ -61,17 +61,19 @@
 		opacity: 1;
 	}
 }
-.details {
-	overflow: hidden;
-	margin-top: -25px;
-	margin-bottom: 25px;
-	border-bottom: 5px solid @default-blue;
+.details, .info {
 	background: url('/assets/images/backgrounds/pattern_light.png') repeat @accent-white;
+	transition: background 0.3s linear;
+	margin-top: -25px;
 	.container {
 		padding: 15px;
 		background: transparent!important;
-		margin-top: 25px;
 	}
+}
+.details {
+	overflow: hidden;
+	margin-bottom: 25px;
+	border-bottom: 5px solid @default-blue;
 	h3.container {
 		text-transform: uppercase;
 		.gotham-med();
@@ -90,9 +92,23 @@
 	}
 	h6 {
 		color: @accent-green;
+		margin-top: 25px;
+	}
+	.row.watch-online {
+		margin-bottom: 0;
+		a {
+			opacity: 0.8;
+			transition: opacity 0.3s linear;
+			&:hover {
+				opacity: 1;
+			}
+			> img {
+				pointer-events: none;
+			}
+		}
 	}
 }
-.dark .details {
+.dark .details, .dark .info {
 	background: url('/assets/images/backgrounds/pattern_dark.png') repeat @default-blue;
 }
 .details-bottom {

@@ -53,6 +53,9 @@ body {
 .text-red {
   color: #F44336;
 }
+.text-small {
+  font-size: smaller;
+}
 i.starred {
   color: goldenrod!important;
 }
@@ -1047,17 +1050,21 @@ input[type=checkbox]:not(:checked) + .err a {
   max-height: 5000px;
   opacity: 1;
 }
-.details {
-  overflow: hidden;
-  margin-top: -25px;
-  margin-bottom: 25px;
-  border-bottom: 5px solid #3C3C62;
+.details,
+.info {
   background: url('/assets/images/backgrounds/pattern_light.png') repeat #fff;
+  transition: background 0.3s linear;
+  margin-top: -25px;
 }
-.details .container {
+.details .container,
+.info .container {
   padding: 15px;
   background: transparent!important;
-  margin-top: 25px;
+}
+.details {
+  overflow: hidden;
+  margin-bottom: 25px;
+  border-bottom: 5px solid #3C3C62;
 }
 .details h3.container {
   text-transform: uppercase;
@@ -1080,8 +1087,23 @@ input[type=checkbox]:not(:checked) + .err a {
 }
 .info h6 {
   color: #0CD97E;
+  margin-top: 25px;
 }
-.dark .details {
+.info .row.watch-online {
+  margin-bottom: 0;
+}
+.info .row.watch-online a {
+  opacity: 0.8;
+  transition: opacity 0.3s linear;
+}
+.info .row.watch-online a:hover {
+  opacity: 1;
+}
+.info .row.watch-online a > img {
+  pointer-events: none;
+}
+.dark .details,
+.dark .info {
   background: url('/assets/images/backgrounds/pattern_dark.png') repeat #3C3C62;
 }
 .details-bottom {

@@ -7,9 +7,11 @@
 			vm.abs = $location.absUrl();
 			vm.data;
 			vm.sectionIndex = 0;
-			vm.leagueIndex = 0;
-			vm.top = function(){
-				$anchorScroll("top");
+			vm.moduleIndex = 0;
+			vm.showDetails = false;
+			vm.toggleDetails = function(){
+				vm.showDetails = !vm.showDetails;
+				if(!vm.showDetails) $anchorScroll("top");
 			}
 			$http.get(API + '/leagues/slug/' + $routeParams.slug)
 				.then(function(res){

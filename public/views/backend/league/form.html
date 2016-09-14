@@ -97,6 +97,18 @@
 		</div>
 		<div class="standard group">
 			<label>
+                Twitch URL (Optional)
+            </label>
+			<input placeholder="e.g. http://twitch.tv/riotgames" type="text" ng-model="leagueFormController.data.twitchStream" data-parsley-trigger="input change" data-parsley-group="1" />
+		</div>
+		<div class="standard group">
+			<label>
+                Youtube URL (Optional)
+            </label>
+			<input placeholder="e.g. http://youtube.com/lolesports" type="text" ng-model="leagueFormController.data.youtubeStream" data-parsley-trigger="input change" data-parsley-group="1" />
+		</div>
+		<div class="standard group">
+			<label>
                 Featured Orientation
             </label>
 			<select class="form-style" ng-model="leagueFormController.data.textOrientation">

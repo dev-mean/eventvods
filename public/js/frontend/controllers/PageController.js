@@ -28,7 +28,7 @@
 				var cookieSettings = {
 					expires: exp
 				}
-				vm.contentClass = "dark";//$cookies.get('contentMode') || "light";
+				vm.contentClass = $cookies.get('contentMode') || "light";
 				vm.cookiesAccepted = ($cookies.get('cookieDisclaimer') === "true");
 				vm.contentClassSet = function() {
 					$cookies.put('contentMode', vm.contentClass, cookieSettings);

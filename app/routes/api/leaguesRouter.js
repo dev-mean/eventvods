@@ -100,7 +100,8 @@ router.route('/:league_id')
 		Indicative.validateAll(req.body, Validators.league, Validators.messages)
 			.then(function() {
 				req.body.slug = slug(req.body.slug);
-				League.findByIdAndUpdate(req.params.league_id, req.body, function(err, league) {
+				League.findByIdAndUpdate(req.params.league_id, req.body)
+				.exec(function(err, league) {
 					if (err) next(err);
 					if (!league) {
 						err = new Error("League not found");

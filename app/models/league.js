@@ -36,6 +36,8 @@ var leagueSchema = new Schema({
 	endDate: Date,
 	staff: [Staff],
 	media: [Media],
+	youtubeStream: String,
+	twitchStream: String,
 	teams: [Team],
 	logo: String,
 	header: String,
@@ -53,9 +55,8 @@ var leagueSchema = new Schema({
 });
 
 leagueSchema.virtual('updated').get(function () {
-	var updated;
-	if(typeof this.updatedAt === "undefined" && typeof this.createdAt === "undefined") return "";
-	var updated = (typeof this.updatedAt === "undefined") ? this.createdAt : this.updatedAt;
+	if(typeof this.updatedAt === undefined && typeof this.createdAt === undefined) return "";
+	var updated = (typeof this.updatedAt === undefined) ? this.createdAt : this.updatedAt;
   	return "Updated "+moment(updated).fromNow();
 });
 
