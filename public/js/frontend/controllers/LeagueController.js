@@ -1,8 +1,8 @@
 (function() {
 	'use strict';
 	angular.module('eventvods')
-		.controller('LeagueController', ['$rootScope', '$routeParams', '$http', 'API_BASE_URL', '$location', '$anchorScroll',
-		function($rootScope, $routeParams, $http, API, $location, $anchorScroll) {
+		.controller('LeagueController', ['$rootScope', '$routeParams', '$http', 'API_BASE_URL', '$location', '$anchorScroll', '$timeout',
+		function($rootScope, $routeParams, $http, API, $location, $anchorScroll, $timeout) {
 			var vm = this;
 			vm.abs = $location.absUrl();
 			vm.data;
@@ -17,7 +17,10 @@
 				.then(function(res){
 					vm.data = res.data;
 					console.log(res.data);
-					$('.evSlider .image, .contents .details-toggle, .load-in').addClass('loaded');
+					$('.evSlider .image, .contents .details-toggle').addClass('loaded');
+					$timeout(function(){
+						$('.load-in').addClass('loaded');
+					}, 100);
 				})
 
 		}]);

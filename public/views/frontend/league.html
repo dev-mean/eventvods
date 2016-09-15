@@ -32,13 +32,13 @@
 				<h6>Full Stream</h6>
 				<span class="text-small">May contain spoilers</span>
 				<div class="row watch-online">
-					<a ng-if="League.data.youtubeStream" ng-href="League.data.youtubeStream" class="col s6">
-						<img ng-if="Page.contentClass == 'light'" class="responsive-img" src="/assets/images/icons/youtube_full.png" />
-						<img ng-if="Page.contentClass == 'dark'" class="responsive-img" src="/assets/images/icons/youtube_full_dark.png" />
+					<a ng-if="League.data.youtubeStream" ng-href="{{League.data.youtubeStream}}" class="col s6">
+						<img ng-if="Page.contentClass == 'light'" class="responsive-img load-in" src="/assets/images/icons/youtube_full.png" />
+						<img ng-if="Page.contentClass == 'dark'" class="responsive-img load-in" src="/assets/images/icons/youtube_full_dark.png" />
 					</a>
-					<a ng-if="League.data.twitchStream" ng-href="League.data.twitchStream" class="col s6">
-						<img ng-if="Page.contentClass == 'light'" class="responsive-img" src="/assets/images/icons/twitch_full.png" />
-						<img ng-if="Page.contentClass == 'dark'" class="responsive-img" src="/assets/images/icons/twitch_full_dark.png" />
+					<a ng-if="League.data.twitchStream" ng-href="{{League.data.twitchStream}}" class="col s6">
+						<img ng-if="Page.contentClass == 'light'" class="responsive-img load-in" src="/assets/images/icons/twitch_full.png" />
+						<img ng-if="Page.contentClass == 'dark'" class="responsive-img load-in" src="/assets/images/icons/twitch_full_dark.png" />
 					</a>
 				</div>
 			</div>

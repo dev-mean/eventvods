@@ -1088,6 +1088,7 @@ input[type=checkbox]:not(:checked) + .err a {
 .info h6 {
   color: #0CD97E;
   margin-top: 25px;
+  font-size: larger;
 }
 .info .row.watch-online {
   margin-bottom: 0;
@@ -1101,6 +1102,8 @@ input[type=checkbox]:not(:checked) + .err a {
 }
 .info .row.watch-online a > img {
   pointer-events: none;
+  max-width: 80%;
+  margin-top: 10px;
 }
 .dark .details,
 .dark .info {
