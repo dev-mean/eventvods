@@ -19,7 +19,11 @@ var teamSchema = new Schema({
 		required: true
 	},
 	media: [Media],
-	icon: String
+	icon: String,
+	spoiler: {
+		type: Boolean,
+		default: false
+	}
 });
 
 

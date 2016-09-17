@@ -7,12 +7,11 @@ function link_facebook(user, res, facebook_id) {
 	user.social.facebook = facebook_id;
 	user.save(function(err) {
 		if (err) next(err);
-		res.redirect('/');
+		res.sendStatus('204');
 	})
 }
 
 function process(req, res, body) {
-	console.log(body);
 	var logged_in = req.isAuthenticated();
 
 	//Check Facebook isn't linked to any other accounts
@@ -63,8 +62,7 @@ function process(req, res, body) {
 router.get('/', function(req, res, next) {
 	res.redirect('https://www.facebook.com/dialog/oauth?client_id='
 		+ config.social_login.facebook.id
-		+ '&redirect_uri=http://'
-		+ req.hostname
+		+ '&redirect_uri=http://beta.eventvods.com/'
 		+ '/login/facebook/complete/&scope=email');
 });
 
@@ -76,15 +74,13 @@ router.get('/complete', function(req, res, next) {
 	else if (typeof req.query.code === "string") {
 		request('https://graph.facebook.com/v2.3/oauth/access_token?client_id='
 			+ config.social_login.facebook.id
-			+ '&redirect_uri=http://'
-			+ req.hostname
+			+ '&redirect_uri=http://beta.eventvods.com/'
 			+'/login/facebook/complete/&client_secret='
 			+ config.social_login.facebook.secret
 			+'&code=' + req.query.code,
 			function(err, response, body) {
 				if (err) next(err);
 				body = JSON.parse(body);
-				console.log(body.access_token);
 				if (typeof body.error !== "undefined") res.json(body.error);
 				//Access token is valid, request b asic details
 				else request('https://graph.facebook.com/me?access_token='

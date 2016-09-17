@@ -32,6 +32,7 @@
     "moment": "*",
     "mongoose": "*",
     "morgan": "*",
+    "oauth": "^0.9.14",
     "passport": "*",
     "passport-local": "*",
     "passport-local-mongoose": "*",

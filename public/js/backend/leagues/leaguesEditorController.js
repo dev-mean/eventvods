@@ -3,7 +3,7 @@
 	angular.module('eventApp')
 		.controller('updateLeagueController', function($http, API_BASE_URL, leaguesService, $routeParams, notificationService) {
 			var vm = this;
-			var static_columns = 2;
+			var static_columns = 0;
 			vm.tab = 0;
 			vm.save = function() {
 				leaguesService.update($routeParams.id, vm.data)
@@ -27,10 +27,9 @@
 			vm.addModule = function(){
 				vm.data.contents[vm.tab].modules.push({
 					title: "New Module",
-					columns: ["Team 1", "Team 2", "Picks & Bans", "Game Start"],
+					columns: ["Picks & Bans", "Game Start"],
 					matches: []
 				});
-				console.log(vm.data.contents[vm.tab].modules);
 			}
 			vm.deleteModule = function($index){
 				vm.data.contents[vm.tab].modules.splice($index, 1);
@@ -59,6 +58,8 @@
 			vm.duplicateMatch = function(module, $index){
 				var newMatch = $.extend({}, module.matches[$index]);
 				newMatch.links = newMatch.links.slice(0);
+				newMatch.team1 = $.extend({}, newMatch.team1);
+				newMatch.team2 = $.extend({}, newMatch.team2);
 				module.matches.splice($index, 0, newMatch);
 			}
 			leaguesService.findById($routeParams.id)

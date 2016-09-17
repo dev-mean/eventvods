@@ -31,7 +31,11 @@ module.exports = {
 		"facebook": {
 			"id": process.env.FACEBOOK_ID || "",
 			"secret": process.env.FACEBOOK_SECRET || ""
-		}
+		},
+		"twitter": {
+			"id": process.env.TWITTER_ID || "",
+			"secret": process.env.TWITTER_SECRET || ""
+		},
 	},
 	"prerender": process.env.PRERENDER_TOKEN,
 	"staffRoles": ['Analyst', 'Caster', 'Coach', 'Host', 'Translator', 'Player', 'Mixed', 'Other'],

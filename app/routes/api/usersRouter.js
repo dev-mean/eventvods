@@ -7,7 +7,6 @@ var AWS = require('../../controllers/aws');
 
 router.route('/')
 	.get(auth.admin(), function(req, res, next) {
-		var time = new Date();
 		User.find(function(err, users) {
 			if (err) next(err);
 			else res.json(users);

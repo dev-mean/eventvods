@@ -11,7 +11,7 @@
 				<img ng-src="{{League.data.logo}}" />
 				<h3 ng-bind="League.data.name"></h3>
 				<h4 ng-if="League.data.subtitle === undefined || League.data.subtitle === ''">&nbsp;</h4>
-				<h4 ng-if="League.data.subtitle !== 'undefined'" ng-bind="League.data.subtitle"></h4>
+				<h4 ng-if="League.data.subtitle !== undefined && League.data.subtitle !== ''" ng-bind="League.data.subtitle"></h4>
 				<a class="waves-effect waves-light btn" ng-click="Page.toggleFollow(League.data._id, 'leagues')">
 					<i class="material-icons left" ng-class="{starred: Page.following(League.data._id)}">star</i> {{Page.following(League.data._id) ? "Following" : "Follow"}}
 				</a>
@@ -33,12 +33,12 @@
 				<span class="text-small">May contain spoilers</span>
 				<div class="row watch-online">
 					<a ng-if="League.data.youtubeStream" ng-href="{{League.data.youtubeStream}}" class="col s6">
-						<img ng-if="Page.contentClass == 'light'" class="responsive-img load-in" src="/assets/images/icons/youtube_full.png" />
-						<img ng-if="Page.contentClass == 'dark'" class="responsive-img load-in" src="/assets/images/icons/youtube_full_dark.png" />
+						<img ng-if="Page.contentClass == 'light'" class="responsive-img" src="/assets/images/icons/youtube_full.png" />
+						<img ng-if="Page.contentClass == 'dark'" class="responsive-img" src="/assets/images/icons/youtube_full_dark.png" />
 					</a>
 					<a ng-if="League.data.twitchStream" ng-href="{{League.data.twitchStream}}" class="col s6">
-						<img ng-if="Page.contentClass == 'light'" class="responsive-img load-in" src="/assets/images/icons/twitch_full.png" />
-						<img ng-if="Page.contentClass == 'dark'" class="responsive-img load-in" src="/assets/images/icons/twitch_full_dark.png" />
+						<img ng-if="Page.contentClass == 'light'" class="responsive-img" src="/assets/images/icons/twitch_full.png" />
+						<img ng-if="Page.contentClass == 'dark'" class="responsive-img" src="/assets/images/icons/twitch_full_dark.png" />
 					</a>
 				</div>
 			</div>
@@ -92,66 +92,77 @@
 		<div class="nav-row">
 			<h3 class="material-icons" ng-show="League.sectionIndex > 0" ng-click="League.sectionIndex = League.sectionIndex - 1;League.moduleIndex = 0">&#xE314;</h3>
 			<h3 ng-bind="League.data.contents[League.sectionIndex].title"></h3>
-			<h3 class="material-icons" ng-show="League.sectionIndex <= League.data.contents.length" ng-click="League.sectionIndex = League.sectionIndex + 1;League.moduleIndex = 0">&#xE315;</h3>
+			<h3 class="material-icons" ng-show="League.sectionIndex < League.data.contents.length - 1" ng-click="League.sectionIndex = League.sectionIndex + 1;League.moduleIndex = 0">&#xE315;</h3>
 		</div>
 		<div class="nav-row">
 			<h4 class="material-icons" ng-show="League.moduleIndex > 0" ng-click="League.moduleIndex = League.moduleIndex - 1;">&#xE314;</h3>
 			<h4 ng-bind="League.data.contents[League.sectionIndex].modules[League.moduleIndex].title">Day 1</h4>
-			<h4 class="material-icons" ng-show="League.moduleIndex <= League.data.contents[League.sectionIndex].modules.length" ng-click="League.moduleIndex = League.moduleIndex + 1;">&#xE315;</h3>
+			<h4 class="material-icons" ng-show="League.moduleIndex < League.data.contents[League.sectionIndex].modules.length - 1 " ng-click="League.moduleIndex = League.moduleIndex + 1;">&#xE315;</h3>
 		</div>
 	</div>
-	<div class="element-container container" ng-repeat="league in Page.nav.leagues track by $index">
+	<div class="element-container container" ng-repeat="match in League.data.contents[League.sectionIndex].modules[League.moduleIndex].matches">
 		<div class="element-border">
-			<div class="element-background" ng-class="Page.elementClass($index)">
-				<a ng-href="/league/{{league.slug}}"><img ng-src="{{league.logo}}" /></a>
+			<div class="element-background event-background">
+				<span class="element-tag">Q1</span>
+				<div class="element-teams">
+					<div ng-if="!match.team1.spoiler" class="element-team">
+						<img ng-src="{{match.team1.icon}}" class="responsive-img team-large" />
+						<span ng-bind="match.team1.tag"></span>
+					</div>
+					<div ng-if="match.team1.spoiler" class="element-team">
+						<span>Team 1</span>
+					</div>
+					<div class="element-vs">
+						VS
+					</div>
+					<div ng-if="!match.team2.spoiler" class="element-team">
+						<img ng-src="{{match.team2.icon}}" class="responsive-img team-large" />
+						<span ng-bind="match.team2.tag"></span>
+					</div>
+					<div ng-if="match.team2.spoiler" class="element-team">
+						<span>Team 2</span>
+					</div>
+				</div>
 			</div>
 		</div>
-		<div class="element-info">
-			<div class="element-title">
-				<a ng-href="/league/{{league.slug}}">
-					<h4 ng-bind="league.name"></h4>
-			<span ng-bind="league.subtitle"></span>
-			</a>
-		</div>
-		<div class="element-dates">
-			<b>Starts </b><span ng-bind="league.startDate | date: 'EEEE, MMMM dd yyyy'"></span><br />
-			<b>Ends </b><span ng-bind="league.endDate | date: 'EEEE, MMMM dd yyyy'"></span>
-		</div>
-		<div class="element-buttons">
-			<a class="waves-effect waves-light btn" ng-click="Page.toggleFollow(league._id, 'leagues')">
-				<i class="material-icons left" ng-class="{starred: Page.following(league._id)}">star</i> {{Page.following(league._id) ? "Following" : "Follow"}}
-			</a>
-			<a ng-href="/league/{{league.slug}}" class="waves-effect waves-light btn">View League</a>
-		</div>
-		<div class="element-footer" ng-bind="league.updated">
-		</div>
-	</div>
-</div>
-<br />
-<br />
-<h1 class="container">Featured Tournaments</h1>
-<div class="element-container container" ng-repeat="tournament in Page.nav.tournaments track by $index">
-	<div class="element-border">
-		<div class="element-background" ng-class="Page.elementClass($index)">
-			<a ng-href="/tournament/{{tournament.slug}}"><img ng-src="{{tournament.logo}}" /></a>
-		</div>
-	</div>
-	<div class="element-info">
-		<div class="element-title">
-			<a ng-href="/tournament/{{tournament.slug}}"><h4 ng-bind="tournament.name"></h4></a>
-		</div>
-		<div class="element-dates">
-			<b>Starts </b><span ng-bind="tournament.startDate | date: 'EEEE, MMMM dd yyyy'"></span><br />
-			<b>Ends </b><span ng-bind="tournament.endDate | date: 'EEEE, MMMM dd yyyy'"></span>
-		</div>
-		<div class="element-buttons">
-			<a class="waves-effect waves-light btn" ng-click="Page.toggleFollow(tournament._id, 'tournaments')">
-				<i class="material-icons left" ng-class="{starred: Page.following(tournament._id)}">star</i> {{Page.following(tournament._id) ? "Following" : "Follow"}}
-			</a>
-			<a ng-href="/tournament/{{tournament.slug}}" class="waves-effect waves-light btn">View tournament</a>
-		</div>
-		<div class="element-footer" ng-bind="tournament.updated">
+		<div class="element-links">
+			<div class="element-titles flex-row">
+				<h6>Picks & Bans</h6>
+				<h6>Game Start</h6>
+			</div>
+			<div class="element-go row">
+				<div class="row col s6">
+					<a href="/"  class="col s6">
+						<img ng-if="Page.contentClass == 'light'" class="responsive-img" src="/assets/images/icons/youtube_full.png" />
+						<img ng-if="Page.contentClass == 'dark'" class="responsive-img" src="/assets/images/icons/youtube_full_dark.png" />
+					</a>
+					<a href="/" class="col s6">
+						<img ng-if="Page.contentClass == 'light'" class="responsive-img" src="/assets/images/icons/twitch_full.png" />
+						<img ng-if="Page.contentClass == 'dark'" class="responsive-img" src="/assets/images/icons/twitch_full_dark.png" />
+					</a>
+				</div>
+				<div class="row col s6">
+					<a href="/" class="col s6">
+						<img ng-if="Page.contentClass == 'light'" class="responsive-img" src="/assets/images/icons/youtube_full.png" />
+						<img ng-if="Page.contentClass == 'dark'" class="responsive-img" src="/assets/images/icons/youtube_full_dark.png" />
+					</a>
+					<a href="/" class="col s6">
+						<img ng-if="Page.contentClass == 'light'" class="responsive-img" src="/assets/images/icons/twitch_full.png" />
+						<img ng-if="Page.contentClass == 'dark'" class="responsive-img" src="/assets/images/icons/twitch_full_dark.png" />
+					</a>
+				</div>
+			</div>
+			<div class="element-extras">
+				<a class="btn flat">
+					Interview
+				</a>
+				<a class="btn flat">
+					Highlights
+				</a>
+				<a class="btn flat">
+					Discussion
+				</a>
+			</div>
 		</div>
 	</div>
-</div>
 </div>

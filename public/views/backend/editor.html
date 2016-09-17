@@ -23,12 +23,21 @@
 		<div class="flex"><i sv-handle class="fa fa-bars fa-lg"></i><h2 editable-text="module.title" ng-bind="module.title"></h2><i class="fa fa-lg fa-trash del" ng-click="editorController.deleteModule($index)"></i></div>
 		<table class="matches standard" sv-root sv-part="module.matches">
 			<tr class="columns">
-				<th ng-repeat="column in module.columns track by $index">
-					<span editable-text="column">{{column}} </span>
-					<i class="fa fa-lg fa-trash del" ng-show="$index > 1" ng-click="editorController.deleteColumn(module, $index)"></i>
+				<th>
+					Team 1
 				</th>
 				<th class="center">
 					Spoiler
+				</th>
+				<th>
+					Team 2
+				</th>
+				<th class="center">
+					Spoiler
+				</th>
+				<th ng-repeat="column in module.columns track by $index">
+					<span editable-text="column">{{column}} </span>
+					<i class="fa fa-lg fa-trash del" ng-show="$index > 1" ng-click="editorController.deleteColumn(module, $index)"></i>
 				</th>
 				<th class="center">
 					Placeholder
@@ -41,13 +50,17 @@
 			</tr>
 			<tr class="match" ng-repeat="match in module.matches track by $index">
 				<td><span editable-select="match.team1" e-ng-options="team.name for team in editorController.data.teams" e-placeholder="Select Team">{{match.team1.name || "Select Team"}}</span></td>
+				<td class="center">
+					<input type="checkbox" ng-model="match.team1.spoiler" ng-attr-id="sp_{{$parent.$parent.$id}}_{{$parent.$id}}_{{$id}}"/>
+					<label ng-attr-for="sp_{{$parent.$parent.$id}}_{{$parent.$id}}_{{$id}}"></label>
+				</td>
 				<td><span editable-select="match.team2" e-ng-options="team.name for team in editorController.data.teams" e-placeholder="Select Team">{{match.team2.name || "Select Team"}}</span></td>
+				<td class="center">
+					<input type="checkbox" ng-model="match.team2.spoiler" ng-attr-id="sp_{{$parent.$parent.$id}}_{{$parent.$id}}_{{$id}}_2"/>
+					<label ng-attr-for="sp_{{$parent.$parent.$id}}_{{$parent.$id}}_{{$id}}_2"></label>
+				</td>
 				<td ng-repeat="url in match.links track by $index">
 					<span editable-text="match.links[$index]">{{match.links[$index] || "Insert Link"}}</span>
-				</td>
-				<td class="center">
-					<input type="checkbox" ng-model="match.spoiler" ng-attr-id="sp_{{$parent.$parent.$id}}_{{$parent.$id}}_{{$id}}"/>
-					<label ng-attr-for="sp_{{$parent.$parent.$id}}_{{$parent.$id}}_{{$id}}"></label>
 				</td>
 				<td class="center">
 					<input type="checkbox" ng-model="match.placeholder" ng-attr-id="ph_{{$parent.$parent.$id}}_{{$parent.$id}}_{{$id}}"/>

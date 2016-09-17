@@ -75,15 +75,15 @@ var userSchema = new Schema({
 	social: {
 		facebook: {
 			type: String,
-			select: false
+			//select: false
 		},
 		twitter: {
 			type: String,
-			select: false
+			//select: false
 		},
 		google: {
 			type: String,
-			select: false
+			//select: false
 		}
 	},
 	following: {

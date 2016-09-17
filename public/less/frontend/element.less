@@ -5,8 +5,8 @@
 	align-items: center;
 	display: flex;
 	padding: 0!important;
-	border-bottom: 2px solid @accent-green;
-
+	border-bottom: 3px solid @accent-green;
+	height: 200px;
 	.element-border {
 		flex-basis: 0px;
 		height: 200px;
@@ -16,7 +16,8 @@
 		max-width: 600px;
 		position: relative;
 		left: 20px;
-		background: @default-blue;
+		background: @dark-blue;
+		transition: background 0.3s linear;
 		.element-background {
 			height: 200px;
 			width: 100%;
@@ -37,6 +38,43 @@
 					max-width: 70%;
 				}
 			}
+			&.event-background {
+				background: @default-blue;
+				display: flex;
+				flex-direction: column;
+				justify-content: space-between;
+				align-items: center;
+			}
+			.element-tag {
+				color: white;
+				font-size: 2.18em;
+				height: 45px;
+			}
+			.element-teams {
+				height: 155px;
+				width: 100%;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				color: white;
+				font-size: 2.18em;
+				.element-vs {
+					font-size: large;
+				}
+				.element-team {
+					flex-grow: 1;
+					flex-basis: 0px;
+    				padding: 10px;
+					display: flex;
+					flex-direction: column;
+					justify-content: space-around;
+					align-items: center;
+					> img {
+						margin-bottom: 5px;
+					}
+				}
+			}
+
 			&.element-1 {
 				background: url('/assets/images/elements/1.jpg');
 			}
@@ -90,7 +128,7 @@
 			}
 		}
 	}
-	.element-info {
+	.element-info, .element-links {
 		flex-basis: 0;
 		flex-grow: 2;
 		height: 200px;
@@ -98,6 +136,8 @@
 		align-items: center;
 		justify-content: space-between;
 		flex-direction: column;
+	}
+	.element-info {
 		.element-title {
 			a {
 				color: inherit!important;
@@ -125,5 +165,61 @@
 		.element-footer, .element-dates, .element-title {
 			text-transform: uppercase;
 		}
+	}
+	.element-links {
+		.element-titles {
+			display: flex;
+			justify-content: space-around;
+			align-items: center;
+			width: 100%;
+			h6 {
+				font-size: 2.18em;
+				position: relative;
+				&:after {
+					content : "";
+					position: absolute;
+					left    : 25%;
+					bottom  : 0px;
+					height  : 1px;
+					width   : 50%;  /* or 100px */
+					border-bottom: 3px solid @accent-green;
+					transform: translateY(5px);
+				}
+			}
+		}
+		.element-go {
+			margin-bottom: 0px;
+			.row {
+				margin-bottom: 0;
+				a {
+					opacity: 0.6;
+					&:hover {
+						opacity: 1;
+					}
+					.responsive-img {
+						padding: 15px;
+						pointer-events: none;
+					}
+				}
+			}
+		}
+		.element-extras {
+			position: relative;
+			top: -10px;
+			a.btn {
+				background: transparent;
+				border: 1px solid @border-blue;
+				color: @default-blue!important;
+			}
+		}
+
+	}
+}
+.dark .element-container {
+	.element-border {
+		background: white;
+	}
+	.element-extras a.btn {
+		color: white!important;
 	}
 }

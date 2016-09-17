@@ -828,7 +828,8 @@ input[type=checkbox]:not(:checked) + .err a {
   display: -ms-flexbox;
   display: flex;
   padding: 0!important;
-  border-bottom: 2px solid #0CD97E;
+  border-bottom: 3px solid #0CD97E;
+  height: 200px;
 }
 .element-container .element-border {
   -webkit-flex-basis: 0px;
@@ -844,7 +845,8 @@ input[type=checkbox]:not(:checked) + .err a {
   max-width: 600px;
   position: relative;
   left: 20px;
-  background: #3C3C62;
+  background: #27273F;
+  transition: background 0.3s linear;
 }
 .element-container .element-border .element-background {
   height: 200px;
@@ -873,6 +875,68 @@ input[type=checkbox]:not(:checked) + .err a {
   pointer-events: none;
   max-height: 80%;
   max-width: 70%;
+}
+.element-container .element-border .element-background.event-background {
+  background: #3C3C62;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-justify-content: space-between;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.element-container .element-border .element-background .element-tag {
+  color: white;
+  font-size: 2.18em;
+  height: 45px;
+}
+.element-container .element-border .element-background .element-teams {
+  height: 155px;
+  width: 100%;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  color: white;
+  font-size: 2.18em;
+}
+.element-container .element-border .element-background .element-teams .element-vs {
+  font-size: large;
+}
+.element-container .element-border .element-background .element-teams .element-team {
+  -webkit-flex-grow: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  -webkit-flex-basis: 0px;
+      -ms-flex-preferred-size: 0px;
+          flex-basis: 0px;
+  padding: 10px;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-justify-content: space-around;
+      -ms-flex-pack: distribute;
+          justify-content: space-around;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.element-container .element-border .element-background .element-teams .element-team > img {
+  margin-bottom: 5px;
 }
 .element-container .element-border .element-background.element-1 {
   background: url('/assets/images/elements/1.jpg');
@@ -925,7 +989,8 @@ input[type=checkbox]:not(:checked) + .err a {
 .element-container .element-border .element-background.element-17 {
   background: url('/assets/images/elements/17.jpg');
 }
-.element-container .element-info {
+.element-container .element-info,
+.element-container .element-links {
   -webkit-flex-basis: 0;
       -ms-flex-preferred-size: 0;
           flex-basis: 0;
@@ -972,6 +1037,66 @@ input[type=checkbox]:not(:checked) + .err a {
 .element-container .element-info .element-dates,
 .element-container .element-info .element-title {
   text-transform: uppercase;
+}
+.element-container .element-links .element-titles {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-justify-content: space-around;
+      -ms-flex-pack: distribute;
+          justify-content: space-around;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+}
+.element-container .element-links .element-titles h6 {
+  font-size: 2.18em;
+  position: relative;
+}
+.element-container .element-links .element-titles h6:after {
+  content: "";
+  position: absolute;
+  left: 25%;
+  bottom: 0px;
+  height: 1px;
+  width: 50%;
+  /* or 100px */
+  border-bottom: 3px solid #0CD97E;
+  -webkit-transform: translateY(5px);
+      -ms-transform: translateY(5px);
+          transform: translateY(5px);
+}
+.element-container .element-links .element-go {
+  margin-bottom: 0px;
+}
+.element-container .element-links .element-go .row {
+  margin-bottom: 0;
+}
+.element-container .element-links .element-go .row a {
+  opacity: 0.6;
+}
+.element-container .element-links .element-go .row a:hover {
+  opacity: 1;
+}
+.element-container .element-links .element-go .row a .responsive-img {
+  padding: 15px;
+  pointer-events: none;
+}
+.element-container .element-links .element-extras {
+  position: relative;
+  top: -10px;
+}
+.element-container .element-links .element-extras a.btn {
+  background: transparent;
+  border: 1px solid #323256;
+  color: #3C3C62 !important;
+}
+.dark .element-container .element-border {
+  background: white;
+}
+.dark .element-container .element-extras a.btn {
+  color: white!important;
 }
 .load-in {
   opacity: 0;
@@ -1035,6 +1160,7 @@ input[type=checkbox]:not(:checked) + .err a {
 }
 .event-nav.container .material-icons.ng-hide {
   opacity: 0;
+  display: block!important;
 }
 .event-nav.container h4 {
   border-bottom: 0;
@@ -1094,8 +1220,7 @@ input[type=checkbox]:not(:checked) + .err a {
   margin-bottom: 0;
 }
 .info .row.watch-online a {
-  opacity: 0.8;
-  transition: opacity 0.3s linear;
+  opacity: 0.6;
 }
 .info .row.watch-online a:hover {
   opacity: 1;
