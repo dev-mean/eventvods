@@ -939,13 +939,13 @@ input[type=checkbox]:not(:checked) + .err a {
   margin-bottom: 5px;
 }
 .element-container .element-border .element-background.element-1 {
-  background: url('/assets/images/elements/1.jpg');
+  background: url('/assets/images/elements/15.jpg');
 }
 .element-container .element-border .element-background.element-2 {
-  background: url('/assets/images/elements/2.jpg');
+  background: url('/assets/images/elements/16.jpg');
 }
 .element-container .element-border .element-background.element-3 {
-  background: url('/assets/images/elements/3.jpg');
+  background: url('/assets/images/elements/17.jpg');
 }
 .element-container .element-border .element-background.element-4 {
   background: url('/assets/images/elements/4.jpg');
@@ -979,15 +979,6 @@ input[type=checkbox]:not(:checked) + .err a {
 }
 .element-container .element-border .element-background.element-14 {
   background: url('/assets/images/elements/14.jpg');
-}
-.element-container .element-border .element-background.element-15 {
-  background: url('/assets/images/elements/15.jpg');
-}
-.element-container .element-border .element-background.element-16 {
-  background: url('/assets/images/elements/16.jpg');
-}
-.element-container .element-border .element-background.element-17 {
-  background: url('/assets/images/elements/17.jpg');
 }
 .element-container .element-info,
 .element-container .element-links {
@@ -1053,6 +1044,7 @@ input[type=checkbox]:not(:checked) + .err a {
 .element-container .element-links .element-titles h6 {
   font-size: 2.18em;
   position: relative;
+  padding-top: 15px;
 }
 .element-container .element-links .element-titles h6:after {
   content: "";
@@ -1080,7 +1072,7 @@ input[type=checkbox]:not(:checked) + .err a {
   opacity: 1;
 }
 .element-container .element-links .element-go .row a .responsive-img {
-  padding: 15px;
+  padding: 25px;
   pointer-events: none;
 }
 .element-container .element-links .element-extras {
