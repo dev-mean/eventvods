@@ -62,8 +62,8 @@ function process(req, res, body) {
 router.get('/', function(req, res, next) {
 	res.redirect('https://www.facebook.com/dialog/oauth?client_id='
 		+ config.social_login.facebook.id
-		+ '&redirect_uri=http://beta.eventvods.com/'
-		+ '/login/facebook/complete/&scope=email');
+		+ '&redirect_uri=http://beta.eventvods.com'
+		+ '/login/facebook/complete?scope=email');
 });
 
 router.get('/complete', function(req, res, next) {
@@ -74,8 +74,8 @@ router.get('/complete', function(req, res, next) {
 	else if (typeof req.query.code === "string") {
 		request('https://graph.facebook.com/v2.3/oauth/access_token?client_id='
 			+ config.social_login.facebook.id
-			+ '&redirect_uri=http://beta.eventvods.com/'
-			+'/login/facebook/complete/&client_secret='
+			+ '&redirect_uri=http://beta.eventvods.com'
+			+'/login/facebook/complete?client_secret='
 			+ config.social_login.facebook.secret
 			+'&code=' + req.query.code,
 			function(err, response, body) {
