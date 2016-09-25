@@ -102,11 +102,14 @@ i.starred {
   text-decoration: underline;
 }
 .contents .container {
-  transition: all 0.3s linear;
   font-family: Gotham;
   font-weight: 500;
   padding: 50px;
   background: #fff;
+  transition: background 0.3s linear;
+}
+.contents .container.ng-animate {
+  transition: none;
 }
 .contents .container h3.title {
   width: 100%;
@@ -490,6 +493,43 @@ nav.nav-main a.btn:hover {
   /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#4d000000', endColorstr='#4d000000', GradientType=1);
   /* IE6-9 */
+}
+.evSlider div.overlay.article {
+  padding-top: 64px;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.evSlider div.overlay.article.h3 {
+  color: white;
+}
+.evSlider div.overlay.article .article-details {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-justify-content: space-around;
+      -ms-flex-pack: distribute;
+          justify-content: space-around;
+}
+.evSlider div.overlay.article .article-details span {
+  text-transform: uppercase;
+  font-size: 1.2em;
+  -webkit-flex-grow: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+}
+.evSlider div.overlay.article .article-details span.middle {
+  border-left: 2px solid white;
+  border-right: 2px solid white;
 }
 .evSlider div.overlay img {
   position: relative;

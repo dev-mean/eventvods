@@ -2,24 +2,24 @@
 	<div class="images">
 		<div class="image load-in">
 			<div class="main">
-				<img ng-src="{{League.data.header}}" />
+				<img ng-src="{{Article.data.header}}" />
 			</div>
 			<div class="blur">
-				<img ng-src="{{League.data.header_blur}}" />
+				<img ng-src="{{Article.data.header_blur}}" />
 			</div>
-			<div class="overlay middle">
-				<img ng-src="{{League.data.logo}}" />
-				<h3 ng-bind="League.data.name"></h3>
-				<h4 ng-if="League.data.subtitle === undefined || League.data.subtitle === ''">&nbsp;</h4>
-				<h4 ng-if="League.data.subtitle !== undefined && League.data.subtitle !== ''" ng-bind="League.data.subtitle"></h4>
-				<a class="waves-effect waves-light btn" ng-click="Page.toggleFollow(League.data._id, 'leagues')">
-					<i class="material-icons left" ng-class="{starred: Page.following(League.data._id)}">star</i> {{Page.following(League.data._id) ? "Following" : "Follow"}}
-				</a>
+			<div class="overlay middle article">
+				<h3 ng-bind="Article.data.title"></h3>
+				<br /><br />
+				<div class="article-details container">
+					<span>WRITTEN BY@{{Article.data.author.displayName}}</span>
+					<span class="middle">@{{Article.data.author.displayName}}</span>
+					<span>@{{Article.data.author.displayName}}</span>
+				</div>
 			</div>
 		</div>
 	</div>
 </div>
-<div class="contents pad-bottom league">
+<div class="contents pad-bottom">
 	<div class="info">
 		<div class="container row">
 			<div class="col m12 l4">

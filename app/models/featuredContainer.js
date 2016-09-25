@@ -13,6 +13,10 @@ var featuredSchema = new Schema({
 		type: [Schema.Types.ObjectId],
 		ref: 'Tournament'
 	},
+	articles: {
+		type: [Schema.Types.ObjectId],
+		ref: 'Article'
+	},
 });
 var Featured = mongoose.model('Featured', featuredSchema);
 module.exports = Featured;

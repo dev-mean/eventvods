@@ -84,5 +84,19 @@ router.route('/:article_id')
 				next(err);
 			});
 	});
-
+router.get('/slug/:slug', auth.public_api(), ratelimit, cache, function(req, res, next) {
+		Article.findOne({
+			"slug": req.params.slug
+		})
+		.populate('author','displayName profilePicture')
+		.exec(function(err, article) {
+			if (err) next(err);
+			if (!article) {
+				err = new Error("Article Not Found");
+				err.status = 404;
+				next(err);
+			}
+			res.json(article);
+		});
+	})
 module.exports = router;

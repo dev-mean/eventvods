@@ -72,10 +72,13 @@ i.starred {
 		}
 	}
 	.container {
-		.transition(all, 0.3s, linear);
 		.gotham-med();
 		padding: 50px;
 		background: @accent-white;
+		transition: background 0.3s linear;
+		&.ng-animate {
+			transition: none;
+		}
 		h3.title {
 			width: 100%;
 			text-align: center;

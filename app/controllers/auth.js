@@ -106,16 +106,13 @@ module.exports.public_api = function() {
 	return function(req, res, next) {
 		var key = req.query.apikey || req.get('X-Eventvods-Authorization');
 		if (process.env.NODE_ENV == "development" ||
-			(req.isAuthenticated && req.isAuthenticated() && req.user.userRights >= constants.updater))
-			key = config.secret;
+			(req.isAuthenticated() && req.user.userRights >= constants.author))
+			return next();
 		if (typeof key === "undefined" || key === null || key === "") {
 			var err = new Error("Unauthorized - No API Key provided");
 			err.status = 401;
 			res.use_express_redis_cache = false;
 			return next(err);
-		}
-		if (key == config.secret) {
-			return next();
 		}
 		APIKey.count({
 			apiKey: key

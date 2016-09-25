@@ -13,6 +13,11 @@
 				}
 			});
 		})
+		.directive("noNgAnimate", function ($animate) {
+			return function (scope, element) {
+				$animate.enabled(element, false);
+			};
+		})
 		.directive('fixFill', function($location) {
 			var absUrl = 'url(' + $location.absUrl() + '#';
 			return {
@@ -62,6 +67,14 @@
 					controllerAs: 'League',
 					meta: {
 						title: 'View League - Eventvods - Esports on Demand'
+					}
+                })
+				.when('/article/:slug', {
+                    templateUrl: '/assets/views/frontend/article.html',
+					controller: 'ArticleController',
+					controllerAs: 'Article',
+					meta: {
+						title: 'View Article - Eventvods - Esports on Demand'
 					}
                 })
 				.when('/about/cookies', {

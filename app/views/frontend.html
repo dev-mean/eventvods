@@ -48,8 +48,18 @@
 						</i> {{game.name}}
 					</a>
 				</li>
-				<li class="border-top">
+				<li>
 					<a href="/games">All Games</a>
+				</li>
+			</ul>
+			<ul class="dropdown-content wide" id="articles_dd">
+				<li ng-repeat="article in Page.nav.articles">
+					<a ng-href="/article/{{article.slug}}">
+						{{article.title}}
+					</a>
+				</li>
+				<li>
+					<a href="/articles">All Articles</a>
 				</li>
 			</ul>
 			<ul class="dropdown-content wide grouped" id="leagues_dd">
@@ -108,9 +118,11 @@
 						</a>
 					</li>
 					<li>
-						<a href="/articles">
-									ARTICLES
-								</a>
+						<a class="dropdown-button" data-activates="articles_dd" href="/articles">
+								<i class="material-icons left">
+										&#xE5C5;
+									</i> ARTICLES
+							</a>
 					</li>
 					<li class="no-transition" ng-if="Page.session == false" ng-cloak>
 						<a href="/login" class="waves-effect waves-light btn">
@@ -268,6 +280,8 @@
 	<script src="/assets/js/frontend/controllers/SettingsController.js">
 	</script>
 	<script src="/assets/js/frontend/controllers/LeagueController.js">
+	</script>
+	<script src="/assets/js/frontend/controllers/ArticleController.js">
 	</script>
 </body>
 

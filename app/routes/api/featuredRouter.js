@@ -24,6 +24,16 @@ router.get('/', function(req, res, next){
 		model: 'Tournament',
 		select: 'name subtitle shortTitle slug logo startDate endDate updatedAt createdAt updated header header_blur textOrientation'
 	})
+	.populate({
+		path: 'articles',
+		model: 'Article',
+		select: 'title slug tags header header_blur tagline author',
+		populate: {
+			path: 'author',
+			model: 'Users',
+			select: 'displayName profilePicture'
+		}
+	})
 	.exec(function(err, featuredContent){
 		if(err) next(err);
 		res.json(featuredContent);
