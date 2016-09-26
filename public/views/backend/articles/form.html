@@ -50,6 +50,12 @@
 			<tags-input ng-model="articlesFormController.data.tags">
 			</tags-input>
 		</div>
+		<div class="standard group">
+			<label>
+                Publish Date (Display Only)
+            </label>
+			<input id="publishDate" placeholder="Click to select date." type="text" data-parsley-trigger="input change" required/>
+		</div>
 		<br />
 		<div class="standard group checkbox">
 			<input id="published" type="checkbox" ng-model="articlesFormController.data.published" name="published" />
@@ -83,7 +89,7 @@
 		</div>
 		<div class="col-1-2">
 			Preview
-			<div class="form-style" id="article-preview" ng-bind="articlesFormController.data.content" ks-nl2br ks-bbcode>
+			<div class="form-style" id="article-preview" ng-bind-html="articlesFormController.data.content" ks-nl2br ks-bbcode>
 			</div>
 		</div>
 	</div>

@@ -21,7 +21,7 @@
 	</div>
 </div>
 <div class="contents pad-bottom">
-	<h3 class="container">Featured Leagues</h3>
+	<h3 class="container" ng-if=" Page.nav.leagues.length > 0">Featured Leagues</h3>
 	<div class="element-container container" ng-repeat="league in Page.nav.leagues track by $index">
 		<div class="element-border">
 			<div class="element-background" ng-class="Page.elementClass($index)">
@@ -53,7 +53,7 @@
 	</div>
 	<br />
 	<br />
-	<h3 class="container">Featured Tournaments</h3>
+	<h3 class="container" ng-if=" Page.nav.tournaments.length > 0">Featured Tournaments</h3>
 	<div class="element-container container" ng-repeat="tournament in Page.nav.tournaments track by $index">
 		<div class="element-border">
 			<div class="element-background" ng-class="Page.elementClass($index)">
@@ -74,8 +74,8 @@
 				</a>
 				<a ng-href="/tournament/{{tournament.slug}}" class="waves-effect waves-light btn">View tournament</a>
 			</div>
-			<div class="element-footer" ng-bind="tournament.updated">
-			</div>
+			<!--<div class="element-footer" ng-bind="tournament.updated">
+			</div>-->
 		</div>
 	</div>
 </div>

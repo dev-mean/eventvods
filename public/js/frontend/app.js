@@ -1,6 +1,6 @@
 (function() {
 	'use strict';
-	angular.module('eventvods', ['ngAnimate', 'ngRoute', 'ngCookies', 'angular-loading-bar', 'ui.materialize','xeditable'])
+	angular.module('eventvods', ['ngAnimate', 'ngRoute', 'ngCookies', 'ngSanitize', 'angular-loading-bar', 'ui.materialize','xeditable'])
 		.constant('DOMAIN', 'http://beta.eventvods.com')
 		.constant('API_BASE_URL', '/api')
 		.run(function(editableOptions, editableThemes, $rootScope, $anchorScroll, DOMAIN) {
@@ -27,6 +27,61 @@
 				}
 			};
 		})
+		// Available BB code snippets
+		.value('snippets', {
+			"b": "<b>$1</b>", // Bolded text
+			"u": "<u>$1</u>", // Underlined text
+			"i": "<i>$1</i>", // Italicized text
+			"s": "<s>$1</s>", // Strikethrough text
+			"br": "<br />",
+			"hr": "<hr />",
+			"center": "<center>$1</center>", //Center text
+			"left": "<left>$1</left>", //Center text
+			"right": "<right>$1</right>", //Center text
+			"h1": "<h1>$1</h1>",
+			"h2": "<h2>$1</h2>",
+			"h3": "<h3>$1</h3>",
+			"h4": "<h4>$1</h4>",
+			"h5": "<h5>$1</h5>",
+			"img": "<img src=\"$1\" />", // Image without title
+			"img=([^\\[\\]<>]+?)": "<img src=\"$2\" width=\"$1\" />", // Image with width
+			"url": "<a href=\"$1\" target=\"_blank\" title=\"$1\">$1</a>", // Simple URL
+			"url=([^\\[\\]<>]+?)": "<a href=\"$1\" target=\"_blank\" title=\"$2\">$2</a>", // URL with title
+		})
+		// Format BB code
+		.directive('ksBbcode', ['snippets', function(snippets) {
+			return {
+				"restrict": "A",
+				"link": function($scope, $element, $attrs) {
+					$scope.$watch(function() {
+						var contents = $element.html().replace(/^\s+|\s+$/i, '');
+
+						for (var i in snippets) {
+							var regexp = new RegExp('\\[' + i + '\\](.+?)\\[\/' + i.replace(/[^a-z0-9]/g, '') + '\\]', 'gi');
+
+							contents = contents.replace(regexp, snippets[i]);
+						}
+
+						$element.html(contents);
+					});
+				}
+			};
+		}])
+		// Format new lines
+		.directive('ksNl2br', [function() {
+			return {
+				"restrict": "A",
+				"link": function($scope, $element, $attrs) {
+					$scope.$watch(function() {
+						var contents = $element.html().replace(/^\s+|\s+$/i, '');
+
+						contents = contents.replace(/(?:\r\n|\n|\r)/gi, '<br>');
+
+						$element.html(contents);
+					});
+				}
+			};
+		}])
 		.config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
             $routeProvider
 				.when('/_=_', {

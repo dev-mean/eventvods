@@ -24,6 +24,9 @@
     <span ng-class="{selected: featuredSelectController.tab == 3}" ng-click="featuredSelectController.tab = 3">
         Tournaments
     </span>
+	<span ng-class="{selected: featuredSelectController.tab == 4}" ng-click="featuredSelectController.tab = 4">
+        Articles
+    </span>
 </div>
 <div class="sortable-container" sv-root sv-part="featuredSelectController.data.games" ng-show="featuredSelectController.tab == 1">
 	<div>
@@ -71,6 +74,23 @@
 	<div ng-repeat="tournament in featuredSelectController.data.tournaments track by $index" sv-element>
 		<span><i sv-handle class="fa fa-lg fa-fw fa-bars"></i>{{$index + 1}} {{tournament.name}}</span>
 		<a class="btn lg icon-only float-right del" ng-click="featuredSelectController.deleteTournament($index)">
+			<i class="fa fa-minus-circle fa-lg fa-fw">
+			</i>
+		</a>
+	</div>
+</div>
+<div class="sortable-container" sv-root sv-part="featuredSelectController.data.articles" ng-show="featuredSelectController.tab == 4">
+	<div>
+		<span><select ng-options="article.title for article in featuredSelectController.articles" ng-model="featuredSelectController.selectedArticle">
+		</select></span>
+		<a class="btn lg icon-only float-right" ng-click="featuredSelectController.addArticle()">
+			<i class="fa fa-plus fa-lg fa-fw">
+			</i>
+		</a>
+	</div>
+	<div ng-repeat="article in featuredSelectController.data.articles track by $index" sv-element>
+		<span><i sv-handle class="fa fa-lg fa-fw fa-bars"></i>{{$index + 1}} {{article.title}}</span>
+		<a class="btn lg icon-only float-right del" ng-click="featuredSelectController.deleteArticle($index)">
 			<i class="fa fa-minus-circle fa-lg fa-fw">
 			</i>
 		</a>

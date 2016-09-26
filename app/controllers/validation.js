@@ -15,7 +15,8 @@ module.exports.article = {
 	title: 'required',
 	content: 'required',
 	slug: 'required',
-	author: 'required'
+	author: 'required',
+	publishDate: 'required'
 }
 module.exports.register = {
 	displayName: 'required|max:30',

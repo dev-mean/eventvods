@@ -4,43 +4,55 @@
 		.controller('updateLeagueController', function($http, API_BASE_URL, leaguesService, $routeParams, notificationService) {
 			var vm = this;
 			var static_columns = 0;
-			vm.tab = 0;
+			vm.manage = true;
+			vm.sectionIndex = 0;
+			vm.moduleIndex = 0;
 			vm.save = function() {
-				leaguesService.update($routeParams.id, vm.data)
-					.then(function(){
-						notificationService.success('League updated');
-					});
+				console.log(vm.data);
+				// leaguesService.update($routeParams.id, vm.data)
+				// 	.then(function(){
+				// 		notificationService.success('League updated');
+				// 	});
 			};
+			vm.getIdentifier = function($parentIndex, $index){
+				var counter = 0;
+				for(var i =0; i < $parentIndex; i++){
+					counter += vm.data.contents[i].modules.length;
+					console.log("Section: "+i+" with length " + vm.data.contents[i].modules.length);
+				}
+				counter += $index;
+				return String.fromCharCode(65+counter);
+			}
 			vm.addSection = function(){
 				vm.data.contents.push({
 					title: "New Section",
 					modules: []
 				});
-				vm.tab = vm.data.contents.length -1;
+				vm.sectionIndex = vm.data.contents.length -1;
+				vm.moduleIndex = 0;
 			};
-			vm.deleteSection = function(){
-				vm.data.contents.splice(vm.tab, 1);
+			vm.deleteSection = function(index){
+				vm.data.contents.splice(index, 1);
+				vm.sectionIndex = 0;
 			}
-			vm.tabSorted = function(a, b, c, $indexFrom, $indexTo){
-				if(vm.tab == $indexFrom)	vm.tab = $indexTo;
-			}
-			vm.addModule = function(){
-				vm.data.contents[vm.tab].modules.push({
-					title: "New Module",
-					columns: ["Picks & Bans", "Game Start"],
+			vm.addModule = function($index){
+				vm.data.contents[$index].modules.push({
+					title: "New Table",
+					columns: [],
 					matches: []
 				});
+				vm.moduleIndex = vm.data.contents[$index].modules.length - 1;
 			}
-			vm.deleteModule = function($index){
-				vm.data.contents[vm.tab].modules.splice($index, 1);
+			vm.deleteModule = function($sectionIndex, $moduleIndex){
+				vm.data.contents[$sectionIndex].modules.splice($moduleIndex, 1);
 			}
 			vm.addMatch = function($index){
-				vm.data.contents[vm.tab].modules[$index].matches.push({
-					links: Array(vm.data.contents[vm.tab].modules[$index].columns.length - static_columns).join(".").split(".")
+				vm.data.contents[vm.sectionIndex].modules[$index].matches.push({
+					links: Array(vm.data.contents[vm.sectionIndex].modules[$index].columns.length - static_columns).join(".").split(".")
 				});
 			}
 			vm.addColumn = function($index){
-				var module = vm.data.contents[vm.tab].modules[$index];
+				var module = vm.data.contents[vm.sectionIndex].modules[$index];
 				module.columns.push("New Column");
 				module.matches.forEach(function(match){
 					if(module.columns.length > match.links.length + static_columns) match.links.push("");
@@ -65,6 +77,7 @@
 			leaguesService.findById($routeParams.id)
 				.then(function(res) {
 					vm.data = res.data;
+					console.log(res.data);
 				});
 		});
 }());

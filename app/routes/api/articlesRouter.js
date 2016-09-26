@@ -21,6 +21,7 @@ router.route('/')
 	})
 	.post(auth.writer(), AWS.handleUpload(['header']), function(req, res, next) {
 		req.body.author = req.user._id;
+		req.body.publishDate = Date.parse(req.body.publishDate);
 		Indicative.validateAll(req.body, Validators.article, Validators.messages)
 			.then(function() {
 				req.body.slug = slug(req.body.slug);
@@ -65,6 +66,7 @@ router.route('/:article_id')
 		});
 	})
 	.put(auth.writer(), AWS.handleUpload(['header']), function(req, res, next) {
+		req.body.publishDate = Date.parse(req.body.publishDate);
 		Indicative.validateAll(req.body, Validators.article, Validators.messages)
 			.then(function() {
 				req.body.slug = slug(req.body.slug);
@@ -88,6 +90,7 @@ router.get('/slug/:slug', auth.public_api(), ratelimit, cache, function(req, res
 		Article.findOne({
 			"slug": req.params.slug
 		})
+		.select('-tags._id')
 		.populate('author','displayName profilePicture')
 		.exec(function(err, article) {
 			if (err) next(err);

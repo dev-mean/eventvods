@@ -9,7 +9,9 @@
 			$http.get(API + '/articles/slug/' + $routeParams.slug)
 				.then(function(res){
 					vm.data = res.data;
-					console.log(res.data);
+					vm.data.tagsList = res.data.tags.map(function(item){
+						return item.text;
+					}).join(", ");
 					$('.evSlider .image').addClass('loaded');
 				})
 

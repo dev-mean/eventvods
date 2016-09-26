@@ -22,6 +22,9 @@ body {
 		font-size: smaller;
 	}
 }
+.light {
+	font-weight: normal;
+}
 i.starred {
 	color: goldenrod!important;
 }
@@ -57,7 +60,7 @@ i.starred {
 	.transition(all, 0.3s, linear);
 	text-align: center;
 	background: url('/assets/images/backgrounds/light.jpg') #fff;
-	background-position: center -300px;
+	background-position: center -600px;
 	background-repeat: no-repeat;
 	background-size: cover;
 	color: @default-blue;
@@ -86,6 +89,16 @@ i.starred {
 			color: @accent-green;
 			border-bottom: 5px solid @accent-green;
 			padding-bottom: 10px;
+		}
+		&.article {
+			text-align: left;
+			padding: 50px;
+			ul, ol {
+				margin-left: 25px;
+				li {
+					list-style-type: circle!important;
+				}
+			}
 		}
 	}
 	h3.container, {
