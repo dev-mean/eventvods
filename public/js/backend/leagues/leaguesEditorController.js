@@ -8,17 +8,15 @@
 			vm.sectionIndex = 0;
 			vm.moduleIndex = 0;
 			vm.save = function() {
-				console.log(vm.data);
-				// leaguesService.update($routeParams.id, vm.data)
-				// 	.then(function(){
-				// 		notificationService.success('League updated');
-				// 	});
+				leaguesService.update($routeParams.id, vm.data)
+					.then(function(){
+						notificationService.success('League updated');
+					});
 			};
 			vm.getIdentifier = function($parentIndex, $index){
 				var counter = 0;
 				for(var i =0; i < $parentIndex; i++){
 					counter += vm.data.contents[i].modules.length;
-					console.log("Section: "+i+" with length " + vm.data.contents[i].modules.length);
 				}
 				counter += $index;
 				return String.fromCharCode(65+counter);
@@ -46,19 +44,20 @@
 			vm.deleteModule = function($sectionIndex, $moduleIndex){
 				vm.data.contents[$sectionIndex].modules.splice($moduleIndex, 1);
 			}
-			vm.addMatch = function($index){
-				vm.data.contents[vm.sectionIndex].modules[$index].matches.push({
-					links: Array(vm.data.contents[vm.sectionIndex].modules[$index].columns.length - static_columns).join(".").split(".")
+			vm.addMatch = function($sectionIndex, $moduleIndex){
+				vm.data.contents[$sectionIndex].modules[$moduleIndex].matches.push({
+					links: Array(vm.data.contents[$sectionIndex].modules[$moduleIndex].columns.length - static_columns).join(".").split(".")
 				});
 			}
-			vm.addColumn = function($index){
-				var module = vm.data.contents[vm.sectionIndex].modules[$index];
+			vm.addColumn = function($sectionIndex, $moduleIndex){
+				var module = vm.data.contents[$sectionIndex].modules[$moduleIndex];
 				module.columns.push("New Column");
 				module.matches.forEach(function(match){
 					if(module.columns.length > match.links.length + static_columns) match.links.push("");
 				});
 			}
-			vm.deleteColumn = function(module, $index){
+			vm.removeColumn = function($sectionIndex, $moduleIndex, $index){
+				var module = vm.data.contents[$sectionIndex].modules[$moduleIndex];
 				module.columns.splice($index, 1);
 				module.matches.forEach(function(match){
 					match.links.splice($index-static_columns, 1);
@@ -77,7 +76,6 @@
 			leaguesService.findById($routeParams.id)
 				.then(function(res) {
 					vm.data = res.data;
-					console.log(res.data);
 				});
 		});
 }());

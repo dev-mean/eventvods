@@ -31,7 +31,10 @@ body {
 	color: @silver-light;
 	font-family: 'Open Sans', sans-serif!important;
 }
-
+.fa-align {
+	position: relative;
+	top: 2px;
+}
 a,
 [ng-click] {
 	color: inherit;
@@ -380,10 +383,10 @@ nav.leftNavigation {
 		padding-left: 54px;
 		margin-bottom: 1px;
 		border-left: 5px solid @default;
+		transition: all 0.2s ease-in-out;
 		span {
 			display: inline-block;
 		}
-		.transition;
 		&:hover {
 			border-left: 5px solid @green;
 			i.fa {
@@ -396,7 +399,7 @@ nav.leftNavigation {
 		i.fa {
 			position: relative;
 			left: -25px;
-			.transition;
+			transition: all 0.2s ease-in-out;
 		}
 	}
 }
@@ -642,6 +645,7 @@ table.standard {
 	border-bottom: 1px solid @default;
 	height: 50px;
 	margin-top: -7px;
+	text-transform: uppercase;
 }
 
 .editor-selector {
@@ -1156,12 +1160,14 @@ form {
 			color: darkred;
 		}
 	}
-	&.pull-right {
-		right: 25px;
-		position: absolute;
-	}
 }
-
+.pull-right {
+	right: 25px;
+	position: absolute;
+}
+span.pull-right {
+	right: 75px;
+}
 @-webkit-keyframes ngdialog-flyin {
 	0% {
 		opacity: 0;
@@ -1534,16 +1540,18 @@ select.form-style {
 	margin-left: 0;
 }
 
-.match .editable-click {
-	margin-left: 0;
-	max-width: 200px;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	display: inline-block;
-}
-.editable-empty {
-	color: darkred;
-	font-style: normal;
+.element-teams{
+	.editable-click {
+		margin-left: 0;
+		max-width: 200px;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		display: inline-block;
+	}
+	.editable-empty {
+		color: darkred!important;
+		font-style: normal!important;
+	}
 }
 .module-settings {
 	background: @dark-blue;
@@ -1553,6 +1561,11 @@ select.form-style {
 	b, span {
 		margin-left: 25px;
 	}
+	i.fa:hover {
+		color: @accent-green;
+	}
+}
+.module-settings, .element-container {
 	input[type=checkbox] {
 		display: none;
 	}
@@ -1592,11 +1605,54 @@ select.form-style {
 		opacity: 1;
 	}
 }
+.behind {
+	z-index: 0;
+}
+.front {
+	z-index: 1;
+}
 .element-container {
 	margin: 0;
 	input,
 	select {
 		.form-style;
 		background: @default;
+	}
+	.element-team {
+		position: relative;
+		top: -20px;
+		label {
+			font-size: 0.4em;
+			text-transform: uppercase;
+			color: @silver;
+			cursor: pointer;
+		}
+	}
+	.element-go {
+		max-height: 75px;
+		display: flex;
+		width: 100%;
+		.element-half {
+			width: 50%;
+			text-align: center
+		}
+	}
+	.element-links .element-titles h6 {
+		padding-top: 5px;
+	}
+	.element-button {
+		color: white;
+		border: 1px solid green;
+		background: transparent;
+		text-transform: uppercase;
+		padding: 5px;
+		margin: 10px 5px;
+		&.editable-empty {
+			border-color: darkred;
+			font-style: normal;
+			&:hover {
+				color: @silver-light;;
+			}
+		}
 	}
 }

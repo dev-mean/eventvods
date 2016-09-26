@@ -514,6 +514,10 @@ body {
   color: #d3d7e3;
   font-family: 'Open Sans', sans-serif !important;
 }
+.fa-align {
+  position: relative;
+  top: 2px;
+}
 a,
 [ng-click] {
   color: inherit;
@@ -896,8 +900,7 @@ nav.leftNavigation a {
   padding-left: 54px;
   margin-bottom: 1px;
   border-left: 5px solid #3c405c;
-  transition: all 0.25s ease-in-out;
-  transition: all 2s linear;
+  transition: all 0.2s ease-in-out;
 }
 nav.leftNavigation a span {
   display: inline-block;
@@ -914,8 +917,7 @@ nav.leftNavigation a.selected {
 nav.leftNavigation a i.fa {
   position: relative;
   left: -25px;
-  transition: all 0.25s ease-in-out;
-  transition: all 2s linear;
+  transition: all 0.2s ease-in-out;
 }
 .section,
 .sortable-container {
@@ -1207,6 +1209,7 @@ table.standard input[type=checkbox]:checked + label::after {
   border-bottom: 1px solid #3c405c;
   height: 50px;
   margin-top: -7px;
+  text-transform: uppercase;
 }
 .editor-selector {
   height: 100px;
@@ -1947,10 +1950,6 @@ form .group tags-input input {
 .group.standard div.image-drop div.controls-container p a.warning:hover {
   color: darkred;
 }
-.group.standard div.image-drop div.controls-container p a.pull-right {
-  right: 25px;
-  position: absolute;
-}
 .group.standard div.image-drop div.controls-container p a:hover {
   background-color: #22ff75;
   color: #2a2d3e;
@@ -2075,9 +2074,12 @@ form .group tags-input input {
 .btn.warning:hover {
   color: darkred;
 }
-.btn.pull-right {
+.pull-right {
   right: 25px;
   position: absolute;
+}
+span.pull-right {
+  right: 75px;
 }
 @-webkit-keyframes ngdialog-flyin {
   0% {
@@ -2512,16 +2514,16 @@ select.form-style {
 .columns .editable-click {
   margin-left: 0;
 }
-.match .editable-click {
+.element-teams .editable-click {
   margin-left: 0;
   max-width: 200px;
   overflow: hidden;
   text-overflow: ellipsis;
   display: inline-block;
 }
-.editable-empty {
-  color: darkred;
-  font-style: normal;
+.element-teams .editable-empty {
+  color: darkred!important;
+  font-style: normal!important;
 }
 .module-settings {
   background: #27273F;
@@ -2539,10 +2541,15 @@ select.form-style {
 .module-settings span {
   margin-left: 25px;
 }
-.module-settings input[type=checkbox] {
+.module-settings i.fa:hover {
+  color: #0CD97E;
+}
+.module-settings input[type=checkbox],
+.element-container input[type=checkbox] {
   display: none;
 }
-.module-settings input[type=checkbox] + label {
+.module-settings input[type=checkbox] + label,
+.element-container input[type=checkbox] + label {
   width: 20px;
   height: 20px;
   display: inline-block;
@@ -2553,14 +2560,17 @@ select.form-style {
   position: relative;
   top: 4px;
 }
-.module-settings input[type=checkbox] + label:hover {
+.module-settings input[type=checkbox] + label:hover,
+.element-container input[type=checkbox] + label:hover {
   border-color: #474c6c;
   cursor: pointer;
 }
-.module-settings input[type=checkbox] + label:hover::after {
+.module-settings input[type=checkbox] + label:hover::after,
+.element-container input[type=checkbox] + label:hover::after {
   opacity: 0.5;
 }
-.module-settings input[type=checkbox] + label::after {
+.module-settings input[type=checkbox] + label::after,
+.element-container input[type=checkbox] + label::after {
   opacity: 0;
   content: '';
   position: absolute;
@@ -2576,8 +2586,15 @@ select.form-style {
       -ms-transform: rotate(-45deg);
           transform: rotate(-45deg);
 }
-.module-settings input[type=checkbox]:checked + label::after {
+.module-settings input[type=checkbox]:checked + label::after,
+.element-container input[type=checkbox]:checked + label::after {
   opacity: 1;
+}
+.behind {
+  z-index: 0;
+}
+.front {
+  z-index: 1;
 }
 .element-container {
   margin: 0;
@@ -2625,6 +2642,45 @@ select.form-style {
   font-size: 14px;
   line-height: 16px;
   color: #8690af;
+}
+.element-container .element-team {
+  position: relative;
+  top: -20px;
+}
+.element-container .element-team label {
+  font-size: 0.4em;
+  text-transform: uppercase;
+  color: #aeb8d6;
+  cursor: pointer;
+}
+.element-container .element-go {
+  max-height: 75px;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+}
+.element-container .element-go .element-half {
+  width: 50%;
+  text-align: center;
+}
+.element-container .element-links .element-titles h6 {
+  padding-top: 5px;
+}
+.element-container .element-button {
+  color: white;
+  border: 1px solid green;
+  background: transparent;
+  text-transform: uppercase;
+  padding: 5px;
+  margin: 10px 5px;
+}
+.element-container .element-button.editable-empty {
+  border-color: darkred;
+  font-style: normal;
+}
+.element-container .element-button.editable-empty:hover {
+  color: #d3d7e3;
 }
 
 /*# sourceMappingURL=backend.css.map */

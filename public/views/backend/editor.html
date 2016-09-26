@@ -15,13 +15,15 @@
 <div class="editor-selector" ng-show="!editorController.manage">
 	<div class="row">
 		<i class="fa fa-2x fa-chevron-left" ng-show="editorController.sectionIndex > 0" ng-click="editorController.sectionIndex = editorController.sectionIndex - 1"></i>
-		<span class="section-title"ng-bind="editorController.data.contents[editorController.sectionIndex].title"></span>
-		<i class="fa fa-2x fa-chevron-right" ng-show="editorController.sectionIndex < editorController.data.contents.length -1 " ng-click="editorController.sectionIndex = editorController.sectionIndex + 1"></i>
+		<span class="section-title" ng-bind="editorController.data.contents[editorController.sectionIndex].title"></span>
+		<i class="fa fa-2x fa-chevron-right" ng-show="editorController.sectionIndex < editorController.data.contents.length -1 "
+						ng-click="editorController.sectionIndex = editorController.sectionIndex + 1"></i>
 	</div>
 	<div class="row">
 		<i class="fa fa-2x fa-chevron-left" ng-show="editorController.moduleIndex > 0" ng-click="editorController.moduleIndex = editorController.moduleIndex - 1"></i>
 		<span class="section-title" ng-bind="editorController.data.contents[editorController.sectionIndex].modules[editorController.moduleIndex].title"></span>
-		<i class="fa fa-2x fa-chevron-right" ng-show="editorController.moduleIndex < editorController.data.contents[editorController.sectionIndex].modules.length -1 " ng-click="editorController.moduleIndex = editorController.moduleIndex + 1"></i>
+		<i class="fa fa-2x fa-chevron-right" ng-show="editorController.moduleIndex < editorController.data.contents[editorController.sectionIndex].modules.length -1 "
+						ng-click="editorController.moduleIndex = editorController.moduleIndex + 1"></i>
 	</div>
 </div>
 <div class="sortable-container" ng-show="editorController.manage" sv-root="section" sv-part="editorController.data.contents">
@@ -46,43 +48,92 @@
 	</div>
 </div>
 <div class="section-container" ng-repeat="section in editorController.data.contents track by $index" ng-show="editorController.sectionIndex == $index && !editorController.manage">
-	<div class="matches-container" ng-show="editorController.moduleIndex == $index" ng-repeat="module in section.modules track by $index" class="module-container">
+	<div class="matches-container" ng-show="editorController.moduleIndex == $index" ng-repeat="module in section.modules track by $index"
+					class="module-container" sv-root sv-part="module.matches">
 		<div class="module-settings">
 			<b>Module Settings</b>
 			<span>
 				Twitch
-				<input type="checkbox" ng-model="match.twitch" ng-attr-id="tw_{{$parent.$id}}_{{$id}}" />
+				<input type="checkbox" ng-model="module.twitch" ng-attr-id="tw_{{$parent.$id}}_{{$id}}" />
 				<label ng-attr-for="tw_{{$parent.$id}}_{{$id}}"></label>
 			</span>
 			<span>
 				Youtube
-				<input type="checkbox" ng-model="match.youtube" ng-attr-id="yt_{{$parent.$id}}_{{$id}}" />
+				<input type="checkbox" ng-model="module.youtube" ng-attr-id="yt_{{$parent.$id}}_{{$id}}" />
 				<label ng-attr-for="yt_{{$parent.$id}}_{{$id}}"></label>
 			</span>
+			<b>Custom Columns <i ng-click="editorController.addColumn($parent.$index, $index)" class="fa fa-align fa-lg fa-plus fa-fw"></i></b>
+			<span class="front">
+				<span ng-repeat-start="column in module.columns track by $index" ng-bind="module.columns[$index]" editable-text="module.columns[$index]" ></span>
+			<i ng-repeat-end ng-click="editorController.removeColumn($parent.$parent.$index, $parent.$index, $index)" class="fa fa-lg fa-times fa-fw"></i>
+			</span>
+			<span class="pull-right behind">
+				<a class="btn solid icon " ng-click="editorController.addMatch($parent.$index, $index)"><i class="fa fa-plus fa-fw"></i><span>Add Match</span></a>
+			</span>
 		</div>
-		<div sv-element class="element-container" ng-repeat="match in module.matches track by $index">
+		<div class="element-container" ng-repeat="match in module.matches track by $index" sv-element>
 			<div class="element-border">
 				<div class="element-background event-background">
-					<span sv-handle class="element-tag">{{editorController.getIdentifier($parent.$parent.$parent.$index, $parent.$parent.$index) + ($index+1)}}</span>
+					<span class="element-tag"><i sv-handle class="fa fa-sort fa-fw"></i> {{editorController.getIdentifier($parent.$parent.$index, $parent.$index) + ($index+1)}}</span>
 					<div class="element-teams">
 						<div ng-show="!(match.team1 === undefined || match.team1 === null)" class="element-team">
 							<img ng-src="{{match.team1.icon}}" class="responsive-img team-large" />
-							<span editable-select="match.team1" e-ng-options="team.name for team in editorController.data.teams" e-placeholder="Select Team" ng-bind="match.team1.tag"></span>
+							<span editable-select="match.team1" e-ng-options="team.name for team in editorController.data.teams" e-placeholder="Select Team"
+											ng-bind="match.team1.tag"></span>
+							<span>
+								<input type="checkbox" ng-model="match.team1.spoiler" ng-attr-id="sp_{{$parent.$parent.$id}}_{{$parent.$id}}_{{$id}}" />
+								<label ng-attr-for="sp_{{$parent.$parent.$id}}_{{$parent.$id}}_{{$id}}"></label>
+								<label ng-attr-for="sp_{{$parent.$parent.$id}}_{{$parent.$id}}_{{$id}}">spoilers</b>
+							</span>
 						</div>
 						<div ng-show="match.team1 === undefined || match.team1 === null" class="element-team">
 							<span editable-select="match.team1" e-ng-options="team.name for team in editorController.data.teams" e-placeholder="Select Team">Select Team</span>
 						</div>
 						<div class="element-vs">
-						VS
+							VS
 						</div>
 						<div ng-show="!(match.team2 === undefined || match.team2 === null)" class="element-team">
 							<img ng-src="{{match.team2.icon}}" class="responsive-img team-large" />
-							<span editable-select="match.team2" e-ng-options="team.name for team in editorController.data.teams" e-placeholder="Select Team" ng-bind="match.team2.tag"></span>
+							<span editable-select="match.team2" e-ng-options="team.name for team in editorController.data.teams" e-placeholder="Select Team"
+											ng-bind="match.team2.tag"></span>
+							<span>
+								<input type="checkbox" ng-model="match.team2.spoiler" ng-attr-id="sp_{{$parent.$parent.$id}}_{{$parent.$id}}_{{$id}}_2" />
+								<label ng-attr-for="sp_{{$parent.$parent.$id}}_{{$parent.$id}}_{{$id}}_2"></label>
+								<label ng-attr-for="sp_{{$parent.$parent.$id}}_{{$parent.$id}}_{{$id}}_2">spoilers</label>
+							</span>
 						</div>
 						<div ng-show="match.team2 === undefined || match.team2 === null" class="element-team">
 							<span editable-select="match.team2" e-ng-options="team.name for team in editorController.data.teams" e-placeholder="Select Team">Select Team</span>
 						</div>
 					</div>
+				</div>
+			</div>
+			<div class="element-links">
+				<div class="element-titles flex-row">
+					<h6>Picks & Bans</h6>
+					<h6>Game Start</h6>
+				</div>
+				<div class="element-go row">
+					<div class="element-half">
+						<span ng-if="module.youtube" editable-text="match.youtube.picksBans" class="element-button">
+							Youtube
+						</span>
+						<span ng-if="module.twitch" editable-text="match.twitch.picksBans" class="element-button">
+							Twitch
+						</span>
+					</div>
+					<div class="element-half">
+						<span ng-if="module.youtube" editable-text="match.youtube.gameStart" class="element-button">
+							Youtube
+						</span>
+						<span ng-if="module.twitch" editable-text="match.twitch.gameStart" class="element-button">
+							Twitch
+						</span>
+					</div>
+				</div>
+				<div class="element-extras">
+					<span ng-repeat="column in module.columns track by $index" class="element-button" ng-bind="column" editable-text="match.links[$index]" >
+					</span>
 				</div>
 			</div>
 		</div>
