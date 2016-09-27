@@ -62,10 +62,10 @@
 				<input type="checkbox" ng-model="module.twitch" ng-attr-id="tw_{{$parent.$id}}_{{$id}}" />
 				<label ng-attr-for="tw_{{$parent.$id}}_{{$id}}"></label>
 			</span>
-			<b>Custom Columns <i ng-click="editorController.addColumn($parent.$index, $index)" class="fa fa-align fa-lg fa-plus fa-fw"></i></b>
+			<b>Custom Columns <i ng-click="editorController.addColumn($parent.$parent.$index, $parent.$index)" class="fa fa-align fa-lg fa-plus fa-fw"></i></b>
 			<span class="front">
 				<span ng-repeat-start="column in module.columns track by $index" ng-bind="module.columns[$index]" editable-text="module.columns[$index]" ></span>
-				<i ng-repeat-end ng-click="editorController.removeColumn($parent.$parent.$index, $parent.$index, $index)" class="fa fa-lg fa-times fa-fw"></i>
+				<i ng-repeat-end ng-click="editorController.removeColumn($parent.$parent.$parent.$index, $parent.$index, $index)" class="fa fa-lg fa-times fa-fw"></i>
 			</span>
 			<span class="pull-right behind">
 				<a class="btn solid icon " ng-click="editorController.addMatch($parent.$parent.$index, $parent.$index)"><i class="fa fa-plus fa-fw"></i><span>Add Match</span></a>

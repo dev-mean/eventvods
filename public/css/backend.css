@@ -1238,9 +1238,6 @@ table.standard input[type=checkbox]:checked + label::after {
   text-transform: uppercase;
   border: 0;
 }
-.editor-selector .row span.section-title:hover {
-  border-bottom: 1px dashed #d3d7e3;
-}
 .editor-selector .row i {
   position: relative;
   top: 3px;

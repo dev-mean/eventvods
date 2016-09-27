@@ -139,6 +139,20 @@
 						description: 'Meta Description'
 					}
                 })
+				.when('/about/team', {
+                    templateUrl: '/assets/views/frontend/team.html',
+					meta: {
+						title: 'Meet the Team - Eventvods - Esports on Demand',
+						description: 'Meta Description'
+					}
+                })
+				.when('/about/get-in-touch', {
+                    templateUrl: '/assets/views/frontend/contact.html',
+					meta: {
+						title: 'Get in Touch - Eventvods - Esports on Demand',
+						description: 'Meta Description'
+					}
+                })
 				.when('/about/terms', {
                     templateUrl: '/assets/views/frontend/tos.html',
 					meta: {
