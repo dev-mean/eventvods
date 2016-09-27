@@ -57,7 +57,6 @@
 				});
 			}
 			vm.removeColumn = function($sectionIndex, $moduleIndex, $index){
-				console.log('Removing column: '+$sectionIndex+'-'+$moduleIndex+'-'+$index);
 				var module = vm.data.contents[$sectionIndex].modules[$moduleIndex];
 				module.columns.splice($index, 1);
 				module.matches.forEach(function(match){
