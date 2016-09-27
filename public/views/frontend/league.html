@@ -132,42 +132,44 @@
 			</div>
 			<div class="element-go row">
 				<div class="row col s6">
-					<a href="/"  class="col s6">
+					<a ng-if="League.data.contents[League.sectionIndex].modules[League.moduleIndex].youtube === true" href="/"  class="col s6"
+						ng-class="{'offset-s3': League.data.contents[League.sectionIndex].modules[League.moduleIndex].twitch !== true}"
+						ng-href="{{match.youtube.picksBans}}">
 						<img ng-if="Page.contentClass == 'light'" class="responsive-img" src="/assets/images/icons/youtube_full.png" />
 						<img ng-if="Page.contentClass == 'dark'" class="responsive-img" src="/assets/images/icons/youtube_full_dark.png" />
 					</a>
-					<a href="/" class="col s6">
+					<a ng-if="League.data.contents[League.sectionIndex].modules[League.moduleIndex].twitch === true" href="/" class="col s6"
+						ng-class="{'offset-s3': League.data.contents[League.sectionIndex].modules[League.moduleIndex].youtube !== true}"
+						ng-href="{{match.twitch.picksBans}}">
 						<img ng-if="Page.contentClass == 'light'" class="responsive-img" src="/assets/images/icons/twitch_full.png" />
 						<img ng-if="Page.contentClass == 'dark'" class="responsive-img" src="/assets/images/icons/twitch_full_dark.png" />
 					</a>
 				</div>
 				<div class="row col s6">
-					<a href="/" class="col s6">
+					<a ng-if="League.data.contents[League.sectionIndex].modules[League.moduleIndex].youtube === true" href="/" class="col s6"
+						ng-class="{'offset-s3': League.data.contents[League.sectionIndex].modules[League.moduleIndex].twitch !== true}"
+						ng-href="{{match.youtube.gameStart}}">
 						<img ng-if="Page.contentClass == 'light'" class="responsive-img" src="/assets/images/icons/youtube_full.png" />
 						<img ng-if="Page.contentClass == 'dark'" class="responsive-img" src="/assets/images/icons/youtube_full_dark.png" />
 					</a>
-					<a href="/" class="col s6">
+					<a ng-if="League.data.contents[League.sectionIndex].modules[League.moduleIndex].twitch === true" href="/" class="col s6"
+						ng-class="{'offset-s3': League.data.contents[League.sectionIndex].modules[League.moduleIndex].youtube !== true}"
+						ng-href="{{match.twitch.gameStart}}">
 						<img ng-if="Page.contentClass == 'light'" class="responsive-img" src="/assets/images/icons/twitch_full.png" />
 						<img ng-if="Page.contentClass == 'dark'" class="responsive-img" src="/assets/images/icons/twitch_full_dark.png" />
 					</a>
 				</div>
 			</div>
 			<div class="element-extras">
-				<a class="btn flat">
-					Interview
-				</a>
-				<a class="btn flat">
-					Highlights
-				</a>
-				<a class="btn flat">
-					Discussion
+				<a ng-repeat="column in League.data.contents[League.sectionIndex].modules[League.moduleIndex].columns track by $index"
+				 ng-href="{{match.links[$index]}}" ng-bind="column" class="btn flat">
 				</a>
 			</div>
 		</div>
-		<div class="element-favourite-back">
+		<!--<div class="element-favourite-back">
 		</div>
 		<div class="element-favourite">
 			<i class="material-icons starred">&#xE838;</i>
-		</div>
+		</div>-->
 	</div>
 </div>

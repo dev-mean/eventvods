@@ -2655,7 +2655,7 @@ select.form-style {
   cursor: pointer;
 }
 .element-container .element-team img {
-  max-height: 25px;
+  max-height: 25px!important;
 }
 .element-container .element-go {
   max-height: 75px;

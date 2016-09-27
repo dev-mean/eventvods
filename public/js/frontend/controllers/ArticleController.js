@@ -12,6 +12,7 @@
 					vm.data.tagsList = res.data.tags.map(function(item){
 						return item.text;
 					}).join(", ");
+					$rootScope.meta.title = vm.data.title + " - Eventvods - Esports on Demand"
 					$('.evSlider .image').addClass('loaded');
 				})
 

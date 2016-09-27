@@ -146,8 +146,8 @@
 						description: 'Meta Description'
 					}
                 })
-				.when('/about/get-in-touch', {
-                    templateUrl: '/assets/views/frontend/contact.html',
+				.when('/about/beta-feedback', {
+                    templateUrl: '/assets/views/frontend/feedback.html',
 					meta: {
 						title: 'Get in Touch - Eventvods - Esports on Demand',
 						description: 'Meta Description'
