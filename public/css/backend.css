@@ -2597,6 +2597,7 @@ select.form-style {
 }
 .front {
   z-index: 1;
+  position: relative;
 }
 .element-container {
   margin: 0;

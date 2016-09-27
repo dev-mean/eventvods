@@ -74,7 +74,7 @@
 		<div class="element-container" ng-repeat="match in module.matches track by $index" sv-element>
 			<div class="element-border">
 				<div class="element-background event-background">
-					<span sv-handle class="element-tag"><i class="fa fa-sort fa-fw"></i> {{editorController.getIdentifier($parent.$parent.$index, $parent.$index) + ($index+1)}}</span>
+					<span class="element-tag"><i sv-handle class="fa fa-sort fa-fw"></i> {{editorController.getIdentifier($parent.$parent.$index, $parent.$index) + ($index+1)}}</span>
 					<div class="element-teams">
 						<div ng-show="!(match.team1 === undefined || match.team1 === null)" class="element-team">
 							<img ng-src="{{match.team1.icon}}" class="responsive-img team-large" />
