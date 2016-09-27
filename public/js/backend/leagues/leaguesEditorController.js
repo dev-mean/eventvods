@@ -63,8 +63,9 @@
 					match.links.splice($index-static_columns, 1);
 				})
 			}
-			vm.deleteMatch = function(module, $index){
-				module.matches.splice($index, 1);
+			vm.removeMatch = function($sectionIndex, $moduleIndex, $index){
+				console.log('Removing match at: '+$sectionIndex+'-'+$moduleIndex+'-'+$index);
+				vm.data.contents[$sectionIndex].modules[$moduleIndex].matches.splice($index, 1);
 			}
 			vm.duplicateMatch = function(module, $index){
 				var newMatch = $.extend({}, module.matches[$index]);

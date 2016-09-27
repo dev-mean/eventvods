@@ -53,28 +53,28 @@
 		<div class="module-settings">
 			<b>Module Settings</b>
 			<span>
-				Twitch
-				<input type="checkbox" ng-model="module.twitch" ng-attr-id="tw_{{$parent.$id}}_{{$id}}" />
-				<label ng-attr-for="tw_{{$parent.$id}}_{{$id}}"></label>
-			</span>
-			<span>
 				Youtube
 				<input type="checkbox" ng-model="module.youtube" ng-attr-id="yt_{{$parent.$id}}_{{$id}}" />
 				<label ng-attr-for="yt_{{$parent.$id}}_{{$id}}"></label>
 			</span>
+			<span>
+				Twitch
+				<input type="checkbox" ng-model="module.twitch" ng-attr-id="tw_{{$parent.$id}}_{{$id}}" />
+				<label ng-attr-for="tw_{{$parent.$id}}_{{$id}}"></label>
+			</span>
 			<b>Custom Columns <i ng-click="editorController.addColumn($parent.$index, $index)" class="fa fa-align fa-lg fa-plus fa-fw"></i></b>
 			<span class="front">
 				<span ng-repeat-start="column in module.columns track by $index" ng-bind="module.columns[$index]" editable-text="module.columns[$index]" ></span>
-			<i ng-repeat-end ng-click="editorController.removeColumn($parent.$parent.$index, $parent.$index, $index)" class="fa fa-lg fa-times fa-fw"></i>
+				<i ng-repeat-end ng-click="editorController.removeColumn($parent.$parent.$index, $parent.$index, $index)" class="fa fa-lg fa-times fa-fw"></i>
 			</span>
 			<span class="pull-right behind">
-				<a class="btn solid icon " ng-click="editorController.addMatch($parent.$index, $index)"><i class="fa fa-plus fa-fw"></i><span>Add Match</span></a>
+				<a class="btn solid icon " ng-click="editorController.addMatch($parent.$parent.$index, $parent.$index)"><i class="fa fa-plus fa-fw"></i><span>Add Match</span></a>
 			</span>
 		</div>
 		<div class="element-container" ng-repeat="match in module.matches track by $index" sv-element>
 			<div class="element-border">
 				<div class="element-background event-background">
-					<span class="element-tag"><i sv-handle class="fa fa-sort fa-fw"></i> {{editorController.getIdentifier($parent.$parent.$index, $parent.$index) + ($index+1)}}</span>
+					<span sv-handle class="element-tag"><i class="fa fa-sort fa-fw"></i> {{editorController.getIdentifier($parent.$parent.$index, $parent.$index) + ($index+1)}}</span>
 					<div class="element-teams">
 						<div ng-show="!(match.team1 === undefined || match.team1 === null)" class="element-team">
 							<img ng-src="{{match.team1.icon}}" class="responsive-img team-large" />
@@ -134,6 +134,11 @@
 				<div class="element-extras">
 					<span ng-repeat="column in module.columns track by $index" class="element-button" ng-bind="column" editable-text="match.links[$index]" >
 					</span>
+				</div>
+				<div class="element-favourite-back">
+				</div>
+				<div class="element-favourite">
+					<i ng-click="editorController.removeMatch($parent.$parent.$parent.$index, $parent.$index, $index)" class="fa fa-fw fa-3x fa-times"></i>
 				</div>
 			</div>
 		</div>

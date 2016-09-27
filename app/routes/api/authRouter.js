@@ -59,15 +59,13 @@ router.post('/register', function(req, res, next){
 					});
 					if(err.length > 0) res.status('400').json(err);
 					else {
-						console.log(req.session);
-						console.log(req.body.flow_create);
 						var newUser = new User({
 							"email": req.body.email,
 							"displayName": req.body.displayName.toUpperCase(),
 							"signup.IP": req.ip,
 							"userRights": require('../../controllers/auth').constants.logged_in,
 							"social": req.body.flow_create ? req.session.flow_create.social : {},
-							"profilePicture": req.body.flow_create ? req.session.flow_create.photo : null
+							"profilePicture": req.body.flow_create ? req.session.flow_create.photo : "http://i.imgur.com/tep1kEd.png"
 						});
 						User.register(newUser, req.body.password, function(err, user){
 							if(err) next(err);

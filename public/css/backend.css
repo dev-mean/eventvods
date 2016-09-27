@@ -307,9 +307,13 @@ textarea.parsley-error {
   -webkit-align-items: center;
       -ms-flex-align: center;
           align-items: center;
+  position: relative;
+  top: -20px;
+  height: 150px;
 }
 .element-container .element-border .element-background .element-teams .element-team > img {
   margin-bottom: 5px;
+  max-height: 60%;
 }
 .element-container .element-border .element-background.element-1 {
   background: url('/assets/images/elements/15.jpg');
@@ -524,6 +528,11 @@ a,
   text-decoration: none;
   cursor: pointer;
 }
+i.fa[ng-click]:hover,
+a[ng-click]:hover i.fa,
+a[href]:hover i.fa {
+  color: #0fc461;
+}
 p {
   padding-left: 15px;
 }
@@ -727,13 +736,6 @@ img.icon-16:not([src]) {
 img.icon-text-align {
   position: relative;
   top: 2px;
-}
-img.icon-team {
-  width: 60px;
-  height: 25px;
-}
-img.icon-team:not([src]) {
-  display: none;
 }
 #fragmentViewer .content {
   height: 100%;
@@ -2646,12 +2648,16 @@ select.form-style {
 .element-container .element-team {
   position: relative;
   top: -20px;
+  height: 150px;
 }
 .element-container .element-team label {
   font-size: 0.4em;
   text-transform: uppercase;
   color: #aeb8d6;
   cursor: pointer;
+}
+.element-container .element-team img {
+  max-height: 25px;
 }
 .element-container .element-go {
   max-height: 75px;

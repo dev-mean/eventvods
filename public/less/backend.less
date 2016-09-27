@@ -41,7 +41,11 @@ a,
 	text-decoration: none;
 	cursor: pointer;
 }
-
+i.fa[ng-click]:hover,
+a[ng-click]:hover i.fa,
+a[href]:hover i.fa {
+	color: @green;
+}
 p {
 	padding-left: 15px;
 }
@@ -250,13 +254,6 @@ img.icon {
 	&-text-align {
 		position: relative;
 		top: 2px;
-	}
-	&-team {
-		width: 60px;
-		height: 25px;
-		&:not([src]) {
-			display: none;
-		}
 	}
 }
 
@@ -1621,11 +1618,15 @@ select.form-style {
 	.element-team {
 		position: relative;
 		top: -20px;
+		height: 150px;
 		label {
 			font-size: 0.4em;
 			text-transform: uppercase;
 			color: @silver;
 			cursor: pointer;
+		}
+		img {
+			max-height: 25px;
 		}
 	}
 	.element-go {
