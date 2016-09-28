@@ -6,6 +6,12 @@ footer.page-footer {
 		text-transform: uppercase;
 		.gotham-med();
 	}
+	img.responsive-img {
+		opacity: 0.6;
+		&:hover {
+			opacity: 1;
+		}
+	}
 	.spaced-row {
 		display: flex;
 		align-items: stretch;
@@ -27,27 +33,23 @@ footer.page-footer {
 	}
 	.social-media {
 		width: 100%;
-		a {
-			width: 36px;
-			height: 36px;
-			display: inline-block;
-			background-size: contain!important;
-			margin: 10px 15px;
-			&.facebook {
-				background: url('/assets/images/icons/facebook.png');
-			}
-			&.twitter {
-				background: url('/assets/images/icons/twitter.png');
-			}
-			&.linked-in {
-				background: url('/assets/images/icons/linkedin.png');
-			}
-			&.patreon {
-				background: url('/assets/images/icons/patreon.png');
-			}
-			&:hover {
-				opacity: 0.7;
-			}
+		> a {
+			position: relative;
+			top: 10px;
+			padding: 25px;
+		}
+	}
+	#patreon {
+		display: block;
+		width: 400px;
+		height: 100px;
+		margin: auto;
+		transform: scale(0.7);
+		background: url('/assets/images/icons/patreon.png');
+		background-size: contain;
+		opacity: 0.7;
+		&:hover {
+			opacity: 1;
 		}
 	}
 	.btn {

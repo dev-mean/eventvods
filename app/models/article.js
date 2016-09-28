@@ -25,8 +25,8 @@ var articleSchema = new Schema({
 		type: Boolean,
 		default: false
 	},
-	publishDate: Date
-
+	publishDate: Date,
+	credits: String
 }, {
 	id: false,
 	toJSON: {

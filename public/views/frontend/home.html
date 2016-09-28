@@ -16,6 +16,8 @@
 					<h4 ng-bind="item.subtitle"></h4>
 					<a class="waves-effect waves-light btn" ng-href="{{item.type.toLowerCase()}}/{{item.slug}}">View {{item.type}}</a>
 				</div>
+				<div class="credits" ng-bind-html="item.credits">
+				</div>
 			</div>
 		</div>
 	</div>

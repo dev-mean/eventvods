@@ -40,6 +40,14 @@
 		<ng-include src="'/assets/views/dialogs/userSettings.html'" ng-if="Page.session != false && Page.session != null" onload="Page.init()" ng-cloak></ng-include>
 		<nav class="nav-main" role="navigation" >
 			<ul class="dropdown-content wide" id="games_dd">
+				<svg width="0" height="0">
+						<defs>
+							<clipPath id="element" clipPathUnits="objectBoundingBox">
+								<polygon points="0 0, 0.85 0, 1 1, 0 1">
+								</polygon>
+							</clipPath>
+						</defs>
+				</svg>
 				<li ng-repeat="game in Page.nav.games">
 					<a ng-href="/game/{{game.slug}}">
 						<i class="material-icons left icon">
@@ -183,14 +191,15 @@
                                 Follow Us
                             </h5>
 					<div class="spacer">
-						<div class="social-media center-align">
-							<a class="facebook" href="http://facebook.com/eventvods">
+						<div class="social-media center-align row">
+							<a class="col s4" href="http://facebook.com/eventvods">
+								<img src="/assets/images/icons/facebook.png" class="responsive-img" />
 							</a>
-							<a class="twitter" href="http://twitter.com/eventvods">
+							<a class="col s4" href="http://twitter.com/eventvods">
+								<img src="/assets/images/icons/twitter.png" class="responsive-img" />
 							</a>
-							<a class="linked-in" href="https://www.linkedin.com/company/5389991">
-							</a>
-							<a class="patreon" href="http://patreon.com/eventvods">
+							<a class="col s4" href="https://www.linkedin.com/company/5389991">
+								<img src="/assets/images/icons/linkedin.png" class="responsive-img" />
 							</a>
 						</div>
 					</div>
@@ -218,11 +227,12 @@
 				</div>
 				<div class="col l4 s12">
 					<h5 class="white-text">
-                                Our Sponsors
+                                Support Eventvods
                             </h5>
 					<div class="spacer">
 						<div class="sponsors center-align">
-							<!-- sponsors-->
+							<a href="/about/support" class="responsive-img" id="patreon">
+							</a>
 						</div>
 					</div>
 				</div>
@@ -236,14 +246,6 @@
 					© Eventvods - 2016
 				</span>
 			</div>
-			<svg width="0" height="0">
-						<defs>
-							<clipPath id="element" clipPathUnits="objectBoundingBox">
-								<polygon points="0 0, 0.85 0, 1 1, 0 1">
-								</polygon>
-							</clipPath>
-						</defs>
-				</svg>
 		</div>
 	</footer>
 	<!--  Scripts-->

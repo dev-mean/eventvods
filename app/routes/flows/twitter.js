@@ -23,6 +23,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/complete', function(req, res, next) {
+	if(typeof req.query.denied === "string") res.redirect('/login');
 	oauth_convert_token({
 		oa_token: req.session.oa_token,
 		oa_secret: req.session.oa_secret,

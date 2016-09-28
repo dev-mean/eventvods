@@ -5,7 +5,7 @@
 	z-index: 0;
 	overflow: hidden;
 	.images {
-		background: #1A192B;
+		background: @dark-blue;
 	}
 	&.single {
 		.image:not(.load-in),
@@ -129,6 +129,15 @@
 		a.btn {
 			background: @accent-green;
 			line-height: 39px;
+		}
+		.credits {
+			position: absolute;
+			left: 0;
+			bottom: 0;
+			background: rgba(0,0,0, 0.8);
+			padding: 3px;
+			opacity: 0.5;
+			font-size: 0.8em;
 		}
 	}
 	.indicators {

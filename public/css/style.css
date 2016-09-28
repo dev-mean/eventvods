@@ -407,7 +407,7 @@ nav.nav-main a.btn:hover {
   overflow: hidden;
 }
 .evSlider .images {
-  background: #1A192B;
+  background: #27273F;
 }
 .evSlider.single {
   height: 364px;
@@ -587,6 +587,15 @@ nav.nav-main a.btn:hover {
   background: #0CD97E;
   line-height: 39px;
 }
+.evSlider div.overlay .credits {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  padding: 3px;
+  opacity: 0.5;
+  font-size: 0.8em;
+}
 .evSlider .indicators {
   position: relative;
   top: -50px;
@@ -752,6 +761,12 @@ footer.page-footer h5 {
   font-family: Gotham;
   font-weight: 500;
 }
+footer.page-footer img.responsive-img {
+  opacity: 0.6;
+}
+footer.page-footer img.responsive-img:hover {
+  opacity: 1;
+}
 footer.page-footer .spaced-row {
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -786,27 +801,25 @@ footer.page-footer .spacer {
 footer.page-footer .social-media {
   width: 100%;
 }
-footer.page-footer .social-media a {
-  width: 36px;
-  height: 36px;
-  display: inline-block;
-  background-size: contain!important;
-  margin: 10px 15px;
+footer.page-footer .social-media > a {
+  position: relative;
+  top: 10px;
+  padding: 25px;
 }
-footer.page-footer .social-media a.facebook {
-  background: url('/assets/images/icons/facebook.png');
-}
-footer.page-footer .social-media a.twitter {
-  background: url('/assets/images/icons/twitter.png');
-}
-footer.page-footer .social-media a.linked-in {
-  background: url('/assets/images/icons/linkedin.png');
-}
-footer.page-footer .social-media a.patreon {
+footer.page-footer #patreon {
+  display: block;
+  width: 400px;
+  height: 100px;
+  margin: auto;
+  -webkit-transform: scale(0.7);
+      -ms-transform: scale(0.7);
+          transform: scale(0.7);
   background: url('/assets/images/icons/patreon.png');
-}
-footer.page-footer .social-media a:hover {
+  background-size: contain;
   opacity: 0.7;
+}
+footer.page-footer #patreon:hover {
+  opacity: 1;
 }
 footer.page-footer .btn {
   background: #323256;

@@ -42,7 +42,8 @@ var leagueSchema = new Schema({
 	logo: String,
 	header: String,
 	header_blur: String,
-	contents: [Section]
+	contents: [Section],
+	credits: String
 }, {
 	timestamps: true,
 	id: false,
