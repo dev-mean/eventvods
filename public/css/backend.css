@@ -310,6 +310,7 @@ textarea.parsley-error {
   position: relative;
   top: -20px;
   height: 150px;
+  font-weight: 300;
 }
 .element-container .element-border .element-background .element-teams .element-team > img {
   margin-bottom: 5px;
@@ -390,6 +391,9 @@ textarea.parsley-error {
 .element-container .element-info .element-title span {
   font-size: larger;
 }
+.element-container .element-info .element-buttons {
+  margin-bottom: 10px;
+}
 .element-container .element-info .element-buttons a {
   margin: 0 25px;
   width: 240px;
@@ -418,6 +422,7 @@ textarea.parsley-error {
       -ms-flex-align: center;
           align-items: center;
   width: 100%;
+  margin-top: 5px;
 }
 .element-container .element-links .element-titles h6 {
   font-size: 1.5em;
@@ -463,6 +468,7 @@ textarea.parsley-error {
   background: transparent;
   border: 1px solid #323256;
   color: #3C3C62 !important;
+  margin: 5px 10px;
 }
 .element-container .element-favourite-back {
   width: 0px;

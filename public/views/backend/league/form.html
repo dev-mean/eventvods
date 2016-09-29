@@ -128,6 +128,12 @@
             </label>
 			<image-drop model="leagueFormController.data.header" preview-width="300" preview-height="100" />
 		</div>
+		<div class="standard group">
+			<label>
+                Header Photo Credits
+            </label>
+			<input type="text" placeholder="e.g. Riot Games" ng-model="leagueFormController.data.credits" data-parsley-trigger="keyup" />
+		</div>
 		<br />
 		<div class="standard group">
 			<a class="btn lg solid icon icon-right pull-right" ng-click="leagueFormController.goToTab(2)">

@@ -296,9 +296,8 @@ nav.nav-main li.user-details > svg {
 nav.nav-main li.user-details > a {
   color: #0CD97E;
   text-transform: uppercase;
-  padding-left: 59px;
+  padding-left: 19px;
   padding-right: 0;
-  min-width: 165px;
   text-align: right;
   font-family: Gotham;
 }
@@ -1024,6 +1023,7 @@ input[type=checkbox]:not(:checked) + .err a {
   position: relative;
   top: -20px;
   height: 150px;
+  font-weight: 300;
 }
 .element-container .element-border .element-background .element-teams .element-team > img {
   margin-bottom: 5px;
@@ -1104,6 +1104,9 @@ input[type=checkbox]:not(:checked) + .err a {
 .element-container .element-info .element-title span {
   font-size: larger;
 }
+.element-container .element-info .element-buttons {
+  margin-bottom: 10px;
+}
 .element-container .element-info .element-buttons a {
   margin: 0 25px;
   width: 240px;
@@ -1132,6 +1135,7 @@ input[type=checkbox]:not(:checked) + .err a {
       -ms-flex-align: center;
           align-items: center;
   width: 100%;
+  margin-top: 5px;
 }
 .element-container .element-links .element-titles h6 {
   font-size: 1.5em;
@@ -1177,6 +1181,7 @@ input[type=checkbox]:not(:checked) + .err a {
   background: transparent;
   border: 1px solid #323256;
   color: #3C3C62 !important;
+  margin: 5px 10px;
 }
 .element-container .element-favourite-back {
   width: 0px;

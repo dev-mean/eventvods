@@ -130,15 +130,6 @@
 								</a>
 					</li>
 					<li class="no-transition user-details" ng-show="Page.session != false && Page.session != null" ng-cloak>
-						<svg viewbox="1 1 8 8">
-								<defs>
-									<pattern id="profilePicture" patternUnits="userSpaceOnUse" width="10" height="10">
-										<image ng-attr-href="{{Page.session.profilePicture}}" x="0" y="0"
-											width="10" height="10" />
-									</pattern>
-								</defs>
-								<path fix-fill fill="url(#profilePicture)" stroke="#0CD97E" stroke-width="0.35" d="M5.5 1.5 L8.5 4.5 Q9 5 8.5 5.5 L5.5 8.5 Q5 9 4.5 8.5 L 1.5 5.5 Q1 5 1.5 4.5 L4.5 1.5 Q 5 1 5.5 1.5z" />
-							</svg>
 						<a class="dropdown-button" id="userProfile" data-activates="profile_dd">
 								{{Page.session.displayName}}
 								<i class="material-icons right">

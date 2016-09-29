@@ -1,4 +1,4 @@
-<ul class="dropdown-content" id="profile_dd">
+<ul class="dropdown-content wide" id="profile_dd">
 	<li>
 		<a ng-href="/user/{{Page.session._id}}">
 			<i class="material-icons left">
@@ -62,12 +62,4 @@
 		</div>
 	</div>
 </div>
-<style>
-	.material-tooltip .backdrop {
-		background: #0CD97E;
-	}
-	.material-tooltip span {
-		text-transform: uppercase;
-	}
-</style>
 <ng-include src="'/assets/views/dialogs/emailConfirmation.html'" ng-if="Page.session != false && Page.session.emailConfirmation.confirmed == false" ng-cloak onload="Page.init()"></ng-include>
