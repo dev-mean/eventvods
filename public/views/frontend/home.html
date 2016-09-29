@@ -10,9 +10,8 @@
 			<div class="overlay" ng-class="item.textOrientation">
 				<div class="container">
 					<img ng-src="{{item.logo}}" />
-					<h4 ng-bind="item.game.name" ng-if="item.game.name !== undefined"></h4>
-					<h4 ng-bind="item.name" ng-if="item.game.name === undefined"></h4>
-					<h3 ng-if="item.type !== 'Article'">Follow {{item.type === "League" ? "the" : ""}} {{item.shortTitle}}</h3>
+					<h4 ng-bind="item.game.name"></h4>
+					<h3 ng-bind="item.shortTitle"></h3>
 					<h4 ng-bind="item.subtitle"></h4>
 					<a class="waves-effect waves-light btn" ng-href="{{item.type.toLowerCase()}}/{{item.slug}}">View {{item.type}}</a>
 				</div>

@@ -54,6 +54,9 @@ img:not([src]),
 body {
   background: #27273F;
 }
+.col.border-right {
+  border-right: 3px solid #3C3C62;
+}
 .text-accent {
   color: #0CD97E;
 }
@@ -156,8 +159,21 @@ i.starred {
   padding: 25px;
   background: transparent!important;
 }
+.collection .collection-item {
+  color: #0CD97E;
+  text-transform: uppercase;
+}
+.collection .collection-item .secondary-content {
+  color: inherit;
+}
+.collection .collection-item.active {
+  background-color: #0CD97E !important;
+}
 .dark {
   background: #27273F;
+}
+.dark .col.border-right {
+  border-right: 3px solid white;
 }
 .dark .contents {
   background: url('/assets/images/backgrounds/dark.jpg') #1A192B;
@@ -171,6 +187,9 @@ i.starred {
 }
 .dark .contents .collection-item {
   background-color: transparent;
+}
+.dark .editable-buttons {
+  color: #3C3C62;
 }
 #loading-bar .bar {
   background: #0CD97E !important;
@@ -846,6 +865,12 @@ input:-webkit-autofill:active {
   -webkit-transition: "color 9999s ease-out, background-color 9999s ease-out";
   -webkit-transition-delay: 9999s;
 }
+label,
+input {
+  font-family: Gotham;
+  font-weight: 500;
+  color: inherit;
+}
 input[type=checkbox]:not(:checked) + .err,
 input[type=checkbox]:not(:checked) + .err a {
   transition: color 0.3s linear;
@@ -853,11 +878,6 @@ input[type=checkbox]:not(:checked) + .err a {
 }
 .input-field {
   margin-bottom: 25px;
-}
-.input-field label,
-.input-field input {
-  font-family: Gotham;
-  font-weight: 500;
 }
 .input-field label {
   text-align: left;
@@ -900,6 +920,66 @@ input[type=checkbox]:not(:checked) + .err a {
 .contents.dark .input-field label,
 .contents.dark .input-field input {
   color: white;
+}
+input[type="checkbox"].filled-in:checked + label:after {
+  border: 2px solid #0CD97E;
+  background-color: #0CD97E;
+}
+.settings ol.verify {
+  font-size: 1.2em;
+}
+.settings > .row > .col {
+  padding: 0 1.5rem;
+}
+.settings ol.verify-wip {
+  margin: 50px;
+  font-size: 1.2em;
+}
+.settings ol.verify-wip li {
+  opacity: 0.3;
+}
+.settings ol.verify-wip li.complete,
+.settings ol.verify-wip li.current {
+  opacity: 1;
+}
+.settings ol.verify-wip li.complete {
+  color: #0CD97E;
+  text-decoration: line-through;
+}
+.settings ol.verify-wip li.final.current {
+  color: #0CD97E;
+}
+.settings h2 .editable-click {
+  color: #0CD97E;
+  text-transform: uppercase;
+}
+.settings h2 .editable-input {
+  font-size: 0.8em;
+  width: 90%;
+  height: 64px;
+  text-transform: uppercase;
+}
+.settings h2 .editable-wrap {
+  width: 100%;
+}
+.settings h2 .editable-buttons {
+  display: block;
+  margin-top: 5px;
+}
+.settings h2 .editable-buttons button {
+  text-transform: uppercase;
+  margin: 0 10px 0 0;
+  font-size: 50%;
+}
+.settings h2 .editable-error {
+  width: 166%;
+  text-transform: uppercase;
+  font-size: 0.4em;
+  color: red;
+  position: relative;
+  left: -66%;
+  text-align: center;
+  padding-left: 25px;
 }
 .element-container {
   margin: 25px auto;

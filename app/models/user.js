@@ -25,26 +25,36 @@ var userSchema = new Schema({
 			type: Boolean,
 			default: false
 		},
-		code: {
-			type: String,
-			default: shortid.generate()
-		},
 		sent: {
 			type: Boolean,
 			default: false
 		}
+	},
+	code: {
+		type: String,
+		default: shortid.generate()
 	},
 	profilePicture: {
 		type: String,
 		default: "http://i.imgur.com/tep1kEd.png",
 	},
 	settings: {
+		inline: {
+			twitch: {
+				type: Boolean,
+				default: true
+			},
+			youtube: {
+				type: Boolean,
+				default: true
+			}
+		},
 		notifications: {
 			game: {
 				type: Boolean,
 				default: false
 			},
-			league: {
+			event: {
 				type: Boolean,
 				default: true
 			},
@@ -111,7 +121,7 @@ userSchema.plugin(passportLocalMongoose, {
 	limitAttempts: true,
 	maxAttempts: 5,
 	usernameLowerCase: true,
-	selectFields: 'displayName _id social email userRights settings profilePicture following',
+	selectFields: 'displayName _id social email userRights settings profilePicture following emailConfirmation',
 	errorMessages: {
 		IncorrectUsernameError: "Incorrect email or password.",
 		IncorrectPasswordError: "Incorrect email or password.",

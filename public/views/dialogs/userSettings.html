@@ -13,13 +13,6 @@
                         </i> Settings
 		</a>
 	</li>
-	<li>
-		<a href="#emailConfirm" modal opacity="1" in-duration="500" out-duration="300">
-			<i class="material-icons left">
-                            email
-                        </i> Confirm
-		</a>
-	</li>
 	<li ng-if="Page.session.userRights > 1">
 		<a href="/manage/" target="_self">
 			<i class="material-icons left">
@@ -28,38 +21,10 @@
 		</a>
 	</li>
 	<li>
-		<a ng-click="Page.logout()">
+		<a target="_self" href="/api/auth/logout">
 			<i class="material-icons left">
                             exit_to_app
                         </i> Log Out
 		</a>
 	</li>
 </ul>
-<div class="modal" id="settings" ng-controller="SettingsController as Settings">
-	<img class="modal-logo" src="/assets/images/logo.png" />
-	<div class="modal-wrapper z-depth-4">
-		<div class="modal-content flow-text left-align">
-			<div class="row">
-				<div class="col s12">
-					<svg viewbox="1 1 8 8" tooltipped data-position="bottom" data-tooltip="Update Image" data-delay="0">
-						<path fix-fill fill="url(#profilePicture)" stroke="#0CD97E" stroke-width="0.35" d="M5.5 1.5 L8.5 4.5 Q9 5 8.5 5.5 L5.5 8.5 Q5 9 4.5 8.5 L 1.5 5.5 Q1 5 1.5 4.5 L4.5 1.5 Q 5 1 5.5 1.5z" />
-					</svg>
-					<div class="account-header">
-						<span class="title">My Account Settings</span>
-						<br />
-						<span class="name" editable-text="Settings.data.displayName" onbeforesave="Settings.validateName($data)" onaftersave="Settings.updateName()">
-							{{Settings.data.displayName}} <i class="material-icons">edit</i>
-						</span>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col s12 m6">
-				</div>
-				<div class="col s12 m6">
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-<ng-include src="'/assets/views/dialogs/emailConfirmation.html'" ng-if="Page.session != false && Page.session.emailConfirmation.confirmed == false" ng-cloak onload="Page.init()"></ng-include>

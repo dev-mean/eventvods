@@ -18,12 +18,19 @@
 				$animate.enabled(element, false);
 			};
 		})
-		.directive('fixFill', function($location) {
-			var absUrl = 'url(' + $location.absUrl() + '#';
+		.directive('fixFill', function($rootScope, $location) {
+			var abs = $location.absUrl();
 			return {
 				restrict: 'A',
 				link: function($scope, $element, $attrs) {
-					$attrs.$set('fill', $attrs.fill.replace("url(#", absUrl));
+					var rel = $element.data('relfill');
+					$attrs.$set('fill', "url("+abs+rel+")");
+					$rootScope.$on('$routeChangeSuccess', function (evt, current, previous) {
+						if(current != previous && typeof current !== "undefined"){
+							abs = $location.absUrl();
+							$attrs.$set('fill', "url("+abs+rel+")");
+						}
+					});
 				}
 			};
 		})
@@ -157,6 +164,15 @@
                     templateUrl: '/assets/views/frontend/tos.html',
 					meta: {
 						title: 'Terms of Service - Eventvods - Esports on Demand',
+						description: 'Meta Description'
+					}
+                })
+				.when('/user/settings', {
+                    templateUrl: '/assets/views/frontend/settings.html',
+					controller: 'SettingsController',
+					controllerAs: 'Settings',
+					meta: {
+						title: 'Settings - Eventvods - Esports on Demand',
 						description: 'Meta Description'
 					}
                 });

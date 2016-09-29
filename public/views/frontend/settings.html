@@ -1,0 +1,130 @@
+<div class="evSlider single" id="banner">
+	<div class="images">
+		<div class="image">
+			<div class="main">
+				<img src="/assets/images/backgrounds/1.jpg" />
+			</div>
+			<div class="blur">
+				<img src="/assets/images/backgrounds/1b.jpg" />
+			</div>
+			<div class="overlay middle">
+				<div class="container">
+					<h4 class="material-icons force-lowercase icon-text-large">&#xE8B9;</h4>
+					<br /><br />
+					<h3>Account Settings</h3>
+				</div>
+				<div class="credits">
+					&copy; Riot Games 2016
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="contents" ng-class="Page.contentClass">
+	<div class="container center-align settings">
+		<div class="row">
+			<div class="col s4 border-right">
+				<div class="account-header row">
+					<div class="col s4">
+						<svg viewbox="1 1 8 8">
+							<defs>
+								<pattern id="profilePicture" patternUnits="userSpaceOnUse" width="10" height="10">
+									<image ng-attr-href="{{Settings.data.profilePicture}}" x="0" y="0" width="10" height="10" />
+								</pattern>
+							</defs>
+							<path fix-fill data-relFill="#profilePicture" stroke="#0CD97E" stroke-width="0.35" d="M5.5 1.5 L8.5 4.5 Q9 5 8.5 5.5 L5.5 8.5 Q5 9 4.5 8.5 L 1.5 5.5 Q1 5 1.5 4.5 L4.5 1.5 Q 5 1 5.5 1.5z"
+							/>
+						</svg>
+					</div>
+					<h2 class="col s8 left-align">
+						<span class="name" editable-text="Settings.data.displayName" onbeforesave="Settings.validateName($data)" onaftersave="Settings.updateName()">
+							{{Settings.data.displayName}} <i class="material-icons">edit</i>
+						</span>
+					</h2>
+				</div>
+				<div class="collection">
+					<a class="collection-item left-align" ng-click="Settings.tab = 0" ng-class="Settings.tab == 0 ? 'active' : ''">Settings<i class="secondary-content material-icons">&#xE8B8;</i></a>
+					<a class="collection-item left-align" ng-click="Settings.tab = 1" ng-class="Settings.tab == 1 ? 'active' : ''">Verify Email<i class="secondary-content material-icons">&#xE8E8;</i></a>
+					<a class="collection-item left-align" ng-click="Settings.tab = 2" ng-class="Settings.tab == 2 ? 'active' : ''">Change Email<i class="secondary-content material-icons">&#xE0BE;</i></a>
+					<a class="collection-item left-align" ng-click="Settings.tab = 3" ng-class="Settings.tab == 3 ? 'active' : ''">Change Password<i class="secondary-content material-icons">&#xE32A;</i></a>
+				</div>
+			</div>
+			<div class="col s8">
+				<div class="section left-align force-uppercase" ng-show="Settings.tab == 0">
+					<h3 class="force-uppercase">Inline Player</h3>
+					<p>Use our custom built inline player to eliminate spoilers.</p>
+					<form class="row">
+						<p class="col m3 s6">
+							<input class="filled-in" type="checkbox" id="player_yt" ng-model="Settings.data.settings.inline.youtube" />
+							<label for="player_yt">Youtube</label>
+						</p>
+						<p class="col m3 s6">
+							<input class="filled-in" type="checkbox" id="player_tw" ng-model="Settings.data.settings.inline.twitch" />
+							<label for="player_tw">Twitch</label>
+						</p>
+					</form>
+					<h3 class="force-uppercase">Notify Me</h3>
+					<p>You'll be notified when there's an update to your favourite...</p>
+					<form class="row">
+						<p class="col s4">
+							<input class="filled-in" type="checkbox" id="notif_games" ng-model="Settings.data.settings.notifications.game" />
+							<label for="notif_games">Games</label>
+						</p>
+						<p class="col s4">
+							<input class="filled-in" type="checkbox" id="notif_events" ng-model="Settings.data.settings.notifications.event" />
+							<label for="notif_events">Events</label>
+						</p>
+						<p class="col s4">
+							<input class="filled-in" type="checkbox" id="notif_teams" ng-model="Settings.data.settings.notifications.team" />
+							<label for="notif_teams">Teams</label>
+						</p>
+					</form>
+					<h3 class="force-uppercase">Email Me</h3>
+					<p>We'll only send you emails you want. Promise.</p>
+					<form>
+						<div class="row">
+							<p class="col s12">
+								<input class="filled-in" type="checkbox" id="email_featured" ng-model="Settings.data.settings.emails.featured" />
+								<label for="email_featured">Featured Content</label>
+							</p>
+						</div>
+						<div class="row">
+							<p class="col s4">
+								<input class="filled-in" type="checkbox" id="email_daily" ng-model="Settings.data.settings.emails.daily" />
+								<label for="email_daily">Daily Updates</label>
+							</p>
+							<p class="col s4">
+								<input class="filled-in" type="checkbox" id="email_weekly" ng-model="Settings.data.settings.emails.weekly" />
+								<label for="email_weekly">Weekly Updates</label>
+							</p>
+							<p class="col s4">
+								<input class="filled-in" type="checkbox" id="email_monthly" ng-model="Settings.data.settings.emails.monthly" />
+								<label for="email_monthly">Monthly Roundups</label>
+							</p>
+						</div>
+					</form>
+					<a class="waves-effect waves-light btn" ng-click="Settings.save()">
+						<i class="material-icons left">save</i> Save My Settings
+					</a>
+				</div>
+				<div class="section left-align force-uppercase" ng-show="Settings.tab == 1">
+					<h3 class="force-uppercase">Verify Email</h3>
+					<p>
+						Verify your email to make the most of our features.
+					</p>
+					<a ng-show="Settings.stage == 0" class="waves-effect waves-light btn no-transition" ng-click="Settings.verifySend()">
+						<i class="material-icons left">send</i> Send me a verification email
+					</a>
+					<ol ng-show="Settings.stage > 0" class="verify-wip">
+						<li ng-class="{complete: Settings.stage > 0}">We've sent you an email.</li>
+						<li ng-class="{complete: Settings.stage > 1, current: Settings.stage == 1}">Follow the included instructions</li>
+						<li class="final" ng-class="{current: Settings.stage == 2}">Email verified!</li>
+					</ol>
+					<p>
+						Signed up with the wrong email? <a ng-click="Settings.tab = 2">Change my email</a>
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -11,6 +11,9 @@ html {
 body {
 	background: @dark-blue;
 }
+.col.border-right {
+	border-right: 3px solid @default-blue;
+}
 .text {
 	&-accent {
 		color: @accent-green;
@@ -116,8 +119,21 @@ i.starred {
 		background: transparent!important;
 	}
 }
+.collection .collection-item {
+	color: @accent-green;
+	text-transform: uppercase;
+	.secondary-content {
+		color: inherit;
+	}
+	&.active {
+		background-color: @accent-green!important;
+	}
+}
 .dark {
 	background: @dark-blue;
+	.col.border-right {
+		border-right: 3px solid white;
+	}
 	.contents {
 		background: url('/assets/images/backgrounds/dark.jpg') @darker-blue;
 		background-position: center -300px;
@@ -130,6 +146,9 @@ i.starred {
 		.collection-item {
 			background-color: transparent;
 		}
+	}
+	.editable-buttons {
+		color: @default-blue;
 	}
 }
 #loading-bar .bar {

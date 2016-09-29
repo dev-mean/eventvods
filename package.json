@@ -43,6 +43,7 @@
     "redis": "*",
     "redis-rate-limiter": "*",
     "request": "^2.74.0",
+    "sendgrid": "^4.4.0",
     "serve-favicon": "*",
     "shortid": "*",
     "slug": "^0.9.1"

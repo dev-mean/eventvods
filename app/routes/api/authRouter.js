@@ -13,7 +13,7 @@ router.get('/session', function(req, res) {
 
 router.get('/logout', function(req, res){
 	req.logout();
-	res.sendStatus('200');
+	res.redirect('/');
 });
 
 router.post('/login', function(req, res, next) {

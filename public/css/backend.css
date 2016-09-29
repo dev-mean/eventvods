@@ -760,7 +760,7 @@ img.icon-text-align {
   border: 2px solid #535a83;
   color: #a4abc1;
   transition: all 0.25s ease-in-out;
-  transition: all 2s linear;
+  transition: all 0.3s linear;
 }
 .form-style:focus {
   border-color: #a4abc1;
@@ -1034,7 +1034,7 @@ table.standard td.update a {
   text-align: center;
   color: #8690af;
   transition: all 0.25s ease-in-out;
-  transition: all 2s linear;
+  transition: all 0.3s linear;
 }
 table.standard td.edit a i,
 table.standard td.url a i,
@@ -1270,7 +1270,7 @@ table.standard input[type=checkbox]:checked + label::after {
   border: 2px solid #535a83;
   color: #a4abc1;
   transition: all 0.25s ease-in-out;
-  transition: all 2s linear;
+  transition: all 0.3s linear;
   text-transform: uppercase;
   position: relative;
   top: 2px;
@@ -1340,7 +1340,7 @@ table.standard input[type=checkbox]:checked + label::after {
   border: 2px solid #535a83;
   color: #a4abc1;
   transition: all 0.25s ease-in-out;
-  transition: all 2s linear;
+  transition: all 0.3s linear;
   border-radius: 0;
   width: 100%;
   padding: 16px;
@@ -1464,7 +1464,7 @@ table.standard input[type=checkbox]:checked + label::after {
   overflow: hidden;
   zoom: 1;
   transition: all 0.25s ease-in-out;
-  transition: all 2s linear;
+  transition: all 0.3s linear;
   cursor: pointer;
 }
 .row-list .item:before,
@@ -1477,7 +1477,7 @@ table.standard input[type=checkbox]:checked + label::after {
 }
 .row-list .item div {
   transition: all 0.25s ease-in-out;
-  transition: all 2s linear;
+  transition: all 0.3s linear;
   padding: 15px;
   position: relative;
   float: left;
@@ -1558,7 +1558,7 @@ form .group select {
   border: 2px solid #535a83;
   color: #a4abc1;
   transition: all 0.25s ease-in-out;
-  transition: all 2s linear;
+  transition: all 0.3s linear;
   background: #3c405c;
   margin-right: 20px;
 }
@@ -1636,7 +1636,7 @@ form .group tags-input input {
   padding: 2px;
   margin: 2px 8px -2px 0;
   transition: all 0.25s ease-in-out;
-  transition: all 2s linear;
+  transition: all 0.3s linear;
 }
 .group.checkbox input + label:before,
 .group.radio input + label:before {
@@ -1651,7 +1651,7 @@ form .group tags-input input {
   width: 20px;
   border: 2px solid #535a83;
   transition: all 0.25s ease-in-out;
-  transition: all 2s linear;
+  transition: all 0.3s linear;
 }
 .group.checkbox input + label:hover,
 .group.radio input + label:hover {
@@ -1701,7 +1701,7 @@ form .group tags-input input {
   border: 2px solid #535a83;
   color: #a4abc1;
   transition: all 0.25s ease-in-out;
-  transition: all 2s linear;
+  transition: all 0.3s linear;
   margin-right: 20px;
 }
 .group.standard input[type=text]:focus,
@@ -1758,7 +1758,7 @@ form .group tags-input input {
   font-size: 14px;
   cursor: pointer;
   transition: all 0.25s ease-in-out;
-  transition: all 2s linear;
+  transition: all 0.3s linear;
 }
 .group.standard input:focus + label {
   color: #d3d7e3;
@@ -2330,7 +2330,7 @@ span.pull-right {
   border: 2px solid #535a83;
   color: #a4abc1;
   transition: all 0.25s ease-in-out;
-  transition: all 2s linear;
+  transition: all 0.3s linear;
   background: #3c405c;
 }
 .sortable-container > div > span input:focus,
@@ -2408,7 +2408,7 @@ span.pull-right {
   border: 2px solid #535a83;
   color: #a4abc1;
   transition: all 0.25s ease-in-out;
-  transition: all 2s linear;
+  transition: all 0.3s linear;
   background: #3c405c;
 }
 .sortable-container .editable-input:focus {
@@ -2617,7 +2617,7 @@ select.form-style {
   border: 2px solid #535a83;
   color: #a4abc1;
   transition: all 0.25s ease-in-out;
-  transition: all 2s linear;
+  transition: all 0.3s linear;
   background: #3c405c;
 }
 .element-container input:focus,
