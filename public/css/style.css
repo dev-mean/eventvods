@@ -52,7 +52,7 @@ img:not([src]),
   display: none !important;
 }
 body {
-  background: white;
+  background: #27273F;
 }
 .text-accent {
   color: #0CD97E;
@@ -762,6 +762,7 @@ footer.page-footer h5 {
 }
 footer.page-footer img.responsive-img {
   opacity: 0.6;
+  max-width: 75%;
 }
 footer.page-footer img.responsive-img:hover {
   opacity: 1;
