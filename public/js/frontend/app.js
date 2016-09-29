@@ -1,6 +1,7 @@
 (function() {
 	'use strict';
-	angular.module('eventvods', ['ngAnimate', 'ngRoute', 'ngCookies', 'ngSanitize', 'angular-loading-bar', 'ui.materialize','xeditable'])
+	angular.module('eventvods', ['ngAnimate', 'ngRoute', 'ngCookies', 'ngSanitize',
+	 'angular-loading-bar', 'ui.materialize','xeditable','angulartics', 'angulartics.google.analytics'])
 		.constant('DOMAIN', 'http://beta.eventvods.com')
 		.constant('API_BASE_URL', '/api')
 		.run(function(editableOptions, editableThemes, $rootScope, $anchorScroll, DOMAIN) {
