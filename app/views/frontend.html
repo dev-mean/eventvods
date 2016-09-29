@@ -40,14 +40,6 @@
 		<ng-include src="'/assets/views/dialogs/userSettings.html'" ng-if="Page.session != false && Page.session != null" onload="Page.init()" ng-cloak></ng-include>
 		<nav class="nav-main" role="navigation" >
 			<ul class="dropdown-content wide" id="games_dd">
-				<svg width="0" height="0">
-						<defs>
-							<clipPath id="element" clipPathUnits="objectBoundingBox">
-								<polygon points="0 0, 0.85 0, 1 1, 0 1">
-								</polygon>
-							</clipPath>
-						</defs>
-				</svg>
 				<li ng-repeat="game in Page.nav.games">
 					<a ng-href="/game/{{game.slug}}">
 						<i class="material-icons left icon">
@@ -183,6 +175,14 @@
 		</nav>
 	</header>
 	<div id="main" ng-view ng-cloak onload="Page.init()"></div>
+	<svg width="0px" height="0px">
+			<defs>
+				<clipPath id="element" clipPathUnits="objectBoundingBox">
+					<polygon points="0 0, 0.85 0, 1 1, 0 1">
+					</polygon>
+				</clipPath>
+			</defs>
+	</svg>
 	<footer class="page-footer">
 		<div class="container">
 			<div class="row center-align spaced-row">

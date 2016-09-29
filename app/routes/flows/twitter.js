@@ -88,7 +88,7 @@ function link_twitter(user, res, twitter_id) {
 	user.social.twitter = twitter_id;
 	user.save(function(err) {
 		if (err) next(err);
-		res.sendStatus('204');
+		else res.redirect('/');
 	});
 }
 function process(req, res, body) {
