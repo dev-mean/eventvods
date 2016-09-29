@@ -102,10 +102,10 @@
 			<h4 class="material-icons" ng-show="League.moduleIndex < League.data.contents[League.sectionIndex].modules.length - 1 " ng-click="League.moduleIndex = League.moduleIndex + 1;">&#xE315;</h3>
 		</div>
 	</div>
-	<div no-ng-animate class="element-container container" ng-repeat="match in League.data.contents[League.sectionIndex].modules[League.moduleIndex].matches">
+	<div no-ng-animate class="element-container container" ng-repeat="match in League.data.contents[League.sectionIndex].modules[League.moduleIndex].matches track by $index">
 		<div class="element-border">
 			<div class="element-background event-background">
-				<span class="element-tag">Q1</span>
+				<span class="element-tag" ng-bind="League.getIdentifier($index)"></span>
 				<div class="element-teams">
 					<div ng-if="!match.team1.spoiler" class="element-team">
 						<img ng-src="{{match.team1.icon}}" class="responsive-img team-large" />

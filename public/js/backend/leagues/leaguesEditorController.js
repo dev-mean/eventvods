@@ -64,7 +64,6 @@
 				})
 			}
 			vm.removeMatch = function($sectionIndex, $moduleIndex, $index){
-				console.log('Removing match at: '+$sectionIndex+'-'+$moduleIndex+'-'+$index);
 				vm.data.contents[$sectionIndex].modules[$moduleIndex].matches.splice($index, 1);
 			}
 			vm.duplicateMatch = function(module, $index){

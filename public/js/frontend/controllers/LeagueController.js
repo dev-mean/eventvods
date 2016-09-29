@@ -13,6 +13,14 @@
 				vm.showDetails = !vm.showDetails;
 				if(!vm.showDetails) $anchorScroll("top");
 			}
+			vm.getIdentifier = function($index){
+				var counter = 0;
+				for(var i =0; i < vm.sectionIndex; i++){
+					counter += vm.data.contents[i].modules.length;
+				}
+				counter += vm.moduleIndex;
+				return String.fromCharCode(65+counter) + ($index+1);
+			}
 			$http.get(API + '/leagues/slug/' + $routeParams.slug)
 				.then(function(res){
 					vm.data = res.data;
