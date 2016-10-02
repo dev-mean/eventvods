@@ -25,7 +25,7 @@
 				);
 				if(!vm.data.tos)
 					$('#tos + label').addClass('err');
-				if (valid){
+				if (valid)
 					SessionManager.register(vm.data)
 					.then(function(){
 						$location.path('/user/settings?tab=1');
@@ -41,7 +41,7 @@
 							})
 						});
 					});
-				}
+				else $('#register input.invalid').first().focus();
 			};
 			$timeout(function() {
 				$('#register input[type!=checkbox]').blur(function() {

@@ -638,137 +638,6 @@ nav.nav-main a.btn:hover {
 .evSlider .indicators .indicator.active {
   background-color: #0CD97E;
 }
-.modal {
-  border-radius: 0;
-  overflow-y: visible;
-  background: transparent;
-  box-shadow: none;
-  text-align: center;
-  font-family: Gotham;
-  font-weight: 500;
-}
-.modal .tabs {
-  background: #3C3C62;
-  color: #fff;
-}
-.modal .tabs a {
-  color: #fff;
-  cursor: pointer;
-}
-.modal .tabs a:hover {
-  color: #0CD97E;
-}
-.modal .tabs .indicator {
-  background-color: #0CD97E;
-  height: 5px;
-}
-.modal > img {
-  margin: auto;
-  max-height: 100px;
-  pointer-events: none;
-}
-.modal > .modal-wrapper {
-  background: #fff;
-  border-bottom: 5px solid #0CD97E;
-  color: #3C3C62;
-}
-.modal h5 {
-  padding-bottom: 20px;
-}
-.modal .btn {
-  width: 100%;
-  font-size: 18px;
-  background: #0CD97E;
-}
-.modal .btn.modal-close,
-.modal .btn.cancel {
-  background: #3C3C62;
-}
-.modal label {
-  color: #3C3C62 !important;
-}
-.modal .input-field label {
-  width: 100%;
-  text-align: left;
-}
-.modal .input-field label:after {
-  top: 45px;
-}
-.modal .input-field label.active:after {
-  opacity: 0!important;
-}
-.modal .input-field label.click-through {
-  pointer-events: none;
-}
-.modal .input-field label.center-label {
-  width: auto;
-}
-.modal .input-field input[type="checkbox"]:not(:checked) + label {
-  color: #F44336 !important;
-}
-.modal textarea {
-  min-height: 150px;
-  max-height: 300px;
-  height: auto!important;
-  margin-top: 10px;
-  overflow-y: scroll;
-}
-.modal#settings svg {
-  width: 128px;
-  height: 128px;
-  transition: opacity 0.3s linear;
-}
-.modal#settings svg > path:hover {
-  opacity: 0.8;
-  cursor: pointer;
-}
-.modal#settings .account-header {
-  display: inline-block;
-  vertical-align: top;
-  padding: 0 15px;
-  text-transform: uppercase;
-}
-.modal#settings .account-header i.material-icons {
-  position: relative;
-  top: 2px;
-}
-.modal#settings .account-header span.title {
-  border-bottom: 2px solid #0CD97E;
-  font-size: larger;
-}
-.modal#settings .account-header span.name {
-  font-weight: bolder;
-  font-size: larger;
-}
-.modal .editable,
-.modal .editable-empty,
-.modal .editable-click,
-.modal .editable-input {
-  color: inherit!important;
-  font-style: inherit;
-}
-.modal .editable-click {
-  cursor: pointer;
-}
-.modal .editable-input {
-  text-transform: uppercase;
-  font-size: larger;
-  font-weight: bolder;
-  color: inherit;
-  border-bottom: 0!important;
-  box-shadow: none!important;
-}
-.modal .editable-error {
-  color: darkred;
-  font-size: medium;
-}
-.lean-overlay {
-  background: url("/assets/images/modal.jpg");
-  background-position: center top;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-size: cover;
-}
 footer.page-footer {
   background: #3C3C62;
   margin-top: -20px;
@@ -876,24 +745,32 @@ input[type=checkbox]:not(:checked) + .err a {
   transition: color 0.3s linear;
   color: #F44336 !important;
 }
+input:not([type]):focus:not([readonly]),
+input[type=text]:focus:not([readonly]),
+input[type=password]:focus:not([readonly]),
+input[type=email]:focus:not([readonly]),
+input[type=url]:focus:not([readonly]),
+input[type=time]:focus:not([readonly]),
+input[type=date]:focus:not([readonly]),
+input[type=datetime]:focus:not([readonly]),
+input[type=datetime-local]:focus:not([readonly]),
+input[type=tel]:focus:not([readonly]),
+input[type=number]:focus:not([readonly]),
+input[type=search]:focus:not([readonly]),
+textarea.materialize-textarea:focus:not([readonly]) {
+  border-bottom: 1px solid #0CD97E;
+  box-shadow: 0 1px 0 0 #0CD97E;
+}
 .input-field {
-  margin-bottom: 25px;
+  margin-bottom: 30px;
 }
 .input-field label {
   text-align: left;
-  transition: color 0.3s linear, font-size 0.2s ease-out, -webkit-transform 0.2s ease-out;
-  transition: color 0.3s linear, transform 0.2s ease-out, font-size 0.2s ease-out;
-  transition: color 0.3s linear, transform 0.2s ease-out, font-size 0.2s ease-out, -webkit-transform 0.2s ease-out;
   text-transform: uppercase;
+  color: inherit;
 }
 .input-field label.active {
   color: #0CD97E !important;
-}
-.input-field label:after {
-  top: 45px;
-}
-.input-field label.active:after {
-  opacity: 0!important;
 }
 .input-field label.click-through {
   pointer-events: none;
@@ -903,6 +780,18 @@ input[type=checkbox]:not(:checked) + .err a {
 }
 .input-field input[type="checkbox"]:not(:checked) + label {
   color: #F44336 !important;
+}
+.input-field input.validate + label {
+  font-size: inherit;
+  transition: color 0.3s linear, transform 0.2s ease-out, font-size 0.2s ease-out, -webkit-transform 0.2s ease-out;
+}
+.input-field input.validate + label:after {
+  transition: top 0.2s ease-out;
+  position: absolute!important;
+  top: 65px;
+}
+.input-field input.validate + label.active:after {
+  top: 90px;
 }
 .buttons {
   margin-top: 25px;
@@ -924,6 +813,9 @@ input[type=checkbox]:not(:checked) + .err a {
 input[type="checkbox"].filled-in:checked + label:after {
   border: 2px solid #0CD97E;
   background-color: #0CD97E;
+}
+.settings .pad-left {
+  padding-left: 50px!important;
 }
 .settings ol.verify {
   font-size: 1.2em;

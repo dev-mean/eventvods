@@ -18,12 +18,20 @@
 					return $http.get( API_BASE_URL + '/user/sendEmail', {
 						ignoreLoadingBar: true
 					});
+				},
+				changeEmail: function(email, password){
+					return $http.post( API_BASE_URL + '/user/email', {
+						email: email,
+						confirm_pw: password
+					});
 				}
             };
         } ] )
 		.controller('SettingsController', ['SettingsService','SessionManager', '$q', '$rootScope', '$location', '$timeout', '$routeParams',
 		function(SettingsService, SessionManager, $q, $rootScope, $location, $timeout, $routeParams) {
 			var vm = this;
+			vm.emailData = {};
+			vm.passwordData = {};
 			function getSession(){
 				vm.data = SessionManager.get();
 				if(vm.data === false) $location.path('/login');
@@ -47,6 +55,37 @@
 					.then(function(){
 						vm.stage = 1;
 					});
+			}
+			vm.changeEmail = function(){
+				$('#new_email_form input[type!=checkbox]').each(function() {
+					if ($(this).val() === "") {
+						$(this).addClass('invalid');
+					}
+				});
+				var valid = (
+					$('#new_email')[0].checkValidity() &&
+					$('#new_email_pw')[0].checkValidity()
+				);
+				if(valid)
+					SettingsService.changeEmail(vm.emailData.email, vm.emailData.confirm_pw)
+					.then(function(){
+						$location.path('/login');
+					}, function(response){
+						switch(response.status){
+							case 400:
+								$('#new_email').val('').removeClass('valid').addClass('invalid').focus();
+							break;
+							case 403:
+								$('#new_email_pw + label').attr('data-error', "Incorrect password. Please try again.");
+								$('#new_email_pw').val('').removeClass('valid').addClass('invalid').focus();
+							break;
+							default:
+								$('#new_email_pw + label').attr('data-error', "Unknown server error occured. Please try again.");
+								$('#new_email_pw').val('').removeClass('valid').addClass('invalid').focus();
+							break;
+						}
+					})
+				else $('#new_email_form input.invalid').first().focus();
 			}
 			vm.validateName = function(name){
 				var deferred = $q.defer();

@@ -36,16 +36,19 @@ router.post('/settings', auth.logged_in(true), function (req, res, next) {
 	});
 });
 router.post('/email', auth.logged_in(true), function (req, res, next) {
-	req.user.authenticate(req.body.confirm_pw, function (err, user, pwMessage) {
-		if (err) next(err);
-		if (!user) res.status('403').send('Incorrect password.');
-		else if (Indicative.is.email(req.body.email)) {
-			req.user.email = req.body.email;
-			req.user.save(function (err) {
-				if (err) next(err);
-				else res.sendStatus('204');
-			});
-		} else res.status('400').send('Invalid email format/address.');
+	User.findById(req.user._id, function(err, user){
+		if(err) next(err);
+		user.authenticate(req.body.confirm_pw, function (err, validUser, pwMessage) {
+			if (err) next(err);
+			if(validUser === false) res.sendStatus('403');
+			else if (Indicative.is.email(req.body.email)) {
+				req.user.email = req.body.email;
+				req.user.save(function (err) {
+					if (err) next(err);
+					else return res.sendStatus('204');
+				});
+			} else return res.sendStatus('400');
+		});
 	});
 });
 

@@ -49,7 +49,7 @@
 					<a class="collection-item left-align" ng-click="Settings.tab = 3" ng-class="Settings.tab == 3 ? 'active' : ''">Change Password<i class="secondary-content material-icons">&#xE32A;</i></a>
 				</div>
 			</div>
-			<div class="col s8">
+			<div class="col s8 pad-left">
 				<div class="section left-align force-uppercase" ng-show="Settings.tab == 0">
 					<h3 class="force-uppercase">Inline Player</h3>
 					<p>Use our custom built inline player to eliminate spoilers.</p>
@@ -123,6 +123,32 @@
 					<p>
 						Signed up with the wrong email? <a ng-click="Settings.tab = 2">Change my email</a>
 					</p>
+				</div>
+				<div class="section left-align force-uppercase" ng-show="Settings.tab == 2">
+					<h3 class="force-uppercase">Change Email</h3>
+					<p>
+						Note: You'll need to login with your <b>new email.</b
+					</p>
+					<form id="new_email_form">
+						<div class="row">
+							<div class="col s12 input-field">
+								<input id="new_email" type="email" class="validate" ng-model="Settings.emailData.email" required />
+         						<label for="new_email" data-error="Please enter a valid email.">New Email</label>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col s12 input-field">
+								<input id="new_email_pw" type="password" class="validate" required ng-model="Settings.emailData.confirm_pw"  pattern=".{6,50}"/>
+         						<label for="new_email_pw" data-error="Please confirm your password for security.">Confirm Password</label>
+							</div>
+						</div>
+						<div class="row">
+							<a class="waves-effect waves-light btn no-transition" ng-click="Settings.changeEmail()">
+								<i class="material-icons left">send</i> Change Email
+							</a>
+						</div>
+
+					</form>
 				</div>
 			</div>
 		</div>

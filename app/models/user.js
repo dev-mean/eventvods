@@ -112,7 +112,7 @@ userSchema.plugin(passportLocalMongoose, {
 	limitAttempts: true,
 	maxAttempts: 5,
 	usernameLowerCase: true,
-	selectFields: 'displayName _id social email userRights settings profilePicture following emailConfirmation',
+	selectFields: 'displayName _id social email userRights settings profilePicture following emailConfirmation attempts',
 	errorMessages: {
 		IncorrectUsernameError: "Incorrect email or password.",
 		IncorrectPasswordError: "Incorrect email or password.",
