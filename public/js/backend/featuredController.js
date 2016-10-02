@@ -18,17 +18,11 @@
 			vm.addGame = function() {
 				vm.data.games.push(vm.selectedGame);
 			};
-			vm.deleteLeague = function(index) {
-				vm.data.leagues.splice(index, 1);
+			vm.deleteEvent = function(index) {
+				vm.data.events.splice(index, 1);
 			};
-			vm.addLeague = function() {
-				vm.data.leagues.push(vm.selectedLeague);
-			};
-			vm.deleteTournament = function(index) {
-				vm.data.tournaments.splice(index, 1);
-			};
-			vm.addTournament = function() {
-				vm.data.tournaments.push(vm.selectedTournament);
+			vm.addEvent = function() {
+				vm.data.events.push(vm.selectedEvent);
 			};
 			vm.deleteArticle = function(index) {
 				vm.data.articles.splice(index, 1);
@@ -47,13 +41,8 @@
 				});
 			leaguesService.find()
 				.then(function(res) {
-					vm.leagues = res.data;
-					vm.selectedLeague = res.data[0];
-				});
-			tournamentsService.find()
-				.then(function(res) {
-					vm.tournaments = res.data;
-					vm.selectedTournament = res.data[0];
+					vm.events = res.data;
+					vm.selectedEvent = res.data[0];
 				});
 			articlesService.find()
 				.then(function(res) {

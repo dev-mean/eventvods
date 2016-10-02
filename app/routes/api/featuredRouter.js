@@ -10,7 +10,7 @@ router.get('/', function(req, res, next){
 		select: 'name slug icon'
 	})
 	.populate({
-		path: 'leagues',
+		path: 'events',
 		model: 'League',
 		select: 'name slug game shortTitle subtitle startDate endDate updatedAt createdAt updated logo header header_blur textOrientation credits',
 		populate: {
@@ -18,11 +18,6 @@ router.get('/', function(req, res, next){
 			model: 'Game',
 			select: 'name icon'
 		}
-	})
-	.populate({
-		path: 'tournaments',
-		model: 'Tournament',
-		select: 'name subtitle shortTitle slug logo startDate endDate updatedAt createdAt updated header header_blur textOrientation'
 	})
 	.populate({
 		path: 'articles',

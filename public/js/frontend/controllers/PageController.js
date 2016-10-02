@@ -60,14 +60,9 @@
 						alignment: "left"
 					});
 				};
-				vm.leagueClass = function($index) {
+				vm.eventClass = function($index) {
 					if ($index === 0 ||
-						vm.nav.orderedLeagues[$index].game.name !== vm.nav.orderedLeagues[$index - 1].game.name) return "border-top";
-					else return "";
-				};
-				vm.tournamentClass = function($index) {
-					if ($index === 0 ||
-						vm.nav.orderedTournaments[$index].game.name !== vm.nav.orderedTournaments[$index - 1].game.name) return "border-top";
+						vm.nav.orderedEvents[$index].game.name !== vm.nav.orderedEvents[$index - 1].game.name) return "border-top";
 					else return "";
 				};
 				vm.elementClass = function($index) {
@@ -75,32 +70,21 @@
 					return "element-" + img;
 				}
 				vm.following = function(id) {
-					if (vm.session == false || vm.session == null) return false;
-					else if (vm.session.following.leagues.indexOf(id) > -1) return true;
-					else if (vm.session.following.tournaments.indexOf(id) > -1) return true;
+					if (vm.session == false || vm.session == null || vm.session.following == null) return false;
+					else if (vm.session.following.indexOf(id) > -1) return true;
 					else return false;
 				}
 				vm.toggleFollow = function(id, type, name) {
 					if (vm.session == false || vm.session == null) return $location.path('/login');
-					var index = vm.session.following[type].indexOf(id);
+					var index = vm.session.following == null ? -1 : vm.session.following.indexOf(id);
 					if (index > -1)
-						vm.session.following[type].splice(index, 1);
-					else vm.session.following[type].push(id);
+						vm.session.following.splice(index, 1);
+					else vm.session.following.push(id);
 					SessionManager.following(vm.session.following);
 				}
 				NavService.get()
 					.then(function(res) {
 						vm.nav = res.data;
-						vm.nav.all =
-							res.data.leagues.map(function(item){
-								item.type="League";
-								return item;
-							})
-							.concat(res.data.tournaments.map(function(item){
-								item.type="Tournament";
-								return item;
-							}));
-						shuffleArray(vm.nav.all);
 						vm.init();
 					});
 			}

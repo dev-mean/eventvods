@@ -5,13 +5,9 @@ var featuredSchema = new Schema({
 		type: [Schema.Types.ObjectId],
 		ref: 'Game'
 	},
-	leagues: {
+	events: {
 		type: [Schema.Types.ObjectId],
 		ref: 'League'
-	},
-	tournaments: {
-		type: [Schema.Types.ObjectId],
-		ref: 'Tournament'
 	},
 	articles: {
 		type: [Schema.Types.ObjectId],

@@ -28,7 +28,7 @@
 				if (valid){
 					SessionManager.register(vm.data)
 					.then(function(){
-						$location.path('/');
+						$location.path('/user/settings?tab=1');
 					})
 					.catch(function(errs) {
 						errs.forEach(function(err){
@@ -51,7 +51,7 @@
 				});
 				$('#register input').keydown(function(e) {
 					if (e.which == 13) {
-						vm.login();
+						vm.register();
 					}
 				});
 			}, 500);

@@ -78,33 +78,24 @@ var userSchema = new Schema({
 			},
 			featured: {
 				type: Boolean,
-				default: false
+				default: true
 			},
 		}
 	},
 	social: {
 		facebook: {
-			type: String,
-			//select: false
+			type: String
 		},
 		twitter: {
-			type: String,
-			//select: false
+			type: String
 		},
 		google: {
-			type: String,
-			//select: false
+			type: String
 		}
 	},
 	following: {
-		leagues: {
-			type: [mongoose.Schema.Types.ObjectId],
-			ref: 'League'
-		},
-		tournaments: {
-			type: [mongoose.Schema.Types.ObjectId],
-			ref: 'Tournament'
-		}
+		type: [mongoose.Schema.Types.ObjectId],
+		ref: 'League'
 	}
 }, {
 	id: false,

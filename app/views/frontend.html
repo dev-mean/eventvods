@@ -69,34 +69,18 @@
 					<a href="/articles">All Articles</a>
 				</li>
 			</ul>
-			<ul class="dropdown-content wide grouped" id="leagues_dd">
-				<li ng-repeat="league in Page.nav.orderedLeagues = (Page.nav.leagues | orderBy:'game.name') track by $index" ng-class="Page.leagueClass($index)">
-					<a ng-href="/league/{{league.slug}}">
+			<ul class="dropdown-content wide grouped" id="events_dd">
+				<li ng-repeat="event in Page.nav.orderedEvents = (Page.nav.events | orderBy:'game.name') track by $index" ng-class="Page.eventClass($index)">
+					<a ng-href="/event/{{event.slug}}">
 						<i class="material-icons left icon border-right">
-							<img ng-src="{{league.game.icon}}" />
+							<img ng-src="{{event.game.icon}}" />
 							&nbsp;
-						</i> {{league.name}}
+						</i> {{event.name}}
 					</a>
 				</li>
 				<li class="border-top">
-					<a href="/leagues">All Leagues</a>
+					<a href="/events">All Events</a>
 				</li>
-			</ul>
-			<ul class="dropdown-content wide grouped" id="tournaments_dd">
-				<li class="border-top">
-					<a href="/">Coming Soon&trade;</a>
-				</li>
-				<!--<li ng-repeat="tournament in Page.nav.tournaments" class="border-top">
-					<a ng-href="/tournament/{{tournament.slug}}">
-						<i class="material-icons left icon border-right">
-							<img ng-src="{{tournament.logo}}" />
-							&nbsp;
-						</i> {{tournament.name}}
-					</a>
-				</li>
-				<li class="border-top">
-					<a href="/tournaments">All Tournaments</a>
-				</li>-->
 			</ul>
 			<div class="nav-wrapper container">
 				<a class="brand-logo" href="/">
@@ -111,17 +95,10 @@
 						</a>
 					</li>
 					<li>
-						<a class="dropdown-button" data-activates="leagues_dd" href="/leagues">
+						<a class="dropdown-button" data-activates="events_dd" href="/events">
 							<i class="material-icons left">
 										&#xE5C5;
-									</i> LEAGUES
-						</a>
-					</li>
-					<li>
-						<a class="dropdown-button" data-activates="tournaments_dd" href="/tournaments">
-							<i class="material-icons left">
-										&#xE5C5;
-									</i> TOURNAMENTS
+									</i> EVENTS
 						</a>
 					</li>
 					<li>
@@ -217,7 +194,7 @@
 							<a class="waves-effect waves-light btn" href="/about/team">
                                         Our Team
                                     </a>
-							<a class="waves-effect waves-light btn" href="/about/get-in-touch">
+							<a class="waves-effect waves-light btn" href="/about/beta-feedback">
                                         Feedback
                                     </a>
 							<a class="waves-effect waves-light btn" href="/login">

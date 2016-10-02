@@ -124,7 +124,7 @@
 						description: 'Meta Description'
 					}
                 })
-				.when('/league/:slug', {
+				.when('/event/:slug', {
                     templateUrl: '/assets/views/frontend/league.html',
 					controller: 'LeagueController',
 					controllerAs: 'League',
