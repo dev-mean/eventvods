@@ -14,12 +14,20 @@
 				if(!vm.showDetails) $anchorScroll("top");
 			}
 			vm.getIdentifier = function($index){
-				var counter = 0;
+				var str = "", counter = 0;
 				for(var i =0; i < vm.sectionIndex; i++){
 					counter += vm.data.contents[i].modules.length;
 				}
 				counter += vm.moduleIndex;
-				return String.fromCharCode(65+counter) + ($index+1);
+				if(counter > 25){
+					str += String.fromCharCode(64 + Math.floor(counter / 26))
+					str += String.fromCharCode(65+(counter % 26)) + ($index+1);
+				}
+				else str = String.fromCharCode(65+counter) + ($index+1);
+				return str;
+			}
+			vm.parseLink = function(link){
+				return link;
 			}
 			$http.get(API + '/leagues/slug/' + $routeParams.slug)
 				.then(function(res){

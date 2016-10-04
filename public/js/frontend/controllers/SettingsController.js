@@ -44,6 +44,18 @@
 			}
 			vm.tab = $routeParams.tab || 0;
 			getSession();
+			$timeout(function() {
+				$('#new_email_form input[type!=checkbox]').blur(function() {
+					if ($(this).val() === "") {
+						$(this).addClass('invalid');
+					}
+				});
+				$('#new_email_form input').keydown(function(e) {
+					if (e.which == 13) {
+						vm.changeEmail();
+					}
+				});
+			}, 500);
 			vm.save = function(){
 				SettingsService.setSettings(vm.data.settings)
 					.then(function(){
