@@ -340,7 +340,7 @@
 						$scope.model.splice($index, 1);
 					}
 				},
-				template: '<div class="sortable-container" sv-root sv-part="model"><div><span><select ng-options="team.name for team in data.teams | filter:data.filter" ng-model="data.selectedTeam"></select><input class="form-style" placeholder="Filter Teams" ng-model="data.filter" /></span><button-right icon="fa-plus" ng-click="$add()" /></div><div sv-element ng-repeat="team in model track by $index"><span class="no-grow"><i sv-handle class="fa fa-lg fa-fw fa-bars"></i>{{$index + 1}}.</span><span class="no-grow"><img class="team-icon" ng-src="{{team.icon}}" /></span><span editable-text="team.tag" ng-bind="team.tag"></span><span editable-text="team.name" ng-bind="team.name"></span><button-right class="del" icon="fa-minus" ng-click="$remove($index)" /></div></div>'
+				template: '<div class="sortable-container" sv-root sv-part="model"><div><span><select ng-options="team.name for team in data.teams | filter:data.filter" ng-model="data.selectedTeam"></select><input class="form-style" placeholder="Filter Teams" ng-model="data.filter" /></span><button-right icon="fa-plus" ng-click="$add()" /></div><div sv-element ng-repeat="team in model track by $index"><span class="no-grow"><i sv-handle class="fa fa-lg fa-fw fa-bars"></i>{{$index + 1}}.</span><span class="no-grow"><img class="icon-48" ng-src="{{team.icon}}" /></span><span editable-text="team.tag" ng-bind="team.tag"></span><span editable-text="team.name" ng-bind="team.name"></span><button-right class="del" icon="fa-minus" ng-click="$remove($index)" /></div></div>'
 			};
 		})
 		.directive('mediaList', function($http, API_BASE_URL) {

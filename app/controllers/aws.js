@@ -103,8 +103,8 @@ var deleteImage = function(key) {
 function deleteOldImages(opts){
 	return Q.all(
 		[
-			deleteImage(opts.oldURL),
-			deleteImage(opts.oldBlurURL)
+			deleteImage(opts.oldURL, opts.deleteOld),
+			deleteImage(opts.oldBlurURL, opts.deleteOld)
 		]
 	);
 }
@@ -126,7 +126,8 @@ function handleImage(fileData, process, func) {
 					blur_key: fileData.field + "/" + filename + "_b",
 					ext: 'jpg',
 					oldURL: fileData.image.oldURL,
-					oldBlurURL: (typeof fileData.image.oldURL === "string") ? fileData.image.oldURL.replace(".jpg", "_b.jpg") : null
+					oldBlurURL: (typeof fileData.image.oldURL === "string") ? fileData.image.oldURL.replace(".jpg", "_b.jpg") : null,
+					deleteOld: true
 				}
 				jpegify(opts)
 					.then(headerCrop)

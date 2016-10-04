@@ -1133,7 +1133,6 @@ input[type="checkbox"].filled-in:checked + label:after {
   width: 100%;
 }
 .element-container .element-links .element-go .row {
-  margin-top: -20px;
   margin-bottom: 0;
   margin-right: 0;
 }
