@@ -84,9 +84,9 @@ function headerBlur(opts) {
 	return $promise.promise;
 }
 
-var deleteImage = function(key) {
+var deleteImage = function(key, del) {
 	var $promise = Q.defer();
-	if (typeof key === "undefined" || key == null) $promise.resolve();
+	if (typeof key === "undefined" || key == null || !del) $promise.resolve();
 	else {
 		key = key.replace(config.aws.cdn, "");
 		S3.deleteObject({

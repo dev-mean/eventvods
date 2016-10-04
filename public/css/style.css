@@ -1129,7 +1129,8 @@ input[type="checkbox"].filled-in:checked + label:after {
           transform: translateY(5px);
 }
 .element-container .element-links .element-go {
-  margin-bottom: 0px;
+  margin-top: -15px;
+  margin-bottom: -5px;
   width: 100%;
 }
 .element-container .element-links .element-go .row {
