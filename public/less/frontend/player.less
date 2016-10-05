@@ -1,0 +1,59 @@
+.player {
+	position: fixed;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	z-index: 10005;
+	background: url('/assets/images/backgrounds/pattern_light.png') repeat @accent-white;
+	border-bottom: 5px solid @accent-green;
+	&.dark {
+		background: url('/assets/images/backgrounds/pattern_dark.png') repeat @default-blue;
+	}
+	.back {
+		position: fixed;
+		top: 25px;
+		left: 25px;
+		font-size: 3em;
+		&:hover {
+			color: @accent-green;
+		}
+	}
+	.player-below {
+		h5, h6 {
+			text-transform: uppercase;
+		}
+		h5 {
+			color: @accent-green;
+		}
+		a.btn {
+			padding: 0 5px;
+			margin-top: 0.41rem;
+		}
+	}
+	> div {
+		margin: auto;
+	}
+	.col img {
+		max-height: 100%;
+	}
+	.player-teams {
+		height: 100px;
+		padding: 15px;
+		width: 100%;
+		display: flex;
+		justify-content: flex-start;
+		align-items: center;
+	}
+	#player {
+		margin: auto;
+		> iframe{
+			border: 5px solid @default-blue;
+		}
+	}
+	.preloader-wrapper {
+		height: 256px;
+		width: 256px;
+		margin: auto;
+	}
+}

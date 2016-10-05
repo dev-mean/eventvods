@@ -1459,5 +1459,69 @@ a.btn.details-toggle.loaded {
   position: relative;
   bottom: -6px;
 }
+.player {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 10005;
+  background: url('/assets/images/backgrounds/pattern_light.png') repeat #fff;
+  border-bottom: 5px solid #0CD97E;
+}
+.player.dark {
+  background: url('/assets/images/backgrounds/pattern_dark.png') repeat #3C3C62;
+}
+.player .back {
+  position: fixed;
+  top: 25px;
+  left: 25px;
+  font-size: 3em;
+}
+.player .back:hover {
+  color: #0CD97E;
+}
+.player .player-below h5,
+.player .player-below h6 {
+  text-transform: uppercase;
+}
+.player .player-below h5 {
+  color: #0CD97E;
+}
+.player .player-below a.btn {
+  padding: 0 5px;
+  margin-top: 0.41rem;
+}
+.player > div {
+  margin: auto;
+}
+.player .col img {
+  max-height: 100%;
+}
+.player .player-teams {
+  height: 100px;
+  padding: 15px;
+  width: 100%;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-justify-content: flex-start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.player #player {
+  margin: auto;
+}
+.player #player > iframe {
+  border: 5px solid #3C3C62;
+}
+.player .preloader-wrapper {
+  height: 256px;
+  width: 256px;
+  margin: auto;
+}
 
 /*# sourceMappingURL=style.css.map */

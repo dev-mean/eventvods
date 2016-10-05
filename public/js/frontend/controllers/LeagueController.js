@@ -26,8 +26,12 @@
 				else str = String.fromCharCode(65+counter) + ($index+1);
 				return str;
 			}
-			vm.parseLink = function(link){
-				return link;
+			function timeToSeconds(time){
+				time = /((\d+)h)?((\d+)m)?((\d+)s)?/i.exec(time);
+				for(var i = 0; i < time.length; i++){
+					if(typeof time[i] === "undefined") time[i] = 0;
+				}
+				return (parseInt(time[2] * 3600) + parseInt(time[4] * 60) + parseInt(time[6]));
 			}
 			$http.get(API + '/leagues/slug/' + $routeParams.slug)
 				.then(function(res){
