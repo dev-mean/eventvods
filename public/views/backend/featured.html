@@ -19,7 +19,7 @@
         Games
     </span>
     <span ng-class="{selected: featuredSelectController.tab == 2}" ng-click="featuredSelectController.tab = 2">
-        Leagues
+        Events
     </span>
 	<span ng-class="{selected: featuredSelectController.tab == 3}" ng-click="featuredSelectController.tab = 3">
         Articles
@@ -52,7 +52,7 @@
 		</a>
 	</div>
 	<div ng-repeat="event in featuredSelectController.data.events track by $index" sv-element>
-		<span><i sv-handle class="fa fa-lg fa-fw fa-bars"></i>{{$index + 1}} {{league.name}}</span>
+		<span><i sv-handle class="fa fa-lg fa-fw fa-bars"></i>{{$index + 1}} {{event.name}}</span>
 		<a class="btn lg icon-only float-right del" ng-click="featuredSelectController.deleteEvents($index)">
 			<i class="fa fa-minus-circle fa-lg fa-fw">
 			</i>
