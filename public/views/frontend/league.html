@@ -198,8 +198,8 @@
 					<h6 class="left-align" ng-bind="League.data.subtitle"></h6>
 				</div>
 				<div class="col s4 right-align">
-					<a class="btn flat" ng-click="Player.picks()">Picks & Bans</a>
-					<a class="btn flat" ng-click="Player.start()">Game Start</a>
+					<a class="btn flat" ng-click="Player.picks()" ng-if="Player.match[Player.type].picksBans">Picks & Bans</a>
+					<a class="btn flat" ng-click="Player.start()" ng-if="Player.match[Player.type].gameStart">Game Start</a>
 				</div>
 			</div>
 			<div no-ng-animate ng-show="!Player.loaded" class="row valign preloader-wrapper big active">

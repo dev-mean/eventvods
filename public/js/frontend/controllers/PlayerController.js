@@ -2,16 +2,17 @@
 	'use strict';
 	angular.module('eventvods')
 		.controller('PlayerController', ['$rootScope', '$timeout', function($rootScope, $timeout) {
-			var vm = this, player = null, type = null;
+			var vm = this, player = null;
 			vm.show = false;
 			vm.match = null;
+			vm.type = null;
 			vm.back = function(){
 				vm.show = false;
 				reset();
 			}
 			function reset(){
 				player = null;
-				type = null;
+				vm.type = null;
 				$('#player').empty();
 			}
 			function timeToSeconds(time){
@@ -34,9 +35,12 @@
 				vm.match = match;
 			}
 			vm.playTwitch = function(link, match){
+				reset();
+				console.log(link);
+				console.log(match);
 				vm.show = true;
 				vm.match = match;
-				type = "twitch";
+				vm.type = "twitch";
 				var twitch = parseTwitch(link);
 				if(twitch === false) window.location.url = link;
 				var options = {
@@ -44,29 +48,29 @@
 					height: window.innerWidth * 0.6 * 9/16,
 					video: twitch.vid
 				};
+				console.log(options);
 				player = new Twitch.Player("player", options);
-				player.seek(twitch.time);
-				player.play();
-				$timeout(function(){
-					vm.loaded = true;
-				}, 2500);
+				function init(){
+					player.seek(twitch.time);
+					player.removeEventListener(Twitch.Player.READY, init);
+					$timeout(function(){
+						vm.loaded = true;
+					}, 1);
+				}
+				player.addEventListener(Twitch.Player.READY, init);
 			}
 			vm.picks = function(){
-				if(type === "twitch"){
+				if(vm.type === "twitch"){
 					var time = parseTwitch(vm.match.twitch.picksBans);
 					if(time !== false) time = time.time;
-					player.pause();
 					player.seek(time);
-					player.play();
 				}
 			}
 			vm.start = function(){
-				if(type === "twitch"){
+				if(vm.type === "twitch"){
 					var time = parseTwitch(vm.match.twitch.gameStart);
 					if(time !== false) time = time.time;
-					player.pause();
 					player.seek(time);
-					player.play();
 				}
 			}
 		}]);
