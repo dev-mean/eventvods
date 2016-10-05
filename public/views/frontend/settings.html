@@ -129,7 +129,9 @@
 					<p>
 						Note: You'll need to login with your <b>new email.</b
 					</p>
-					<form id="new_email_form">
+					<form id="new_email_form" autocomplete="false" autofill="false">
+						<input name="email" class="hide">
+						<input name="password" class="hide">
 						<div class="row">
 							<div class="col s12 input-field">
 								<input id="new_email" type="email" class="validate" ng-model="Settings.emailData.email" required />
@@ -153,7 +155,9 @@
 				<div class="section left-align force-uppercase" ng-show="Settings.tab == 3">
 					<h3 class="force-uppercase">Change Password</h3>
 					<p>You'll need to log back in after changing your password.</p>
-					<form id="new_email_form">
+					<form id="new_email_form" autocomplete="false" autofill="false">
+						<input name="email" class="hide">
+						<input name="password" class="hide">
 						<div class="row">
 							<div class="col s12 input-field">
 								<input id="current_pw" type="password" class="validate" ng-model="Settings.passwordData.current_pw" required pattern=".{6,50}"/>
