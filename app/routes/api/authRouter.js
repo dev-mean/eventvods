@@ -17,6 +17,7 @@ router.get('/logout', function(req, res){
 });
 
 router.post('/login', function(req, res, next) {
+	console.log(req.body);
     User.authenticate()(req.body.email, req.body.password, function(err, user, code) {
         if (err) next(err);
         else if (user === false) res.status('400').send(code.message);

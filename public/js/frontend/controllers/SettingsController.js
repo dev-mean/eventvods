@@ -24,6 +24,13 @@
 						email: email,
 						confirm_pw: password
 					});
+				},
+				changePassword: function(current, password, confirm){
+					return $http.post( API_BASE_URL + '/user/password', {
+						current_pw: current,
+						password: password,
+						password_confirm: confirm
+					});
 				}
             };
         } ] )
@@ -55,6 +62,16 @@
 						vm.changeEmail();
 					}
 				});
+				$('#change_pw_form input[type!=checkbox]').blur(function() {
+					if ($(this).val() === "") {
+						$(this).addClass('invalid');
+					}
+				});
+				$('#change_pw_form input').keydown(function(e) {
+					if (e.which == 13) {
+						vm.changePassword();
+					}
+				});
 			}, 500);
 			vm.save = function(){
 				SettingsService.setSettings(vm.data.settings)
@@ -81,6 +98,7 @@
 				if(valid)
 					SettingsService.changeEmail(vm.emailData.email, vm.emailData.confirm_pw)
 					.then(function(){
+						$rootScope.$broadcast('triggerSessionUpdate');
 						$location.path('/login');
 					}, function(response){
 						switch(response.status){
@@ -94,6 +112,44 @@
 							default:
 								$('#new_email_pw + label').attr('data-error', "Unknown server error occured. Please try again.");
 								$('#new_email_pw').val('').removeClass('valid').addClass('invalid').focus();
+							break;
+						}
+					})
+				else $('#new_email_form input.invalid').first().focus();
+			}
+			vm.changePassword = function(){
+				$('#change_pw_form input[type!=checkbox]').each(function() {
+					if ($(this).val() === "") {
+						$(this).addClass('invalid');
+					}
+				});
+				var valid = (
+					$('#current_pw')[0].checkValidity() &&
+					$('#new_pw')[0].checkValidity() &&
+					$('#new_pw_c')[0].checkValidity()
+				);
+				valid = true;
+				if(valid)
+					SettingsService.changePassword(vm.passwordData.current_pw, vm.passwordData.password, vm.passwordData.password_confirm)
+					.then(function(){
+						$rootScope.$broadcast('triggerSessionUpdate');
+						$location.path('/login');
+					}, function(response){
+						switch(response.status){
+							case 400:
+								$('#new_pw, #new_pw_c').val('').removeClass('valid').addClass('invalid');
+								$('#new_pw').focus();
+							break;
+							case 403:
+								$('#current_pw + label').attr('data-error', "Incorrect password. Please try again.");
+								$('#current_pw').val('').removeClass('valid').addClass('invalid').focus();
+							break;
+							default:
+								$('#new_pw_c + label').attr('data-error', "Unknown server error occured. Please try again.");
+								$('#new_pw_c').val('').removeClass('valid').addClass('invalid').focus();
+								$('#new_pw').one('keydown', function(){
+										$('#new_pw_c + label').attr('data-error', $('#new_pw_c + label').attr('data-error-original'));
+								})
 							break;
 						}
 					})

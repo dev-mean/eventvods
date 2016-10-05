@@ -36,6 +36,7 @@ router.post('/settings', auth.logged_in(true), function (req, res, next) {
 	});
 });
 router.post('/email', auth.logged_in(true), function (req, res, next) {
+	if(!req.body.confirm_pw) return res.sendStatus('403');
 	User.findById(req.user._id, function(err, user){
 		if(err) next(err);
 		user.authenticate(req.body.confirm_pw, function (err, validUser, pwMessage) {
@@ -45,9 +46,40 @@ router.post('/email', auth.logged_in(true), function (req, res, next) {
 				req.user.email = req.body.email;
 				req.user.save(function (err) {
 					if (err) next(err);
-					else return res.sendStatus('204');
+					else {
+						req.logout();
+						return res.sendStatus('204');
+					}
 				});
 			} else return res.sendStatus('400');
+		});
+	});
+});
+router.post('/password', auth.logged_in(true), function (req, res, next) {
+	if(!req.body.current_pw) return res.sendStatus('403');
+	User.findById(req.user._id, function(err, user){
+		if(err) next(err);
+		user.authenticate(req.body.current_pw, function (err, validUser, pwMessage) {
+			if (err) next(err);
+			if(validUser === false) res.sendStatus('403');
+			else Indicative.validateAll(req.body, Validators.password, Validators.messages)
+				.then(function() {
+					validUser.setPassword(req.body.password, function(err, updatedModel, pwMessage){
+						if(err) next(err);
+						updatedModel.save(function(err){
+							if(err) next(err);
+							else {
+								req.logout();
+								return res.sendStatus('204');
+							}
+						});
+					})
+				})
+				.catch(function() {
+					var err = new Error("Bad Request");
+					err.status = 400;
+					next(err);
+				});
 		});
 	});
 });

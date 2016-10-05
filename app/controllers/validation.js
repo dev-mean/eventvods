@@ -25,6 +25,10 @@ module.exports.register = {
     password_confirm: 'same:password',
 	tos: "required|accepted"
 };
+module.exports.password = {
+	password: 'required|min:6',
+    password_confirm: 'same:password'
+};
 module.exports.login = {
 	email: 'required|email',
 	password: 'required|min:6'
