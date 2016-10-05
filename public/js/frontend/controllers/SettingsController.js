@@ -153,7 +153,7 @@
 							break;
 						}
 					})
-				else $('#new_email_form input.invalid').first().focus();
+				else $('#change_pw_form input.invalid').first().focus();
 			}
 			vm.validateName = function(name){
 				var deferred = $q.defer();
