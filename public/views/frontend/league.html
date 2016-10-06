@@ -111,26 +111,33 @@
 		<div no-ng-animate class="element-container container" ng-repeat="match in module.matches track by $index">
 			<div class="element-border">
 				<div class="element-background event-background">
-					<span class="element-tag" ng-bind="League.getIdentifier($index)"></span>
-					<div class="element-teams">
-						<div ng-if="!match.team1.spoiler" class="element-team">
-							<img ng-src="{{match.team1.icon}}" class="responsive-img team-large" />
-							<span ng-bind="match.team1.tag"></span>
+					<div class="row element-teams">
+						<div class="col s12 m5">
+							<div ng-if="!match.team1.spoiler" class="element-team">
+								<img ng-src="{{match.team1.icon}}" class="responsive-img team-large" />
+								<span ng-bind="match.team1.tag"></span>
+							</div>
+							<div ng-if="match.team1.spoiler" class="element-team">
+								<span>Team 1</span>
+							</div>
 						</div>
-						<div ng-if="match.team1.spoiler" class="element-team">
-							<span>Team 1</span>
+						<div class="col s12 m2">
+							<span class="element-tag" ng-bind="League.getIdentifier($index)"></span>
+							<div class="element-vs">
+								<span>VS</span>
+							</div>
 						</div>
-						<div class="element-vs">
-							VS
-						</div>
-						<div ng-if="!match.team2.spoiler" class="element-team">
-							<img ng-src="{{match.team2.icon}}" class="responsive-img team-large" />
-							<span ng-bind="match.team2.tag"></span>
-						</div>
-						<div ng-if="match.team2.spoiler" class="element-team">
-							<span>Team 2</span>
+						<div class="col s12 m5">
+							<div ng-if="!match.team2.spoiler" class="element-team">
+								<img ng-src="{{match.team2.icon}}" class="responsive-img team-large" />
+								<span ng-bind="match.team2.tag"></span>
+							</div>
+							<div ng-if="match.team2.spoiler" class="element-team">
+								<span>Team 2</span>
+							</div>
 						</div>
 					</div>
+
 				</div>
 			</div>
 			<div class="element-links">

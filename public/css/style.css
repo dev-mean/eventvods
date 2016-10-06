@@ -975,12 +975,21 @@ input[type="checkbox"].filled-in:checked + label:after {
 }
 .element-container .element-border .element-background .element-tag {
   color: white;
-  font-size: 2.18em;
+  font-size: 2em;
   height: 45px;
+  display: block;
+  padding: 0;
 }
 .element-container .element-border .element-background .element-teams {
-  height: 155px;
   width: 100%;
+  color: white;
+  height: 150px;
+}
+.element-container .element-border .element-background .element-teams .element-vs {
+  font-size: large;
+  height: 150px;
+  position: relative;
+  top: -45px;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
@@ -990,36 +999,20 @@ input[type="checkbox"].filled-in:checked + label:after {
   -webkit-align-items: center;
       -ms-flex-align: center;
           align-items: center;
-  color: white;
-  font-size: 2.18em;
-}
-.element-container .element-border .element-background .element-teams .element-vs {
-  font-size: large;
 }
 .element-container .element-border .element-background .element-teams .element-team {
-  -webkit-flex-grow: 1;
-      -ms-flex-positive: 1;
-          flex-grow: 1;
-  -webkit-flex-basis: 0px;
-      -ms-flex-preferred-size: 0px;
-          flex-basis: 0px;
-  padding: 10px;
+  height: 150px;
+  font-weight: 300;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
   -webkit-flex-direction: column;
       -ms-flex-direction: column;
           flex-direction: column;
-  -webkit-justify-content: space-around;
-      -ms-flex-pack: distribute;
-          justify-content: space-around;
-  -webkit-align-items: center;
-      -ms-flex-align: center;
-          align-items: center;
-  position: relative;
-  top: -20px;
-  height: 150px;
-  font-weight: 300;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  font-size: 2em;
 }
 .element-container .element-border .element-background .element-teams .element-team > img {
   margin-bottom: 5px;
@@ -1067,8 +1060,7 @@ input[type="checkbox"].filled-in:checked + label:after {
 .element-container .element-border .element-background.element-14 {
   background: url('/assets/images/elements/14.jpg');
 }
-.element-container .element-info,
-.element-container .element-links {
+.element-container .element-info {
   -webkit-flex-basis: 0;
       -ms-flex-preferred-size: 0;
           flex-basis: 0;
@@ -1120,23 +1112,22 @@ input[type="checkbox"].filled-in:checked + label:after {
 .element-container .element-info .element-title {
   text-transform: uppercase;
 }
+.element-container .element-links {
+  -webkit-flex-basis: 0;
+      -ms-flex-preferred-size: 0;
+          flex-basis: 0;
+  -webkit-flex-grow: 2;
+      -ms-flex-positive: 2;
+          flex-grow: 2;
+  height: 150px;
+}
 .element-container .element-links .element-titles {
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-justify-content: space-around;
-      -ms-flex-pack: distribute;
-          justify-content: space-around;
-  -webkit-align-items: center;
-      -ms-flex-align: center;
-          align-items: center;
   width: 100%;
-  margin-top: 5px;
+  margin-bottom: 5px;
 }
 .element-container .element-links .element-titles h6 {
-  font-size: 1.5em;
+  font-size: 1.3em;
   position: relative;
-  padding-top: 20px;
 }
 .element-container .element-links .element-titles h6:after {
   content: "";
@@ -1152,9 +1143,8 @@ input[type="checkbox"].filled-in:checked + label:after {
           transform: translateY(5px);
 }
 .element-container .element-links .element-go {
-  margin-top: -15px;
-  margin-bottom: -5px;
   width: 100%;
+  margin-bottom: 0;
 }
 .element-container .element-links .element-go .row {
   margin-bottom: 0;
@@ -1162,14 +1152,14 @@ input[type="checkbox"].filled-in:checked + label:after {
 }
 .element-container .element-links .element-go .row a {
   opacity: 0.6;
-  height: 100px;
 }
 .element-container .element-links .element-go .row a:hover {
   opacity: 1;
 }
 .element-container .element-links .element-go .row a .responsive-img {
-  padding: 25px;
+  padding: 0 25px;
   pointer-events: none;
+  max-height: 60px;
 }
 .element-container .element-links .element-extras {
   position: relative;
@@ -1422,6 +1412,7 @@ input[type="checkbox"].filled-in:checked + label:after {
   height: 150px;
   position: absolute;
   top: 0;
+  left: 25px;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;

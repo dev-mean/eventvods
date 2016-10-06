@@ -48,32 +48,31 @@
 			}
 			.element-tag {
 				color: white;
-				font-size: 2.18em;
+				font-size: 2em;
 				height: 45px;
+				display: block;
+				padding: 0;
 			}
 			.element-teams {
-				height: 155px;
 				width: 100%;
-				display: flex;
-				justify-content: center;
-				align-items: center;
 				color: white;
-				font-size: 2.18em;
+				height: 150px;
 				.element-vs {
 					font-size: large;
+					height: 150px;
+					position: relative;
+					top: -45px;
+					display: flex;
+					justify-content: center;
+					align-items: center;
 				}
 				.element-team {
-					flex-grow: 1;
-					flex-basis: 0px;
-    				padding: 10px;
-					display: flex;
-					flex-direction: column;
-					justify-content: space-around;
-					align-items: center;
-					position: relative;
-					top: -20px;
 					height: 150px;
 					font-weight: 300;
+					display: flex;
+					flex-direction: column;
+					justify-content: center;
+					font-size: 2em;
 					> img {
 						margin-bottom: 5px;
 						max-height: 60%;
@@ -125,7 +124,7 @@
 			}
 		}
 	}
-	.element-info, .element-links {
+	.element-info {
 		flex-basis: 0;
 		flex-grow: 2;
 		height: 150px;
@@ -168,16 +167,15 @@
 		}
 	}
 	.element-links {
+		flex-basis: 0;
+		flex-grow: 2;
+		height: 150px;
 		.element-titles {
-			display: flex;
-			justify-content: space-around;
-			align-items: center;
 			width: 100%;
-			margin-top: 5px;
+			margin-bottom: 5px;
 			h6 {
-				font-size: 1.5em;
+				font-size: 1.3em;
 				position: relative;
-				padding-top: 20px;
 				&:after {
 					content : "";
 					position: absolute;
@@ -191,21 +189,20 @@
 			}
 		}
 		.element-go {
-			margin-top: -15px;
-    		margin-bottom: -5px;
 			width: 100%;
+			margin-bottom: 0;
 			.row {
 				margin-bottom: 0;
 				margin-right: 0;
 				a {
 					opacity: 0.6;
-					height: 100px;
 					&:hover {
 						opacity: 1;
 					}
 					.responsive-img {
-						padding: 25px;
+						padding: 0 25px;
 						pointer-events: none;
+						max-height: 60px;
 					}
 				}
 			}
