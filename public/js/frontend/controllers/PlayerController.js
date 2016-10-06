@@ -6,14 +6,16 @@
 			vm.show = false;
 			vm.match = null;
 			vm.type = null;
+			vm.loaded = true;
 			vm.back = function(){
-				vm.show = false;
 				reset();
 			}
 			function reset(){
 				player = null;
 				vm.type = null;
+				vm.match = null;
 				$('#player').empty();
+				vm.show = false;
 			}
 			function timeToSeconds(time){
 				time = /((\d+)h)?((\d+)m)?((\d+)s)?/i.exec(time);
@@ -24,20 +26,49 @@
 			}
 			function parseTwitch(link){
 				var twitch = /http(s|):\/\/(www\.|)twitch\.tv\/(\S+)\/v\/(\S+)\?t=(\S+)?/i.exec(link);
-				if(twitch === null) return false;
+				if(twitch == null) return false;
 				else return {
 					vid: "v"+twitch[4],
 					time: timeToSeconds(twitch[5])
 				}
 			}
+			function parseYoutube(link){
+				var yt = /http(s|):\/\/(www\.|)(youtube\.com\/watch\?v=|youtu\.be\/)(\S+)[&\?]t=(\S+)/i.exec(link);
+				if(yt == null) return false;
+				else return {
+					vid: yt[4],
+					time: timeToSeconds(yt[5])
+				}
+			}
 			vm.playYoutube = function(link, match){
+				reset();
 				vm.show = true;
 				vm.match = match;
+				vm.type = "youtube";
+				var yt = parseYoutube(link);
+				if(yt === false) window.location.url = link;
+				var options = {
+					width: window.innerWidth * 0.6,
+					height: window.innerWidth * 0.6 * 9/16,
+					videoId: yt.vid,
+					playerVars: {
+						controls: 0,
+						modestbranding: 1,
+						start: yt.time
+					},
+					events: {
+						onReady: function(event) {
+							event.target.playVideo();
+						}
+					}
+				};
+				player = new YT.Player('player', options);
+
+
 			}
 			vm.playTwitch = function(link, match){
 				reset();
-				console.log(link);
-				console.log(match);
+				vm.loaded = false;
 				vm.show = true;
 				vm.match = match;
 				vm.type = "twitch";
@@ -65,6 +96,12 @@
 					if(time !== false) time = time.time;
 					player.seek(time);
 				}
+				if(vm.type === "youtube"){
+					var time = parseYoutube(vm.match.youtube.picksBans);
+					if(time !== false) time = time.time;
+					player.seekTo(time);
+				}
+				console.log(time);
 			}
 			vm.start = function(){
 				if(vm.type === "twitch"){
@@ -72,6 +109,12 @@
 					if(time !== false) time = time.time;
 					player.seek(time);
 				}
+				if(vm.type === "youtube"){
+					var time = parseYoutube(vm.match.youtube.gameStart);
+					if(time !== false) time = time.time;
+					player.seekTo(time);
+				}
+				console.log(time);
 			}
 		}]);
 }());
