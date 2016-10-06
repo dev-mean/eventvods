@@ -8,16 +8,34 @@ var Indicative = require('indicative');
 var Validators = require('../../controllers/validation');
 var Q = require('q');
 var slug = require('slug');
+var League = require('../../models/league');
+
+router.get('/slug/:slug', auth.public_api(), ratelimit, cache, function(req, res, next) {
+		Game.findOne({
+			slug: req.params.slug
+		})
+		.exec(function(err, game) {
+			if (err) next(err);
+			League.find({
+				"game": game._id
+			})
+			.exec(function(err, leagues) {
+				console.log(leagues);
+				if (err) next(err);
+				game.leagues = ["test"];
+				res.json(game);
+			});
+		});
+	})
 
 router.route('/')
 	.get(auth.public_api(), ratelimit, cache, function(req, res, next) {
-		var time = new Date();
 		Game.find(function(err, games) {
 			if (err) next(err);
 			else res.json(games);
 		});
 	})
-	.post(auth.updater(), AWS.handleUpload(['icon', 'banner']), function(req, res, next) {
+	.post(auth.updater(), AWS.handleUpload(['icon', 'header']), function(req, res, next) {
 		Indicative.validateAll(req.body, Validators.game, Validators.messages)
 			.then(function() {
 				req.body.slug = slug(req.body.slug);
@@ -48,7 +66,7 @@ router.route('/:game_id')
 	})
 	.delete(auth.updater(), function(req, res, next) {
 		Game.findById(req.params.game_id, function(err, doc) {
-			Q.all([AWS.deleteImage(doc.icon), AWS.deleteImage(doc.banner)])
+			Q.all([AWS.deleteImage(doc.icon), AWS.deleteImage(doc.header),AWS.deleteImage(doc.header_blur)])
 				.then(function() {
 					doc.remove(function(err) {
 						if (err) next(err);
@@ -59,7 +77,7 @@ router.route('/:game_id')
 				});
 		});
 	})
-	.put(auth.updater(), AWS.handleUpload(['icon', 'banner']), function(req, res, next) {
+	.put(auth.updater(), AWS.handleUpload(['icon', 'header']), function(req, res, next) {
 		Indicative.validateAll(req.body, Validators.game, Validators.messages)
 			.then(function() {
 				req.body.slug = slug(req.body.slug);

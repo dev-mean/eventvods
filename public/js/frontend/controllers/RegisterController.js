@@ -28,7 +28,7 @@
 				if (valid)
 					SessionManager.register(vm.data)
 					.then(function(){
-						$location.path('/user/settings?tab=1');
+						$location.path('/user/settings').search();
 					})
 					.catch(function(errs) {
 						errs.forEach(function(err){

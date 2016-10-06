@@ -129,7 +129,8 @@
 					controller: 'LeagueController',
 					controllerAs: 'League',
 					meta: {
-						title: 'View League - Eventvods - Esports on Demand'
+						title: 'View League - Eventvods - Esports on Demand',
+						description: 'Watch all vods and highlights on demand,  easily and spoiler-free. Rate, favorite and share matches of your favorite teams!'
 					}
                 })
 				.when('/article/:slug', {
@@ -145,7 +146,7 @@
                     templateUrl: '/assets/views/frontend/cookies.html',
 					meta: {
 						title: 'Cookie Policy - Eventvods - Esports on Demand',
-						description: 'Meta Description'
+						description: 'Eventvods is your go-to platform to watch all professional esports games on demand. Follow your favorite teams, rate videos and view all major events spoiler-free.'
 					}
                 })
 				.when('/about/team', {
@@ -158,7 +159,7 @@
 				.when('/about/beta-feedback', {
                     templateUrl: '/assets/views/frontend/feedback.html',
 					meta: {
-						title: 'Get in Touch - Eventvods - Esports on Demand',
+						title: 'Beta Feedback - Eventvods - Esports on Demand',
 						description: 'Got a question? Don\'t hesitate and get in touch with us. Ideas, suggestions, feedback, complaints, business queries or just want to say hi? Contact us.'
 					}
                 })
@@ -166,7 +167,7 @@
                     templateUrl: '/assets/views/frontend/tos.html',
 					meta: {
 						title: 'Terms of Service - Eventvods - Esports on Demand',
-						description: 'Meta Description'
+						description: 'Eventvods is your go-to platform to watch all professional esports games on demand. Follow your favorite teams, rate videos and view all major events spoiler-free.'
 					}
                 })
 				.when('/user/settings', {
@@ -175,7 +176,7 @@
 					controllerAs: 'Settings',
 					meta: {
 						title: 'Settings - Eventvods - Esports on Demand',
-						description: 'Meta Description'
+						description: 'Eventvods is your go-to platform to watch all professional esports games on demand. Follow your favorite teams, rate videos and view all major events spoiler-free.'
 					}
                 });
 			$locationProvider.html5Mode({

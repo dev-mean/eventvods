@@ -11,7 +11,8 @@ var gameSchema = new Schema({
         unique: true
     },
     icon: String,
-    banner: String,
+    header: String,
+	header_blur: String,
 });
 var Game = mongoose.model('Game', gameSchema);
 module.exports = Game;

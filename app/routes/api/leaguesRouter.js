@@ -25,7 +25,6 @@ router.route('/')
 			.then(function() {
 				req.body.slug = slug(req.body.slug);
 				League.create(req.body, function(err, league) {
-					if (err) console.log(err);
 					if (err) next(err);
 					else res.json(league);
 				});
@@ -83,7 +82,7 @@ router.route('/:league_id')
 	})
 	.delete(auth.updater(), function(req, res, next) {
 		League.findById(req.params.league_id, function(err, doc) {
-			Q.all([AWS.deleteImage(doc.logo), AWS.deleteImage(doc.banner)])
+			Q.all([AWS.deleteImage(doc.logo), AWS.deleteImage(doc.header),AWS.deleteImage(doc.header_blur)])
 				.then(function() {
 					doc.remove(function(err) {
 						if (err) next(err);

@@ -83,6 +83,10 @@ input[type="checkbox"].filled-in:checked + label:after {
 	> .row > .col {
 		padding: 0 1.5rem;
 	}
+	.account-header {
+		display: flex;
+		align-items: center;
+	}
 	ol.verify-wip {
 		margin: 50px;
 		font-size: 1.2em;
@@ -100,7 +104,12 @@ input[type="checkbox"].filled-in:checked + label:after {
 			}
 		}
 	}
-	h2 {
+	h3 {
+		display: flex;
+		align-items: center;
+		.name {
+			margin-left: 50px;
+		}
 		.editable-click {
 			color: @accent-green;
 			text-transform: uppercase;

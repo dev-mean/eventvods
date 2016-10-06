@@ -115,18 +115,18 @@
 				</div>
 				<div class="element-go row">
 					<div class="element-half">
-						<span ng-if="module.youtube" editable-text="match.youtube.picksBans" class="element-button">
+						<span ng-if="module.youtube" editable-text="module.matches[$index].youtube.picksBans" class="element-button">
 							Youtube
 						</span>
-						<span ng-if="module.twitch" editable-text="match.twitch.picksBans" class="element-button">
+						<span ng-if="module.twitch" editable-text="module.matches[$index].twitch.picksBans" class="element-button">
 							Twitch
 						</span>
 					</div>
 					<div class="element-half">
-						<span ng-if="module.youtube" editable-text="match.youtube.gameStart" class="element-button">
+						<span ng-if="module.youtube" editable-text="module.matches[$index].youtube.gameStart" class="element-button">
 							Youtube
 						</span>
-						<span ng-if="module.twitch" editable-text="match.twitch.gameStart" class="element-button">
+						<span ng-if="module.twitch" editable-text="module.matches[$index].twitch.gameStart" class="element-button">
 							Twitch
 						</span>
 					</div>

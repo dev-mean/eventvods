@@ -54,7 +54,7 @@ router.route('/:article_id')
 	})
 	.delete(auth.writer(), function(req, res, next) {
 		Article.findById(req.params.article_id, function(err, doc) {
-			AWS.deleteImage(doc.header)
+			Q.all([AWS.deleteImage(doc.header),AWS.deleteImage(doc.header_blur)])
 				.then(function() {
 					doc.remove(function(err) {
 						if (err) next(err);

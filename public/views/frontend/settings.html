@@ -22,26 +22,24 @@
 </div>
 <div class="contents" ng-class="Page.contentClass">
 	<div class="container center-align settings">
+		<div class="account-header row">
+			<h3 class="col s12 left-align">
+				<svg viewbox="1 1 8 8" width="100px" height="100px">
+					<defs>
+						<pattern id="profilePicture" patternUnits="userSpaceOnUse" width="10" height="10">
+							<image ng-attr-href="{{Settings.data.profilePicture}}" x="0" y="0" width="10" height="10" />
+						</pattern>
+					</defs>
+					<path fix-fill data-relFill="#profilePicture" stroke="#0CD97E" stroke-width="0.35" d="M5.5 1.5 L8.5 4.5 Q9 5 8.5 5.5 L5.5 8.5 Q5 9 4.5 8.5 L 1.5 5.5 Q1 5 1.5 4.5 L4.5 1.5 Q 5 1 5.5 1.5z"
+					/>
+				</svg>
+				<span class="name" editable-text="Settings.data.displayName" onbeforesave="Settings.validateName($data)" onaftersave="Settings.updateName()">
+					{{Settings.data.displayName}} <i class="material-icons">edit</i>
+				</span>
+			</h3>
+		</div>
 		<div class="row">
-			<div class="col s4 border-right">
-				<div class="account-header row">
-					<div class="col s4">
-						<svg viewbox="1 1 8 8">
-							<defs>
-								<pattern id="profilePicture" patternUnits="userSpaceOnUse" width="10" height="10">
-									<image ng-attr-href="{{Settings.data.profilePicture}}" x="0" y="0" width="10" height="10" />
-								</pattern>
-							</defs>
-							<path fix-fill data-relFill="#profilePicture" stroke="#0CD97E" stroke-width="0.35" d="M5.5 1.5 L8.5 4.5 Q9 5 8.5 5.5 L5.5 8.5 Q5 9 4.5 8.5 L 1.5 5.5 Q1 5 1.5 4.5 L4.5 1.5 Q 5 1 5.5 1.5z"
-							/>
-						</svg>
-					</div>
-					<h2 class="col s8 left-align">
-						<span class="name" editable-text="Settings.data.displayName" onbeforesave="Settings.validateName($data)" onaftersave="Settings.updateName()">
-							{{Settings.data.displayName}} <i class="material-icons">edit</i>
-						</span>
-					</h2>
-				</div>
+			<div class="col s4">
 				<div class="collection">
 					<a class="collection-item left-align" ng-click="Settings.tab = 0" ng-class="Settings.tab == 0 ? 'active' : ''">Settings<i class="secondary-content material-icons">&#xE8B8;</i></a>
 					<a class="collection-item left-align" ng-click="Settings.tab = 1" ng-class="Settings.tab == 1 ? 'active' : ''">Verify Email<i class="secondary-content material-icons">&#xE8E8;</i></a>
@@ -49,7 +47,7 @@
 					<a class="collection-item left-align" ng-click="Settings.tab = 3" ng-class="Settings.tab == 3 ? 'active' : ''">Change Password<i class="secondary-content material-icons">&#xE32A;</i></a>
 				</div>
 			</div>
-			<div class="col s8 pad-left">
+			<div class="col s8 pad-left border-left">
 				<div class="section left-align force-uppercase" ng-show="Settings.tab == 0">
 					<h3 class="force-uppercase">Inline Player</h3>
 					<p>Use our custom built inline player to eliminate spoilers.</p>

@@ -57,8 +57,8 @@ img:not([src]),
 body {
   background: #27273F;
 }
-.col.border-right {
-  border-right: 3px solid #3C3C62;
+.col.border-left {
+  border-left: 3px solid #3C3C62;
 }
 .text-accent {
   color: #0CD97E;
@@ -175,8 +175,8 @@ i.starred {
 .dark {
   background: #27273F;
 }
-.dark .col.border-right {
-  border-right: 3px solid white;
+.dark .col.border-left {
+  border-left: 3px solid white;
 }
 .dark .contents {
   background: url('/assets/images/backgrounds/dark.jpg') #1A192B;
@@ -242,6 +242,7 @@ i.starred {
       -ms-flex-preferred-size: 200px;
           flex-basis: 200px;
   padding: 0;
+  background-color: #0CD97E;
 }
 .cookie_disclaimer .disclaimer {
   display: -webkit-flex;
@@ -826,6 +827,14 @@ input[type="checkbox"].filled-in:checked + label:after {
 .settings > .row > .col {
   padding: 0 1.5rem;
 }
+.settings .account-header {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
 .settings ol.verify-wip {
   margin: 50px;
   font-size: 1.2em;
@@ -844,29 +853,40 @@ input[type="checkbox"].filled-in:checked + label:after {
 .settings ol.verify-wip li.final.current {
   color: #0CD97E;
 }
-.settings h2 .editable-click {
+.settings h3 {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.settings h3 .name {
+  margin-left: 50px;
+}
+.settings h3 .editable-click {
   color: #0CD97E;
   text-transform: uppercase;
 }
-.settings h2 .editable-input {
+.settings h3 .editable-input {
   font-size: 0.8em;
   width: 90%;
   height: 64px;
   text-transform: uppercase;
 }
-.settings h2 .editable-wrap {
+.settings h3 .editable-wrap {
   width: 100%;
 }
-.settings h2 .editable-buttons {
+.settings h3 .editable-buttons {
   display: block;
   margin-top: 5px;
 }
-.settings h2 .editable-buttons button {
+.settings h3 .editable-buttons button {
   text-transform: uppercase;
   margin: 0 10px 0 0;
   font-size: 50%;
 }
-.settings h2 .editable-error {
+.settings h3 .editable-error {
   width: 166%;
   text-transform: uppercase;
   font-size: 0.4em;
