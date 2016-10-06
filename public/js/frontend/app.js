@@ -96,14 +96,14 @@
 					templateUrl: '/assets/views/frontend/home.html',
 					meta: {
 						title: 'Eventvods - Esports on Demand',
-						description: 'Testing Meta Description'
+						description: 'Eventvods is your go-to platform to watch all professional esports games on demand. Follow your favorite teams, rate videos and view all major events spoiler-free.'
 					}
 				})
                 .when('/', {
                     templateUrl: '/assets/views/frontend/home.html',
 					meta: {
 						title: 'Eventvods - Esports on Demand',
-						description: 'Testing Meta Description'
+						description: 'Eventvods is your go-to platform to watch all professional esports games on demand. Follow your favorite teams, rate videos and view all major events spoiler-free.'
 					}
                 })
 				.when('/login', {
@@ -137,7 +137,8 @@
 					controller: 'ArticleController',
 					controllerAs: 'Article',
 					meta: {
-						title: 'View Article - Eventvods - Esports on Demand'
+						title: 'View Article - Eventvods - Esports on Demand',
+						description: 'Eventvods features articles on a wide variety of topics covering everything esports i.e. League of Legends, CS:GO, Dota 2, Overwatch and more.'
 					}
                 })
 				.when('/about/cookies', {
@@ -151,14 +152,14 @@
                     templateUrl: '/assets/views/frontend/team.html',
 					meta: {
 						title: 'Meet the Team - Eventvods - Esports on Demand',
-						description: 'Meta Description'
+						description: 'Meet our team and get to know the people that deliver live updates for your spoiler-free esports experience. Most of our staff are volunteers.'
 					}
                 })
 				.when('/about/beta-feedback', {
                     templateUrl: '/assets/views/frontend/feedback.html',
 					meta: {
 						title: 'Get in Touch - Eventvods - Esports on Demand',
-						description: 'Meta Description'
+						description: 'Got a question? Don\'t hesitate and get in touch with us. Ideas, suggestions, feedback, complaints, business queries or just want to say hi? Contact us.'
 					}
                 })
 				.when('/about/terms', {

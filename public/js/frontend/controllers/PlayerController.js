@@ -11,6 +11,7 @@
 				reset();
 			}
 			function reset(){
+				player.destroy();
 				player = null;
 				vm.type = null;
 				vm.match = null;
@@ -41,7 +42,6 @@
 				}
 			}
 			vm.playYoutube = function(link, match){
-				reset();
 				vm.show = true;
 				vm.match = match;
 				vm.type = "youtube";
@@ -53,6 +53,7 @@
 					videoId: yt.vid,
 					playerVars: {
 						controls: 0,
+						showinfo: 0,
 						modestbranding: 1,
 						start: yt.time
 					},
@@ -63,11 +64,8 @@
 					}
 				};
 				player = new YT.Player('player', options);
-
-
 			}
 			vm.playTwitch = function(link, match){
-				reset();
 				vm.loaded = false;
 				vm.show = true;
 				vm.match = match;
@@ -79,7 +77,6 @@
 					height: window.innerWidth * 0.6 * 9/16,
 					video: twitch.vid
 				};
-				console.log(options);
 				player = new Twitch.Player("player", options);
 				function init(){
 					player.seek(twitch.time);
