@@ -306,8 +306,9 @@ textarea.parsley-error {
   font-size: 2em;
 }
 .element-container .element-border .element-background .element-teams .element-team > img {
-  margin-bottom: 5px;
   max-height: 60%;
+  margin: 5px auto 5px auto;
+  padding: 10px;
 }
 .element-container .element-border .element-background.element-1 {
   background: url('/assets/images/elements/15.jpg');

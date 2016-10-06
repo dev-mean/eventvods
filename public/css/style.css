@@ -1015,8 +1015,9 @@ input[type="checkbox"].filled-in:checked + label:after {
   font-size: 2em;
 }
 .element-container .element-border .element-background .element-teams .element-team > img {
-  margin-bottom: 5px;
   max-height: 60%;
+  margin: 5px auto 5px auto;
+  padding: 10px;
 }
 .element-container .element-border .element-background.element-1 {
   background: url('/assets/images/elements/15.jpg');
@@ -1542,6 +1543,16 @@ a.btn.details-toggle.loaded {
   height: 256px;
   width: 256px;
   margin: auto;
+}
+.beta {
+  color: #0CD97E;
+  padding: 5px;
+  text-transform: uppercase;
+  background: #27273F;
+  text-align: center;
+}
+.beta a {
+  text-decoration: underline;
 }
 
 /*# sourceMappingURL=style.css.map */
