@@ -35,6 +35,21 @@
 				}
 			};
 		})
+		.directive('fixClip', function($rootScope, $location) {
+			var abs = $location.absUrl();
+			return {
+				restrict: 'A',
+				link: function($scope, $element, $attrs) {
+					$element.css('clip-path','url("'+abs+'#element")');
+					$rootScope.$on('$routeChangeSuccess', function (evt, current, previous) {
+						if(current != previous && typeof current !== "undefined"){
+							abs = $location.absUrl();
+							$element.css('clip-path','url("'+abs+'#element")');
+						}
+					});
+				}
+			};
+		})
 		// Available BB code snippets
 		.value('snippets', {
 			"b": "<b>$1</b>", // Bolded text

@@ -109,8 +109,8 @@
 	</div>
 	<div ng-repeat="module in League.data.contents[League.sectionIndex].modules track by $index" ng-if="League.moduleIndex == $index">
 		<div no-ng-animate class="element-container container" ng-repeat="match in module.matches track by $index">
-			<div class="element-border">
-				<div class="element-background event-background">
+			<div class="element-border" fix-clip>
+				<div class="element-background event-background" fix-clip>
 					<div class="row element-teams">
 						<div class="col s12 m5">
 							<div ng-if="!match.team1.spoiler" class="element-team">
