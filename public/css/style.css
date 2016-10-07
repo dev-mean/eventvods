@@ -1301,6 +1301,7 @@ input[type="checkbox"].filled-in:checked + label:after {
 .event-nav.container .material-icons.ng-hide {
   opacity: 0;
   display: block!important;
+  pointer-events: none;
 }
 .event-nav.container h4 {
   border-bottom: 0;
