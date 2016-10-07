@@ -616,6 +616,7 @@ nav.nav-main a.btn:hover {
   padding: 3px;
   opacity: 0.5;
   font-size: 0.8em;
+  text-transform: uppercase;
 }
 .evSlider .indicators {
   position: relative;
