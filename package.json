@@ -22,6 +22,7 @@
     "express-session": "*",
     "file-type": "*",
     "gm": "^1.23.0",
+    "gulp-gm": "0.0.8",
     "gulp-postcss": "^6.1.1",
     "gulp-sourcemaps": "^1.6.0",
     "indicative": "*",
