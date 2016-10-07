@@ -164,7 +164,6 @@ i.starred {
 }
 .collection .collection-item {
   color: #0CD97E;
-  text-transform: uppercase;
 }
 .collection .collection-item .secondary-content {
   color: inherit;
@@ -843,6 +842,9 @@ textarea.materialize-textarea:focus.valid {
 input[type="checkbox"].filled-in:checked + label:after {
   border: 2px solid #0CD97E;
   background-color: #0CD97E;
+}
+.settings .collection-item {
+  text-transform: uppercase;
 }
 .settings .pad-left {
   padding-left: 50px!important;

@@ -178,7 +178,10 @@
 						title: 'Settings - Eventvods - Esports on Demand',
 						description: 'Eventvods is your go-to platform to watch all professional esports games on demand. Follow your favorite teams, rate videos and view all major events spoiler-free.'
 					}
-                });
+                })
+				.otherwise({
+					templateUrl: '/assets/views/frontend/404.html',
+				});
 			$locationProvider.html5Mode({
 				enabled: true,
 				requireBase: true
