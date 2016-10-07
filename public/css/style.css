@@ -216,7 +216,7 @@ i.starred {
   border-top: 5px solid #0CD97E;
   color: #fff;
   background: #3C3C62;
-  transition: all 1s linear;
+  transition: all 0.3s linear;
   -webkit-transform: translate(0px, 100%);
       -ms-transform: translate(0px, 100%);
           transform: translate(0px, 100%);
