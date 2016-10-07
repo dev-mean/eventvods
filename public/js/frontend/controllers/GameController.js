@@ -7,7 +7,11 @@
 			var slug = $routeParams.slug;
 			$http.get(API + '/games/slug/'+slug)
 				.then(function(res){
-					vm.data.game = res.data;
+					vm.data = res.data;
+					$('.evSlider .image, .contents .details-toggle').addClass('loaded');
+					$timeout(function(){
+						$('.load-in').addClass('loaded');
+					}, 100);
 				})
 		}]);
 }());

@@ -14,15 +14,17 @@ router.get('/slug/:slug', auth.public_api(), ratelimit, cache, function(req, res
 		Game.findOne({
 			slug: req.params.slug
 		})
+		.lean()
 		.exec(function(err, game) {
 			if (err) next(err);
+			console.log(game._id);
 			League.find({
 				"game": game._id
 			})
 			.exec(function(err, leagues) {
 				console.log(leagues);
 				if (err) next(err);
-				game.leagues = ["test"];
+				game.leagues = leagues;
 				res.json(game);
 			});
 		});

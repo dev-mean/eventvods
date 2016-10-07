@@ -13,6 +13,7 @@ var gameSchema = new Schema({
     icon: String,
     header: String,
 	header_blur: String,
+	credits: String,
 });
 var Game = mongoose.model('Game', gameSchema);
 module.exports = Game;

@@ -45,9 +45,15 @@
 		</div>
 		<div class="standard group">
 			<label>
-                Banner (optional)
+                Game Header (optional)
             </label>
-			<image-drop model="gameFormController.data.banner" preview-width="300" preview-height="100" />
+			<image-drop model="gameFormController.data.header" preview-width="300" preview-height="100" />
+		</div>
+		<div class="standard group">
+			<label>
+                Header Photo Credits
+            </label>
+			<input type="text" placeholder="e.g. Riot Games" ng-model="gameFormController.data.credits" data-parsley-trigger="keyup" />
 		</div>
 	</div>
 </form>

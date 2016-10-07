@@ -139,12 +139,21 @@
 						description: 'Meta Description'
 					}
                 })
+				.when('/game/:slug', {
+                    templateUrl: '/assets/views/frontend/game.html',
+					controller: 'GameController',
+					controllerAs: 'Game',
+					meta: {
+						title: 'Events - Eventvods - Esports on Demand',
+						description: 'Watch all vods and highlights on demand,  easily and spoiler-free. Rate, favorite and share matches of your favorite teams!'
+					}
+                })
 				.when('/event/:slug', {
                     templateUrl: '/assets/views/frontend/league.html',
 					controller: 'LeagueController',
 					controllerAs: 'League',
 					meta: {
-						title: 'View League - Eventvods - Esports on Demand',
+						title: 'View Event - Eventvods - Esports on Demand',
 						description: 'Watch all vods and highlights on demand,  easily and spoiler-free. Rate, favorite and share matches of your favorite teams!'
 					}
                 })
