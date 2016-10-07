@@ -1548,7 +1548,8 @@ a.btn.details-toggle.loaded {
   color: #0CD97E;
   padding: 5px;
   text-transform: uppercase;
-  background: #27273F;
+  border-bottom: 2px solid #3c405c;
+  background: black;
   text-align: center;
 }
 .beta a {
