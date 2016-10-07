@@ -42,7 +42,7 @@
 		</a>
 	</div>
 </div>
-<div class="sortable-container" sv-root sv-part="featuredSelectController.data.event" ng-show="featuredSelectController.tab == 2">
+<div class="sortable-container" sv-root sv-part="featuredSelectController.data.events" ng-show="featuredSelectController.tab == 2">
 	<div>
 		<span><select ng-options="event.name for event in featuredSelectController.events" ng-model="featuredSelectController.selectedEvent">
 		</select></span>
@@ -53,7 +53,7 @@
 	</div>
 	<div ng-repeat="event in featuredSelectController.data.events track by $index" sv-element>
 		<span><i sv-handle class="fa fa-lg fa-fw fa-bars"></i>{{$index + 1}} {{event.name}}</span>
-		<a class="btn lg icon-only float-right del" ng-click="featuredSelectController.deleteEvents($index)">
+		<a class="btn lg icon-only float-right del" ng-click="featuredSelectController.deleteEvent($index)">
 			<i class="fa fa-minus-circle fa-lg fa-fw">
 			</i>
 		</a>
