@@ -3,11 +3,11 @@ var User = require('../../models/user');
 var config = require('../../../config/config');
 var request = require('request');
 
-function link_facebook(user, res, facebook_id) {
+function link_facebook(user, res, facebook_id, ret) {
 	user.social.facebook = facebook_id;
 	user.save(function(err) {
 		if (err) next(err);
-		res.sendStatus('204');
+		res.sendStatus(ret);
 	})
 }
 
@@ -29,7 +29,7 @@ function process(req, res, body) {
 			if (err) next(err);
 			if (count > 0)
 				res.status('409').send('This Facebook account is associated linked to an Eventvods.com account. Please remove it before attempting to associate it with a new account.');
-			else link_facebook(req.user, res, body.id);
+			else link_facebook(req.user, res, body.id, req.session.returnTo);
 		});
 	}
 	//Else login w/ Facebook ID.
@@ -60,9 +60,10 @@ function process(req, res, body) {
 }
 
 router.get('/', function(req, res, next) {
+	req.session.returnTo = req.query.return || "/";
 	res.redirect('https://www.facebook.com/dialog/oauth?client_id='
 		+ config.social_login.facebook.id
-		+ '&redirect_uri=http://beta.eventvods.com/login/facebook/complete/&scope=email');
+		+ '&redirect_uri=http://localhost.eventvods.com:5000/login/facebook/complete/&scope=email');
 });
 
 router.get('/complete', function(req, res, next) {
@@ -73,14 +74,14 @@ router.get('/complete', function(req, res, next) {
 	else if (typeof req.query.code === "string") {
 		request('https://graph.facebook.com/v2.3/oauth/access_token?client_id='
 			+ config.social_login.facebook.id
-			+ '&redirect_uri=http://beta.eventvods.com/login/facebook/complete/&client_secret='
+			+ '&redirect_uri=http://localhost.eventvods.com:5000/login/facebook/complete/&client_secret='
 			+ config.social_login.facebook.secret
 			+'&code=' + req.query.code,
 			function(err, response, body) {
 				if (err) next(err);
 				body = JSON.parse(body);
 				if (typeof body.error !== "undefined") res.json(body.error);
-				//Access token is valid, request b asic details
+				//Access token is valid, request basic details
 				else request('https://graph.facebook.com/me?access_token='
 					+ body.access_token
 					+'&fields=id,name,email,picture',
@@ -96,11 +97,12 @@ router.get('/complete', function(req, res, next) {
 
 router.get('/remove', function(req, res, next) {
 	var logged_in = req.isAuthenticated();
+	req.session.returnTo = req.query.return || "/";
 	if (logged_in) {
 		req.user.social.facebook = undefined;
 		req.user.save(function(err) {
 			if (err) next(err);
-			else res.sendStatus('204');
+			else res.redirect(req.session.returnTo);
 		})
 	} else res.sendStatus('401');
 });

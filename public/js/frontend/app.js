@@ -203,6 +203,9 @@
 						description: 'Eventvods is your go-to platform to watch all professional esports games on demand. Follow your favorite teams, rate videos and view all major events spoiler-free.'
 					}
                 })
+				.when('/error', {
+                    templateUrl: '/assets/views/frontend/404.html',
+                })
 				.otherwise({
 					templateUrl: '/assets/views/frontend/404.html',
 				});

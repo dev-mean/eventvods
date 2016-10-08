@@ -98,13 +98,7 @@ app.use(function(req, res, next) {
 app.use(function(err, req, res, next) {
 	res.status(err.status || 500);
 	logger.error(err);
-	if (process.env.NODE_ENV == "development") res.render('error', {
-		message: err.message,
-		stack: err.stack
-	});
-	else res.render('error', {
-		message: err.message
-	});
+	res.redirect('/error');
 });
 logger.info('NODE_ENV: ' + process.env.NODE_ENV);
 //listens

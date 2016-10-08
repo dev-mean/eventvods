@@ -212,10 +212,10 @@
 							<a class="waves-effect waves-light btn" href="/about/beta-feedback">
                                         Feedback
                                     </a>
-							<a class="waves-effect waves-light btn" href="/login">
+							<a ng-if="Page.session == false" class="waves-effect waves-light btn" href="/login">
                                         Login
                                     </a>
-							<a class="waves-effect waves-light btn" href="/register">
+							<a ng-if="Page.session == false" class="waves-effect waves-light btn" href="/register">
                                         Register
                                     </a>
 						</div>

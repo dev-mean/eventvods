@@ -865,7 +865,7 @@ input[type="checkbox"].filled-in:checked + label:after {
           align-items: center;
 }
 .settings ol.verify-wip {
-  margin: 50px;
+  margin: 30px;
   font-size: 1.2em;
 }
 .settings ol.verify-wip li {
@@ -880,6 +880,24 @@ input[type="checkbox"].filled-in:checked + label:after {
   text-decoration: line-through;
 }
 .settings ol.verify-wip li.final.current {
+  color: #0CD97E;
+}
+.settings ul.verify-wip {
+  margin: 30px;
+  font-size: 1.2em;
+}
+.settings ul.verify-wip li {
+  opacity: 0.3;
+}
+.settings ul.verify-wip li.complete,
+.settings ul.verify-wip li.current {
+  opacity: 1;
+}
+.settings ul.verify-wip li.complete {
+  color: #0CD97E;
+  text-decoration: line-through;
+}
+.settings ul.verify-wip li.final.current {
   color: #0CD97E;
 }
 .settings h3 {

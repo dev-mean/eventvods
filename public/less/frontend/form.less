@@ -92,7 +92,24 @@ input[type="checkbox"].filled-in:checked + label:after {
 		align-items: center;
 	}
 	ol.verify-wip {
-		margin: 50px;
+		margin: 30px;
+		font-size: 1.2em;
+		li {
+			opacity: 0.3;
+			&.complete, &.current {
+				opacity: 1;
+			}
+			&.complete {
+				color: @accent-green;
+				text-decoration: line-through;
+			}
+			&.final.current {
+				color: @accent-green;
+			}
+		}
+	}
+	ul.verify-wip {
+		margin: 30px;
 		font-size: 1.2em;
 		li {
 			opacity: 0.3;

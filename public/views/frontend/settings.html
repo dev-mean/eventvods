@@ -45,6 +45,7 @@
 					<a class="collection-item left-align" ng-click="Settings.tab = 1" ng-class="Settings.tab == 1 ? 'active' : ''">Verify Email<i class="secondary-content material-icons">&#xE8E8;</i></a>
 					<a class="collection-item left-align" ng-click="Settings.tab = 2" ng-class="Settings.tab == 2 ? 'active' : ''">Change Email<i class="secondary-content material-icons">&#xE0BE;</i></a>
 					<a class="collection-item left-align" ng-click="Settings.tab = 3" ng-class="Settings.tab == 3 ? 'active' : ''">Change Password<i class="secondary-content material-icons">&#xE32A;</i></a>
+					<a class="collection-item left-align" ng-click="Settings.tab = 4" ng-class="Settings.tab == 4 ? 'active' : ''">Social Media<i class="secondary-content material-icons">&#xE87C;</i></a>
 				</div>
 			</div>
 			<div class="col s8 pad-left border-left">
@@ -181,6 +182,22 @@
 						</div>
 
 					</form>
+				</div>
+				<div class="section left-align force-uppercase" ng-show="Settings.tab == 4">
+					<h3 class="force-uppercase">Social Media</h3>
+					<p>Link your social media accounts for quicker login.</p>
+					<ul class="collection">
+						<li class="collection-item">
+							Facebook
+							<a ng-if="!Page.session.social.facebook" target="_self" href="/login/facebook?return=/user/settings?tab=4" class="secondary-content" target="_self"><i class="material-icons">&#xE157;</i></a>
+							<a ng-if="Page.session.social.facebook" target="_self" href="/login/facebook/remove?return=/user/settings?tab=4" class="secondary-content" target="_self"><i class="material-icons">&#xE92B;</i></a>
+						</li>
+						<li class="collection-item">
+							Twitter
+							<a ng-if="!Page.session.social.twitter" target="_self" href="/login/twitter?return=/user/settings?tab=4" class="secondary-content"><i class="material-icons">&#xE157;</i></a>
+							<a ng-if="Page.session.social.twitter" target="_self" href="/login/twitter/remove?return=/user/settings?tab=4" class="secondary-content" target="_self"><i class="material-icons">&#xE92B;</i></a>
+						</li>
+					</ul>
 				</div>
 			</div>
 		</div>

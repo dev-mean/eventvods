@@ -10,6 +10,7 @@ var oa = new oauth.OAuth(
 	"1.0A", "http://beta.eventvods.com/login/twitter/complete", "HMAC-SHA1");
 
 router.get('/', function(req, res, next) {
+	req.session.returnTo = req.query.return || "/";
 	oauth_request_token()
 		.then(function(oa){
 			req.session.oa_token = oa.token;
@@ -41,11 +42,12 @@ router.get('/complete', function(req, res, next) {
 
 router.get('/remove', function(req, res, next) {
 	var logged_in = req.isAuthenticated();
+	req.session.returnTo = req.query.return || "/";
 	if (logged_in) {
 		req.user.social.twitter = undefined;
 		req.user.save(function(err) {
 			if (err) next(err);
-			else res.sendStatus('204');
+			else res.redirect(req.session.returnTo);
 		})
 	} else res.sendStatus('401');
 });
@@ -84,11 +86,11 @@ function get_twitter_data(opts){
 	return $promise.promise;
 }
 
-function link_twitter(user, res, twitter_id) {
+function link_twitter(user, res, twitter_id, ret) {
 	user.social.twitter = twitter_id;
 	user.save(function(err) {
 		if (err) next(err);
-		else res.redirect('/');
+		else res.redirect(ret);
 	});
 }
 function process(req, res, body) {
@@ -109,7 +111,7 @@ function process(req, res, body) {
 			if (err) next(err);
 			if (count > 0)
 				res.status('409').send('This Twitter account is already linked to an Eventvods.com account. Please remove it before attempting to associate it with a new account.');
-			else link_twitter(req.user, res, body.id);
+			else link_twitter(req.user, res, body.id, req.session.returnTo);
 		});
 	}
 	//Else login w/ Twitter ID.
