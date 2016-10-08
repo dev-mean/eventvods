@@ -7,7 +7,7 @@ var oauth = require('oauth');
 var oa = new oauth.OAuth(
     "https://twitter.com/oauth/request_token", "https://twitter.com/oauth/access_token",
     config.social_login.twitter.id, config.social_login.twitter.secret,
-	"1.0A", "http://beta.eventvods.com/login/twitter/complete", "HMAC-SHA1");
+	"1.0A", "https://beta.eventvods.com/login/twitter/complete", "HMAC-SHA1");
 
 router.get('/', function(req, res, next) {
 	req.session.returnTo = req.query.return || "/";
