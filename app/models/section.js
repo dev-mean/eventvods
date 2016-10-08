@@ -5,6 +5,10 @@ var Team = require('./team').schema;
 var matchSchema = {
 	team1: Team,
 	team2: Team,
+	team1Sp: Boolean,
+	team2Sp: Boolean,
+	team1SpText: String,
+	team2SpText: String,
 	links: [String],
 	twitch: {
 		picksBans: String,

@@ -20,10 +20,6 @@ var teamSchema = new Schema({
 	},
 	media: [Media],
 	icon: String,
-	spoiler: {
-		type: Boolean,
-		default: false
-	}
 });
 
 

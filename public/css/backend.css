@@ -537,9 +537,7 @@ a,
   text-decoration: none;
   cursor: pointer;
 }
-i.fa[ng-click]:hover,
-a[ng-click]:hover i.fa,
-a[href]:hover i.fa {
+i.fa[ng-click]:hover {
   color: #0fc461;
 }
 p {
@@ -2694,6 +2692,26 @@ select.form-style {
 }
 .element-container .element-button.editable-empty:hover {
   color: #d3d7e3;
+}
+.element-teams span.editable-click {
+  font-size: 80%;
+  text-transform: uppercase;
+}
+.popover-wrapper {
+  margin-bottom: -20px;
+}
+.popover-wrapper form {
+  background: #3c405c !important;
+}
+.popover-wrapper form::before,
+.popover-wrapper form::after {
+  display: none!important;
+}
+.popover-left form {
+  left: 35px!important;
+}
+.popover-right form {
+  left: -135px !important;
 }
 
 /*# sourceMappingURL=backend.css.map */

@@ -1048,6 +1048,7 @@ input[type="checkbox"].filled-in:checked + label:after {
           align-items: center;
 }
 .element-container .element-border .element-background .element-teams .element-team {
+  margin: 0 -20px;
   height: 150px;
   font-weight: 300;
   display: -webkit-flex;
@@ -1065,6 +1066,11 @@ input[type="checkbox"].filled-in:checked + label:after {
   max-height: 60%;
   margin: 5px auto 5px auto;
   padding: 10px;
+}
+.element-container .element-border .element-background .element-teams .element-team .spoiler-text {
+  font-size: 70%;
+  text-transform: uppercase;
+  white-space: nowrap;
 }
 .element-container .element-border .element-background.element-1 {
   background: url('/assets/images/elements/15.jpg');
@@ -1255,6 +1261,17 @@ input[type="checkbox"].filled-in:checked + label:after {
 }
 .dark .element-container .element-extras a.btn {
   color: white!important;
+}
+.material-tooltip {
+  font-size: 2.5em;
+  border-radius: 0px;
+  background: #3C3C62 !important;
+  border-bottom: 2px solid #0CD97E;
+  box-shadow: 0 16px 28px 0 rgba(0, 0, 0, 0.22), 0 25px 55px 0 rgba(0, 0, 0, 0.21);
+  padding: 2px 10px;
+}
+.material-tooltip .backdrop {
+  display: none!important;
 }
 .load-in {
   opacity: 0;

@@ -108,17 +108,17 @@
 		</div>
 	</div>
 	<div ng-repeat="module in League.data.contents[League.sectionIndex].modules track by $index" ng-if="League.moduleIndex == $index">
-		<div no-ng-animate class="element-container container" ng-repeat="match in module.matches track by $index">
+		<div no-ng-animate class="element-container container z-depth-3" ng-repeat="match in module.matches track by $index">
 			<div class="element-border" fix-clip>
 				<div class="element-background event-background" fix-clip>
 					<div class="row element-teams">
 						<div class="col s12 m5">
-							<div ng-if="!match.team1.spoiler" class="element-team">
+							<div ng-if="!match.team1Sp" class="element-team">
 								<img ng-src="{{match.team1.icon}}" class="responsive-img team-large" />
-								<span ng-bind="match.team1.tag"></span>
+								<span class="spoiler-text" ng-bind="match.team1.tag"></span>
 							</div>
-							<div ng-if="match.team1.spoiler" class="element-team">
-								<span>Team 1</span>
+							<div ng-if="match.team1Sp" class="element-team">
+								<span tooltipped data-position="bottom" data-tooltip="{{match.team1.tag}}" class="spoiler-text">{{match.team1SpText || "Team 1"}}</span>
 							</div>
 						</div>
 						<div class="col s12 m2">
@@ -128,12 +128,13 @@
 							</div>
 						</div>
 						<div class="col s12 m5">
-							<div ng-if="!match.team2.spoiler" class="element-team">
+							<div ng-if="!match.team2Sp" class="element-team">
 								<img ng-src="{{match.team2.icon}}" class="responsive-img team-large" />
-								<span ng-bind="match.team2.tag"></span>
+								<span class="spoiler-text" ng-bind="match.team2.tag"></span>
 							</div>
-							<div ng-if="match.team2.spoiler" class="element-team">
-								<span>Team 2</span>
+							<div ng-if="match.team2Sp" class="element-team">
+								<img src="/assets/images/icons/ev.png" class="responsive-img team-large" />
+								<span tooltipped data-position="bottom" data-tooltip="{{match.team2.tag}}" class="spoiler-text">{{match.team2SpText || "Team 2"}}</span>
 							</div>
 						</div>
 					</div>

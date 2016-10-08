@@ -77,11 +77,15 @@
 					<span class="element-tag"><i sv-handle class="fa fa-sort fa-fw"></i><span ng-bind="editorController.getIdentifier($parent.$parent.$parent.$index, $parent.$parent.$index) + ($index+1)"></span></span>
 					<div class="element-teams">
 						<div ng-show="!(match.team1 === undefined || match.team1 === null)" class="element-team">
-							<img ng-src="{{match.team1.icon}}" class="responsive-img team-large" />
-							<span editable-select="match.team1" e-ng-options="team.name for team in editorController.data.teams" e-placeholder="Select Team"
+							<img ng-src="{{match.team1.icon}}" ng-show="!match.team1Sp" class="responsive-img team-large" />
+							<img src="/assets/images/icons/ev.png" ng-show="match.team1Sp" class="responsive-img team-large" />
+							<span editable-select="match.team1" ng-show="!match.team1Sp" e-ng-options="team.name for team in editorController.data.teams" e-placeholder="Select Team"
 											ng-bind="match.team1.tag"></span>
+							<div class="popover-wrapper popover-left">
+								<span editable-text="match.team1SpText" ng-show="match.team1Sp" e-placeholder="Team 1">{{match.team1SpText || "Team 1"}}</span>
+							</div>
 							<span>
-								<input type="checkbox" ng-model="match.team1.spoiler" ng-attr-id="sp_{{$parent.$parent.$id}}_{{$parent.$id}}_{{$id}}" />
+								<input type="checkbox" ng-model="match.team1Sp" ng-attr-id="sp_{{$parent.$parent.$id}}_{{$parent.$id}}_{{$id}}" />
 								<label ng-attr-for="sp_{{$parent.$parent.$id}}_{{$parent.$id}}_{{$id}}"></label>
 								<label ng-attr-for="sp_{{$parent.$parent.$id}}_{{$parent.$id}}_{{$id}}">spoilers</b>
 							</span>
@@ -93,11 +97,15 @@
 							VS
 						</div>
 						<div ng-show="!(match.team2 === undefined || match.team2 === null)" class="element-team">
-							<img ng-src="{{match.team2.icon}}" class="responsive-img team-large" />
-							<span editable-select="match.team2" e-ng-options="team.name for team in editorController.data.teams" e-placeholder="Select Team"
+							<img ng-src="{{match.team2.icon}}" ng-show="!match.team2Sp" class="responsive-img team-large" />
+							<img src="/assets/images/icons/ev.png" ng-show="match.team2Sp" class="responsive-img team-large" />
+							<span editable-select="match.team2" ng-show="!match.team2Sp" e-ng-options="team.name for team in editorController.data.teams" e-placeholder="Select Team"
 											ng-bind="match.team2.tag"></span>
+							<div class="popover-wrapper popover-right">
+								<span editable-text="match.team2SpText" ng-show="match.team2Sp" e-placeholder="Team 2">{{match.team2SpText || "Team 2"}}</span>
+							</div>
 							<span>
-								<input type="checkbox" ng-model="match.team2.spoiler" ng-attr-id="sp_{{$parent.$parent.$id}}_{{$parent.$id}}_{{$id}}_2" />
+								<input type="checkbox" ng-model="match.team2Sp" ng-attr-id="sp_{{$parent.$parent.$id}}_{{$parent.$id}}_{{$id}}_2" />
 								<label ng-attr-for="sp_{{$parent.$parent.$id}}_{{$parent.$id}}_{{$id}}_2"></label>
 								<label ng-attr-for="sp_{{$parent.$parent.$id}}_{{$parent.$id}}_{{$id}}_2">spoilers</label>
 							</span>
@@ -174,12 +182,12 @@
 			<tr class="match" ng-repeat="match in module.matches track by $index">
 				<td><span editable-select="match.team1" e-ng-options="team.name for team in editorController.data.teams" e-placeholder="Select Team">{{match.team1.name || "Select Team"}}</span></td>
 				<td class="center">
-					<input type="checkbox" ng-model="match.team1.spoiler" ng-attr-id="sp_{{$parent.$parent.$id}}_{{$parent.$id}}_{{$id}}" />
+					<input type="checkbox" ng-model="match.team1Sp" ng-attr-id="sp_{{$parent.$parent.$id}}_{{$parent.$id}}_{{$id}}" />
 					<label ng-attr-for="sp_{{$parent.$parent.$id}}_{{$parent.$id}}_{{$id}}"></label>
 				</td>
 				<td><span editable-select="match.team2" e-ng-options="team.name for team in editorController.data.teams" e-placeholder="Select Team">{{match.team2.name || "Select Team"}}</span></td>
 				<td class="center">
-					<input type="checkbox" ng-model="match.team2.spoiler" ng-attr-id="sp_{{$parent.$parent.$id}}_{{$parent.$id}}_{{$id}}_2" />
+					<input type="checkbox" ng-model="match.team2Sp" ng-attr-id="sp_{{$parent.$parent.$id}}_{{$parent.$id}}_{{$id}}_2" />
 					<label ng-attr-for="sp_{{$parent.$parent.$id}}_{{$parent.$id}}_{{$id}}_2"></label>
 				</td>
 				<td ng-repeat="url in match.links track by $index">

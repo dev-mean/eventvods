@@ -20,7 +20,7 @@
 			};
 		})
 		.directive('fixFill', function($rootScope, $location) {
-			var abs = $location.absUrl();
+			var abs = $location.absUrl().replace('#_=_','');
 			return {
 				restrict: 'A',
 				link: function($scope, $element, $attrs) {
@@ -28,7 +28,7 @@
 					$attrs.$set('fill', "url("+abs+rel+")");
 					$rootScope.$on('$routeChangeSuccess', function (evt, current, previous) {
 						if(current != previous && typeof current !== "undefined"){
-							abs = $location.absUrl();
+							abs = $location.absUrl().replace('#_=_','');
 							$attrs.$set('fill', "url("+abs+rel+")");
 						}
 					});
@@ -36,14 +36,14 @@
 			};
 		})
 		.directive('fixClip', function($rootScope, $location) {
-			var abs = $location.absUrl();
+			var abs = $location.absUrl().replace('#_=_','');
 			return {
 				restrict: 'A',
 				link: function($scope, $element, $attrs) {
 					$element.css('clip-path','url("'+abs+'#element")');
 					$rootScope.$on('$routeChangeSuccess', function (evt, current, previous) {
 						if(current != previous && typeof current !== "undefined"){
-							abs = $location.absUrl();
+							abs = $location.absUrl().replace('#_=_','');
 							$element.css('clip-path','url("'+abs+'#element")');
 						}
 					});
@@ -108,11 +108,7 @@
 		.config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
             $routeProvider
 				.when('/_=_', {
-					templateUrl: '/assets/views/frontend/home.html',
-					meta: {
-						title: 'Eventvods - Esports on Demand',
-						description: 'Eventvods is your go-to platform to watch all professional esports games on demand. Follow your favorite teams, rate videos and view all major events spoiler-free.'
-					}
+					redirectTo: '/'
 				})
                 .when('/', {
                     templateUrl: '/assets/views/frontend/home.html',
