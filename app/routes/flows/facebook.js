@@ -7,7 +7,7 @@ function link_facebook(user, res, facebook_id, ret) {
 	user.social.facebook = facebook_id;
 	user.save(function(err) {
 		if (err) next(err);
-		res.sendStatus(ret);
+		res.redirect(ret);
 	})
 }
 
@@ -78,6 +78,7 @@ router.get('/complete', function(req, res, next) {
 			+ config.social_login.facebook.secret
 			+'&code=' + req.query.code,
 			function(err, response, body) {
+				console.log(err);
 				if (err) next(err);
 				body = JSON.parse(body);
 				if (typeof body.error !== "undefined") res.json(body.error);
