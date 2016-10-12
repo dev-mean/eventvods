@@ -1,59 +1,47 @@
 {
-  "name": "EventVODS",
+  "name": "eventvods.com",
   "version": "0.0.1",
   "description": "EventVODS website",
   "main": "server.js",
-  "engines": {
-    "node": "5.10.0",
-    "npm": "3.5.3"
-  },
   "dependencies": {
     "async": "*",
-    "autoprefixer": "^6.3.7",
     "aws-sdk": "*",
     "body-parser": "*",
-    "bower": "*",
     "bristol": "*",
     "connect-redis": "*",
-    "cssnano": "^3.7.3",
     "dotenv": "*",
     "express": "*",
     "express-redis-cache": "*",
     "express-session": "*",
     "file-type": "*",
-    "gm": "^1.23.0",
-    "gulp-gm": "0.0.8",
-    "gulp-postcss": "^6.1.1",
-    "gulp-sourcemaps": "^1.6.0",
+    "gm": "*",
     "indicative": "*",
     "intimidate": "*",
-    "jade": "*",
     "keygenerator": "*",
     "loggly": "*",
     "moment": "*",
     "mongoose": "*",
     "morgan": "*",
-    "oauth": "^0.9.14",
+    "oauth": "*",
     "passport": "*",
     "passport-local": "*",
     "passport-local-mongoose": "*",
     "pmx": "*",
-    "prerender-node": "^2.3.0",
+    "prerender-node": "*",
     "q": "*",
-    "ratelimit.js": "^1.7.0",
+    "ratelimit.js": "*",
     "redis": "*",
-    "redis-rate-limiter": "*",
-    "request": "^2.74.0",
-    "sendgrid": "^4.4.0",
+    "request": "*",
+    "sendgrid": "*",
     "serve-favicon": "*",
     "shortid": "*",
-    "slug": "^0.9.1"
+    "slug": "*"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/simon--poole/EventVODS.git"
   },
-  "author": "",
+  "author": "Simon Poole",
   "license": "UNLICENSED",
   "bugs": {
     "url": "https://github.com/simon--poole/EventVODS/issues"
@@ -63,9 +51,14 @@
     "start": "node server.js"
   },
   "devDependencies": {
+    "autoprefixer": "*",
+    "cssnano": "*",
     "gulp": "*",
+    "gulp-gm": "*",
     "gulp-less": "*",
     "gulp-plumber": "*",
+    "gulp-postcss": "*",
+    "gulp-sourcemaps": "*",
     "gulp-util": "*"
   }
 }
