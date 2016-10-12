@@ -34,14 +34,11 @@ var redis = require('./app/controllers/redis');
 app.use(morgan('tiny'));
 //Set up logging
 var logger = require('bristol');
-if (process.env.NODE_ENV == "development") {
-	logger.addTarget('console')
-		.withFormatter('human')
-} else {
-	logger.addTarget('loggly', config.logs)
-		.withFormatter('json')
-		.withLowestSeverity('warn');
-}
+logger.addTarget('console')
+	.withFormatter('human')
+logger.addTarget('loggly', config.logs)
+	.withFormatter('json')
+	.withLowestSeverity('warn');
 app.use(require('prerender-node').set('prerenderToken', config.prerender));
 //Static file at the top, prevents all the code below being run for static files.
 app.use('/assets', express.static(path.join(__dirname, 'public')));
@@ -77,10 +74,6 @@ mongoose.connect(config.databaseUrl, function(err) {
 	if (err) logger.error(err);
 	else logger.info("MongoDB server online.");
 });
-//templating
-app.set('views', path.join(__dirname, 'app', 'views'));
-app.set('view engine', 'jade');
-app.locals.pretty = true;
 //routes
 var backend = require('./app/routes/backend');
 var frontend = require('./app/routes/frontend');
@@ -97,7 +90,9 @@ app.use(function(req, res, next) {
 });
 app.use(function(err, req, res, next) {
 	res.status(err.status || 500);
-	logger.error(err);
+	logger.error(err, {
+		current_user: req.isAuthenticated() ? req.user : {"authenticated": false},
+	});
 	res.redirect('/error');
 });
 logger.info('NODE_ENV: ' + process.env.NODE_ENV);
