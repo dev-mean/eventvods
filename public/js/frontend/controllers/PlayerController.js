@@ -19,6 +19,7 @@
 				vm.show = false;
 			}
 			function timeToSeconds(time){
+				if(typeof time === "undefined") return 0;
 				time = /((\d+)h)?((\d+)m)?((\d+)s)?/i.exec(time);
 				for(var i = 0; i < time.length; i++){
 					if(typeof time[i] === "undefined") time[i] = 0;
@@ -26,7 +27,7 @@
 				return (parseInt(time[2] * 3600) + parseInt(time[4] * 60) + parseInt(time[6]));
 			}
 			function parseTwitch(link){
-				var twitch = /http(s|):\/\/(www\.|)twitch\.tv\/(\S+)\/v\/(\S+)\?t=(\S+)?/i.exec(link);
+				var twitch = /http(s|):\/\/(www\.|)twitch\.tv\/(\S+)\/v\/(\S+)(?:\?t=(\S+)?|$)/i.exec(link);
 				if(twitch == null) return false;
 				else return {
 					vid: "v"+twitch[4],
@@ -34,11 +35,11 @@
 				}
 			}
 			function parseYoutube(link){
-				var yt = /http(s|):\/\/(www\.|)(youtube\.com\/watch\?v=|youtu\.be\/)(\S+)[&\?]t=(\S+)/i.exec(link);
+				var yt = /http(s|):\/\/(www\.|)(youtube\.com\/watch\?v=|youtu\.be\/)([^&]+)([&\?]t=(\S+)?)?/i.exec(link);
 				if(yt == null) return false;
 				else return {
 					vid: yt[4],
-					time: timeToSeconds(yt[5])
+					time: timeToSeconds(yt[6])
 				}
 			}
 			vm.playYoutube = function(link, match, $event){
