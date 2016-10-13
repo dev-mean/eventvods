@@ -1230,17 +1230,7 @@ input[type="checkbox"].filled-in:checked + label:after {
       flex-wrap: nowrap;
   padding: 5px;
 }
-.event-nav.container h3,
-.event-nav.container h4 {
-  text-transform: uppercase;
-  font-family: Gotham;
-  font-weight: 500;
-  padding-top: 0;
-  margin: 0 20px;
-  -ms-flex-positive: 1;
-      flex-grow: 1;
-}
-.event-nav.container .material-icons {
+.event-nav.container .nav-row .material-icons {
   font-family: 'Material Icons';
   font-weight: normal;
   font-size: 2.92rem;
@@ -1252,17 +1242,27 @@ input[type="checkbox"].filled-in:checked + label:after {
       flex-grow: 0;
   opacity: 1;
 }
-.event-nav.container .material-icons:hover {
+.event-nav.container .nav-row .material-icons:hover {
   color: #0CD97E;
 }
-.event-nav.container .material-icons.ng-hide-add,
-.event-nav.container .material-icons.ng-hide-remove {
+.event-nav.container .nav-row .material-icons.ng-hide-add,
+.event-nav.container .nav-row .material-icons.ng-hide-remove {
   transition: all 0.3s linear;
 }
-.event-nav.container .material-icons.ng-hide {
+.event-nav.container .nav-row .material-icons.ng-hide {
   opacity: 0;
   display: block!important;
   pointer-events: none;
+}
+.event-nav.container h3,
+.event-nav.container h4 {
+  text-transform: uppercase;
+  font-family: Gotham;
+  font-weight: 500;
+  padding-top: 0;
+  margin: 0 20px;
+  -ms-flex-positive: 1;
+      flex-grow: 1;
 }
 .event-nav.container h4 {
   border-bottom: 0;
@@ -1456,14 +1456,13 @@ nav.sections-nav {
   background-color: #0CD97E;
 }
 nav.sections-nav ul.section-dd {
-  background-color: #0CD97E !important;
+  background-color: #3c405c !important;
 }
 nav.sections-nav ul.section-dd li {
-  background-color: #0CD97E !important;
+  background-color: #3c405c;
 }
 nav.sections-nav ul.section-dd li a {
   color: white!important;
-  background: transparent!important;
 }
 nav.sections-nav ul.main-sections-nav {
   width: 100%;
@@ -1482,6 +1481,7 @@ nav.sections-nav ul.main-sections-nav li a {
   width: 100%;
   text-transform: uppercase;
   color: white!important;
+  text-align: left;
 }
 .player {
   position: fixed;

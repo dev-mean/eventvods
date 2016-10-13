@@ -14,15 +14,7 @@
 		align-content: center;
 		flex-wrap: nowrap;
 		padding: 5px;
-	}
-	h3, h4 {
-		text-transform: uppercase;
-		.gotham-med();
-		padding-top: 0;
-		margin: 0 20px;
-		flex-grow: 1;
-	}
-	.material-icons {
+		.material-icons {
 		    font-family: 'Material Icons';
     		font-weight: normal;
 		    font-size: 2.92rem;
@@ -43,7 +35,16 @@
 				display: block!important;
 				pointer-events: none;
 			}
+		}
 	}
+	h3, h4 {
+		text-transform: uppercase;
+		.gotham-med();
+		padding-top: 0;
+		margin: 0 20px;
+		flex-grow: 1;
+	}
+
 	h4 {
 		border-bottom: 0;
 		background: transparent!important;
@@ -214,12 +215,11 @@ a.btn.details-toggle {
 nav.sections-nav {
 	background-color: @accent-green;
 	ul.section-dd {
-		background-color: @accent-green!important;
+		background-color: @default!important;
 		li {
-			background-color: @accent-green!important;
+			background-color: @default;
 			a {
 				color: white!important;
-				background: transparent!important;
 			}
 		}
 	}
@@ -234,6 +234,7 @@ nav.sections-nav {
 				width: 100%;
 				text-transform: uppercase;
 				color: white!important;
+				text-align: left;
 			}
 		}
 	}
