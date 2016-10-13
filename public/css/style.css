@@ -1473,6 +1473,9 @@ nav.sections-nav ul.main-sections-nav {
   -ms-flex-align: center;
       align-items: center;
 }
+nav.sections-nav ul.main-sections-nav i.material-icons {
+  margin-right: 0;
+}
 nav.sections-nav ul.main-sections-nav li {
   -ms-flex-positive: 1;
       flex-grow: 1;
@@ -1482,6 +1485,10 @@ nav.sections-nav ul.main-sections-nav li a {
   text-transform: uppercase;
   color: white!important;
   text-align: left;
+}
+a.section-handle {
+  font-size: 75%;
+  padding: 0 5px;
 }
 .player {
   position: fixed;
