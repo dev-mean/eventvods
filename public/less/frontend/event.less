@@ -213,12 +213,12 @@ a.btn.details-toggle {
 	bottom: -6px;
 }
 nav.sections-nav {
-	background-color: @default;
+	background-color: @default-blue;
 	margin-bottom: 5px;
 	ul.section-dd {
-		background-color: @default!important;
+		background-color: @default-blue!important;
 		li {
-			background-color: @default;
+			background-color: @default-blue;
 			a {
 				color: white!important;
 			}
@@ -239,12 +239,14 @@ nav.sections-nav {
 				text-transform: uppercase;
 				color: white!important;
 				text-align: left;
+				height: 64px;
+				overflow: hidden;
 			}
 		}
 	}
 }
 
-a.section-handle {
+.squish a.section-handle {
 	font-size: 75%;
 	padding: 0 5px;
 }

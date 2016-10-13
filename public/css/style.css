@@ -1453,14 +1453,14 @@ a.btn.details-toggle.loaded {
   bottom: -6px;
 }
 nav.sections-nav {
-  background-color: #3c405c;
+  background-color: #3C3C62;
   margin-bottom: 5px;
 }
 nav.sections-nav ul.section-dd {
-  background-color: #3c405c !important;
+  background-color: #3C3C62 !important;
 }
 nav.sections-nav ul.section-dd li {
-  background-color: #3c405c;
+  background-color: #3C3C62;
 }
 nav.sections-nav ul.section-dd li a {
   color: white!important;
@@ -1486,8 +1486,10 @@ nav.sections-nav ul.main-sections-nav li a {
   text-transform: uppercase;
   color: white!important;
   text-align: left;
+  height: 64px;
+  overflow: hidden;
 }
-a.section-handle {
+.squish a.section-handle {
   font-size: 75%;
   padding: 0 5px;
 }
