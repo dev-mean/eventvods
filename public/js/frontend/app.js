@@ -50,6 +50,14 @@
 				}
 			};
 		})
+		.directive('dropdownTarget', function($parse) {
+			return {
+				restrict: 'A',
+				link: function($scope, $element, $attrs) {
+					$attrs.$set('data-activates', $attrs.dropdownTarget);
+				}
+			};
+		})
 		// Available BB code snippets
 		.value('snippets', {
 			"b": "<b>$1</b>", // Bolded text

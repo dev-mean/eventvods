@@ -101,6 +101,16 @@
 			<h3 ng-bind="League.data.contents[League.sectionIndex].title"></h3>
 			<h3 class="material-icons" ng-show="League.sectionIndex < League.data.contents.length - 1" ng-click="League.nextSection()">&#xE315;</h3>
 		</div>
+		<ul ng-repeat="section in League.data.contents track by $index" ng-attr-id="{{'section-'+$index}}" class="dropdown-content section-dd wide">
+			<li ng-repeat="module in section.modules"><a ng-click="League.jumpTo($parent.$index, $index)" ng-bind="module.title"></a></li>
+		</ul>
+		<nav class="sections-nav">
+			<div class="nav-wrapper">
+				<ul class="main-sections-nav">
+					<li ng-repeat="section in League.data.contents track by $index"><a dropdown dropdown-target="{{'section-'+$index}}" data-hover="true" data-beloworigin="true" ng-bind="section.title"></a></li>
+				</ul>
+			</div>
+		</nav>
 		<div class="nav-row">
 			<h4 class="material-icons" ng-show="League.moduleIndex > 0" ng-click="League.prevModule()">&#xE314;</h4>
 			<h4 ng-bind="League.data.contents[League.sectionIndex].modules[League.moduleIndex].title">Day 1</h4>

@@ -58,6 +58,7 @@
     "gulp-less": "*",
     "gulp-plumber": "*",
     "gulp-postcss": "*",
+    "gulp-rename": "^1.2.2",
     "gulp-sourcemaps": "*",
     "gulp-util": "*"
   }

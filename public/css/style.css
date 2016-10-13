@@ -217,17 +217,15 @@ i.starred {
   color: #fff;
   background: #3C3C62;
   transition: all 0.3s linear;
-  -webkit-transform: translate(0px, 100%);
-      -ms-transform: translate(0px, 100%);
-          transform: translate(0px, 100%);
+  -ms-transform: translate(0px, 100%);
+      transform: translate(0px, 100%);
   font-family: Gotham;
   font-weight: 500;
   opacity: 0;
 }
 .cookie_disclaimer.show {
-  -webkit-transform: translate(0px, 0);
-      -ms-transform: translate(0px, 0);
-          transform: translate(0px, 0);
+  -ms-transform: translate(0px, 0);
+      transform: translate(0px, 0);
   opacity: 1;
 }
 .cookie_disclaimer h5 {
@@ -237,24 +235,20 @@ i.starred {
   display: inline-block;
   vertical-align: middle;
   margin-right: 20px;
-  -webkit-flex-basis: 200px;
-      -ms-flex-preferred-size: 200px;
-          flex-basis: 200px;
+  -ms-flex-preferred-size: 200px;
+      flex-basis: 200px;
   padding: 0;
   background-color: #0CD97E;
 }
 .cookie_disclaimer .disclaimer {
-  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-align-items: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+      align-items: center;
 }
 .cookie_disclaimer .disclaimer p {
-  -webkit-flex-grow: 1;
-      -ms-flex-positive: 1;
-          flex-grow: 1;
+  -ms-flex-positive: 1;
+      flex-grow: 1;
 }
 nav.nav-main {
   position: relative;
@@ -360,15 +354,12 @@ nav.nav-main .dropdown-content.wide.grouped li.border-top img {
 }
 nav.nav-main .dropdown-content.wide .icon {
   min-width: 48px;
-  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-justify-content: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-align-items: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-pack: center;
+      justify-content: center;
+  -ms-flex-align: center;
+      align-items: center;
   margin: -14px 10px -14px -5px;
   padding-right: 2px;
   height: 50px;
@@ -438,9 +429,8 @@ nav.nav-main a.btn:hover {
   opacity: 1;
 }
 .evSlider.single h4 {
-  -webkit-transform: scale(0.8);
-      -ms-transform: scale(0.8);
-          transform: scale(0.8);
+  -ms-transform: scale(0.8);
+      transform: scale(0.8);
 }
 .evSlider .main img,
 .evSlider .blur img {
@@ -475,9 +465,8 @@ nav.nav-main a.btn:hover {
 }
 .evSlider .image.active .overlay.left .container,
 .evSlider .image.active .overlay.right .container {
-  -webkit-transform: translate(0, 0px);
-      -ms-transform: translate(0, 0px);
-          transform: translate(0, 0px);
+  -ms-transform: translate(0, 0px);
+      transform: translate(0, 0px);
 }
 .evSlider .image div.blur {
   height: 64px;
@@ -515,9 +504,8 @@ nav.nav-main a.btn:hover {
   text-align: right;
 }
 .evSlider div.overlay.right .container {
-  -webkit-transform: translate(1000px, 0px);
-      -ms-transform: translate(1000px, 0px);
-          transform: translate(1000px, 0px);
+  -ms-transform: translate(1000px, 0px);
+      transform: translate(1000px, 0px);
 }
 .evSlider div.overlay.left {
   /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#000000+0,000000+100&0.8+40,0+100 */
@@ -530,9 +518,8 @@ nav.nav-main a.btn:hover {
   text-align: left;
 }
 .evSlider div.overlay.left .container {
-  -webkit-transform: translate(-1000px, 0px);
-      -ms-transform: translate(-1000px, 0px);
-          transform: translate(-1000px, 0px);
+  -ms-transform: translate(-1000px, 0px);
+      transform: translate(-1000px, 0px);
 }
 .evSlider div.overlay.middle {
   text-align: center;
@@ -546,39 +533,31 @@ nav.nav-main a.btn:hover {
 }
 .evSlider div.overlay.article {
   padding-top: 64px;
-  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-flex-direction: column;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-justify-content: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-align-items: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-direction: column;
+      flex-direction: column;
+  -ms-flex-pack: center;
+      justify-content: center;
+  -ms-flex-align: center;
+      align-items: center;
 }
 .evSlider div.overlay.article h3 {
   color: white;
 }
 .evSlider div.overlay.article .article-details {
-  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-justify-content: space-around;
-      -ms-flex-pack: distribute;
-          justify-content: space-around;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
 }
 .evSlider div.overlay.article .article-details span {
   text-transform: uppercase;
   font-size: 1.2em;
-  -webkit-flex-grow: 1;
-      -ms-flex-positive: 1;
-          flex-grow: 1;
-  -webkit-flex-basis: 0px;
-      -ms-flex-preferred-size: 0px;
-          flex-basis: 0px;
+  -ms-flex-positive: 1;
+      flex-grow: 1;
+  -ms-flex-preferred-size: 0px;
+      flex-basis: 0px;
   padding: 0px 25px;
 }
 .evSlider div.overlay.article .article-details span.middle {
@@ -623,12 +602,10 @@ nav.nav-main a.btn:hover {
   top: -50px;
   height: 50px;
   z-index: 998;
-  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-justify-content: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+      justify-content: center;
   transition: all 2s ease-in-out;
 }
 .evSlider .indicators .indicator {
@@ -660,15 +637,12 @@ footer.page-footer img.responsive-img:hover {
   opacity: 1;
 }
 footer.page-footer .spaced-row {
-  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-align-items: stretch;
-      -ms-flex-align: stretch;
-          align-items: stretch;
-  -webkit-flex-wrap: wrap;
-      -ms-flex-wrap: wrap;
-          flex-wrap: wrap;
+  -ms-flex-align: stretch;
+      align-items: stretch;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
 }
 @media (min-width: 992px) {
   footer.page-footer .sborders {
@@ -678,15 +652,12 @@ footer.page-footer .spaced-row {
 }
 footer.page-footer .spacer {
   height: 100%;
-  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-flex-direction: column;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-justify-content: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-direction: column;
+      flex-direction: column;
+  -ms-flex-pack: center;
+      justify-content: center;
   margin-top: -20px;
   margin-bottom: 20px;
 }
@@ -703,9 +674,8 @@ footer.page-footer #patreon {
   width: 400px;
   height: 100px;
   margin: auto;
-  -webkit-transform: scale(0.7);
-      -ms-transform: scale(0.7);
-          transform: scale(0.7);
+  -ms-transform: scale(0.7);
+      transform: scale(0.7);
   background: url('/assets/images/icons/patreon.png');
   background-size: contain;
   opacity: 0.7;
@@ -813,7 +783,7 @@ textarea.materialize-textarea:focus.valid {
 }
 .input-field input.validate + label {
   font-size: inherit;
-  transition: color 0.3s linear, transform 0.2s ease-out, font-size 0.2s ease-out, -webkit-transform 0.2s ease-out;
+  transition: color 0.3s linear, transform 0.2s ease-out, font-size 0.2s ease-out;
 }
 .input-field input.validate + label:after {
   transition: top 0.2s ease-out;
@@ -857,12 +827,10 @@ input[type="checkbox"].filled-in:checked + label:after {
   padding: 0 1.5rem;
 }
 .settings .account-header {
-  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-align-items: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+      align-items: center;
 }
 .settings ol.verify-wip {
   margin: 30px;
@@ -901,12 +869,10 @@ input[type="checkbox"].filled-in:checked + label:after {
   color: #0CD97E;
 }
 .settings h3 {
-  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-align-items: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+      align-items: center;
 }
 .settings h3 .name {
   margin-left: 50px;
@@ -946,13 +912,10 @@ input[type="checkbox"].filled-in:checked + label:after {
 .element-container {
   margin: 25px auto;
   overflow: hidden;
-  -webkit-flex-wrap: nowrap;
-      -ms-flex-wrap: nowrap;
-          flex-wrap: nowrap;
-  -webkit-align-items: center;
-      -ms-flex-align: center;
-          align-items: center;
-  display: -webkit-flex;
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
+  -ms-flex-align: center;
+      align-items: center;
   display: -ms-flexbox;
   display: flex;
   padding: 0!important;
@@ -961,19 +924,16 @@ input[type="checkbox"].filled-in:checked + label:after {
   position: relative;
 }
 .element-container .element-border {
-  -webkit-flex-basis: 0px;
-      -ms-flex-preferred-size: 0px;
-          flex-basis: 0px;
+  -ms-flex-preferred-size: 0px;
+      flex-basis: 0px;
   height: 150px;
-  -webkit-flex-grow: 1;
-      -ms-flex-positive: 1;
-          flex-grow: 1;
+  -ms-flex-positive: 1;
+      flex-grow: 1;
   width: 33%;
   -webkit-clip-path: url("../../../../#element");
           clip-path: url("../../../../#element");
   max-width: 600px;
   position: relative;
-  left: 20px;
   background: #27273F;
   transition: background 0.3s linear;
 }
@@ -989,15 +949,12 @@ input[type="checkbox"].filled-in:checked + label:after {
 .element-container .element-border .element-background > a {
   height: 100%;
   width: 100%;
-  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-align-items: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-justify-content: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-align: center;
+      align-items: center;
+  -ms-flex-pack: center;
+      justify-content: center;
 }
 .element-container .element-border .element-background > a > img {
   vertical-align: middle;
@@ -1007,18 +964,14 @@ input[type="checkbox"].filled-in:checked + label:after {
 }
 .element-container .element-border .element-background.event-background {
   background: #3C3C62;
-  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-flex-direction: column;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-justify-content: space-between;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  -webkit-align-items: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-direction: column;
+      flex-direction: column;
+  -ms-flex-pack: justify;
+      justify-content: space-between;
+  -ms-flex-align: center;
+      align-items: center;
 }
 .element-container .element-border .element-background .element-tag {
   color: white;
@@ -1037,29 +990,23 @@ input[type="checkbox"].filled-in:checked + label:after {
   height: 150px;
   position: relative;
   top: -45px;
-  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-justify-content: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-align-items: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-pack: center;
+      justify-content: center;
+  -ms-flex-align: center;
+      align-items: center;
 }
 .element-container .element-border .element-background .element-teams .element-team {
   margin: 0 -20px;
   height: 150px;
   font-weight: 300;
-  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-flex-direction: column;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-justify-content: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-direction: column;
+      flex-direction: column;
+  -ms-flex-pack: center;
+      justify-content: center;
   font-size: 2em;
 }
 .element-container .element-border .element-background .element-teams .element-team > img {
@@ -1115,25 +1062,19 @@ input[type="checkbox"].filled-in:checked + label:after {
   background: url('/assets/images/elements/14.jpg');
 }
 .element-container .element-info {
-  -webkit-flex-basis: 0;
-      -ms-flex-preferred-size: 0;
-          flex-basis: 0;
-  -webkit-flex-grow: 2;
-      -ms-flex-positive: 2;
-          flex-grow: 2;
+  -ms-flex-preferred-size: 0;
+      flex-basis: 0;
+  -ms-flex-positive: 2;
+      flex-grow: 2;
   height: 150px;
-  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-align-items: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-justify-content: space-between;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  -webkit-flex-direction: column;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  -ms-flex-align: center;
+      align-items: center;
+  -ms-flex-pack: justify;
+      justify-content: space-between;
+  -ms-flex-direction: column;
+      flex-direction: column;
 }
 .element-container .element-info .element-title a {
   color: inherit!important;
@@ -1167,12 +1108,10 @@ input[type="checkbox"].filled-in:checked + label:after {
   text-transform: uppercase;
 }
 .element-container .element-links {
-  -webkit-flex-basis: 0;
-      -ms-flex-preferred-size: 0;
-          flex-basis: 0;
-  -webkit-flex-grow: 2;
-      -ms-flex-positive: 2;
-          flex-grow: 2;
+  -ms-flex-preferred-size: 0;
+      flex-basis: 0;
+  -ms-flex-positive: 2;
+      flex-grow: 2;
   height: 150px;
 }
 .element-container .element-links .element-titles {
@@ -1192,9 +1131,8 @@ input[type="checkbox"].filled-in:checked + label:after {
   width: 50%;
   /* or 100px */
   border-bottom: 3px solid #0CD97E;
-  -webkit-transform: translateY(5px);
-      -ms-transform: translateY(5px);
-          transform: translateY(5px);
+  -ms-transform: translateY(5px);
+      transform: translateY(5px);
 }
 .element-container .element-links .element-go {
   width: 100%;
@@ -1234,23 +1172,19 @@ input[type="checkbox"].filled-in:checked + label:after {
   right: -50px;
   border: 50px solid transparent;
   border-left-color: #3C3C62;
-  -webkit-transform: rotate(-45deg);
-      -ms-transform: rotate(-45deg);
-          transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+      transform: rotate(-45deg);
 }
 .element-container .element-favourite {
   position: absolute;
   top: 5px;
   right: 5px;
-  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-justify-content: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-align-items: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-pack: center;
+      justify-content: center;
+  -ms-flex-align: center;
+      align-items: center;
   color: white;
 }
 .element-container .element-favourite > i.material-icons {
@@ -1269,6 +1203,7 @@ input[type="checkbox"].filled-in:checked + label:after {
   border-bottom: 2px solid #0CD97E;
   box-shadow: 0 16px 28px 0 rgba(0, 0, 0, 0.22), 0 25px 55px 0 rgba(0, 0, 0, 0.21);
   padding: 2px 10px;
+  font-weight: 300;
 }
 .material-tooltip .backdrop {
   display: none!important;
@@ -1285,22 +1220,15 @@ input[type="checkbox"].filled-in:checked + label:after {
   padding: 0;
 }
 .event-nav.container .nav-row {
-  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-justify-content: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-align-content: center;
-      -ms-flex-line-pack: center;
-          align-content: center;
-  -webkit-flex-wrap: nowrap;
-      -ms-flex-wrap: nowrap;
-          flex-wrap: nowrap;
+  -ms-flex-pack: center;
+      justify-content: center;
+  -ms-flex-line-pack: center;
+      align-content: center;
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
   padding: 5px;
-}
-.event-nav.container .nav-row:first-child {
-  border-bottom: 3px solid #0CD97E;
 }
 .event-nav.container h3,
 .event-nav.container h4 {
@@ -1309,9 +1237,8 @@ input[type="checkbox"].filled-in:checked + label:after {
   font-weight: 500;
   padding-top: 0;
   margin: 0 20px;
-  -webkit-flex-grow: 1;
-      -ms-flex-positive: 1;
-          flex-grow: 1;
+  -ms-flex-positive: 1;
+      flex-grow: 1;
 }
 .event-nav.container .material-icons {
   font-family: 'Material Icons';
@@ -1321,9 +1248,8 @@ input[type="checkbox"].filled-in:checked + label:after {
   line-height: 110%;
   transition: color 0.3s linear;
   margin: 0 -25px;
-  -webkit-flex-grow: 0;
-      -ms-flex-positive: 0;
-          flex-grow: 0;
+  -ms-flex-positive: 0;
+      flex-grow: 0;
   opacity: 1;
 }
 .event-nav.container .material-icons:hover {
@@ -1420,15 +1346,12 @@ input[type="checkbox"].filled-in:checked + label:after {
   z-index: 150;
 }
 .icon-container {
-  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-justify-content: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-flex-wrap: wrap;
-      -ms-flex-wrap: wrap;
-          flex-wrap: wrap;
+  -ms-flex-pack: center;
+      justify-content: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
   background: transparent!important;
   padding: 0!important;
   margin-bottom: 25px;
@@ -1436,18 +1359,14 @@ input[type="checkbox"].filled-in:checked + label:after {
 .icon-container .icon {
   font-family: Gotham;
   font-weight: 500;
-  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-flex-direction: column;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-align-items: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-justify-content: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-direction: column;
+      flex-direction: column;
+  -ms-flex-align: center;
+      align-items: center;
+  -ms-flex-pack: center;
+      justify-content: center;
   overflow: hidden;
   margin: 25px;
   height: 250px;
@@ -1455,9 +1374,8 @@ input[type="checkbox"].filled-in:checked + label:after {
   position: relative;
 }
 .icon-container .icon.team {
-  -webkit-justify-content: space-between;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -ms-flex-pack: justify;
+      justify-content: space-between;
   height: 200px;
 }
 .icon-container .icon .icon-image,
@@ -1466,12 +1384,10 @@ input[type="checkbox"].filled-in:checked + label:after {
 }
 .icon-container .icon .two-lines {
   height: 55px;
-  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-align-items: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+      align-items: center;
 }
 .icon-container .icon .team-container {
   pointer-events: none;
@@ -1479,15 +1395,12 @@ input[type="checkbox"].filled-in:checked + label:after {
   position: absolute;
   top: 0;
   left: 25px;
-  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-justify-content: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-align-items: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-pack: center;
+      justify-content: center;
+  -ms-flex-align: center;
+      align-items: center;
 }
 .icon-container .icon .team-container > img {
   max-width: 50%;
@@ -1539,6 +1452,37 @@ a.btn.details-toggle.loaded {
   position: relative;
   bottom: -6px;
 }
+nav.sections-nav {
+  background-color: #0CD97E;
+}
+nav.sections-nav ul.section-dd {
+  background-color: #0CD97E !important;
+}
+nav.sections-nav ul.section-dd li {
+  background-color: #0CD97E !important;
+}
+nav.sections-nav ul.section-dd li a {
+  color: white!important;
+  background: transparent!important;
+}
+nav.sections-nav ul.main-sections-nav {
+  width: 100%;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: center;
+      justify-content: center;
+  -ms-flex-align: center;
+      align-items: center;
+}
+nav.sections-nav ul.main-sections-nav li {
+  -ms-flex-positive: 1;
+      flex-grow: 1;
+}
+nav.sections-nav ul.main-sections-nav li a {
+  width: 100%;
+  text-transform: uppercase;
+  color: white!important;
+}
 .player {
   position: fixed;
   top: 0;
@@ -1582,15 +1526,12 @@ a.btn.details-toggle.loaded {
   height: 100px;
   padding: 15px;
   width: 100%;
-  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-justify-content: flex-start;
-      -ms-flex-pack: start;
-          justify-content: flex-start;
-  -webkit-align-items: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-pack: start;
+      justify-content: flex-start;
+  -ms-flex-align: center;
+      align-items: center;
 }
 .player .player-teams img {
   max-height: 100%;

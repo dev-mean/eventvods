@@ -1,6 +1,6 @@
 # EventVODs Website Project
 This project contains the web front and back end to the EventVODs website project.
-
+This file structure is horribly out of date - as I'm the sole developer working on it, docs for other devs are low priority.
 ### Project File Structure
     - app
         - controllers

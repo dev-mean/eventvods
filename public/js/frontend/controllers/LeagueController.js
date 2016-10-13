@@ -26,6 +26,12 @@
 				else str = String.fromCharCode(65+counter) + ($index+1);
 				return str;
 			}
+			vm.jumpTo = function(sectionIndex, moduleIndex){
+				vm.sectionIndex = sectionIndex;
+				vm.moduleIndex = moduleIndex;
+				$location.search('s', sectionIndex);
+				$location.search('m', moduleIndex);
+			}
 			vm.prevSection = function(){
 				vm.sectionIndex = vm.sectionIndex - 1;
 				$location.search('s', vm.sectionIndex);

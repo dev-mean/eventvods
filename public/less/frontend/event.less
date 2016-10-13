@@ -14,10 +14,6 @@
 		align-content: center;
 		flex-wrap: nowrap;
 		padding: 5px;
-		&:first-child {
-			border-bottom: 3px solid @accent-green;
-
-		}
 	}
 	h3, h4 {
 		text-transform: uppercase;
@@ -214,4 +210,31 @@ a.btn.details-toggle {
 	border-bottom-right-radius: 0;
 	position: relative;
 	bottom: -6px;
+}
+nav.sections-nav {
+	background-color: @accent-green;
+	ul.section-dd {
+		background-color: @accent-green!important;
+		li {
+			background-color: @accent-green!important;
+			a {
+				color: white!important;
+				background: transparent!important;
+			}
+		}
+	}
+	ul.main-sections-nav {
+		width: 100%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		li {
+			flex-grow: 1;
+			a {
+				width: 100%;
+				text-transform: uppercase;
+				color: white!important;
+			}
+		}
+	}
 }
