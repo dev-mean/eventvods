@@ -108,7 +108,7 @@
 			<div class="nav-wrapper">
 				<ul class="main-sections-nav">
 					<li ng-repeat="section in League.data.contents track by $index">
-						<a class="section-handle" dropdown dropdown-target="{{'section-'+$index}}" data-hover="true" data-beloworigin="true">
+						<a ng-click="League.jumpTo($index, 0)" class="section-handle" dropdown dropdown-target="{{'section-'+$index}}" data-hover="true" data-beloworigin="true">
 								<i class="material-icons left">
 									&#xE5C5;
 								</i>

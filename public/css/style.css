@@ -1453,7 +1453,8 @@ a.btn.details-toggle.loaded {
   bottom: -6px;
 }
 nav.sections-nav {
-  background-color: #0CD97E;
+  background-color: #3c405c;
+  margin-bottom: 5px;
 }
 nav.sections-nav ul.section-dd {
   background-color: #3c405c !important;
