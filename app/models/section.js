@@ -35,7 +35,8 @@ var moduleSchema = new Schema({
 	columns: [String],
 	matches: [matchSchema],
 	twitch: Boolean,
-	youtube: Boolean
+	youtube: Boolean,
+	picksText: String
 });
 var sectionSchema = new Schema({
 	title: {

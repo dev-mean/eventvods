@@ -217,7 +217,5 @@
 				enabled: true,
 				requireBase: true
 			});
-
-
 		}]);
 }());

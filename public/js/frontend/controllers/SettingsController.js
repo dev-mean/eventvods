@@ -34,8 +34,8 @@
 				}
             };
         } ] )
-		.controller('SettingsController', ['SettingsService','SessionManager', '$q', '$rootScope', '$location', '$timeout', '$routeParams',
-		function(SettingsService, SessionManager, $q, $rootScope, $location, $timeout, $routeParams) {
+		.controller('SettingsController', ['SettingsService','SessionManager', '$q', '$rootScope', '$location', '$timeout', '$routeParams', '$anchorScroll',
+		function(SettingsService, SessionManager, $q, $rootScope, $location, $timeout, $routeParams, $anchorScroll) {
 			var vm = this;
 			vm.emailData = {};
 			vm.passwordData = {};
@@ -76,7 +76,8 @@
 			vm.save = function(){
 				SettingsService.setSettings(vm.data.settings)
 					.then(function(){
-						console.log("success");
+						$rootScope.$broadcast('triggerSessionUpdate');
+						$anchorScroll("top");
 					});
 			}
 			vm.verifySend = function(){

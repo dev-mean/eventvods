@@ -1,7 +1,7 @@
 (function() {
 	'use strict';
 	angular.module('eventvods')
-		.controller('PlayerController', ['$rootScope', '$timeout', function($rootScope, $timeout) {
+		.controller('PlayerController', ['$rootScope', '$timeout', 'SessionManager', function($rootScope, $timeout, SessionManager) {
 			var vm = this, player = null;
 			vm.show = false;
 			vm.match = null;
@@ -41,12 +41,12 @@
 					time: timeToSeconds(yt[5])
 				}
 			}
-			vm.playYoutube = function(link, match){
+			vm.playYoutube = function(link, match, $event){
+				var yt = parseYoutube(link);
+				if(yt !== false) $event.preventDefault();
 				vm.show = true;
 				vm.match = match;
 				vm.type = "youtube";
-				var yt = parseYoutube(link);
-				if(yt === false) window.location.url = link;
 				var options = {
 					width: window.innerWidth * 0.6,
 					height: window.innerWidth * 0.6 * 9/16,
@@ -65,13 +65,13 @@
 				};
 				player = new YT.Player('player', options);
 			}
-			vm.playTwitch = function(link, match){
+			vm.playTwitch = function(link, match, $event){
+				var twitch = parseTwitch(link);
+				if(twitch !== false) $event.preventDefault();
 				vm.loaded = false;
 				vm.show = true;
 				vm.match = match;
 				vm.type = "twitch";
-				var twitch = parseTwitch(link);
-				if(twitch === false) window.location.url = link;
 				var options = {
 					width: window.innerWidth * 0.6,
 					height: window.innerWidth * 0.6 * 9/16,
