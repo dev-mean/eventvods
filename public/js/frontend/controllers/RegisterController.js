@@ -16,12 +16,13 @@
 						$(this).addClass('invalid');
 					}
 				});
+				var passwords_match = (vm.data.password === vm.data.password_confirm);
 				var valid = (
 					$('#email')[0].checkValidity() &&
 					$('#password')[0].checkValidity() &&
 					$('#password_confirm')[0].checkValidity() &&
 					$('#name')[0].checkValidity &&
-					vm.data.tos
+					vm.data.tos && passwords_match
 				);
 				if(!vm.data.tos)
 					$('#tos + label').addClass('err');
@@ -41,6 +42,10 @@
 							})
 						});
 					});
+				else if(!passwords_match) {
+					$('#password_confirm').removeClass('valid').addClass('invalid');
+					$('#register input.invalid').first().focus();
+				}
 				else $('#register input.invalid').first().focus();
 			};
 			$timeout(function() {
