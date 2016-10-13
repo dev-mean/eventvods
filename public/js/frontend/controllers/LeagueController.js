@@ -6,8 +6,8 @@
 			var vm = this;
 			vm.abs = $location.absUrl();
 			vm.data;
-			vm.sectionIndex = 0;
-			vm.moduleIndex = 0;
+			vm.sectionIndex = $routeParams.s || 0;
+			vm.moduleIndex = $routeParams.m || 0;
 			vm.showDetails = false;
 			vm.toggleDetails = function(){
 				vm.showDetails = !vm.showDetails;
@@ -25,6 +25,26 @@
 				}
 				else str = String.fromCharCode(65+counter) + ($index+1);
 				return str;
+			}
+			vm.prevSection = function(){
+				vm.sectionIndex = vm.sectionIndex - 1;
+				$location.search('s', vm.sectionIndex);
+				vm.moduleIndex = 0;
+				$location.search('m', 0);
+			}
+			vm.nextSection = function(){
+				vm.sectionIndex = vm.sectionIndex + 1;
+				$location.search('s', vm.sectionIndex);
+				vm.moduleIndex = 0;
+				$location.search('m', 0);
+			}
+			vm.prevModule = function(){
+				vm.moduleIndex = vm.moduleIndex - 1;
+				$location.search('m', vm.moduleIndex);
+			}
+			vm.nextModule = function(){
+				vm.moduleIndex = vm.moduleIndex + 1;
+				$location.search('m', vm.moduleIndex);
 			}
 			function timeToSeconds(time){
 				time = /((\d+)h)?((\d+)m)?((\d+)s)?/i.exec(time);

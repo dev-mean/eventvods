@@ -3,7 +3,7 @@ var User = require('../../models/user');
 var Indicative = require('indicative');
 var Validators = require('../../controllers/validation');
 var async = require('async');
-
+var email = require('../../controllers/email');
 router.get('/session', function(req, res) {
     if (!req.isAuthenticated())
         res.sendStatus('204');
@@ -71,7 +71,14 @@ router.post('/register', function(req, res, next){
 							if(err) next(err);
 							req.login(user, function(err){
 								if (err) next(err);
-								res.redirect('/api/auth/session');
+								email.sendVerification(user)
+									.then(function () {
+										user.emailConfirmation.sent = true;
+										user.save(function (err) {
+											if (err) next(err);
+											else res.redirect('/api/auth/session');
+										})
+									})
 							});
 						});
 					}

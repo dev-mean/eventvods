@@ -79,7 +79,7 @@
 			<div class="icon team" ng-repeat="team in League.data.teams">
 				<svg viewbox="1 1 8 8" class="icon-image" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1">
 					<a ng-href="#" xlink:href="">
-						<path class="icon-path solid" fill="url(http://localhost:5000/league/eulcs2#bg)" stroke-width="0.2" d="M5.5 1.5 L8.5 4.5 Q9 5 8.5 5.5 L5.5 8.5 Q5 9 4.5 8.5 L 1.5 5.5 Q1 5 1.5 4.5 L4.5 1.5 Q 5 1 5.5 1.5z"
+						<path class="icon-path solid" stroke-width="0.2" d="M5.5 1.5 L8.5 4.5 Q9 5 8.5 5.5 L5.5 8.5 Q5 9 4.5 8.5 L 1.5 5.5 Q1 5 1.5 4.5 L4.5 1.5 Q 5 1 5.5 1.5z"
 						/>
 					</a>
 				</svg>
@@ -97,14 +97,14 @@
 	</a>
 	<div class="event-nav container load-in">
 		<div class="nav-row">
-			<h3 class="material-icons" ng-show="League.sectionIndex > 0" ng-click="League.sectionIndex = League.sectionIndex - 1;League.moduleIndex = 0">&#xE314;</h3>
+			<h3 class="material-icons" ng-show="League.sectionIndex > 0" ng-click="League.prevSection();">&#xE314;</h3>
 			<h3 ng-bind="League.data.contents[League.sectionIndex].title"></h3>
-			<h3 class="material-icons" ng-show="League.sectionIndex < League.data.contents.length - 1" ng-click="League.sectionIndex = League.sectionIndex + 1;League.moduleIndex = 0">&#xE315;</h3>
+			<h3 class="material-icons" ng-show="League.sectionIndex < League.data.contents.length - 1" ng-click="League.nextSection()">&#xE315;</h3>
 		</div>
 		<div class="nav-row">
-			<h4 class="material-icons" ng-show="League.moduleIndex > 0" ng-click="League.moduleIndex = League.moduleIndex - 1;">&#xE314;</h4>
+			<h4 class="material-icons" ng-show="League.moduleIndex > 0" ng-click="League.prevModule()">&#xE314;</h4>
 			<h4 ng-bind="League.data.contents[League.sectionIndex].modules[League.moduleIndex].title">Day 1</h4>
-			<h4 class="material-icons" ng-show="League.moduleIndex < League.data.contents[League.sectionIndex].modules.length - 1 " ng-click="League.moduleIndex = League.moduleIndex + 1;">&#xE315;</h4>
+			<h4 class="material-icons" ng-show="League.moduleIndex < League.data.contents[League.sectionIndex].modules.length - 1 " ng-click="League.nextModule()">&#xE315;</h4>
 		</div>
 	</div>
 	<div ng-repeat="module in League.data.contents[League.sectionIndex].modules track by $index" ng-if="League.moduleIndex == $index">

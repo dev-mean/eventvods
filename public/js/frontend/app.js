@@ -148,6 +148,7 @@
                     templateUrl: '/assets/views/frontend/league.html',
 					controller: 'LeagueController',
 					controllerAs: 'League',
+					reloadOnSearch: false,
 					meta: {
 						title: 'View Event - Eventvods - Esports on Demand',
 						description: 'Watch all vods and highlights on demand,  easily and spoiler-free. Rate, favorite and share matches of your favorite teams!'
