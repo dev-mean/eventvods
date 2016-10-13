@@ -335,41 +335,6 @@ nav.nav-main li.content-switch .switch label input[type=checkbox]:checked + .lev
 nav.nav-main li.content-switch .switch label input[type=checkbox]:checked + .lever:after {
   background-color: #0CD97E;
 }
-nav.nav-main .dropdown-content.wide {
-  width: auto!important;
-}
-nav.nav-main .dropdown-content.wide.grouped li {
-  border: 0;
-  border-left: 1px solid #323256;
-  border-right: 1px solid #323256;
-}
-nav.nav-main .dropdown-content.wide.grouped li img {
-  display: none;
-}
-nav.nav-main .dropdown-content.wide.grouped li.border-top {
-  border-top: 2px solid #323256;
-}
-nav.nav-main .dropdown-content.wide.grouped li.border-top img {
-  display: inline-block;
-}
-nav.nav-main .dropdown-content.wide .icon {
-  min-width: 48px;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-pack: center;
-      justify-content: center;
-  -ms-flex-align: center;
-      align-items: center;
-  margin: -14px 10px -14px -5px;
-  padding-right: 2px;
-  height: 50px;
-  border-right: 2px solid #323256;
-}
-nav.nav-main .dropdown-content.wide .icon > img {
-  height: 24px;
-  pointer-events: none;
-  vertical-align: middle;
-}
 nav.nav-main .dropdown-content a {
   text-transform: uppercase;
   text-align: left;
@@ -410,6 +375,41 @@ nav.nav-main a.btn {
 }
 nav.nav-main a.btn:hover {
   background: #0CD97E;
+}
+.dropdown-content.wide {
+  width: auto!important;
+}
+.dropdown-content.wide.grouped li {
+  border: 0;
+  border-left: 1px solid #323256;
+  border-right: 1px solid #323256;
+}
+.dropdown-content.wide.grouped li img {
+  display: none;
+}
+.dropdown-content.wide.grouped li.border-top {
+  border-top: 2px solid #323256;
+}
+.dropdown-content.wide.grouped li.border-top img {
+  display: inline-block;
+}
+.dropdown-content.wide .icon {
+  min-width: 48px;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: center;
+      justify-content: center;
+  -ms-flex-align: center;
+      align-items: center;
+  margin: -14px 10px -14px -5px;
+  padding-right: 2px;
+  height: 50px;
+  border-right: 2px solid #323256;
+}
+.dropdown-content.wide .icon > img {
+  height: 24px;
+  pointer-events: none;
+  vertical-align: middle;
 }
 .evSlider {
   position: relative;
