@@ -215,8 +215,13 @@ a.btn.details-toggle {
 nav.sections-nav {
 	background-color: @default-blue;
 	margin-bottom: 5px;
+	.wide {
+		width: 100%!important;
+		left: 0!important;
+	}
 	ul.section-dd {
 		background-color: @default-blue!important;
+		border-top: 2px solid @accent-green;
 		li {
 			background-color: @default-blue;
 			a {
@@ -239,7 +244,6 @@ nav.sections-nav {
 				text-transform: uppercase;
 				color: white!important;
 				text-align: left;
-				height: 64px;
 				overflow: hidden;
 			}
 		}

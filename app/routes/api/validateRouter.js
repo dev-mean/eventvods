@@ -72,9 +72,10 @@ router.get('/staffSlug/:slug/:id', function(req, res, next) {
         else return res.sendStatus('409');
     });
 });
-router.get('/teamSlug/:slug', function(req, res, next) {
+router.get('/teamSlug/:slug/game/:game', function(req, res, next) {
     Team.find({
-            slug: req.params.slug
+            slug: req.params.slug,
+			game: req.params.game
         })
         .count()
         .exec(function(err, count) {
@@ -83,9 +84,10 @@ router.get('/teamSlug/:slug', function(req, res, next) {
             else return res.sendStatus('200');
         });
 });
-router.get('/teamSlug/:slug/:id', function(req, res, next) {
+router.get('/teamSlug/:slug/:id/game/:game', function(req, res, next) {
     Team.findOne({
-        slug: req.params.slug
+        slug: req.params.slug,
+		game: req.params.game
     }, function(err, doc) {
         if (err) next(err);
         if (!doc) return res.sendStatus('200');

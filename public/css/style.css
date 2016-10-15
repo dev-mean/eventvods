@@ -930,8 +930,8 @@ input[type="checkbox"].filled-in:checked + label:after {
   -ms-flex-positive: 1;
       flex-grow: 1;
   width: 33%;
-  -webkit-clip-path: url("../../../../#element");
-          clip-path: url("../../../../#element");
+  -webkit-clip-path: url("#element");
+          clip-path: url("#element");
   max-width: 600px;
   position: relative;
   background: #27273F;
@@ -940,8 +940,8 @@ input[type="checkbox"].filled-in:checked + label:after {
 .element-container .element-border .element-background {
   height: 150px;
   width: 100%;
-  -webkit-clip-path: url("../../../../#element");
-          clip-path: url("../../../../#element");
+  -webkit-clip-path: url("#element");
+          clip-path: url("#element");
   position: relative;
   padding-right: 10%;
   left: -20px;
@@ -1012,7 +1012,6 @@ input[type="checkbox"].filled-in:checked + label:after {
 .element-container .element-border .element-background .element-teams .element-team > img {
   max-height: 60%;
   margin: 5px auto 5px auto;
-  padding: 10px;
 }
 .element-container .element-border .element-background .element-teams .element-team .spoiler-text {
   font-size: 70%;
@@ -1456,8 +1455,13 @@ nav.sections-nav {
   background-color: #3C3C62;
   margin-bottom: 5px;
 }
+nav.sections-nav .wide {
+  width: 100%!important;
+  left: 0!important;
+}
 nav.sections-nav ul.section-dd {
   background-color: #3C3C62 !important;
+  border-top: 2px solid #0CD97E;
 }
 nav.sections-nav ul.section-dd li {
   background-color: #3C3C62;
@@ -1486,7 +1490,6 @@ nav.sections-nav ul.main-sections-nav li a {
   text-transform: uppercase;
   color: white!important;
   text-align: left;
-  height: 64px;
   overflow: hidden;
 }
 .squish a.section-handle {

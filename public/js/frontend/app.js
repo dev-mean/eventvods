@@ -1,16 +1,35 @@
 (function() {
 	'use strict';
-	String.prototype.hexEncode = function(){
-		var hex, i;
-		var result = "";
-		for (i=0; i<this.length; i++) {
-			hex = this.charCodeAt(i).toString(16);
-			result += ("000"+hex).slice(-4);
+	jQuery.uaMatch = function( ua ) {
+		ua = ua.toLowerCase();
+		var match = /(chrome)[ \/]([\w.]+)/.exec( ua ) ||
+			/(webkit)[ \/]([\w.]+)/.exec( ua ) ||
+			/(opera)(?:.*version|)[ \/]([\w.]+)/.exec( ua ) ||
+			/(msie) ([\w.]+)/.exec( ua ) ||
+			ua.indexOf("compatible") < 0 && /(mozilla)(?:.*? rv:([\w.]+)|)/.exec( ua ) || [];
+		return {
+			browser: match[ 1 ] || "",
+			version: match[ 2 ] || "0"
+		};
+	};
+	if ( !jQuery.browser ) {
+		var
+		matched = jQuery.uaMatch( navigator.userAgent ),
+		browser = {};
+		if ( matched.browser ) {
+			browser[ matched.browser ] = true;
+			browser.version = matched.version;
 		}
-		return result
+		// Chrome is Webkit, but Webkit is also Safari.
+		if ( browser.chrome ) {
+			browser.webkit = true;
+		} else if ( browser.webkit ) {
+			browser.safari = true;
+		}
+		jQuery.browser = browser;
 	}
 	angular.module('eventvods', ['ngAnimate', 'ngRoute', 'ngCookies', 'ngSanitize',
-	 'angular-loading-bar', 'ui.materialize','xeditable','angulartics', 'angulartics.google.analytics'])
+	 'angular-loading-bar', 'ui.materialize','xeditable','angulartics', 'angulartics.google.analytics','ngSVGAttributes'])
 		.constant('DOMAIN', 'http://beta.eventvods.com')
 		.constant('API_BASE_URL', '/api')
 		.run(function(editableOptions, editableThemes, $rootScope, $anchorScroll, DOMAIN) {
@@ -49,13 +68,15 @@
 			return {
 				restrict: 'A',
 				link: function($scope, $element, $attrs) {
-					$element.css('clip-path','url("'+abs+'#element")');
-					$rootScope.$on('$routeChangeSuccess', function (evt, current, previous) {
-						if(current != previous && typeof current !== "undefined"){
-							abs = $location.absUrl().replace('#_=_','');
-							$element.css('clip-path','url("'+abs+'#element")');
-						}
-					});
+					if ($.browser.mozilla) {
+						$element.css('clip-path','url("'+abs+'#element")');
+						$rootScope.$on('$routeChangeSuccess', function (evt, current, previous) {
+							if(current != previous && typeof current !== "undefined"){
+								abs = $location.absUrl().replace('#_=_','');
+								$element.css('clip-path','url("'+abs+'#element")');
+							}
+						});
+					}
 				}
 			};
 		})
