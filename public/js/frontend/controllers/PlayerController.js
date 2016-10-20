@@ -43,6 +43,7 @@
 				}
 			}
 			vm.playYoutube = function(link, match, $event){
+				if(match.placeholder) return;
 				var yt = parseYoutube(link);
 				if(yt !== false) $event.preventDefault();
 				vm.show = true;
@@ -67,6 +68,7 @@
 				player = new YT.Player('player', options);
 			}
 			vm.playTwitch = function(link, match, $event){
+				if(match.placeholder) return;
 				var twitch = parseTwitch(link);
 				if(twitch !== false) $event.preventDefault();
 				vm.loaded = false;

@@ -1,13 +1,4 @@
 (function() {
-	function shuffleArray(array) {
-		for (var i = array.length - 1; i > 0; i--) {
-			var j = Math.floor(Math.random() * (i + 1));
-			var temp = array[i];
-			array[i] = array[j];
-			array[j] = temp;
-		}
-		return array;
-	}
 	'use strict';
 	angular.module('eventvods')
 		.factory('NavService', ['$http', 'API_BASE_URL', function($http, API_BASE_URL) {
@@ -21,6 +12,7 @@
 			function(SessionManager, $rootScope, $timeout, $cookies, $window, NavService, $location) {
 				var vm = this;
 				var element_images = 17;
+				vm.session = null;
 				vm.nav = null;
 				var now = new $window.Date(),
 					// this will set the expiration to 6 months
@@ -38,6 +30,8 @@
 				};
 				$rootScope.$on('sessionUpdate', function() {
 					vm.session = SessionManager.get();
+					vm.inlineYoutube = inlineYoutube();
+					vm.inlineTwitch = inlineTwitch();
 					$('.dropdown-button#userProfile').dropdown({
 						hover: true,
 						belowOrigin: true,
@@ -81,6 +75,14 @@
 						vm.session.following.splice(index, 1);
 					else vm.session.following.push(id);
 					SessionManager.following(vm.session.following);
+				}
+				var inlineYoutube = function(){
+					if(vm.session == null || vm.session == false) return true;
+					else return vm.session.settings.inline.youtube;
+				}
+				var inlineTwitch = function(){
+					if(vm.session == null || vm.session == false) return true;
+					else return vm.session.settings.inline.youtube;
 				}
 				NavService.get()
 					.then(function(res) {

@@ -5,6 +5,8 @@
 			var svc = this,
 				session = null;
 			svc.get = function() {
+				console.log('Current session:');
+				console.log(session);
 				return session;
 			};
 			svc.load = function() {
