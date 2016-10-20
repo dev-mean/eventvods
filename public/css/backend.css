@@ -221,7 +221,6 @@ textarea.parsley-error {
   -webkit-clip-path: url("../../../../#element");
           clip-path: url("../../../../#element");
   position: relative;
-  padding-right: 10%;
   left: -20px;
 }
 .element-container .element-border .element-background > a {
@@ -251,13 +250,46 @@ textarea.parsley-error {
   -ms-flex-align: center;
       align-items: center;
 }
+.element-container .element-border .element-background .element-extraTitle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: #d3d7e3;
+  text-decoration: none;
+  font-style: normal;
+  border: 0;
+  padding-left: 5px;
+  z-index: 100;
+}
+.element-container .element-border .element-background .element-extraTitle:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+.element-container .element-border .element-background .element-extraTitle.editable-empty {
+  opacity: 0.6;
+}
 .element-container .element-border .element-background .element-tag {
   color: white;
   font-size: 2.18em;
   height: 45px;
 }
+.element-container .element-border .element-background .element-settings {
+  width: 100%;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -ms-flex-align: center;
+      align-items: center;
+  color: white;
+  height: 50px;
+}
+.element-container .element-border .element-background .element-settings .element-team {
+  height: 50px;
+  padding: 0;
+}
 .element-container .element-border .element-background .element-teams {
-  height: 155px;
+  height: 100px;
   width: 100%;
   display: -ms-flexbox;
   display: flex;
@@ -268,10 +300,17 @@ textarea.parsley-error {
   color: white;
   font-size: 2.18em;
 }
-.element-container .element-border .element-background .element-teams .element-vs {
+.element-container .element-border .element-background .element-teams .element-team {
+  height: 100px;
+}
+.element-container .element-border .element-background .element-teams div {
+  -ms-flex-preferred-size: 0;
+      flex-basis: 0;
+}
+.element-container .element-border .element-background .element-vs {
   font-size: large;
 }
-.element-container .element-border .element-background .element-teams .element-team {
+.element-container .element-border .element-background .element-team {
   -ms-flex-positive: 1;
       flex-grow: 1;
   -ms-flex-preferred-size: 0px;
@@ -287,10 +326,9 @@ textarea.parsley-error {
       align-items: center;
   position: relative;
   top: -20px;
-  height: 150px;
   font-weight: 300;
 }
-.element-container .element-border .element-background .element-teams .element-team > img {
+.element-container .element-border .element-background .element-team > img {
   margin-bottom: 5px;
   max-height: 60%;
 }
@@ -474,6 +512,10 @@ textarea.parsley-error {
   color: white!important;
 }
 /* global elements + box sizing */
+[sv-handle] {
+  position: relative;
+  z-index: 99999;
+}
 html {
   background: url(/assets/images/backend-background.jpg) no-repeat center center fixed;
   background-size: cover;
@@ -1159,7 +1201,6 @@ table.standard input[type=checkbox]:checked + label::after {
   color: #a4abc1;
   transition: all 0.25s ease-in-out;
   transition: all 0.3s linear;
-  text-transform: uppercase;
   position: relative;
   top: 2px;
 }
@@ -1191,6 +1232,9 @@ table.standard input[type=checkbox]:checked + label::after {
   font-size: 14px;
   line-height: 16px;
   color: #8690af;
+}
+.editable-buttons button {
+  text-transform: uppercase;
 }
 .editable-buttons button:hover {
   border-color: #a4abc1;
@@ -2449,19 +2493,27 @@ select.form-style {
   line-height: 16px;
   color: #8690af;
 }
+.element-container label {
+  text-transform: uppercase;
+  color: #aeb8d6;
+  cursor: pointer;
+}
 .element-container .element-team {
   position: relative;
   top: -20px;
   height: 150px;
 }
-.element-container .element-team label {
-  font-size: 0.4em;
-  text-transform: uppercase;
-  color: #aeb8d6;
-  cursor: pointer;
-}
 .element-container .element-team img {
   max-height: 25px!important;
+}
+.element-container h6.editable-click {
+  border-bottom: 0;
+  color: #d3d7e3;
+  font-style: normal;
+}
+.element-container h6.editable-click:hover:after {
+  width: 100%;
+  left: 0;
 }
 .element-container .element-go {
   max-height: 75px;

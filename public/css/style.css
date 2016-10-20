@@ -943,7 +943,6 @@ input[type="checkbox"].filled-in:checked + label:after {
   -webkit-clip-path: url("#element");
           clip-path: url("#element");
   position: relative;
-  padding-right: 10%;
   left: -20px;
 }
 .element-container .element-border .element-background > a {
@@ -984,6 +983,7 @@ input[type="checkbox"].filled-in:checked + label:after {
   width: 100%;
   color: white;
   height: 150px;
+  padding-right: 10%;
 }
 .element-container .element-border .element-background .element-teams .element-vs {
   font-size: large;
@@ -1518,15 +1518,13 @@ nav.sections-nav ul.main-sections-nav li a {
 .player .back:hover {
   color: #0CD97E;
 }
-.player .player-below h5,
-.player .player-below h6 {
+.player .player-above h5 {
   text-transform: uppercase;
 }
-.player .player-below h5 {
+.player .player-above h5:first-child {
   color: #0CD97E;
 }
-.player .player-below a.btn {
-  padding: 0 5px;
+.player .player-above a.btn {
   margin-top: 0.41rem;
 }
 .player > div {
@@ -1535,7 +1533,12 @@ nav.sections-nav ul.main-sections-nav li a {
 .player .col img {
   max-height: 100%;
 }
-.player .player-teams {
+.player .player-controls {
+  height: 32px;
+  background: #3c405c;
+  width: 100%;
+}
+.player .player-below {
   height: 100px;
   padding: 15px;
   width: 100%;
@@ -1545,18 +1548,19 @@ nav.sections-nav ul.main-sections-nav li a {
       justify-content: flex-start;
   -ms-flex-align: center;
       align-items: center;
+  background: #3C3C62;
+  color: white;
 }
-.player .player-teams img {
+.player .player-below img {
   max-height: 100%;
 }
-.player .player-teams h4 {
+.player .player-below h4 {
   padding: 10px;
 }
 .player #player {
   margin: auto;
-}
-.player #player > iframe {
-  border: 5px solid #3C3C62;
+  border: 3px solid #3C3C62;
+  border-top: 0;
 }
 .player .preloader-wrapper {
   height: 256px;

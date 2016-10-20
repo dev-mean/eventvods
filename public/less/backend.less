@@ -10,7 +10,10 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans);
 
 /* global elements + box sizing */
-
+[sv-handle] {
+	position: relative;
+	z-index: 99999;
+}
 html {
 	background: url(/assets/images/backend-background.jpg) no-repeat center center fixed;
 	background-size: cover;
@@ -678,12 +681,12 @@ table.standard {
 .editable-input,
 .editable-buttons button {
 	.form-style;
-	text-transform: uppercase;
 	position: relative;
 	top: 2px;
 }
 
 .editable-buttons button {
+	text-transform: uppercase;
 	&:hover {
 		border-color: @silver-dark;
 		color: @silver-light;
@@ -1611,18 +1614,26 @@ select.form-style {
 		.form-style;
 		background: @default;
 	}
+	label {
+		text-transform: uppercase;
+		color: @silver;
+		cursor: pointer;
+	}
 	.element-team {
 		position: relative;
 		top: -20px;
 		height: 150px;
-		label {
-			font-size: 0.4em;
-			text-transform: uppercase;
-			color: @silver;
-			cursor: pointer;
-		}
 		img {
 			max-height: 25px!important;
+		}
+	}
+	h6.editable-click {
+		border-bottom: 0;
+		color: @silver-light;
+		font-style: normal;
+		&:hover:after {
+			width: 100%;
+			left: 0;
 		}
 	}
 	.element-go {

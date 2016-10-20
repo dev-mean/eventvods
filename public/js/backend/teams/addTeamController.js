@@ -3,7 +3,7 @@
     angular.module( 'eventApp' )
         .controller( 'addTeamController', [ 'teamsService', '$location', 'notificationService', 'API_BASE_URL', 'gamesService',
             function( Teams, $location, toastr, API_BASE_URL, Games ) {
-                var vm = this, mappedGames;
+                var vm = this, mappedGames, parsley;
                 vm.title = "Add Team";
                 vm.errors = [];
 				vm.tab = 1;
@@ -11,9 +11,7 @@
 					media: []
 				}
 				vm.gameName = "";
-				$('#slug').attr('data-parsley-remote', API_BASE_URL + '/validate/teamSlug/{value}');
-                var parsley = $( '#addTeamForm' )
-                    .parsley();
+				parsley =  $( '#addTeamForm').parsley();
 				Games.find()
 					.then(function(res){
 						vm.games = res.data;
@@ -23,8 +21,10 @@
 						}, {});
 					});
 				vm.setGameName = function(){
-					if(typeof vm.data.game === "undefined") return "";
-					else vm.gameName="/" + mappedGames[vm.data.game].slug;
+					if(typeof vm.data.game === "undefined") return;
+					$('#slug').attr('data-parsley-remote', API_BASE_URL + '/validate/teamSlug/{value}/game/'+vm.data.game);
+                	parsley =  $( '#addTeamForm').parsley();
+					vm.gameName="/" + mappedGames[vm.data.game].slug;
 				}
                 vm.submit = function() {
                     if ( parsley.validate() ) Teams.create( vm.data )

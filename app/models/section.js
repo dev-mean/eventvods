@@ -10,6 +10,7 @@ var matchSchema = {
 	team1SpText: String,
 	team2SpText: String,
 	links: [String],
+	title: String,
 	twitch: {
 		picksBans: String,
 		gameStart: String,
@@ -35,15 +36,15 @@ var moduleSchema = new Schema({
 	columns: [String],
 	matches: [matchSchema],
 	twitch: Boolean,
-	youtube: Boolean,
-	picksText: String
+	youtube: Boolean
 });
 var sectionSchema = new Schema({
 	title: {
 		type: String,
 		required: true
 	},
-	modules: [moduleSchema]
+	modules: [moduleSchema],
+	draftText: String
 });
 var Section = mongoose.model('Section', sectionSchema);
 module.exports = Section;

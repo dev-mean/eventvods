@@ -24,7 +24,6 @@
 			width: 100%;
 			clip-path: url("../../../../#element");
 			position: relative;
-			padding-right: 10%;
 			left: -20px;
 			> a {
 				height: 100%;
@@ -46,38 +45,74 @@
 				justify-content: space-between;
 				align-items: center;
 			}
+			.element-extraTitle {
+				position: absolute;
+				top: 0;
+				left: 0;
+				color: @silver-light;
+				text-decoration: none;
+				font-style: normal;
+				border: 0;
+				padding-left: 5px;
+				z-index: 100;
+				&:hover {
+					text-decoration: underline;
+					cursor: pointer;
+				}
+				&.editable-empty {
+					opacity: 0.6;
+				}
+			}
 			.element-tag {
 				color: white;
 				font-size: 2.18em;
 				height: 45px;
 			}
+			.element-settings {
+				width: 100%;
+				display: flex;
+				justify-content: space-around;
+				align-items: center;
+				color: white;
+				height: 50px;
+				.element-team {
+					height: 50px;
+					padding: 0;
+				}
+
+			}
 			.element-teams {
-				height: 155px;
+				height: 100px;
 				width: 100%;
 				display: flex;
 				justify-content: center;
 				align-items: center;
 				color: white;
 				font-size: 2.18em;
-				.element-vs {
-					font-size: large;
-				}
 				.element-team {
-					flex-grow: 1;
-					flex-basis: 0px;
-    				padding: 10px;
-					display: flex;
-					flex-direction: column;
-					justify-content: space-around;
-					align-items: center;
-					position: relative;
-					top: -20px;
-					height: 150px;
-					font-weight: 300;
-					> img {
-						margin-bottom: 5px;
-						max-height: 60%;
-					}
+					height: 100px;
+				}
+				div {
+					flex-basis: 0;
+				}
+			}
+			.element-vs {
+				font-size: large;
+			}
+			.element-team {
+				flex-grow: 1;
+				flex-basis: 0px;
+				padding: 10px;
+				display: flex;
+				flex-direction: column;
+				justify-content: space-around;
+				align-items: center;
+				position: relative;
+				top: -20px;
+				font-weight: 300;
+				> img {
+					margin-bottom: 5px;
+					max-height: 60%;
 				}
 			}
 

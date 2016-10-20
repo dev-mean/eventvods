@@ -3,12 +3,12 @@
     angular.module( 'eventApp' )
         .controller( 'editTeamController', [ 'teamsService', '$location', 'notificationService', '$routeParams', 'API_BASE_URL', 'gamesService',
             function( Teams, $location, toastr, $routeParams, API_BASE_URL, Games ) {
-                var vm = this, mappedGames;
+                var vm = this, mappedGames, parsley;
                 vm.title = "Edit Team";
                 vm.errors = [];
 				vm.tab = 1;
 				$( '#slug' ).attr( 'data-parsley-remote', API_BASE_URL + '/validate/teamSlug/{value}/'  + $routeParams.id );
-                var parsley = $( '#addTeamForm' )
+                parsley = $( '#addTeamForm' )
                             .parsley();
                 Teams.findById( $routeParams.id )
                     .then( function( response ) {
@@ -31,8 +31,10 @@
 						vm.setGameName();
 					});
 				vm.setGameName = function(){
-					if(typeof vm.data.game === "undefined" || typeof mappedGames === "undefined") return "";
-					else vm.gameName="/" + mappedGames[vm.data.game].slug;
+					if(typeof vm.data.game === "undefined" || typeof mappedGames === "undefined") return;
+					$('#slug').attr('data-parsley-remote', API_BASE_URL + '/validate/teamSlug/{value}/' +$routeParams.id+ '/game/'+vm.data.game);
+                	parsley =  $( '#addTeamForm').parsley();
+					vm.gameName="/" + mappedGames[vm.data.game].slug;
 				}
                 vm.submit = function() {
                     if ( parsley.validate() ) Teams.update( $routeParams.id, vm.data )

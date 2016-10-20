@@ -1,7 +1,7 @@
 <div class="contextHead">
     <div class="leftSide">
         <h1 class="title">
-            Leagues
+            Events
         </h1>
     </div>
     <div class="rightSide">
@@ -9,13 +9,13 @@
             <i class="fa fa-line-chart">
             </i>
             <span>
-                Add League
+                Add Event
             </span>
         </a>
     </div>
 </div>
 <div class="filters">
-    <input type="text" ng-model="leaguesListController.search" placeholder="Search Leagues" tabindex="1"/>
+    <input type="text" ng-model="leaguesListController.search" placeholder="Search Events" tabindex="1"/>
 </div>
 <div class="listView events">
     <table class="standard">
@@ -85,7 +85,7 @@
                     {{league.subtitle}}
                 </td>
 				<td>
-					/league/{{league.slug}}
+					/event/{{league.slug}}
 				</td>
 				<td class="update">
 					<a ng-href="/manage/league/{{league._id}}/update">

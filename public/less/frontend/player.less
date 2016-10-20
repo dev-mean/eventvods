@@ -19,15 +19,14 @@
 			color: @accent-green;
 		}
 	}
-	.player-below {
-		h5, h6 {
-			text-transform: uppercase;
-		}
+	.player-above {
 		h5 {
-			color: @accent-green;
+			text-transform: uppercase;
+			&:first-child {
+				color: @accent-green;
+			}
 		}
 		a.btn {
-			padding: 0 5px;
 			margin-top: 0.41rem;
 		}
 	}
@@ -37,13 +36,20 @@
 	.col img {
 		max-height: 100%;
 	}
-	.player-teams {
+	.player-controls {
+		height: 32px;
+		background: @default;
+		width: 100%;
+	}
+	.player-below {
 		height: 100px;
 		padding: 15px;
 		width: 100%;
 		display: flex;
 		justify-content: flex-start;
 		align-items: center;
+		background: @default-blue;
+		color: white;
 		img {
 			max-height: 100%;
 		}
@@ -53,9 +59,8 @@
 	}
 	#player {
 		margin: auto;
-		> iframe{
-			border: 5px solid @default-blue;
-		}
+		border: 3px solid @default-blue;
+		border-top: 0;
 	}
 	.preloader-wrapper {
 		height: 256px;

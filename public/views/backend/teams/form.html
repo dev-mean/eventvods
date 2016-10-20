@@ -40,17 +40,17 @@
 		</div>
 		<div class="standard group">
 			<label>
-                URL Slug
-            </label>
-			<input id="slug" type="text" placeholder="e.g. fnc" ng-model="teamsFormController.data.slug" data-parsley-trigger="keyup" data-parsley-remote-message="Slug already in use." required/>
-		</div>
-		<div class="standard group">
-			<label>
                 Game
             </label>
 			<select ng-model="teamsFormController.data.game" ng-options="game._id as game.name for game in teamsFormController.games" ng-change="teamsFormController.setGameName()" required>
 				<option value="">Select Game</option>
 			</select>
+		</div>
+		<div class="standard group">
+			<label>
+                URL Slug
+            </label>
+			<input id="slug" type="text" placeholder="e.g. fnc" ng-model="teamsFormController.data.slug" data-parsley-trigger="keyup" data-parsley-remote-message="Slug already in use." required/>
 		</div>
 		<div class="standard group">
 			<label class="full">

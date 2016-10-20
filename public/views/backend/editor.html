@@ -74,6 +74,7 @@
 		<div class="element-container" ng-repeat="match in module.matches track by $index" sv-element>
 			<div class="element-border">
 				<div class="element-background event-background">
+					<span class="element-extraTitle" editable-text="match.title">{{match.title || "Add Title"}}</span>
 					<span class="element-tag"><i sv-handle class="fa fa-sort fa-fw"></i><span ng-bind="editorController.getIdentifier($parent.$parent.$parent.$index, $parent.$parent.$index) + ($index+1)"></span></span>
 					<div class="element-teams">
 						<div ng-show="!(match.team1 === undefined || match.team1 === null)" class="element-team">
@@ -84,11 +85,6 @@
 							<div class="popover-wrapper popover-left">
 								<span editable-text="match.team1SpText" ng-show="match.team1Sp" e-placeholder="Team 1">{{match.team1SpText || "Team 1"}}</span>
 							</div>
-							<span>
-								<input type="checkbox" ng-model="match.team1Sp" ng-attr-id="sp_{{$parent.$parent.$id}}_{{$parent.$id}}_{{$id}}" />
-								<label ng-attr-for="sp_{{$parent.$parent.$id}}_{{$parent.$id}}_{{$id}}"></label>
-								<label ng-attr-for="sp_{{$parent.$parent.$id}}_{{$parent.$id}}_{{$id}}">spoilers</b>
-							</span>
 						</div>
 						<div ng-show="match.team1 === undefined || match.team1 === null" class="element-team">
 							<span editable-select="match.team1" e-ng-options="team.name for team in editorController.data.teams" e-placeholder="Select Team">Select Team</span>
@@ -104,21 +100,41 @@
 							<div class="popover-wrapper popover-right">
 								<span editable-text="match.team2SpText" ng-show="match.team2Sp" e-placeholder="Team 2">{{match.team2SpText || "Team 2"}}</span>
 							</div>
+
+						</div>
+						<div ng-show="match.team2 === undefined || match.team2 === null" class="element-team">
+							<span editable-select="match.team2" e-ng-options="team.name for team in editorController.data.teams" e-placeholder="Select Team">Select Team</span>
+						</div>
+					</div>
+					<div class="element-settings">
+						<div class="element-sp">
+							<span>
+								<input type="checkbox" ng-model="match.team1Sp" ng-attr-id="sp_{{$parent.$parent.$id}}_{{$parent.$id}}_{{$id}}" />
+								<label ng-attr-for="sp_{{$parent.$parent.$id}}_{{$parent.$id}}_{{$id}}"></label>
+								<label ng-attr-for="sp_{{$parent.$parent.$id}}_{{$parent.$id}}_{{$id}}">spoilers</label>
+							</span>
+						</div>
+						<div class="element-vs">
+							<span>
+								<input type="checkbox" ng-model="match.placeholder" ng-attr-id="ph_{{$parent.$parent.$id}}_{{$parent.$id}}_{{$id}}" />
+								<label ng-attr-for="ph_{{$parent.$parent.$id}}_{{$parent.$id}}_{{$id}}"></label>
+								<label ng-attr-for="ph_{{$parent.$parent.$id}}_{{$parent.$id}}_{{$id}}">placeholder</label>
+							</span>
+						</div>
+						<div class="element-sp">
 							<span>
 								<input type="checkbox" ng-model="match.team2Sp" ng-attr-id="sp_{{$parent.$parent.$id}}_{{$parent.$id}}_{{$id}}_2" />
 								<label ng-attr-for="sp_{{$parent.$parent.$id}}_{{$parent.$id}}_{{$id}}_2"></label>
 								<label ng-attr-for="sp_{{$parent.$parent.$id}}_{{$parent.$id}}_{{$id}}_2">spoilers</label>
 							</span>
 						</div>
-						<div ng-show="match.team2 === undefined || match.team2 === null" class="element-team">
-							<span editable-select="match.team2" e-ng-options="team.name for team in editorController.data.teams" e-placeholder="Select Team">Select Team</span>
-						</div>
 					</div>
 				</div>
 			</div>
 			<div class="element-links">
 				<div class="element-titles flex-row">
-					<h6>Picks & Bans</h6>
+					<h6 ng-if="!section.draftText" editable-text="section.draftText">Picks & Bans </h6>
+					<h6 ng-if="section.draftText" editable-text="section.draftText">{{section.draftText}}</h6>
 					<h6>Game Start</h6>
 				</div>
 				<div class="element-go row">

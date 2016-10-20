@@ -14,12 +14,17 @@
 					});
 			};
 			vm.getIdentifier = function($parentIndex, $index){
-				var counter = 0;
+				var counter = 0, str = "";
 				for(var i =0; i < $parentIndex; i++){
 					counter += vm.data.contents[i].modules.length;
 				}
 				counter += $index;
-				return String.fromCharCode(65+counter);
+				if(counter > 25){
+					str += String.fromCharCode(64 + Math.floor(counter / 26))
+					str += String.fromCharCode(65+(counter % 26));
+				}
+				else str = String.fromCharCode(65+counter);
+				return str;
 			}
 			vm.addSection = function(){
 				vm.data.contents.push({
