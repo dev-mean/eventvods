@@ -7,6 +7,9 @@
 			vm.match = null;
 			vm.type = null;
 			vm.loaded = true;
+			vm.playing = false;
+			vm.sectionT = null;
+			vm.moduleT = null;
 			vm.back = function(){
 				reset();
 			}
@@ -42,13 +45,15 @@
 					time: timeToSeconds(yt[6])
 				}
 			}
-			vm.playYoutube = function(link, match, $event){
+			vm.playYoutube = function(link, match, $event, sectionT, moduleT){
 				if(match.placeholder) return;
 				var yt = parseYoutube(link);
 				if(yt !== false) $event.preventDefault();
 				vm.show = true;
 				vm.match = match;
 				vm.type = "youtube";
+				vm.sectionT = sectionT;
+				vm.moduleT = moduleT;
 				var options = {
 					width: window.innerWidth * 0.6,
 					height: window.innerWidth * 0.6 * 9/16,
@@ -62,6 +67,8 @@
 					events: {
 						onReady: function(event) {
 							event.target.playVideo();
+							vm.playing = true;
+							vm.volSlider = event.target.getVolume();
 						}
 					}
 				};
@@ -82,6 +89,7 @@
 				};
 				player = new Twitch.Player("player", options);
 				function init(){
+					vm.playing = true;
 					player.seek(twitch.time);
 					player.removeEventListener(Twitch.Player.READY, init);
 					$timeout(function(){
@@ -101,7 +109,6 @@
 					if(time !== false) time = time.time;
 					player.seekTo(time);
 				}
-				console.log(time);
 			}
 			vm.start = function(){
 				if(vm.type === "twitch"){
@@ -114,7 +121,18 @@
 					if(time !== false) time = time.time;
 					player.seekTo(time);
 				}
-				console.log(time);
+			}
+			vm.toggle = function(){
+				if(vm.playing) player.pauseVideo();
+				else player.playVideo();
+				vm.playing = !vm.playing;
+			}
+			vm.setVol = function(vol){
+				vm.volSlider = vol;
+				player.setVolume(vol);
+			}
+			vm.skip = function(diff){
+				player.seekTo(player.getCurrentTime() + diff);
 			}
 		}]);
 }());

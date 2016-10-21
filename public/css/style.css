@@ -1534,9 +1534,53 @@ nav.sections-nav ul.main-sections-nav li a {
   max-height: 100%;
 }
 .player .player-controls {
+  border-left: 3px solid #3C3C62;
+  border-right: 3px solid #3C3C62;
   height: 32px;
-  background: #3c405c;
+  line-height: 32px;
+  padding: 0 5px;
+  background: black;
   width: 100%;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: justify;
+      justify-content: space-between;
+  -ms-flex-align: center;
+      align-items: center;
+  color: white;
+}
+.player .player-controls i.material-icons[ng-click]:hover,
+.player .player-controls span > span:hover {
+  color: #0CD97E;
+}
+.player .player-controls span {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+      align-items: center;
+  position: relative;
+}
+.player .player-controls span > span {
+  padding: 0px 5px;
+}
+.player .player-controls .vol-slider {
+  -ms-transform: rotate(270deg);
+      transform: rotate(270deg);
+  position: absolute;
+  right: -40px;
+  top: -70px;
+  width: 100px;
+  background: transparent;
+  border: 0;
+  opacity: 0;
+  transition: opacity 0.3s linear;
+}
+.player .player-controls i.material-icons:hover + .vol-slider,
+.player .player-controls .vol-slider:hover {
+  opacity: 1;
+}
+.player .player-controls .thumb.active {
+  display: none!important;
 }
 .player .player-below {
   height: 100px;
@@ -1557,10 +1601,33 @@ nav.sections-nav ul.main-sections-nav li a {
 .player .player-below h4 {
   padding: 10px;
 }
+.player .match-details {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: row;
+      flex-direction: row;
+  -ms-flex-pack: justify;
+      justify-content: space-between;
+  -ms-flex-align: center;
+      align-items: center;
+  width: 100%;
+}
+.player .match-details > span,
+.player .match-details div {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+      align-items: center;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
 .player #player {
   margin: auto;
   border: 3px solid #3C3C62;
-  border-top: 0;
+  border-bottom: 0;
+}
+.player #player.twitch {
+  margin-bottom: -6px;
 }
 .player .preloader-wrapper {
   height: 256px;

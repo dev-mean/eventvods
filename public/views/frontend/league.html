@@ -171,7 +171,7 @@
 						<div class="row col s6">
 							<a ng-if="module.youtube && match.youtube.picksBans" class="col s6" ng-class="{'offset-s3': (!module.twitch || !match.twitch.picksBans)}"
 											ng-href="{{match.youtube.picksBans}}"
-											ng-click="!Page.inlineYoutube ? return : Player.playYoutube(match.youtube.picksBans, match, $event)">
+											ng-click="!Page.inlineYoutube ? return : Player.playYoutube(match.youtube.picksBans, match, $event, League.data.contents[League.sectionIndex].title, module.title)">
 								<img ng-if="Page.contentClass == 'light'" class="responsive-img" src="/assets/images/icons/youtube_full.png" />
 								<img ng-if="Page.contentClass == 'dark'" class="responsive-img" src="/assets/images/icons/youtube_full_dark.png" />
 							</a>
@@ -232,17 +232,45 @@
 			<div no-ng-animate ng-show="Player.loaded" class="player-above row">
 				<div class="col s12">
 					<h5 class="left-align" ng-bind="League.data.name"></h5>
-					<h5 class="left-align" ng-bind="League.data.subtitle"></h5>
+					<h5 class="left-align">{{League.data.subtitle}} - {{Player.sectionT}}, {{Player.moduleT}}</h5>
 				</div>
 			</div>
-			<div no-ng-animate ng-show="Player.loaded" class="valign row" id="player"></div>
-			<div no-ng-animate ng-show="Player.loaded" class="player-controls">
-
+			<div no-ng-animate ng-show="Player.loaded" class="valign row" id="player" ng-class="Player.type"></div>
+			<div no-ng-animate ng-show="Player.loaded && Player.type == 'youtube'" class="player-controls">
+				<i ng-click="Player.toggle()" class="material-icons">{{Player.playing ? "&#xE034;" : "&#xE037;"}}</i>
+				<span>
+					<span ng-click="Player.skip(-600)">10m</span>
+					<span ng-click="Player.skip(-300)">5m</span>
+					<span ng-click="Player.skip(-60)">1m</span>
+					<span ng-click="Player.skip(-30)">30s</span>
+					<span ng-click="Player.skip(-10)">10s</span>
+					<i class="material-icons">&#xE020;</i>
+					SKIP
+					<i class="material-icons">&#xE01F;</i>
+					<span ng-click="Player.skip(10)">10s</span>
+					<span ng-click="Player.skip(30)">30s</span>
+					<span ng-click="Player.skip(60)">1m</span>
+					<span ng-click="Player.skip(300)">5m</span>
+					<span ng-click="Player.skip(600)">10m</span>
+				</span>
+				<span>
+					<i ng-click="Player.setVol(0)" class="material-icons">&#xE050;</i>
+					<input class="vol-slider" type="range" min="0" max="100" ng-model="Player.volSlider" ng-change="Player.setVol(Player.volSlider)" />
+				</span>
 			</div>
 			<div no-ng-animate ng-show="Player.loaded" class="player-below">
-				<img ng-src="{{Player.match.team1.icon}}"/>
-				<h4>VS</h4>
-				<img ng-src="{{Player.match.team2.icon}}"/>
+				<div class="match-details">
+					<span>
+						<img ng-src="{{Player.match.team1.icon}}"/>
+						<h4>VS</h4>
+						<img ng-src="{{Player.match.team2.icon}}"/>
+					</span>
+					<div>
+						<a class="btn flat" ng-click="Player.picks()" ng-if="Player.match[Player.type].picksBans">{{League.data.contents[League.sectionIndex].draftText || "Picks & Bans"}}</a>
+						<a class="btn flat" ng-click="Player.start()" ng-if="Player.match[Player.type].gameStart">Game Start</a>
+					</div>
+				</div>
+
 			</div>
 			<div no-ng-animate ng-show="!Player.loaded" class="row valign preloader-wrapper big active">
 				<div class="spinner-layer spinner-blue">
