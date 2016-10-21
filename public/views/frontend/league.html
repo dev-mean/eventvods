@@ -170,13 +170,13 @@
 					<div class="element-go row">
 						<div class="row col s6">
 							<a ng-if="module.youtube && match.youtube.picksBans" class="col s6" ng-class="{'offset-s3': (!module.twitch || !match.twitch.picksBans)}"
-											ng-href="{{match.youtube.picksBans}}"
+											ng-href="{{League.parseLink(match, match.youtube.picksBans)}}"
 											ng-click="!Page.inlineYoutube ? return : Player.playYoutube(match.youtube.picksBans, match, $event, League.data.contents[League.sectionIndex].title, module.title)">
 								<img ng-if="Page.contentClass == 'light'" class="responsive-img" src="/assets/images/icons/youtube_full.png" />
 								<img ng-if="Page.contentClass == 'dark'" class="responsive-img" src="/assets/images/icons/youtube_full_dark.png" />
 							</a>
 							<a ng-if="module.twitch && match.twitch.picksBans" class="col s6" ng-class="{'offset-s3': (!module.youtube || !match.youtube.picksBans)}"
-											ng-href="{{match.twitch.picksBans}}"
+											ng-href="{{League.parseLink(match, match.twitch.picksBans)}}"
 											ng-click="!Page.inlineTwitch ? return : Player.playTwitch(match.twitch.picksBans, match, $event, League.data.contents[League.sectionIndex].title, module.title)">
 								<img ng-if="Page.contentClass == 'light'" class="responsive-img" src="/assets/images/icons/twitch_full.png" />
 								<img ng-if="Page.contentClass == 'dark'" class="responsive-img" src="/assets/images/icons/twitch_full_dark.png" />
@@ -187,13 +187,13 @@
 						</div>
 						<div class="row col s6">
 							<a ng-if="module.youtube && match.youtube.gameStart" class="col s6" ng-class="{'offset-s3': (!module.twitch || !match.twitch.gameStart)}"
-											ng-href="{{match.youtube.gameStart}}"
+											ng-href="{{League.parseLink(match, match.youtube.gameStart)}}"
 											ng-click="!Page.inlineYoutube ? return : Player.playYoutube(match.youtube.gameStart, match, $event, League.data.contents[League.sectionIndex].title, module.title)">
 								<img ng-if="Page.contentClass == 'light'" class="responsive-img" src="/assets/images/icons/youtube_full.png" />
 								<img ng-if="Page.contentClass == 'dark'" class="responsive-img" src="/assets/images/icons/youtube_full_dark.png" />
 							</a>
 							<a ng-if="module.twitch && match.twitch.gameStart" class="col s6" ng-class="{'offset-s3': (!module.youtube || !match.youtube.gameStart)}"
-											ng-href="{{match.twitch.gameStart}}"
+											ng-href="{{League.parseLink(match, match.twitch.gameStart)}}"
 											ng-click="!Page.inlineTwitch ? return : Player.playTwitch(match.twitch.gameStart, match, $event, League.data.contents[League.sectionIndex].title, module.title)">
 								<img ng-if="Page.contentClass == 'light'" class="responsive-img" src="/assets/images/icons/twitch_full.png" />
 								<img ng-if="Page.contentClass == 'dark'" class="responsive-img" src="/assets/images/icons/twitch_full_dark.png" />
@@ -205,7 +205,7 @@
 					</div>
 					<div class="element-extras">
 						<a ng-repeat="column in League.data.contents[League.sectionIndex].modules[League.moduleIndex].columns track by $index" ng-if="match.links[$index]"
-										ng-href="{{match.links[$index]}}" ng-bind="column" class="btn flat" target="_blank">
+										ng-href="{{League.parseLink(match, match.links[$index])}}" ng-bind="column" class="btn flat" target="_blank">
 						</a>
 					</div>
 				</div>

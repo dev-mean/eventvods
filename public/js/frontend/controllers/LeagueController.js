@@ -52,6 +52,10 @@
 				vm.moduleIndex = vm.moduleIndex + 1;
 				$location.search('m', vm.moduleIndex);
 			}
+			vm.parseLink = function(match, link){
+				if(match.placeholder) return "";
+				else return link;
+			}
 			function timeToSeconds(time){
 				time = /((\d+)h)?((\d+)m)?((\d+)s)?/i.exec(time);
 				for(var i = 0; i < time.length; i++){
