@@ -1530,9 +1530,6 @@ nav.sections-nav ul.main-sections-nav li a {
 .player > div {
   margin: auto;
 }
-.player .col img {
-  max-height: 100%;
-}
 .player .player-controls {
   border-left: 3px solid #3C3C62;
   border-right: 3px solid #3C3C62;
@@ -1596,7 +1593,7 @@ nav.sections-nav ul.main-sections-nav li a {
   color: white;
 }
 .player .player-below img {
-  max-height: 100%;
+  max-height: 85px;
 }
 .player .player-below h4 {
   padding: 10px;
@@ -1620,6 +1617,9 @@ nav.sections-nav ul.main-sections-nav li a {
       align-items: center;
   -ms-flex-pack: distribute;
       justify-content: space-around;
+}
+.player .match-details a.btn {
+  margin: 0 10px;
 }
 .player #player {
   margin: auto;
