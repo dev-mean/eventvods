@@ -74,7 +74,7 @@
 				};
 				player = new YT.Player('player', options);
 			}
-			vm.playTwitch = function(link, match, $event){
+			vm.playTwitch = function(link, match, $event, sectionT, moduleT){
 				if(match.placeholder) return;
 				var twitch = parseTwitch(link);
 				if(twitch !== false) $event.preventDefault();
@@ -82,6 +82,8 @@
 				vm.show = true;
 				vm.match = match;
 				vm.type = "twitch";
+				vm.sectionT = sectionT;
+				vm.moduleT = moduleT;
 				var options = {
 					width: window.innerWidth * 0.6,
 					height: window.innerWidth * 0.6 * 9/16,
