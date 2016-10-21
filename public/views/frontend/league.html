@@ -127,6 +127,7 @@
 	<div ng-repeat="module in League.data.contents[League.sectionIndex].modules track by $index" ng-if="League.moduleIndex == $index">
 		<div ng-repeat="match in module.matches track by $index">
 			<h3 class="container" ng-if="match.title" ng-bind="match.title"></h3>
+			<span class="container extra-info" ng-if="match.title"><i class="material-icons">&#xE88F;</i> We always include placeholder tiebreaker games where they might happen, so you don't get spoiled.</span>
 			<div no-ng-animate class="element-container container z-depth-3" >
 				<div class="element-border" fix-clip>
 					<div class="element-background event-background" fix-clip>

@@ -983,8 +983,7 @@ input[type="checkbox"].filled-in:checked + label:after {
   color: white;
   height: 150px;
   padding-right: 10%;
-  position: relative;
-  left: 20px;
+  padding-left: 20px;
 }
 .element-container .element-border .element-background .element-teams .element-vs {
   font-size: large;
@@ -1496,6 +1495,13 @@ nav.sections-nav ul.main-sections-nav li a {
 .squish a.section-handle {
   font-size: 75%;
   padding: 0 5px;
+}
+.container.extra-info {
+  background: transparent!important;
+}
+.container.extra-info i.material-icons {
+  position: relative;
+  top: 6px;
 }
 .player {
   position: fixed;
