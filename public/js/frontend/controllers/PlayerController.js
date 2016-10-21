@@ -30,7 +30,7 @@
 				return (parseInt(time[2] * 3600) + parseInt(time[4] * 60) + parseInt(time[6]));
 			}
 			function parseTwitch(link){
-				var twitch = /http(s|):\/\/(www\.|)twitch\.tv\/(\S+)\/v\/(\S+)(?:\?t=(\S+)?|$)/i.exec(link);
+				var twitch = /http(s|):\/\/(www\.|)twitch\.tv\/(\S+)\/v\/([0-9]+)(?:\?t=(\S+)|$)/i.exec(link);
 				if(twitch == null) return false;
 				else return {
 					vid: "v"+twitch[4],
@@ -78,6 +78,7 @@
 				if(match.placeholder) return;
 				var twitch = parseTwitch(link);
 				if(twitch !== false) $event.preventDefault();
+				console.log(twitch);
 				vm.loaded = false;
 				vm.show = true;
 				vm.match = match;
