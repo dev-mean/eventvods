@@ -6,8 +6,8 @@
 			var vm = this;
 			vm.abs = $location.absUrl();
 			vm.data;
-			vm.sectionIndex = $routeParams.s || 0;
-			vm.moduleIndex = $routeParams.m || 0;
+			vm.sectionIndex = parseInt($routeParams.s || 0);
+			vm.moduleIndex = parseInt($routeParams.m || 0);
 			vm.showDetails = false;
 			vm.toggleDetails = function(){
 				vm.showDetails = !vm.showDetails;
