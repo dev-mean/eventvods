@@ -250,6 +250,9 @@ i.starred {
   -ms-flex-positive: 1;
       flex-grow: 1;
 }
+.our-team .responsive-img {
+  max-width: 75%;
+}
 nav.nav-main {
   position: relative;
   background: rgba(0, 0, 0, 0.3);
