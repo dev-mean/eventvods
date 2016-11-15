@@ -44,5 +44,5 @@ gulp.task('header', ['header_pre'], function(){
 gulp.task('prod-build', function(){
 	return gulp.src('public/js/**/*.js')
 		.pipe(uglify({mangle: false}))
-		.pipe(gulp.dest('public'));
+		.pipe(gulp.dest('public/js'));
 })
