@@ -187,7 +187,7 @@
 	</div>
 </div>
 <div class="section" ng-show="leagueFormController.tab == 4">
-	<team-select model="leagueFormController.data.teams">
+	<team-select model="leagueFormController.data.teams" game="leagueFormController.data.game">
 	</team-select>
 	<div class="standard group">
 		<a class="btn lg solid icon" ng-click="leagueFormController.goToTab(3)">

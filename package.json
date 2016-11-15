@@ -15,6 +15,7 @@
     "express-session": "*",
     "file-type": "*",
     "gm": "*",
+    "gulp-uglify": "^2.0.0",
     "indicative": "*",
     "intimidate": "*",
     "keygenerator": "*",

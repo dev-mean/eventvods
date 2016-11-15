@@ -133,11 +133,11 @@
 					<div class="element-background event-background" fix-clip>
 						<div class="row element-teams">
 							<div class="col s12 m5">
-								<div ng-if="!match.team1Sp" class="element-team">
+								<div ng-if="!match.team1Sp" class="element-team team-1">
 									<img ng-src="{{match.team1.icon}}" class="responsive-img team-large" />
 									<span class="spoiler-text" ng-bind="match.team1.tag"></span>
 								</div>
-								<div ng-if="match.team1Sp" class="element-team">
+								<div ng-if="match.team1Sp" class="element-team team-1">
 									<img src="/assets/images/icons/ev.png" class="responsive-img team-large" />
 									<span tooltipped data-position="bottom" data-tooltip="{{match.team1.tag || 'PLACEHOLDER'}}" class="spoiler-text">{{match.team1SpText || "Team 1"}}</span>
 								</div>
@@ -149,11 +149,11 @@
 								</div>
 							</div>
 							<div class="col s12 m5">
-								<div ng-if="!match.team2Sp" class="element-team">
+								<div ng-if="!match.team2Sp" class="element-team team-2">
 									<img ng-src="{{match.team2.icon}}" class="responsive-img team-large" />
 									<span class="spoiler-text" ng-bind="match.team2.tag"></span>
 								</div>
-								<div ng-if="match.team2Sp" class="element-team">
+								<div ng-if="match.team2Sp" class="element-team team-2">
 									<img src="/assets/images/icons/ev.png" class="responsive-img team-large" />
 									<span tooltipped data-position="bottom" data-tooltip="{{match.team2.tag || 'PLACEHOLDER'}}" class="spoiler-text">{{match.team2SpText || "Team 2"}}</span>
 								</div>

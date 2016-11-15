@@ -1001,7 +1001,6 @@ input[type="checkbox"].filled-in:checked + label:after {
       align-items: center;
 }
 .element-container .element-border .element-background .element-teams .element-team {
-  margin: 0 -20px;
   height: 150px;
   font-weight: 300;
   display: -ms-flexbox;
@@ -1020,6 +1019,12 @@ input[type="checkbox"].filled-in:checked + label:after {
   font-size: 70%;
   text-transform: uppercase;
   white-space: nowrap;
+}
+.element-container .element-border .element-background .element-teams .element-team.team-1 {
+  margin-right: -20px;
+}
+.element-container .element-border .element-background .element-teams .element-team.team-2 {
+  margin-left: -20px;
 }
 .element-container .element-border .element-background.element-1 {
   background: url('/assets/images/elements/15.jpg');
