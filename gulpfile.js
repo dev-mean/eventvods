@@ -32,7 +32,7 @@ gulp.task('header_pre', function(){
 		}))
 		.pipe(rename("header.jpg"))
 		.pipe(gulp.dest("./"))
-})
+});
 gulp.task('header', ['header_pre'], function(){
 	return gulp.src("./header.jpg")
 		.pipe(gm(function(file){
@@ -45,4 +45,4 @@ gulp.task('prod-build', function(){
 	return gulp.src('public/js/**/*.js')
 		.pipe(uglify({mangle: false}))
 		.pipe(gulp.dest('public/js'));
-})
+});
