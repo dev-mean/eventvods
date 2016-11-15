@@ -15,7 +15,6 @@
     "express-session": "*",
     "file-type": "*",
     "gm": "*",
-    "gulp-uglify": "^2.0.0",
     "indicative": "*",
     "intimidate": "*",
     "keygenerator": "*",
@@ -59,8 +58,9 @@
     "gulp-less": "*",
     "gulp-plumber": "*",
     "gulp-postcss": "*",
-    "gulp-rename": "^1.2.2",
+    "gulp-rename": "*",
     "gulp-sourcemaps": "*",
-    "gulp-util": "*"
+    "gulp-util": "*",
+    "gulp-uglify": "*"
   }
 }
