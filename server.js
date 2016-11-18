@@ -36,9 +36,10 @@ app.use(morgan('tiny'));
 var logger = require('bristol');
 logger.addTarget('console')
 	.withFormatter('human')
-logger.addTarget('loggly', config.logs)
-	.withFormatter('json')
-	.withLowestSeverity('warn');
+if(process.env.NODE_ENV !== "development")
+	logger.addTarget('loggly', config.logs)
+		.withFormatter('json')
+		.withLowestSeverity('warn');
 app.use(require('prerender-node').set('prerenderToken', config.prerender));
 //Static file at the top, prevents all the code below being run for static files.
 app.use('/assets', express.static(path.join(__dirname, 'public')));
