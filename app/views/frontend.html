@@ -1,171 +1,188 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="eventvods">
+
 <head>
-	<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
-	<meta content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no" name="viewport" />
-	<meta charset="utf-8" />
-	<meta content="IE=edge" http-equiv="X-UA-Compatible" />
-	<meta name="fragment" content="!">
-	<base href="/" />
-	<title ng-bind="meta.title">
-		Eventvods - Esports on Demand
-	</title>
-	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-	<link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.css" media="screen,projection" rel="stylesheet" type="text/css" />
-	<link href="/assets/css/style.css" media="screen,projection" rel="stylesheet" type="text/css" />
-	<link href="https://cdnjs.cloudflare.com/ajax/libs/angular-loading-bar/0.9.0/loading-bar.min.css" rel="stylesheet" />
-	<link href="https://cdnjs.cloudflare.com/ajax/libs/angular-xeditable/0.2.0/css/xeditable.min.css" rel="stylesheet" />
-	<link href="/assets/images/favicon.png" rel="icon" type="image/x-icon" />
-	<meta name="description" content="{{meta.description}}" />
-	<meta name="description" content="{{meta.keywords}}" />
-	<meta property="og:title" content="{{meta.title}}" />
-	<meta property="og:type" content="website" />
-	<meta property="og:image" content="/assets/snapshot.jpg" />
-	<meta property="og:url" content="{{meta.url}}" />
-	<meta property="og:description" content="{{meta.description}}" />
-	<meta name="robots" content="noindex, nofollow"> <!-- Launch: remove -->
-	<script>
-		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-		})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-		ga('create', 'UA-48148485-4', 'auto');
-	</script>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no" name="viewport" />
+    <meta charset="utf-8" />
+    <meta content="IE=edge" http-equiv="X-UA-Compatible" />
+    <meta name="fragment" content="!">
+    <base href="/" />
+    <title ng-bind="meta.title">
+        Eventvods - Esports on Demand
+    </title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.css" media="screen,projection" rel="stylesheet" type="text/css" />
+    <link href="/assets/css/style.css" media="screen,projection" rel="stylesheet" type="text/css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/angular-loading-bar/0.9.0/loading-bar.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/angular-xeditable/0.2.0/css/xeditable.min.css" rel="stylesheet" />
+    <link href="/assets/images/favicon.png" rel="icon" type="image/x-icon" />
+    <meta name="description" content="{{meta.description}}" />
+    <meta name="description" content="{{meta.keywords}}" />
+    <meta property="og:title" content="{{meta.title}}" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="/assets/snapshot.jpg" />
+    <meta property="og:url" content="{{meta.url}}" />
+    <meta property="og:description" content="{{meta.description}}" />
+    <meta name="robots" content="noindex, nofollow">
+    <!-- Launch: remove -->
+    <script>
+        (function(i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function() {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+        ga('create', 'UA-48148485-4', 'auto');
+    </script>
 </head>
 
 <body id="top" ng-controller="PageController as Page" ng-class="Page.contentClass">
-	<header>
-		<div class="beta">
-			Please remember that this is a beta release. You can find out more about our beta roadmap <a href="http://beta.eventvods.com/article/website-beta-launch">in our announcement post.</a>
-		</div>
-		<div class="cookie_disclaimer" ng-class="{show: Page.cookiesAccepted === false}">
-			<div class="container">
-				<h5>Cookie Disclaimer</h5>
-				<div class="disclaimer">
-					<a ng-click="Page.cookiesAccepted=true;Page.acceptCookies()" class="btn-large waves-effect waves-light">Accept</a>
-					<p>Eventvods.com uses cookies to enhance your experience, collect usage stats to improve our services and store certain settings.<br /> For more details, please read our <a href="/about/cookies">Cookie Policy</a>.</p>
-				</div>
-			</div>
-		</div>
-		<ng-include src="'/assets/views/dialogs/userSettings.html'" ng-if="Page.session != false && Page.session != null" onload="Page.init()" ng-cloak></ng-include>
-		<nav class="nav-main" role="navigation" >
-			<ul class="dropdown-content wide" id="games_dd">
-				<li ng-repeat="game in Page.nav.games">
-					<a ng-href="/game/{{game.slug}}">
-						<i class="material-icons left icon">
+    <header>
+        <div class="beta">
+            Please remember that this is a beta release. You can find out more about our beta roadmap <a href="http://beta.eventvods.com/article/website-beta-launch">in our announcement post.</a>
+        </div>
+        <div class="cookie_disclaimer" ng-class="{show: Page.cookiesAccepted === false}">
+            <div class="container">
+                <h5>Cookie Disclaimer</h5>
+                <div class="disclaimer">
+                    <a ng-click="Page.cookiesAccepted=true;Page.acceptCookies()" class="btn-large waves-effect waves-light">Accept</a>
+                    <p>Eventvods.com uses cookies to enhance your experience, collect usage stats to improve our services and store certain settings.<br /> For more details, please read our <a href="/about/cookies">Cookie Policy</a>.</p>
+                </div>
+            </div>
+        </div>
+        <ng-include src="'/assets/views/dialogs/userSettings.html'" ng-if="Page.session != false && Page.session != null" onload="Page.init()" ng-cloak></ng-include>
+        <nav class="nav-main" role="navigation">
+            <ul class="dropdown-content wide" id="games_dd">
+                <li ng-repeat="game in Page.nav.games">
+                    <a ng-href="/game/{{game.slug}}">
+                        <i class="material-icons left icon">
 							<img ng-src="{{game.icon}}" />
 							&nbsp;
 						</i> {{game.name}}
-					</a>
-				</li>
-				<!--<li>
-					<a href="/games">All Games</a>
-				</li>-->
-			</ul>
-			<ul class="dropdown-content wide" id="articles_dd">
-				<li ng-repeat="article in Page.nav.articles">
-					<a ng-href="/article/{{article.slug}}">
+                    </a>
+                </li>
+            </ul>
+            <ul class="dropdown-content wide" id="articles_dd">
+                <li ng-repeat="article in Page.nav.articles">
+                    <a ng-href="/article/{{article.slug}}">
 						{{article.title}}
 					</a>
-				</li>
-				<!--<li>
-					<a href="/articles">All Articles</a>
-				</li>-->
-			</ul>
-			<ul class="dropdown-content wide grouped" id="events_dd">
-				<li ng-repeat="event in Page.nav.orderedEvents = (Page.nav.events | orderBy:'game.name') track by $index" ng-class="Page.eventClass($index)">
-					<a ng-href="/event/{{event.slug}}">
-						<i class="material-icons left icon border-right">
+                </li>
+            </ul>
+            <ul class="dropdown-content wide grouped" id="events_dd">
+                <li ng-repeat="event in Page.nav.orderedEvents = (Page.nav.events | orderBy:'game.name') track by $index" ng-class="Page.eventClass($index)">
+                    <a ng-href="/event/{{event.slug}}">
+                        <i class="material-icons left icon border-right">
 							<img ng-src="{{event.game.icon}}" />
 							&nbsp;
 						</i> {{event.name}}
-					</a>
-				</li>
-				<!--<li class="border-top">
-					<a href="/events">All Events</a>
-				</li>-->
-			</ul>
-			<ul class="dropdown-content wide grouped" id="teams_dd">
-				<li class="border-top">
-					<a href="#">Coming Soon&trade;</a>
-				</li>
-			</ul>
-			<div class="nav-wrapper container">
-				<a class="brand-logo" href="/">
-					<img id="logo-image" src="/assets/images/logo.png" />
-				</a>
-				<ul class="right hide-on-med-and-down">
-					<li>
-						<a class="dropdown-button" data-activates="games_dd">
-							<i class="material-icons left">
+                    </a>
+                </li>
+            </ul>
+            <ul class="dropdown-content wide grouped" id="teams_dd">
+                <li class="border-top">
+                    <a href="#">Coming Soon&trade;</a>
+                </li>
+            </ul>
+            <div class="nav-wrapper container">
+                <a class="brand-logo" href="/">
+                    <img id="logo-image" src="/assets/images/logo.png" />
+                </a>
+                <ul class="right hide-on-med-and-down">
+                    <li>
+                        <a class="dropdown-button" data-activates="games_dd">
+                            <i class="material-icons left">
 										&#xE5C5;
 									</i> GAMES
-						</a>
-					</li>
-					<li>
-						<a class="dropdown-button" data-activates="events_dd">
-							<i class="material-icons left">
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-button" data-activates="events_dd">
+                            <i class="material-icons left">
 										&#xE5C5;
 									</i> EVENTS
-						</a>
-					</li>
-					<li>
-						<a class="dropdown-button" data-activates="teams_dd">
-								<i class="material-icons left">
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-button" data-activates="teams_dd">
+                            <i class="material-icons left">
 										&#xE5C5;
 									</i> TEAMS
-							</a>
-					</li>
-					<li>
-						<a class="dropdown-button" data-activates="articles_dd">
-								<i class="material-icons left">
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-button" data-activates="articles_dd">
+                            <i class="material-icons left">
 										&#xE5C5;
 									</i> ARTICLES
-							</a>
-					</li>
-					<li class="no-transition" ng-if="Page.session == false" ng-cloak>
-						<a href="/login" class="waves-effect waves-light btn">
+                        </a>
+                    </li>
+                    <li class="no-transition" ng-if="Page.session == false" ng-cloak>
+                        <a href="/login" class="waves-effect waves-light btn">
 									LOGIN
 								</a>
-					</li>
-					<li class="no-transition user-details" ng-show="Page.session != false && Page.session != null" ng-cloak>
-						<a class="dropdown-button" id="userProfile" data-activates="profile_dd">
+                    </li>
+                    <li class="no-transition user-details" ng-show="Page.session != false && Page.session != null" ng-cloak>
+                        <a class="dropdown-button" id="userProfile" data-activates="profile_dd">
 								{{Page.session.displayName}}
 								<i class="material-icons right">
 										&#xE5C5;
 									</i>
 							</a>
-					</li>
-					<li class="no-transition content-switch">
-						<div class="switch">
-							<label>
+                    </li>
+                    <li class="no-transition content-switch">
+                        <div class="switch">
+                            <label>
 								Light
 								<input type="checkbox" ng-model="Page.contentClass" ng-true-value="'dark'" ng-false-value="'light'" ng-change="Page.contentClassSet()">
 								<span class="lever"></span>
 								Dark
 							</label>
-						</div>
-					</li>
-				</ul>
-				<ul class="side-nav" id="nav-mobile">
-					<li>
-						<a href="#">
-							<i class="material-icons left">
-										expand_more
-									</i> TODO
-						</a>
-					</li>
-				</ul>
-				<a class="button-collapse" data-activates="nav-mobile" href="#">
-					<i class="material-icons">
-								menu
-							</i>
-				</a>
-			</div>
-		</nav>
-	</header>
-	<div id="main" ng-view ng-cloak onload="Page.init()"></div>
-	<svg width="0px" height="0px">
+                        </div>
+                    </li>
+                </ul>
+                <a class="button-collapse" data-sidenav="left" data-activates="nav-mobile" data-menuwidth="400">
+                    <i class="material-icons">
+						menu
+					</i>
+                </a>
+            </div>
+        </nav>
+        <ul class="side-nav" id="nav-mobile">
+            <li class="side-heading">Featured Games</li>
+            <li ng-repeat="game in Page.nav.games">
+                <a ng-href="/game/{{game.slug}}">
+                    <i class="material-icons left icon">
+                        <img ng-src="{{game.icon}}" />
+                        &nbsp;
+                    </i> {{game.slug | uppercase}}
+                </a>
+            </li>
+            <li class="side-heading">Featured Events</li>
+            <li ng-repeat="event in Page.nav.events track by $index">
+                <a ng-href="/event/{{event.slug}}">
+                    <i class="material-icons left icon">
+                        <img ng-src="{{event.game.icon}}" />
+                        &nbsp;
+                    </i> {{event.name}}
+                </a>
+            </li>
+            <li class="side-heading">Featured Articles</li>
+            <li ng-repeat="article in Page.nav.articles" class="side-indented">
+                <a ng-href="/article/{{article.slug}}">
+                    {{article.title}}
+                </a>
+            </li>
+        </ul>
+    </header>
+    <div id="main" ng-view ng-cloak onload="Page.init()"></div>
+    <svg width="0px" height="0px">
 		<defs>
 			<clipPath id="element" clipPathUnits="objectBoundingBox">
 				<polygon points="0 0, 0.85 0, 1 1, 0 1">
@@ -173,126 +190,126 @@
 			</clipPath>
 		</defs>
 	</svg>
-	<footer class="page-footer">
-		<div class="container">
-			<div class="row center-align spaced-row">
-				<div class="col l4 s12">
-					<h5 class="white-text">
-                                Follow Us
-                            </h5>
-					<div class="spacer">
-						<div class="social-media center-align row">
-							<a class="col s4" href="http://facebook.com/eventvods">
-								<img src="/assets/images/icons/facebook.png" class="responsive-img" />
-							</a>
-							<a class="col s4" href="http://twitter.com/eventvods">
-								<img src="/assets/images/icons/twitter.png" class="responsive-img" />
-							</a>
-							<a class="col s4" href="https://www.linkedin.com/company/5389991">
-								<img src="/assets/images/icons/linkedin.png" class="responsive-img" />
-							</a>
-						</div>
-					</div>
-				</div>
-				<div class="col l4 s12 sborders">
-					<h5 class="white-text">
-                                SiteMap
-                            </h5>
-					<div class="spacer">
-						<div class="sitemap center-align">
-							<a class="waves-effect waves-light btn" href="/">
+    <footer class="page-footer">
+        <div class="container">
+            <div class="row center-align spaced-row">
+                <div class="col l4 s12">
+                    <h5 class="white-text">
+                        Follow Us
+                    </h5>
+                    <div class="spacer">
+                        <div class="social-media center-align row">
+                            <a class="col s4" href="http://facebook.com/eventvods">
+                                <img src="/assets/images/icons/facebook.png" class="responsive-img" />
+                            </a>
+                            <a class="col s4" href="http://twitter.com/eventvods">
+                                <img src="/assets/images/icons/twitter.png" class="responsive-img" />
+                            </a>
+                            <a class="col s4" href="https://www.linkedin.com/company/5389991">
+                                <img src="/assets/images/icons/linkedin.png" class="responsive-img" />
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col l4 s12 sborders">
+                    <h5 class="white-text">
+                        SiteMap
+                    </h5>
+                    <div class="spacer">
+                        <div class="sitemap center-align">
+                            <a class="waves-effect waves-light btn" href="/">
                                         Home
                                     </a>
-							<a class="waves-effect waves-light btn" href="/about/cookies">
+                            <a class="waves-effect waves-light btn" href="/about/cookies">
                                         Cookies
                                     </a>
-							<a class="waves-effect waves-light btn" href="/about/team">
+                            <a class="waves-effect waves-light btn" href="/about/team">
                                         Our Team
                                     </a>
-							<a class="waves-effect waves-light btn" href="/about/beta-feedback">
+                            <a class="waves-effect waves-light btn" href="/about/beta-feedback">
                                         Feedback
                                     </a>
-							<a ng-if="Page.session == false" class="waves-effect waves-light btn" href="/login">
+                            <a ng-if="Page.session == false" class="waves-effect waves-light btn" href="/login">
                                         Login
                                     </a>
-							<a ng-if="Page.session == false" class="waves-effect waves-light btn" href="/register">
+                            <a ng-if="Page.session == false" class="waves-effect waves-light btn" href="/register">
                                         Register
                                     </a>
-						</div>
-					</div>
-				</div>
-				<div class="col l4 s12">
-					<h5 class="white-text">
-                                Support Eventvods
-                            </h5>
-					<div class="spacer">
-						<div class="sponsors center-align">
-							<a href="http://patreon.com/eventvods" class="responsive-img" id="patreon">
-							</a>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="footer-copyright">
-			<div class="container center-align">
-				We provide spoiler-free VODs of competitive esports matches.
-				<br />
-				<span class="copyright">
+                        </div>
+                    </div>
+                </div>
+                <div class="col l4 s12">
+                    <h5 class="white-text">
+                        Support Eventvods
+                    </h5>
+                    <div class="spacer">
+                        <div class="sponsors center-align">
+                            <a href="http://patreon.com/eventvods" class="responsive-img" id="patreon">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="container center-align">
+                We provide spoiler-free VODs of competitive esports matches.
+                <br />
+                <span class="copyright">
 					© Eventvods - 2016
 				</span>
-			</div>
-		</div>
-	</footer>
-	<!--  Scripts-->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js">
-	</script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.7/angular.min.js">
-	</script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.7/angular-animate.min.js">
-	</script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.7/angular-route.min.js">
-	</script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.7/angular-cookies.min.js">
-	</script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js">
-	</script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-materialize/0.1.9/angular-materialize.min.js">
-	</script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-loading-bar/0.9.0/loading-bar.min.js">
-	</script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-xeditable/0.2.0/js/xeditable.min.js">
-	</script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-sanitize/1.5.8/angular-sanitize.min.js">
-	</script>
-	<script src="/assets/js/frontend/analytics.js">
-	</script>
-	<script src="/assets/js/frontend/evSlider.js">
-	</script>
-	<script src="/assets/js/frontend/svg.js">
-	</script>
-	<script src="/assets/js/frontend/app.js">
-	</script>
-	<script src="/assets/js/frontend/services/SessionManager.js">
-	</script>
-	<script src="/assets/js/frontend/controllers/PageController.js">
-	</script>
-	<script src="/assets/js/frontend/controllers/LoginController.js">
-	</script>
-	<script src="/assets/js/frontend/controllers/RegisterController.js">
-	</script>
-	<script src="/assets/js/frontend/controllers/SettingsController.js">
-	</script>
-	<script src="/assets/js/frontend/controllers/LeagueController.js">
-	</script>
-	<script src="/assets/js/frontend/controllers/ArticleController.js">
-	</script>
-	<script src="/assets/js/frontend/controllers/PlayerController.js">
-	</script>
-	<script src="/assets/js/frontend/controllers/GameController.js">
-	</script>
-	<script src="https://player.twitch.tv/js/embed/v1.js"></script>
-	<script src="https://www.youtube.com/iframe_api"></script>
+            </div>
+        </div>
+    </footer>
+    <!--  Scripts-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.7/angular.min.js">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.7/angular-animate.min.js">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.7/angular-route.min.js">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.7/angular-cookies.min.js">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-materialize/0.1.9/angular-materialize.min.js">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-loading-bar/0.9.0/loading-bar.min.js">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-xeditable/0.2.0/js/xeditable.min.js">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-sanitize/1.5.8/angular-sanitize.min.js">
+    </script>
+    <script src="/assets/js/frontend/analytics.js">
+    </script>
+    <script src="/assets/js/frontend/evSlider.js">
+    </script>
+    <script src="/assets/js/frontend/svg.js">
+    </script>
+    <script src="/assets/js/frontend/app.js">
+    </script>
+    <script src="/assets/js/frontend/services/SessionManager.js">
+    </script>
+    <script src="/assets/js/frontend/controllers/PageController.js">
+    </script>
+    <script src="/assets/js/frontend/controllers/LoginController.js">
+    </script>
+    <script src="/assets/js/frontend/controllers/RegisterController.js">
+    </script>
+    <script src="/assets/js/frontend/controllers/SettingsController.js">
+    </script>
+    <script src="/assets/js/frontend/controllers/LeagueController.js">
+    </script>
+    <script src="/assets/js/frontend/controllers/ArticleController.js">
+    </script>
+    <script src="/assets/js/frontend/controllers/PlayerController.js">
+    </script>
+    <script src="/assets/js/frontend/controllers/GameController.js">
+    </script>
+    <script src="https://player.twitch.tv/js/embed/v1.js"></script>
+    <script src="https://www.youtube.com/iframe_api"></script>
 </body>
 
 </html>
