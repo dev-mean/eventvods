@@ -1,64 +1,61 @@
 <div class="evSlider single" id="banner">
-	<div class="images">
-		<div class="image load-in">
-			<div class="main">
-				<img ng-src="{{League.data.header}}" />
-			</div>
-			<div class="blur">
-				<img ng-src="{{League.data.header_blur}}" />
-			</div>
-			<div class="overlay middle">
-				<img ng-src="{{League.data.logo}}" />
-				<h3 ng-bind="League.data.name"></h3>
-				<h4 ng-if="League.data.subtitle === undefined || League.data.subtitle === ''">&nbsp;</h4>
-				<h4 ng-if="League.data.subtitle !== undefined && League.data.subtitle !== ''" ng-bind="League.data.subtitle"></h4>
-				<a class="waves-effect waves-light btn" ng-click="Page.toggleFollow(League.data._id, 'leagues')">
-					<i class="material-icons left" ng-class="{starred: Page.following(League.data._id)}">star</i> {{Page.following(League.data._id)
-					? "Following" : "Follow"}}
-				</a>
-				<div class="credits" ng-bind-html="League.data.credits">
-				</div>
-			</div>
-		</div>
-	</div>
+    <div class="images">
+        <div class="image load-in">
+            <div class="main">
+                <img ng-src="{{League.data.header}}" />
+            </div>
+            <div class="blur">
+                <img ng-src="{{League.data.header_blur}}" />
+            </div>
+            <div class="overlay middle">
+                <img ng-src="{{League.data.logo}}" />
+                <h3 ng-bind="League.data.name"></h3>
+                <h4 ng-if="League.data.subtitle === undefined || League.data.subtitle === ''">&nbsp;</h4>
+                <h4 ng-if="League.data.subtitle !== undefined && League.data.subtitle !== ''" ng-bind="League.data.subtitle"></h4>
+                <a class="waves-effect waves-light btn" ng-click="Page.toggleFollow(League.data._id, 'leagues')">
+                    <i class="material-icons left" ng-class="{starred: Page.following(League.data._id)}">star</i> {{Page.following(League.data._id) ? "Following" : "Follow"}}
+                </a>
+                <div class="credits" ng-bind-html="League.data.credits">
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <div class="contents pad-bottom league" ng-controller="PlayerController as Player">
-	<div class="info">
-		<div class="container row">
-			<div class="col m12 l4">
-				<i class="material-icons">&#xE88F;</i>
-				<h6>Format</h6> {{League.data.format}}
-				<h6>Patch</h6> {{League.data.patch}}
-			</div>
-			<div class="col m12 l4">
-				<i class="material-icons">&#xE417;</i>
-				<h6>Full Stream</h6>
-				<span class="text-small">May contain spoilers</span>
-				<div class="row watch-online">
-					<a ng-if="League.data.youtubeStream" ng-href="{{League.data.youtubeStream}}" ng-class="{'offset-s3': !League.data.twitchStream}"
-									class="col s6" target="_blank">
-						<img ng-if="Page.contentClass == 'light'" class="responsive-img" src="/assets/images/icons/youtube_full.png" />
-						<img ng-if="Page.contentClass == 'dark'" class="responsive-img" src="/assets/images/icons/youtube_full_dark.png" />
-					</a>
-					<a ng-if="League.data.twitchStream" ng-href="{{League.data.twitchStream}}" ng-class="{'offset-s3': !League.data.youtubeStream}"
-									class="col s6" target="_blank">
-						<img ng-if="Page.contentClass == 'light'" class="responsive-img" src="/assets/images/icons/twitch_full.png" />
-						<img ng-if="Page.contentClass == 'dark'" class="responsive-img" src="/assets/images/icons/twitch_full_dark.png" />
-					</a>
-				</div>
-			</div>
-			<div class="col m12 l4">
-				<i class="material-icons">&#xE8DF;</i>
-				<h6>Start Date</h6> {{League.data.startDate | date: 'EEEE, MMMM dd yyyy'}}
-				<h6>End Date</h6> {{League.data.endDate | date: 'EEEE, MMMM dd yyyy'}}
-			</div>
-		</div>
-	</div>
-	<div class="details slide-toggle" ng-class="{show: League.showDetails}">
-		<h4 class="container">Staff</h4>
-		<div class="icon-container container">
-			<div class="icon" ng-repeat="staff in League.data.staff">
-				<svg viewbox="1 1 8 8" class="icon-image" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1">
+    <div class="info">
+        <div class="container row">
+            <div class="col m12 l4">
+                <i class="material-icons">&#xE88F;</i>
+                <h6>Format</h6> {{League.data.format}}
+                <h6>Patch</h6> {{League.data.patch}}
+            </div>
+            <div class="col m12 l4">
+                <i class="material-icons">&#xE417;</i>
+                <h6>Full Stream</h6>
+                <span class="text-small">May contain spoilers</span>
+                <div class="row watch-online">
+                    <a ng-if="League.data.youtubeStream" ng-href="{{League.data.youtubeStream}}" ng-class="{'offset-s3': !League.data.twitchStream}" class="col s6" target="_blank">
+                        <img ng-if="Page.contentClass == 'light'" class="responsive-img" src="/assets/images/icons/youtube_full.png" />
+                        <img ng-if="Page.contentClass == 'dark'" class="responsive-img" src="/assets/images/icons/youtube_full_dark.png" />
+                    </a>
+                    <a ng-if="League.data.twitchStream" ng-href="{{League.data.twitchStream}}" ng-class="{'offset-s3': !League.data.youtubeStream}" class="col s6" target="_blank">
+                        <img ng-if="Page.contentClass == 'light'" class="responsive-img" src="/assets/images/icons/twitch_full.png" />
+                        <img ng-if="Page.contentClass == 'dark'" class="responsive-img" src="/assets/images/icons/twitch_full_dark.png" />
+                    </a>
+                </div>
+            </div>
+            <div class="col m12 l4">
+                <i class="material-icons">&#xE8DF;</i>
+                <h6>Start Date</h6> {{League.data.startDate | date: 'EEEE, MMMM dd yyyy'}}
+                <h6>End Date</h6> {{League.data.endDate | date: 'EEEE, MMMM dd yyyy'}}
+            </div>
+        </div>
+    </div>
+    <div class="details slide-toggle" ng-class="{show: League.showDetails}">
+        <h4 class="container">Staff</h4>
+        <div class="icon-container container">
+            <div class="icon" ng-repeat="staff in League.data.staff">
+                <svg viewbox="1 1 8 8" class="icon-image" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1">
 					<defs>
 						<pattern ng-attr-id="{{staff._id}}" patternUnits="userSpaceOnUse" width="10" height="10">
 							<image ng-attr-href="{{staff.photo}}" x="0" y="0" width="10" height="10" />
@@ -69,260 +66,326 @@
 						/>
 					</a>
 				</svg>
-				<span class="icon-role" ng-bind="staff.role"></span>
-				<span>{{staff.forename + " " + staff.surname}}</span>
-				<a ng-href="#" class="icon-alias" ng-bind="staff.alias"></a>
-			</div>
-		</div>
-		<h4 class="container">Teams</h4>
-		<div class="icon-container container">
-			<div class="icon team" ng-repeat="team in League.data.teams">
-				<svg viewbox="1 1 8 8" class="icon-image" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1">
+                <span class="icon-role" ng-bind="staff.role"></span>
+                <span>{{staff.forename + " " + staff.surname}}</span>
+                <a ng-href="#" class="icon-alias" ng-bind="staff.alias"></a>
+            </div>
+        </div>
+        <h4 class="container">Teams</h4>
+        <div class="icon-container container">
+            <div class="icon team" ng-repeat="team in League.data.teams">
+                <svg viewbox="1 1 8 8" class="icon-image" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1">
 					<a ng-href="#" xlink:href="">
 						<path class="icon-path solid" stroke-width="0.2" d="M5.5 1.5 L8.5 4.5 Q9 5 8.5 5.5 L5.5 8.5 Q5 9 4.5 8.5 L 1.5 5.5 Q1 5 1.5 4.5 L4.5 1.5 Q 5 1 5.5 1.5z"
 						/>
 					</a>
 				</svg>
-				<div class="team-container"><img ng-src="{{team.icon}}" class="icon-team" /></div>
-				<span class="two-lines">
+                <div class="team-container"><img ng-src="{{team.icon}}" class="icon-team" /></div>
+                <span class="two-lines">
 						<a ng-href="#" class="icon-alias" ng-bind="team.name"></a>
 					</span>
-			</div>
-		</div>
-	</div>
-	<div id="details-jump" class="details-bottom"></div>
-	<a class="details-toggle waves-effect waves-light btn" ng-click="League.toggleDetails()">
-		<i class="material-icons left">{{League.showDetails ? "&#xE5CE;" : "&#xE5CF;"}}</i> {{League.showDetails ? "less" : "more"}}
-		details
-	</a>
-	<div class="event-nav container load-in">
-		<div class="nav-row">
-			<h3 class="material-icons" ng-show="League.sectionIndex > 0" ng-click="League.prevSection();">&#xE314;</h3>
-			<h3 ng-bind="League.data.contents[League.sectionIndex].title"></h3>
-			<h3 class="material-icons" ng-show="League.sectionIndex < League.data.contents.length - 1" ng-click="League.nextSection()">&#xE315;</h3>
-		</div>
-		<ul ng-repeat="section in League.data.contents track by $index" ng-attr-id="{{'section-'+$index}}" class="dropdown-content section-dd wide">
-			<li class="border-top" ng-repeat="module in section.modules"><a ng-click="League.jumpTo($parent.$index, $index)" ng-bind="module.title"></a></li>
-		</ul>
-		<div class="nav-row">
-			<h4 class="material-icons" ng-show="League.moduleIndex > 0" ng-click="League.prevModule()">&#xE314;</h4>
-			<h4 ng-bind="League.data.contents[League.sectionIndex].modules[League.moduleIndex].title">Day 1</h4>
-			<h4 class="material-icons" ng-show="League.moduleIndex < League.data.contents[League.sectionIndex].modules.length - 1 " ng-click="League.nextModule()">&#xE315;</h4>
-		</div>
-		<nav class="sections-nav">
-			<div class="nav-wrapper">
-				<ul class="main-sections-nav" ng-class="{'squish': (League.data.contents.length > 8)}">
-					<li ng-repeat="section in League.data.contents track by $index">
-						<a ng-click="League.jumpTo($index, 0)" class="section-handle" dropdown dropdown-target="{{'section-'+$index}}" data-hover="true" data-beloworigin="true">
-								<i class="material-icons left">
+            </div>
+        </div>
+    </div>
+    <div id="details-jump" class="details-bottom"></div>
+    <a class="details-toggle waves-effect waves-light btn" ng-click="League.toggleDetails()">
+        <i class="material-icons left">{{League.showDetails ? "&#xE5CE;" : "&#xE5CF;"}}</i> {{League.showDetails ? "less" : "more"}} details
+    </a>
+    <div class="event-nav container load-in">
+        <div class="nav-row">
+            <h3 class="material-icons" ng-show="League.sectionIndex > 0" ng-click="League.prevSection();">&#xE314;</h3>
+            <h3 ng-bind="League.data.contents[League.sectionIndex].title"></h3>
+            <h3 class="material-icons" ng-show="League.sectionIndex < League.data.contents.length - 1" ng-click="League.nextSection()">&#xE315;</h3>
+        </div>
+        <ul ng-repeat="section in League.data.contents track by $index" ng-attr-id="{{'section-'+$index}}" class="dropdown-content section-dd wide">
+            <li class="border-top" ng-repeat="module in section.modules">
+                <a ng-click="League.jumpTo($parent.$index, $index)" ng-bind="module.title"></a>
+            </li>
+        </ul>
+        <div class="nav-row">
+            <h4 class="material-icons" ng-show="League.moduleIndex > 0" ng-click="League.prevModule()">&#xE314;</h4>
+            <h4 ng-bind="League.data.contents[League.sectionIndex].modules[League.moduleIndex].title">Day 1</h4>
+            <h4 class="material-icons" ng-show="League.moduleIndex < League.data.contents[League.sectionIndex].modules.length - 1 " ng-click="League.nextModule()">&#xE315;</h4>
+        </div>
+        <div class="display-swap left-align">
+            <a class="waves-effect waves-light btn" ng-class="{active: !Page.compact}" ng-click="Page.compactSet(false)"><i class="material-icons left">&#xE896;</i>List View</a>
+            <a class="waves-effect waves-light btn" ng-class="{active: Page.compact}" ng-click="Page.compactSet(true)"><i class="material-icons left">&#xE3EC;</i>Grid View</a>
+        </div>
+        <nav class="sections-nav">
+            <div class="nav-wrapper">
+                <ul class="main-sections-nav" ng-class="{'squish': (League.data.contents.length > 8)}">
+                    <li ng-repeat="section in League.data.contents track by $index">
+                        <a ng-click="League.jumpTo($index, 0)" class="section-handle" dropdown dropdown-target="{{'section-'+$index}}" data-hover="true" data-beloworigin="true">
+                            <i class="material-icons left">
 									&#xE5C5;
-								</i>
-								{{section.title}}
-						</a>
-					</li>
-				</ul>
-			</div>
-		</nav>
-	</div>
-	<div ng-repeat="module in League.data.contents[League.sectionIndex].modules track by $index" ng-if="League.moduleIndex == $index">
-		<div ng-repeat="match in module.matches track by $index">
-			<h3 class="container" ng-if="match.title" ng-bind="match.title"></h3>
-			<span class="container extra-info" ng-if="match.title"><i class="material-icons">&#xE88F;</i> We always include placeholder tiebreaker games where they might happen, so you don't get spoiled.</span>
-			<div no-ng-animate class="element-container container z-depth-3" >
-				<div class="element-border" fix-clip>
-					<div class="element-background event-background" fix-clip>
-						<div class="row element-teams">
-							<div class="col s12 m5">
-								<div ng-if="!match.team1Sp" class="element-team team-1">
-									<img ng-src="{{match.team1.icon}}" class="responsive-img team-large" />
-									<span class="spoiler-text" ng-bind="match.team1.tag"></span>
-								</div>
-								<div ng-if="match.team1Sp" class="element-team team-1">
-									<img src="/assets/images/icons/ev.png" class="responsive-img team-large" />
-									<span tooltipped data-position="bottom" data-tooltip="{{match.team1.tag || 'PLACEHOLDER'}}" class="spoiler-text">{{match.team1SpText || "Team 1"}}</span>
-								</div>
-							</div>
-							<div class="col s12 m2">
-								<span class="element-tag" ng-bind="League.getIdentifier($index)"></span>
-								<div class="element-vs">
-									<span>VS</span>
-								</div>
-							</div>
-							<div class="col s12 m5">
-								<div ng-if="!match.team2Sp" class="element-team team-2">
-									<img ng-src="{{match.team2.icon}}" class="responsive-img team-large" />
-									<span class="spoiler-text" ng-bind="match.team2.tag"></span>
-								</div>
-								<div ng-if="match.team2Sp" class="element-team team-2">
-									<img src="/assets/images/icons/ev.png" class="responsive-img team-large" />
-									<span tooltipped data-position="bottom" data-tooltip="{{match.team2.tag || 'PLACEHOLDER'}}" class="spoiler-text">{{match.team2SpText || "Team 2"}}</span>
-								</div>
-							</div>
-						</div>
-
-					</div>
-				</div>
-				<div class="element-links">
-					<div class="element-titles row">
-						<h6 class="col s6" ng-if="!League.data.contents[League.sectionIndex].draftText">Picks & Bans</h6>
-						<h6 class="col s6" ng-if="League.data.contents[League.sectionIndex].draftText" ng-bind="League.data.contents[League.sectionIndex].draftText"></h6>
-						<h6 class="col s6">Game Start</h6>
-					</div>
-					<div class="element-go row">
-						<div class="row col s6">
-							<a ng-if="module.youtube && match.youtube.picksBans" class="col s6" ng-class="{'offset-s3': (!module.twitch || !match.twitch.picksBans)}"
-											ng-href="{{League.parseLink(match, match.youtube.picksBans)}}"
-											ng-click="!Page.inlineYoutube ? return : Player.playYoutube(match.youtube.picksBans, match, $event, League.data.contents[League.sectionIndex].title, module.title)">
-								<img ng-if="Page.contentClass == 'light'" class="responsive-img" src="/assets/images/icons/youtube_full.png" />
-								<img ng-if="Page.contentClass == 'dark'" class="responsive-img" src="/assets/images/icons/youtube_full_dark.png" />
-							</a>
-							<a ng-if="module.twitch && match.twitch.picksBans" class="col s6" ng-class="{'offset-s3': (!module.youtube || !match.youtube.picksBans)}"
-											ng-href="{{League.parseLink(match, match.twitch.picksBans)}}"
-											ng-click="!Page.inlineTwitch ? return : Player.playTwitch(match.twitch.picksBans, match, $event, League.data.contents[League.sectionIndex].title, module.title)">
-								<img ng-if="Page.contentClass == 'light'" class="responsive-img" src="/assets/images/icons/twitch_full.png" />
-								<img ng-if="Page.contentClass == 'dark'" class="responsive-img" src="/assets/images/icons/twitch_full_dark.png" />
-							</a>
-							<span ng-if="!(module.twitch && match.twitch.picksBans) && !(module.youtube && match.youtube.picksBans)" class="col s12">
+								</i> {{section.title}}
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <div ng-repeat="module in League.data.contents[League.sectionIndex].modules track by $index" ng-if="League.moduleIndex == $index && Page.compact">
+        <table class="container striped bordered responsive centered">
+            <thead>
+                <tr>
+                    <th>Game</th>
+                    <th class="right-align">Team 1</th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th class="left-align">Team 2</th>
+                    <th ng-if="League.data.contents[League.sectionIndex].draftText" ng-bind="League.data.contents[League.sectionIndex].draftText" colspan="2"></th>
+                    <th ng-if="!League.data.contents[League.sectionIndex].draftText" colspan="2">Picks & Bans</th>
+                    <th colspan="2">Game Start</th>
+                    <th>Extras</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="match in module.matches track by $index">
+                    <td ng-bind="League.getIdentifier($index)"></td>
+                    <td ng-if="!match.team1Sp" ng-bind="match.team1.name" class="right-align"></td>
+                    <td ng-if="!match.team1Sp" class="table-links"><img ng-src="{{match.team1.icon}}" /></td>
+                    <td ng-if="match.team1Sp" class="right-align">{{match.team1SpText || "Team 1 "}}</td>
+                    <td ng-if="match.team1Sp && Page.contentClass == 'dark'" class="table-links"><img src="/assets/images/icons/ev.png" /></td>
+                    <td ng-if="match.team1Sp && Page.contentClass == 'light'" class="table-links"><img src="/assets/images/icons/ev_dark.png" /></td>
+                    <td>VS</td>
+                    <td ng-show="match.team2Sp && !match.team2H" ng-if="Page.contentClass == 'dark'" class="table-links generic-icon" ng-mouseenter="League.setHover(match, 2, true)" ng-mouseleave="League.setHover(match, 2, false)"><img src="/assets/images/icons/ev.png" /></td>
+                    <td ng-show="match.team2Sp && !match.team2H" ng-if="Page.contentClass == 'light'" class="table-links generic-icon" ng-mouseenter="League.setHover(match, 2, true)" ng-mouseleave="League.setHover(match, 2, false)"><img src="/assets/images/icons/ev_dark.png" /></td>
+                    <td ng-show="!match.team2Sp || match.team2H" class="table-links spoiler-icon" ng-mouseenter="League.setHover(match, 2, true)" ng-mouseleave="League.setHover(match, 2, false)"><img ng-src=" {{match.team2.icon}} " /></td>
+                    <td ng-show="match.team2Sp && !match.team2H " class="left-align " ng-mouseenter="League.setHover(match, 2, true) " ng-mouseleave="League.setHover(match, 2, false)">{{match.team2SpText || "Team 2 "}}</td>
+                    <td ng-show="!match.team2Sp || match.team2H " ng-bind="match.team2.name" ng-mouseenter="League.setHover(match, 2, true)" ng-mouseleave="League.setHover(match, 2, false)" class="left-align "></td>
+                    <td class="table-links ">
+                        <a ng-if="module.youtube && match.youtube.picksBans " ng-href="{{League.parseLink(match, match.youtube.picksBans)}} " ng-click="!Page.inlineYoutube ? return : Player.playYoutube(match.youtube.picksBans, match, $event, League.data.contents[League.sectionIndex].title,
+                        module.title) ">
+                            <img ng-if="Page.contentClass=='light' " class="responsive-img " src="/assets/images/icons/youtube.png " />
+                            <img ng-if="Page.contentClass=='dark' " class="responsive-img " src="/assets/images/icons/youtube_dark.png " />
+                        </a>
+                        <i ng-if="!(module.youtube && match.youtube.picksBans) ">-</i>
+                    </td>
+                    <td class="table-links ">
+                        <a ng-if="module.twitch && match.twitch.picksBans " ng-href="{{League.parseLink(match, match.twitch.picksBans)}} " ng-click="!Page.inlineTwitch ? return : Player.playTwitch(match.twitch.picksBans, match, $event, League.data.contents[League.sectionIndex].title,
+                        module.title) ">
+                            <img ng-if="Page.contentClass=='light' " class="responsive-img " src="/assets/images/icons/twitch.png " />
+                            <img ng-if="Page.contentClass=='dark' " class="responsive-img " src="/assets/images/icons/twitch_dark.png " />
+                        </a>
+                        <i ng-if="!(module.twitch && match.twitch.picksBans) ">-</i>
+                    </td>
+                    <td class="table-links ">
+                        <a ng-if="module.youtube && match.youtube.gameStart " ng-href="{{League.parseLink(match, match.youtube.gameStart)}} " ng-click="!Page.inlineYoutube ? return : Player.playYoutube(match.youtube.gameStart, match, $event, League.data.contents[League.sectionIndex].title,
+                        module.title) ">
+                            <img ng-if="Page.contentClass=='light' " class="responsive-img " src="/assets/images/icons/youtube.png " />
+                            <img ng-if="Page.contentClass=='dark' " class="responsive-img " src="/assets/images/icons/youtube_dark.png " />
+                        </a>
+                        <i ng-if="!(module.youtube && match.youtube.gameStart) ">-</i>
+                    </td>
+                    <td class="table-links ">
+                        <a ng-if="module.twitch && match.twitch.gameStart " ng-href="{{League.parseLink(match, match.twitch.gameStart)}} " ng-click="!Page.inlineTwitch ? return : Player.playTwitch(match.twitch.gameStart, match, $event, League.data.contents[League.sectionIndex].title,
+                        module.title) ">
+                            <img ng-if="Page.contentClass=='light' " class="responsive-img " src="/assets/images/icons/twitch.png " />
+                            <img ng-if="Page.contentClass=='dark' " class="responsive-img " src="/assets/images/icons/twitch_dark.png " />
+                        </a>
+                        <i ng-if="!(module.twitch && match.twitch.gameStart) ">-</i>
+                    </td>
+                    <td>
+                        <i ng-if="League.hasExtras(module, match) " ng-attr-data-activates="{{match._id}} " dropdown data-hover="true " class="material-icons extras-toggle " below-origin="true " alignment="right ">&#xE5CF;</i>
+                        <i ng-if="!League.hasExtras(module, match) ">-</i>
+                        <ul ng-attr-id="{{match._id}} " class="dropdown-content match-extras-dd wide ">
+                            <li ng-repeat="column in module.columns track by $index " ng-if="match.links[$index] ">
+                                <a ng-href="{{League.parseLink(match, match.links[$index])}} " ng-bind="column "></a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div ng-repeat="module in League.data.contents[League.sectionIndex].modules track by $index " ng-if="League.moduleIndex==$ index && !Page.compact ">
+        <div ng-repeat="match in module.matches track by $index ">
+            <h3 class="container " ng-if="match.title " ng-bind="match.title "></h3>
+            <span class="container extra-info " ng-if="match.title "><i class="material-icons ">&#xE88F;</i> We always include placeholder tiebreaker games where they might happen, so you don't get spoiled.</span>
+            <div no-ng-animate class="element-container container z-depth-3 ">
+                <div class="element-border " fix-clip>
+                    <div class="element-background event-background " fix-clip>
+                        <div class="row element-teams ">
+                            <div class="col s12 m5 ">
+                                <div ng-if="!match.team1Sp " class="element-team team-1 ">
+                                    <img ng-src="{{match.team1.icon}} " class="responsive-img team-large " />
+                                    <span class="spoiler-text " ng-bind="match.team1.tag "></span>
+                                </div>
+                                <div ng-if="match.team1Sp " class="element-team team-1 ">
+                                    <img src="/assets/images/icons/ev.png " class="responsive-img team-large " />
+                                    <span tooltipped data-position="bottom " data-tooltip="{{match.team1.tag || 'PLACEHOLDER'}} " class="spoiler-text ">{{match.team1SpText || "Team 1 "}}</span>
+                                </div>
+                            </div>
+                            <div class="col s12 m2 ">
+                                <span class="element-tag " ng-bind="League.getIdentifier($index) "></span>
+                                <div class="element-vs ">
+                                    <span>VS</span>
+                                </div>
+                            </div>
+                            <div class="col s12 m5 ">
+                                <div ng-if="!match.team2Sp " class="element-team team-2 ">
+                                    <img ng-src="{{match.team2.icon}} " class="responsive-img team-large " />
+                                    <span class="spoiler-text " ng-bind="match.team2.tag "></span>
+                                </div>
+                                <div ng-if="match.team2Sp " class="element-team team-2 ">
+                                    <img src="/assets/images/icons/ev.png " class="responsive-img team-large " />
+                                    <span tooltipped data-position="bottom " data-tooltip="{{match.team2.tag || 'PLACEHOLDER'}} " class="spoiler-text ">{{match.team2SpText || "Team 2 "}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="element-links ">
+                    <div class="element-titles row ">
+                        <h6 class="col s6 " ng-if="!League.data.contents[League.sectionIndex].draftText ">Picks & Bans</h6>
+                        <h6 class="col s6 " ng-if="League.data.contents[League.sectionIndex].draftText " ng-bind="League.data.contents[League.sectionIndex].draftText "></h6>
+                        <h6 class="col s6 ">Game Start</h6>
+                    </div>
+                    <div class="element-go row ">
+                        <div class="row col s6 ">
+                            <a ng-if="module.youtube && match.youtube.picksBans " class="col s6 " ng-class="{ 'offset-s3': (!module.twitch || !match.twitch.picksBans)} " ng-href="{{League.parseLink(match, match.youtube.picksBans)}} " ng-click="!Page.inlineYoutube
+                        ? return : Player.playYoutube(match.youtube.picksBans, match, $event, League.data.contents[League.sectionIndex].title, module.title) ">
+                                <img ng-if="Page.contentClass=='light' " class="responsive-img " src="/assets/images/icons/youtube_full.png " />
+                                <img ng-if="Page.contentClass=='dark' " class="responsive-img " src="/assets/images/icons/youtube_full_dark.png " />
+                            </a>
+                            <a ng-if="module.twitch && match.twitch.picksBans " class="col s6 " ng-class="{ 'offset-s3': (!module.youtube || !match.youtube.picksBans)} " ng-href="{{League.parseLink(match, match.twitch.picksBans)}} " ng-click="!Page.inlineTwitch
+                        ? return : Player.playTwitch(match.twitch.picksBans, match, $event, League.data.contents[League.sectionIndex].title, module.title) ">
+                                <img ng-if="Page.contentClass=='light' " class="responsive-img " src="/assets/images/icons/twitch_full.png " />
+                                <img ng-if="Page.contentClass=='dark' " class="responsive-img " src="/assets/images/icons/twitch_full_dark.png " />
+                            </a>
+                            <span ng-if="!(module.twitch && match.twitch.picksBans) && !(module.youtube && match.youtube.picksBans) " class="col s12 ">
 								Coming soon!
 							</span>
-						</div>
-						<div class="row col s6">
-							<a ng-if="module.youtube && match.youtube.gameStart" class="col s6" ng-class="{'offset-s3': (!module.twitch || !match.twitch.gameStart)}"
-											ng-href="{{League.parseLink(match, match.youtube.gameStart)}}"
-											ng-click="!Page.inlineYoutube ? return : Player.playYoutube(match.youtube.gameStart, match, $event, League.data.contents[League.sectionIndex].title, module.title)">
-								<img ng-if="Page.contentClass == 'light'" class="responsive-img" src="/assets/images/icons/youtube_full.png" />
-								<img ng-if="Page.contentClass == 'dark'" class="responsive-img" src="/assets/images/icons/youtube_full_dark.png" />
-							</a>
-							<a ng-if="module.twitch && match.twitch.gameStart" class="col s6" ng-class="{'offset-s3': (!module.youtube || !match.youtube.gameStart)}"
-											ng-href="{{League.parseLink(match, match.twitch.gameStart)}}"
-											ng-click="!Page.inlineTwitch ? return : Player.playTwitch(match.twitch.gameStart, match, $event, League.data.contents[League.sectionIndex].title, module.title)">
-								<img ng-if="Page.contentClass == 'light'" class="responsive-img" src="/assets/images/icons/twitch_full.png" />
-								<img ng-if="Page.contentClass == 'dark'" class="responsive-img" src="/assets/images/icons/twitch_full_dark.png" />
-							</a>
-							<span ng-if="!(module.twitch && match.twitch.gameStart) && !(module.youtube && match.youtube.gameStart)" class="col s12">
+                        </div>
+                        <div class="row col s6 ">
+                            <a ng-if="module.youtube && match.youtube.gameStart " class="col s6 " ng-class="{ 'offset-s3': (!module.twitch || !match.twitch.gameStart)} " ng-href="{{League.parseLink(match, match.youtube.gameStart)}} " ng-click="!Page.inlineYoutube
+                        ? return : Player.playYoutube(match.youtube.gameStart, match, $event, League.data.contents[League.sectionIndex].title, module.title) ">
+                                <img ng-if="Page.contentClass=='light' " class="responsive-img " src="/assets/images/icons/youtube_full.png " />
+                                <img ng-if="Page.contentClass=='dark' " class="responsive-img " src="/assets/images/icons/youtube_full_dark.png " />
+                            </a>
+                            <a ng-if="module.twitch && match.twitch.gameStart " class="col s6 " ng-class="{ 'offset-s3': (!module.youtube || !match.youtube.gameStart)} " ng-href="{{League.parseLink(match, match.twitch.gameStart)}} " ng-click="!Page.inlineTwitch
+                        ? return : Player.playTwitch(match.twitch.gameStart, match, $event, League.data.contents[League.sectionIndex].title, module.title) ">
+                                <img ng-if="Page.contentClass=='light' " class="responsive-img " src="/assets/images/icons/twitch_full.png " />
+                                <img ng-if="Page.contentClass=='dark' " class="responsive-img " src="/assets/images/icons/twitch_full_dark.png " />
+                            </a>
+                            <span ng-if="!(module.twitch && match.twitch.gameStart) && !(module.youtube && match.youtube.gameStart) " class="col s12 ">
 								Coming soon!
 							</span>
-						</div>
-					</div>
-					<div class="element-extras">
-						<a ng-repeat="column in League.data.contents[League.sectionIndex].modules[League.moduleIndex].columns track by $index" ng-if="match.links[$index]"
-										ng-href="{{League.parseLink(match, match.links[$index])}}" ng-bind="column" class="btn flat" target="_blank">
-						</a>
-					</div>
-				</div>
-				<!--<div class="element-favourite-back">
+                        </div>
+                    </div>
+                    <div class="element-extras ">
+                        <a ng-repeat="column in module.columns track by $index " ng-if="match.links[$index] " ng-href="{{League.parseLink(match, match.links[$index])}} " ng-bind="column " class="btn flat " target="_blank ">
+                        </a>
+                    </div>
+                </div>
+                <!--<div class="element-favourite-back ">
 			</div>
-			<div class="element-favourite">
-				<i class="material-icons starred">&#xE838;</i>
+			<div class="element-favourite ">
+				<i class="material-icons starred ">&#xE838;</i>
 			</div>-->
-			</div>
-		</div>
-	</div>
-	<svg width="0px" height="0px">
+            </div>
+        </div>
+    </div>
+    <svg width="0px " height="0px ">
 		<defs>
-			<clipPath id="element" clipPathUnits="objectBoundingBox">
-				<polygon points="0 0, 0.85 0, 1 1, 0 1">
+			<clipPath id="element " clipPathUnits="objectBoundingBox ">
+				<polygon points="0 0, 0.85 0, 1 1, 0 1 ">
 				</polygon>
 			</clipPath>
 		</defs>
 	</svg>
-	<div class="player contents valign-wrapper center-align" ng-class="Page.contentClass" ng-show="Player.show">
-		<i ng-click="Player.back()" class="material-icons back">&#xE5C4;</i>
-		<div>
-
-			<div no-ng-animate ng-show="Player.loaded" class="player-above row">
-				<div class="col s12">
-					<h5 class="left-align" ng-bind="League.data.name"></h5>
-					<h5 class="left-align">{{League.data.subtitle}} {{Player.sectionT}}, {{Player.moduleT}}</h5>
-				</div>
-			</div>
-			<div no-ng-animate ng-show="Player.loaded" class="valign row" id="player" ng-class="Player.type"></div>
-			<div no-ng-animate ng-show="Player.loaded && Player.type == 'youtube'" class="player-controls">
-				<i ng-click="Player.toggle()" class="material-icons">{{Player.playing ? "&#xE034;" : "&#xE037;"}}</i>
-				<span>
-					<span ng-click="Player.skip(-600)">10m</span>
-					<span ng-click="Player.skip(-300)">5m</span>
-					<span ng-click="Player.skip(-60)">1m</span>
-					<span ng-click="Player.skip(-30)">30s</span>
-					<span ng-click="Player.skip(-10)">10s</span>
-					<i class="material-icons">&#xE020;</i>
-					SKIP
-					<i class="material-icons">&#xE01F;</i>
-					<span ng-click="Player.skip(10)">10s</span>
-					<span ng-click="Player.skip(30)">30s</span>
-					<span ng-click="Player.skip(60)">1m</span>
-					<span ng-click="Player.skip(300)">5m</span>
-					<span ng-click="Player.skip(600)">10m</span>
+    <div class="player contents valign-wrapper center-align " ng-class="Page.contentClass " ng-show="Player.show ">
+        <i ng-click="Player.back() " class="material-icons back ">&#xE5C4;</i>
+        <div>
+            <div no-ng-animate ng-show="Player.loaded " class="player-above row ">
+                <div class="col s12 ">
+                    <h5 class="left-align " ng-bind="League.data.name "></h5>
+                    <h5 class="left-align ">{{League.data.subtitle}} {{Player.sectionT}}, {{Player.moduleT}}</h5>
+                </div>
+            </div>
+            <div no-ng-animate ng-show="Player.loaded " class="valign row " id="player " ng-class="Player.type "></div>
+            <div no-ng-animate ng-show="Player.loaded && Player.type=='youtube' " class="player-controls ">
+                <i ng-click="Player.toggle() " class="material-icons ">{{Player.playing ? "&#xE034; " : "&#xE037; "}}</i>
+                <span>
+					<span ng-click="Player.skip(-600) ">10m</span>
+                <span ng-click="Player.skip(-300) ">5m</span>
+                <span ng-click="Player.skip(-60) ">1m</span>
+                <span ng-click="Player.skip(-30) ">30s</span>
+                <span ng-click="Player.skip(-10) ">10s</span>
+                <i class="material-icons ">&#xE020;</i> SKIP
+                <i class="material-icons ">&#xE01F;</i>
+                <span ng-click="Player.skip(10) ">10s</span>
+                <span ng-click="Player.skip(30) ">30s</span>
+                <span ng-click="Player.skip(60) ">1m</span>
+                <span ng-click="Player.skip(300) ">5m</span>
+                <span ng-click="Player.skip(600) ">10m</span>
+                </span>
+                <span>
+					<i ng-click="Player.setVol(0) " class="material-icons ">&#xE050;</i>
+					<input class="vol-slider " type="range " min="0 " max="100 " ng-model="Player.volSlider " ng-change="Player.setVol(Player.volSlider) " />
 				</span>
-				<span>
-					<i ng-click="Player.setVol(0)" class="material-icons">&#xE050;</i>
-					<input class="vol-slider" type="range" min="0" max="100" ng-model="Player.volSlider" ng-change="Player.setVol(Player.volSlider)" />
-				</span>
-			</div>
-			<div no-ng-animate ng-show="Player.loaded" class="player-below">
-				<div class="match-details">
-					<span>
-						<img ng-src="{{Player.match.team1.icon}}"/>
+            </div>
+            <div no-ng-animate ng-show="Player.loaded " class="player-below ">
+                <div class="match-details ">
+                    <span>
+						<img ng-src="{{Player.match.team1.icon}} "/>
 						<h4>VS</h4>
-						<img ng-src="{{Player.match.team2.icon}}"/>
+						<img ng-src="{{Player.match.team2.icon}} "/>
 					</span>
-					<div>
-						<a class="btn flat" ng-click="Player.picks()" ng-if="Player.match[Player.type].picksBans">{{League.data.contents[League.sectionIndex].draftText || "Picks & Bans"}}</a>
-						<a class="btn flat" ng-click="Player.start()" ng-if="Player.match[Player.type].gameStart">Game Start</a>
-					</div>
-				</div>
-
-			</div>
-			<div no-ng-animate ng-show="!Player.loaded" class="row valign preloader-wrapper big active">
-				<div class="spinner-layer spinner-blue">
-					<div class="circle-clipper left">
-						<div class="circle"></div>
-					</div>
-					<div class="gap-patch">
-						<div class="circle"></div>
-					</div>
-					<div class="circle-clipper right">
-						<div class="circle"></div>
-					</div>
-				</div>
-
-				<div class="spinner-layer spinner-red">
-					<div class="circle-clipper left">
-						<div class="circle"></div>
-					</div>
-					<div class="gap-patch">
-						<div class="circle"></div>
-					</div>
-					<div class="circle-clipper right">
-						<div class="circle"></div>
-					</div>
-				</div>
-
-				<div class="spinner-layer spinner-yellow">
-					<div class="circle-clipper left">
-						<div class="circle"></div>
-					</div>
-					<div class="gap-patch">
-						<div class="circle"></div>
-					</div>
-					<div class="circle-clipper right">
-						<div class="circle"></div>
-					</div>
-				</div>
-
-				<div class="spinner-layer spinner-green">
-					<div class="circle-clipper left">
-						<div class="circle"></div>
-					</div>
-					<div class="gap-patch">
-						<div class="circle"></div>
-					</div>
-					<div class="circle-clipper right">
-						<div class="circle"></div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+                    <div>
+                        <a class="btn flat " ng-click="Player.picks() " ng-if="Player.match[Player.type].picksBans ">{{League.data.contents[League.sectionIndex].draftText || "Picks & Bans "}}</a>
+                        <a class="btn flat " ng-click="Player.start() " ng-if="Player.match[Player.type].gameStart ">Game Start</a>
+                    </div>
+                </div>
+            </div>
+            <div no-ng-animate ng-show="!Player.loaded " class="row valign preloader-wrapper big active ">
+                <div class="spinner-layer spinner-blue ">
+                    <div class="circle-clipper left ">
+                        <div class="circle "></div>
+                    </div>
+                    <div class="gap-patch ">
+                        <div class="circle "></div>
+                    </div>
+                    <div class="circle-clipper right ">
+                        <div class="circle "></div>
+                    </div>
+                </div>
+                <div class="spinner-layer spinner-red ">
+                    <div class="circle-clipper left ">
+                        <div class="circle "></div>
+                    </div>
+                    <div class="gap-patch ">
+                        <div class="circle "></div>
+                    </div>
+                    <div class="circle-clipper right ">
+                        <div class="circle "></div>
+                    </div>
+                </div>
+                <div class="spinner-layer spinner-yellow ">
+                    <div class="circle-clipper left ">
+                        <div class="circle "></div>
+                    </div>
+                    <div class="gap-patch ">
+                        <div class="circle "></div>
+                    </div>
+                    <div class="circle-clipper right ">
+                        <div class="circle "></div>
+                    </div>
+                </div>
+                <div class="spinner-layer spinner-green ">
+                    <div class="circle-clipper left ">
+                        <div class="circle "></div>
+                    </div>
+                    <div class="gap-patch ">
+                        <div class="circle "></div>
+                    </div>
+                    <div class="circle-clipper right ">
+                        <div class="circle "></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-

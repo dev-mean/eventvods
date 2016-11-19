@@ -136,7 +136,7 @@
 									</i>
 							</a>
                     </li>
-                    <li class="no-transition content-switch">
+                    <li class="center-align">
                         <div class="switch">
                             <label>
 								Light
@@ -147,7 +147,7 @@
                         </div>
                     </li>
                 </ul>
-                <a class="button-collapse" data-sidenav="left" data-activates="nav-mobile" data-menuwidth="400">
+                <a class="button-collapse" data-sidenav="left" data-activates="nav-mobile" data-menuwidth="600" data-closeonclick="true">
                     <i class="material-icons">
 						menu
 					</i>
@@ -155,6 +155,16 @@
             </div>
         </nav>
         <ul class="side-nav" id="nav-mobile">
+            <li class="no-transition content-switch">
+                <div class="switch">
+                    <label>
+                        Light
+                        <input type="checkbox" ng-model="Page.contentClass" ng-true-value="'dark'" ng-false-value="'light'" ng-change="Page.contentClassSet()">
+                        <span class="lever"></span>
+                        Dark
+                    </label>
+                </div>
+            </li>
             <li class="side-heading">Featured Games</li>
             <li ng-repeat="game in Page.nav.games">
                 <a ng-href="/game/{{game.slug}}">
@@ -174,9 +184,12 @@
                 </a>
             </li>
             <li class="side-heading">Featured Articles</li>
-            <li ng-repeat="article in Page.nav.articles" class="side-indented">
+            <li ng-repeat="article in Page.nav.articles">
                 <a ng-href="/article/{{article.slug}}">
-                    {{article.title}}
+                    <i class="material-icons left icon">
+                        <img ng-src="/assets/images/icons/ev.png" />
+                        &nbsp;
+                    </i> {{article.title}}
                 </a>
             </li>
         </ul>

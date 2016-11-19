@@ -89,7 +89,6 @@
                 if (match.placeholder) return;
                 var twitch = parseTwitch(link);
                 if (twitch !== false) $event.preventDefault();
-                console.log(twitch);
                 vm.loaded = false;
                 vm.show = true;
                 vm.match = match;
