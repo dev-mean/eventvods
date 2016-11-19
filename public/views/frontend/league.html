@@ -144,16 +144,16 @@
             <tbody>
                 <tr ng-repeat="match in module.matches track by $index">
                     <td ng-bind="League.getIdentifier($index)"></td>
-                    <td ng-if="!match.team1Sp" ng-bind="match.team1.name" class="right-align"></td>
-                    <td ng-if="!match.team1Sp" class="table-links"><img ng-src="{{match.team1.icon}}" /></td>
-                    <td ng-if="match.team1Sp" class="right-align">{{match.team1SpText || "Team 1 "}}</td>
-                    <td ng-if="match.team1Sp && Page.contentClass == 'dark'" class="table-links"><img src="/assets/images/icons/ev.png" /></td>
-                    <td ng-if="match.team1Sp && Page.contentClass == 'light'" class="table-links"><img src="/assets/images/icons/ev_dark.png" /></td>
+                    <td ng-show="!match.team1Sp || match.team1H" ng-bind="match.team1.name" ng-mouseenter="League.setHover(match, 1, true)" ng-mouseleave="League.setHover(match, 1, false)" class="right-align"></td>
+                    <td ng-show="!match.team1Sp || match.team1H" ng-mouseenter="League.setHover(match, 1, true)" ng-mouseleave="League.setHover(match, 1, false)" class="table-links"><img ng-src="{{match.team1.icon}}" /></td>
+                    <td ng-show="match.team1Sp && !match.team1H" ng-mouseenter="League.setHover(match, 1, true)" ng-mouseleave="League.setHover(match, 1, false)" class="right-align">{{match.team1SpText || "Team 1 "}}</td>
+                    <td ng-show="match.team1Sp && !match.team1H" ng-if="Page.contentClass == 'dark'" ng-mouseenter="League.setHover(match, 1, true)" ng-mouseleave="League.setHover(match, 1, false)" class="table-links"><img src="/assets/images/icons/ev.png" /></td>
+                    <td ng-show="match.team1Sp && !match.team1H" ng-if="Page.contentClass == 'light'" ng-mouseenter="League.setHover(match, 1, true)" ng-mouseleave="League.setHover(match, 1, false)" class="table-links"><img src="/assets/images/icons/ev_dark.png" /></td>
                     <td>VS</td>
                     <td ng-show="match.team2Sp && !match.team2H" ng-if="Page.contentClass == 'dark'" class="table-links generic-icon" ng-mouseenter="League.setHover(match, 2, true)" ng-mouseleave="League.setHover(match, 2, false)"><img src="/assets/images/icons/ev.png" /></td>
                     <td ng-show="match.team2Sp && !match.team2H" ng-if="Page.contentClass == 'light'" class="table-links generic-icon" ng-mouseenter="League.setHover(match, 2, true)" ng-mouseleave="League.setHover(match, 2, false)"><img src="/assets/images/icons/ev_dark.png" /></td>
-                    <td ng-show="!match.team2Sp || match.team2H" class="table-links spoiler-icon" ng-mouseenter="League.setHover(match, 2, true)" ng-mouseleave="League.setHover(match, 2, false)"><img ng-src=" {{match.team2.icon}} " /></td>
                     <td ng-show="match.team2Sp && !match.team2H " class="left-align " ng-mouseenter="League.setHover(match, 2, true) " ng-mouseleave="League.setHover(match, 2, false)">{{match.team2SpText || "Team 2 "}}</td>
+                    <td ng-show="!match.team2Sp || match.team2H" class="table-links spoiler-icon" ng-mouseenter="League.setHover(match, 2, true)" ng-mouseleave="League.setHover(match, 2, false)"><img ng-src=" {{match.team2.icon}} " /></td>
                     <td ng-show="!match.team2Sp || match.team2H " ng-bind="match.team2.name" ng-mouseenter="League.setHover(match, 2, true)" ng-mouseleave="League.setHover(match, 2, false)" class="left-align "></td>
                     <td class="table-links ">
                         <a ng-if="module.youtube && match.youtube.picksBans " ng-href="{{League.parseLink(match, match.youtube.picksBans)}} " ng-click="!Page.inlineYoutube ? return : Player.playYoutube(match.youtube.picksBans, match, $event, League.data.contents[League.sectionIndex].title,
@@ -200,7 +200,7 @@
             </tbody>
         </table>
     </div>
-    <div ng-repeat="module in League.data.contents[League.sectionIndex].modules track by $index " ng-if="League.moduleIndex==$ index && !Page.compact ">
+    <div ng-repeat="module in League.data.contents[League.sectionIndex].modules track by $index " ng-if="League.moduleIndex== $index && !Page.compact ">
         <div ng-repeat="match in module.matches track by $index ">
             <h3 class="container " ng-if="match.title " ng-bind="match.title "></h3>
             <span class="container extra-info " ng-if="match.title "><i class="material-icons ">&#xE88F;</i> We always include placeholder tiebreaker games where they might happen, so you don't get spoiled.</span>
