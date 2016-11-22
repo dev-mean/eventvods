@@ -73,7 +73,7 @@ function infobox(event) {
     else if (has(event, "twitchStream")) str += format("* **Streams:** [Twitch.tv]({tw})", {
         tw: event.twitchStream
     }) + EOL;
-    else if (has(event, "youtubeStream")) str += format("* **Streams:** [Youtube]({tw})", {
+    else if (has(event, "youtubeStream")) str += format("* **Streams:** [YouTube]({tw})", {
         yt: event.youtubeStream
     }) + EOL;
     hosts = event.staff.filter(staff => staff.role == 'Host');
@@ -152,7 +152,7 @@ function simple_table(event, section, module, sectionIndex, moduleIndex) {
     }) + NL;
     str += format("|#|Team1|vs.|Team2|{twitch}{youtube}{extras}", {
         twitch: module.twitch ? "Twitch|" : "",
-        youtube: module.youtube ? "Youtube|" : "",
+        youtube: module.youtube ? "YouTube|" : "",
         extras: module.columns.join("|")
     }) + EOL;
     str += format(":--:|--:|:--:|:--|{twitch}{youtube}{extras}", {
@@ -168,7 +168,7 @@ function simple_table(event, section, module, sectionIndex, moduleIndex) {
             team1: teamDisplay(match, false),
             team2: teamDisplay(match, true),
             twitch: module.twitch ? link("Twitch", match.twitch.gameStart) : "",
-            youtube: module.youtube ? link("Youtube", match.youtube.gameStart) : "",
+            youtube: module.youtube ? link("YouTube", match.youtube.gameStart) : "",
             extras: formatExtras(module.columns, match.links)
         }) + EOL;
     })
@@ -186,7 +186,7 @@ function table(event, section, module, sectionIndex, moduleIndex) {
     }) + NL;
     str += format("|#|Team1|vs.|Team2|{twitch}{youtube}{extras}", {
         twitch: module.twitch ? "Twitch|" : "",
-        youtube: module.youtube ? "Youtube|" : "",
+        youtube: module.youtube ? "YouTube|" : "",
         extras: module.columns.join("|")
     }) + EOL;
     str += format(":--:|--:|:--:|:--|{twitch}{youtube}{extras}", {
