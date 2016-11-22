@@ -112,6 +112,12 @@ function teamName(name, spoiler, text, invert) {
 
 function teamDisplay(match, invert) {
     var disp = invert ? "[](#{icon}) **{team}**" : "**{team}** [](#{icon})";
+    if (match.placeholder) {
+        match.team1.name = "Placeholder";
+        match.team2.name = "Placeholder";
+        match.team1Sp = true;
+        match.team2Sp = true;
+    }
     var name = invert ? match.team2.name : match.team1.name;
     var spoiler = invert ? match.team2Sp : match.team1Sp;
     var text = invert ? match.team2SpText : match.team1SpText;
@@ -185,6 +191,7 @@ module.exports = {
                 moduleIndex++;
             })
             sectionIndex++;
+            moduleIndex = 0;
         });
         md += "---" + NL;
         md += "**Stay up to date 24/7 - follow us on [Twitter](http://twitter.com/Eventvods), [Facebook](http://www.facebook.com/Eventvods), [YouTube](http://www.youtube.com/loleventvods?sub_confirmation=1). Check out our free apps for [Android](http://play.google.com/store/apps/details?id=com.kox.zzreal) & [iOS](http://appsto.re/us/Eh0m1.i)!**" + EOL;
