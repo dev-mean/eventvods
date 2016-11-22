@@ -105,7 +105,7 @@ function infobox(event) {
 function teamName(name, spoiler, text, invert) {
     var disp = spoiler ? "[{text}](/s \"{name}\")" : "{name}";
     return format(disp, {
-        name: name,
+        name: name.replace(/\b\w/g, l => l.toUpperCase()),
         text: text
     });
 }
