@@ -140,7 +140,7 @@ function link(text, link) {
 function formatExtras(columns, links) {
     var i = 0;
     return columns.map((extra) => {
-        return link(extra, links[i++])
+        return link(extra.replace(/\b\w/g, l => l.toUpperCase()), links[i++])
     }).join("");
 }
 
@@ -153,7 +153,7 @@ function simple_table(event, section, module, sectionIndex, moduleIndex) {
     str += format("|#|Team1|vs.|Team2|{twitch}{youtube}{extras}", {
         twitch: module.twitch ? "Twitch|" : "",
         youtube: module.youtube ? "YouTube|" : "",
-        extras: module.columns.join("|")
+        extras: module.columns.map((str) => { return str.replace(/\b\w/g, l => l.toUpperCase()) }).join("|")
     }) + EOL;
     str += format(":--:|--:|:--:|:--|{twitch}{youtube}{extras}", {
         twitch: module.twitch ? ":--:|" : "",
@@ -187,7 +187,7 @@ function table(event, section, module, sectionIndex, moduleIndex) {
     str += format("|#|Team1|vs.|Team2|{twitch}{youtube}{extras}", {
         twitch: module.twitch ? "Twitch|" : "",
         youtube: module.youtube ? "YouTube|" : "",
-        extras: module.columns.join("|")
+        extras: module.columns.map((str) => { return str.replace(/\b\w/g, l => l.toUpperCase()) }).join("|")
     }) + EOL;
     str += format(":--:|--:|:--:|:--|{twitch}{youtube}{extras}", {
         twitch: module.twitch ? ":--:|" : "",
