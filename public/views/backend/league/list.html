@@ -15,7 +15,7 @@
     </div>
 </div>
 <div class="filters">
-    <input type="text" ng-model="leaguesListController.search" placeholder="Search Events" tabindex="1"/>
+    <input type="text" ng-model="leaguesListController.search" placeholder="Search Events" tabindex="1" />
 </div>
 <div class="listView events">
     <table class="standard">
@@ -43,8 +43,8 @@
                     <span ng-show="leaguesListController.sort.sortField != 'name'" class="fa fa-unsorted">
                     </span>
                 </th>
-				<th>
-					<a ng-click="leaguesListController.setSort('subtitle')">
+                <th>
+                    <a ng-click="leaguesListController.setSort('subtitle')">
                         Subtitle
                     </a>
                     <span ng-show="leaguesListController.sort.sortField == 'subtitle' && !leaguesListController.sort.sortReverse" class="caret-down">
@@ -53,9 +53,9 @@
                     </span>
                     <span ng-show="leaguesListController.sort.sortField != 'subtitle'" class="fa fa-unsorted">
                     </span>
-				</th>
-				<th>
-					<a ng-click="leaguesListController.setSort('slug')">
+                </th>
+                <th>
+                    <a ng-click="leaguesListController.setSort('slug')">
                         URL Slug
                     </a>
                     <span ng-show="leaguesListController.sort.sortField == 'slug' && !leaguesListController.sort.sortReverse" class="caret-down">
@@ -64,9 +64,9 @@
                     </span>
                     <span ng-show="leaguesListController.sort.sortField != 'slug'" class="fa fa-unsorted">
                     </span>
-				</th>
-				<th>
-				</th>
+                </th>
+                <th>
+                </th>
                 <th>
                 </th>
                 <th>
@@ -76,26 +76,32 @@
         <tbody>
             <tr ng-repeat="league in leaguesListController.filterData = (leaguesListController.leagueData | filter: leaguesListController.search) | orderBy: leaguesListController.sort.sortField:leaguesListController.sort.sortReverse | offset: (leaguesListController.paging.page - 1) * leaguesListController.paging.itemsPerPage | limitTo: leaguesListController.paging.itemsPerPage">
                 <td>
-                   {{league.game.slug | uppercase}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    {{league.game.slug | uppercase}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 </td>
                 <td>
                     {{league.name}}
                 </td>
-				<td>
+                <td>
                     {{league.subtitle}}
                 </td>
-				<td>
-					/event/{{league.slug}}
-				</td>
-				<td class="update">
-					<a ng-href="/manage/league/{{league._id}}/update">
+                <td>
+                    /event/{{league.slug}}
+                </td>
+                <td class="update">
+                    <a ng-href="/manage/league/{{league._id}}/update">
                         <i class="fa fa-list fa-fw">
                         </i>
                     </a>
-				</td>
+                </td>
                 <td class="edit">
                     <a ng-href="/manage/league/{{league._id}}/edit">
                         <i class="fa fa-edit fa-fw">
+                        </i>
+                    </a>
+                </td>
+                <td class="edit">
+                    <a ng-href="/api/leagues/export/{{league._id}}" target="_blank">
+                        <i class="fa fa-reddit-alien fa-fw">
                         </i>
                     </a>
                 </td>

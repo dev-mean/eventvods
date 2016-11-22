@@ -192,7 +192,7 @@
                         <i ng-if="!League.hasExtras(module, match) ">-</i>
                         <ul ng-attr-id="{{match._id}} " class="dropdown-content match-extras-dd wide ">
                             <li ng-repeat="column in module.columns track by $index " ng-if="match.links[$index] ">
-                                <a ng-href="{{League.parseLink(match, match.links[$index])}} " ng-bind="column "></a>
+                                <a ng-href="{{League.parseLink(match, match.links[$index])}}" target="_blank" ng-bind="column "></a>
                             </li>
                         </ul>
                     </td>

@@ -661,7 +661,7 @@ debug@^1.0.2:
   dependencies:
     ms "0.6.2"
 
-debug@^2.2.0, debug@2.X:
+debug@^2.2, debug@^2.2.0, debug@2.X:
   version "2.3.2"
   resolved "https://registry.yarnpkg.com/debug/-/debug-2.3.2.tgz#94cb466ef7d6d2c7e5245cdd6e4104f2d0d70d30"
   dependencies:
@@ -1192,7 +1192,7 @@ gulp-postcss@*:
     postcss "^5.2.0"
     vinyl-sourcemaps-apply "^0.2.0"
 
-gulp-rename@^1.2.2:
+gulp-rename@*:
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/gulp-rename/-/gulp-rename-1.2.2.tgz#3ad4428763f05e2764dec1c67d868db275687817"
 
@@ -1612,7 +1612,7 @@ json-schema@0.2.3:
   version "0.2.3"
   resolved "https://registry.yarnpkg.com/json-schema/-/json-schema-0.2.3.tgz#b480c892e59a2f05954ce727bd3f2a4e882f9e13"
 
-json-stringify-safe@~5.0.1, json-stringify-safe@5.0.x:
+json-stringify-safe@^5.0, json-stringify-safe@~5.0.1, json-stringify-safe@5.0.x:
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/json-stringify-safe/-/json-stringify-safe-5.0.1.tgz#1296a2d58fd45f19a0f6ce01d65701e2c735b6eb"
 
@@ -2432,9 +2432,12 @@ pinkie@^2.0.0:
   version "2.0.4"
   resolved "https://registry.yarnpkg.com/pinkie/-/pinkie-2.0.4.tgz#72556b80cfa0d48a974e80e77248e80ed4f7f870"
 
-pmx@*:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/pmx/-/pmx-1.0.0.tgz#935a057bbf7fe482a0cd505032de5aff2102e303"
+pmx:
+  version "0.6.8"
+  resolved "https://registry.yarnpkg.com/pmx/-/pmx-0.6.8.tgz#8f9d6db4707ea6ec7383053747510367cd1f6332"
+  dependencies:
+    debug "^2.2"
+    json-stringify-safe "^5.0"
 
 pop-iterate@^1.0.1:
   version "1.0.1"
@@ -3193,6 +3196,10 @@ strict-uri-encode@^1.0.0:
 string_decoder@~0.10.x:
   version "0.10.31"
   resolved "https://registry.yarnpkg.com/string_decoder/-/string_decoder-0.10.31.tgz#62e203bc41766c6c28c9fc84301dab1c5310fa94"
+
+string-template:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/string-template/-/string-template-1.0.0.tgz#9e9f2233dc00f218718ec379a28a5673ecca8b96"
 
 stringstream@~0.0.4:
   version "0.0.5"
