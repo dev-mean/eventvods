@@ -113,8 +113,8 @@ function teamName(name, spoiler, text, invert) {
 function teamDisplay(match, invert) {
     var disp = invert ? "{icon} **{team}**" : "**{team}** {icon}";
     if (match.placeholder) {
-        match.team1.name = "Placeholder";
-        match.team2.name = "Placeholder";
+        match.team1 = { name: "Placeholder" };
+        match.team2 = { name: "Placeholder" };
         match.team1Sp = true;
         match.team2Sp = true;
     }
