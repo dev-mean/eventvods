@@ -112,16 +112,17 @@ function teamName(name, spoiler, text, invert) {
 
 function teamDisplay(match, invert) {
     var disp = invert ? "{icon} **{team}**" : "**{team}** {icon}";
-    if (!def(match.team1)) match.team1 = { tag: "Team 1" };
-    if (!def(match.team2)) match.team2 = { tag: "Team 2" };
     var spoiler = invert ? match.team2Sp : match.team1Sp;
     if (match.placeholder) spoiler = true;
     var text = invert ? match.team2SpText : match.team1SpText;
+    var empty = invert ? !def(match.team2) : !def(match.team1);
+    if (!def(match.team1)) match.team1 = { tag: "Team 1" };
+    if (!def(match.team2)) match.team2 = { tag: "Team 2" };
     var tag = invert ? match.team2.tag : match.team1.tag;
     if (!def(text)) text = invert ? "Team 2" : "Team 1";
     return format(disp, {
         team: teamName(tag, spoiler, text, invert),
-        icon: spoiler ? "" : "[](#" + tag.toLowerCase() + ")"
+        icon: (spoiler || empty) ? "" : "[](#" + tag.toLowerCase() + ")"
     })
 }
 
