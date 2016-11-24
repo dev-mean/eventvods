@@ -39,6 +39,15 @@
         </div>
         <div class="standard group">
             <label>
+				Table Type
+            </label>
+            <select ng-model="gameFormController.data.simple_tables" ng-options="(item?'Simple Tables':'MOBA Style') for item in [false, true]">
+                <!--<option value="false">MOBA Style</option>
+                <option value="true">Simple Tables</option>-->
+            </select>
+        </div>
+        <div class="standard group">
+            <label>
                 Icon (optional)
             </label>
             <image-drop model="gameFormController.data.icon" preview-width="64" preview-height="64" />

@@ -13,7 +13,8 @@ var exporter = require('../../controllers/export');
 router.route('/')
     .get(auth.public_api(), ratelimit, cache, function(req, res, next) {
         League.find()
-            .populate('game staff')
+            .select('_id game name subtitle slug')
+            .populate('game', 'slug icon -_id')
             .exec(function(err, leagues) {
                 if (err) next(err);
                 else res.json(leagues);

@@ -12,8 +12,12 @@ var gameSchema = new Schema({
     },
     icon: String,
     header: String,
-	header_blur: String,
-	credits: String,
+    header_blur: String,
+    credits: String,
+    simple_tables: {
+        type: Boolean,
+        default: false
+    }
 });
 var Game = mongoose.model('Game', gameSchema);
 module.exports = Game;
