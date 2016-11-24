@@ -67,7 +67,7 @@ function infobox(event) {
         patch: event.patch
     }) + EOL;
     if (has(event, "prize")) str += format("* **Prize Pool:** {prize}", {
-        patch: event.prize
+        prize: event.prize
     }) + EOL;
     if (has(event, "twitchStream") && has(event, "youtubeStream)")) str += format("* **Streams:** [Twitch.tv]({tw}); [YouTube]({yt});", {
         tw: event.twitchStream,

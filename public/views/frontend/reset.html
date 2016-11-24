@@ -1,0 +1,66 @@
+<div class="evSlider single" id="banner">
+    <div class="images">
+        <div class="image">
+            <div class="main">
+                <img src="/assets/images/headers/technical.jpg" />
+            </div>
+            <div class="blur">
+                <img src="/assets/images/headers/technical_b.jpg" />
+            </div>
+            <div class="overlay middle">
+                <div class="container">
+                    <h1>Password Reset</h1>
+                    <h4>Forgotten your password?</h4>
+                </div>
+                <div class="credits">
+                    &copy; ESL Gaming
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="contents" ng-class="Page.contentClass">
+    <div class="container center-align">
+        <h5>Your password won't be changed until you confirm it through your email.</h5>
+        <br />
+        <div class="row" ng-show="!Reset.sent">
+            <form autocomplete="false">
+                <input name="email" class="hide">
+                <input name="password" class="hide">
+                <div class="col s6 offset-s3 center-align" id="reset">
+                    <div class="row">
+                        <div class="col s12">
+                            <input-field>
+                                <input id="email" type="email" class="validate" ng-model="Reset.data.email" required tabindex="0" />
+                                <label class="click-through" data-error="Please enter your email address.">Account Email</label>
+                            </input-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s12">
+                            <input-field>
+                                <input id="password" type="password" ng-model="Reset.data.password" class="validate" required pattern=".{6,100}" />
+                                <label class="click-through" data-error="Password must be 6-100 characters long.">New Password</label>
+                            </input-field>
+                        </div>
+                        <div class="col s12">
+                            <input-field>
+                                <input id="password_confirm" type="password" id="password_confirm" ng-model="Reset.data.password_confirm" class="validate" required pattern=".{6,100}" />
+                                <label class="click-through" data-error="Password confirmation must match.">Confirm Password</label>
+                            </input-field>
+                        </div>
+                    </div>
+                    <div class="row buttons">
+                        <div class="col s6 offset-s3">
+                            <a class="waves-effect waves-light btn submit" ng-click="Reset.reset()" tabindex="1">Reset Password</a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="section" ng-show="Reset.sent">
+            <h6>If that email matches an account, we've sent an email to it.<br /> Please follow the link in that email to finish changing your password.
+            </h6>
+        </div>
+    </div>
+</div>

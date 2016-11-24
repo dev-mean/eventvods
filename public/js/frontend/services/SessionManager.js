@@ -61,6 +61,9 @@
                     ignoreLoadingBar: true
                 })
             }
+            svc.reset = function(data) {
+                return $http.post(URL + '/user/reset', data);
+            }
             $rootScope.$on('triggerSessionUpdate', svc.load);
             svc.load();
         }]);
