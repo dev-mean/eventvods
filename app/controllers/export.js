@@ -116,8 +116,8 @@ function teamDisplay(match, invert) {
     if (match.placeholder) spoiler = true;
     var text = invert ? match.team2SpText : match.team1SpText;
     var empty = invert ? !def(match.team2) : !def(match.team1);
-    if (!def(match.team1)) match.team1 = { tag: "Team 1" };
-    if (!def(match.team2)) match.team2 = { tag: "Team 2" };
+    if (!def(match.team1) && !invert) match.team1 = { tag: "Team 1" };
+    if (!def(match.team2) && invert) match.team2 = { tag: "Team 2" };
     var tag = invert ? match.team2.tag : match.team1.tag;
     if (!def(text)) text = invert ? "Team 2" : "Team 1";
     return format(disp, {
@@ -127,7 +127,7 @@ function teamDisplay(match, invert) {
 }
 
 function link(text, link) {
-    var disp = (def(link) && link != "") ? "[{text}]({link})|" : "[{text}]|";
+    var disp = (def(link) && link != "") ? "[{text}]({link})|" : "{text}|";
     return format(disp, {
         text: text,
         link: link
