@@ -26,8 +26,8 @@
         <div class="container row">
             <div class="col m12 l4">
                 <i class="material-icons">&#xE88F;</i>
-                <h6>Format</h6> {{League.data.format}}
-                <h6>Patch</h6> {{League.data.patch}}
+                <h6 ng-if="League.data.patch">Patch</h6> {{League.data.patch}}
+                <h6 ng-if="League.data.prize">Prize Pool</h6> {{League.data.prize}}
             </div>
             <div class="col m12 l4">
                 <i class="material-icons">&#xE417;</i>

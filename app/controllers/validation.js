@@ -12,29 +12,29 @@ module.exports.messages = {
     'Username.alpha_numeric': 'Usernames can only contain alphanumeric characters.'
 };
 module.exports.article = {
-	title: 'required',
-	content: 'required',
-	slug: 'required',
-	author: 'required',
-	publishDate: 'required'
+    title: 'required',
+    content: 'required',
+    slug: 'required',
+    author: 'required',
+    publishDate: 'required'
 }
 module.exports.register = {
-	displayName: 'required|max:30',
+    displayName: 'required|max:30',
     email: 'required|email',
     password: 'required|min:6',
     password_confirm: 'same:password',
-	tos: "required|accepted"
+    tos: "required|accepted"
 };
 module.exports.password = {
-	password: 'required|min:6',
+    password: 'required|min:6',
     password_confirm: 'same:password'
 };
 module.exports.login = {
-	email: 'required|email',
-	password: 'required|min:6'
+    email: 'required|email',
+    password: 'required|min:6'
 };
 module.exports.name = {
-	"Name": 'required|max:30',
+    "Name": 'required|max:30',
 };
 module.exports.api = {
     Name: 'required|alpha_numeric',
@@ -48,18 +48,17 @@ module.exports.game = {
 module.exports.league = {
     name: 'required',
     game: 'required',
-	slug: 'required',
-	startDate: 'required',
-	endDate: 'required',
-	patch: 'required',
-	format: 'required'
+    slug: 'required',
+    startDate: 'required',
+    endDate: 'required',
+    format: 'required'
 };
 module.exports.staff = {
     forename: 'required',
     surname: 'required',
     alias: 'required',
     role: 'required',
-	slug: 'required'
+    slug: 'required'
 };
 module.exports.link = {
     linkText: 'required',
@@ -73,7 +72,7 @@ module.exports.map = {
 module.exports.team = {
     name: 'required',
     tag: 'required',
-	slug: 'required'
+    slug: 'required'
 };
 module.exports.user = {
     displayName: 'required',

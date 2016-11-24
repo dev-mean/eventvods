@@ -1,201 +1,207 @@
 <div class="contextHead">
-	<div class="leftSide">
-		<h1 ng-bind="leagueFormController.title">
+    <div class="leftSide">
+        <h1 ng-bind="leagueFormController.title">
         </h1>
-	</div>
-	<div class="rightSide">
-		<a class="btn lg solid icon" ng-click="leagueFormController.submit()">
-			<i class="fa fa-save">
+    </div>
+    <div class="rightSide">
+        <a class="btn lg solid icon" ng-click="leagueFormController.submit()">
+            <i class="fa fa-save">
 				</i>
-			<span>
+            <span>
 				Save
 			</span>
-		</a>
-	</div>
+        </a>
+    </div>
 </div>
 <div class="tabs">
-	<span ng-class="{selected: leagueFormController.tab == 1}" ng-click="leagueFormController.goToTab(1)">
+    <span ng-class="{selected: leagueFormController.tab == 1}" ng-click="leagueFormController.goToTab(1)">
         1. League Details
     </span>
-	<span ng-class="{selected: leagueFormController.tab == 2}" ng-click="leagueFormController.goToTab(2)">
+    <span ng-class="{selected: leagueFormController.tab == 2}" ng-click="leagueFormController.goToTab(2)">
         2. Staff
     </span>
-	<span ng-class="{selected: leagueFormController.tab == 3}" ng-click="leagueFormController.goToTab(3)">
+    <span ng-class="{selected: leagueFormController.tab == 3}" ng-click="leagueFormController.goToTab(3)">
         3. Media
     </span>
-	<span ng-class="{selected: leagueFormController.tab == 4}" ng-click="leagueFormController.goToTab(4)">
+    <span ng-class="{selected: leagueFormController.tab == 4}" ng-click="leagueFormController.goToTab(4)">
         4. Teams
     </span>
 </div>
 <form name="form" id="addLeagueForm" autocomplete="false" ng-cloak>
-	<div class="errors" ng-show="leagueFormController.errors.length > 0">
-		<ul>
-			<li ng-repeat="error in leagueFormController.errors">{{error.message}}</li>
-		</ul>
-	</div>
-	<div class="section" ng-show="leagueFormController.tab == 1">
-		<div class="standard group">
-			<label>
+    <div class="errors" ng-show="leagueFormController.errors.length > 0">
+        <ul>
+            <li ng-repeat="error in leagueFormController.errors">{{error.message}}</li>
+        </ul>
+    </div>
+    <div class="section" ng-show="leagueFormController.tab == 1">
+        <div class="standard group">
+            <label>
                 League Title
             </label>
-			<input type="text" placeholder="e.g. League Championship Series" ng-model="leagueFormController.data.name" data-parsley-trigger="keyup" data-parsley-group="1" required/>
-		</div>
-		<div class="standard group">
-			<label>
+            <input type="text" placeholder="e.g. League Championship Series" ng-model="leagueFormController.data.name" data-parsley-trigger="keyup" data-parsley-group="1" required/>
+        </div>
+        <div class="standard group">
+            <label>
                 League Short Title
             </label>
-			<input type="text" placeholder="e.g. EU LCS" ng-model="leagueFormController.data.shortTitle" />
-		</div>
-		<div class="standard group">
-			<label>
+            <input type="text" placeholder="e.g. EU LCS" ng-model="leagueFormController.data.shortTitle" />
+        </div>
+        <div class="standard group">
+            <label>
                 League Sub-title
             </label>
-			<input type="text" placeholder="e.g. Summer Split" ng-model="leagueFormController.data.subtitle" />
-		</div>
-		<div class="standard group">
-			<label>
+            <input type="text" placeholder="e.g. Summer Split" ng-model="leagueFormController.data.subtitle" />
+        </div>
+        <div class="standard group">
+            <label>
                 URL Slug
             </label>
-			<input id="slug" type="text" placeholder="e.g. lcs-2016" ng-model="leagueFormController.data.slug" data-parsley-trigger="keyup" data-parsley-remote-message="Slug already in use." data-parsley-group="1" required/>
-		</div>
-		<div class="standard group">
-			<label class="full">
+            <input id="slug" type="text" placeholder="e.g. lcs-2016" ng-model="leagueFormController.data.slug" data-parsley-trigger="keyup" data-parsley-remote-message="Slug already in use." data-parsley-group="1" required/>
+        </div>
+        <div class="standard group">
+            <label class="full">
 				League will be accessible at eventvods.com/league/{{leagueFormController.data.slug}}
             </label>
-		</div>
-		<div class="standard group">
-			<label>
+        </div>
+        <div class="standard group">
+            <label>
                 Game
             </label>
-			<select ng-model="leagueFormController.data.game" ng-options="game._id as game.name for game in leagueFormController.games" required>
+            <select ng-model="leagueFormController.data.game" ng-options="game._id as game.name for game in leagueFormController.games" required>
 				<option value="">Select Game</option>
 			</select>
-		</div>
-		<div class="standard group">
-			<label>
+        </div>
+        <div class="standard group">
+            <label>
                 Patch
             </label>
-			<input placeholder="e.g. 6.14" type="text" ng-model="leagueFormController.data.patch" data-parsley-trigger="input change" data-parsley-group="1" />
-		</div>
-		<div class="standard group">
-			<label>
+            <input placeholder="e.g. 6.14" type="text" ng-model="leagueFormController.data.patch" />
+        </div>
+        <div class="standard group">
+            <label>
+                Prize Pool
+            </label>
+            <input placeholder="e.g. $2million" type="text" ng-model="leagueFormController.data.prize" />
+        </div>
+        <div class="standard group">
+            <label>
                 League Format
             </label>
-			<input placeholder="e.g. Round Robin" type="text" ng-model="leagueFormController.data.format" data-parsley-trigger="input change" data-parsley-group="1" required/>
-		</div>
-		<div class="standard group">
-			<label>
+            <input placeholder="e.g. Round Robin" type="text" ng-model="leagueFormController.data.format" data-parsley-trigger="input change" data-parsley-group="1" required/>
+        </div>
+        <div class="standard group">
+            <label>
                 Start Date
             </label>
-			<input id="startDate" placeholder="Click to select date." type="text" data-parsley-trigger="input change" data-parsley-group="1" required/>
-		</div>
-		<div class="standard group">
-			<label>
+            <input id="startDate" placeholder="Click to select date." type="text" data-parsley-trigger="input change" data-parsley-group="1" required/>
+        </div>
+        <div class="standard group">
+            <label>
                 End Date
             </label>
-			<input id="endDate" placeholder="Click to select date." type="text" data-parsley-trigger="input change" data-parsley-group="1" required/>
-		</div>
-		<div class="standard group">
-			<label>
+            <input id="endDate" placeholder="Click to select date." type="text" data-parsley-trigger="input change" data-parsley-group="1" required/>
+        </div>
+        <div class="standard group">
+            <label>
                 Twitch URL (Optional)
             </label>
-			<input placeholder="e.g. http://twitch.tv/riotgames" type="text" ng-model="leagueFormController.data.twitchStream" data-parsley-trigger="input change" data-parsley-group="1" />
-		</div>
-		<div class="standard group">
-			<label>
+            <input placeholder="e.g. http://twitch.tv/riotgames" type="text" ng-model="leagueFormController.data.twitchStream" data-parsley-trigger="input change" data-parsley-group="1" />
+        </div>
+        <div class="standard group">
+            <label>
                 Youtube URL (Optional)
             </label>
-			<input placeholder="e.g. http://youtube.com/lolesports" type="text" ng-model="leagueFormController.data.youtubeStream" data-parsley-trigger="input change" data-parsley-group="1" />
-		</div>
-		<div class="standard group">
-			<label>
+            <input placeholder="e.g. http://youtube.com/lolesports" type="text" ng-model="leagueFormController.data.youtubeStream" data-parsley-trigger="input change" data-parsley-group="1" />
+        </div>
+        <div class="standard group">
+            <label>
                 Featured Orientation
             </label>
-			<select class="form-style" ng-model="leagueFormController.data.textOrientation">
+            <select class="form-style" ng-model="leagueFormController.data.textOrientation">
 				<option value="left">Left</option>
 				<option value="right">Right</option>
 			</select>
-		</div>
-		<div class="standard group">
-			<label>
+        </div>
+        <div class="standard group">
+            <label>
                 League Logo (optional)
             </label>
-			<image-drop model="leagueFormController.data.logo" preview-width="128" preview-height="128" />
-		</div>
-		<div class="standard group">
-			<label>
+            <image-drop model="leagueFormController.data.logo" preview-width="128" preview-height="128" />
+        </div>
+        <div class="standard group">
+            <label>
                 League Header (optional)
             </label>
-			<image-drop model="leagueFormController.data.header" preview-width="300" preview-height="100" />
-		</div>
-		<div class="standard group">
-			<label>
+            <image-drop model="leagueFormController.data.header" preview-width="300" preview-height="100" />
+        </div>
+        <div class="standard group">
+            <label>
                 Header Photo Credits
             </label>
-			<input type="text" placeholder="e.g. Riot Games" ng-model="leagueFormController.data.credits" data-parsley-trigger="keyup" />
-		</div>
-		<br />
-		<div class="standard group">
-			<a class="btn lg solid icon icon-right pull-right" ng-click="leagueFormController.goToTab(2)">
-				<i class="fa fa-chevron-right">
+            <input type="text" placeholder="e.g. Riot Games" ng-model="leagueFormController.data.credits" data-parsley-trigger="keyup" />
+        </div>
+        <br />
+        <div class="standard group">
+            <a class="btn lg solid icon icon-right pull-right" ng-click="leagueFormController.goToTab(2)">
+                <i class="fa fa-chevron-right">
                 </i>
-				<span>
+                <span>
 					Staff
                 </span>
-			</a>
-		</div>
-	</div>
+            </a>
+        </div>
+    </div>
 </form>
 <div class="section" ng-show="leagueFormController.tab == 2">
-	<staff-select model="leagueFormController.data.staff">
-	</staff-select>
-	<div class="standard group">
-		<a class="btn lg solid icon" ng-click="leagueFormController.goToTab(1)">
-			<i class="fa fa-chevron-left">
+    <staff-select model="leagueFormController.data.staff">
+    </staff-select>
+    <div class="standard group">
+        <a class="btn lg solid icon" ng-click="leagueFormController.goToTab(1)">
+            <i class="fa fa-chevron-left">
 				</i>
-			<span>
+            <span>
 				Details
 			</span>
-		</a>
-		<a class="btn lg solid icon icon-right pull-right" ng-click="leagueFormController.goToTab(3)">
-			<i class="fa fa-chevron-right">
+        </a>
+        <a class="btn lg solid icon icon-right pull-right" ng-click="leagueFormController.goToTab(3)">
+            <i class="fa fa-chevron-right">
 				</i>
-			<span>
+            <span>
 				Media
 			</span>
-		</a>
-	</div>
+        </a>
+    </div>
 </div>
 <div class="section" ng-show="leagueFormController.tab == 3">
-	<media-list model="leagueFormController.data.media">
-	</media-list>
-	<div class="standard group">
-		<a class="btn lg solid icon" ng-click="leagueFormController.goToTab(2)">
-			<i class="fa fa-chevron-left">
+    <media-list model="leagueFormController.data.media">
+    </media-list>
+    <div class="standard group">
+        <a class="btn lg solid icon" ng-click="leagueFormController.goToTab(2)">
+            <i class="fa fa-chevron-left">
 				</i>
-			<span>
+            <span>
 				Staff
 			</span>
-		</a>
-		<a class="btn lg solid icon icon-right pull-right" ng-click="leagueFormController.goToTab(4)">
-			<i class="fa fa-chevron-right">
+        </a>
+        <a class="btn lg solid icon icon-right pull-right" ng-click="leagueFormController.goToTab(4)">
+            <i class="fa fa-chevron-right">
 				</i>
-			<span>
+            <span>
 				Teams
 			</span>
-		</a>
-	</div>
+        </a>
+    </div>
 </div>
 <div class="section" ng-show="leagueFormController.tab == 4">
-	<team-select model="leagueFormController.data.teams" game="leagueFormController.data.game">
-	</team-select>
-	<div class="standard group">
-		<a class="btn lg solid icon" ng-click="leagueFormController.goToTab(3)">
-			<i class="fa fa-chevron-left">
+    <team-select model="leagueFormController.data.teams" game="leagueFormController.data.game">
+    </team-select>
+    <div class="standard group">
+        <a class="btn lg solid icon" ng-click="leagueFormController.goToTab(3)">
+            <i class="fa fa-chevron-left">
 				</i>
-			<span>
+            <span>
 				Media
 			</span>
-		</a>
-	</div>
+        </a>
+    </div>
 </div>
