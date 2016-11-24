@@ -131,9 +131,9 @@
                 <tr>
                     <th>Game</th>
                     <th class="right-align">Team 1</th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
+                    <th class="icon"></th>
+                    <th class="vs"></th>
+                    <th class="icon"></th>
                     <th class="left-align">Team 2</th>
                     <th ng-if="League.data.contents[League.sectionIndex].draftText && !League.data.game.simple_tables" ng-bind="League.data.contents[League.sectionIndex].draftText" colspan="2"></th>
                     <th ng-if="!League.data.contents[League.sectionIndex].draftText && !League.data.game.simple_tables" colspan="2">Picks & Bans</th>
@@ -149,7 +149,7 @@
                     <td ng-show="match.team1Sp && !match.team1H" ng-mouseenter="League.setHover(match, 1, true)" ng-mouseleave="League.setHover(match, 1, false)" class="right-align">{{match.team1SpText || "Team 1 "}}</td>
                     <td ng-show="match.team1Sp && !match.team1H" ng-if="Page.contentClass == 'dark'" ng-mouseenter="League.setHover(match, 1, true)" ng-mouseleave="League.setHover(match, 1, false)" class="table-links"><img src="/assets/images/icons/ev.png" /></td>
                     <td ng-show="match.team1Sp && !match.team1H" ng-if="Page.contentClass == 'light'" ng-mouseenter="League.setHover(match, 1, true)" ng-mouseleave="League.setHover(match, 1, false)" class="table-links"><img src="/assets/images/icons/ev_dark.png" /></td>
-                    <td>VS</td>
+                    <td class="vs">VS</td>
                     <td ng-show="match.team2Sp && !match.team2H" ng-if="Page.contentClass == 'dark'" class="table-links generic-icon" ng-mouseenter="League.setHover(match, 2, true)" ng-mouseleave="League.setHover(match, 2, false)"><img src="/assets/images/icons/ev.png" /></td>
                     <td ng-show="match.team2Sp && !match.team2H" ng-if="Page.contentClass == 'light'" class="table-links generic-icon" ng-mouseenter="League.setHover(match, 2, true)" ng-mouseleave="League.setHover(match, 2, false)"><img src="/assets/images/icons/ev_dark.png" /></td>
                     <td ng-show="match.team2Sp && !match.team2H " class="left-align " ng-mouseenter="League.setHover(match, 2, true) " ng-mouseleave="League.setHover(match, 2, false)">{{match.team2SpText || "Team 2 "}}</td>
