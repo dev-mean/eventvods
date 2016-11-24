@@ -28,7 +28,7 @@ function has(event, param) {
 function staff_list(staff) {
     return staff.map(function(staff) {
         var twitter = staff.media.filter(media => media.type == "Twitter").length > 0;
-        var disp = twitter ? "{forename} **[{alias}]({link})** {surname}" : "{forename} **{alias}** {surname}"
+        var disp = twitter ? "{forename} **\"[{alias}]({link})\"** {surname}" : "{forename} **\"{alias}\"** {surname}"
         return format(disp, {
             forename: staff.forename,
             alias: staff.alias,
@@ -112,19 +112,15 @@ function teamName(name, spoiler, text, invert) {
 
 function teamDisplay(match, invert) {
     var disp = invert ? "{icon} **{team}**" : "**{team}** {icon}";
-    if (match.placeholder) {
-        match.team1 = { name: "Placeholder" };
-        match.team2 = { name: "Placeholder" };
-        match.team1Sp = true;
-        match.team2Sp = true;
-    }
-    var name = invert ? match.team2.name : match.team1.name;
+    if (!def(match.team1)) match.team1 = { tag: "Team 1" };
+    if (!def(match.team2)) match.team2 = { tag: "Team 2" };
     var spoiler = invert ? match.team2Sp : match.team1Sp;
+    if (match.placeholder) spoiler = true;
     var text = invert ? match.team2SpText : match.team1SpText;
     var tag = invert ? match.team2.tag : match.team1.tag;
     if (!def(text)) text = invert ? "Team 2" : "Team 1";
     return format(disp, {
-        team: teamName(name, spoiler, text, invert),
+        team: teamName(tag, spoiler, text, invert),
         icon: spoiler ? "" : "[](#" + tag.toLowerCase() + ")"
     })
 }
