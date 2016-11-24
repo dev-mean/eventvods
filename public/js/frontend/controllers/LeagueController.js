@@ -6,6 +6,7 @@
                 var vm = this;
                 vm.abs = $location.absUrl();
                 vm.data;
+                vm.simple_tables = false;
                 vm.sectionIndex = parseInt($routeParams.s || 0);
                 vm.moduleIndex = parseInt($routeParams.m || 0);
                 vm.showDetails = false;
@@ -81,6 +82,9 @@
                 $http.get(API + '/leagues/slug/' + $routeParams.slug)
                     .then(function(res) {
                         vm.data = res.data;
+                        if (vm.data.game.slug === "csgo" || vm.data.game.slug === "overwatch") vm.simple_tables = true;
+                        console.log(vm.data);
+                        console.log(vm.simple_tables);
                         $rootScope.meta.title = vm.data.name + " - Eventvods - Esports on Demand";
                         $rootScope.meta.description = "Watch all " + vm.data.name + " vods and highlights on demand,  easily and spoiler-free. Rate, favorite and share matches of your favorite teams!";
                         $('.evSlider .image, .contents .details-toggle').addClass('loaded');
