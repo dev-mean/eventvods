@@ -14,7 +14,7 @@ var resetTokenSchema = new Schema({
     },
     expiry: {
         type: Date,
-        default: moment().subtract(1, 'd').toDate()
+        default: moment().add(1, 'd').toDate()
     },
     newPassword: String
 });
