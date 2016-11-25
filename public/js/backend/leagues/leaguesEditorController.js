@@ -81,7 +81,7 @@
             leaguesService.findById($routeParams.id)
                 .then(function(res) {
                     vm.data = res.data;
-                    document.title = res.data.title + " - Eventvods";
+                    document.title = res.data.name + " - Eventvods";
                 });
         });
 }());
