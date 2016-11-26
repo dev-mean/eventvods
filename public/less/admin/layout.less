@@ -1,0 +1,58 @@
+.relative {
+    position: relative;
+}
+
+.fixed {
+    position: fixed;
+}
+
+.fa-fix {
+    .relative;
+    top: 2px;
+}
+
+body {
+    padding-top: 70px;
+}
+#viewport {
+    width: 100%;
+    padding: 25px;
+}
+.container-fluid {
+    padding-left: 25px;
+    padding-right: 25px;
+}
+.center-full {
+    .fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.table-list {
+    tr, th,td {
+        height: 50px!important;
+        line-height: 50px!important;
+    }
+}
+.panel-title {
+    .gotham-med();
+}
+.panel-heading .btn {
+    position: absolute;
+    right: 5px;
+    top: 5px
+}
+.tight {
+    margin-bottom: 15px;
+    margin-left: 10px;
+    h2, h5 {
+        margin: 0 auto;
+    }
+    h2 {
+        padding-left: 10px;
+    }
+}

@@ -1,5 +1,8 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+var Event = require('./league');
+var Team = require('./team');
+
 var gameSchema = new Schema({
     name: {
         type: String,

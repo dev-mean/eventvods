@@ -1,0 +1,16 @@
+.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
+[ng-click] {
+    cursor: pointer;
+    &.success:hover {
+        color: green;
+    }
+    &.danger:hover {
+        color: darkred;
+    }
+}
+#loading-bar .bar {
+    background: @accent-green!important;
+}
+#loading-bar-spinner .spinner-icon {
+	display: none;
+}

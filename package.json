@@ -15,6 +15,7 @@
     "express-session": "*",
     "file-type": "*",
     "gm": "*",
+    "googleapis": "^14.2.0",
     "indicative": "*",
     "intimidate": "*",
     "keygenerator": "*",

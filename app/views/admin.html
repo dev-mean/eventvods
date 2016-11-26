@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Eventvods - Dashboard</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="/assets/css/admin.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.2/toastr.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/angular-loading-bar/0.9.0/loading-bar.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/ng-dialog/0.6.2/css/ngDialog.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.4.0/css/pikaday.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/angular-xeditable/0.2.0/css/xeditable.min.css" rel="stylesheet" />
+    <meta name="robots" content="noindex, nofollow">
+    <base href="/manage/" />
+</head>
+
+<body ng-app="eventApp" ng-controller="PageController as Page">
+    <nav class="navbar navbar-default navbar-fixed-top load-in" ng-class="{loaded: Page.loaded}">
+        <div class="container-fluid no-pad">
+            <div class="navbar-header">
+                <a href="../" class="navbar-brand"><img src='/assets/images/logo.png' /></a>
+            </div>
+            <ul class="nav navbar-nav navbar-left">
+                <li ng-class="{active: Page.current.match('/dashboard')}"><a href="/manage/">Dashboard</a></li>
+                <li ng-class="{active: Page.current.match('/featured')}"><a href="/manage/featured/">Featured Content</a></li>
+                <li ng-class="{active: Page.current.match('/games')}"><a href="/manage/games/">Games</a></li>
+                <li ng-class="{active: Page.current.match('/articles')}"><a href="/manage/articles/">Articles</a></li>
+                <li ng-class="{active: Page.current.match('/events')}"><a href="/manage/events/">Events</a></li>
+                <li ng-class="{active: Page.current.match('/staff')}"><a href="/manage/staff/">Staff</a></li>
+                <li ng-class="{active: Page.current.match('/teams')}"><a href="/manage/teams/">Teams</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown">
+                        Welcome back, {{Page.user.displayName}}
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="../user/settings">Settings</a></li>
+                        <li><a ng-click="Page.logout()">Log Out</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container-fluid load-in relative no-pad" ng-class="{loaded: Page.loaded}">
+        <div uib-alert ng-repeat="alert in Page.alerts" ng-class="'alert-' + (alert.type || 'info')" close="Page.closeAlert($index)">{{alert.msg}}</div>
+    </div>
+    <div class="container-fluid load-in relative" ng-class="{loaded: Page.loaded}">
+        <div id="viewport" ng-view>
+            <div class="center-full">
+                <i class="fa fa-spinner fa-5x fa-spin"></i>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular-route.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular-animate.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.2.0/ui-bootstrap-tpls.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-loading-bar/0.9.0/loading-bar.min.js">
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ng-dialog/0.6.2/js/ngDialog.min.js">
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.4.3/parsley.min.js">
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.14.1/moment.min.js">
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.4.0/pikaday.min.js">
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-xeditable/0.4.0/js/xeditable.min.js">
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-sortable-view/0.0.15/angular-sortable-view.min.js">
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ng-tags-input/3.1.1/ng-tags-input.min.js">
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-sanitize/1.5.8/angular-sanitize.min.js">
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js">
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-chart.js/1.0.3/angular-chart.min.js">
+</script>
+<script src="/assets/js/admin/app.js">
+</script>
+<script src="/assets/js/admin/common/notifier.js">
+</script>
+<script src="/assets/js/admin/common/PageController.js">
+</script>
+<script src="/assets/js/admin/overviewController.js">
+</script>
+<script src="/assets/js/admin/featuredController.js">
+</script>
+<script src="/assets/js/admin/games/gamesService.js">
+</script>
+<script src="/assets/js/admin/games/gamesListController.js">
+</script>
+<script src="/assets/js/admin/games/addGameController.js">
+</script>
+<script src="/assets/js/admin/games/editGameController.js">
+</script>
+<script src="/assets/js/admin/leagues/leaguesService.js">
+</script>
+<script src="/assets/js/admin/leagues/leaguesListController.js">
+</script>
+<script src="/assets/js/admin/leagues/addLeagueController.js">
+</script>
+<script src="/assets/js/admin/leagues/editLeagueController.js">
+</script>
+<script src="/assets/js/admin/tournaments/tournamentsService.js">
+</script>
+<script src="/assets/js/admin/tournaments/tournamentsListController.js">
+</script>
+<script src="/assets/js/admin/tournaments/addTournamentController.js">
+</script>
+<script src="/assets/js/admin/tournaments/editTournamentController.js">
+</script>
+<script src="/assets/js/admin/staff/staffService.js">
+</script>
+<script src="/assets/js/admin/staff/staffListController.js">
+</script>
+<script src="/assets/js/admin/staff/addStaffController.js">
+</script>
+<script src="/assets/js/admin/staff/editStaffController.js">
+</script>
+<script src="/assets/js/admin/articles/articlesService.js">
+</script>
+<script src="/assets/js/admin/articles/articlesListController.js">
+</script>
+<script src="/assets/js/admin/articles/addArticleController.js">
+</script>
+<script src="/assets/js/admin/articles/editArticleController.js">
+</script>
+<script src="/assets/js/admin/teams/teamsService.js">
+</script>
+<script src="/assets/js/admin/teams/teamsListController.js">
+</script>
+<script src="/assets/js/admin/teams/addTeamController.js">
+</script>
+<script src="/assets/js/admin/teams/editTeamController.js">
+</script>
+<script src="/assets/js/admin/users/usersService.js">
+</script>
+<script src="/assets/js/admin/users/usersListController.js">
+</script>
+<script src="/assets/js/admin/users/editUserController.js">
+</script>
+<script src="/assets/js/admin/leagues/leaguesEditorController.js">
+</script>
+<script src="/assets/js/admin/tournaments/tournamentsEditorController.js">
+</script>
+
+</html>

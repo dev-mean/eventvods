@@ -1,0 +1,105 @@
+<div class="contextHead">
+    <div class="leftSide">
+        <h1 class="title">
+            Teams
+        </h1>
+    </div>
+    <div class="rightSide">
+        <a href="/manage/teams/new" class="btn lg solid icon">
+            <i class="fa fa-trophy">
+            </i>
+            <span>
+                Add Team
+            </span>
+        </a>
+    </div>
+</div>
+<div class="filters">
+    <input type="text" ng-model="teamsListController.search" placeholder="Search Teams" tabindex="1"/>
+</div>
+<div class="listView events">
+    <table class="standard">
+        <thead>
+            <tr>
+                <th></th>
+                <th>
+                    <a href="" ng-click="teamsListController.setSort('tag')">
+                        Tag
+                    </a>
+                    <span ng-show="teamsListController.sort.sortField == 'tag' && !teamsListController.sort.sortReverse" class="caret-down">
+                    </span>
+                    <span ng-show="teamsListController.sort.sortField == 'tag' && teamsListController.sort.sortReverse" class="caret-up">
+                    </span>
+                    <span ng-show="teamsListController.sort.sortField != 'tag'" class="fa fa-unsorted">
+                    </span>
+                </th>
+                <th>
+                    <a href="" ng-click="teamsListController.setSort('name')">
+                        Name
+                    </a>
+                    <span ng-show="teamsListController.sort.sortField == 'name' && !teamsListController.sort.sortReverse" class="caret-down">
+                    </span>
+                    <span ng-show="teamsListController.sort.sortField == 'name' && teamsListController.sort.sortReverse" class="caret-up">
+                    </span>
+                    <span ng-show="teamsListController.sort.sortField != 'name'" class="fa fa-unsorted">
+                    </span>
+                </th>
+				 <th>
+                    <a href="" ng-click="teamsListController.setSort('slug')">
+                        URL Slug
+                    </a>
+                    <span ng-show="teamsListController.sort.sortField == 'slug' && !teamsListController.sort.sortReverse" class="caret-down">
+                    </span>
+                    <span ng-show="teamsListController.sort.sortField == 'slug' && teamsListController.sort.sortReverse" class="caret-up">
+                    </span>
+                    <span ng-show="teamsListController.sort.sortField != 'slug'" class="fa fa-unsorted">
+                    </span>
+                </th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="team in teamsListController.filterData = (teamsListController.teamsData | filter: teamsListController.search) | orderBy: teamsListController.sort.sortField:teamsListController.sort.sortReverse | offset: (teamsListController.paging.page - 1) * teamsListController.paging.itemsPerPage | limitTo: teamsListController.paging.itemsPerPage">
+                <td>
+                    <img ng-src="{{team.icon}}" class="icon-48" />
+                </td>
+                <td>
+                    {{team.tag}}
+                </td>
+                <td>
+                    {{team.name}}
+                </td>
+				<td>
+					/team/{{team.slug}}{{team.game ? "/"+team.game.slug : ""}}
+				</td>
+                <td class="edit">
+                    <a ng-href="/manage/teams/{{team._id}}/edit">
+                        <i class="fa fa-edit fa-fw">
+                        </i>
+                    </a>
+                </td>
+                <td class="delete">
+                    <a ng-click="teamsListController.delete(team._id)">
+                        <i class="fa fa-trash fa-fw">
+                        </i>
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<span class="empty" ng-show="teamsListController.loaded && (teamsListController.filterData.length == 0 || teamsListController.teamsData.length == 0)">
+    No teams match those criteria.
+</span>
+<div class="pagination" ng-show="teamsListController.filterData.length > 0">
+    <a ng-style="{visibility: teamsListController.paging.page >1 && 'visible' || 'hidden'}" ng-click="teamsListController.previousPage()" class="btn">
+        Prev Page
+    </a>
+    <p>
+        Page {{teamsListController.paging.page}} of {{teamsListController.paging.pages()}}
+    </p>
+    <a ng-style="{visibility: (teamsListController.paging.pages() >1 && teamsListController.paging.page < teamsListController.paging.pages()) && 'visible' || 'hidden'}" ng-click="teamsListController.nextPage()" class="btn">
+        Next Page
+    </a>
+</div>

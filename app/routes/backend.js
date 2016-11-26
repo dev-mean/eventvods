@@ -5,7 +5,8 @@ var User = require('../models/user');
 var path = require('path');
 
 router.get('/*', auth.writer(), function(req, res) {
-	res.sendFile(path.resolve(__dirname + '/../../app/views/backend.html'));
+    if (process.env.NODE_ENV === "development") res.sendFile(path.resolve(__dirname + '/../../app/views/admin.html'));
+    else res.sendFile(path.resolve(__dirname + '/../../app/views/backend.html'));
 });
 
 

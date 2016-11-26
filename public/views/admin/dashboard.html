@@ -1,0 +1,26 @@
+<div class="tight">
+    <h5 class="text-muted">Eventvods</h5>
+    <h2>Dashboard</h2>
+</div>
+<div class="row">
+    <div class="col-lg-6 col-md-6 col-sm-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h2 class="panel-title"><i class="fa fa-line-chart"></i>&nbsp;&nbsp;&nbsp; Weekly Viewers</h2>
+            </div>
+            <div class="panel-body">
+                <canvas id="line" class="chart chart-line" chart-data="Overview.data.days_7.data" chart-labels="Overview.data.days_7.labels" chart-series="Overview.data.days_7.series" chart-options="Overview.options" chart-colors="Overview.colors"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h2 class="panel-title"><i class="fa fa-line-chart"></i>&nbsp;&nbsp;&nbsp; Monthly Viewers</h2>
+            </div>
+            <div class="panel-body">
+                <canvas id="line" class="chart chart-line" chart-data="Overview.data.days_30.data" chart-labels="Overview.data.days_30.labels" chart-series="Overview.data.days_30.series" chart-options="Overview.options" chart-colors="Overview.colors"></canvas>
+            </div>
+        </div>
+    </div>
+</div>

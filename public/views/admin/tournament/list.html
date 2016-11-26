@@ -1,0 +1,130 @@
+<div class="contextHead">
+    <div class="leftSide">
+        <h1 class="title">
+            Tournaments
+        </h1>
+    </div>
+    <div class="rightSide">
+        <a href="/manage/tournaments/new" class="btn lg solid icon">
+            <i class="fa fa-line-chart">
+            </i>
+            <span>
+                Add Tournament
+            </span>
+        </a>
+    </div>
+</div>
+<div class="filters">
+    <input type="text" ng-model="tournamentsListController.search" placeholder="Search Tournaments" tabindex="1"/>
+</div>
+<div class="listView events">
+    <table class="standard">
+        <thead>
+            <tr>
+                <th>
+                    Tournament Logo
+                </th>
+                <th>
+                    <a ng-click="tournamentsListController.setSort('name')">
+                        Tournament Title
+                    </a>
+                    <span ng-show="tournamentsListController.sort.sortField == 'name' && !tournamentsListController.sort.sortReverse" class="caret-down">
+                    </span>
+                    <span ng-show="tournamentsListController.sort.sortField == 'name' && tournamentsListController.sort.sortReverse" class="caret-up">
+                    </span>
+                    <span ng-show="tournamentsListController.sort.sortField != 'name'" class="fa fa-unsorted">
+                    </span>
+                </th>
+				<th>
+					<a ng-click="tournamentsListController.setSort('shortTitle')">
+                        Short Title
+                    </a>
+                    <span ng-show="tournamentsListController.sort.sortField == 'shortTitle' && !tournamentsListController.sort.sortReverse" class="caret-down">
+                    </span>
+                    <span ng-show="tournamentsListController.sort.sortField == 'shortTitle' && tournamentsListController.sort.sortReverse" class="caret-up">
+                    </span>
+                    <span ng-show="tournamentsListController.sort.sortField != 'shortTitle'" class="fa fa-unsorted">
+                    </span>
+				</th>
+				<th>
+					<a ng-click="tournamentsListController.setSort('subtitle')">
+                        Subtitle
+                    </a>
+                    <span ng-show="tournamentsListController.sort.sortField == 'subtitle' && !tournamentsListController.sort.sortReverse" class="caret-down">
+                    </span>
+                    <span ng-show="tournamentsListController.sort.sortField == 'subtitle' && tournamentsListController.sort.sortReverse" class="caret-up">
+                    </span>
+                    <span ng-show="tournamentsListController.sort.sortField != 'subtitle'" class="fa fa-unsorted">
+                    </span>
+				</th>
+				<th>
+					<a ng-click="tournamentsListController.setSort('slug')">
+                        URL Slug
+                    </a>
+                    <span ng-show="tournamentsListController.sort.sortField == 'slug' && !tournamentsListController.sort.sortReverse" class="caret-down">
+                    </span>
+                    <span ng-show="tournamentsListController.sort.sortField == 'slug' && tournamentsListController.sort.sortReverse" class="caret-up">
+                    </span>
+                    <span ng-show="tournamentsListController.sort.sortField != 'slug'" class="fa fa-unsorted">
+                    </span>
+				</th>
+				<th></th>
+                <th>
+                </th>
+                <th>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="tournament in tournamentsListController.filterData = (tournamentsListController.tournamentData | filter: tournamentsListController.search) | orderBy: tournamentsListController.sort.sortField:tournamentsListController.sort.sortReverse | offset: (tournamentsListController.paging.page - 1) * tournamentsListController.paging.itemsPerPage | limitTo: tournamentsListController.paging.itemsPerPage">
+                <td>
+                    <img ng-src="{{tournament.logo}}" class="icon-48" />
+                </td>
+                <td>
+                    {{tournament.name}}
+                </td>
+				 <td>
+                    {{tournament.shortTitle}}
+                </td>
+				 <td>
+                    {{tournament.subtitle}}
+                </td>
+				<td>
+					/tournament/{{tournament.slug}}
+				</td>
+				<td class="update">
+					<a ng-href="/manage/tournament/{{tournament._id}}/update">
+                        <i class="fa fa-list fa-fw">
+                        </i>
+                    </a>
+				</td>
+                <td class="edit">
+                    <a ng-href="/manage/tournament/{{tournament._id}}/edit">
+                        <i class="fa fa-edit fa-fw">
+                        </i>
+                    </a>
+                </td>
+                <td class="delete">
+                    <a ng-click="tournamentsListController.delete(tournament._id)">
+                        <i class="fa fa-trash fa-fw">
+                        </i>
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<span class="empty" ng-show="tournamentsListController.loaded && (tournamentsListController.filterData.length == 0 || tournamentsListController.tournamentData == 0)">
+    No tournaments match those criteria.
+</span>
+<div class="pagination" ng-show="tournamentsListController.filterData.length > 0">
+    <a ng-style="{visibility: tournamentsListController.paging.page >1 && 'visible' || 'hidden'}" ng-click="tournamentsListController.previousPage()" class="btn">
+        Prev Page
+    </a>
+    <p>
+        Page {{tournamentsListController.paging.page}} of {{tournamentsListController.paging.pages()}}
+    </p>
+    <a ng-style="{visibility: (tournamentsListController.paging.pages() >1 && tournamentsListController.paging.page < tournamentsListController.paging.pages()) && 'visible' || 'hidden'}" ng-click="tournamentsListController.nextPage()" class="btn">
+        Next Page
+    </a>
+</div>

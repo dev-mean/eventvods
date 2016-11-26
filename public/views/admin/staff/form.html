@@ -1,0 +1,102 @@
+<div class="contextHead">
+	<div class="leftSide">
+		<h1 ng-bind="staffFormController.title">
+        </h1>
+	</div>
+	<div class="rightSide">
+		<a class="btn lg solid icon" ng-click="staffFormController.submit()">
+			<i class="fa fa-save">
+				</i>
+			<span>Save</span>
+		</a>
+	</div>
+</div>
+<div class="tabs">
+	<span ng-class="{selected: staffFormController.tab == 1}" ng-click="staffFormController.tab = 1">
+        1. Staff Details
+    </span>
+	<span ng-class="{selected: staffFormController.tab == 2}" ng-click="staffFormController.tab = 2">
+        2. Social Media
+    </span>
+</div>
+<form name="form" id="addStaffForm" ng-cloak>
+	<div class="errors" ng-show="staffFormController.errors.length > 0">
+		<ul>
+			<li ng-repeat="error in staffFormController.errors">{{error.message}}</li>
+		</ul>
+	</div>
+	<div class="section" ng-show="staffFormController.tab == 1">
+		<div class="standard group">
+			<label>
+                Forename
+            </label>
+			<input type="text" placeholder="e.g. Paul" ng-model="staffFormController.data.forename" data-parsley-trigger="keyup" required/>
+		</div>
+		<div class="standard group">
+			<label>
+                Alias
+            </label>
+			<input type="text" placeholder="e.g. ReDeYe" ng-model="staffFormController.data.alias" ng-change="staffFormController.suggestSlug()" data-parsley-trigger="keyup" required/>
+		</div>
+		<div class="standard group">
+			<label>
+                Surname
+            </label>
+			<input type="text" placeholder="e.g. Chaloner" ng-model="staffFormController.data.surname" data-parsley-trigger="keyup" required/>
+		</div>
+		<div class="standard group">
+			<label class="full">
+            	Displayed as <b>{{staffFormController.data.forename}} "{{staffFormController.data.alias}}" {{staffFormController.data.surname}}</b>
+            </label>
+		</div>
+		<div class="standard group">
+			<label>
+                URL Slug
+            </label>
+			<input id="slug" type="text" placeholder="e.g. ReDeYe" ng-model="staffFormController.data.slug" ng-change="staffFormController.slug_changed = true;" data-parsley-trigger="keyup" data-parsley-remote-message="Slug already in use." required/>
+		</div>
+		<div class="standard group">
+			<label class="full">
+            	Staff will be accessible at eventvods.com/staff/{{staffFormController.data.slug}}
+            </label>
+		</div>
+		<div class="standard group">
+			<label>
+                Default Role
+            </label>
+			<ng-typeahead data-id="staffRole" placeholder="e.g. Caster" ng-model="staffFormController.data.role" data="staffFormController.staffRoles" container="#staffRoleError" required/>
+			<div id="staffRoleError" class="typeahead-error">
+			</div>
+		</div>
+		<div class="standard group">
+			<label>
+                Photo (optional)
+            </label>
+			<image-drop model="staffFormController.data.photo" preview-width="64" preview-height="64" />
+		</div>
+		<br />
+		<div class="standard group">
+			<a class="btn lg solid icon icon-right pull-right" ng-click="staffFormController.tab = 2">
+				<i class="fa fa-chevron-right">
+                </i>
+				<span>
+					Social Media
+                </span>
+			</a>
+		</div>
+	</div>
+</form>
+<div class="section" ng-show="staffFormController.tab == 2">
+	<media-list model="staffFormController.data.media">
+	</media-list>
+	<div class="standard group">
+		<a class="btn lg solid icon" ng-click="staffFormController.tab = 1">
+			<i class="fa fa-chevron-left">
+				</i>
+			<span>
+				Staff Details
+			</span>
+		</a>
+
+	</div>
+</div>
