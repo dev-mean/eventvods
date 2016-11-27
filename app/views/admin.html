@@ -35,11 +35,21 @@
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown">
+                        Theme
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Original</a></li>
+                        <li><a href="#">Clam</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown">
                         Welcome back, {{Page.user.displayName}}
                         <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a href="../user/settings">Settings</a></li>
+                        <li><a href="../user/settings">My Settings</a></li>
                         <li><a ng-click="Page.logout()">Log Out</a></li>
                     </ul>
                 </li>

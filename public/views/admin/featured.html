@@ -1,45 +1,80 @@
-<uib-tabset active="Featured.tab" justified="true">
-    <uib-tab index="0" heading="Featured Games">
-        <ul class="list-group relative" sv-root sv-part="Featured.data.games">
-            <li class="list-group-item first">
-                <div class="input-group">
-                    <select ng-options="game.name for game in Featured.games" ng-model="Featured.selectedGame" class="form-control"></select>
-                    <div class="input-group-addon" ng-click="Featured.addGame()">Add Game</div>
-                </div>
-            </li>
-            <li ng-repeat="game in Featured.data.games track by $index" class="list-group-item relative" sv-element="{'containment': '.list-group'}">
-                <i sv-handle class="fa fa-lg fa-fw fa-sort"></i> {{game.name}}
-                <span ng-click="Featured.deleteGame($index)" class="pull-right fa-fix fa fa-lg fa-times danger"> </span>
-            </li>
-        </ul>
-    </uib-tab>
-    <uib-tab index="1" heading="Featured Events">
-        <ul class="list-group relative" sv-root sv-part="Featured.data.events">
-            <li class="list-group-item first">
-                <div class="input-group">
-                    <select ng-options="event.name for event in Featured.events" ng-model="Featured.selectedEvent" class="form-control"></select>
-                    <div class="input-group-addon" ng-click="Featured.addEvent()">Add Event</div>
-                </div>
-            </li>
-            <li ng-repeat="event in Featured.data.events track by $index" class="list-group-item relative" sv-element="{'containment': '.list-group'}">
-                <i sv-handle class="fa fa-lg fa-fw fa-sort"></i> {{event.name}}
-                <span ng-click="Featured.deleteEvent($index)" class="pull-right fa-fix fa fa-lg fa-times danger"> </span>
-            </li>
-        </ul>
-    </uib-tab>
-    <uib-tab index="2" heading="Featured Articles">
-        <ul class="list-group relative" sv-root sv-part="Featured.data.articles">
-            <li class="list-group-item first">
-                <div class="input-group">
-                    <select ng-options="article.title for article in Featured.articles" ng-model="Featured.selectedArticle" class="form-control"></select>
-                    <div class="input-group-addon" ng-click="Featured.addArticle()">Add Article</div>
-                </div>
-            </li>
-            <li ng-repeat="article in Featured.data.articles track by $index" class="list-group-item relative" sv-element="{'containment': '.list-group'}">
-                <i sv-handle class="fa fa-lg fa-fw fa-sort"></i> {{article.title}}
-                <span ng-click="Featured.deleteArticle($index)" class="pull-right fa-fix fa fa-lg fa-times danger"> </span>
-            </li>
-        </ul>
-    </uib-tab>
-</uib-tabset>
-<button ng-click="Featured.save()" type="button" class="btn btn-success"><i class="fa fa-lg fa-fw fa-save"></i>Save</button>
+<div class="row">
+    <div class="col-sm-10">
+        <div class="tight">
+            <h5 class="text-muted">
+                <a href="/manage/">Eventvods</a>
+                <i class="fa fa-fw fa-fix fa-level-down"></i>
+            </h5>
+            <h2>Featured Content</h2>
+        </div>
+    </div>
+    <div class="col-sm-2">
+        <button class="btn btn-success pull-right" ng-click="Featured.save()">Save</button>
+    </div>
+</div>
+<br />
+<div class="row">
+    <div class="col-xs-12 col-sm-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h2 class="panel-title"><i class="fa fa-gamepad"></i>&nbsp;&nbsp;&nbsp; Games</h2>
+            </div>
+            <ul class="list-group relative" sv-root sv-part="Featured.data.games">
+                <li class="list-group-item first">
+                    <div class="input-group">
+                        <select ng-options="game.name for game in Featured.games" ng-model="Featured.selectedGame" class="form-control"></select>
+                        <div class="input-group-btn">
+                            <a ng-click="Featured.addGame()" class="btn btn-default">Add Game</a>
+                        </div>
+                    </div>
+                </li>
+                <li ng-repeat="game in Featured.data.games track by $index" class="list-group-item relative" sv-element="{'containment': '.list-group'}">
+                    <i sv-handle class="fa fa-lg fa-fw fa-sort"></i> {{game.name}}
+                    <span ng-click="Featured.deleteGame($index)" class="pull-right fa-fix fa fa-lg fa-times danger"> </span>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-xs-12 col-sm-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h2 class="panel-title"><i class="fa fa-calendar"></i>&nbsp;&nbsp;&nbsp; Events</h2>
+            </div>
+            <ul class="list-group relative" sv-root sv-part="Featured.data.events">
+                <li class="list-group-item first">
+                    <div class="input-group">
+                        <select ng-options="event.name for event in Featured.events" ng-model="Featured.selectedEvent" class="form-control"></select>
+                        <div class="input-group-btn">
+                            <a ng-click="Featured.addEvent()" class="btn btn-default">Add Event</a>
+                        </div>
+                    </div>
+                </li>
+                <li ng-repeat="event in Featured.data.events track by $index" class="list-group-item relative" sv-element="{'containment': '.list-group'}">
+                    <i sv-handle class="fa fa-lg fa-fw fa-sort"></i> {{event.name}}
+                    <span ng-click="Featured.deleteEvent($index)" class="pull-right fa-fix fa fa-lg fa-times danger"> </span>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-xs-12 col-sm-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h2 class="panel-title"><i class="fa fa-pencil"></i>&nbsp;&nbsp;&nbsp; Articles</h2>
+            </div>
+            <ul class="list-group relative" sv-root sv-part="Featured.data.articles">
+                <li class="list-group-item first">
+                    <div class="input-group">
+                        <select ng-options="article.title for article in Featured.articles" ng-model="Featured.selectedArticle" class="form-control"></select>
+                        <div class="input-group-btn">
+                            <a ng-click="Featured.addArticle()" class="btn btn-default">Add Article</a>
+                        </div>
+                    </div>
+                </li>
+                <li ng-repeat="article in Featured.data.articles track by $index" class="list-group-item relative" sv-element="{'containment': '.list-group'}">
+                    <i sv-handle class="fa fa-lg fa-fw fa-sort"></i> {{article.title}}
+                    <span ng-click="Featured.deleteArticle($index)" class="pull-right fa-fix fa fa-lg fa-times danger"> </span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

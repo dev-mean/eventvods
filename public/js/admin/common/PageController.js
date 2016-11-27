@@ -25,6 +25,7 @@
                 vm.alerts.push(alert);
             });
             $rootScope.$on('$routeChangeSuccess', function(evt, current, pre) {
+                vm.alerts = [];
                 if (current.$$route.originalPath !== "undefined") vm.current = current.$$route.originalPath;
                 if (vm.current === "/") vm.current = "/dashboard";
             });

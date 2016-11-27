@@ -16,11 +16,11 @@ body {
 }
 #viewport {
     width: 100%;
-    padding: 25px;
+    padding: 20px 50px;
 }
 .container-fluid {
-    padding-left: 25px;
-    padding-right: 25px;
+    padding-left: 40px;
+    padding-right: 40px;
 }
 .center-full {
     .fixed;
@@ -41,18 +41,23 @@ body {
 .panel-title {
     .gotham-med();
 }
-.panel-heading .btn {
-    position: absolute;
-    right: 5px;
-    top: 5px
-}
 .tight {
-    margin-bottom: 15px;
-    margin-left: 10px;
+    .text-muted {
+        color: #999!important;
+        > a {
+            color: #999!important;
+        }
+    }
     h2, h5 {
         margin: 0 auto;
     }
     h2 {
         padding-left: 10px;
     }
+}
+hr {
+    margin: 20px 0;
+}
+.chart-title {
+    padding-left: 10px;
 }

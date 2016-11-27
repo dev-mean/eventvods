@@ -5,6 +5,10 @@ var key = require('../../../gapi.json');
 var analytics = google.analytics('v3');
 var async = require('async');
 var moment = require('moment');
+var Article = require('../../models/article');
+var Event = require('../../models/league');
+var User = require('../../models/user');
+
 var jwtClient = new google.auth.JWT(
     key.client_email,
     null,
@@ -66,11 +70,64 @@ router.get('/', auth.writer(), (req, res, next) => {
                         if (err) callback(err);
                         else callback(null, transformDateData(data, 30));
                     });
-            }
+            },
+            active: (callback) => {
+                analytics.data.realtime.get({
+                        "ids": "ga:102429433",
+                        "metrics": "rt:activeUsers",
+                        auth: jwtClient
+                    },
+                    (err, data) => {
+                        if (err) callback(err);
+                        else callback(null, data.totalsForAllResults["rt:activeUsers"]);
+                    });
+            },
+            articles: (callback) => {
+                Article.count((err, count) => {
+                    if (err) callback(err);
+                    else callback(null, count);
+                });
+            },
+            ongoing: (callback) => {
+                var today = moment().format();
+                Event.find({
+                        "startDate": {
+                            $lte: today
+                        },
+                        "endDate": {
+                            $gte: today
+                        }
+                    })
+                    .count()
+                    .exec((err, count) => {
+                        if (err) callback(err);
+                        else callback(null, count);
+                    });
+            },
+            users: (callback) => {
+                User.count((err, count) => {
+                    if (err) callback(err);
+                    else callback(null, count);
+                });
+            },
         }, (err, results) => {
             if (err) next(err);
             else res.json(results);
         });
+    })
+});
+
+router.get('/active', auth.writer(), (req, res, next) => {
+    jwtClient.authorize((err, tokens) => {
+        analytics.data.realtime.get({
+                "ids": "ga:102429433",
+                "metrics": "rt:activeUsers",
+                auth: jwtClient
+            },
+            (err, data) => {
+                if (err) next(err);
+                else res.send(data.totalsForAllResults["rt:activeUsers"]);
+            });
     })
 });
 

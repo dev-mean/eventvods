@@ -1,12 +1,62 @@
-<div class="tight">
-    <h5 class="text-muted">Eventvods</h5>
-    <h2>Dashboard</h2>
+<div class="row">
+    <div class="col-sm-4">
+        <div class="tight">
+            <h5 class="text-muted">
+                <a href="/manage/">Eventvods</a>
+                <i class="fa fa-fw fa-fix fa-level-down"></i>
+            </h5>
+            <h2>Dashboard</h2>
+        </div>
+    </div>
+    <div class="col-sm-2">
+        <div class="input-group">
+            <input type="text" class="form-control text-center" ng-model="Overview.data.active" readonly />
+            <span class="input-group-addon">Online</span>
+        </div>
+    </div>
+    <div class="col-sm-2">
+        <div class="input-group">
+            <input type="text" class="form-control text-center" ng-model="Overview.data.ongoing" readonly />
+            <span class="input-group-addon">Ongoing Events</span>
+        </div>
+    </div>
+    <div class="col-sm-2">
+        <div class="input-group">
+            <input type="text" class="form-control text-center" ng-model="Overview.data.users" readonly />
+            <span class="input-group-addon">Users</span>
+        </div>
+    </div>
+    <div class="col-sm-2">
+        <div class="input-group">
+            <input type="text" class="form-control text-center" ng-model="Overview.data.articles" readonly />
+            <span class="input-group-addon">Articles</span>
+        </div>
+    </div>
+</div>
+<hr />
+<div class="row">
+    <div class="col-lg-3 col-md-6 col-sm-12">
+        <h4 class="chart-title text-muted">User Registrations</h4>
+        <canvas id="line" class="chart chart-line" chart-data="Overview.data.days_7.data" chart-labels="Overview.data.days_7.labels" chart-series="Overview.data.days_7.series" chart-options="Overview.minimal" chart-colors="Overview.colors"></canvas>
+    </div>
+    <div class="col-lg-3 col-md-6 col-sm-12">
+        <h4 class="chart-title text-muted">Blah</h4>
+        <canvas id="line" class="chart chart-line" chart-data="Overview.data.days_7.data" chart-labels="Overview.data.days_7.labels" chart-series="Overview.data.days_7.series" chart-options="Overview.minimal" chart-colors="Overview.colors"></canvas>
+    </div>
+    <div class="col-lg-3 col-md-6 col-sm-12">
+        <h4 class="chart-title text-muted">More Stats</h4>
+        <canvas id="line" class="chart chart-line" chart-data="Overview.data.days_30.data" chart-labels="Overview.data.days_30.labels" chart-series="Overview.data.days_30.series" chart-options="Overview.minimal" chart-colors="Overview.colors"></canvas>
+    </div>
+    <div class="col-lg-3 col-md-6 col-sm-12">
+        <h4 class="chart-title text-muted">.....braiiinzzz</h4>
+        <canvas id="line" class="chart chart-line" chart-data="Overview.data.days_30.data" chart-labels="Overview.data.days_30.labels" chart-series="Overview.data.days_30.series" chart-options="Overview.minimal" chart-colors="Overview.colors"></canvas>
+    </div>
 </div>
 <div class="row">
     <div class="col-lg-6 col-md-6 col-sm-12">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h2 class="panel-title"><i class="fa fa-line-chart"></i>&nbsp;&nbsp;&nbsp; Weekly Viewers</h2>
+                <h2 class="panel-title"><i class="fa fa-line-chart"></i>&nbsp;&nbsp;&nbsp; Past Week</h2>
             </div>
             <div class="panel-body">
                 <canvas id="line" class="chart chart-line" chart-data="Overview.data.days_7.data" chart-labels="Overview.data.days_7.labels" chart-series="Overview.data.days_7.series" chart-options="Overview.options" chart-colors="Overview.colors"></canvas>
@@ -16,7 +66,7 @@
     <div class="col-lg-6 col-md-6 col-sm-12">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h2 class="panel-title"><i class="fa fa-line-chart"></i>&nbsp;&nbsp;&nbsp; Monthly Viewers</h2>
+                <h2 class="panel-title"><i class="fa fa-line-chart"></i>&nbsp;&nbsp;&nbsp; Past Month</h2>
             </div>
             <div class="panel-body">
                 <canvas id="line" class="chart chart-line" chart-data="Overview.data.days_30.data" chart-labels="Overview.data.days_30.labels" chart-series="Overview.data.days_30.series" chart-options="Overview.options" chart-colors="Overview.colors"></canvas>
