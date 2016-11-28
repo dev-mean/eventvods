@@ -129,26 +129,27 @@
         <table class="container striped bordered responsive centered">
             <thead>
                 <tr>
-                    <th>Game</th>
+                    <th class="fixed">Game</th>
                     <th class="right-align">Team 1</th>
                     <th class="icon"></th>
                     <th class="icon"></th>
                     <th class="icon"></th>
                     <th class="left-align">Team 2</th>
-                    <th ng-if="League.data.contents[League.sectionIndex].draftText && !League.data.game.simple_tables" ng-bind="League.data.contents[League.sectionIndex].draftText" colspan="2"></th>
-                    <th ng-if="!League.data.contents[League.sectionIndex].draftText && !League.data.game.simple_tables" colspan="2">Picks & Bans</th>
-                    <th colspan="2">Game Start</th>
-                    <th>Extras</th>
+                    <th class="double" ng-if="League.data.contents[League.sectionIndex].draftText && !League.data.game.simple_tables" ng-bind="League.data.contents[League.sectionIndex].draftText" colspan="2"></th>
+                    <th class="double" ng-if="!League.data.contents[League.sectionIndex].draftText && !League.data.game.simple_tables" colspan="2">Picks & Bans</th>
+                    <th class="filler"></th>
+                    <th class="double" colspan="2">Game Start</th>
+                    <th class="fixed">Extras</th>
                 </tr>
             </thead>
             <tbody>
                 <tr ng-repeat-start="match in module.matches track by $index" ng-if="match.title">
-                    <td ng-if="League.data.game.simple_tables" colspan="9">
-                        <h4 ng-bind="match.title"></h4>
+                    <td ng-if="League.data.game.simple_tables" colspan="10">
+                        <h5 ng-bind="match.title"></h5>
                         <span ng-bind="League.description(match.title)"></span>
                         </td>
-                   <td ng-if="!League.data.game.simple_tables" colspan="11">
-                       <h4 ng-bind="match.title"></h4>
+                   <td ng-if="!League.data.game.simple_tables" colspan="12">
+                       <h5 ng-bind="match.title"></h5>
                        <span ng-bind="League.description(match.title)"></span>
                     </td>
                 </tr>
@@ -181,6 +182,7 @@
                         </a>
                         <i ng-if="!(module.twitch && match.twitch.picksBans) ">-</i>
                     </td>
+                    <td></td>
                     <td class="table-links ">
                         <a ng-if="module.youtube && match.youtube.gameStart " ng-href="{{League.parseLink(match, match.youtube.gameStart)}} " ng-click="!Page.inlineYoutube ? return : Player.playYoutube(match.youtube.gameStart, match, $event, League.data.contents[League.sectionIndex].title,
                         module.title) ">
