@@ -128,18 +128,19 @@ function teamDisplay(match, invert) {
     })
 }
 
-function link(text, link) {
+function link(text, link, placeholder, slug) {
+    console.log(placeholder);
     var disp = (def(link) && link != "") ? "[{text}]({link})|" : "{text}|";
     return format(disp, {
         text: text,
-        link: link
+        link: placeholder ? "http://"+slug+".eventvods.com" : link
     });
 }
 
-function formatExtras(columns, links) {
+function formatExtras(columns, links, placeholder, slug) {
     var i = 0;
     return columns.map((extra) => {
-        return link(extra.replace(/\b\w/g, l => l.toUpperCase()), links[i++])
+        return link(extra.replace(/\b\w/g, l => l.toUpperCase()), links[i++], placeholder, slug)
     }).join("");
 }
 
@@ -166,9 +167,9 @@ function simple_table(event, section, module, sectionIndex, moduleIndex) {
             id: getId(event, sectionIndex, moduleIndex, matchIndex++),
             team1: teamDisplay(match, false),
             team2: teamDisplay(match, true),
-            twitch: module.twitch ? link("Twitch", match.twitch.gameStart) : "",
-            youtube: module.youtube ? link("YouTube", match.youtube.gameStart) : "",
-            extras: formatExtras(module.columns, match.links)
+            twitch: module.twitch ? link("Twitch", match.twitch.gameStart, match.placeholder, event.game.slug) : "",
+            youtube: module.youtube ? link("YouTube", match.youtube.gameStart, match.placeholder, event.game.slug) : "",
+            extras: formatExtras(module.columns, match.links, match.placeholder, event.game.slug)
         }) + EOL;
     })
     str += NL;
@@ -202,9 +203,9 @@ function table(event, section, module, sectionIndex, moduleIndex) {
             module: module.title,
             team1: teamDisplay(match, false),
             team2: teamDisplay(match, true),
-            twitch: module.twitch ? link(pbText, match.twitch.picksBans) : "",
-            youtube: module.youtube ? link(pbText, match.youtube.picksBans) + link("Game Start", match.youtube.gameStart) : "",
-            extras: formatExtras(module.columns, match.links)
+            twitch: module.twitch ? link(pbText, match.twitch.picksBans, match.placeholder, event.game.slug) : "",
+            youtube: module.youtube ? link(pbText, match.youtube.picksBans, match.placeholder, event.game.slug) + link("Game Start", match.youtube.gameStart, match.placeholder, event.game.slug) : "",
+            extras: formatExtras(module.columns, match.links, match.placeholder, event.game.slug)
         }) + EOL;
     })
     str += NL;
