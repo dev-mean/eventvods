@@ -213,7 +213,7 @@
     <div ng-repeat="module in League.data.contents[League.sectionIndex].modules track by $index " ng-if="League.moduleIndex== $index && !Page.compact ">
         <div ng-repeat="match in module.matches track by $index ">
             <h3 class="container " ng-if="match.title " ng-bind="match.title "></h3>
-            <span class="container extra-info " ng-if="match.title" ng-bind="match.description(match.title)"></span>
+            <span class="container extra-info down-10" ng-if="match.title" ng-bind="League.description(match.title)"></span>
             <div no-ng-animate class="element-container container z-depth-3 ">
                 <div class="element-border " fix-clip>
                     <div class="element-background event-background " fix-clip>
