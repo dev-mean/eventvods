@@ -65,7 +65,6 @@
                     return false;
                 }
                 vm.setHover = function(match, index, isHovered) {
-                    if (match.placeholder) return;
                     if (index == 1)
                         match.team1H = isHovered;
                     else
