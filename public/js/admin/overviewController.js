@@ -7,7 +7,7 @@
             $http.get(API_BASE_URL + '/overview')
                 .then(function(response) {
                     vm.data = response.data;
-                    vm.colors = ['#1A192B', '#0CD97E']
+                    vm.colors = ['#0CD97E', '#3C3C62']
                     vm.options = {
                         legend: {
                             display: true,

@@ -1,8 +1,9 @@
 (function() {
     'use strict';
     angular.module('eventApp')
-        .controller('PageController', function($http, $timeout, API_BASE_URL, $window, $rootScope) {
+        .controller('PageController', function($http, $timeout, API_BASE_URL, $window, $rootScope, $cookies) {
             var vm = this;
+            vm.theme = $cookies.get('theme') || null;
             vm.current = '/';
             vm.alerts = [];
             $http.get(API_BASE_URL + "/auth/session")
