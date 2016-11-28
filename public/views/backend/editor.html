@@ -74,7 +74,7 @@
 		<div class="element-container" ng-repeat="match in module.matches track by $index" sv-element>
 			<div class="element-border">
 				<div class="element-background event-background">
-					<span class="element-extraTitle" editable-text="match.title">{{match.title || "Add Title"}}</span>
+					<span class="element-extraTitle" editable-select="match.title" e-ng-options="s for s in editorController.titles">{{match.title || "Add Title"}}</span>
 					<span class="element-tag"><i sv-handle class="fa fa-sort fa-fw"></i><span ng-bind="editorController.getIdentifier($parent.$parent.$parent.$index, $parent.$parent.$index) + ($index+1)"></span></span>
 					<div class="element-teams">
 						<div ng-show="!(match.team1 === undefined || match.team1 === null)" class="element-team">

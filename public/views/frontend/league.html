@@ -142,7 +142,17 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="match in module.matches track by $index">
+                <tr ng-repeat-start="match in module.matches track by $index" ng-if="match.title">
+                    <td ng-if="League.data.game.simple_tables" colspan="9">
+                        <h4 ng-bind="match.title"></h4>
+                        <span ng-bind="League.description(match.title)"></span>
+                        </td>
+                   <td ng-if="!League.data.game.simple_tables" colspan="11">
+                       <h4 ng-bind="match.title"></h4>
+                       <span ng-bind="League.description(match.title)"></span>
+                    </td>
+                </tr>
+                <tr ng-repeat-end>
                     <td ng-bind="League.getIdentifier($index)"></td>
                     <td ng-show="!match.team1Sp || match.team1H" ng-bind="match.team1.name" ng-mouseenter="League.setHover(match, 1, true)" ng-mouseleave="League.setHover(match, 1, false)" class="right-align"></td>
                     <td ng-show="!match.team1Sp || match.team1H" ng-mouseenter="League.setHover(match, 1, true)" ng-mouseleave="League.setHover(match, 1, false)" class="table-links"><img ng-src="{{match.team1.icon}}" /></td>
@@ -203,7 +213,7 @@
     <div ng-repeat="module in League.data.contents[League.sectionIndex].modules track by $index " ng-if="League.moduleIndex== $index && !Page.compact ">
         <div ng-repeat="match in module.matches track by $index ">
             <h3 class="container " ng-if="match.title " ng-bind="match.title "></h3>
-            <span class="container extra-info " ng-if="match.title "><i class="material-icons ">&#xE88F;</i> We always include placeholder tiebreaker games where they might happen, so you don't get spoiled.</span>
+            <span class="container extra-info " ng-if="match.title" ng-bind="match.description(match.title)"></span>
             <div no-ng-animate class="element-container container z-depth-3 ">
                 <div class="element-border " fix-clip>
                     <div class="element-background event-background " fix-clip>

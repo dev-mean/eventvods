@@ -71,7 +71,12 @@
                     else
                         match.team2H = isHovered;
                 }
-
+                vm.description = function(title){
+                    var titles = {
+                        "Tiebreakers": "We always include placeholder tiebreaker games where they might happen, so you don't get spoiled."
+                    }
+                    return titles[title];
+                }
                 function timeToSeconds(time) {
                     time = /((\d+)h)?((\d+)m)?((\d+)s)?/i.exec(time);
                     for (var i = 0; i < time.length; i++) {

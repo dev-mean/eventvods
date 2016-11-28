@@ -27,7 +27,7 @@ var matchSchema = {
 		type: Boolean,
 		default: false
 	}
-}
+};
 var moduleSchema = new Schema({
 	title: {
 		type: String,
