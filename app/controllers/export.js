@@ -116,7 +116,6 @@ function teamName(name, spoiler, text, invert) {
 function teamDisplay(match, invert) {
     var disp = invert ? "{icon} **{team}**" : "**{team}** {icon}";
     var spoiler = invert ? match.team2Sp : match.team1Sp;
-    if (match.placeholder) spoiler = true;
     var text = invert ? match.team2SpText : match.team1SpText;
     var empty = invert ? !def(match.team2) : !def(match.team1);
     if (!def(match.team1) && !invert) match.team1 = { tag: "Team 1" };
