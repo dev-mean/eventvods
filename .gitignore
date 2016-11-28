@@ -29,3 +29,4 @@ tmp/
 ssl.key
 ssl.cert
 dhparams.pem
+gapi.json
