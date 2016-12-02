@@ -16,10 +16,7 @@ var leagueSchema = new Schema({
     textOrientation: String,
     patch: String,
     prize: String,
-    format: {
-        type: String,
-        required: true
-    },
+    format: String,
     game: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Game',
@@ -36,28 +33,22 @@ var leagueSchema = new Schema({
     media: [Media],
     youtubeStream: String,
     twitchStream: String,
-    teams: [Team],
+    //teams: [Team],
+    teams: {
+        type: [mongoose.Schema.Types.ObjectId],
+        ref: 'Teams'
+    },
+    teams_new: {
+        type: [mongoose.Schema.Types.ObjectId],
+        ref: 'Teams'
+    },
     logo: String,
     header: String,
     header_blur: String,
     contents: [Section],
     credits: String
-}, {
-    timestamps: true,
-    id: false,
-    toJSON: {
-        virtuals: true,
-    },
-    toObject: {
-        virtual: true,
-    }
 });
 
-leagueSchema.virtual('updated').get(function() {
-    if (typeof this.updatedAt === undefined && typeof this.createdAt === undefined) return "";
-    var updated = (typeof this.updatedAt === undefined) ? this.createdAt : this.updatedAt;
-    return "Updated " + moment(updated).fromNow();
-});
 
 var League = mongoose.model('League', leagueSchema);
 

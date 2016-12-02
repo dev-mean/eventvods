@@ -5,7 +5,6 @@ var League = require('../../models/league');
 var Staff = require('../../models/staff');
 var Team = require('../../models/team');
 var Article = require('../../models/article');
-var Tournament = require('../../models/tournament');
 
 router.get('/gameSlug/:slug', function(req, res, next) {
     Game.find({
@@ -116,28 +115,6 @@ router.get('/articleSlug/:slug/:id', function(req, res, next) {
         else return res.sendStatus('409');
     });
 });
-router.get('/tournamentSlug/:slug', function(req, res, next) {
-    Tournament.find({
-            slug: req.params.slug
-        })
-        .count()
-        .exec(function(err, count) {
-            if (err) next(err);
-            if (count > 0) return res.sendStatus('409');
-            else return res.sendStatus('200');
-        });
-});
-router.get('/tournamentSlug/:slug/:id', function(req, res, next) {
-    Tournament.findOne({
-        slug: req.params.slug
-    }, function(err, doc) {
-        if (err) next(err);
-        if (!doc) return res.sendStatus('200');
-        else if (doc._id == req.params.id) return res.sendStatus('200');
-        else return res.sendStatus('409');
-    });
-});
-
 
 router.get('/displayName/:name', function(req, res, next){
 	if(req.params.name == req.user.displayName) res.sendStatus('204');

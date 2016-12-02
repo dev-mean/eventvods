@@ -15,6 +15,11 @@ router.route('/')
         League.find()
             .select('_id game name subtitle slug')
             .populate('game', 'slug icon -_id')
+            .populate({
+				path: 'teams',
+				model: 'Teams',
+                select: 'name tag _id slug icon'
+			})
             .exec(function(err, leagues) {
                 if (err) next(err);
                 else res.json(leagues);
@@ -51,6 +56,12 @@ router.get('/game/:slug', auth.public_api(), ratelimit, cache, function(req, res
         League.find({
                 game: game._id
             })
+            .populate('game staff')
+            .populate({
+                path: 'teams',
+                model: 'Teams',
+                select: 'name tag _id slug icon'
+            })
             .exec(function(err, leagues) {
                 if (err) next(err);
                 res.json(leagues);
@@ -63,6 +74,11 @@ router.get('/slug/:slug', auth.public_api(), ratelimit, cache, function(req, res
         })
         .select('-__v -textOrientation')
         .populate('game staff')
+        .populate({
+            path: 'teams',
+            model: 'Teams',
+                select: 'name tag _id slug icon'
+        })
         .exec(function(err, leagues) {
             if (err) next(err);
             else res.json(leagues);
@@ -71,6 +87,11 @@ router.get('/slug/:slug', auth.public_api(), ratelimit, cache, function(req, res
 router.get('/export/:league_id', auth.updater(), function(req, res, next) {
     League.findById(req.params.league_id)
         .populate('game staff')
+        .populate({
+            path: 'teams',
+            model: 'Teams',
+                select: 'name tag _id slug icon'
+        })
         .exec(function(err, league) {
             if (err) next(err);
             if (!league) {
@@ -84,7 +105,12 @@ router.get('/export/:league_id', auth.updater(), function(req, res, next) {
 router.route('/:league_id')
     .get(auth.public_api(), ratelimit, cache, function(req, res, next) {
         League.findById(req.params.league_id)
-            .populate('game staff')
+            .populate('game staff contents.modules.matches.team1 contents.modules.matches.team2')
+            .populate({
+                path: 'teams',
+                model: 'Teams',
+                select: 'name tag _id slug icon'
+            })
             .exec(function(err, league) {
                 if (err) next(err);
                 if (!league) {
