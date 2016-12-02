@@ -7,8 +7,8 @@
 			vm.manage = true;
 			vm.sectionIndex = 0;
 			vm.moduleIndex = 0;
-			vm.titles = ['', 'Tiebreakers', 'Quarterfinals', 'Semifinals', 'Winners\' Finals', 'Losers\' Round 1', 'Losers\' Round 2', 'Losers\' Round 3',
-             'Losers\' Finals', 'Grand Finals', 'Decider Match', 'Elimination Match', 'Opening Match'];
+			vm.titles = ['', 'Tiebreakers', 'Quarterfinals', 'Semifinals', 'Winners\' Finals', 'Winners\' Match', 'Losers\' Round 1', 'Losers\' Round 2', 'Losers\' Round 3',
+             'Losers\' Finals', 'Grand Finals', 'Decider Match', 'Elimination Match', 'Opening Match', 'Group A', 'Group B', 'Group C', 'Group D'];
 			vm.save = function () {
 				leaguesService.update($routeParams.id, vm.data)
 					.then(function () {
