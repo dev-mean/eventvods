@@ -14,6 +14,12 @@
                 },
                 page: 1
             };
+            vm.prevPage = function(){
+                if(vm.paging.page > 1) vm.paging.page--;
+            }
+            vm.nextPage = function(){
+                if(vm.paging.page < vm.paging.pages()) vm.paging.page++;
+            }
             $http.get(API_BASE_URL + '/mail')
                 .then(function(res) {
                     vm.data = res.data;

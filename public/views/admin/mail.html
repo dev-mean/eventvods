@@ -36,7 +36,10 @@
 					</div>
 				</div>
 			</div>
-			<div class="panel-footer text-center">
+            <div ng-if="Mail.data.length === 0" class="panel-body text-center">
+                No messages received yet.
+            </div>
+			<div ng-if="Mail.paging.pages() > 1" class="panel-footer text-center">
 				<ul class="pagination">
 					<li ng-class="{disabled: Mail.paging.page == 1}">
 						<a ng-click="Mail.prevPage()">&laquo;</a>
@@ -45,7 +48,7 @@
 						<span>Page {{Mail.paging.page}} of {{Mail.paging.pages()}}</span>
 					</li>
 					<li ng-class="{disabled: !(Mail.paging.pages() > 1 && Mail.paging.page < Mail.paging.pages())}">
-						<a ng-click="Mail.prevPage()">&raquo;</a>
+						<a ng-click="Mail.nextPage()">&raquo;</a>
 					</li>
 				</ul>
 			</div>
