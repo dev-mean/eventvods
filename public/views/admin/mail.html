@@ -1,0 +1,91 @@
+<div class="row">
+	<div class="col-xs-12">
+		<div class="tight">
+			<h5 class="text-muted">
+				<a href="/manage/">Eventvods</a>
+				<i class="fa fa-fw fa-fix fa-level-down"></i>
+			</h5>
+			<h2>Modmail</h2>
+		</div>
+	</div>
+</div>
+<br />
+<div class="row">
+	<div class="col-sm-12 col-md-6">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h2 class="panel-title"><i class="fa fa-envelope"></i>&nbsp;&nbsp;&nbsp; Inbox</h2>
+			</div>
+			<div class="list-group">
+				<div ng-repeat="mail in Mail.data | offset: (Mail.paging.page - 1) * Mail.paging.itemsPerPage | limitTo: Mail.paging.itemsPerPage track by $index"
+				class="list-group-item">
+					<div class="row">
+						<div class="col-xs-10">
+							<a ng-click="Mail.show($index)">
+								<h5 class="list-group-item-heading" ng-bind="mail.subject"></h5>
+							</a>
+							<p class="list-group-item-text text-muted">
+								{{mail.name}} &bull; {{mail.when}}
+							</p>
+						</div>
+						<div class="col-xs-2 text-right fa-fix" ng-if="!mail.resolved">
+							<a ng-click="Mail.resolve($index, mail._id)" class="btn btn-success btn-sm">
+                                Mark Resolved
+                            </a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="panel-footer text-center">
+				<ul class="pagination">
+					<li ng-class="{disabled: Mail.paging.page == 1}">
+						<a ng-click="Mail.prevPage()">&laquo;</a>
+					</li>
+					<li class="active">
+						<span>Page {{Mail.paging.page}} of {{Mail.paging.pages()}}</span>
+					</li>
+					<li ng-class="{disabled: !(Mail.paging.pages() > 1 && Mail.paging.page < Mail.paging.pages())}">
+						<a ng-click="Mail.prevPage()">&raquo;</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="col-sm-12 col-md-6">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h2 class="panel-title"><i class="fa fa-envelope-open"></i>&nbsp;&nbsp;&nbsp; Selected Message</h2>
+			</div>
+			<div ng-if="Mail.selected === null" class="panel-body text-center">
+				No message selected.
+			</div>
+			<div ng-if="Mail.selected !== null" class="list-group">
+				<div class="list-group-item">
+					<div class="row">
+						<div class="col-xs-10">
+							<h5 class="list-group-item-heading" ng-bind="Mail.selected.subject"></h5>
+							<p class="list-group-item-text text-muted">
+								{{Mail.selected.name}} &bull; {{Mail.selected.when}}
+							</p>
+						</div>
+						<div class="col-xs-2 text-right fa-fix" ng-if="!Mail.selected.resolved">
+							<a ng-click="Mail.resolve(Mail.selected.$index, Mail.selected._id)" class="btn btn-success btn-sm">
+                                Mark Resolved
+                            </a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div ng-if="Mail.selected !== null" class="panel-body" ng-bind="Mail.selected.contents">
+			</div>
+			<div ng-if="Mail.selected !== null" class="list-group">
+				<div class="list-group-item">
+					<h5>Contact Email</h5>
+					<p class="list-group-item-text text-muted">
+						{{Mail.selected.email || "No contact email left."}}
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

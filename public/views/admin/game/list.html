@@ -1,4 +1,70 @@
-<div class="panel panel-primary">
+<div class="row">
+	<div class="col-sm-12">
+		<div class="tight">
+			<h5 class="text-muted">
+				<a href="/manage/">Eventvods</a>
+				<i class="fa fa-fw fa-fix fa-level-down"></i>
+			</h5>
+			<h2>Games</h2>
+		</div>
+	</div>
+	<!--<div class="col-sm-2">
+        <button class="btn btn-success pull-right" ng-click="Featured.save()">Save</button>
+    </div>-->
+</div>
+<br />
+<div class="row">
+	<div class="col-xs-12 col-sm-12 col-md-6">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h2 class="panel-title"><i class="fa fa-gamepad"></i>&nbsp;&nbsp;&nbsp; Games</h2>
+			</div>
+			<div class="list-group">
+				<div class="list-group-item">
+					<div class="row">
+						<div class="col-xs-12 col-sm-6">
+							<div class="input-group">
+								<div class="input-group-addon">
+									Filter
+								</div>
+								<input type="text" ng-model="gamesListController.search" placeholder="Enter Query" tabindex="1" class="form-control" />
+							</div>
+						</div>
+						<div class="col-xs-12 col-sm-6">
+							<div class="input-group">
+								<div class="input-group-addon">
+									Sort By
+								</div>
+								<select ng-options="opt.name for opt in gamesListController.sorts track by opt.sortField" ng-model="gamesListController.sort"
+								class="form-control"></select>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div ng-repeat="game in gamesListController.filterData = (gamesListController.gameData | filter: gamesListController.search) | orderBy: gamesListController.sort.sortField:gamesListController.sort.reverse | offset: (gamesListController.paging.page - 1) * gamesListController.paging.itemsPerPage | limitTo: gamesListController.paging.itemsPerPage"
+				class="list-group-item">
+					<div class="row">
+						<div class="col-xs-8">
+							<a ng-href="/game/{{game.slug}}" target="_blank"><h5 class="list-group-item-heading" ng-bind="game.name"></h5></a>
+							<p class="list-group-item-text text-muted">
+								{{game.eventsCount}} events &bull; {{game.teamsCount}} teams
+							</p>
+						</div>
+						<div class="col-xs-4 text-right fa-fix">
+							<a ng-href="/manage/game/{{game._id}}/edit" class="btn btn-primary btn-sm">
+                                Edit
+                            </a>
+							<a ng-click="gamesListController.delete(game._id)" class="btn btn-danger btn-sm">
+                                Delete
+                            </a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!--<div class="panel panel-primary">
     <div class="panel-heading">
         <h2 class="panel-title"><i class="fa fa-gamepad"></i>&nbsp;&nbsp;&nbsp; Games</h2>
     </div>
@@ -93,4 +159,4 @@
         Next Page
     </a>
     </div>
-</div>
+</div>-->

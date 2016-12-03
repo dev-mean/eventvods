@@ -23,6 +23,7 @@ router.use('/teams', require('./api/teamsRouter'));
 router.use('/users', require('./api/usersRouter'));
 router.use('/user', require('./api/userRouter'));
 router.use('/leagues', require('./api/leaguesRouter'));
+router.use('/mail', require('./api/mailRouter'));
 
 // 404 handler
 router.use(function(req, res, next) {

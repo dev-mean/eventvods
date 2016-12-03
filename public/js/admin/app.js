@@ -474,6 +474,12 @@
                     controllerAs: 'Overview',
                     title: "Dashboard"
                 })
+                .when('/mail', {
+                    templateUrl: '/assets/views/admin/mail.html',
+                    controller: 'mailController',
+                    controllerAs: 'Mail',
+                    title: "Modmail"
+                })
                 .when('/games', {
                     templateUrl: '/assets/views/admin/game/list.html',
                     controller: 'gamesListController',

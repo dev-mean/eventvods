@@ -62,6 +62,7 @@
                     });
                 };
                 vm.eventClass = function($index) {
+                    if(vm.nav.orderedEvents[$index].game === null) return "border-top";
                     if ($index === 0 ||
                         vm.nav.orderedEvents[$index].game.name !== vm.nav.orderedEvents[$index - 1].game.name) return "border-top";
                     else return "";

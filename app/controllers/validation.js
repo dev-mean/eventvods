@@ -79,3 +79,10 @@ module.exports.user = {
     email: 'required|email',
     userRights: 'required'
 };
+module.exports.mail = {
+    subject: 'required',
+    contents: 'required',
+    name: 'required',
+    email: 'email'
+
+}

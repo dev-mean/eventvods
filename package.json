@@ -22,6 +22,7 @@
     "loggly": "*",
     "moment": "*",
     "mongoose": "*",
+    "mongoose-fill": "^1.6.0",
     "morgan": "*",
     "oauth": "*",
     "passport": "*",

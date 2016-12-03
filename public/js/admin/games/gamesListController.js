@@ -7,10 +7,29 @@
                 vm.loaded = false;
                 vm.gameData = [];
                 vm.filter = {};
-                vm.sort = {
-                    sortField: 'name',
-                    sortReverse: false
-                };
+                vm.sorts = [
+                    {
+                        name: 'Name',
+                        sortField: 'name',
+                        reverse: false
+                    },
+                    {
+                        name: 'URL Slug',
+                        sortField: 'slug',
+                        reverse: false
+                    },
+                    {
+                        name: 'Events',
+                        sortField: 'eventsCount',
+                        reverse: true
+                    },
+                    {
+                        name: 'Teams',
+                        sortField: 'teamsCount',
+                        reverse: true
+                    }
+                ]
+                vm.sort = vm.sorts[0];
                 vm.paging = {
                     itemsPerPage: 10,
                     pages: function() {
