@@ -3,8 +3,10 @@ var Schema = mongoose.Schema;
 var Team = require('./team').schema;
 
 var matchSchema = new Schema({
+	//Stage 1-2
 	// team1: Team,
 	// team2: Team,
+	//Stage 3
 	team1: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Teams'

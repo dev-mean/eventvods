@@ -33,7 +33,9 @@ var leagueSchema = new Schema({
     media: [Media],
     youtubeStream: String,
     twitchStream: String,
-    //teams: [Team],
+    //Stage 1-2
+    // teams: [Team],
+    //Stage 3
     teams: {
         type: [mongoose.Schema.Types.ObjectId],
         ref: 'Teams'

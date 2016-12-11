@@ -105,9 +105,14 @@ router.get('/export/:league_id', auth.updater(), function(req, res, next) {
 router.route('/:league_id')
     .get(auth.public_api(), ratelimit, cache, function(req, res, next) {
         League.findById(req.params.league_id)
-            .populate('game staff contents.modules.matches.team1 contents.modules.matches.team2')
+            .populate('game staff')
             .populate({
                 path: 'teams',
+                model: 'Teams',
+                select: 'name tag _id slug icon'
+            })
+            .populate({
+                path: 'contents.modules.matches.team1 contents.modules.matches.team2',
                 model: 'Teams',
                 select: 'name tag _id slug icon'
             })
