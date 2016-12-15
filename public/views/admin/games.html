@@ -1,0 +1,147 @@
+<div class="row">
+	<div class="col-xs-10">
+		<div class="tight">
+			<h5 class="text-muted">
+				<a href="/manage/">Eventvods</a>
+				<i class="fa fa-fw fa-fix fa-level-down"></i>
+			</h5>
+			<h2>Games</h2>
+		</div>
+	</div>
+	<div class="col-xs-2">
+		<button ng-show="Games.editing || Games.form.stage == 2" class="btn btn-primary pull-right" ng-click="Games.initAdd()">Add Game</button>
+	</div>
+</div>
+<br />
+<div class="row">
+	<div class="col-xs-12 col-sm-12 col-md-6">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h2 class="panel-title"><i class="fa fa-gamepad"></i>&nbsp;&nbsp;&nbsp; Games</h2>
+			</div>
+			<div class="list-group">
+				<div class="list-group-item">
+					<div class="row">
+						<div class="col-xs-12 col-sm-6">
+							<div class="input-group">
+								<div class="input-group-addon">
+									Filter
+								</div>
+								<input type="text" ng-model="Games.search" placeholder="Enter Query" tabindex="1" class="form-control" />
+							</div>
+						</div>
+						<div class="col-xs-12 col-sm-6">
+							<div class="input-group">
+								<div class="input-group-addon">
+									Sort By
+								</div>
+								<select ng-options="opt.name for opt in Games.sorts track by opt.sortField" ng-model="Games.sort"
+								class="form-control"></select>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div ng-repeat="game in Games.filterData = (Games.gameData | filter: Games.search) | orderBy: Games.sort.sortField:Games.sort.reverse | offset: (Games.paging.page - 1) * Games.paging.itemsPerPage | limitTo: Games.paging.itemsPerPage"
+				class="list-group-item">
+					<div class="row">
+						<div class="col-xs-8">
+							<a ng-href="/game/{{game.slug}}" target="_blank">
+								<h5 class="list-group-item-heading" ng-bind="game.name"></h5>
+							</a>
+							<p class="list-group-item-text text-muted">
+								{{game.eventsCount}} events &bull; {{game.teamsCount}} teams
+							</p>
+						</div>
+						<div class="col-xs-4 text-right fa-fix">
+							<a ng-click="Games.edit(game._id)" class="btn btn-primary btn-sm">
+                                Edit
+                            </a>
+							<a ng-click="Games.delete(game)" class="btn btn-danger btn-sm">
+                                Delete
+                            </a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-xs-12 col-sm-12 col-md-6">
+		<form name="form" id="addGameForm" ng-cloak>
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h2 class="panel-title"><i class="fa fa-gamepad"></i>&nbsp;&nbsp;&nbsp; {{Games.editing ? "Edit" : "Add"}} Game</h2>
+				</div>
+				<div class="panel-body" ng-show="Games.form.stage == 0">
+					<div class="form-group">
+						<label>
+                            Game Name
+                        </label>
+						<input type="text" class="form-control" placeholder="e.g. League of Legends" ng-model="Games.form.name" data-parsley-trigger="keyup"
+						required/>
+					</div>
+					<div class="form-group">
+						<label>
+                            URL Slug
+                        </label>
+						<input type="text" class="form-control" id="slug" placeholder="e.g. lol" ng-model="Games.form.slug" data-parsley-trigger="keyup"
+						data-parsley-remote-message="Slug already in use." required/>
+					</div>
+					<div class="form-group">
+						<p class="form-control-static">
+							Game will be accessible at eventvods.com/game/{{Games.form.slug}}
+						</p>
+					</div>
+					<div class="form-group">
+						<label>
+                            Table Type
+                        </label>
+						<select no-ng-animate ng-if="!Games.editing" class="form-control" ng-model="Games.form.simple_tables" required>
+                            <option selected value="">Please select a type</option>
+                            <option label="Simple Tables" value="boolean:true">Simple Tables</option>
+                            <option label="MOBA Style" value="boolean:false">MOBA Style</option>
+                        </select>
+						<select no-ng-animate ng-if="Games.editing" class="form-control" ng-model="Games.form.simple_tables" ng-options="(item?'Simple Tables':'MOBA Style') for item in [true, false]"></select>
+					</div>
+				</div>
+				<div class="panel-body" ng-show="Games.form.stage == 1">
+					<div class="form-group">
+						<label>
+							Icon (optional)
+						</label>
+						<image-drop model="Games.form.icon" preview-width="64" preview-height="64" />
+					</div>
+					<div class="form-group">
+						<label>
+							Game Header (optional)
+						</label>
+						<image-drop model="Games.form.header" preview-width="300" preview-height="100" />
+					</div>
+					<div class="form-group">
+						<label>
+							Header Photo ©
+						</label>
+						<input class="form-control" type="text" placeholder="e.g. Riot Games" ng-model="Games.form.credits" data-parsley-trigger="keyup"/>
+					</div>
+				</div>
+				<div class="panel-footer">
+					<div class="row">
+						<div class="col-xs-2 text-center">
+							<button ng-show="Games.form.stage > 0 && Games.form.stage < 2" class="btn btn-primary pull-left" ng-click="Games.prevStage()"
+							type="button">{{Games.stages[Games.form.stage - 1]}}</button>
+						</div>
+						<div class="col-xs-8 text-center">
+							<span ng-if="Games.form.stage < 2">Stage {{Games.form.stage+1}} of 2</span>
+							<span ng-if="Games.form.stage == 2">Event {{Games.editing ? "Updated" : "Added"}}</span>
+							<br />
+							<uib-progressbar value="Games.form.stage" max="2"></uib-progressbar>
+						</div>
+						<div class="col-xs-2 text-center">
+							<button ng-show="Games.form.stage < 2" class="btn btn-primary pull-right" ng-click="Games.nextStage()"
+							type="button"><i no-ng-animate ng-if="Games.validating" class="fa fa-refresh fa-spin fa-lg fa-fw"></i>{{Games.validating ? '' : Games.stages[Games.form.stage + 1]}}</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
