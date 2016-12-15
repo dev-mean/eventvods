@@ -5,11 +5,6 @@
 			function (Games, $modal, API, $timeout, notifier) {
 				var vm = this,
 					parsley;
-				vm._ = {
-					editing: false,
-					validating: false,
-					stage: 0
-				}
 				vm.editing = false;
 				vm.validating = false;
 				vm.stages = ['Game Details', 'Graphics', 'Submit'];
@@ -35,16 +30,6 @@
 					sortField: 'teamsCount',
 					reverse: true
 				}];
-				vm.tables = [{
-					label: "Please select a value.",
-					value: undefined,
-				}, {
-					label: "Simple Tables",
-					value: "boolean:true"
-				}, {
-					label: "MOBA Style",
-					value: "boolean:false",
-				}]
 				vm.sort = vm.sorts[0];
 				vm.paging = {
 					itemsPerPage: 10,
@@ -104,9 +89,9 @@
 						parsley.whenValidate()
 							.done(function () {
 								$timeout(function () {
-									vm.validating = false;
 									if (vm.form.stage === vm.stages.length - 2) return submit();
 									vm.form.stage = vm.form.stage + 1;
+									vm.validating = false;
 								}, 50);
 							})
 							.catch(function () {
@@ -128,6 +113,7 @@
 						.then(function (res) {
 							vm.gameData = res.data;
 							vm.form.stage = vm.form.stage + 1;
+							vm.validating = false;
 						})
 					else
 						Games.create(vm.form)
@@ -135,6 +121,7 @@
 						.then(function (res) {
 							vm.gameData = res.data;
 							vm.form.stage = vm.form.stage + 1;
+							vm.validating = false;
 						})
 				}
 				Games.find()

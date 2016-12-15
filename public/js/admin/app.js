@@ -277,6 +277,7 @@
 						loadFile(file);
 					});
 					$scope.$watch('model', function () {
+						if (typeof $scope.model === "undefined") $scope.dom.preview.attr('src', "http://placehold.it/" + width + "x" + height + "?text=%20");
 						if ($scope.model == null) return;
 						else if (typeof $scope.model === "string") $scope.dom.preview.attr('src', $scope.model);
 						else if (typeof $scope.model === "object" && $scope.model.changed) $scope.dom.preview.attr('src', $scope.model.data);
