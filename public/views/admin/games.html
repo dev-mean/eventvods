@@ -125,19 +125,26 @@
 				</div>
 				<div class="panel-footer">
 					<div class="row">
-						<div class="col-xs-2 text-center">
+						<div class="col-xs-3 text-center">
 							<button ng-show="Games.form.stage > 0 && Games.form.stage < 2" class="btn btn-primary pull-left" ng-click="Games.prevStage()"
-							type="button">{{Games.stages[Games.form.stage - 1]}}</button>
+							type="button">
+								<i class="glyphicon glyphicon-chevron-left"></i>
+								{{Games.stages[Games.form.stage - 1]}}
+							</button>
 						</div>
-						<div class="col-xs-8 text-center">
+						<div class="col-xs-6 text-center">
 							<span ng-if="Games.form.stage < 2">Stage {{Games.form.stage+1}} of 2</span>
-							<span ng-if="Games.form.stage == 2">Event {{Games.editing ? "Updated" : "Added"}}</span>
+							<span ng-if="Games.form.stage == 2">Game {{Games.editing ? "Updated" : "Added"}}</span>
 							<br />
 							<uib-progressbar value="Games.form.stage" max="2"></uib-progressbar>
 						</div>
-						<div class="col-xs-2 text-center">
+						<div class="col-xs-3 text-center">
 							<button ng-show="Games.form.stage < 2" class="btn btn-primary pull-right" ng-click="Games.nextStage()"
-							type="button"><i no-ng-animate ng-if="Games.validating" class="fa fa-refresh fa-spin fa-lg fa-fw"></i>{{Games.validating ? '' : Games.stages[Games.form.stage + 1]}}</button>
+							type="button">
+								<i no-ng-animate ng-if="Games.validating" class="fa fa-refresh fa-spin fa-lg fa-fw"></i>
+								{{Games.validating ? '' : Games.stages[Games.form.stage + 1]}}
+								<i class="glyphicon glyphicon-chevron-right"></i>
+							</button>
 						</div>
 					</div>
 				</div>

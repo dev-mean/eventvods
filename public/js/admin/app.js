@@ -1,6 +1,6 @@
 (function () {
 	'use strict';
-	angular.module('eventApp', ['ngAnimate', 'ngRoute', 'ngCookies', 'chart.js', 'ui.bootstrap', 'ngSanitize', 'angular-loading-bar', 'ngDialog', 'angular-sortable-view', 'xeditable', 'ngTagsInput'])
+	angular.module('eventApp', ['ngAnimate', 'ngRoute', 'ngCookies', 'chart.js', 'ui.bootstrap', 'ngSanitize', 'textAngular', 'angular-loading-bar', 'ngDialog', 'angular-sortable-view', 'xeditable', 'ngTagsInput'])
 		.constant('API_BASE_URL', '/api')
 		// Set up titles on ngroute pages
 		.run(['$rootScope', '$route', function ($rootScope, $route) {
@@ -31,6 +31,37 @@
 				'    <button class="btn btn-danger" type="button" ng-click="ok()">Delete Game</button>\n' +
 				'    <button class="btn btn-default" type="button" ng-click="$close()">Cancel</button>\n' +
 				'</div>');
+		}])
+		.config(['$httpProvider', function ($httpProvider) {
+
+			// ISO 8601 Date Pattern: YYYY-mm-ddThh:MM:ss
+			var dateMatchPattern = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/;
+
+			var convertDates = function (obj) {
+				for (var key in obj) {
+					if (!obj.hasOwnProperty(key)) continue;
+
+					var value = obj[key];
+					var typeofValue = typeof (value);
+
+					if (typeofValue === 'object') {
+						// If it is an object, check within the object for dates.
+						convertDates(value);
+					} else if (typeofValue === 'string') {
+						if (dateMatchPattern.test(value)) {
+							obj[key] = new Date(value);
+						}
+					}
+				}
+			}
+
+			$httpProvider.defaults.transformResponse.push(function (data) {
+				if (typeof (data) === 'object') {
+					convertDates(data);
+				}
+
+				return data;
+			});
 		}])
 		// ng-typeahead adapted from
 		// https://github.com/raymondmuller/ng-typeahead
@@ -579,9 +610,9 @@
 					title: "Edit Team"
 				})
 				.when('/articles', {
-					templateUrl: '/assets/views/admin/articles/list.html',
+					templateUrl: '/assets/views/admin/articles.html',
 					controller: 'articlesListController',
-					controllerAs: 'articlesListController',
+					controllerAs: 'Articles',
 					title: "Articles"
 				})
 				.when('/articles/new', {

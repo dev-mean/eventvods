@@ -1,0 +1,178 @@
+<div class="row">
+	<div class="col-xs-10">
+		<div class="tight">
+			<h5 class="text-muted">
+				<a href="/manage/">Eventvods</a>
+				<i class="fa fa-fw fa-fix fa-level-down"></i>
+			</h5>
+			<h2>Articles</h2>
+		</div>
+	</div>
+	<div class="col-xs-2">
+		<button ng-show="Articles.editing || Articles.form.stage == 3" class="btn btn-primary pull-right" ng-click="Articles.initAdd()">Add Article</button>
+	</div>
+</div>
+<br />
+<div class="row">
+	<div class="col-xs-12 col-sm-12 col-md-6">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h2 class="panel-title"><i class="fa fa-pencil"></i>&nbsp;&nbsp;&nbsp; Articles</h2>
+			</div>
+			<div class="list-group">
+				<div class="list-group-item">
+					<div class="row">
+						<div class="col-xs-12 col-sm-6">
+							<div class="input-group">
+								<div class="input-group-addon">
+									Filter
+								</div>
+								<input type="text" ng-model="Articles.search" placeholder="Enter Query" tabindex="1" class="form-control" />
+							</div>
+						</div>
+						<div class="col-xs-12 col-sm-6">
+							<div class="input-group">
+								<div class="input-group-addon">
+									Sort By
+								</div>
+								<select ng-options="opt.name for opt in Articles.sorts track by opt.sortField" ng-model="Articles.sort" class="form-control"></select>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div ng-repeat="article in Articles.filterData = (Articles.articlesData | filter: Articles.search) | orderBy: Articles.sort.sortField:Articles.sort.reverse | offset: (Articles.paging.page - 1) * Articles.paging.itemsPerPage | limitTo: Articles.paging.itemsPerPage"
+				class="list-group-item">
+					<div class="row">
+						<div class="col-xs-8">
+							<a ng-href="/article/{{article.slug}}" target="_blank">
+								<h5 class="list-group-item-heading" ng-bind="article.title"></h5>
+							</a>
+							<p class="list-group-item-text text-muted">
+								{{article.publishDate | date:'MMM dd, yyyy'}} &bull; By {{article.author.displayName}}
+							</p>
+						</div>
+						<div class="col-xs-4 text-right fa-fix">
+							<a ng-click="Articles.edit(article._id)" class="btn btn-primary btn-sm">
+                                Edit
+                            </a>
+							<a ng-click="Articles.delete(article)" class="btn btn-danger btn-sm">
+                                Delete
+                            </a>
+						</div>
+					</div>
+				</div>
+				<div ng-if="Articles.paging.pages() > 1" class="panel-footer text-center">
+					<ul class="pagination">
+						<li ng-class="{disabled: Articles.paging.page == 1}">
+							<a ng-click="Articles.prevPage()">&laquo;</a>
+						</li>
+						<li class="active">
+							<span>Page {{Articles.paging.page}} of {{Articles.paging.pages()}}</span>
+						</li>
+						<li ng-class="{disabled: !(Articles.paging.pages() > 1 && Articles.paging.page < Articles.paging.pages())}">
+							<a ng-click="Articles.nextPage()">&raquo;</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-xs-12 col-sm-12 col-md-6">
+		<form name="form" id="addArticleForm" ng-cloak>
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h2 class="panel-title"><i class="fa fa-pencil"></i>&nbsp;&nbsp;&nbsp; {{Articles.editing ? "Edit" : "Add"}} Article</h2>
+				</div>
+				<div class="panel-body" ng-show="Articles.form.stage == 0">
+					<div class="form-group">
+						<label>
+                            Article Title
+                        </label>
+						<input type="text"class="form-control" placeholder="Article Title" ng-model="Articles.form.title" data-parsley-trigger="keyup"
+						required/>
+					</div>
+					<div class="form-group">
+						<label>
+                            URL Slug
+                        </label>
+						<input id="slug" class="form-control" type="text" placeholder="URL Slug" ng-model="Articles.form.slug" data-parsley-trigger="keyup"
+						data-parsley-remote-message="Slug already in use." required/>
+					</div>
+					<div class="form-group">
+						<p class="form-control-static">
+                            Article will be accessible at eventvods.com/article/{{Articles.form.slug}}
+                        </p>
+					</div>
+					<div class="form-group">
+						<label>
+                            Publish Date (Display Only)
+                        </label>
+                        <div class="input-group">
+						    <input ng-model="Articles.form.publishDate" ng-click="dpOpen = !dpOpen" ng-focus="dpOpen = true"
+								is-open="dpOpen" uib-datepicker-popup="MMM dd, yyyy"
+								type="text" placeholder="Click to select date."
+								data-parsley-trigger="input change" data-parsley-errors-container="#date-errors"
+								required ng-required="true" class="form-control"/>
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="button" ng-click="dpOpen = !dpOpen"><i class="fa fa-lg fa-calendar-plus-o"></i></button>
+                            </span>
+                        </div>
+						<span id="date-errors"></span>
+					</div>
+					<br />
+					<div class="checkbox">
+                        <label for="published">
+                            <input id="published" type="checkbox" ng-model="Articles.form.published" name="published" />
+                            Article Published
+                        </label>
+					</div>
+				</div>
+				<div class="panel-body" ng-show="Articles.form.stage == 1">
+					<div class="form-group">
+						<label>Article Contents</label>
+						<text-angular class="form-control-static" ng-model="Articles.form.content"></text-angular>
+					</div>
+				</div>
+				<div class="panel-body" ng-show="Articles.form.stage == 2">
+					<div class="form-group">
+						<label>
+							Article Header (optional)
+						</label>
+						<image-drop model="Articles.form.header" preview-width="300" preview-height="100" />
+					</div>
+					<div class="form-group">
+						<label>
+							Header Photo ©
+						</label>
+						<input class="form-control" type="text" placeholder="e.g. Riot Articles" ng-model="Articles.form.credits" data-parsley-trigger="keyup"
+						/>
+					</div>
+				</div>
+				<div class="panel-footer">
+					<div class="row">
+						<div class="col-xs-3 text-center">
+							<button ng-show="Articles.form.stage > 0 && Articles.form.stage < 2" class="btn btn-primary pull-left" ng-click="Articles.prevStage()"
+							type="button">
+								<i class="glyphicon glyphicon-chevron-left"></i>
+								{{Articles.stages[Articles.form.stage - 1]}}
+							</button>
+						</div>
+						<div class="col-xs-6 text-center">
+							<span ng-if="Articles.form.stage < 4">Stage {{Articles.form.stage+1}} of 3</span>
+							<span ng-if="Articles.form.stage == 3">Article {{Articles.editing ? "Updated" : "Added"}}</span>
+							<br />
+							<uib-progressbar value="Articles.form.stage" max="3"></uib-progressbar>
+						</div>
+						<div class="col-xs-3 text-center">
+							<button ng-show="Articles.form.stage < 3" class="btn btn-primary pull-right" ng-click="Articles.nextStage()" type="button">
+							<i no-ng-animate ng-if="Articles.validating" class="fa fa-refresh fa-spin fa-lg fa-fw"></i>
+							{{Articles.validating ? '' : Articles.stages[Articles.form.stage + 1]}}
+							<i class="glyphicon glyphicon-chevron-right"></i>
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>

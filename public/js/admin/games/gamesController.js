@@ -7,10 +7,10 @@
 					parsley;
 				vm.editing = false;
 				vm.validating = false;
-				vm.stages = ['Game Details', 'Graphics', 'Submit'];
 				vm.form = {
 					stage: 0
 				};
+				vm.stages = ['Game Details', 'Graphics', 'Submit'];
 				vm.gameData = [];
 				vm.filter = {};
 				vm.sorts = [{
