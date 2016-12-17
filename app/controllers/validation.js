@@ -13,7 +13,6 @@ module.exports.messages = {
 };
 module.exports.article = {
     title: 'required',
-    content: 'required',
     slug: 'required',
     author: 'required',
     publishDate: 'required'

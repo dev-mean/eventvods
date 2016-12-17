@@ -158,7 +158,7 @@
 							</button>
 						</div>
 						<div class="col-xs-6 text-center">
-							<span ng-if="Articles.form.stage < 4">Stage {{Articles.form.stage+1}} of 3</span>
+							<span ng-if="Articles.form.stage < 3">Stage {{Articles.form.stage+1}} of 3</span>
 							<span ng-if="Articles.form.stage == 3">Article {{Articles.editing ? "Updated" : "Added"}}</span>
 							<br />
 							<uib-progressbar value="Articles.form.stage" max="3"></uib-progressbar>

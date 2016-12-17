@@ -114,6 +114,7 @@
 							vm.gameData = res.data;
 							vm.form.stage = vm.form.stage + 1;
 							vm.validating = false;
+							notifier.success('Updated ' + vm.form.name);
 						})
 					else
 						Games.create(vm.form)
@@ -122,6 +123,7 @@
 							vm.gameData = res.data;
 							vm.form.stage = vm.form.stage + 1;
 							vm.validating = false;
+							notifier.success('Added '+vm.form.name);
 						})
 				}
 				Games.find()

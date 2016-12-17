@@ -23,10 +23,6 @@
 					name: 'URL Slug',
 					sortField: 'slug',
 					reverse: false
-				}, {
-					name: 'Author',
-					sortField: 'author',
-					reverse: false
 				}];
                 vm.sort = vm.sorts[0];
                 vm.paging = {
@@ -122,6 +118,7 @@
 							vm.articlesData = res.data;
 							vm.form.stage = vm.form.stage + 1;
 							vm.validating = false;
+							notifier.success('Updated ' + vm.form.title);
 						})
 					else
 						Articles.create(vm.form)
@@ -130,6 +127,7 @@
 							vm.articlesData = res.data;
 							vm.form.stage = vm.form.stage + 1;
 							vm.validating = false;
+							notifier.success('Added ' + vm.form.title);
 						})
 				}
             }
