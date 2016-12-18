@@ -41,8 +41,10 @@
                         <span class="caret"></span>
                     </a>
 					<ul class="dropdown-menu">
-						<li><a href="#">Original</a></li>
-						<li><a href="#">Clam</a></li>
+						<li ng-class="{active: Page.theme == null}"><a ng-click="Page.setTheme(null)">Eventvods</a></li>
+                        <li ng-class="{active: Page.theme == 'flatly'}"><a ng-click="Page.setTheme('flatly')">Light</a></li>
+						<li ng-class="{active: Page.theme == 'darkly'}"><a ng-click="Page.setTheme('darkly')">Dark</a></li>
+						<li ng-class="{active: Page.theme == 'sandstone'}"><a ng-click="Page.setTheme('sandstone')">Grey</a></li>
 					</ul>
 				</li>
 				<li class="dropdown">
@@ -90,6 +92,7 @@
 <script src='http://cdnjs.cloudflare.com/ajax/libs/textAngular/1.5.0/textAngular.min.js'></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-chart.js/1.0.3/angular-chart.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-css/1.0.8/angular-css.min.js"></script>
 <script src="/assets/js/admin/app.js"></script>
 <script src="/assets/js/admin/common/notifier.js"></script>
 <script src="/assets/js/admin/common/PageController.js"></script>

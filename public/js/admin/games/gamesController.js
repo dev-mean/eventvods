@@ -49,6 +49,7 @@
 						templateUrl: 'deleteModal.html',
 						controller: function ($scope) {
 							$scope.item = game.name;
+							$scope.type = 'Game';
 							$scope.ok = function () {
 								Games.delete(game._id)
 									.then(function () {

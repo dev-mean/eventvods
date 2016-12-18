@@ -73,7 +73,8 @@
                     $modal.open({
 						templateUrl: 'deleteModal.html',
 						controller: function ($scope) {
-							$scope.item = article.title
+							$scope.item = article.title;
+							$scope.type = 'Article';
 							$scope.ok = function () {
 								Articles.delete(article._id)
 									.then(function () {

@@ -1,6 +1,7 @@
 (function () {
 	'use strict';
-	angular.module('eventApp', ['ngAnimate', 'ngRoute', 'ngCookies', 'chart.js', 'ui.bootstrap', 'ngSanitize', 'textAngular', 'angular-loading-bar', 'ngDialog', 'angular-sortable-view', 'xeditable', 'ngTagsInput'])
+	angular.module('eventApp', ['ngAnimate', 'ngRoute', 'ngCookies', 'chart.js', 'ui.bootstrap', 'ngSanitize',
+		 'textAngular', 'angular-loading-bar', 'ngDialog', 'angular-sortable-view', 'xeditable', 'ngTagsInput','angularCSS'])
 		.constant('API_BASE_URL', '/api')
 		// Set up titles on ngroute pages
 		.run(['$rootScope', '$route', function ($rootScope, $route) {
@@ -28,10 +29,11 @@
 				'    <p>Are you sure you want to delete {{item}}?</p>\n' +
 				'</div>\n' +
 				'<div class="modal-footer">\n' +
-				'    <button class="btn btn-danger" type="button" ng-click="ok()">Delete Game</button>\n' +
+				'    <button class="btn btn-danger" type="button" ng-click="ok()">Delete {{type}}</button>\n' +
 				'    <button class="btn btn-default" type="button" ng-click="$close()">Cancel</button>\n' +
 				'</div>');
 		}])
+		// $http interceptor to convert Date strings into js Date objects.
 		.config(['$httpProvider', function ($httpProvider) {
 
 			// ISO 8601 Date Pattern: YYYY-mm-ddThh:MM:ss
@@ -59,165 +61,9 @@
 				if (typeof (data) === 'object') {
 					convertDates(data);
 				}
-
 				return data;
 			});
 		}])
-		// ng-typeahead adapted from
-		// https://github.com/raymondmuller/ng-typeahead
-		.filter("highlight", function ($sce) {
-			return function (item, search) {
-				angular.forEach(item, function (input) {
-					var exp, highlightedInput, normalInput, words;
-					if (search) {
-						words = "(" + search.split(/\ /)
-							.join(" |") + "|" + search.split(/\ /)
-							.join("|") + ")";
-						exp = new RegExp(words, "gi");
-						normalInput = input.label.slice(search.length);
-						if (words.length) {
-							highlightedInput = input.label.slice(0, search.length)
-								.replace(exp, "<span class=\"ng-typeahead-highlight\">$1</span>");
-						}
-						return input.html = $sce.trustAsHtml(highlightedInput + normalInput);
-					}
-				});
-				return item;
-			};
-		})
-		.filter("startsWith", function ($log) {
-			var strStartsWith;
-			strStartsWith = function (suggestion, search) {
-				if (!!suggestion && !!search) {
-					return suggestion.toLowerCase()
-						.indexOf(search.toLowerCase()) === 0;
-				}
-			};
-			return function (suggestions, search, startFilter) {
-				var filtered;
-				if (startFilter) {
-					filtered = [];
-					angular.forEach(suggestions, function (suggestion) {
-						if (strStartsWith(suggestion.label, search)) {
-							return filtered.push(suggestion);
-						}
-					});
-					return filtered;
-				} else {
-					return suggestions;
-				}
-			};
-		})
-		.directive('ngTypeahead', function ($log, $timeout) {
-			return {
-				restrict: 'E',
-				scope: {
-					data: '=',
-					delay: "=?",
-					forceSelection: "=?",
-					limit: '=?',
-					startFilter: "=?",
-					threshold: '=?',
-					onBlur: "=?",
-					onSelect: '=?',
-					onType: "=?"
-				},
-				require: "?ngModel",
-				transclude: true,
-				link: function (scope, elem, attrs, ngModel) {
-					var KEY, itemSelected, selectedLabel, selecting;
-					KEY = {
-						UP: 38,
-						DOWN: 40,
-						ENTER: 13,
-						TAB: 9,
-						ESC: 27
-					};
-					selectedLabel = scope.search;
-					selecting = void 0;
-					itemSelected = false;
-					scope.index = 0;
-					if (!scope.delay) {
-						scope.delay = 0;
-					}
-					scope.placeholder = attrs.placeholder;
-					scope.required = attrs.required ? true : false;
-					scope.container = (typeof attrs.container == "undefined") ? false : attrs.container;
-					scope.id = (typeof attrs.id == "undefined") ? "" : attrs.id;
-					scope.group = (typeof attrs.group == "undefined") ? "" : attrs.group;
-					if (scope.startFilter === void 0) {
-						scope.startFilter = true;
-					}
-					if (scope.limit === void 0) {
-						scope.limit = Infinity;
-					}
-					if (scope.threshold === void 0) {
-						scope.threshold = 0;
-					}
-					if (scope.forceSelection === void 0) {
-						scope.forceSelection = false;
-					}
-					scope.$watch("search", function (v) {
-						scope.index = 0;
-						if (!scope.forceSelection) ngModel.$setViewValue(v);
-						if (v === selectedLabel) {
-							return;
-						}
-						itemSelected = false;
-						if (v !== void 0) {
-							if (scope.onType) {
-								scope.onType(scope.search);
-							}
-							return scope.showSuggestions = scope.suggestions.length && scope.search && scope.search.length > scope.threshold;
-						}
-					});
-					scope.$onBlur = function () {
-						if (!itemSelected && scope.forceSelection) {
-							scope.search = selectedLabel;
-						}
-						return scope.showSuggestions = false;
-					};
-					scope.$onSelect = function (item) {
-						selecting = true;
-						if (typeof item == undefined) return;
-						selectedLabel = item.label;
-						scope.search = item.label;
-						ngModel.$setViewValue(item.value);
-						itemSelected = true;
-						if (scope.onSelect) {
-							scope.onSelect(item);
-						}
-						scope.showSuggestions = false;
-						return $timeout(function () {
-							return selecting = false;
-						});
-					};
-					return scope.$onKeyDown = function (event) {
-						switch (event.keyCode) {
-							case KEY.UP:
-								if (scope.index > 0) {
-									return scope.index--;
-								} else {
-									return scope.index = scope.suggestions.length - 1;
-								}
-							case KEY.DOWN:
-								if (scope.index < (scope.suggestions.length - 1)) {
-									return scope.index++;
-								} else {
-									return scope.index = 0;
-								}
-							case KEY.ENTER:
-								return scope.$onSelect(scope.suggestions[scope.index]);
-							case KEY.TAB:
-								return scope.$onSelect(scope.suggestions[scope.index]);
-							case KEY.ESC:
-								return scope.showSuggestions = false;
-						}
-					};
-				},
-				template: "<input id=\"{{id}}\" ng-model=\"search\" placeholder=\"{{placeholder}}\" ng-keydown=\"$onKeyDown($event)\" ng-model-options=\"{ debounce: delay }\" ng-blur=\"$onBlur()\" class=\"ng-typeahead-input\" data-parsley-required=\"{{required}}\" data-parsley-errors-container=\"{{container}}\" data-parsley-group=\"{{group}}\" autocomplete=\"off\"/>\n<div class=\"ng-typeahead-wrapper\">\n  <ul class=\"ng-typeahead-list\" ng-show=\"showSuggestions\">\n    <li class=\"ng-typeahead-list-item\" ng-repeat=\"item in suggestions = (data | filter:search | startsWith:search:startFilter |limitTo: limit | highlight:search)\" ng-mousedown=\"$onSelect(item)\" ng-class=\"{'active': $index == index}\" ng-bind-html=\"item.html\"></li>\n    </ul>\n</div>\n<div ng-transclude>"
-			};
-		})
 		// File upload handling adapted from
 		// http://odetocode.com/blogs/scott/archive/2013/07/10/angularjs-drag-and-drop-photo-directive.aspx
 		// and

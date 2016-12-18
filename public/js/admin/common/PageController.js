@@ -1,11 +1,21 @@
 (function () {
 	'use strict';
 	angular.module('eventApp')
-		.controller('PageController', function ($http, $interval, API_BASE_URL, $window, $rootScope, $cookies) {
+		.controller('PageController', function ($http, $interval, API_BASE_URL, $window, $rootScope, $cookies, $css) {
 			var vm = this;
-			vm.theme = $cookies.get('theme') || null;
 			vm.current = '/';
 			vm.alerts = [];
+			vm.setTheme = function(theme){
+				vm.theme = theme;
+				$css.removeAll();
+				if(theme !== null){
+					$css.add('https://bootswatch.com/'+theme+'/bootstrap.css');
+					$cookies.put('theme', theme);
+				}
+				else $cookies.remove('theme');
+			}
+			vm.theme = $cookies.get('theme') || null;
+			vm.setTheme(vm.theme);
 			$http.get(API_BASE_URL + "/auth/session")
 				.then(function (res) {
 					vm.user = res.data;
