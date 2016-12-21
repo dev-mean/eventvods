@@ -44,7 +44,7 @@ module.exports.game = {
     name: 'required',
     slug: 'required'
 };
-module.exports.league = {
+module.exports.event = {
     name: 'required',
     game: 'required',
     slug: 'required',

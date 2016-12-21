@@ -1,5 +1,5 @@
 var router = require('express').Router();
-var League = require('../../models/league');
+var Event = require('../../models/event');
 var auth = require('../../controllers/auth');
 var ratelimit = require('../../controllers/ratelimit');
 var AWS = require('../../controllers/aws');
@@ -12,7 +12,7 @@ var exporter = require('../../controllers/export');
 
 router.route('/')
     .get(auth.public_api(), ratelimit, cache, function(req, res, next) {
-        League.find()
+        Event.find()
             .select('_id game name subtitle slug')
             .populate('game', 'slug icon -_id')
             .populate({
@@ -20,20 +20,20 @@ router.route('/')
 				model: 'Teams',
                 select: 'name tag _id slug icon'
 			})
-            .exec(function(err, leagues) {
+            .exec(function(err, events) {
                 if (err) next(err);
-                else res.json(leagues);
+                else res.json(events);
             });
     })
     .post(auth.updater(), AWS.handleUpload(['logo', 'header']), function(req, res, next) {
         req.body.startDate = Date.parse(req.body.startDate);
         req.body.endDate = Date.parse(req.body.endDate);
-        Indicative.validateAll(req.body, Validators.league, Validators.messages)
+        Indicative.validateAll(req.body, Validators.event, Validators.messages)
             .then(function() {
                 req.body.slug = slug(req.body.slug);
-                League.create(req.body, function(err, league) {
+                Event.create(req.body, function(err, event) {
                     if (err) next(err);
-                    else res.json(league);
+                    else res.json(event);
                 });
             })
             .catch(function(errors) {
@@ -49,11 +49,11 @@ router.get('/game/:slug', auth.public_api(), ratelimit, cache, function(req, res
     }, function(err, game) {
         if (err) next(err);
         if (!game) {
-            err = new Error("League Not Found");
+            err = new Error("E Not Found");
             err.status = 404;
             next(err);
         }
-        League.find({
+        Event.find({
                 game: game._id
             })
             .populate('game staff')
@@ -62,14 +62,14 @@ router.get('/game/:slug', auth.public_api(), ratelimit, cache, function(req, res
                 model: 'Teams',
                 select: 'name tag _id slug icon'
             })
-            .exec(function(err, leagues) {
+            .exec(function(err, events) {
                 if (err) next(err);
-                res.json(leagues);
+                res.json(events);
             });
     });
 });
 router.get('/slug/:slug', auth.public_api(), ratelimit, cache, function(req, res, next) {
-    League.findOne({
+    Event.findOne({
             slug: req.params.slug
         })
         .select('-__v -textOrientation')
@@ -79,32 +79,32 @@ router.get('/slug/:slug', auth.public_api(), ratelimit, cache, function(req, res
             model: 'Teams',
                 select: 'name tag _id slug icon'
         })
-        .exec(function(err, leagues) {
+        .exec(function(err, events) {
             if (err) next(err);
-            else res.json(leagues);
+            else res.json(events);
         });
 })
-router.get('/export/:league_id', auth.updater(), function(req, res, next) {
-    League.findById(req.params.league_id)
+router.get('/export/:event_id', auth.updater(), function(req, res, next) {
+    Event.findById(req.params.event_id)
         .populate('game staff')
         .populate({
             path: 'teams',
             model: 'Teams',
                 select: 'name tag _id slug icon'
         })
-        .exec(function(err, league) {
+        .exec(function(err, event) {
             if (err) next(err);
-            if (!league) {
-                err = new Error("League Not Found");
+            if (!event) {
+                err = new Error("E Not Found");
                 err.status = 404;
                 next(err);
             }
-            res.send(exporter.parse(league));
+            res.send(exporter.parse(event));
         });
 })
-router.route('/:league_id')
+router.route('/:event_id')
     .get(auth.public_api(), ratelimit, cache, function(req, res, next) {
-        League.findById(req.params.league_id)
+        Event.findById(req.params.event_id)
             .populate('game staff')
             .populate({
                 path: 'teams',
@@ -116,18 +116,18 @@ router.route('/:league_id')
                 model: 'Teams',
                 select: 'name tag _id slug icon'
             })
-            .exec(function(err, league) {
+            .exec(function(err, event) {
                 if (err) next(err);
-                if (!league) {
-                    err = new Error("League Not Found");
+                if (!event) {
+                    err = new Error("E Not Found");
                     err.status = 404;
                     next(err);
                 }
-                res.json(league);
+                res.json(event);
             });
     })
     .delete(auth.updater(), function(req, res, next) {
-        League.findById(req.params.league_id, function(err, doc) {
+        Event.findById(req.params.event_id, function(err, doc) {
             Q.all([AWS.deleteImage(doc.logo), AWS.deleteImage(doc.header), AWS.deleteImage(doc.header_blur)])
                 .then(function() {
                     doc.remove(function(err) {
@@ -142,17 +142,17 @@ router.route('/:league_id')
     .put(auth.updater(), AWS.handleUpload(['logo', 'header']), function(req, res, next) {
         req.body.startDate = Date.parse(req.body.startDate);
         req.body.endDate = Date.parse(req.body.endDate);
-        Indicative.validateAll(req.body, Validators.league, Validators.messages)
+        Indicative.validateAll(req.body, Validators.event, Validators.messages)
             .then(function() {
                 req.body.slug = slug(req.body.slug);
-                League.findByIdAndUpdate(req.params.league_id, req.body)
-                    .exec(function(err, league) {
+                Event.findByIdAndUpdate(req.params.event_id, req.body)
+                    .exec(function(err, event) {
                         if (err) next(err);
-                        if (!league) {
-                            err = new Error("League not found");
+                        if (!event) {
+                            err = new Error("E not found");
                             err.status = 404;
                             next(err);
-                        } else res.json(league);
+                        } else res.json(event);
                     });
             })
             .catch(function(errors) {

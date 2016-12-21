@@ -1,7 +1,7 @@
 var router = require('express').Router();
 var Game = require('../../models/game');
 var User = require('../../models/user');
-var League = require('../../models/league');
+var Event = require('../../models/event');
 var Staff = require('../../models/staff');
 var Team = require('../../models/team');
 var Article = require('../../models/article');
@@ -29,7 +29,7 @@ router.get('/gameSlug/:slug/:id', function(req, res, next) {
 });
 
 router.get('/leagueSlug/:slug', function(req, res, next) {
-    League.find({
+    Event.find({
             slug: req.params.slug
         })
         .count()
@@ -40,7 +40,7 @@ router.get('/leagueSlug/:slug', function(req, res, next) {
         });
 });
 router.get('/leagueSlug/:slug/:id', function(req, res, next) {
-    League.findOne({
+    Event.findOne({
         slug: req.params.slug
     }, function(err, doc) {
         if (err) next(err);

@@ -6,7 +6,7 @@ var Team = require('./team').schema;
 var slug = require('slug');
 var Section = require('./section').schema;
 var moment = require('moment');
-var leagueSchema = new Schema({
+var eventSchema = new Schema({
     name: {
         type: String,
         required: true
@@ -52,7 +52,9 @@ var leagueSchema = new Schema({
 });
 
 
-var League = mongoose.model('League', leagueSchema);
+//Leave model name as League so as to keep old data.
+//Eventually we'll want to rename the collection
+var Event = mongoose.model('League', eventSchema);
 
-module.exports = League;
-module.exports.schema = leagueSchema;
+module.exports = Event;
+module.exports.schema = eventSchema;

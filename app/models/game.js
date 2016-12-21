@@ -1,6 +1,6 @@
 var mongoose = require('mongoose-fill');
 var Schema = mongoose.Schema;
-var Event = require('./league');
+var Event = require('./event');
 var Team = require('./team');
 
 var gameSchema = new Schema({

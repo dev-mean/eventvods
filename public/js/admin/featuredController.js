@@ -1,11 +1,7 @@
 (function() {
     'use strict';
-
-    function def(prop) {
-        return typeof prop !== "undefined";
-    }
     angular.module('eventApp')
-        .controller('featuredSelectController', function($http, API_BASE_URL, gamesService, leaguesService, tournamentsService, articlesService, notifier) {
+        .controller('featuredSelectController', function($http, API_BASE_URL, gamesService, eventsService, articlesService, notifier) {
             var vm = this;
             vm.tab = 0;
             vm.save = function() {
@@ -23,7 +19,7 @@
                 vm.selectedGame = selected;
             }
             vm.addGame = function() {
-                if (def(vm.selectedGame)) vm.data.games.push(vm.selectedGame);
+                vm.data.games.push(vm.selectedGame);
             };
             vm.deleteEvent = function(index) {
                 vm.data.events.splice(index, 1);
@@ -46,7 +42,7 @@
                     vm.games = res.data;
                     vm.selectedGame = res.data[0];
                 });
-            leaguesService.find()
+            eventsService.find()
                 .then(function(res) {
                     vm.events = res.data;
                     vm.selectedEvent = res.data[0];

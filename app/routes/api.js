@@ -22,7 +22,7 @@ router.use('/staff', require('./api/staffRouter'));
 router.use('/teams', require('./api/teamsRouter'));
 router.use('/users', require('./api/usersRouter'));
 router.use('/user', require('./api/userRouter'));
-router.use('/leagues', require('./api/leaguesRouter'));
+router.use('/events', require('./api/eventsRouter'));
 router.use('/mail', require('./api/mailRouter'));
 
 // 404 handler

@@ -371,53 +371,11 @@
 					controllerAs: 'Games',
 					title: "Games"
 				})
-				.when('/leagues', {
-					templateUrl: '/assets/views/admin/league/list.html',
-					controller: 'leaguesListController',
-					controllerAs: 'leaguesListController',
-					title: "Leagues"
-				})
-				.when('/leagues/new', {
-					templateUrl: '/assets/views/admin/league/form.html',
-					controller: 'addLeagueController',
-					controllerAs: 'leagueFormController',
-					title: "Add League"
-				})
-				.when('/league/:id/edit', {
-					templateUrl: '/assets/views/admin/league/form.html',
-					controller: 'editLeagueController',
-					controllerAs: 'leagueFormController',
-					title: "Edit League"
-				})
-				.when('/league/:id/update', {
-					templateUrl: '/assets/views/admin/editor.html',
-					controller: 'updateLeagueController',
-					controllerAs: 'editorController',
-					title: "League Editor"
-				})
-				.when('/tournaments', {
-					templateUrl: '/assets/views/admin/tournament/list.html',
-					controller: 'tournamentsListController',
-					controllerAs: 'tournamentsListController',
-					title: "Tournaments"
-				})
-				.when('/tournaments/new', {
-					templateUrl: '/assets/views/admin/tournament/form.html',
-					controller: 'addTournamentController',
-					controllerAs: 'tournamentFormController',
-					title: "Add Tournament"
-				})
-				.when('/tournament/:id/edit', {
-					templateUrl: '/assets/views/admin/tournament/form.html',
-					controller: 'editTournamentController',
-					controllerAs: 'tournamentFormController',
-					title: "Edit Tournament"
-				})
-				.when('/tournament/:id/update', {
-					templateUrl: '/assets/views/admin/editor.html',
-					controller: 'updateTournamentController',
-					controllerAs: 'editorController',
-					title: "Tournament Editor"
+				.when('/events', {
+					templateUrl: '/assets/views/admin/events.html',
+					controller: 'eventsListController',
+					controllerAs: 'Events',
+					title: "Events"
 				})
 				.when('/staff', {
 					templateUrl: '/assets/views/admin/staff/list.html',

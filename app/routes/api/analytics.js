@@ -6,7 +6,7 @@ var analytics = google.analytics('v3');
 var async = require('async');
 var moment = require('moment');
 var Article = require('../../models/article');
-var Event = require('../../models/league');
+var Event = require('../../models/event');
 var User = require('../../models/user');
 
 var jwtClient = new google.auth.JWT(

@@ -1,11 +1,11 @@
 ( function() {
     'use strict';
     angular.module( 'eventApp' )
-        .controller( 'tournamentsListController', [ 'tournamentsService', 'ngDialog', '$rootScope',
-            function( Tournaments, dialog, $rootScope ) {
+        .controller( 'leaguesListController', [ 'leaguesService', 'ngDialog', '$rootScope',
+            function( Leagues, dialog, $rootScope ) {
                 var vm = this;
                 vm.loaded = false;
-                vm.tournamentData = [];
+                vm.leagueData = [];
                 vm.filter = {};
                 vm.sort = {
                     sortField: 'name',
@@ -20,10 +20,10 @@
                     },
                     page: 1
                 };
-                Tournaments.find()
+                Leagues.find()
                     .then( function( response ) {
                         vm.loaded = true;
-                        vm.tournamentData = response.data;
+                        vm.leagueData = response.data;
                     } );
                 vm.setSort = function( sortField ) {
                     vm.sort.sortField = sortField;
@@ -39,24 +39,24 @@
                     dialog.open( {
                         template: 'confirmDeleteTemplate',
                         className: 'ngdialog-ev',
-                        controller: [ '$scope', '$location', 'tournamentsService', 'notificationService', '$rootScope', function( $scope, $location, Tournaments, toastr, $rootScope ) {
+                        controller: [ '$scope', '$location', 'leaguesService', 'notificationService', '$rootScope', function( $scope, $location, Leagues, toastr, $rootScope ) {
                             $scope.delete = function() {
-                                Tournaments.delete( $scope.ngDialogData.tournamentID )
+                                Leagues.delete( $scope.ngDialogData.leagueID )
                                     .then( function() {
-                                        toastr.success( 'Tournament deleted.' );
+                                        toastr.success( 'League deleted.' );
                                         $scope.closeThisDialog();
-                                        $rootScope.$broadcast('tournamentsUpdated');
+                                        $rootScope.$broadcast('leaguesUpdated');
                                     } )
                             }
                         } ],
                         data: {
-                            tournamentID: id,
+                            leagueID: id,
                         }
                     } );
-                    $rootScope.$on( 'tournamentsUpdated', function() {
-                        Tournaments.find()
+                    $rootScope.$on( 'leaguesUpdated', function() {
+                        Leagues.find()
                             .then( function( response ) {
-                                vm.tournamentData = response.data;
+                                vm.leagueData = response.data;
                             } );
                     } );
                 }
