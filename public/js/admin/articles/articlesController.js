@@ -26,7 +26,7 @@
 				}];
                 vm.sort = vm.sorts[0];
                 vm.paging = {
-                    itemsPerPage: 6,
+                    itemsPerPage: 10,
                     pages: function() {
                         var pages = Math.ceil(vm.filterData.length / vm.paging.itemsPerPage);
                         if (vm.paging.page > pages && pages > 0) vm.paging.page = pages;
@@ -49,7 +49,7 @@
                 vm.nextPage = function(){
                     if(vm.paging.page < vm.paging.pages()) vm.paging.page++;
                 }
-					
+
                 vm.initAdd = function () {
 					vm.editing = false;
 					parsley.destroy();

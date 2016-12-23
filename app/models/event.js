@@ -50,6 +50,14 @@ var eventSchema = new Schema({
     header_blur: String,
     contents: [Section],
     credits: String
+}, {
+	id: false,
+	toObject: {
+		virtuals: true,
+	},
+	toJSON: {
+		virtuals: true,
+	}
 });
 eventSchema.fill('followers', function(cb){
     User
@@ -58,22 +66,6 @@ eventSchema.fill('followers', function(cb){
         })
         .count()
         .exec(cb);
-});
-eventSchema.virtual('modules').get(function(){
-    var counter = 0;
-    this.contents.forEach((section) => {
-        counter += section.modules.length;
-    });
-    return counter;
-});
-eventSchema.virtual('matches').get(function(){
-    var counter = 0;
-    this.contents.forEach((section) => {
-        section.modules.forEach((module) => {
-            counter += module.matches.length;
-        });
-    });
-    return counter;
 });
 
 //Leave model name as League so as to keep old data.

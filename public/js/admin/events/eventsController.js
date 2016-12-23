@@ -1,16 +1,19 @@
 (function () {
 	'use strict';
 	angular.module('eventApp')
-		.controller('eventsListController', ['eventsService', '$uibModal', 'API_BASE_URL', '$timeout', 'notifier',
-			function (Events, $modal, API, $timeout, notifier) {
+		.controller('eventsListController', ['eventsService', 'gamesService', '$uibModal', 'API_BASE_URL', '$timeout', 'notifier',
+			function (Events, Games, $modal, API, $timeout, notifier) {
 				var vm = this,
 					parsley;
 				vm.editing = false;
 				vm.validating = false;
 				vm.form = {
-					stage: 0
+					stage: 5,
+					media: [],
+					teams: [],
+					staff: []
 				};
-				vm.stages = ['Event Details', 'Team', 'Staff', 'Media', 'Graphics', 'Submit'];
+				vm.stages = ['Details', 'Extras', 'Teams', 'Staff', 'Media', 'Graphics', 'Submit'];
 				vm.eventsData = [];
 				vm.filter = {};
 				vm.sorts = [{
@@ -18,6 +21,18 @@
 					sortField: 'endDate',
 					reverse: true
 				}, {
+					name: 'Followers',
+					sortField: 'followers',
+					reverse: true
+				}, {
+					name: 'Teams',
+					sortField: 'teams.length',
+					reverse: true
+				},{
+					name: 'Staff',
+					sortField: 'staff.length',
+					reverse: true
+				},{
 					name: 'Event Title',
 					sortField: 'name',
 					reverse: false
@@ -28,7 +43,7 @@
 				}];
 				vm.sort = vm.sorts[0];
 				vm.paging = {
-					itemsPerPage: 6,
+					itemsPerPage: 7,
 					pages: function () {
 						var pages = Math.ceil(vm.filterData.length / vm.paging.itemsPerPage);
 						if (vm.paging.page > pages && pages > 0) vm.paging.page = pages;
@@ -86,6 +101,7 @@
 						.then(function (res) {
 							vm.form = res.data;
 							vm.form.stage = 0;
+							vm.form.game = res.data.game._id;
 						})
 				}
                 vm.nextStage = function () {
@@ -133,6 +149,11 @@
 				Events.find()
 					.then(function (res) {
 						vm.eventsData = res.data;
+						
+					});
+				Games.find()
+					.then(function (res) {
+						vm.games = res.data;
 					});
 			}
 		]);

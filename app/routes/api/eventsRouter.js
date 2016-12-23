@@ -13,14 +13,9 @@ var exporter = require('../../controllers/export');
 router.route('/')
     .get(auth.public_api(), ratelimit, cache, function(req, res, next) {
         Event.find()
-            .select('_id game name shortTitle subtitle slug startDate endDate followers')
+            .select('_id game name slug startDate endDate teams staff logo')
             .fill('followers')
-            .populate('game', 'slug icon -_id')
-            .populate({
-				path: 'teams',
-				model: 'Teams',
-                select: 'name tag _id slug icon'
-			})
+            .populate('game', 'slug icon -_id name')
             .exec(function(err, events) {
                 if (err) next(err);
                 else res.json(events);

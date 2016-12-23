@@ -42,7 +42,7 @@
 				</div>
 				<div ng-repeat="article in Articles.filterData = (Articles.articlesData | filter: Articles.search) | orderBy: Articles.sort.sortField:Articles.sort.reverse | offset: (Articles.paging.page - 1) * Articles.paging.itemsPerPage | limitTo: Articles.paging.itemsPerPage"
 				class="list-group-item">
-					<div class="row">
+					<div class="row row-center">
 						<div class="col-xs-8">
 							<a ng-href="/article/{{article.slug}}" target="_blank">
 								<h5 class="list-group-item-heading" ng-bind="article.title"></h5>

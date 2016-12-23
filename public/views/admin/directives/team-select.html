@@ -1,0 +1,28 @@
+<div class="list-directive">
+	<div class="list-group" sv-root sv-part="model">
+		<div class="list-group-item">
+			<div class="form-group"><label>Add Team</label>
+				<div class="input-group">
+					<select class="form-control" ng-options="team.name for team in data.teams | filter:data.filter" ng-model="data.selectedTeam"></select>
+					<span class="input-group-btn"><button class="btn btn-default" type="button" ng-click="$add()">Add</button></span>
+				</div>
+			</div>
+		</div>
+		<div class="list-group-item" sv-element="{'containment': '.list-group'}" ng-repeat="team in model track by $index">
+			<div class="media">
+				<div class="media-left media-middle">
+                    <img class="media-object" ng-src="{{team.icon}}" />
+                </div>
+				<div class="media-body">
+                    <a ng-href="/team/{{team.slug}}" target="_blank">
+                        <h4 class="list-group-item-heading media-heading">{{team.name}}</h4>
+                    </a>
+                    <p class="list-group-item-text text-muted media-body">
+                        <span sv-handle class="fa fa-fw fa-lg fa-sort"></span>
+                        <span class="fa fa-fw fa-lg fa-times" ng-click="$remove($index)"></span>
+                    </p>
+                </div>
+			</div>
+		</div>
+	</div>
+</div>

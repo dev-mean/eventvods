@@ -9,6 +9,11 @@
 				if (typeof $route.current.title !== "undefined") document.title = "Eventvods - " + $route.current.title;
 			});
 		}])
+		.run(function(editableOptions, editableThemes) {
+			editableThemes.bs3.inputClass = 'input-sm';
+			editableThemes.bs3.buttonsClass = 'btn-sm';
+			editableOptions.theme = 'bs3';
+		})
 		// Offset filter for paging lists
 		.filter('offset', function () {
 			return function (input, start) {
@@ -186,6 +191,7 @@
 				scope: {
 					model: '='
 				},
+				replace: true,
 				link: function ($scope) {
 					$scope.data = {};
 					staffService.find()
@@ -201,7 +207,7 @@
 						$scope.model.splice($index, 1);
 					}
 				},
-				template: '<div class="sortable-container" sv-root sv-part="model"><div><span><select ng-options="staffMember.name for staffMember in data.staff | filter:data.filter" ng-model="data.selectedStaff"></select><input class="form-style" placeholder="Filter Staff" ng-model="data.filter" /></span><button-right icon="fa-plus" ng-click="$add()" /></div><div sv-element ng-repeat="staff in model track by $index"><span class="no-grow"><i sv-handle class="fa fa-lg fa-fw fa-bars"></i>{{$index + 1}}.</span><span editable-text="staff.name" ng-bind="staff.name"></span><span editable-text="staff.role" ng-bind="staff.role"></span><button-right class="del" icon="fa-minus" ng-click="$remove($index)" /></div></div>'
+				templateUrl: '/assets/views/admin/directives/staff-select.html'
 			};
 		})
 		.directive('teamSelect', function (teamsService) {
@@ -211,10 +217,11 @@
 					model: '=',
 					game: '=?'
 				},
+				replace: true,
 				link: function ($scope) {
 					function filterTeams() {
 						$scope.data.teams = $scope.teams.filter(function (team) {
-							return (typeof team.game !== "undefined" && team.game._id === $scope.game);
+							return (typeof team.game !== "undefined" && team.game !== null && team.game._id === $scope.game);
 						});
 						$scope.data.selectedTeam = $scope.data.teams[0];
 					}
@@ -240,7 +247,7 @@
 						}
 					})
 				},
-				template: '<div class="sortable-container" sv-root sv-part="model"><div><span><select ng-options="team.name for team in data.teams | filter:data.filter" ng-model="data.selectedTeam"></select><input class="form-style" placeholder="Filter Teams" ng-model="data.filter" /></span><button-right icon="fa-plus" ng-click="$add()" /></div><div sv-element ng-repeat="team in model track by $index"><span class="no-grow"><i sv-handle class="fa fa-lg fa-fw fa-bars"></i>{{$index + 1}}.</span><span class="no-grow"><img class="icon-48" ng-src="{{team.icon}}" /></span><span editable-text="team.tag" ng-bind="team.tag"></span><span editable-text="team.name" ng-bind="team.name"></span><button-right class="del" icon="fa-minus" ng-click="$remove($index)" /></div></div>'
+				templateUrl: '/assets/views/admin/directives/team-select.html'
 			};
 		})
 		.directive('mediaList', function ($http, API_BASE_URL) {
@@ -249,12 +256,14 @@
 				scope: {
 					model: '='
 				},
+				replace: true,
 				link: function ($scope) {
 					$http.get(API_BASE_URL + '/data/mediaTypes')
 						.then(function (res) {
 							$scope.types = res.data;
-							//$scope.data.type = res.data[0];
-							$scope.data.type = "";
+							$scope.data = {
+								type: $scope.types[0]
+							}
 						});
 					$scope.$name_changed = false;
 					$scope.data = {};
@@ -280,75 +289,9 @@
 						$scope.$name_changed = true;
 					}
 				},
-				template: '<div class="sortable-container" sv-root sv-part="model"><div><span><select ng-options="t as t for t in types" ng-model="data.type" ng-change="$change()"><option value="">Select Type</option></select></span><span><input type="text" placeholder="Media Name" ng-model="data.name" ng-change="$changed()" /></span><span><input type="text" placeholder="Media Link" ng-model="data.link" /></span><button-right icon="fa-plus" ng-click="$add()" /></div><div sv-element ng-repeat="media in model track by $index"><span class="no-grow"><i sv-handle class="fa fa-lg fa-fw fa-bars"></i>{{$index + 1}}.</span><span editable-text="media.name" ng-bind="media.name"></span><span editable-text="media.link" ng-bind="media.link"></span><span class="center"><select ng-options="t as t for t in types" ng-model="media.type"></select></span><button-right class="del" icon="fa-minus" ng-click="$remove($index)" /></div></div>'
+				templateUrl: '/assets/views/admin/directives/media-list.html'
 			};
 		})
-		.directive('buttonRight', function () {
-			return {
-				restrict: 'E',
-				replace: true,
-				scope: {
-					icon: '@',
-					class: '@'
-				},
-				template: '<a class="btn lg icon-only float-right {{class}}"><i class="fa fa-lg fa-fw {{icon}}"></i></a>'
-			};
-		})
-		// Available BB code snippets
-		.value('snippets', {
-			"b": "<b>$1</b>", // Bolded text
-			"u": "<u>$1</u>", // Underlined text
-			"i": "<i>$1</i>", // Italicized text
-			"s": "<s>$1</s>", // Strikethrough text
-			"br": "<br />",
-			"hr": "<hr />",
-			"center": "<center>$1</center>", //Center text
-			"left": "<left>$1</left>", //Center text
-			"right": "<right>$1</right>", //Center text
-			"h1": "<h1>$1</h1>",
-			"h2": "<h2>$1</h2>",
-			"h3": "<h3>$1</h3>",
-			"h4": "<h4>$1</h4>",
-			"h5": "<h5>$1</h5>",
-			"img": "<img src=\"$1\" />", // Image without title
-			"img=([^\\[\\]<>]+?)": "<img src=\"$2\" width=\"$1\" />", // Image with width
-			"url": "<a href=\"$1\" target=\"_blank\" title=\"$1\">$1</a>", // Simple URL
-			"url=([^\\[\\]<>]+?)": "<a href=\"$1\" target=\"_blank\" title=\"$2\">$2</a>", // URL with title
-		})
-		// Format BB code
-		.directive('ksBbcode', ['snippets', function (snippets) {
-			return {
-				"restrict": "A",
-				"link": function ($scope, $element, $attrs) {
-					$scope.$watch(function () {
-						var contents = $element.html().replace(/^\s+|\s+$/i, '');
-
-						for (var i in snippets) {
-							var regexp = new RegExp('\\[' + i + '\\](.+?)\\[\/' + i.replace(/[^a-z0-9]/g, '') + '\\]', 'gi');
-
-							contents = contents.replace(regexp, snippets[i]);
-						}
-
-						$element.html(contents);
-					});
-				}
-			};
-		}])
-		// Format new lines
-		.directive('ksNl2br', [function () {
-			return {
-				"restrict": "A",
-				"link": function ($scope, $element, $attrs) {
-					$scope.$watch(function () {
-						var contents = $element.html().replace(/^\s+|\s+$/i, '');
-
-						contents = contents.replace(/(?:\r\n|\n|\r)/gi, '<br>');
-
-						$element.html(contents);
-					});
-				}
-			};
-		}])
 		.config(function ($routeProvider, $locationProvider) {
 			$locationProvider.html5Mode(true);
 			$routeProvider

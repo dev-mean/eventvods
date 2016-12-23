@@ -9,7 +9,7 @@
 		</div>
 	</div>
 	<div class="col-xs-2">
-		<button ng-show="Events.editing || Events.form.stage == 5" class="btn btn-primary pull-right" ng-click="Events.initAdd()">Add Article</button>
+		<button ng-show="Events.editing || Events.form.stage == 6" class="btn btn-primary pull-right" ng-click="Events.initAdd()">Add Event</button>
 	</div>
 </div>
 <br />
@@ -42,20 +42,28 @@
 				</div>
 				<div ng-repeat="event in Events.filterData = (Events.eventsData | filter: Events.search) | orderBy: Events.sort.sortField:Events.sort.reverse | offset: (Events.paging.page - 1) * Events.paging.itemsPerPage | limitTo: Events.paging.itemsPerPage"
 				class="list-group-item">
-					<div class="row">
+					<div class="row row-center">
 						<div class="col-xs-8">
-							<a ng-href="/event/{{event.slug}}" target="_blank">
-								<h5 class="list-group-item-heading">{{event.name}}</h5>
-							</a>
-							<p class="list-group-item-text text-muted">
-								<span>{{event.shortTitle}} &bull; {{event.subtitle}} &bull; {{event.startDate | date:'MMM dd, yyyy'}} until {{event.endDate | date:'MMM dd, yyyy'}}</span>
-							</p>
+							<div class="media">
+								<div class="media-left media-middle">
+									<img class="media-object" ng-src="{{event.logo}}" />
+								</div>
+								<div class="media-body">
+									<a ng-href="/event/{{event.slug}}" target="_blank">
+										<h5 class="list-group-item-heading media-heading">{{event.name}}</h5>
+									</a>
+									<p class="list-group-item-text text-muted media-body">
+										<span>{{event.startDate | date:'MMM dd, yyyy'}} until {{event.endDate | date:'MMM dd, yyyy'}}</span> <br />
+										<span>{{event.followers}} Followers &bull; {{event.teams.length}} Teams &bull; {{event.staff.length}} Staff</span>
+									</p>
+								</div>
+							</div>
 						</div>
 						<div class="col-xs-4 text-right fa-fix">
-							<a ng-click="Events.edit(article._id)" class="btn btn-primary btn-sm">
+							<a ng-click="Events.edit(event._id)" class="btn btn-primary btn-sm">
                                 Edit
                             </a>
-							<a ng-click="Events.delete(article)" class="btn btn-danger btn-sm">
+							<a ng-click="Events.delete(event)" class="btn btn-danger btn-sm">
                                 Delete
                             </a>
 						</div>
@@ -78,101 +86,174 @@
 		</div>
 	</div>
 	<div class="col-xs-12 col-sm-12 col-md-6">
-		<form name="form" id="addEventForm" ng-cloak>
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<h2 class="panel-title"><i class="fa fa-pencil"></i>&nbsp;&nbsp;&nbsp; {{Events.editing ? "Edit" : "Add"}} Article</h2>
-				</div>
-				<div class="panel-body" ng-show="Events.form.stage == 0">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h2 class="panel-title"><i class="fa fa-calendar"></i>&nbsp;&nbsp;&nbsp; {{Events.editing ? "Edit" : "Add"}} Event</h2>
+			</div>
+			<div class="panel-body" ng-show="Events.form.stage == 0">
+				<form name="form" id="addEventForm" ng-cloak>
 					<div class="form-group">
 						<label>
-                            Article Title
+                            Event Title
                         </label>
-						<input type="text"class="form-control" placeholder="Article Title" ng-model="Events.form.title" data-parsley-trigger="keyup"
+						<input type="text" class="form-control" placeholder="e.g. League Championship Series" ng-model="Events.form.name" data-parsley-trigger="keyup"
 						required/>
+					</div>
+					<div class="form-group">
+						<label>
+                            Short Title
+                        </label>
+						<input type="text" class="form-control" placeholder="e.g. EU LCS" ng-model="Events.form.shortTitle" required/>
 					</div>
 					<div class="form-group">
 						<label>
                             URL Slug
                         </label>
 						<input id="slug" class="form-control" type="text" placeholder="URL Slug" ng-model="Events.form.slug" data-parsley-trigger="keyup"
-						data-parsley-remote-message="Slug already in use." required/>
+						data-parsley-remote-message="Slug already in use." required />
 					</div>
 					<div class="form-group">
 						<p class="form-control-static">
-                            Article will be accessible at eventvods.com/article/{{Events.form.slug}}
-                        </p>
+							Event will be accessible at eventvods.com/event/{{Events.form.slug}}
+						</p>
 					</div>
 					<div class="form-group">
 						<label>
-                            Publish Date (For Display Only)
-                        </label>
-                        <div class="input-group">
-						    <input ng-model="Events.form.publishDate" ng-click="dpOpen = true" ng-focus="dpOpen = true"
-								is-open="dpOpen" uib-datepicker-popup="MMM dd, yyyy"
-								type="text" placeholder="Click to select date."
-								data-parsley-trigger="input change" data-parsley-errors-container="#date-errors"
-								required ng-required="true" class="form-control"/>
-                            <span class="input-group-btn">
-                                <button class="btn btn-default" type="button" ng-click="dpOpen = !dpOpen"><i class="fa fa-lg fa-calendar-plus-o"></i></button>
-                            </span>
-                        </div>
-						<span id="date-errors"></span>
-					</div>
-					<br />
-					<div class="checkbox">
-                        <label for="published">
-                            <input id="published" type="checkbox" ng-model="Events.form.published" name="published" />
-                            Article Published
-                        </label>
-					</div>
-				</div>
-				<div class="panel-body" ng-show="Events.form.stage == 1">
-					<div class="form-group">
-						<label>Article Contents</label>
-						<text-angular class="form-control-static" ng-model="Events.form.content"></text-angular>
-					</div>
-				</div>
-				<div class="panel-body" ng-show="Events.form.stage == 2">
-					<div class="form-group">
-						<label>
-							Article Header (optional)
+							Game
 						</label>
-						<image-drop model="Events.form.header" preview-width="300" preview-height="100" />
+						<select class="form-control" ng-model="Events.form.game" ng-options="game._id as game.name for game in Events.games" required>
+							<option value="">Select Game</option>
+						</select>
 					</div>
 					<div class="form-group">
 						<label>
+                            Start Date
+                        </label>
+						<div class="input-group">
+							<input ng-model="Events.form.startDate" ng-click="dp1Open = true" ng-focus="dp1Open = true" is-open="dp1Open" uib-datepicker-popup="MMM dd, yyyy"
+							type="text" placeholder="Click to select date." data-parsley-trigger="input change" data-parsley-errors-container="#date1-errors"
+							required ng-required="true" class="form-control" />
+							<span class="input-group-btn">
+                                <button class="btn btn-default" type="button" ng-click="dp1Open = !dp1Open"><i class="fa fa-lg fa-calendar-plus-o"></i></button>
+                            </span>
+						</div>
+						<span id="date1-errors"></span>
+					</div>
+					<div class="form-group">
+						<label>
+                            End Date
+                        </label>
+						<div class="input-group">
+							<input ng-model="Events.form.endDate" ng-click="dp2Open = true" ng-focus="dp2Open = true" is-open="dp2Open" uib-datepicker-popup="MMM dd, yyyy"
+							type="text" placeholder="Click to select date." data-parsley-trigger="input change" data-parsley-errors-container="#date2-errors"
+							required ng-required="true" class="form-control" />
+							<span class="input-group-btn">
+                                <button class="btn btn-default" type="button" ng-click="dp2Open = !dp2Open"><i class="fa fa-lg fa-calendar-plus-o"></i></button>
+                            </span>
+						</div>
+						<span id="date2-errors"></span>
+					</div>
+				</form>
+			</div>
+			<div class="panel-body" ng-show="Events.form.stage == 1">
+				<div class="form-group">
+					<label>
+                            Subtitle
+                        </label>
+					<input type="text" class="form-control" placeholder="e.g. Summer Split" ng-model="Events.form.subtitle" />
+				</div>
+				<div class="form-group">
+					<label>
+							Patch
+						</label>
+					<input placeholder="e.g. 6.14" type="text" class="form-control" ng-model="Events.form.patch" />
+				</div>
+				<div class="form-group">
+					<label>
+							Prize Pool
+						</label>
+					<input placeholder="e.g. $2million" type="text" class="form-control" ng-model="Events.form.prize" />
+				</div>
+				<div class="form-group">
+					<label>
+							League Format
+						</label>
+					<input placeholder="e.g. Round Robin" type="text" class="form-control" ng-model="Events.form.format" />
+				</div>
+				<div class="form-group">
+					<label>
+							Twitch URL (Optional)
+						</label>
+					<input placeholder="e.g. http://twitch.tv/riotgames" type="text" class="form-control" ng-model="Events.form.twitchStream"
+					/>
+				</div>
+				<div class="form-group">
+					<label>
+							Youtube URL (Optional)
+						</label>
+					<input placeholder="e.g. http://youtube.com/lolesports" type="text" class="form-control" ng-model="Events.form.youtubeStream"
+					/>
+				</div>
+			</div>
+			<team-select model="Events.form.teams" game="Events.form.game" ng-show="Events.form.stage == 2">
+			</team-select>
+			<staff-select model="Events.form.staff" ng-show="Events.form.stage == 3">
+			</staff-select>
+			<media-list model="Events.form.media" ng-show="Events.form.stage == 4">
+			</media-list>
+			<div class="panel-body" ng-show="Events.form.stage == 5">
+				<div class="form-group">
+					<label>
+							Event Logo
+						</label>
+					<image-drop model="Events.form.logo" preview-width="128" preview-height="128" />
+				</div>
+				<div class="form-group">
+					<label>
+							Event Header
+						</label>
+					<image-drop model="Events.form.header" preview-width="300" preview-height="100" />
+				</div>
+				<div class="form-group">
+					<label>
 							Header Photo ©
 						</label>
-						<input class="form-control" type="text" placeholder="e.g. Riot Events" ng-model="Events.form.credits" data-parsley-trigger="keyup"
-						/>
-					</div>
+					<input class="form-control" type="text" placeholder="e.g. Riot Events" ng-model="Events.form.credits" />
 				</div>
-				<div class="panel-footer">
-					<div class="row">
-						<div class="col-xs-3 text-center">
-							<button ng-show="Events.form.stage > 0 && Events.form.stage < 2" class="btn btn-primary pull-left" ng-click="Events.prevStage()"
-							type="button">
+				<div class="form-group">
+					<label>
+							Featured Orientation
+						</label>
+					<select class="form-control" ng-model="Events.form.textOrientation">
+							<option value="left">Left</option>
+							<option value="right">Right</option>
+						</select>
+				</div>
+			</div>
+			<div class="panel-footer">
+				<div class="row">
+					<div class="col-xs-3 text-center">
+						<button ng-show="Events.form.stage > 0 && Events.form.stage < 6" class="btn btn-primary pull-left" ng-click="Events.prevStage()"
+						type="button">
 								<i class="glyphicon glyphicon-chevron-left"></i>
 								{{Events.stages[Events.form.stage - 1]}}
 							</button>
-						</div>
-						<div class="col-xs-6 text-center">
-							<span ng-if="Events.form.stage < 3">Stage {{Events.form.stage+1}} of 3</span>
-							<span ng-if="Events.form.stage == 3">Article {{Events.editing ? "Updated" : "Added"}}</span>
-							<br />
-							<uib-progressbar value="Events.form.stage" max="3"></uib-progressbar>
-						</div>
-						<div class="col-xs-3 text-center">
-							<button ng-show="Events.form.stage < 3" class="btn btn-primary pull-right" ng-click="Events.nextStage()" type="button">
+					</div>
+					<div class="col-xs-6 text-center">
+						<span ng-if="Events.form.stage < 6">Stage {{Events.form.stage+1}} of 6</span>
+						<span ng-if="Events.form.stage == 6">Event {{Events.editing ? "Updated" : "Added"}}</span>
+						<br />
+						<uib-progressbar value="Events.form.stage" max="6"></uib-progressbar>
+					</div>
+					<div class="col-xs-3 text-center">
+						<button ng-show="Events.form.stage < 6" class="btn btn-primary pull-right" ng-click="Events.nextStage()" type="button">
 							<i no-ng-animate ng-if="Events.validating" class="fa fa-refresh fa-spin fa-lg fa-fw"></i>
 							{{Events.validating ? '' : Events.stages[Events.form.stage + 1]}}
 							<i class="glyphicon glyphicon-chevron-right"></i>
 							</button>
-						</div>
 					</div>
 				</div>
 			</div>
-		</form>
+		</div>
 	</div>
 </div>

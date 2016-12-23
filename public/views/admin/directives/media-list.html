@@ -1,0 +1,38 @@
+<div class="list-directive">
+	<div class="list-group" sv-root sv-part="model">
+		<div class="list-group-item">
+			<div class="row">
+				<div class="col-xs-12 col-md-4">
+					<div class="form-group">
+						<label>Media Type</label>
+						<select class="form-control" ng-options="t as t for t in types" ng-model="data.type" ng-change="$change()"></select>
+					</div>
+				</div>
+				<div class="col-xs-12 col-md-4">
+					<div class="form-group">
+						<label>Media Name</label>
+						<input class="form-control" type="text" placeholder="Media Name" ng-model="data.name" ng-change="$changed()"/>
+					</div>
+				</div>
+				<div class="col-xs-12 col-md-4">
+					<div class="form-group">
+						<label>Media Link</label>
+						<div class="input-group">
+							<input class="form-control" type="text" placeholder="Media Link" ng-model="data.link" />
+							<span class="input-group-btn"><button class="btn btn-default" type="button" ng-click="$add()">Add</button></span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="list-group-item" sv-element="{'containment': '.list-group'}" ng-repeat="media in model track by $index">
+			<h4 editable-text="media.name" ng-bind="media.name" class="list-group-item-heading text-primary"></h4>
+			<p class="list-group-item-text text-muted media-body">
+				<span sv-handle class="fa fa-fw fa-lg fa-sort"></span>
+				<span class="fa fa-fw fa-lg fa-times" ng-click="$remove($index)"></span>
+				<span class="text-primary" editable-text="media.link" ng-bind="media.link"></span>
+				<span class="text-primary" editable-select="media.type" e-ng-options="t as t for t in types"></span>
+			</p>
+		</div>
+	</div>
+</div>
