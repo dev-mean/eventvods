@@ -49,6 +49,7 @@
                 vm.nextPage = function(){
                     if(vm.paging.page < vm.paging.pages()) vm.paging.page++;
                 }
+					
                 vm.initAdd = function () {
 					vm.editing = false;
 					parsley.destroy();

@@ -28,7 +28,7 @@ router.get('/gameSlug/:slug/:id', function(req, res, next) {
     });
 });
 
-router.get('/leagueSlug/:slug', function(req, res, next) {
+router.get('/eventSlug/:slug', function(req, res, next) {
     Event.find({
             slug: req.params.slug
         })
@@ -39,7 +39,7 @@ router.get('/leagueSlug/:slug', function(req, res, next) {
             else return res.sendStatus('200');
         });
 });
-router.get('/leagueSlug/:slug/:id', function(req, res, next) {
+router.get('/eventSlug/:slug/:id', function(req, res, next) {
     Event.findOne({
         slug: req.params.slug
     }, function(err, doc) {

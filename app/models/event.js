@@ -6,6 +6,7 @@ var Team = require('./team').schema;
 var slug = require('slug');
 var Section = require('./section').schema;
 var moment = require('moment');
+var User = require('./user');
 var eventSchema = new Schema({
     name: {
         type: String,
@@ -50,7 +51,30 @@ var eventSchema = new Schema({
     contents: [Section],
     credits: String
 });
-
+eventSchema.fill('followers', function(cb){
+    User
+        .find({
+            "following": this._id
+        })
+        .count()
+        .exec(cb);
+});
+eventSchema.virtual('modules').get(function(){
+    var counter = 0;
+    this.contents.forEach((section) => {
+        counter += section.modules.length;
+    });
+    return counter;
+});
+eventSchema.virtual('matches').get(function(){
+    var counter = 0;
+    this.contents.forEach((section) => {
+        section.modules.forEach((module) => {
+            counter += module.matches.length;
+        });
+    });
+    return counter;
+});
 
 //Leave model name as League so as to keep old data.
 //Eventually we'll want to rename the collection

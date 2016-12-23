@@ -13,7 +13,8 @@ var exporter = require('../../controllers/export');
 router.route('/')
     .get(auth.public_api(), ratelimit, cache, function(req, res, next) {
         Event.find()
-            .select('_id game name subtitle slug')
+            .select('_id game name shortTitle subtitle slug startDate endDate followers')
+            .fill('followers')
             .populate('game', 'slug icon -_id')
             .populate({
 				path: 'teams',

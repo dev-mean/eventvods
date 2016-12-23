@@ -79,7 +79,7 @@
                     }
                     return (parseInt(time[2] * 3600) + parseInt(time[4] * 60) + parseInt(time[6]));
                 }
-                $http.get(API + '/leagues/slug/' + $routeParams.slug)
+                $http.get(API + '/events/slug/' + $routeParams.slug)
                     .then(function(res) {
                         vm.data = res.data;
                         if (vm.data.game.slug === "csgo" || vm.data.game.slug === "overwatch") vm.simple_tables = true;

@@ -5,11 +5,11 @@
 				<a href="/manage/">Eventvods</a>
 				<i class="fa fa-fw fa-fix fa-level-down"></i>
 			</h5>
-			<h2>Articles</h2>
+			<h2>Events</h2>
 		</div>
 	</div>
 	<div class="col-xs-2">
-		<button ng-show="Articles.editing || Articles.form.stage == 3" class="btn btn-primary pull-right" ng-click="Articles.initAdd()">Add Article</button>
+		<button ng-show="Events.editing || Events.form.stage == 5" class="btn btn-primary pull-right" ng-click="Events.initAdd()">Add Article</button>
 	</div>
 </div>
 <br />
@@ -17,7 +17,7 @@
 	<div class="col-xs-12 col-sm-12 col-md-6">
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<h2 class="panel-title"><i class="fa fa-pencil"></i>&nbsp;&nbsp;&nbsp; Articles</h2>
+				<h2 class="panel-title"><i class="fa fa-calendar"></i>&nbsp;&nbsp;&nbsp; Events</h2>
 			</div>
 			<div class="list-group">
 				<div class="list-group-item">
@@ -27,7 +27,7 @@
 								<div class="input-group-addon">
 									Filter
 								</div>
-								<input type="text" ng-model="Articles.search" placeholder="Enter Query" tabindex="1" class="form-control" />
+								<input type="text" ng-model="Events.search" placeholder="Enter Query" tabindex="1" class="form-control" />
 							</div>
 						</div>
 						<div class="col-xs-12 col-sm-6">
@@ -35,42 +35,42 @@
 								<div class="input-group-addon">
 									Sort By
 								</div>
-								<select ng-options="opt.name for opt in Articles.sorts track by opt.sortField" ng-model="Articles.sort" class="form-control"></select>
+								<select ng-options="opt.name for opt in Events.sorts track by opt.sortField" ng-model="Events.sort" class="form-control"></select>
 							</div>
 						</div>
 					</div>
 				</div>
-				<div ng-repeat="article in Articles.filterData = (Articles.articlesData | filter: Articles.search) | orderBy: Articles.sort.sortField:Articles.sort.reverse | offset: (Articles.paging.page - 1) * Articles.paging.itemsPerPage | limitTo: Articles.paging.itemsPerPage"
+				<div ng-repeat="event in Events.filterData = (Events.eventsData | filter: Events.search) | orderBy: Events.sort.sortField:Events.sort.reverse | offset: (Events.paging.page - 1) * Events.paging.itemsPerPage | limitTo: Events.paging.itemsPerPage"
 				class="list-group-item">
 					<div class="row">
 						<div class="col-xs-8">
-							<a ng-href="/article/{{article.slug}}" target="_blank">
-								<h5 class="list-group-item-heading" ng-bind="article.title"></h5>
+							<a ng-href="/event/{{event.slug}}" target="_blank">
+								<h5 class="list-group-item-heading">{{event.name}}</h5>
 							</a>
 							<p class="list-group-item-text text-muted">
-								{{article.publishDate | date:'MMM dd, yyyy'}} &bull; By {{article.author.displayName}}
+								<span>{{event.shortTitle}} &bull; {{event.subtitle}} &bull; {{event.startDate | date:'MMM dd, yyyy'}} until {{event.endDate | date:'MMM dd, yyyy'}}</span>
 							</p>
 						</div>
 						<div class="col-xs-4 text-right fa-fix">
-							<a ng-click="Articles.edit(article._id)" class="btn btn-primary btn-sm">
+							<a ng-click="Events.edit(article._id)" class="btn btn-primary btn-sm">
                                 Edit
                             </a>
-							<a ng-click="Articles.delete(article)" class="btn btn-danger btn-sm">
+							<a ng-click="Events.delete(article)" class="btn btn-danger btn-sm">
                                 Delete
                             </a>
 						</div>
 					</div>
 				</div>
-				<div ng-if="Articles.paging.pages() > 1" class="panel-footer text-center">
+				<div ng-if="Events.paging.pages() > 1" class="panel-footer text-center">
 					<ul class="pagination">
-						<li ng-class="{disabled: Articles.paging.page == 1}">
-							<a ng-click="Articles.prevPage()">&laquo;</a>
+						<li ng-class="{disabled: Events.paging.page == 1}">
+							<a ng-click="Events.prevPage()">&laquo;</a>
 						</li>
 						<li class="active">
-							<span>Page {{Articles.paging.page}} of {{Articles.paging.pages()}}</span>
+							<span>Page {{Events.paging.page}} of {{Events.paging.pages()}}</span>
 						</li>
-						<li ng-class="{disabled: !(Articles.paging.pages() > 1 && Articles.paging.page < Articles.paging.pages())}">
-							<a ng-click="Articles.nextPage()">&raquo;</a>
+						<li ng-class="{disabled: !(Events.paging.pages() > 1 && Events.paging.page < Events.paging.pages())}">
+							<a ng-click="Events.nextPage()">&raquo;</a>
 						</li>
 					</ul>
 				</div>
@@ -78,29 +78,29 @@
 		</div>
 	</div>
 	<div class="col-xs-12 col-sm-12 col-md-6">
-		<form name="form" id="addArticleForm" ng-cloak>
+		<form name="form" id="addEventForm" ng-cloak>
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<h2 class="panel-title"><i class="fa fa-pencil"></i>&nbsp;&nbsp;&nbsp; {{Articles.editing ? "Edit" : "Add"}} Article</h2>
+					<h2 class="panel-title"><i class="fa fa-pencil"></i>&nbsp;&nbsp;&nbsp; {{Events.editing ? "Edit" : "Add"}} Article</h2>
 				</div>
-				<div class="panel-body" ng-show="Articles.form.stage == 0">
+				<div class="panel-body" ng-show="Events.form.stage == 0">
 					<div class="form-group">
 						<label>
                             Article Title
                         </label>
-						<input type="text"class="form-control" placeholder="Article Title" ng-model="Articles.form.title" data-parsley-trigger="keyup"
+						<input type="text"class="form-control" placeholder="Article Title" ng-model="Events.form.title" data-parsley-trigger="keyup"
 						required/>
 					</div>
 					<div class="form-group">
 						<label>
                             URL Slug
                         </label>
-						<input id="slug" class="form-control" type="text" placeholder="URL Slug" ng-model="Articles.form.slug" data-parsley-trigger="keyup"
+						<input id="slug" class="form-control" type="text" placeholder="URL Slug" ng-model="Events.form.slug" data-parsley-trigger="keyup"
 						data-parsley-remote-message="Slug already in use." required/>
 					</div>
 					<div class="form-group">
 						<p class="form-control-static">
-                            Article will be accessible at eventvods.com/article/{{Articles.form.slug}}
+                            Article will be accessible at eventvods.com/article/{{Events.form.slug}}
                         </p>
 					</div>
 					<div class="form-group">
@@ -108,7 +108,7 @@
                             Publish Date (For Display Only)
                         </label>
                         <div class="input-group">
-						    <input ng-model="Articles.form.publishDate" ng-click="dpOpen = true" ng-focus="dpOpen = true"
+						    <input ng-model="Events.form.publishDate" ng-click="dpOpen = true" ng-focus="dpOpen = true"
 								is-open="dpOpen" uib-datepicker-popup="MMM dd, yyyy"
 								type="text" placeholder="Click to select date."
 								data-parsley-trigger="input change" data-parsley-errors-container="#date-errors"
@@ -122,51 +122,51 @@
 					<br />
 					<div class="checkbox">
                         <label for="published">
-                            <input id="published" type="checkbox" ng-model="Articles.form.published" name="published" />
+                            <input id="published" type="checkbox" ng-model="Events.form.published" name="published" />
                             Article Published
                         </label>
 					</div>
 				</div>
-				<div class="panel-body" ng-show="Articles.form.stage == 1">
+				<div class="panel-body" ng-show="Events.form.stage == 1">
 					<div class="form-group">
 						<label>Article Contents</label>
-						<text-angular class="form-control-static" ng-model="Articles.form.content"></text-angular>
+						<text-angular class="form-control-static" ng-model="Events.form.content"></text-angular>
 					</div>
 				</div>
-				<div class="panel-body" ng-show="Articles.form.stage == 2">
+				<div class="panel-body" ng-show="Events.form.stage == 2">
 					<div class="form-group">
 						<label>
 							Article Header (optional)
 						</label>
-						<image-drop model="Articles.form.header" preview-width="300" preview-height="100" />
+						<image-drop model="Events.form.header" preview-width="300" preview-height="100" />
 					</div>
 					<div class="form-group">
 						<label>
 							Header Photo ©
 						</label>
-						<input class="form-control" type="text" placeholder="e.g. Riot Articles" ng-model="Articles.form.credits" data-parsley-trigger="keyup"
+						<input class="form-control" type="text" placeholder="e.g. Riot Events" ng-model="Events.form.credits" data-parsley-trigger="keyup"
 						/>
 					</div>
 				</div>
 				<div class="panel-footer">
 					<div class="row">
 						<div class="col-xs-3 text-center">
-							<button ng-show="Articles.form.stage > 0 && Articles.form.stage < 2" class="btn btn-primary pull-left" ng-click="Articles.prevStage()"
+							<button ng-show="Events.form.stage > 0 && Events.form.stage < 2" class="btn btn-primary pull-left" ng-click="Events.prevStage()"
 							type="button">
 								<i class="glyphicon glyphicon-chevron-left"></i>
-								{{Articles.stages[Articles.form.stage - 1]}}
+								{{Events.stages[Events.form.stage - 1]}}
 							</button>
 						</div>
 						<div class="col-xs-6 text-center">
-							<span ng-if="Articles.form.stage < 3">Stage {{Articles.form.stage+1}} of 3</span>
-							<span ng-if="Articles.form.stage == 3">Article {{Articles.editing ? "Updated" : "Added"}}</span>
+							<span ng-if="Events.form.stage < 3">Stage {{Events.form.stage+1}} of 3</span>
+							<span ng-if="Events.form.stage == 3">Article {{Events.editing ? "Updated" : "Added"}}</span>
 							<br />
-							<uib-progressbar value="Articles.form.stage" max="3"></uib-progressbar>
+							<uib-progressbar value="Events.form.stage" max="3"></uib-progressbar>
 						</div>
 						<div class="col-xs-3 text-center">
-							<button ng-show="Articles.form.stage < 3" class="btn btn-primary pull-right" ng-click="Articles.nextStage()" type="button">
-							<i no-ng-animate ng-if="Articles.validating" class="fa fa-refresh fa-spin fa-lg fa-fw"></i>
-							{{Articles.validating ? '' : Articles.stages[Articles.form.stage + 1]}}
+							<button ng-show="Events.form.stage < 3" class="btn btn-primary pull-right" ng-click="Events.nextStage()" type="button">
+							<i no-ng-animate ng-if="Events.validating" class="fa fa-refresh fa-spin fa-lg fa-fw"></i>
+							{{Events.validating ? '' : Events.stages[Events.form.stage + 1]}}
 							<i class="glyphicon glyphicon-chevron-right"></i>
 							</button>
 						</div>
