@@ -8,7 +8,7 @@
 				vm.editing = false;
 				vm.validating = false;
 				vm.form = {
-					stage: 5,
+					stage: 0,
 					media: [],
 					teams: [],
 					staff: []
