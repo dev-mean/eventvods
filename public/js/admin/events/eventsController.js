@@ -1,7 +1,7 @@
 (function () {
 	'use strict';
 	angular.module('eventApp')
-		.controller('eventsListController', ['eventsService', 'gamesService', '$uibModal', 'API_BASE_URL', '$timeout', 'notifier',
+		.controller('eventsController', ['eventsService', 'gamesService', '$uibModal', 'API_BASE_URL', '$timeout', 'notifier',
 			function (Events, Games, $modal, API, $timeout, notifier) {
 				var vm = this,
 					parsley;

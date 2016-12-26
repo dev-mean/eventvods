@@ -69,16 +69,16 @@
 					</div>
 				</div>
 			</div>
-			<div ng-if="Articles.paging.pages() > 1" class="panel-footer text-center">
+			<div ng-if="Games.paging.pages() > 1" class="panel-footer text-center">
 				<ul class="pagination">
-					<li ng-class="{disabled: Articles.paging.page == 1}">
-						<a ng-click="Articles.prevPage()">&laquo;</a>
+					<li ng-class="{disabled: Games.paging.page == 1}">
+						<a ng-click="Games.prevPage()">&laquo;</a>
 					</li>
 					<li class="active">
-						<span>Page {{Articles.paging.page}} of {{Articles.paging.pages()}}</span>
+						<span>Page {{Games.paging.page}} of {{Games.paging.pages()}}</span>
 					</li>
-					<li ng-class="{disabled: !(Articles.paging.pages() > 1 && Articles.paging.page < Articles.paging.pages())}">
-						<a ng-click="Articles.nextPage()">&raquo;</a>
+					<li ng-class="{disabled: !(Games.paging.pages() > 1 && Games.paging.page < Games.paging.pages())}">
+						<a ng-click="Games.nextPage()">&raquo;</a>
 					</li>
 				</ul>
 			</div>

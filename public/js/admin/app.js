@@ -316,27 +316,15 @@
 				})
 				.when('/events', {
 					templateUrl: '/assets/views/admin/events.html',
-					controller: 'eventsListController',
+					controller: 'eventsController',
 					controllerAs: 'Events',
 					title: "Events"
 				})
 				.when('/staff', {
-					templateUrl: '/assets/views/admin/staff/list.html',
-					controller: 'staffListController',
-					controllerAs: 'staffListController',
+					templateUrl: '/assets/views/admin/staff.html',
+					controller: 'staffController',
+					controllerAs: 'Staff',
 					title: "Staff"
-				})
-				.when('/staff/new', {
-					templateUrl: '/assets/views/admin/staff/form.html',
-					controller: 'addStaffController',
-					controllerAs: 'staffFormController',
-					title: "New Staff"
-				})
-				.when('/staff/:id/edit', {
-					templateUrl: '/assets/views/admin/staff/form.html',
-					controller: 'editStaffController',
-					controllerAs: 'staffFormController',
-					title: "Edit Staff"
 				})
 				.when('/teams', {
 					templateUrl: '/assets/views/admin/teams/list.html',

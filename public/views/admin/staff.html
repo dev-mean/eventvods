@@ -1,0 +1,172 @@
+<div class="row">
+	<div class="col-xs-10">
+		<div class="tight">
+			<h5 class="text-muted">
+				<a href="/manage/">Eventvods</a>
+				<i class="fa fa-fw fa-fix fa-level-down"></i>
+			</h5>
+			<h2>Staff</h2>
+		</div>
+	</div>
+	<div class="col-xs-2">
+		<button ng-show="Staff.editing || Staff.form.stage == 2" class="btn btn-primary pull-right" ng-click="Staff.initAdd()">Add Staff</button>
+	</div>
+</div>
+<br />
+<div class="row">
+	<div class="col-xs-12 col-sm-12 col-md-6">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h2 class="panel-title"><i class="fa fa-commenting"></i>&nbsp;&nbsp;&nbsp; Staff</h2>
+			</div>
+			<div class="list-group">
+				<div class="list-group-item">
+					<div class="row">
+						<div class="col-xs-12 col-sm-6">
+							<div class="input-group">
+								<div class="input-group-addon">
+									Filter
+								</div>
+								<input class="form-control" type="text" ng-model="Staff.search" placeholder="Enter Query" tabindex="1" class="form-control" />
+							</div>
+						</div>
+						<div class="col-xs-12 col-sm-6">
+							<div class="input-group">
+								<div class="input-group-addon">
+									Sort By
+								</div>
+								<select ng-options="opt.name for opt in Staff.sorts track by opt.sortField" ng-model="Staff.sort" class="form-control"></select>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div ng-repeat="staff in Staff.filterData = (Staff.staffData | filter: Staff.search) | orderBy: Staff.sort.sortField:Staff.sort.reverse | offset: (Staff.paging.page - 1) * Staff.paging.itemsPerPage | limitTo: Staff.paging.itemsPerPage"
+				class="list-group-item">
+					<div class="row row-center">
+						<div class="col-xs-8">
+							<div class="media">
+								<div class="media-left media-middle">
+									<img class="media-object" ng-src="{{staff.photo}}" />
+								</div>
+								<div class="media-body">
+									<a ng-href="/staff/{{staff.slug}}" target="_blank">
+										<h5 class="list-group-item-heading media-heading" ng-bind="staff.name"></h5>
+									</a>
+									<p class="list-group-item-text text-muted media-body">
+										{{staff.role}}
+									</p>
+								</div>
+							</div>
+						</div>
+						<div class="col-xs-4 text-right fa-fix">
+							<a ng-click="Staff.edit(staff._id)" class="btn btn-primary btn-sm">
+                                Edit
+                            </a>
+							<a ng-click="Staff.delete(staff)" class="btn btn-danger btn-sm">
+                                Delete
+                            </a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div ng-if="Staff.paging.pages() > 1" class="panel-footer text-center">
+				<ul class="pagination">
+					<li ng-class="{disabled: Staff.paging.page == 1}">
+						<a ng-click="Staff.prevPage()">&laquo;</a>
+					</li>
+					<li class="active">
+						<span>Page {{Staff.paging.page}} of {{Staff.paging.pages()}}</span>
+					</li>
+					<li ng-class="{disabled: !(Staff.paging.pages() > 1 && Staff.paging.page < Staff.paging.pages())}">
+						<a ng-click="Staff.nextPage()">&raquo;</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="col-xs-12 col-sm-12 col-md-6">
+		<form name="form" id="addStaffForm" ng-cloak>
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h2 class="panel-title"><i class="fa fa-commenting"></i>&nbsp;&nbsp;&nbsp; {{Staff.editing ? "Edit" : "Add"}} Staff</h2>
+				</div>
+				<div class="panel-body" ng-show="Staff.form.stage == 0">
+					<div class="form-group">
+                        <label>
+                            Forename
+                        </label>
+                        <input class="form-control" type="text" placeholder="e.g. Paul" ng-model="Staff.form.forename" data-parsley-trigger="keyup" required/>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            Alias
+                        </label>
+                        <input class="form-control" type="text" placeholder="e.g. ReDeYe" ng-model="Staff.form.alias" ng-change="staffFormController.suggestSlug()" data-parsley-trigger="keyup" required/>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            Surname
+                        </label>
+                        <input class="form-control" type="text" placeholder="e.g. Chaloner" ng-model="Staff.form.surname" data-parsley-trigger="keyup" required/>
+                    </div>
+                    <div class="form-group">
+                        <p class="form-control-static">
+                            Displayed as <b>{{Staff.form.forename}} "{{Staff.form.alias}}" {{Staff.form.surname}}</b>
+                        </p>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            URL Slug
+                        </label>
+                        <input class="form-control" id="slug" type="text" placeholder="e.g. ReDeYe" ng-model="Staff.form.slug" ng-change="staffFormController.slug_changed = true;" data-parsley-trigger="keyup" data-parsley-remote-message="Slug already in use." required/>
+                    </div>
+                    <div class="form-group">
+                        <p class="form-control-static">
+                            Staff will be accessible at eventvods.com/staff/{{Staff.form.slug | lowercase}}
+                        </p>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            Default Role
+                        </label>
+                        <select ng-options="opt for opt in Staff.staffRoles" ng-model="Staff.form.role" class="form-control" required>
+                            <option selected value="">Select Default Role</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            Photo (optional)
+                        </label>
+                        <image-drop model="Staff.form.photo" preview-width="64" preview-height="64" />
+                    </div>
+				</div>
+                <media-list model="Staff.form.media" ng-show="Staff.form.stage == 1">
+			    </media-list>
+				<div class="panel-footer">
+					<div class="row">
+						<div class="col-xs-3 text-center">
+							<button ng-show="Staff.form.stage > 0 && Staff.form.stage < 2" class="btn btn-primary pull-left" ng-click="Staff.prevStage()"
+							type="button">
+								<i class="glyphicon glyphicon-chevron-left"></i>
+								{{Staff.stages[Staff.form.stage - 1]}}
+							</button>
+						</div>
+						<div class="col-xs-6 text-center">
+							<span ng-if="Staff.form.stage < 2">Stage {{Staff.form.stage+1}} of 2</span>
+							<span ng-if="Staff.form.stage == 2">Staff {{Staff.editing ? "Updated" : "Added"}}</span>
+							<br />
+							<uib-progressbar value="Staff.form.stage" max="1"></uib-progressbar>
+						</div>
+						<div class="col-xs-3 text-center">
+							<button ng-show="Staff.form.stage < 2" class="btn btn-primary pull-right" ng-click="Staff.nextStage()" type="button">
+								<i no-ng-animate ng-if="Staff.validating" class="fa fa-refresh fa-spin fa-lg fa-fw"></i>
+								{{Staff.validating ? '' : Staff.stages[Staff.form.stage + 1]}}
+								<i class="glyphicon glyphicon-chevron-right"></i>
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>

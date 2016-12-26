@@ -1,17 +1,18 @@
 (function () {
 	'use strict';
 	angular.module('eventApp')
-		.controller('gamesController', ['gamesService', '$uibModal', 'API_BASE_URL', '$timeout', 'notifier',
-			function (Games, $modal, API, $timeout, notifier) {
+		.controller('staffController', ['staffService', '$uibModal', 'API_BASE_URL', '$timeout', 'notifier',
+			function (Staff, $modal, API, $timeout, notifier) {
 				var vm = this,
 					parsley;
 				vm.editing = false;
 				vm.validating = false;
 				vm.form = {
-					stage: 0
+					stage: 0,
+					media: []
 				};
-				vm.stages = ['Game Details', 'Graphics', 'Submit'];
-				vm.gameData = [];
+				vm.stages = ['Staff Details', 'Social Media', 'Submit'];
+				vm.staffData = [];
 				vm.filter = {};
 				vm.sorts = [{
 					name: 'Name',
@@ -22,13 +23,13 @@
 					sortField: 'slug',
 					reverse: false
 				}, {
-					name: 'Events',
-					sortField: 'eventsCount',
-					reverse: true
+					name: 'Alias',
+					sortField: 'alias',
+					reverse: false
 				}, {
-					name: 'Teams',
-					sortField: 'teamsCount',
-					reverse: true
+					name: 'Role',
+					sortField: 'role',
+					reverse: false
 				}];
 				vm.sort = vm.sorts[0];
 				vm.paging = {
@@ -41,8 +42,8 @@
 					page: 1
 				};
 
-				$('#slug').attr('data-parsley-remote', API + '/validate/gameSlug/{value}');
-				parsley = $('#addGameForm').parsley();
+				$('#slug').attr('data-parsley-remote', API + '/validate/staffSlug/{value}');
+				parsley = $('#addStaffForm').parsley();
 
 				vm.prevPage = function(){
                     if(vm.paging.page > 1) vm.paging.page--;
@@ -51,20 +52,20 @@
                     if(vm.paging.page < vm.paging.pages()) vm.paging.page++;
                 }
 
-				vm.delete = function (game) {
+				vm.delete = function (staff) {
 					$modal.open({
 						templateUrl: 'deleteModal.html',
 						controller: function ($scope) {
-							$scope.item = game.name;
-							$scope.type = 'Game';
+							$scope.item = staff.name;
+							$scope.type = 'Staff';
 							$scope.ok = function () {
-								Games.delete(game._id)
+								Staff.delete(staff._id)
 									.then(function () {
-										notifier.success('Deleted ' + game.name);
+										notifier.success('Deleted ' + staff.name);
 										$scope.$close();
-										Games.find()
+										Staff.find()
 											.then(function (res) {
-												vm.gameData = res.data;
+												vm.staffData = res.data;
 											});
 									})
 							}
@@ -74,8 +75,8 @@
 				vm.initAdd = function () {
 					vm.editing = false;
 					parsley.destroy();
-					$('#slug').attr('data-parsley-remote', API + '/validate/gameSlug/{value}');
-					parsley = $('#addGameForm').parsley();
+					$('#slug').attr('data-parsley-remote', API + '/validate/staffSlug/{value}');
+					parsley = $('#addStaffForm').parsley();
 					vm.form = {
 						stage: 0
 					};
@@ -83,9 +84,9 @@
 				vm.edit = function (id) {
 					vm.editing = true;
 					parsley.destroy();
-					$('#slug').attr('data-parsley-remote', API + '/validate/gameSlug/{value}/' + id);
-					parsley = $('#addGameForm').parsley();
-					Games.findById(id)
+					$('#slug').attr('data-parsley-remote', API + '/validate/staffSlug/{value}/' + id);
+					parsley = $('#addStaffForm').parsley();
+					Staff.findById(id)
 						.then(function (res) {
 							vm.form = res.data;
 							vm.form.stage = 0;
@@ -116,28 +117,38 @@
 
 				function submit() {
 					if (vm.editing)
-						Games.update(vm.form._id, vm.form)
-						.then(Games.find)
+						Staff.update(vm.form._id, vm.form)
+						.then(Staff.find)
 						.then(function (res) {
-							vm.gameData = res.data;
+							vm.staffData = res.data;
 							vm.form.stage = vm.form.stage + 1;
 							vm.validating = false;
 							notifier.success('Updated ' + vm.form.name);
 						})
 					else
-						Games.create(vm.form)
-						.then(Games.find)
+						Staff.create(vm.form)
+						.then(Staff.find)
 						.then(function (res) {
-							vm.gameData = res.data;
+							vm.staffData = res.data;
 							vm.form.stage = vm.form.stage + 1;
 							vm.validating = false;
 							notifier.success('Added '+vm.form.name);
 						})
 				}
-				Games.find()
+				Staff.find()
 					.then(function (res) {
-						vm.gameData = res.data;
+						vm.staffData = res.data;
 					});
+				Staff.getRoles()
+                    .then(function(res){
+                        // vm.staffRoles = res.data.map(function(item){
+                        //     return {
+                        //         label: item,
+                        //         value: item
+                        //     };
+                        // });
+						vm.staffRoles = res.data;
+                    });
 			}
 		]);
 }());
