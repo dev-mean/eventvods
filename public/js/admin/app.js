@@ -327,40 +327,16 @@
 					title: "Staff"
 				})
 				.when('/teams', {
-					templateUrl: '/assets/views/admin/teams/list.html',
-					controller: 'teamsListController',
-					controllerAs: 'teamsListController',
+					templateUrl: '/assets/views/admin/teams.html',
+					controller: 'teamsController',
+					controllerAs: 'Teams',
 					title: "Teams"
-				})
-				.when('/teams/new', {
-					templateUrl: '/assets/views/admin/teams/form.html',
-					controller: 'addTeamController',
-					controllerAs: 'teamsFormController',
-					title: "New Team"
-				})
-				.when('/teams/:id/edit', {
-					templateUrl: '/assets/views/admin/teams/form.html',
-					controller: 'editTeamController',
-					controllerAs: 'teamsFormController',
-					title: "Edit Team"
 				})
 				.when('/articles', {
 					templateUrl: '/assets/views/admin/articles.html',
 					controller: 'articlesListController',
 					controllerAs: 'Articles',
 					title: "Articles"
-				})
-				.when('/articles/new', {
-					templateUrl: '/assets/views/admin/articles/form.html',
-					controller: 'addArticleController',
-					controllerAs: 'articlesFormController',
-					title: "New Article"
-				})
-				.when('/articles/:id/edit', {
-					templateUrl: '/assets/views/admin/articles/form.html',
-					controller: 'editArticleController',
-					controllerAs: 'articlesFormController',
-					title: "Edit Article"
 				})
 				.when('/users', {
 					templateUrl: '/assets/views/admin/user/list.html',
