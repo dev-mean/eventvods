@@ -3,10 +3,10 @@ require('dotenv')
 	.config({
 		silent: false
 	});
-var mongoose = require('mongoose');
+var mongoose = require('mongoose-fill');
 mongoose.Promise = require('q').Promise;
 var config = require('./config/config');
-var League = require('./app/models/league');
+var Event = require('./app/models/event');
 var Match = require('./app/models/section').matchSchema;
 var stage = 3;
 
@@ -17,7 +17,7 @@ mongoose.connect(config.databaseUrl, function (err) {
 	if (err) console.log(err);
 	else if (stage === 1) {
 		console.log("MongoDB server online.");
-		League.find({})
+		Event.find({})
 			.select('teams teams_new name contents')
 			.exec((err, docs) => {
 				if (err) console.log(err);
@@ -41,7 +41,7 @@ mongoose.connect(config.databaseUrl, function (err) {
 			})
 	} else if (stage === 2) {
 		console.log("MongoDB server online.");
-		League.find({})
+		Event.find({})
 			.select('teams teams_new name contents')
 			.populate({
 				path: 'teams_new',
@@ -71,7 +71,7 @@ mongoose.connect(config.databaseUrl, function (err) {
 			})
 	} else if (stage === 3) {
 		console.log("MongoDB server online.");
-		League.find({})
+		Event.find({})
 			.populate({
 				path: 'teams_new',
 				model: 'Teams'

@@ -5,20 +5,20 @@ var matchSchema = new Schema({
 	//Stage 1-2
 	// team1: Team,
 	// team2: Team,
+	team1_2: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Teams'
+    },
+	team2_2: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Teams'
+    },
 	//Stage 3
 	team1: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Teams'
     },
 	team2: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Teams'
-    },
-	team1_2: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Teams'
-    },
-	team2_2: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Teams'
     },
@@ -50,7 +50,7 @@ var moduleSchema = new Schema({
 	columns: [String],
 	matches: [matchSchema],
 	matches2: {
-        type: mongoose.Schema.Types.ObjectId,
+		type: [mongoose.Schema.Types.ObjectId],
         ref: 'Match'
     },
 	twitch: Boolean,

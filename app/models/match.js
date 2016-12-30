@@ -11,11 +11,13 @@ var matchSchema = new Schema({
     },
 	team1: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Teams'
+        ref: 'Teams',
+        required: false
     },
 	team2: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Teams'
+        ref: 'Teams',
+        required: false
     },
     title: String,
 	spoiler: {

@@ -104,6 +104,7 @@ function deleteOldImages(opts){
 	return Q.all(
 		[
 			deleteImage(opts.oldURL, opts.deleteOld),
+			deleteImage(opts.oldBlurURL, opts.deleteOld),
 			deleteImage(opts.oldBlurURL, opts.deleteOld)
 		]
 	);
@@ -152,7 +153,8 @@ function handleImage(fileData, process, func) {
 					key: key,
 					ext: 'jpg',
 					oldURL: fileData.image.oldURL,
-					oldBlurURL: null
+					oldBlurURL: null,
+					deleteOld: true
 				}
 				jpegify(opts)
 					.then(iconCrop)
@@ -173,7 +175,8 @@ function handleImage(fileData, process, func) {
 					ext: type.ext,
 					type: type.mime,
 					oldURL: fileData.image.oldURL,
-					oldBlurURL: null
+					oldBlurURL: null,
+					deleteOld: true
 				})
 				.then(deleteOldImages)
 				.then(function() {

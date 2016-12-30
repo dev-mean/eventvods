@@ -36,15 +36,16 @@ var eventSchema = new Schema({
     twitchStream: String,
     //Stage 1-2
     // teams: [Team],
+    teams_new: {
+        type: [mongoose.Schema.Types.ObjectId],
+        ref: 'Teams'
+    },
     //Stage 3
     teams: {
         type: [mongoose.Schema.Types.ObjectId],
         ref: 'Teams'
     },
-    teams_new: {
-        type: [mongoose.Schema.Types.ObjectId],
-        ref: 'Teams'
-    },
+    
     logo: String,
     header: String,
     header_blur: String,

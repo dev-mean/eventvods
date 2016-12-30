@@ -1,3 +1,13 @@
+Array.prototype.remove = function() {
+    var what, a = arguments, L = a.length, ax;
+    while (L && this.length) {
+        what = a[--L];
+        while ((ax = this.indexOf(what)) !== -1) {
+            this.splice(ax, 1);
+        }
+    }
+    return this;
+};
 //dev config
 require('dotenv')
 	.config({
@@ -61,14 +71,14 @@ function createMatch(match){
 	var t2Sp = match[0].team1SpText;
 	var data = {
 		bestOf: match.length,
-		team1: isset(team1) ? team1 : undefined,
-		team2: isset(team2) ? team2 : undefined,
-		team1Match: isset(t1Sp) ? t1Sp : undefined,
-		team2Match: isset(t2Sp) ? t2Sp : undefined,
 		spoiler: match[0].spoiler,
 		title: match[0].title,
 		data: []
 	}
+	if(isset(team1)) data.team1 = team1;
+	if(isset(team2)) data.team2 = team2;
+	if(isset(t1Sp)) data.team1Match = t1Sp;
+	if(isset(t2Sp)) data.team2Match = t2Sp;
 	match.forEach((m) => {
 		data.data.push({
 			links: m.links,
@@ -77,16 +87,21 @@ function createMatch(match){
 			placeholder: m.placeholder
 		})
 	})
+	if(data.team1 === "undefined" || data.team2 === "undefined"){
+		delete data.team1;
+		delete data.team2;
+	}
 	Match.create(data, (err, match) => {
 		if(err) console.log(err);
 		else $promise.resolve(match._id);
-	});
+	})
 	return $promise.promise;
 }
 function updateModule(module){
 	var $promise = q.defer();
 	createMatches(module)
 		.then((ids) => {
+			ids.remove(undefined);
 			module.matches2 = ids;
 			$promise.resolve(module);
 		})
@@ -100,12 +115,14 @@ function updateSection(section){
 			.then((newModule) => {
 				module = newModule;
 				delete module.matches;
+				console.log('Updated '+module.title)
 				_p.resolve(module);
 			})
 		return _p.promise;
 	}))
 	.then((res) => {
 		section.modules = res;
+		console.log('Updated '+section.title);
 		$promise.resolve(section);
 	})
 	return $promise.promise;
@@ -115,6 +132,7 @@ mongoose.connect(config.databaseUrl, function (err) {
 	console.log("MongoDB server online.");
 	Event.find()
 		.select('name contents')
+		.limit(3)
 		.lean()
 		.exec((err, docs) => {
 			if (err) console.log(err);
@@ -124,9 +142,9 @@ mongoose.connect(config.databaseUrl, function (err) {
 				}))
 				.then((res) => {
 					doc.contents = res;
-					doc.save((err) => {
+					Event.findByIdAndUpdate(doc._id, doc, function(err){
 						if (err) console.log(err);
-						else console.log('Updated ' + doc.name);
+						console.log('Updated ' + doc.name);
 					});
 				})
 				

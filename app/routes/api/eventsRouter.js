@@ -52,7 +52,7 @@ router.get('/game/:slug', auth.public_api(), ratelimit, cache, function(req, res
         Event.find({
                 game: game._id
             })
-            .populate('game staff')
+            .populate('game staff contents.modules.matchs2')
             .populate({
                 path: 'teams',
                 model: 'Teams',
