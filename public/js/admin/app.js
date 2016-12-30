@@ -338,23 +338,17 @@
 					controllerAs: 'Articles',
 					title: "Articles"
 				})
-				.when('/users', {
-					templateUrl: '/assets/views/admin/user/list.html',
-					controller: 'usersListController',
-					controllerAs: 'usersListController',
-					title: "Users"
-				})
-				.when('/user/:id/edit', {
-					templateUrl: '/assets/views/admin/user/form.html',
-					controller: 'editUserController',
-					controllerAs: 'userFormController',
-					title: "Edit User"
-				})
 				.when('/featured', {
 					templateUrl: '/assets/views/admin/featured.html',
 					controller: 'featuredSelectController',
 					controllerAs: 'Featured',
 					title: "Featured Content"
+				})
+				.when('/editor/:id', {
+					templateUrl: '/assets/views/admin/editor.html',
+					controller: 'editorController',
+					controllerAs: 'Editor',
+					title: "Editor"
 				})
 		})
 }());

@@ -1,7 +1,6 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var Team = require('./team').schema;
-
 var matchSchema = new Schema({
 	//Stage 1-2
 	// team1: Team,
@@ -50,6 +49,10 @@ var moduleSchema = new Schema({
 	title: String,
 	columns: [String],
 	matches: [matchSchema],
+	matches2: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Match'
+    },
 	twitch: Boolean,
 	youtube: Boolean
 });

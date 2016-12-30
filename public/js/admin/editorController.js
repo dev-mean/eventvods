@@ -1,16 +1,16 @@
 (function() {
 	'use strict';
 	angular.module('eventApp')
-		.controller('updateLeagueController', function($http, API_BASE_URL, leaguesService, $routeParams, notificationService) {
+		.controller('editorController', function($http, API_BASE_URL, eventsService, $routeParams, notifier) {
 			var vm = this;
 			var static_columns = 0;
 			vm.manage = true;
 			vm.sectionIndex = 0;
 			vm.moduleIndex = 0;
 			vm.save = function() {
-				leaguesService.update($routeParams.id, vm.data)
+				eventsService.update($routeParams.id, vm.data)
 					.then(function(){
-						notificationService.success('League updated');
+						notifier.success('League updated');
 					});
 			};
 			vm.getIdentifier = function($parentIndex, $index){
@@ -78,7 +78,7 @@
 				newMatch.team2 = $.extend({}, newMatch.team2);
 				module.matches.splice($index, 0, newMatch);
 			}
-			leaguesService.findById($routeParams.id)
+			eventsService.findById($routeParams.id)
 				.then(function(res) {
 					vm.data = res.data;
 				});
