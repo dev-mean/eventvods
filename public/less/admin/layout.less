@@ -14,9 +14,24 @@
     .relative;
     top: -2px;
 }
+.p-1px {
+    .relative;
+    top: 1px;
+}
+.m-1px {
+    .relative;
+    top: -1px;
+}
+
 .row-center {
     display: flex;
     align-items: center;
+}
+.col-left {
+    padding-right: 0;
+}
+.col-right {
+    padding-left: 0;
 }
 #viewport {
     width: 100%;
@@ -60,6 +75,8 @@ hr {
 .chart-title {
     padding-left: 10px;
 }
+
+/* List group media & nested list groups */
 .list-group .media-left {
     min-width: 50px;
     text-align: center;
@@ -68,4 +85,67 @@ hr {
     max-height: 40px;
     max-width: 40px;
     margin: auto;
+}
+
+.list-group.list-group-root {
+	padding: 0;
+	overflow: hidden;
+    margin-bottom: 0;
+	.list-group {
+		margin-bottom: 0;
+	}
+	.list-group-item {
+		border-radius: 0;
+		border-width: 1px 1px 0 0;
+	}
+	>.list-group-item {
+		&:first-child {
+			border-top-width: 0;
+		}
+	}
+	>.list-group {
+		>.list-group-item {
+			padding-left: 30px;
+		}
+		>.list-group {
+			>.list-group-item {
+				padding-left: 45px;
+			}
+		}
+	}
+}
+.col-list {
+    margin: auto 10px;
+}
+.matches-list .list-group-item:not(.no-flex) {
+    height: 60px;
+    padding: 0;
+    .row {
+        display: inline-flex;
+        width: 100%;
+        align-items: center;
+        height: 60px;
+        padding: 5px 15px;
+        div.vs {
+            width: auto!important;
+            padding: 0;
+        }
+        div.id {
+            width: 0!important;
+        }
+        span.vs {
+            margin: 0 15px;
+        }
+        .text-right {
+            padding-right: 0!important;
+        }
+        .text-left {
+            padding-left: 0!important;
+        }
+    }
+}
+.team-icon {
+    max-height: 24px;
+    max-width: 24px;
+    margin: 0 5px;
 }

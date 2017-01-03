@@ -71,7 +71,8 @@ function createMatch(match){
 	var t2Sp = match[0].team1SpText;
 	var data = {
 		bestOf: match.length,
-		spoiler: match[0].spoiler,
+		spoiler1: match[0].team1Sp,
+		spoiler2: match[0].team2Sp,
 		title: match[0].title,
 		data: []
 	}
@@ -132,7 +133,6 @@ mongoose.connect(config.databaseUrl, function (err) {
 	console.log("MongoDB server online.");
 	Event.find()
 		.select('name contents')
-		.limit(3)
 		.lean()
 		.exec((err, docs) => {
 			if (err) console.log(err);

@@ -4,19 +4,41 @@
 		.controller('editorController', function($http, API_BASE_URL, eventsService, $routeParams, notifier) {
 			var vm = this;
 			var static_columns = 0;
-			vm.manage = true;
-			vm.sectionIndex = 0;
-			vm.moduleIndex = 0;
+			vm.svOpts = {"containment": ".list-group-root"};
+			vm.titles = ['', 'Tiebreakers', 'Quarterfinals', 'Semifinals', 'Winners\' Finals', 'Winners\' Match', 'Losers\' Round 1', 'Losers\' Round 2', 'Losers\' Round 3',
+             'Losers\' Finals', 'Grand Finals', 'Decider Match', 'Elimination Match', 'Opening Match', 'Group A', 'Group B', 'Group C', 'Group D','1v1 Finals'];
+			function reset(){
+				vm.active = null;
+				vm.$section = null;
+				vm.$index = null;
+				vm.$table = null;
+			}
+			reset();
 			vm.save = function() {
 				eventsService.update($routeParams.id, vm.data)
 					.then(function(){
 						notifier.success('League updated');
 					});
 			};
-			vm.getIdentifier = function($parentIndex, $index){
+			vm.setActive = function(item, $index, $section, $table){
+				vm.active = item;
+				vm.$index = $index;
+				vm.$section = $section;
+				vm.$table = $table;
+				console.log(vm.getIdentifier());
+			}
+			vm.isActive = function(item){
+				return (vm.active == item);
+			}
+			vm.getIdentifier = function($index){
 				var counter = 0, str = "";
-				for(var i =0; i < $parentIndex; i++){
-					counter += vm.data.contents[i].modules.length;
+				for(var i =0; i < vm.$section; i++){
+					for(var c =0; c < vm.data.contents[i].modules.length; c++){
+						counter += vm.data.contents[i].modules[c].matches2.length;
+					}
+				}
+				for(var c =0; c < vm.$table; c++){
+					counter += vm.data.contents[vm.$section].modules[c].matches2.length;
 				}
 				counter += $index;
 				if(counter > 25){
@@ -31,40 +53,39 @@
 					title: "New Section",
 					modules: []
 				});
-				vm.sectionIndex = vm.data.contents.length -1;
-				vm.moduleIndex = 0;
 			};
 			vm.deleteSection = function(index){
-				vm.data.contents.splice(index, 1);
-				vm.sectionIndex = 0;
+				var section = vm.data.contents.splice(index, 1)[0];
+				reset();
 			}
-			vm.addModule = function($index){
-				vm.data.contents[$index].modules.push({
+			vm.addModule = function(section){
+				section.modules.push({
 					title: "New Table",
 					columns: [],
 					matches: []
 				});
-				vm.moduleIndex = vm.data.contents[$index].modules.length - 1;
 			}
-			vm.deleteModule = function($sectionIndex, $moduleIndex){
-				vm.data.contents[$sectionIndex].modules.splice($moduleIndex, 1);
+			vm.deleteModule = function(section, $index){
+				var module = section.modules.splice($index, 1)[0];
+				reset();
 			}
-			vm.addMatch = function($sectionIndex, $moduleIndex){
-				vm.data.contents[$sectionIndex].modules[$moduleIndex].matches.push({
-					links: Array(vm.data.contents[$sectionIndex].modules[$moduleIndex].columns.length - static_columns).join(".").split(".")
+			vm.addMatch = function(){
+				vm.active.matches.push({
+					data: [{
+						links: Array(vm.data.contents[$sectionIndex].modules[$moduleIndex].columns.length - static_columns).join(".").split(".")
+					}],
+					bestOf: 1
 				});
 			}
-			vm.addColumn = function($sectionIndex, $moduleIndex){
-				var module = vm.data.contents[$sectionIndex].modules[$moduleIndex];
-				module.columns.push("New Column");
-				module.matches.forEach(function(match){
+			vm.addColumn = function(){
+				vm.active.columns.push("New Column");
+				vm.active.matches.forEach(function(match){
 					if(module.columns.length > match.links.length + static_columns) match.links.push("");
 				});
 			}
-			vm.removeColumn = function($sectionIndex, $moduleIndex, $index){
-				var module = vm.data.contents[$sectionIndex].modules[$moduleIndex];
-				module.columns.splice($index, 1);
-				module.matches.forEach(function(match){
+			vm.removeColumn = function($index){
+				vm.active.columns.splice($index, 1);
+				vm.active.matches.forEach(function(match){
 					match.links.splice($index-static_columns, 1);
 				})
 			}
@@ -81,6 +102,7 @@
 			eventsService.findById($routeParams.id)
 				.then(function(res) {
 					vm.data = res.data;
+					document.title = res.data.name + " - Eventvods - Editor";
 				});
 		});
 }());

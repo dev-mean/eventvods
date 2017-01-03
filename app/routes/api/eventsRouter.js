@@ -9,6 +9,7 @@ var Validators = require('../../controllers/validation');
 var Q = require('q');
 var slug = require('slug');
 var exporter = require('../../controllers/export');
+var Match = require('../../models/match');
 
 router.route('/')
     .get(auth.public_api(), ratelimit, cache, function(req, res, next) {
@@ -52,7 +53,7 @@ router.get('/game/:slug', auth.public_api(), ratelimit, cache, function(req, res
         Event.find({
                 game: game._id
             })
-            .populate('game staff contents.modules.matchs2')
+            .populate('game staff')
             .populate({
                 path: 'teams',
                 model: 'Teams',
@@ -69,7 +70,16 @@ router.get('/slug/:slug', auth.public_api(), ratelimit, cache, function(req, res
             slug: req.params.slug
         })
         .select('-__v -textOrientation')
-        .populate('game staff')
+        .populate('game staff contents.modules.matches2')
+        .populate({
+                path: 'contents.modules.matches2',
+                model: 'Match',
+                populate: {
+                    path: 'team1 team2',
+                    model: 'Teams',
+                    select: 'name tag _id slug icon'
+                }
+            })
         .populate({
             path: 'teams',
             model: 'Teams',
@@ -82,12 +92,21 @@ router.get('/slug/:slug', auth.public_api(), ratelimit, cache, function(req, res
 })
 router.get('/export/:event_id', auth.updater(), function(req, res, next) {
     Event.findById(req.params.event_id)
-        .populate('game staff')
+        .populate('game staff contents.modules.matches2')
         .populate({
             path: 'teams',
             model: 'Teams',
                 select: 'name tag _id slug icon'
         })
+        .populate({
+                path: 'contents.modules.matches2',
+                model: 'Match',
+                populate: {
+                    path: 'team1 team2',
+                    model: 'Teams',
+                    select: 'name tag _id slug icon'
+                }
+            })
         .exec(function(err, event) {
             if (err) next(err);
             if (!event) {
@@ -108,9 +127,13 @@ router.route('/:event_id')
                 select: 'name tag _id slug icon'
             })
             .populate({
-                path: 'contents.modules.matches.team1 contents.modules.matches.team2',
-                model: 'Teams',
-                select: 'name tag _id slug icon'
+                path: 'contents.modules.matches2',
+                model: 'Match',
+                populate: {
+                    path: 'team1 team2',
+                    model: 'Teams',
+                    select: 'name tag _id slug icon'
+                }
             })
             .exec(function(err, event) {
                 if (err) next(err);
@@ -124,7 +147,7 @@ router.route('/:event_id')
     })
     .delete(auth.updater(), function(req, res, next) {
         Event.findById(req.params.event_id, function(err, doc) {
-            Q.all([AWS.deleteImage(doc.logo), AWS.deleteImage(doc.header), AWS.deleteImage(doc.header_blur)])
+            if(doc) Q.all([AWS.deleteImage(doc.logo), AWS.deleteImage(doc.header), AWS.deleteImage(doc.header_blur)])
                 .then(function() {
                     doc.remove(function(err) {
                         if (err) next(err);

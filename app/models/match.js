@@ -20,7 +20,11 @@ var matchSchema = new Schema({
         required: false
     },
     title: String,
-	spoiler: {
+	spoiler1: {
+		type: Boolean,
+		default: false
+	},
+    spoiler2: {
 		type: Boolean,
 		default: false
 	},

@@ -48,7 +48,9 @@ var matchSchema = new Schema({
 var moduleSchema = new Schema({
 	title: String,
 	columns: [String],
-	matches: [matchSchema],
+	matches: {
+		type: [matchSchema]
+	},
 	matches2: {
 		type: [mongoose.Schema.Types.ObjectId],
         ref: 'Match'

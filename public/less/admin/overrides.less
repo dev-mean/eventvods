@@ -1,3 +1,5 @@
+@import "generated.less";
+
 /*!
 angular-xeditable - 0.2.0
 Edit-in-place for angular.js
@@ -62,6 +64,28 @@ text-angular {
 .editable-click {
     border-bottom: 0!important;
 }
+.editable-empty {
+    color: inherit!important;
+    font-style: inherit!important;
+}
+.editable-buttons .btn-primary {
+    background-color: @brand-success;
+    border-color: @brand-success;
+    &:hover {
+        background-color: darken(@brand-success, 10%);
+        border-color: darken(@brand-success, 10%);
+    }
+}
 .list-directive .list-group {
     margin-bottom: 0;
+}
+
+a.list-group-item:hover:not(.active) {
+    background-color: initial!important;
+}
+i.fa[ng-click]:hover {
+    color: @brand-success;
+}
+i.fa-times[ng-click]:hover {
+    color: @brand-danger;
 }
