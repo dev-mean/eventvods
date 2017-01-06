@@ -55,6 +55,7 @@ var moduleSchema = new Schema({
 		type: [mongoose.Schema.Types.ObjectId],
         ref: 'Match'
     },
+	date: Date,
 	twitch: Boolean,
 	youtube: Boolean
 });

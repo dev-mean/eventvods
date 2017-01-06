@@ -28,6 +28,7 @@ var matchSchema = new Schema({
 		type: Boolean,
 		default: false
 	},
+    date: Date,
     data: [{
         links: [String],
         twitch: {

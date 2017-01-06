@@ -38,6 +38,10 @@
 			vm.collection = function(number){
 				return Array(number).join(".").split(".")
 			}
+			vm.propagateDates = function(){
+				for(var i = 0; i < vm.active.matches2.length; i++)
+					vm.active.matches2[i].date = vm.active.date;
+			}
 			vm.getIdentifier = function($index){
 				var counter = 0, str = "";
 				for(var i =0; i < vm.$section; i++){
@@ -45,7 +49,7 @@
 						counter += vm.data.contents[i].modules[c].matches2.length;
 					}
 				}
-				for(var c =0; c < vm.$table; c++){
+				for(var c =0; c < vm.$index; c++){
 					counter += vm.data.contents[vm.$section].modules[c].matches2.length;
 				}
 				counter += $index;

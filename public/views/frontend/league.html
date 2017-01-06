@@ -12,17 +12,30 @@
                 <h3 ng-bind="League.data.name"></h3>
                 <h4 ng-if="League.data.subtitle === undefined || League.data.subtitle === ''">&nbsp;</h4>
                 <h4 ng-if="League.data.subtitle !== undefined && League.data.subtitle !== ''" ng-bind="League.data.subtitle"></h4>
-                <a class="waves-effect waves-light btn" ng-click="Page.toggleFollow(League.data._id, 'leagues')">
+                <!--<a class="waves-effect waves-light btn" ng-click="Page.toggleFollow(League.data._id, 'leagues')">
                     <i class="material-icons left" ng-class="{starred: Page.following(League.data._id)}">star</i> {{Page.following(League.data._id) ? "Following" : "Follow"}}
-                </a>
+                </a>-->
                 <div class="credits" ng-bind-html="League.data.credits">
                 </div>
             </div>
         </div>
     </div>
 </div>
-<div class="contents pad-bottom league" ng-controller="PlayerController as Player">
-    <div class="info">
+<div class="event-nav">
+    <div class="container load-in">
+        <nav class="sections-nav">
+            <div class="nav-wrapper">
+                <ul ng-class="{'squish': (League.data.contents.length > 8)}">
+                    <li ng-repeat="section in League.data.contents track by $index" ng-class="{active: League.sectionIndex == $index}">
+                        <a ng-click="League.jumpTo($index)" ng-bind="section.title"></a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+</div>
+<div class="contents pad-bottom event" ng-controller="PlayerController as Player">
+    <!--<div class="info">
         <div class="container row">
             <div class="col m12 l4">
                 <i class="material-icons">&#xE88F;</i>
@@ -87,45 +100,16 @@
             </div>
         </div>
     </div>
-    <div id="details-jump" class="details-bottom"></div>
     <a class="details-toggle waves-effect waves-light btn" ng-click="League.toggleDetails()">
         <i class="material-icons left">{{League.showDetails ? "&#xE5CE;" : "&#xE5CF;"}}</i> {{League.showDetails ? "less" : "more"}} details
-    </a>
-    <div class="event-nav container load-in">
-        <div class="nav-row">
-            <h3 class="material-icons" ng-show="League.sectionIndex > 0" ng-click="League.prevSection();">&#xE314;</h3>
-            <h3 ng-bind="League.data.contents[League.sectionIndex].title"></h3>
-            <h3 class="material-icons" ng-show="League.sectionIndex < League.data.contents.length - 1" ng-click="League.nextSection()">&#xE315;</h3>
-        </div>
-        <ul ng-repeat="section in League.data.contents track by $index" ng-attr-id="{{'section-'+$index}}" class="dropdown-content section-dd wide">
-            <li class="border-top" ng-repeat="module in section.modules">
-                <a ng-click="League.jumpTo($parent.$index, $index)" ng-bind="module.title"></a>
-            </li>
-        </ul>
-        <div class="nav-row">
-            <h4 class="material-icons" ng-show="League.moduleIndex > 0" ng-click="League.prevModule()">&#xE314;</h4>
-            <h4 ng-bind="League.data.contents[League.sectionIndex].modules[League.moduleIndex].title">Day 1</h4>
-            <h4 class="material-icons" ng-show="League.moduleIndex < League.data.contents[League.sectionIndex].modules.length - 1 " ng-click="League.nextModule()">&#xE315;</h4>
-        </div>
-        <div class="display-swap left-align">
-            <a class="waves-effect waves-light btn" ng-class="{active: !Page.compact}" ng-click="Page.compactSet(false)"><i class="material-icons left">&#xE896;</i>List View</a>
-            <a class="waves-effect waves-light btn" ng-class="{active: Page.compact}" ng-click="Page.compactSet(true)"><i class="material-icons left">&#xE3EC;</i>Grid View</a>
-        </div>
-        <nav class="sections-nav">
-            <div class="nav-wrapper">
-                <ul class="main-sections-nav" ng-class="{'squish': (League.data.contents.length > 8)}">
-                    <li ng-repeat="section in League.data.contents track by $index">
-                        <a ng-click="League.jumpTo($index, 0)" class="section-handle" dropdown dropdown-target="{{'section-'+$index}}" data-hover="true" data-beloworigin="true">
-                            <i class="material-icons left">
-									&#xE5C5;
-								</i> {{section.title}}
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
+    </a>-->
+    <div class="container">
+         <h4 ng-bind="League.data.contents[League.sectionIndex].title"></h4>
     </div>
-    <div ng-repeat="module in League.data.contents[League.sectionIndex].modules track by $index" ng-if="League.moduleIndex == $index">
+    <div ng-repeat="module in League.data.contents[League.sectionIndex].modules track by $index" class="module">
+        <div class="container">
+            <h4 ng-bind="module.title" class="module-title"></h4>
+        </div>
         <table class="container striped bordered responsive centered">
             <thead>
                 <tr>
@@ -141,9 +125,9 @@
                     <th>Extras</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr ng-repeat="match in module.matches track by $index">
-                    <td ng-bind="League.getIdentifier($index)"></td>
+            <tbody ng-repeat="match in module.matches2 track by $index">
+                <tr ng-repeat="game in match.data track by $index">
+                    <td>{{match.identifier || League.getIdentifier($parent.$parent.$index, $parent.$index)}}{{$index+1}}</td>
                     <td ng-show="!match.team1Sp || match.team1H" ng-bind="match.team1.name" ng-mouseenter="League.setHover(match, 1, true)" ng-mouseleave="League.setHover(match, 1, false)" class="right-align"></td>
                     <td ng-show="!match.team1Sp || match.team1H" ng-mouseenter="League.setHover(match, 1, true)" ng-mouseleave="League.setHover(match, 1, false)" class="table-links"><img ng-src="{{match.team1.icon}}" /></td>
                     <td ng-show="match.team1Sp && !match.team1H" ng-mouseenter="League.setHover(match, 1, true)" ng-mouseleave="League.setHover(match, 1, false)" class="right-align">{{match.team1SpText || "Team 1 "}}</td>

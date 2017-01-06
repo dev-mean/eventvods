@@ -8,50 +8,40 @@
                 vm.data;
                 vm.simple_tables = false;
                 vm.sectionIndex = parseInt($routeParams.s || 0);
-                vm.moduleIndex = parseInt($routeParams.m || 0);
                 vm.showDetails = false;
                 vm.toggleDetails = function() {
                     vm.showDetails = !vm.showDetails;
                     if (!vm.showDetails) $anchorScroll("top");
                 }
-                vm.getIdentifier = function($index) {
-                    var str = "",
-                        counter = 0;
-                    for (var i = 0; i < vm.sectionIndex; i++) {
-                        counter += vm.data.contents[i].modules.length;
+                vm.getIdentifier = function($table, $index){
+                    var counter = 0, str = "";
+                    for(var i =0; i < vm.sectionIndex; i++){
+                        for(var c =0; c < vm.data.contents[i].modules.length; c++){
+                            counter += vm.data.contents[i].modules[c].matches2.length;
+                        }
                     }
-                    counter += vm.moduleIndex;
-                    if (counter > 25) {
+                    for(var c =0; c < $table; c++){
+                        counter += vm.data.contents[vm.sectionIndex].modules[c].matches2.length;
+                    }
+                    counter += $index;
+                    if(counter > 25){
                         str += String.fromCharCode(64 + Math.floor(counter / 26))
-                        str += String.fromCharCode(65 + (counter % 26)) + ($index + 1);
-                    } else str = String.fromCharCode(65 + counter) + ($index + 1);
+                        str += String.fromCharCode(65+(counter % 26));
+                    }
+                    else str = String.fromCharCode(65+counter);
                     return str;
                 }
-                vm.jumpTo = function(sectionIndex, moduleIndex) {
+                vm.jumpTo = function(sectionIndex) {
                     vm.sectionIndex = sectionIndex;
-                    vm.moduleIndex = moduleIndex;
-                    $location.search('s', sectionIndex);
-                    $location.search('m', moduleIndex);
+                    $location.search('section', sectionIndex);
                 }
                 vm.prevSection = function() {
                     vm.sectionIndex = vm.sectionIndex - 1;
                     $location.search('s', vm.sectionIndex);
-                    vm.moduleIndex = 0;
-                    $location.search('m', 0);
                 }
                 vm.nextSection = function() {
                     vm.sectionIndex = vm.sectionIndex + 1;
                     $location.search('s', vm.sectionIndex);
-                    vm.moduleIndex = 0;
-                    $location.search('m', 0);
-                }
-                vm.prevModule = function() {
-                    vm.moduleIndex = vm.moduleIndex - 1;
-                    $location.search('m', vm.moduleIndex);
-                }
-                vm.nextModule = function() {
-                    vm.moduleIndex = vm.moduleIndex + 1;
-                    $location.search('m', vm.moduleIndex);
                 }
                 vm.parseLink = function(match, link) {
                     if (match.placeholder) return "";

@@ -41,13 +41,21 @@
 									<input ng-model="Editor.active.twitch" id="tw" type="checkbox" /> Twitch
 								</label>
 							</div>
-							<div class="col-sx-8 col-sm-9 col-md-10">
+							<div class="col-xs-6 col-sm-7 col-md-8">
 								<b>Columns</b>
 								<span ng-repeat="col in Editor.active.columns track by $index" class="col-list">
 									<span editable-text="Editor.active.columns[$index]" ng-bind="col"></span>
 									<i ng-click="Editor.removeColumn($index)" class="fa fa-fw fa-times m-1px"></i>
 								</span>
 								<i ng-click="Editor.addColumn()" class="fa fa-lg fa-fw fa-plus "></i>
+							</div>
+							<div class="col-xs-2 datepicker-wrapper text-right">
+								<div class="input-group input-group-sm">
+									<input class="form-control" ng-change="Editor.propagateDates()" type="text" uib-datepicker-popup="MMM dd, yyyy" ng-model="Editor.active.date" is-open="dp1" popup-placement="left" datepicker-append-to-body="bottom" />
+									<span class="input-group-btn">
+										<button type="button" class="btn btn-default btn-sm date-button" ng-click="dp1 = true">Set Date</button>
+									</span>
+								</div>
 							</div>
 						</div>
 					</div>
