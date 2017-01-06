@@ -1,0 +1,167 @@
+<div class="row">
+	<div class="col-xs-10">
+		<div class="tight">
+			<h5 class="text-muted">
+				<a href="/manage/">Eventvods</a>
+				<i class="fa fa-fw fa-fix fa-level-down"></i>
+			</h5>
+			<h2>Teams</h2>
+		</div>
+	</div>
+	<div class="col-xs-2">
+		<button ng-show="Teams.editing || Teams.form.stage == 2" class="btn btn-primary pull-right" ng-click="Teams.initAdd()">Add Team</button>
+	</div>
+</div>
+<br />
+<div class="row">
+	<div class="col-xs-12 col-sm-12 col-md-6">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h2 class="panel-title"><i class="fa fa-commenting"></i>&nbsp;&nbsp;&nbsp; Teams</h2>
+			</div>
+			<div class="list-group">
+				<div class="list-group-item">
+					<div class="row">
+						<div class="col-xs-12 col-sm-6">
+							<div class="input-group">
+								<div class="input-group-addon">
+									Filter
+								</div>
+								<input class="form-control" class="form-control" type="text" ng-model="Teams.search" placeholder="Enter Query" tabindex="1"
+								class="form-control" />
+							</div>
+						</div>
+						<div class="col-xs-12 col-sm-6">
+							<div class="input-group">
+								<div class="input-group-addon">
+									Game
+								</div>
+								<select class="form-control" ng-model="Teams.search" ng-options="game.name as game.name for game in Teams.games">
+									<option selected value="">Any</option>
+								</select>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div ng-repeat="team in Teams.filterData = (Teams.teamsData | filter: Teams.search) | orderBy: Teams.sort.sortField:Teams.sort.reverse | offset: (Teams.paging.page - 1) * Teams.paging.itemsPerPage | limitTo: Teams.paging.itemsPerPage"
+				class="list-group-item">
+					<div class="row row-center">
+						<div class="col-xs-8">
+							<div class="media">
+								<div class="media-left media-middle">
+									<img class="media-object" ng-src="{{team.icon}}" />
+								</div>
+								<div class="media-body">
+									<a ng-href="/team/{{team.slug}}" target="_blank">
+										<h5 class="list-group-item-heading media-heading" ng-bind="team.name"></h5>
+									</a>
+									<p class="list-group-item-text text-muted media-body">
+										{{team.tag}} &bull; {{team.game.name}}
+									</p>
+								</div>
+							</div>
+						</div>
+						<div class="col-xs-4 text-right fa-fix">
+							<a ng-click="Teams.edit(team._id)" class="btn btn-primary btn-sm">
+                                Edit
+                            </a>
+							<a ng-click="Teams.delete(team)" class="btn btn-danger btn-sm">
+                                Delete
+                            </a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div ng-if="Teams.paging.pages() > 1" class="panel-footer text-center">
+				<ul class="pagination">
+					<li ng-class="{disabled: Teams.paging.page == 1}">
+						<a ng-click="Teams.prevPage()">&laquo;</a>
+					</li>
+					<li class="active">
+						<span>Page {{Teams.paging.page}} of {{Teams.paging.pages()}}</span>
+					</li>
+					<li ng-class="{disabled: !(Teams.paging.pages() > 1 && Teams.paging.page < Teams.paging.pages())}">
+						<a ng-click="Teams.nextPage()">&raquo;</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="col-xs-12 col-sm-12 col-md-6">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h2 class="panel-title"><i class="fa fa-commenting"></i>&nbsp;&nbsp;&nbsp; {{Teams.editing ? "Edit" : "Add"}} Team</h2>
+			</div>
+			<div class="panel-body" ng-show="Teams.form.stage == 0">
+				<form name="form" id="addTeamForm" ng-cloak>
+					<div class="form-group">
+						<label>
+							Team Name
+						</label>
+						<input class="form-control" type="text" placeholder="e.g. Fnatic" ng-model="Teams.form.name" data-parsley-trigger="keyup"
+						required/>
+					</div>
+					<div class="form-group">
+						<label>
+							Team Tag
+						</label>
+						<input class="form-control" type="text" placeholder="e.g. FNC" ng-model="Teams.form.tag" data-parsley-trigger="keyup" required/>
+					</div>
+					<div class="form-group">
+						<label>
+							Game
+						</label>
+						<select class="form-control" ng-model="Teams.form.game" ng-options="game._id as game.name for game in Teams.games" ng-change="Teams.setGame()"
+						required>
+							<option value="">Select Game</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label>
+							URL Slug
+						</label>
+						<input class="form-control" id="slug" type="text" placeholder="e.g. fnc" ng-model="Teams.form.slug" data-parsley-trigger="keyup"
+						data-parsley-remote-message="Slug already in use." required/>
+					</div>
+					<div class="form-group">
+						<label class="full">
+							Team will be accessible at eventvods.com/team/{{Teams.form.slug}}{{Teams.gameName}}
+						</label>
+					</div>
+					<div class="form-group">
+						<label>
+							Team Icon (optional)
+						</label>
+						<image-drop model="Teams.form.icon" preview-width="60" preview-height="25" />
+					</div>
+				</form>
+			</div>
+			<media-list model="Teams.form.media" ng-show="Teams.form.stage == 1">
+			</media-list>
+			<div class="panel-footer">
+				<div class="row">
+					<div class="col-xs-3 text-center">
+						<button ng-show="Teams.form.stage > 0 && Teams.form.stage < 2" class="btn btn-primary pull-left" ng-click="Teams.prevStage()"
+						type="button">
+								<i class="glyphicon glyphicon-chevron-left"></i>
+								{{Teams.stages[Teams.form.stage - 1]}}
+							</button>
+					</div>
+					<div class="col-xs-6 text-center">
+						<span ng-if="Teams.form.stage < 2">Stage {{Teams.form.stage+1}} of 2</span>
+						<span ng-if="Teams.form.stage == 2">Team {{Teams.editing ? "Updated" : "Added"}}</span>
+						<br />
+						<uib-progressbar value="Teams.form.stage" max="2"></uib-progressbar>
+					</div>
+					<div class="col-xs-3 text-center">
+						<button ng-show="Teams.form.stage < 2" class="btn btn-primary pull-right" ng-click="Teams.nextStage()" type="button">
+								<i no-ng-animate ng-if="Teams.validating" class="fa fa-refresh fa-spin fa-lg fa-fw"></i>
+								{{Teams.validating ? '' : Teams.stages[Teams.form.stage + 1]}}
+								<i class="glyphicon glyphicon-chevron-right"></i>
+							</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,26 @@
+.load-in {
+    transition: opacity 0.3s linear;
+    opacity: 0;
+    &.loaded {
+        opacity: 1;
+    }
+}
+#viewport {
+    position: absolute;
+    top: 0;
+    left: 0;
+    &.ng-enter {
+        transition: 0.3s linear;
+        opacity: 0;
+        &.ng-enter-active {
+            opacity: 1;
+        }
+    }
+    &.ng-leave {
+        transition: 0.3s linear;
+        opacity: 1;
+        &.ng-leave-active {
+            opacity: 0;
+        }
+    }
+}

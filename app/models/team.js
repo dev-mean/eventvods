@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var Media = require('./socialmedia').schema;
+var Event = require('./event');
 
 var teamSchema = new Schema({
 	name: {
@@ -21,7 +22,6 @@ var teamSchema = new Schema({
 	media: [Media],
 	icon: String,
 });
-
 
 var Team = mongoose.model('Teams', teamSchema);
 

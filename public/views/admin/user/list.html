@@ -1,0 +1,98 @@
+<div class="contextHead">
+    <div class="leftSide">
+        <h1 class="title">
+            Users
+        </h1>
+    </div>
+</div>
+<div class="filters">
+    <input type="text" ng-model="usersListController.search" placeholder="Search Users" tabindex="1"/>
+</div>
+<div class="listView events">
+    <table class="standard">
+        <thead>
+            <tr>
+                <th></th>
+                <th>
+                    <a ng-click="usersListController.setSort('displayName')">
+                        Display Name
+                    </a>
+                    <span ng-show="usersListController.sort.sortField == 'name' && !usersListController.sort.sortReverse" class="caret-down">
+                    </span>
+                    <span ng-show="usersListController.sort.sortField == 'name' && usersListController.sort.sortReverse" class="caret-up">
+                    </span>
+                    <span ng-show="usersListController.sort.sortField != 'name'" class="fa fa-unsorted">
+                    </span>
+                </th>
+                <th>
+                    <a ng-click="usersListController.setSort('email')">
+                        Email
+                    </a>
+                    <span ng-show="usersListController.sort.sortField == 'email' && !usersListController.sort.sortReverse" class="caret-down">
+                    </span>
+                    <span ng-show="usersListController.sort.sortField == 'email' && usersListController.sort.sortReverse" class="caret-up">
+                    </span>
+                    <span ng-show="usersListController.sort.sortField != 'email'" class="fa fa-unsorted">
+                    </span>
+                </th>
+				<th>
+                    <a ng-click="usersListController.setSort('userRights')">
+                        Rights
+                    </a>
+                    <span ng-show="usersListController.sort.sortField == 'userRights' && !usersListController.sort.sortReverse" class="caret-down">
+                    </span>
+                    <span ng-show="usersListController.sort.sortField == 'userRights' && usersListController.sort.sortReverse" class="caret-up">
+                    </span>
+                    <span ng-show="usersListController.sort.sortField != 'userRights'" class="fa fa-unsorted">
+                    </span>
+                </th>
+                <th>
+                </th>
+                <th>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="user in usersListController.filterData = (usersListController.userData | filter: usersListController.search) | orderBy: usersListController.sort.sortField:usersListController.sort.sortReverse | offset: (usersListController.paging.page - 1) * usersListController.paging.itemsPerPage | limitTo: usersListController.paging.itemsPerPage">
+                <td>
+                    <img ng-src="{{user.profilePicture}}" class="icon-48" />
+                </td>
+                <td>
+                    {{user.displayName}}
+                </td>
+				<td>
+					{{user.email}}
+				</td>
+				<td>
+					{{user.role}}
+				</td>
+                <td class="edit">
+                    <a ng-href="/manage/user/{{user._id}}/edit">
+                        <i class="fa fa-edit fa-fw">
+                        </i>
+                    </a>
+                </td>
+                <td class="delete">
+                    <a ng-click="usersListController.delete(user._id)">
+                        <i class="fa fa-trash fa-fw">
+                        </i>
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<span class="empty" ng-show="usersListController.loaded && (usersListController.filterData.length == 0 || usersListController.userData.length == 0)">
+    No users match those criteria.
+</span>
+<div class="pagination" ng-show="usersListController.filterData.length > 0">
+    <a ng-style="{visibility: usersListController.paging.page >1 && 'visible' || 'hidden'}" ng-click="usersListController.previousPage()" class="btn">
+        Prev Page
+    </a>
+    <p>
+        Page {{usersListController.paging.page}} of {{usersListController.paging.pages()}}
+    </p>
+    <a ng-style="{visibility: (usersListController.paging.pages() >1 && usersListController.paging.page < usersListController.paging.pages()) && 'visible' || 'hidden'}" ng-click="usersListController.nextPage()" class="btn">
+        Next Page
+    </a>
+</div>

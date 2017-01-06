@@ -18,9 +18,7 @@ var staffSchema = new Schema({
 		required: true
 	},
 	media: [SocialMedia],
-	role: {
-		type: String
-	},
+	role: String,
 	photo: String
 }, {
 	toObject: {

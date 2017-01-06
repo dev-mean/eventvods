@@ -13,7 +13,6 @@ module.exports.messages = {
 };
 module.exports.article = {
     title: 'required',
-    content: 'required',
     slug: 'required',
     author: 'required',
     publishDate: 'required'
@@ -45,7 +44,7 @@ module.exports.game = {
     name: 'required',
     slug: 'required'
 };
-module.exports.league = {
+module.exports.event = {
     name: 'required',
     game: 'required',
     slug: 'required',
@@ -79,3 +78,10 @@ module.exports.user = {
     email: 'required|email',
     userRights: 'required'
 };
+module.exports.mail = {
+    subject: 'required',
+    contents: 'required',
+    name: 'required',
+    email: 'email'
+
+}

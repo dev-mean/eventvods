@@ -6,7 +6,8 @@ var Team = require('./team').schema;
 var slug = require('slug');
 var Section = require('./section').schema;
 var moment = require('moment');
-var leagueSchema = new Schema({
+var User = require('./user');
+var eventSchema = new Schema({
     name: {
         type: String,
         required: true
@@ -16,10 +17,7 @@ var leagueSchema = new Schema({
     textOrientation: String,
     patch: String,
     prize: String,
-    format: {
-        type: String,
-        required: true
-    },
+    format: String,
     game: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Game',
@@ -36,30 +34,44 @@ var leagueSchema = new Schema({
     media: [Media],
     youtubeStream: String,
     twitchStream: String,
-    teams: [Team],
+    //Stage 1-2
+    // teams: [Team],
+    teams_new: {
+        type: [mongoose.Schema.Types.ObjectId],
+        ref: 'Teams'
+    },
+    //Stage 3
+    teams: {
+        type: [mongoose.Schema.Types.ObjectId],
+        ref: 'Teams'
+    },
+    
     logo: String,
     header: String,
     header_blur: String,
     contents: [Section],
     credits: String
 }, {
-    timestamps: true,
-    id: false,
-    toJSON: {
-        virtuals: true,
-    },
-    toObject: {
-        virtual: true,
-    }
+	id: false,
+	toObject: {
+		virtuals: true,
+	},
+	toJSON: {
+		virtuals: true,
+	}
+});
+eventSchema.fill('followers', function(cb){
+    User
+        .find({
+            "following": this._id
+        })
+        .count()
+        .exec(cb);
 });
 
-leagueSchema.virtual('updated').get(function() {
-    if (typeof this.updatedAt === undefined && typeof this.createdAt === undefined) return "";
-    var updated = (typeof this.updatedAt === undefined) ? this.createdAt : this.updatedAt;
-    return "Updated " + moment(updated).fromNow();
-});
+//Leave model name as League so as to keep old data.
+//Eventually we'll want to rename the collection
+var Event = mongoose.model('League', eventSchema);
 
-var League = mongoose.model('League', leagueSchema);
-
-module.exports = League;
-module.exports.schema = leagueSchema;
+module.exports = Event;
+module.exports.schema = eventSchema;

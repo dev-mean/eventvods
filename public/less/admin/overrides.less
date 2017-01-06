@@ -1,0 +1,103 @@
+@import "generated.less";
+
+/*!
+angular-xeditable - 0.2.0
+Edit-in-place for angular.js
+Build date: 2016-06-28 
+*/
+
+.editable-wrap{display:inline-block;white-space:nowrap;margin:0}.editable-wrap .editable-controls,.editable-wrap .editable-error{margin-bottom:0}.editable-wrap .editable-controls>input,.editable-wrap .editable-controls>select,.editable-wrap .editable-controls>textarea{margin-bottom:0}.editable-wrap .editable-input{display:inline-block}.editable-buttons{display:inline-block;vertical-align:top}.editable-buttons button{margin-left:5px}.editable-input.editable-has-buttons{width:auto}.editable-bstime .editable-input input[type=text]{width:46px}.editable-bstime .well-small{margin-bottom:0;padding:10px}.editable-range output{display:inline-block;min-width:30px;vertical-align:top;text-align:center}.editable-color input[type=color]{width:50px}.editable-checkbox label span,.editable-checklist label span,.editable-radiolist label span{margin-left:7px;margin-right:10px}.editable-hide{display:none!important}.editable-click:hover{text-decoration: underline}.editable-empty,.editable-empty:hover,.editable-empty:focus,a.editable-empty,a.editable-empty:hover,a.editable-empty:focus{font-style:italic;color:#D14;text-decoration:none}.popover-wrapper a{display:inline!important}.popover-wrapper{display:inline;position:relative}.popover-wrapper form{position:absolute;top:-53px;background:#FFF;border:1px solid #AAA;border-radius:5px;padding:7px;width:auto;display:inline-block;left:50%;margin-left:-110px;z-index:101}.popover-wrapper form:before{content:"";width:0;height:0;border-left:10px solid transparent;border-right:10px solid transparent;border-top:10px solid #AAA;position:absolute;bottom:-10px;left:100px}.popover-wrapper form:after{content:"";width:0;height:0;border-left:9px solid transparent;border-right:9px solid transparent;border-top:9px solid #FFF;position:absolute;bottom:-9px;left:101px}
+
+body, h1, h2, h3, h4, h5, h6 {
+    .gotham-med();
+}
+.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
+
+.container.no-pad {
+    padding: 0;
+}
+.no-margin-v {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+.navbar-nav > li > .dropdown-menu {
+    width: 100%;
+}
+.row {
+    h2 {
+        margin: 0 auto;
+    }
+    &.pad-top {
+        margin-top: 15px;
+    }
+}
+.table-bordered.joined {
+    border-top: 0;
+}
+.alert {
+    margin: 5px 10px;
+    border-right: 0;
+}
+.dropdown-menu {
+    left: 0!important;
+    right: auto!important;
+}
+.input-group-addon { min-width: 100px; }
+
+.input-group { width: 100%; }
+
+.pagination {
+    margin: 2px auto 0 auto;
+}
+.progress {
+    margin-bottom: 0!important;
+    margin-top: 5px!important;
+}
+text-angular {
+    .btn-toolbar {
+        margin-left: 0;
+        .btn-group {
+            margin-left: 0;
+        }
+    }
+}
+.editable-click {
+    border-bottom: 0!important;
+}
+.editable-empty {
+    color: inherit!important;
+    font-style: inherit!important;
+}
+.editable-buttons .btn-primary {
+    background-color: @brand-success;
+    border-color: @brand-success;
+    &:hover {
+        background-color: darken(@brand-success, 10%);
+        border-color: darken(@brand-success, 10%);
+    }
+}
+.list-directive .list-group {
+    margin-bottom: 0;
+}
+
+a.list-group-item:hover:not(.active) {
+    background-color: initial!important;
+}
+i.fa[ng-click]:hover {
+    color: @brand-success;
+}
+i.fa-times[ng-click]:hover {
+    color: @brand-danger;
+}
+i.fa-check-square-o {
+    color: @brand-success;
+}
+.datepicker-wrapper .input-group {
+    .relative;
+    top: -8px;
+    margin-top: -15px;
+}
+.datepicker-wrapper ul.uib-datepicker-popup {
+    left: -100px!important;
+    right: auto!important;
+}

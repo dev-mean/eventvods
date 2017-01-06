@@ -1,0 +1,163 @@
+.relative {
+    position: relative;
+}
+
+.fixed {
+    position: fixed;
+}
+
+.fa-fix, .p-2px {
+    .relative;
+    top: 2px;
+}
+.m-2px {
+    .relative;
+    top: -2px;
+}
+.p-1px {
+    .relative;
+    top: 1px;
+}
+.m-1px {
+    .relative;
+    top: -1px;
+}
+
+.row-center {
+    display: flex;
+    align-items: center;
+}
+.col-left {
+    padding-right: 0!important;
+}
+.col-right {
+    padding-left: 0!important;
+    .list-group {
+        border-radius: 0!important;
+    }
+}
+#viewport {
+    width: 100%;
+    padding: 20px 50px;
+}
+.container-fluid {
+    padding-left: 40px!important;
+    padding-right: 40px!important;
+}
+.center-full {
+    .fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.panel-title {
+    .gotham-med();
+}
+.tight {
+    .gotham-med();
+    .text-muted {
+        color: #999!important;
+        > a {
+            color: #999!important;
+        }
+    }
+    h2, h5 {
+        margin: 0 auto;
+    }
+    h2 {
+        padding-left: 10px;
+    }
+}
+hr {
+    margin: 20px 0;
+}
+.chart-title {
+    padding-left: 10px;
+}
+
+/* List group media & nested list groups */
+.list-group .media-left {
+    min-width: 50px;
+    text-align: center;
+}
+.list-group .media-object {
+    max-height: 40px;
+    max-width: 40px;
+    margin: auto;
+}
+
+.list-group.list-group-root {
+	padding: 0!important;
+	overflow: hidden!important;
+    margin-bottom: 0!important;
+	.list-group {
+		margin-bottom: 0!important;
+	}
+	.list-group-item {
+		border-radius: 0!important;
+		border-width: 1px 1px 0 0!important;
+	}
+	>.list-group-item {
+		&:first-child {
+			border-top-width: 0!important;
+		}
+	}
+	>.list-group {
+		>.list-group-item {
+			padding-left: 30px!important;
+		}
+		>.list-group {
+			>.list-group-item {
+				padding-left: 45px!important;
+			}
+		}
+	}
+}
+.col-list {
+    margin: auto 10px;
+}
+.matches-list .list-group-item:not(.smaller) {
+    height: 60px;
+    padding: 0;
+    .row {
+        height: 60px;
+        padding: 19px 20px;
+        div.vs {
+            width: auto!important;
+            padding: 0;
+        }
+        div.auto {
+            width: auto!important;
+        }
+        div.id {
+            width: 0!important;
+        }
+        span.vs {
+            margin: 0 15px;
+        }
+        .col-xs-1 {
+            padding-left: 5px;
+            padding-right: 5px;
+        }
+        &.match {
+            .text-right {
+                padding-right: 0!important;
+            }
+            .text-left {
+                padding-left: 0!important;
+            }
+        }
+    }
+    .editable-wrap, .btn-group {
+        margin-top: -7px;
+    }
+}
+.team-icon {
+    max-height: 24px;
+    max-width: 24px;
+    margin: 0 5px;
+}

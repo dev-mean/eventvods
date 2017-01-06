@@ -8,29 +8,22 @@ var Indicative = require('indicative');
 var Validators = require('../../controllers/validation');
 var Q = require('q');
 var slug = require('slug');
-var League = require('../../models/league');
 
 router.get('/slug/:slug', auth.public_api(), ratelimit, cache, function(req, res, next) {
 		Game.findOne({
 			slug: req.params.slug
 		})
-		.lean()
+		.fill('events')
 		.exec(function(err, game) {
-			if (err) next(err);
-			League.find({
-				"game": game._id
-			})
-			.exec(function(err, leagues) {
-				if (err) next(err);
-				game.leagues = leagues;
-				res.json(game);
-			});
+			res.json(game);
 		});
 	})
 
 router.route('/')
 	.get(auth.public_api(), ratelimit, cache, function(req, res, next) {
-		Game.find(function(err, games) {
+		Game.find()
+		.fill('eventsCount teamsCount')
+		.exec(function(err, games) {
 			if (err) next(err);
 			else res.json(games);
 		});

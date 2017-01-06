@@ -1,10 +1,27 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var Team = require('./team').schema;
-
-var matchSchema = {
-	team1: Team,
-	team2: Team,
+var matchSchema = new Schema({
+	//Stage 1-2
+	// team1: Team,
+	// team2: Team,
+	team1_2: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Teams'
+    },
+	team2_2: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Teams'
+    },
+	//Stage 3
+	team1: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Teams'
+    },
+	team2: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Teams'
+    },
 	team1Sp: Boolean,
 	team2Sp: Boolean,
 	team1SpText: String,
@@ -27,22 +44,23 @@ var matchSchema = {
 		type: Boolean,
 		default: false
 	}
-};
+});
 var moduleSchema = new Schema({
-	title: {
-		type: String,
-		required: true
-	},
+	title: String,
 	columns: [String],
-	matches: [matchSchema],
+	matches: {
+		type: [matchSchema]
+	},
+	matches2: {
+		type: [mongoose.Schema.Types.ObjectId],
+        ref: 'Match'
+    },
+	date: Date,
 	twitch: Boolean,
 	youtube: Boolean
 });
 var sectionSchema = new Schema({
-	title: {
-		type: String,
-		required: true
-	},
+	title: String,
 	modules: [moduleSchema],
 	draftText: String
 });
