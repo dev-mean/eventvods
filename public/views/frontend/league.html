@@ -108,7 +108,9 @@
     </div>
     <div ng-repeat="module in League.data.contents[League.sectionIndex].modules track by $index" class="module">
         <div class="container">
-            <h4 ng-bind="module.title" class="module-title"></h4>
+            <h4 class="module-title">
+                {{module.title}} {{module.date ? " - " : ""}} {{module.date | date:"MMMM dd, yyyy"}}
+            </h4>
         </div>
         <table class="container striped bordered responsive centered">
             <thead>

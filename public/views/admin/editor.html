@@ -123,10 +123,20 @@
 						<div class="col-xs-1 id">
 								{{match.identifier || Editor.getIdentifier($parent.$index)}}{{$index+1}}
 						</div>
-						<div ng-if-start="Editor.data.game.simple_tables" class="col-xs-3">
-							Simple Tables
+						<div ng-if-start="Editor.data.game.simple_tables" class="col-xs-3 text-right">
+							<b>Game Start</b>
 						</div>
-						<div ng-if-end class="col-xs-3">
+						<div ng-if="Editor.active.twitch" class="col-xs-1 text-left">
+							<div class="popover-wrapper">
+								<span editable-text="match.data[$index].twitch.gameStart">Twitch</span>
+								<i ng-if="match.data[$index].twitch.gameStart" class="fa fa-check-square-o fa-fix"></i>
+							</div>
+						</div>
+						<div ng-if-end ng-if="Editor.active.youtube" class="col-xs-1 text-left">
+							<div class="popover-wrapper">
+								<span editable-text="match.data[$index].youtube.gameStart">Youtube</span>
+								<i ng-if="match.data[$index].youtube.gameStart" class="fa fa-check-square-o fa-fix"></i>
+							</div>
 						</div>
 						<div ng-if-start="!Editor.data.game.simple_tables" class="col-xs-2 text-right">
 							<div class="popover-wrapper">
