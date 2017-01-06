@@ -80,11 +80,11 @@
 							$scope.item = 'that';
 							$scope.type = 'Table';
 							$scope.ok = function () {
-								$scope.close();
 								var module = section.modules.splice($index, 1)[0];
 								module.matches2.forEach(function(match){
 									if(match._id) toDelete.push(match._id);
 								})
+								$scope.$close();
 							}
 						}
 					})
