@@ -1,7 +1,7 @@
 (function() {
 	'use strict';
 	angular.module('eventApp')
-		.controller('editorController', function($http, API_BASE_URL, eventsService, $routeParams, notifier) {
+		.controller('editorController', function($http, API_BASE_URL, eventsService, $routeParams, notifier, $uibModal) {
 			var vm = this;
 			var static_columns = 0;
 			var toDelete = [];
@@ -74,8 +74,20 @@
 				});
 			}
 			vm.deleteModule = function(section, $index){
-				var module = section.modules.splice($index, 1)[0];
-				reset();
+				$uibModal.open({
+						templateUrl: 'deleteModal.html',
+						controller: function ($scope) {
+							$scope.item = 'that';
+							$scope.type = 'Table';
+							$scope.ok = function () {
+								$scope.close();
+								var module = section.modules.splice($index, 1)[0];
+								module.matches2.forEach(function(match){
+									if(match._id) toDelete.push(match._id);
+								})
+							}
+						}
+					})
 			}
 			vm.addMatch = function(){
 				vm.active.matches2.push({
@@ -87,12 +99,6 @@
 			}
 			vm.addColumn = function(){
 				vm.active.columns.push("Column");
-				// vm.active.matches2.forEach(function(match){
-				// 	for(var i=0; i < match.bestOf; i++){
-				// 		if(vm.active.columns.length > match.data[i].links.length + static_columns) match.data[i].links.push("");
-				// 	}
-					
-				// });
 			}
 			vm.removeColumn = function($index){
 				vm.active.columns.splice($index, 1);
@@ -116,7 +122,6 @@
 			eventsService.findById($routeParams.id)
 				.then(function(res) {
 					vm.data = res.data;
-					console.log(res.data);
 					document.title = res.data.name + " - Eventvods - Editor";
 				});
 		});

@@ -52,10 +52,10 @@
 						</div>
 					</div>
 				</div>
-				<div ng-repeat-start="match in Editor.active.matches2 track by $index" class="list-group-item smaller"  ng-if="match.title">
+				<div ng-repeat-start="match in Editor.active.matches2 track by $index" class="list-group-item smaller" ng-if="match.title" ng-class="{active: hover}" ng-mouseenter="hover = true" ng-mouseleave="hover = false">
 					<span editable-select="match.title" e-ng-options="s for s in Editor.titles" e-placeholder="Select Title">{{match.title || 'Select Title'}}</span>
 				</div>
-				<div class="list-group-item">
+				<div class="list-group-item" ng-class="{active: hover}" ng-mouseenter="hover = true" ng-mouseleave="hover = false">
 					<div class="row match">
 						<div class="col-xs-1 id">
 							<div class="popover-wrapper">
@@ -110,7 +110,7 @@
 						</div>
 					</div>
 				</div>
-				<div ng-repeat-end ng-repeat="game in Editor.collection(match.bestOf) track by $index" class="list-group-item">
+				<div ng-repeat-end ng-repeat="game in Editor.collection(match.bestOf) track by $index" class="list-group-item" ng-class="{active: hover}" ng-mouseenter="hover = true" ng-mouseleave="hover = false">
 					<div class="row">
 						<div class="col-xs-1 id">
 								{{match.identifier || Editor.getIdentifier($parent.$index)}}{{$index+1}}
