@@ -47,10 +47,10 @@
                     if (match.placeholder) return "";
                     else return link;
                 }
-                vm.hasExtras = function(module, match) {
-                    if (module.columns.length !== match.links.length) return false;
+                vm.hasExtras = function(module, game) {
+                    if (module.columns.length !== game.links.length) return false;
                     for (var i = 0; i < module.columns.length; i++) {
-                        if (match.links[i].trim() !== "") return true;
+                        if (game.links[i].trim() !== "") return true;
                     }
                     return false;
                 }

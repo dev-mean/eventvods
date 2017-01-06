@@ -105,6 +105,8 @@
     </a>-->
     <div class="container">
          <h4 ng-bind="League.data.contents[League.sectionIndex].title"></h4>
+         <i tooltipped data-tooltip="Follow Event" data-delay="0" data-position="left" class="material-icons star-right"
+             ng-click="Page.toggleFollow(League.data._id)" ng-class="{starred: Page.following(League.data._id)}">star</i>
     </div>
     <div ng-repeat="module in League.data.contents[League.sectionIndex].modules track by $index" class="module">
         <div class="container">
@@ -142,43 +144,43 @@
                     <td ng-show="!match.team2Sp || match.team2H" class="table-links spoiler-icon" ng-mouseenter="League.setHover(match, 2, true)" ng-mouseleave="League.setHover(match, 2, false)"><img ng-src=" {{match.team2.icon}} " /></td>
                     <td ng-show="!match.team2Sp || match.team2H " ng-bind="match.team2.name" ng-mouseenter="League.setHover(match, 2, true)" ng-mouseleave="League.setHover(match, 2, false)" class="left-align "></td>
                     <td ng-if="!League.data.game.simple_tables" class="table-links ">
-                        <a ng-if="module.youtube && match.youtube.picksBans " ng-href="{{League.parseLink(match, match.youtube.picksBans)}} " ng-click="!Page.inlineYoutube ? return : Player.playYoutube(match.youtube.picksBans, match, $event, League.data.contents[League.sectionIndex].title,
+                        <a ng-if="module.youtube && game.youtube.picksBans " ng-href="{{League.parseLink(match, game.youtube.picksBans)}} " ng-click="!Page.inlineYoutube ? return : Player.playYoutube(game.youtube.picksBans, match, $event, League.data.contents[League.sectionIndex].title,
                         module.title) ">
                             <img ng-if="Page.contentClass=='light' " class="responsive-img " src="/assets/images/icons/youtube.png " />
                             <img ng-if="Page.contentClass=='dark' " class="responsive-img " src="/assets/images/icons/youtube_dark.png " />
                         </a>
-                        <i ng-if="!(module.youtube && match.youtube.picksBans) ">-</i>
+                        <i ng-if="!(module.youtube && game.youtube.picksBans) ">-</i>
                     </td>
                     <td ng-if="!League.data.game.simple_tables" class="table-links ">
-                        <a ng-if="module.twitch && match.twitch.picksBans " ng-href="{{League.parseLink(match, match.twitch.picksBans)}} " ng-click="!Page.inlineTwitch ? return : Player.playTwitch(match.twitch.picksBans, match, $event, League.data.contents[League.sectionIndex].title,
+                        <a ng-if="module.twitch && game.twitch.picksBans " ng-href="{{League.parseLink(match, game.twitch.picksBans)}} " ng-click="!Page.inlineTwitch ? return : Player.playTwitch(game.twitch.picksBans, match, $event, League.data.contents[League.sectionIndex].title,
                         module.title) ">
                             <img ng-if="Page.contentClass=='light' " class="responsive-img " src="/assets/images/icons/twitch.png " />
                             <img ng-if="Page.contentClass=='dark' " class="responsive-img " src="/assets/images/icons/twitch_dark.png " />
                         </a>
-                        <i ng-if="!(module.twitch && match.twitch.picksBans) ">-</i>
+                        <i ng-if="!(module.twitch && game.twitch.picksBans) ">-</i>
                     </td>
                     <td class="table-links ">
-                        <a ng-if="module.youtube && match.youtube.gameStart " ng-href="{{League.parseLink(match, match.youtube.gameStart)}} " ng-click="!Page.inlineYoutube ? return : Player.playYoutube(match.youtube.gameStart, match, $event, League.data.contents[League.sectionIndex].title,
+                        <a ng-if="module.youtube && game.youtube.gameStart " ng-href="{{League.parseLink(match, game.youtube.gameStart)}} " ng-click="!Page.inlineYoutube ? return : Player.playYoutube(game.youtube.gameStart, match, $event, League.data.contents[League.sectionIndex].title,
                         module.title) ">
                             <img ng-if="Page.contentClass=='light' " class="responsive-img " src="/assets/images/icons/youtube.png " />
                             <img ng-if="Page.contentClass=='dark' " class="responsive-img " src="/assets/images/icons/youtube_dark.png " />
                         </a>
-                        <i ng-if="!(module.youtube && match.youtube.gameStart) ">-</i>
+                        <i ng-if="!(module.youtube && game.youtube.gameStart) ">-</i>
                     </td>
                     <td class="table-links ">
-                        <a ng-if="module.twitch && match.twitch.gameStart " ng-href="{{League.parseLink(match, match.twitch.gameStart)}} " ng-click="!Page.inlineTwitch ? return : Player.playTwitch(match.twitch.gameStart, match, $event, League.data.contents[League.sectionIndex].title,
+                        <a ng-if="module.twitch && game.twitch.gameStart " ng-href="{{League.parseLink(match, game.twitch.gameStart)}} " ng-click="!Page.inlineTwitch ? return : Player.playTwitch(game.twitch.gameStart, match, $event, League.data.contents[League.sectionIndex].title,
                         module.title) ">
                             <img ng-if="Page.contentClass=='light' " class="responsive-img " src="/assets/images/icons/twitch.png " />
                             <img ng-if="Page.contentClass=='dark' " class="responsive-img " src="/assets/images/icons/twitch_dark.png " />
                         </a>
-                        <i ng-if="!(module.twitch && match.twitch.gameStart) ">-</i>
+                        <i ng-if="!(module.twitch && game.twitch.gameStart) ">-</i>
                     </td>
                     <td>
-                        <i ng-if="League.hasExtras(module, match) " ng-attr-data-activates="{{match._id}} " dropdown data-hover="true " class="material-icons extras-toggle " below-origin="true " alignment="right ">&#xE5CF;</i>
-                        <i ng-if="!League.hasExtras(module, match) ">-</i>
-                        <ul ng-attr-id="{{match._id}} " class="dropdown-content match-extras-dd wide ">
-                            <li ng-repeat="column in module.columns track by $index " ng-if="match.links[$index] ">
-                                <a ng-href="{{League.parseLink(match, match.links[$index])}}" target="_blank" ng-bind="column "></a>
+                        <i ng-if="League.hasExtras(module, game) " ng-attr-data-activates="{{match._id}}-{{$index}}" dropdown data-hover="true " class="material-icons extras-toggle " below-origin="true " alignment="right ">&#xE5CF;</i>
+                        <i ng-if="!League.hasExtras(module, game) ">-</i>
+                        <ul ng-attr-id="{{match._id}}-{{$index}} " class="dropdown-content match-extras-dd wide ">
+                            <li ng-repeat="column in module.columns track by $index " ng-if="game.links[$index] ">
+                                <a ng-href="{{League.parseLink(match, game.links[$index])}}" target="_blank" ng-bind="column "></a>
                             </li>
                         </ul>
                     </td>

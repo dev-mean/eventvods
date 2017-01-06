@@ -76,7 +76,7 @@
                     else if (vm.session.following.indexOf(id) > -1) return true;
                     else return false;
                 }
-                vm.toggleFollow = function(id, type, name) {
+                vm.toggleFollow = function(id) {
                     if (vm.session == false || vm.session == null) return $location.path('/login');
                     var index = vm.session.following == null ? -1 : vm.session.following.indexOf(id);
                     if (index > -1)
