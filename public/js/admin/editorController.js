@@ -4,6 +4,7 @@
 		.controller('editorController', function($http, API_BASE_URL, eventsService, $routeParams, notifier) {
 			var vm = this;
 			var static_columns = 0;
+			var toDelete = [];
 			vm.svOpts = {"containment": ".list-group-root"};
 			vm.titles = ['', 'Tiebreakers', 'Quarterfinals', 'Semifinals', 'Winners\' Finals', 'Winners\' Match', 'Losers\' Round 1', 'Losers\' Round 2', 'Losers\' Round 3',
              'Losers\' Finals', 'Grand Finals', 'Decider Match', 'Elimination Match', 'Opening Match', 'Group A', 'Group B', 'Group C', 'Group D','1v1 Finals'];
@@ -19,16 +20,23 @@
 					.then(function(){
 						notifier.success('League updated');
 					});
+				for(var i = 0; i < toDelete.length; i++){
+					eventsService.deleteMatch(toDelete[i]);
+					toDelete.splice(i, 1);
+				}
+				console.log(toDelete);
 			};
 			vm.setActive = function(item, $index, $section, $table){
 				vm.active = item;
 				vm.$index = $index;
 				vm.$section = $section;
 				vm.$table = $table;
-				console.log(vm.getIdentifier());
 			}
 			vm.isActive = function(item){
 				return (vm.active == item);
+			}
+			vm.collection = function(number){
+				return Array(number).join(".").split(".")
 			}
 			vm.getIdentifier = function($index){
 				var counter = 0, str = "";
@@ -62,7 +70,7 @@
 				section.modules.push({
 					title: "New Table",
 					columns: [],
-					matches: []
+					matches2: []
 				});
 			}
 			vm.deleteModule = function(section, $index){
@@ -70,30 +78,36 @@
 				reset();
 			}
 			vm.addMatch = function(){
-				vm.active.matches.push({
+				vm.active.matches2.push({
 					data: [{
-						links: Array(vm.data.contents[$sectionIndex].modules[$moduleIndex].columns.length - static_columns).join(".").split(".")
+						links: Array(vm.active.columns.length - static_columns).join(".").split(".")
 					}],
 					bestOf: 1
 				});
 			}
 			vm.addColumn = function(){
-				vm.active.columns.push("New Column");
-				vm.active.matches.forEach(function(match){
-					if(module.columns.length > match.links.length + static_columns) match.links.push("");
-				});
+				vm.active.columns.push("Column");
+				// vm.active.matches2.forEach(function(match){
+				// 	for(var i=0; i < match.bestOf; i++){
+				// 		if(vm.active.columns.length > match.data[i].links.length + static_columns) match.data[i].links.push("");
+				// 	}
+					
+				// });
 			}
 			vm.removeColumn = function($index){
 				vm.active.columns.splice($index, 1);
-				vm.active.matches.forEach(function(match){
-					match.links.splice($index-static_columns, 1);
+				vm.active.matches2.forEach(function(match){
+					match.data.forEach(function(data){
+						data.links.splice($index-static_columns, 1);
+					})
 				})
 			}
-			vm.removeMatch = function($sectionIndex, $moduleIndex, $index){
-				vm.data.contents[$sectionIndex].modules[$moduleIndex].matches.splice($index, 1);
+			vm.removeMatch = function($index){
+				var match = vm.active.matches2.splice($index, 1)[0];
+				if(match._id) toDelete.push(match._id);
 			}
 			vm.duplicateMatch = function(module, $index){
-				var newMatch = $.extend({}, module.matches[$index]);
+				var newMatch = $.extend({}, module.matches2[$index]);
 				newMatch.links = newMatch.links.slice(0);
 				newMatch.team1 = $.extend({}, newMatch.team1);
 				newMatch.team2 = $.extend({}, newMatch.team2);
@@ -102,6 +116,7 @@
 			eventsService.findById($routeParams.id)
 				.then(function(res) {
 					vm.data = res.data;
+					console.log(res.data);
 					document.title = res.data.name + " - Eventvods - Editor";
 				});
 		});

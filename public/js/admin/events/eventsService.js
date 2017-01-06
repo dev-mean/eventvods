@@ -17,6 +17,11 @@
                 },
                 delete: function( id ) {
                     return $http.delete( API_BASE_URL + '/events/' + id );
+                },
+                deleteMatch: function(id){
+                    return $http.delete( API_BASE_URL + '/events/match/' + id, {
+                        ignoreLoadingBar: true
+                    } );
                 }
             }
         } ] );

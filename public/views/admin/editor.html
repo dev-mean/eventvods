@@ -1,16 +1,4 @@
-<!--<div class="contextHead">
-	<div class="leftSide">
-		<h1 class="title" ng-bind="Editor.data.name">
-		</h1>
-	</div>
-	<div class="rightSide">
-		<a class="btn solid icon" ng-click="Editor.manage = !Editor.manage">
-			<i class="fa fa-indent fa-fw"></i>
-			<span>{{Editor.manage? "Manage Links" : "Manage Tables"}}</span>
-		</a>
-		<a class="btn solid icon" ng-click="Editor.save()"><i class="fa fa-save fa-fw"></i><span>Save</span></a>
-	</div>
-</div>-->
+
 <h1 ng-bind="Editor.data.name"></h1>
 <div class="panel panel-default">
 	<div class="row">
@@ -41,7 +29,7 @@
 				<span class="text-center">Select a table to start editing.</span>
 			</div>
 			<div ng-if="!Editor.isActive(null)" class="list-group matches-list">
-				<div class="list-group-item no-flex">
+				<div class="list-group-item smaller">
 					<h3 class="list-group-item-heading">Table Settings</h3>
 					<div class="list-group-item-text">
 						<div class="row">
@@ -56,7 +44,7 @@
 							<div class="col-sx-8 col-sm-9 col-md-10">
 								<b>Columns</b>
 								<span ng-repeat="col in Editor.active.columns track by $index" class="col-list">
-									<span editable-text="col" ng-bind="col"></span>
+									<span editable-text="Editor.active.columns[$index]" ng-bind="col"></span>
 									<i ng-click="Editor.removeColumn($index)" class="fa fa-fw fa-times m-1px"></i>
 								</span>
 								<i ng-click="Editor.addColumn()" class="fa fa-lg fa-fw fa-plus "></i>
@@ -64,11 +52,11 @@
 						</div>
 					</div>
 				</div>
-				<div ng-repeat-start="match in Editor.active.matches2 track by $index" class="list-group-item no-flex"  ng-if="match.title">
-					<span editable-select="match.title" e-ng-options="s for s in Editor.titles">{{match.title || 'Select Title'}}</span>
+				<div ng-repeat-start="match in Editor.active.matches2 track by $index" class="list-group-item smaller"  ng-if="match.title">
+					<span editable-select="match.title" e-ng-options="s for s in Editor.titles" e-placeholder="Select Title">{{match.title || 'Select Title'}}</span>
 				</div>
-				<div ng-repeat-end class="list-group-item">
-					<div class="row">
+				<div class="list-group-item">
+					<div class="row match">
 						<div class="col-xs-1 id">
 							<div class="popover-wrapper">
 								<span editable-text="match.identifier" class="p-2px">{{match.identifier || Editor.getIdentifier($index)}}</span>
@@ -78,11 +66,11 @@
 							<div class="popover-wrapper">
 								<span ng-show="match.spoiler1" editable-text="match.team1Match" e-placeholder="Team 1" class="p-2px">{{match.team1Match || "Team 1"}}</span>
 							</div>
-							<span ng-show="!match.spoiler1" editable-select="match.team1" e-ng-options="t.name for t in Editor.data.teams" e-placeholder="Select Team" class="p-2px">{{match.team1.name}}</span>
+							<span ng-show="!match.spoiler1" editable-select="match.team1" e-ng-options="t.name for t in Editor.data.teams" e-placeholder="Select Team" class="p-2px">{{match.team1.name || "Select  Team"}}</span>
 						</div>
 						<div class="col-xs-2 vs text-center">
-							<img ng-show="!match.spoiler1" class="team-icon" ng-src="{{match.team1.icon}}" />
-							<img ng-show="match.spoiler1" class="team-icon" src="/assets/images/icons/ev.png" />
+							<img ng-if="!match.spoiler1 && match.team1" class="team-icon" ng-src="{{match.team1.icon}}" />
+							<img ng-if="match.spoiler1 || !match.team1" class="team-icon" src="/assets/images/icons/ev.png" />
 							<label uib-tooltip="Spoilers?" class="checkbox-inline">
 								&nbsp;
 								<input ng-model="match.spoiler1" ng-attr-id="sp_$index" type="checkbox" ng-disabled="!match.team1"/>
@@ -94,19 +82,89 @@
 								<input ng-model="match.spoiler2" ng-attr-id="sp_$index" type="checkbox"  ng-disabled="!match.team2"/>
 								&nbsp;
 							</label>
-							<img ng-show="!match.spoiler2" class="team-icon" ng-src="{{match.team2.icon}}" />
-							<img ng-show="match.spoiler2" class="team-icon" src="/assets/images/icons/ev.png" />
+							<img ng-if="!match.spoiler2 && match.team2" class="team-icon" ng-src="{{match.team2.icon}}" />
+							<img ng-if="match.spoiler2 || !match.team2" class="team-icon" src="/assets/images/icons/ev.png" />
 						</div>
 						<div class="col-xs-3 text-left">
-							<span ng-show="!match.spoiler2" editable-select="match.team2" e-ng-options="t.name for t in Editor.data.teams" e-placeholder="Select Team"class="p-2px">{{match.team2.name}}</span>
+							<span ng-show="!match.spoiler2" editable-select="match.team2" e-ng-options="t.name for t in Editor.data.teams" e-placeholder="Select Team"class="p-2px">{{match.team2.name || "Select  Team"}}</span>
 							<div class="popover-wrapper">
 								<span ng-show="match.spoiler2" editable-text="match.team2Match" e-placeholder="Team 2" class="p-2px">{{match.team2Match || "Team 2"}}</span>
 							</div>
 						</div>
-						<div class="col-sx-2">
+						<div class="col-xs-2 text-center">
 							<span editable-select="match.bestOf" e-ng-options="'Best of '+b for b in [1, 2, 3, 5, 7, 9]">{{"Best of "+match.bestOf || "Best of X"}}</span>
 						</div>
+						<div class="col-xs-1">
+							 <div class="btn-group" uib-dropdown>
+								<button type="button" class="btn btn-sm btn-default" uib-dropdown-toggle>
+									Actions <span class="caret"></span>
+								</button>
+								<ul class="dropdown-menu" uib-dropdown-menu>
+									<li class="disabled"><a disabled>Mark Match Complete</a></li>
+									<li><a ng-click="match.title='Select Title'">Add Title</a></li>
+									<li class="divider"></li>
+									<li><a ng-click="Editor.removeMatch($index)">Delete Match</a></li>
+									
+								</ul>
+							</div>
+						</div>
 					</div>
+				</div>
+				<div ng-repeat-end ng-repeat="game in Editor.collection(match.bestOf) track by $index" class="list-group-item">
+					<div class="row">
+						<div class="col-xs-1 id">
+								{{match.identifier || Editor.getIdentifier($parent.$index)}}{{$index+1}}
+						</div>
+						<div ng-if-start="Editor.data.game.simple_tables" class="col-xs-3">
+							Simple Tables
+						</div>
+						<div ng-if-end class="col-xs-3">
+						</div>
+						<div ng-if-start="!Editor.data.game.simple_tables" class="col-xs-2 text-right">
+							<div class="popover-wrapper">
+								<b editable-text="Editor.data.contents[Editor.$section].draftText">{{Editor.data.contents[Editor.$section].draftText || "Picks & Bans"}}</b>
+							</div>
+						</div>
+						<div ng-if="Editor.active.twitch" class="col-xs-1 text-left">
+							<div class="popover-wrapper">
+								<span editable-text="match.data[$index].twitch.picksBans">Twitch</span>
+								<i ng-if="match.data[$index].twitch.picksBans" class="fa fa-check-square-o fa-fix"></i>
+							</div>
+						</div>
+						<div ng-if="Editor.active.youtube" class="col-xs-1 text-left">
+							<div class="popover-wrapper">
+								<span editable-text="match.data[$index].youtube.picksBans">Youtube</span>
+								<i ng-if="match.data[$index].youtube.picksBans" class="fa fa-check-square-o fa-fix"></i>
+							</div>
+						</div>
+						<div class="col-xs-1 text-right">
+							<b>Game Start</b>
+						</div>
+						<div ng-if="Editor.active.twitch" class="col-xs-1 text-left">
+							<div class="popover-wrapper">
+								<span editable-text="match.data[$index].twitch.gameStart">Twitch</span>
+								<i ng-if="match.data[$index].twitch.gameStart" class="fa fa-check-square-o fa-fix"></i>
+							</div>
+						</div>
+						<div ng-if-end ng-if="Editor.active.youtube" class="col-xs-1 text-left">
+							<div class="popover-wrapper">
+								<span editable-text="match.data[$index].youtube.gameStart">Youtube</span>
+								<i ng-if="match.data[$index].youtube.gameStart" class="fa fa-check-square-o fa-fix"></i>
+							</div>
+						</div>
+						<div ng-if="Editor.active.columns.length > 0" class="col-xs-1 text-right">
+							<b>Extras</b>
+						</div>
+						<div ng-repeat="column in Editor.active.columns track by $index" class="col-xs-1 text-left">
+							<div class="popover-wrapper">
+								<span editable-text="match.data[$parent.$index].links[$index]">{{column}}</span>
+								<i ng-if="match.data[$parent.$index].links[$index]" class="fa fa-check-square-o fa-fix"></i>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div ng-click="Editor.addMatch()" class="list-group-item smaller">
+					<i class="fa fa-lg fa-fw fa-plus"></i> Add Match
 				</div>
 			</div>
 		</div>

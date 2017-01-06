@@ -42,9 +42,7 @@ function groupMatches(module){
 		var nextMatch = module.matches[i+1];
 		var teamsMatch = (isset(nextMatch) && isset(match.team1) && isset(match.team2) && isset(nextMatch.team1) && isset(nextMatch.team2) &&
 		 	(match.team1 == nextMatch.team1 && match.team2 == nextMatch.team2));
-		var spoilersMatch = (isset(nextMatch) && isset(match.team1SpText) && isset(match.team2SpText) &&
-			(match.team1SpText == nextMatch.team1SpText && match.team2SpText == nextMatch.team2SpText));
-		if( (teamsMatch && !spoilersMatch) || (spoilersMatch && !teamsMatch) ){
+		if( (teamsMatch){
 			temp.push(match);
 		}
 		else if(temp.length > 0){
