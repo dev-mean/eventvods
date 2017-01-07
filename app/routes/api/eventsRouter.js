@@ -113,12 +113,8 @@ router.get('/game/:slug', auth.public_api(), ratelimit, cache, function(req, res
         Event.find({
                 game: game._id
             })
-            .populate('game staff')
-            .populate({
-                path: 'teams',
-                model: 'Teams',
-                select: 'name tag _id slug icon'
-            })
+            .select('_id name game subtitle slug startDate endDate logo')
+            .populate('game')
             .exec(function(err, events) {
                 if (err) next(err);
                 res.json(events);
