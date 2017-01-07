@@ -2,18 +2,6 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var Team = require('./team').schema;
 var matchSchema = new Schema({
-	//Stage 1-2
-	// team1: Team,
-	// team2: Team,
-	team1_2: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Teams'
-    },
-	team2_2: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Teams'
-    },
-	//Stage 3
 	team1: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Teams'
@@ -48,9 +36,6 @@ var matchSchema = new Schema({
 var moduleSchema = new Schema({
 	title: String,
 	columns: [String],
-	matches: {
-		type: [matchSchema]
-	},
 	matches2: {
 		type: [mongoose.Schema.Types.ObjectId],
         ref: 'Match'
