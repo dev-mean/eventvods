@@ -83,5 +83,8 @@ module.exports.mail = {
     contents: 'required',
     name: 'required',
     email: 'email'
-
+}
+module.exports.rating = {
+    match: 'required',
+    rating:'required|max:5|min:1'
 }

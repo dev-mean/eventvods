@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+var Rating = require('./rating');
 
 var matchSchema = new Schema({
     identifier: String,
@@ -43,8 +44,10 @@ var matchSchema = new Schema({
             type: Boolean,
             default: false
         },
-    }]
+    }],
+    rating: Number
 });
+
 
 var Match = mongoose.model('Match', matchSchema);
 module.exports = Match;

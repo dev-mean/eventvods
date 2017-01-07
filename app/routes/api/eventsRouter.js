@@ -141,9 +141,9 @@ router.get('/slug/:slug', auth.public_api(), ratelimit, cache, function(req, res
             model: 'Teams',
                 select: 'name tag _id slug icon'
         })
-        .exec(function(err, events) {
+        .exec(function(err, event) {
             if (err) next(err);
-            else res.json(events);
+            else res.json(event);
         });
 })
 router.get('/export/:event_id', auth.updater(), function(req, res, next) {

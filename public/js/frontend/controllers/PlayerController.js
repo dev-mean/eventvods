@@ -19,7 +19,6 @@
                 player.destroy();
                 player = null;
                 vm.type = null;
-                vm.match = null;
                 $('#player').empty();
                 vm.show = false;
             }
@@ -50,6 +49,12 @@
                     time: timeToSeconds(yt[6])
                 }
             }
+            vm.showRatingsPop = function(){
+                $('.ratings-popup').addClass('show');
+                $timeout(function(){
+                    $('.ratings-popup').removeClass('show');
+                }, 30000);
+            }
             vm.playYoutube = function(link, match, $event, sectionT, moduleT) {
                 if (match.placeholder) return;
                 var yt = parseYoutube(link);
@@ -59,6 +64,8 @@
                 vm.type = "youtube";
                 vm.sectionT = sectionT;
                 vm.moduleT = moduleT;
+                vm.targetTime = null;
+                vm.ratePop = false;
                 var options = {
                     width: window.innerWidth * 0.6,
                     height: window.innerWidth * 0.6 * 9 / 16,
@@ -74,6 +81,7 @@
                             event.target.playVideo();
                             vm.playing = true;
                             vm.volSlider = event.target.getVolume();
+                            vm.targetTime = event.target.getDuration() * 0.8;
                         },
                         "onStateChange": function(event) {
                             $scope.$apply(function() {
@@ -84,6 +92,14 @@
                     }
                 };
                 player = new YT.Player('player', options);
+                var ratingsCheck = setInterval(function(){
+                    if(vm.show === false || (vm.targetTime !== null && player.getCurrentTime() > vm.targetTime)){
+                        $scope.$apply(function() {
+                            vm.showRatingsPop();
+                        });
+                        clearInterval(ratingsCheck);
+                    }
+                }, 5000)
             }
             vm.playTwitch = function(link, match, $event, sectionT, moduleT) {
                 if (match.placeholder) return;
@@ -127,13 +143,11 @@
             vm.start = function() {
                 if (vm.type === "twitch") {
                     var time = parseTwitch(vm.match.twitch.gameStart);
-                    if (time !== false) time = time.time;
-                    player.seek(time);
+                    if (time !== false) player.seek(time.time);
                 }
                 if (vm.type === "youtube") {
                     var time = parseYoutube(vm.match.youtube.gameStart);
-                    if (time !== false) time = time.time;
-                    player.seekTo(time);
+                    if (time !== false) player.seekTo(time.time);
                 }
             }
             vm.toggle = function() {

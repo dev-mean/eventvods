@@ -35,77 +35,9 @@
     </div>
 </div>
 <div class="contents pad-bottom event" ng-controller="PlayerController as Player">
-    <!--<div class="info">
-        <div class="container row">
-            <div class="col m12 l4">
-                <i class="material-icons">&#xE88F;</i>
-                <h6 ng-if="League.data.patch">Patch</h6> {{League.data.patch}}
-                <h6 ng-if="League.data.prize">Prize Pool</h6> {{League.data.prize}}
-            </div>
-            <div class="col m12 l4">
-                <i class="material-icons">&#xE417;</i>
-                <h6>Full Stream</h6>
-                <span class="text-small">May contain spoilers</span>
-                <div class="row watch-online">
-                    <a ng-if="League.data.youtubeStream" ng-href="{{League.data.youtubeStream}}" ng-class="{'offset-s3': !League.data.twitchStream}" class="col s6" target="_blank">
-                        <img ng-if="Page.contentClass == 'light'" class="responsive-img" src="/assets/images/icons/youtube_full.png" />
-                        <img ng-if="Page.contentClass == 'dark'" class="responsive-img" src="/assets/images/icons/youtube_full_dark.png" />
-                    </a>
-                    <a ng-if="League.data.twitchStream" ng-href="{{League.data.twitchStream}}" ng-class="{'offset-s3': !League.data.youtubeStream}" class="col s6" target="_blank">
-                        <img ng-if="Page.contentClass == 'light'" class="responsive-img" src="/assets/images/icons/twitch_full.png" />
-                        <img ng-if="Page.contentClass == 'dark'" class="responsive-img" src="/assets/images/icons/twitch_full_dark.png" />
-                    </a>
-                </div>
-            </div>
-            <div class="col m12 l4">
-                <i class="material-icons">&#xE8DF;</i>
-                <h6>Start Date</h6> {{League.data.startDate | date: 'EEEE, MMMM dd yyyy'}}
-                <h6>End Date</h6> {{League.data.endDate | date: 'EEEE, MMMM dd yyyy'}}
-            </div>
-        </div>
-    </div>
-    <div class="details slide-toggle" ng-class="{show: League.showDetails}">
-        <h4 class="container">Staff</h4>
-        <div class="icon-container container">
-            <div class="icon" ng-repeat="staff in League.data.staff">
-                <svg viewbox="1 1 8 8" class="icon-image" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1">
-					<defs>
-						<pattern ng-attr-id="{{staff._id}}" patternUnits="userSpaceOnUse" width="10" height="10">
-							<image ng-attr-href="{{staff.photo}}" x="0" y="0" width="10" height="10" />
-						</pattern>
-					</defs>
-					<a ng-href="#" xlink:href="">
-						<path class="icon-path" ng-attr-fill="url({{League.abs + '#' +staff._id}})" stroke-width="0.2" d="M5.5 1.5 L8.5 4.5 Q9 5 8.5 5.5 L5.5 8.5 Q5 9 4.5 8.5 L 1.5 5.5 Q1 5 1.5 4.5 L4.5 1.5 Q 5 1 5.5 1.5z"
-						/>
-					</a>
-				</svg>
-                <span class="icon-role" ng-bind="staff.role"></span>
-                <span>{{staff.forename + " " + staff.surname}}</span>
-                <a ng-href="#" class="icon-alias" ng-bind="staff.alias"></a>
-            </div>
-        </div>
-        <h4 class="container">Teams</h4>
-        <div class="icon-container container">
-            <div class="icon team" ng-repeat="team in League.data.teams">
-                <svg viewbox="1 1 8 8" class="icon-image" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1">
-					<a ng-href="#" xlink:href="">
-						<path class="icon-path solid" stroke-width="0.2" d="M5.5 1.5 L8.5 4.5 Q9 5 8.5 5.5 L5.5 8.5 Q5 9 4.5 8.5 L 1.5 5.5 Q1 5 1.5 4.5 L4.5 1.5 Q 5 1 5.5 1.5z"
-						/>
-					</a>
-				</svg>
-                <div class="team-container"><img ng-src="{{team.icon}}" class="icon-team" /></div>
-                <span class="two-lines">
-						<a ng-href="#" class="icon-alias" ng-bind="team.name"></a>
-					</span>
-            </div>
-        </div>
-    </div>
-    <a class="details-toggle waves-effect waves-light btn" ng-click="League.toggleDetails()">
-        <i class="material-icons left">{{League.showDetails ? "&#xE5CE;" : "&#xE5CF;"}}</i> {{League.showDetails ? "less" : "more"}} details
-    </a>-->
     <div class="container">
          <h4 ng-bind="League.data.contents[League.sectionIndex].title"></h4>
-         <i tooltipped data-tooltip="Follow Event" data-delay="0" data-position="left" class="material-icons star-right"
+         <i tooltipped data-tooltip="{{Page.following(League.data._id) ? 'Unfollow' : 'Follow'}} Event" data-delay="0" data-position="left" class="material-icons star-right"
              ng-click="Page.toggleFollow(League.data._id)" ng-class="{starred: Page.following(League.data._id)}">star</i>
     </div>
     <div ng-repeat="module in League.data.contents[League.sectionIndex].modules track by $index" class="module">
@@ -128,6 +60,7 @@
                     <th class="filler"></th>
                     <th class="double" colspan="2">Game Start</th>
                     <th class="fixed">Extras</th>
+                    <th>Rating</th>
                 </tr>
             </thead>
 
@@ -187,6 +120,13 @@
                             </li>
                         </ul>
                     </td>
+                    <td>
+                        <i ng-if="$parent.$index == 0" class="material-icons" ng-repeat="val in [1,2,3,4,5]"
+                            ng-class="{starred: (League.indexRating.show(match._id) ? League.indexRating.hover(match._id) : match.rating) >= val}"
+                            ng-mouseenter="League.indexRating.onHover(match._id, val)" ng-mouseleave="League.indexRating.onUnHover(match._id)"
+                            ng-click="Page.rate(match._id, val);match.rating = val">star</i>
+                        <i ng-if="$index != 0">-</i>
+                    </td>
                 </tr>
             </tbody>
         </table>
@@ -199,6 +139,15 @@
 			</clipPath>
 		</defs>
 	</svg>
+    <div class="ratings-popup z-depth-3">
+        <h5>How would you rate this match?</h5>
+        <div class="ratings-stars">
+            <i class="material-icons" ng-repeat="val in [1,2,3,4,5]"
+            ng-click="Page.rate(Player.match._id, val);League.rating.stick(val)"
+            ng-mouseenter="League.rating.onHover(val)" ng-mouseleave="League.rating.onUnHover()"
+            ng-class="{starred: League.rating.hover >= val}" ng-style="{'transition-delay': 50*val+'ms'}">star</i>
+        </div>
+    </div>
     <div class="player contents valign-wrapper center-align " ng-class="Page.contentClass " ng-show="Player.show ">
         <i ng-click="Player.back() " class="material-icons back ">&#xE5C4;</i>
         <div>

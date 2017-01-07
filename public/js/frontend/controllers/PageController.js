@@ -8,8 +8,8 @@
                 }
             };
         }])
-        .controller('PageController', ['SessionManager', '$rootScope', '$timeout', '$cookies', '$window', 'NavService', '$location',
-            function(SessionManager, $rootScope, $timeout, $cookies, $window, NavService, $location) {
+        .controller('PageController', ['SessionManager', '$rootScope', '$timeout', '$cookies', '$window', 'NavService', '$location', '$http', 'API_BASE_URL',
+            function(SessionManager, $rootScope, $timeout, $cookies, $window, NavService, $location, $http, API) {
                 var vm = this;
                 var element_images = 17;
                 vm.session = null;
@@ -83,6 +83,18 @@
                         vm.session.following.splice(index, 1);
                     else vm.session.following.push(id);
                     SessionManager.following(vm.session.following);
+                }
+                vm.rate = function(id, rating){
+                    if (vm.session == false || vm.session == null) return $location.path('/login');
+                    $http.post(API+'/ratings', {
+                        match: id,
+                        rating: rating
+                    }, {
+                        ignoreLoadingBar: true
+                    });
+                    $timeout(function(){
+                        $('.ratings-popup').removeClass('show');
+                    }, 1000);
                 }
                 var inlineYoutube = function() {
                     if (vm.session == null || vm.session == false) return true;

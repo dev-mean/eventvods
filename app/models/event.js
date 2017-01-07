@@ -7,6 +7,7 @@ var slug = require('slug');
 var Section = require('./section').schema;
 var moment = require('moment');
 var User = require('./user');
+
 var eventSchema = new Schema({
     name: {
         type: String,

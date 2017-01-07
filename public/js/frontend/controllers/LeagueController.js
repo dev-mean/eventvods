@@ -9,6 +9,46 @@
                 vm.simple_tables = false;
                 vm.sectionIndex = parseInt($routeParams.s || 0);
                 vm.showDetails = false;
+                vm.rating = {
+                    hover: 0,
+                    timeout: null,
+                    stuck: false,
+                    onHover: function(val){
+                        if(vm.rating.timeout !== null)
+                            $timeout.cancel(vm.rating.timeout);
+                        vm.rating.hover = val;
+                    },
+                    onUnHover: function(){
+                        if(!vm.rating.stuck) vm.rating.timeout = $timeout(function(){
+                            vm.rating.hover = 0;
+                        }, 50)
+                    },
+                    stick: function(val){
+                        vm.rating.stuck = true;
+                        vm.rating.hover = val;
+                    }
+                }
+                vm.indexRating = {
+                    hovers: {},
+                    timeouts: {},
+                    stucks: {},
+                    hover: function(index){
+                        return vm.indexRating.hovers[index];
+                    },
+                    onHover: function(index, val){
+                        if(vm.indexRating.timeouts[index] !== null)
+                            $timeout.cancel(vm.indexRating.timeouts[index]);
+                        vm.indexRating.hovers[index] = val;
+                    },
+                    onUnHover: function(index){
+                        if(!vm.indexRating.stucks[index]) vm.indexRating.timeouts[index] = $timeout(function(){
+                            vm.indexRating.hovers[index] = 0;
+                        }, 50)
+                    },
+                    show: function(index){
+                        return vm.indexRating.hovers[index] > 0;
+                    }
+                }
                 vm.toggleDetails = function() {
                     vm.showDetails = !vm.showDetails;
                     if (!vm.showDetails) $anchorScroll("top");
@@ -52,12 +92,6 @@
                     else
                         match.team2H = isHovered;
                 }
-                vm.description = function(title){
-                    var titles = {
-                        "Tiebreakers": "We always include placeholder tiebreaker games where they might happen, so you don't get spoiled."
-                    }
-                    return titles[title];
-                }
                 function timeToSeconds(time) {
                     time = /((\d+)h)?((\d+)m)?((\d+)s)?/i.exec(time);
                     for (var i = 0; i < time.length; i++) {
@@ -68,9 +102,6 @@
                 $http.get(API + '/events/slug/' + $routeParams.slug)
                     .then(function(res) {
                         vm.data = res.data;
-                        if (vm.data.game.slug === "csgo" || vm.data.game.slug === "overwatch") vm.simple_tables = true;
-                        console.log(vm.data);
-                        console.log(vm.simple_tables);
                         $rootScope.meta.title = vm.data.name + " - Eventvods - Esports on Demand";
                         $rootScope.meta.description = "Watch all " + vm.data.name + " vods and highlights on demand,  easily and spoiler-free. Rate, favorite and share matches of your favorite teams!";
                         $('.evSlider .image, .contents .details-toggle').addClass('loaded');

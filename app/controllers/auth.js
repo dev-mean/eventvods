@@ -65,10 +65,10 @@ module.exports.logged_in = function(skipEmailCheck) {
 	return function(req, res, next) {
 		if (!req.isAuthenticated())
 			loginRedirect(req, res);
-		else if (req.user.emailConfirmed || skipEmailCheck)
+		else if (req.user.emailConfirmation.confirmed || skipEmailCheck)
 			next();
 		else
-			res.redirect('/email');
+			res.redirect('/user/settings?tab=1');
 	};
 };
 module.exports.writer = function(){

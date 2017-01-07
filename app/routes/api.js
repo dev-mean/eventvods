@@ -24,6 +24,7 @@ router.use('/users', require('./api/usersRouter'));
 router.use('/user', require('./api/userRouter'));
 router.use('/events', require('./api/eventsRouter'));
 router.use('/mail', require('./api/mailRouter'));
+router.use('/ratings', require('./api/ratingsRouter'));
 
 // 404 handler
 router.use(function(req, res, next) {
