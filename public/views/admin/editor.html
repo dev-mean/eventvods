@@ -120,7 +120,7 @@
 				</div>
 				<div ng-repeat-end ng-repeat="game in Editor.collection(match.bestOf) track by $index" class="list-group-item" ng-class="{active: hover}" ng-mouseenter="hover = true" ng-mouseleave="hover = false">
 					<div class="row">
-						<div class="col-xs-1 id">
+						<div class="col-xs-1 auto">
 								{{match.identifier || Editor.getIdentifier($parent.$index)}}{{$index+1}}
 						</div>
 						<div ng-if-start="Editor.data.game.simple_tables" class="col-xs-3 text-right">

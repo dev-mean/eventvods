@@ -136,13 +136,13 @@
                     <td>{{match.identifier || League.getIdentifier($parent.$parent.$index, $parent.$index)}}{{$index+1}}</td>
                     <td ng-show="!match.spoiler1 || match.team1H" ng-bind="match.team1.name" ng-mouseenter="League.setHover(match, 1, true)" ng-mouseleave="League.setHover(match, 1, false)" class="right-align"></td>
                     <td ng-show="!match.spoiler1 || match.team1H" ng-mouseenter="League.setHover(match, 1, true)" ng-mouseleave="League.setHover(match, 1, false)" class="table-links"><img ng-src="{{match.team1.icon}}" /></td>
-                    <td ng-show="match.spoiler1 && !match.team1H" ng-mouseenter="League.setHover(match, 1, true)" ng-mouseleave="League.setHover(match, 1, false)" class="right-align">{{match.spoiler1Text || "Team 1 "}}</td>
+                    <td ng-show="match.spoiler1 && !match.team1H" ng-mouseenter="League.setHover(match, 1, true)" ng-mouseleave="League.setHover(match, 1, false)" class="right-align">{{match.team1Match || "Team 1 "}}</td>
                     <td ng-show="match.spoiler1 && !match.team1H" ng-if="Page.contentClass == 'dark'" ng-mouseenter="League.setHover(match, 1, true)" ng-mouseleave="League.setHover(match, 1, false)" class="table-links"><img src="/assets/images/icons/ev.png" /></td>
                     <td ng-show="match.spoiler1 && !match.team1H" ng-if="Page.contentClass == 'light'" ng-mouseenter="League.setHover(match, 1, true)" ng-mouseleave="League.setHover(match, 1, false)" class="table-links"><img src="/assets/images/icons/ev_dark.png" /></td>
                     <td>VS</td>
                     <td ng-show="match.spoiler2 && !match.team2H" ng-if="Page.contentClass == 'dark'" class="table-links generic-icon" ng-mouseenter="League.setHover(match, 2, true)" ng-mouseleave="League.setHover(match, 2, false)"><img src="/assets/images/icons/ev.png" /></td>
                     <td ng-show="match.spoiler2 && !match.team2H" ng-if="Page.contentClass == 'light'" class="table-links generic-icon" ng-mouseenter="League.setHover(match, 2, true)" ng-mouseleave="League.setHover(match, 2, false)"><img src="/assets/images/icons/ev_dark.png" /></td>
-                    <td ng-show="match.spoiler2 && !match.team2H " class="left-align " ng-mouseenter="League.setHover(match, 2, true) " ng-mouseleave="League.setHover(match, 2, false)">{{match.spoiler2Text || "Team 2 "}}</td>
+                    <td ng-show="match.spoiler2 && !match.team2H " class="left-align " ng-mouseenter="League.setHover(match, 2, true) " ng-mouseleave="League.setHover(match, 2, false)">{{match.team2Match || "Team 2 "}}</td>
                     <td ng-show="!match.spoiler2 || match.team2H" class="table-links spoiler-icon" ng-mouseenter="League.setHover(match, 2, true)" ng-mouseleave="League.setHover(match, 2, false)"><img ng-src=" {{match.team2.icon}} " /></td>
                     <td ng-show="!match.spoiler2 || match.team2H " ng-bind="match.team2.name" ng-mouseenter="League.setHover(match, 2, true)" ng-mouseleave="League.setHover(match, 2, false)" class="left-align "></td>
                     <td ng-if="!League.data.game.simple_tables" class="table-links ">
