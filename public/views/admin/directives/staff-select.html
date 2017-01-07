@@ -1,26 +1,36 @@
 <div class="list-directive">
 	<div class="list-group" sv-root sv-part="model">
 		<div class="list-group-item">
-			<div class="form-group"><label>Add Staff</label>
-				<div class="input-group">
-					<select class="form-control" ng-options="staffMember.name for staffMember in data.staff" ng-model="data.selectedStaff"></select>
-					<span class="input-group-btn"><button class="btn btn-default" type="button" ng-click="$add()">Add</button></span>
+			<div class="row">
+				<div class="col-xs-12 col-sm-6">
+					<div class="form-group">
+						<label>Filter</label>
+						<input type="text" class="form-control" ng-model="data.filter"></select>
+					</div>
+				</div>
+				<div class="col-xs-12 col-sm-6">
+					<div class="form-group"><label>Select Staff</label>
+						<div class="input-group">
+							<select class="form-control" ng-options="staffMember.name for staffMember in data.staff | filter:data.filter" ng-model="data.selectedStaff"></select>
+							<span class="input-group-btn"><button class="btn btn-default" type="button" ng-click="$add()">Add</button></span>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
 		<div class="list-group-item" sv-element="{'containment': '.list-group'}" ng-repeat="staff in model track by $index">
 			<div class="media">
 				<div class="media-left media-middle">
-                    <img class="media-object" ng-src="{{staff.photo}}" />
-                </div>
+					<img class="media-object" ng-src="{{staff.photo}}" />
+				</div>
 				<div class="media-body">
 					<h4 class="list-group-item-heading media-heading text-primary">{{staff.name}}</h4>
-                    <p class="list-group-item-text text-muted media-body">
-                        <span sv-handle class="fa fa-fw fa-lg fa-sort"></span>
-                        <span class="fa fa-fw fa-lg fa-times" ng-click="$remove($index)"></span>
+					<p class="list-group-item-text text-muted media-body">
+						<span sv-handle class="fa fa-fw fa-lg fa-sort"></span>
+						<span class="fa fa-fw fa-lg fa-times" ng-click="$remove($index)"></span>
 						<span class="text-primary" editable-text="staff.role" ng-bind="staff.role"></span>
-                    </p>
-                </div>
+					</p>
+				</div>
 			</div>
 		</div>
 	</div>
