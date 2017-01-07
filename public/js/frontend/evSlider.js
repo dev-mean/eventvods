@@ -32,14 +32,30 @@
 		this.find('.indicator').eq(settings.index).addClass('active');
 		this.find('.image').eq(settings.index++).addClass('active');
 
-		//Continued functions
-		$('.indicator').click(function() {
-			settings.index = $(this).attr('data-index');
+		//Change to index function
+		function gotoSlide(index){
+			settings.index = index;
 			$('.evSlider .active').removeClass('active');
 			settings.el.find('.indicator').eq(settings.index).addClass('active');
 			settings.el.find('.image').eq(settings.index++).addClass('active');
 			clearableInterval.clear();
 			clearableInterval($.proxy(iterate, settings.el), settings.delay);
+		}
+		//Continued functions
+		$('.indicator').click(function() {
+			gotoSlide($(this).attr('data-index'));
+		});
+		$('.arrow-left').click(function(){
+			if(settings.index == 0)
+				gotoSlide(settings.max);
+			else
+				gotoSlide(settings.index-2);
+		});
+		$('.arrow-right').click(function(){
+			if(settings.index == settings.max)
+				gotoSlide(0);
+			else
+				gotoSlide(settings.index);
 		});
 		var iterate = function() {
 			if (settings.index == settings.max) settings.index = 0;

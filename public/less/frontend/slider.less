@@ -4,6 +4,34 @@
 	height: @banner-slider-height + @nav-height;
 	z-index: 0;
 	overflow: hidden;
+	.arrow-left, .arrow-right {
+		position: absolute;
+		z-index: 998;
+		top: ((@banner-slider-height + @nav-height) / 2);
+		height: 50px;
+		width: 50px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background: @accent-green;
+		color: @accent-white;
+		border-radius: 3px;
+		cursor: pointer;
+		opacity: 0.6;
+		transition: opacity 0.3s linear;	
+		&:hover {
+			opacity: 1;
+		}
+		i {
+			pointer-events: none;
+		}
+	}
+	.arrow-left {
+		left: 50px;
+	}
+	.arrow-right {
+		right: 50px;
+	}
 	.images {
 		background: @dark-blue;
 	}
