@@ -66,7 +66,7 @@ function createMatch(match){
 	var team1 = match[0].team1;
 	var team2 = match[0].team2;
 	var t1Sp = match[0].team1SpText;
-	var t2Sp = match[0].team1SpText;
+	var t2Sp = match[0].team2SpText;
 	var data = {
 		bestOf: match.length,
 		spoiler1: match[0].team1Sp,
