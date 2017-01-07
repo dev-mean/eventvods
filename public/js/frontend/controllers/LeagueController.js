@@ -35,14 +35,6 @@
                     vm.sectionIndex = sectionIndex;
                     $location.search('section', sectionIndex);
                 }
-                vm.prevSection = function() {
-                    vm.sectionIndex = vm.sectionIndex - 1;
-                    $location.search('s', vm.sectionIndex);
-                }
-                vm.nextSection = function() {
-                    vm.sectionIndex = vm.sectionIndex + 1;
-                    $location.search('s', vm.sectionIndex);
-                }
                 vm.parseLink = function(match, link) {
                     if (match.placeholder) return "";
                     else return link;

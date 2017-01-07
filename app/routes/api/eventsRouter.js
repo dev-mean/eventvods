@@ -10,6 +10,7 @@ var Q = require('q');
 var slug = require('slug');
 var exporter = require('../../controllers/export');
 var Match = require('../../models/match');
+var Game = require('../../models/game');
 
 //Individual base promise for updating a match
 function updateMatch(match){
