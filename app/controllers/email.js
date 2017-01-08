@@ -13,7 +13,7 @@ module.exports.sendVerification = function(user) {
     plain = new helper.Content("text/plain", "Eventvods");
     mail = new helper.Mail();
     mail.setTemplateId("0a91c12e-0a74-4608-bd09-8e65c0fc3508"); //confirmation email
-    url = "https://beta.eventvods.com/api/user/verify/" + user._id + "/" + user.code;
+    url = "https://eventvods.com/api/user/verify/" + user._id + "/" + user.code;
     verifyemail = new helper.Substitution("-verifyurl-", url);
     tracking = new helper.ClickTracking(true, true);
     personalization = new helper.Personalization();
@@ -46,7 +46,7 @@ module.exports.passwordReset = function(email, token) {
     plain = new helper.Content("text/plain", "Eventvods");
     mail = new helper.Mail();
     mail.setTemplateId("09b53453-95a6-4a1a-8ab4-fdbbcae3b096"); //reset email
-    url = "https://beta.eventvods.com/api/user/reset/" + token._id + "/" + token.token;
+    url = "https://eventvods.com/api/user/reset/" + token._id + "/" + token.token;
     reseturl = new helper.Substitution("-reseturl-", url);
     tracking = new helper.ClickTracking(true, true);
     personalization = new helper.Personalization();

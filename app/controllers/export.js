@@ -62,7 +62,7 @@ function infobox(event) {
         staff = [];
     str += format("* **[{title}]({link})**", {
         title: event.name,
-        link: "https://beta.eventvods.com/event/" + event.slug
+        link: "https://eventvods.com/event/" + event.slug
     }) + EOL;
     str += format("* **Date:** {start} - {end}", {
         start: moment(event.startDate).format("Do MMMM"),

@@ -8,7 +8,7 @@ var Team = require('../models/team');
 var EOL = "\r\n";
 var lastUpdated = moment(1483909981066);
 var s = function(link){
-    return "https://beta.eventvods.com"+link;
+    return "https://eventvods.com"+link;
 };
 var u = function(link, lastMod, updateFreq, priority){
     if(lastMod == null || typeof lastMod == "undefined") lastMod = lastUpdated;
