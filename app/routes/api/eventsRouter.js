@@ -15,7 +15,8 @@ var Game = require('../../models/game');
 //Individual base promise for updating a match
 function updateMatch(match){
     var $promise = Q.defer();
-    console.log(typeof match._id);
+    match.draftText = draftText;
+    match.columns = columns;
     if(typeof match._id !== "undefined")
         Match.findByIdAndUpdate(match._id, match)
             .exec((err, match) => {
@@ -222,7 +223,6 @@ router.route('/:event_id')
                 req.body.slug = slug(req.body.slug);
                 updateAllMatches(req.body)
                 .then(function(contents){
-                    //req.body.contents = contents;
                     Event.findByIdAndUpdate(req.params.event_id, req.body)
                         .exec(function(err, event) {
                             if (err) next(err);
@@ -253,5 +253,17 @@ router.delete('/match/:id', auth.updater(), function(req, res, next) {
             });
         });
     })
+router.get('/admin/cleanup', auth.admin(), function(req, res, next){
+    Match.find()
+    .fill('event')
+    .exec((err, matches) => {
+        if(err) next(err);
+        else {
+            matches.forEach((match) => {
+                if(match.event == null) match.remove();
+            })
+        }
+    })
+})
 
 module.exports = router;

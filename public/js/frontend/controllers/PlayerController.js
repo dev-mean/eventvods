@@ -22,7 +22,10 @@
                 $('#player').empty();
                 vm.show = false;
             }
-
+            vm.parseLink = function(match, link) {
+                if (match.placeholder) return "";
+                else return link;
+            }
             function timeToSeconds(time) {
                 if (typeof time === "undefined") return 0;
                 time = /((\d+)h)?((\d+)m)?((\d+)s)?/i.exec(time);

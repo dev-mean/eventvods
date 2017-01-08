@@ -1,72 +1,204 @@
 <div class="evSlider single" id="banner">
     <div class="images">
-        <div class="image">
+        <div class="image load-in">
             <div class="main">
-                <img src="/assets/images/headers/team.jpg" />
+                <img ng-src="{{Team.data[Team.active].game.header}}" />
             </div>
             <div class="blur">
-                <img src="/assets/images/headers/team_b.jpg" />
+                <img ng-src="{{Team.data[Team.active].game.header_blur}}" />
             </div>
             <div class="overlay middle">
-                <div class="container">
-					<h4 class="material-icons force-lowercase icon-text-large">&#xE7FB;</h4>
-					<br /><br />
-                    <h3>Meet the Team</h3>
+                <img ng-src="{{Team.data[Team.active].icon}}" />
+                <h3 ng-bind="Team.data[Team.active].name"></h3>
+                <h4 ng-bind="Team.data[Team.active].game.name"></h4>
+                <div class="credits" ng-bind-html="Team.data[$index].credits">
                 </div>
-				<div class="credits">
-					&copy; Riot Esports
-				</div>
             </div>
         </div>
     </div>
 </div>
-<div class="contents">
-	<div class="container our-team">
-		<p class="flow-text">
-			Eventvods consists of a team full of enthusiastic people. Eventvods is an online project that started back in 2012 and has grown to be the number 1 source for all esports related videos on demand.
-		</p>
-		<p class="flow-text">
-			LoLeventVoDs was created on the first of September 2012, shortly before the beginning of the Season 2 World Championship by a bunch of dedicated volunteers on Reddit with the goal of providing a spoiler-free, competitive League of Legends viewing experience. This “from the community, for the community” project has steadily grown to serve over 200,000 unique visitors monthly.
-		</p>
-		<div class="row">
-			<div class="col s12 m4 section">
-				<img class="responsive-img" src="/assets/images/team/clam.png">
-				<h4>Clam-</h4>
-				<h5>General Manager</h5>
-				<p class="flow-text">The big boss. Clam has been around the longest, by far. He took over once the original founder of /r/loleventvods stopped updating. Clam updates across all titles we cover, both on the website and on Reddit and takes care of moderation, finance, finding new volunteers and a whole lot more.</p>
-			</div>
-			<div class="col s12 m4 section">
-				<img class="responsive-img" src="/assets/images/team/simon.png">
-				<h4>Simon</h4>
-				<h5>Lead Developer</h5>
-				<p class="flow-text">Simon is the lead developer of the Eventvods website. Contributing to Eventvods since June 2013 he is, among other things, responsible for the spoiler-free code on the subreddits and creating the Chrome and Firefox extensions. Simon was once almost stabbed to death on a date.</p>
-			</div>
-			<div class="col s12 m4 section">
-				<img class="responsive-img" src="/assets/images/team/murrayz.png">
-				<h4>Murrayz</h4>
-				<h5>Marketing & Social Media</h5>
-				<p class="flow-text">Everything that has to do with marketing or communications is done by Murrayz. He follows esports closely and tries to contribute where possible but mostly you can find him correcting people writing "eSports" regularly. Poor guy is having a hard time trying to get back into Diamond.</p>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col s12 m4 section">
-				<img class="responsive-img" src="/assets/images/team/mlm.png">
-				<h4>MorningLight Mountain</h4>
-				<h5>Video Expert</h5>
-				<p class="flow-text">There's nothing this guy doesn't know about YouTube, streaming, audio etc. Loves trains and airplanes. You can find him on Lirik's Twitch channel 24/7.</p>
-			</div>
-			<div class="col s12 m4 section">
-				<img class="responsive-img" src="/assets/images/team/puni.png">
-				<h4>Punistick</h4>
-				<h5>Updater</h5>
-				<p class="flow-text">Our MVU (Most Valuable Updater) from Mexico has been part of the team for almost two years now and he made a lot of our coverage possible, especially when it comes to smaller leagues such as LMS, CBLoL and so on.</p>
-			</div>
-			<div class="col s12 m4 section">
-				<img class="responsive-img" src="/assets/images/team/ss.png">
-				<h4>ShySoul</h4>
-				<h5>Updater</h5>
-				<p class="flow-text">ShySoul has been part of our team since middle of 2015. She's been a vital part of our reddit coverage for various games (League, CSGO & Dota2), but primarily covering LCK and LPL early in the morning while everyone else is asleep!</p>
-			</div>
-		</div>
-	</div>
+<div class="event-nav">
+    <div class="container load-in">
+        <nav class="sections-nav">
+            <div class="nav-wrapper">
+                <ul ng-class="{'squish': (Team.data.length > 8)}">
+                    <li ng-repeat="game in Team.data track by $index" ng-class="{active: Team.active == $index}">
+                        <a ng-click="Team.show($index)" ng-bind="game.game.name"></a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+</div>
+<div class="contents pad-bottom event" ng-controller="PlayerController as Player">
+    <table class="container bordered responsive centered">
+        <thead>
+            <tr>
+                <th>Event</th>
+                <th class="right-align">Team 1</th>
+                <th class="icon"></th>
+                <th class="icon"></th>
+                <th class="icon"></th>
+                <th class="left-align">Team 2</th>
+                <th class="double" ng-if="!Team.data[Team.active].game.simple_tables" colspan="2">{{Team.data[Team.active].game.draftText || "Picks & Bans"}}</th>
+                <th class="filler"></th>
+                <th class="double" colspan="2">Game Start</th>
+                <th>Rating</th>
+            </tr>
+        </thead>
+
+        <tbody ng-repeat="match in Team.data[Team.active].matches track by $index">
+            <tr ng-repeat="game in match.data track by $index">
+                <td ng-bind="match.event.shortTitle"></td>
+                <td ng-bind="match.team1.name" class="right-align"></td>
+                <td class="table-links"><img ng-src="{{match.team1.icon}}" /></td>
+                <td>VS</td>
+                <td class="table-links spoiler-icon"><img ng-src="{{match.team2.icon}} " /></td>
+                <td ng-bind="match.team2.name" class="left-align "></td>
+                <td ng-if="!Team.data[Team.active].game.simple_tables" class="table-links ">
+                    <a ng-if="game.youtube.picksBans " ng-href="{{Player.parseLink(game, game.youtube.picksBans)}} " ng-click="!Page.inlineYoutube ? return : Player.playYoutube(game.youtube.picksBans, match, $event, League.data.contents[League.sectionIndex].title,
+                    module.title) ">
+                        <img ng-if="Page.contentClass=='light' " class="responsive-img " src="/assets/images/icons/youtube.png " />
+                        <img ng-if="Page.contentClass=='dark' " class="responsive-img " src="/assets/images/icons/youtube_dark.png " />
+                    </a>
+                    <i ng-if="!game.youtube.picksBans">-</i>
+                </td>
+                <td ng-if="!Team.data[Team.active].game.simple_tables" class="table-links ">
+                    <a ng-if="game.twitch.picksBans " ng-href="{{Player.parseLink(game, game.twitch.picksBans)}} " ng-click="!Page.inlineTwitch ? return : Player.playTwitch(game.twitch.picksBans, match, $event, League.data.contents[League.sectionIndex].title,
+                    module.title) ">
+                        <img ng-if="Page.contentClass=='light' " class="responsive-img " src="/assets/images/icons/twitch.png " />
+                        <img ng-if="Page.contentClass=='dark' " class="responsive-img " src="/assets/images/icons/twitch_dark.png " />
+                    </a>
+                    <i ng-if="!game.twitch.picksBans">-</i>
+                </td>
+                <td></td>
+                <td class="table-links ">
+                    <a ng-if="game.youtube.gameStart " ng-href="{{Player.parseLink(game, game.youtube.gameStart)}} " ng-click="!Page.inlineYoutube ? return : Player.playYoutube(game.youtube.gameStart, match, $event, League.data.contents[League.sectionIndex].title,
+                    module.title) ">
+                        <img ng-if="Page.contentClass=='light' " class="responsive-img " src="/assets/images/icons/youtube.png " />
+                        <img ng-if="Page.contentClass=='dark' " class="responsive-img " src="/assets/images/icons/youtube_dark.png " />
+                    </a>
+                    <i ng-if="!game.youtube.gameStart">-</i>
+                </td>
+                <td class="table-links ">
+                    <a ng-if="game.twitch.gameStart " ng-href="{{Player.parseLink(game, game.twitch.gameStart)}} " ng-click="!Page.inlineTwitch ? return : Player.playTwitch(game.twitch.gameStart, match, $event, League.data.contents[League.sectionIndex].title,
+                    module.title) ">
+                        <img ng-if="Page.contentClass=='light' " class="responsive-img " src="/assets/images/icons/twitch.png " />
+                        <img ng-if="Page.contentClass=='dark' " class="responsive-img " src="/assets/images/icons/twitch_dark.png " />
+                    </a>
+                    <i ng-if="!game.twitch.gameStart ">-</i>
+                </td>
+                <td>
+                    <i ng-if="$parent.$index == 0" class="material-icons" ng-repeat="val in [1,2,3,4,5]"
+                        ng-class="{starred: (Team.indexRating.show(match._id) ? Team.indexRating.hover(match._id) : match.rating) >= val}"
+                        ng-mouseenter="Team.indexRating.onHover(match._id, val)" ng-mouseleave="Team.indexRating.onUnHover(match._id)"
+                        ng-click="Page.rate(match._id, val);match.rating = val">star</i>
+                    <i ng-if="$index != 0">-</i>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <svg width="0px " height="0px ">
+		<defs>
+			<clipPath id="element" clipPathUnits="objectBoundingBox">
+				<polygon points="0 0, 0.85 0, 1 1, 0 1 ">
+				</polygon>
+			</clipPath>
+		</defs>
+	</svg>
+    <div class="ratings-popup z-depth-3">
+        <h5>How would you rate this match?</h5>
+        <div class="ratings-stars">
+            <i class="material-icons" ng-repeat="val in [1,2,3,4,5]"
+            ng-click="Page.rate(Player.match._id, val);Team.rating.stick(val)"
+            ng-mouseenter="Team.rating.onHover(val)" ng-mouseleave="Team.rating.onUnHover()"
+            ng-class="{starred: Team.rating.hover >= val}" ng-style="{'transition-delay': 50*val+'ms'}">star</i>
+        </div>
+    </div>
+    <div class="player contents valign-wrapper center-align " ng-class="Page.contentClass " ng-show="Player.show ">
+        <i ng-click="Player.back() " class="material-icons back ">&#xE5C4;</i>
+        <div>
+            <div no-ng-animate ng-show="Player.loaded " class="valign row " id="player" ng-class="Player.type"></div>
+            <div no-ng-animate ng-show="Player.loaded && Player.type=='youtube' " class="player-controls ">
+                <i ng-click="Player.toggle() " class="material-icons ">{{Player.playing ? "&#xE034; " : "&#xE037; "}}</i>
+                <span>
+					<span ng-click="Player.skip(-600) ">10m</span>
+                <span ng-click="Player.skip(-300) ">5m</span>
+                <span ng-click="Player.skip(-60) ">1m</span>
+                <span ng-click="Player.skip(-30) ">30s</span>
+                <span ng-click="Player.skip(-10) ">10s</span>
+                <i class="material-icons ">&#xE020;</i> SKIP
+                <i class="material-icons ">&#xE01F;</i>
+                <span ng-click="Player.skip(10) ">10s</span>
+                <span ng-click="Player.skip(30) ">30s</span>
+                <span ng-click="Player.skip(60) ">1m</span>
+                <span ng-click="Player.skip(300) ">5m</span>
+                <span ng-click="Player.skip(600) ">10m</span>
+                </span>
+                <span>
+					<i ng-click="Player.setVol(0) " class="material-icons ">&#xE050;</i>
+					<input class="vol-slider " type="range " min="0 " max="100 " ng-model="Player.volSlider " ng-change="Player.setVol(Player.volSlider) " />
+				</span>
+            </div>
+            <div no-ng-animate ng-show="Player.loaded " class="player-below ">
+                <div class="match-details ">
+                    <span>
+						<img ng-src="{{Player.match.team1.icon}} "/>
+						<h4>VS</h4>
+						<img ng-src="{{Player.match.team2.icon}} "/>
+					</span>
+                    <div>
+                        <a class="btn flat" ng-click="Player.picks() " ng-if="Player.match[Player.type].picksBans ">Picks & Bans</a>
+                        <a class="btn flat" ng-click="Player.start() " ng-if="Player.match[Player.type].gameStart ">Game Start</a>
+                    </div>
+                </div>
+            </div>
+            <div no-ng-animate ng-show="!Player.loaded " class="row valign preloader-wrapper big active ">
+                <div class="spinner-layer spinner-blue ">
+                    <div class="circle-clipper left ">
+                        <div class="circle "></div>
+                    </div>
+                    <div class="gap-patch ">
+                        <div class="circle "></div>
+                    </div>
+                    <div class="circle-clipper right ">
+                        <div class="circle "></div>
+                    </div>
+                </div>
+                <div class="spinner-layer spinner-red ">
+                    <div class="circle-clipper left ">
+                        <div class="circle "></div>
+                    </div>
+                    <div class="gap-patch ">
+                        <div class="circle "></div>
+                    </div>
+                    <div class="circle-clipper right ">
+                        <div class="circle "></div>
+                    </div>
+                </div>
+                <div class="spinner-layer spinner-yellow ">
+                    <div class="circle-clipper left ">
+                        <div class="circle "></div>
+                    </div>
+                    <div class="gap-patch ">
+                        <div class="circle "></div>
+                    </div>
+                    <div class="circle-clipper right ">
+                        <div class="circle "></div>
+                    </div>
+                </div>
+                <div class="spinner-layer spinner-green ">
+                    <div class="circle-clipper left ">
+                        <div class="circle "></div>
+                    </div>
+                    <div class="gap-patch ">
+                        <div class="circle "></div>
+                    </div>
+                    <div class="circle-clipper right ">
+                        <div class="circle "></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

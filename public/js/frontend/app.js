@@ -202,6 +202,26 @@
                         description: 'Eventvods features articles on a wide variety of topics covering everything esports i.e. League of Legends, CS:GO, Dota 2, Overwatch and more.'
                     }
                 })
+                .when('/team/:slug', {
+                    templateUrl: '/assets/views/frontend/team.html',
+                    controller: 'TeamController',
+                    controllerAs: 'Team',
+                    reloadOnSearch: false,
+                    meta: {
+                        title: 'Follow Team - Eventvods - Esports on Demand',
+                        description: 'Follow your favourite team\'s matches across all the popular esports with Eventvods.'
+                    }
+                })
+                .when('/team/:slug/:game', {
+                    templateUrl: '/assets/views/frontend/team.html',
+                    controller: 'TeamController',
+                    controllerAs: 'Team',
+                    reloadOnSearch: false,
+                    meta: {
+                        title: 'Follow Team - Eventvods - Esports on Demand',
+                        description: 'Follow your favourite team\'s matches across all the popular esports with Eventvods.'
+                    }
+                })
                 .when('/about/cookies', {
                     templateUrl: '/assets/views/frontend/cookies.html',
                     meta: {
@@ -210,7 +230,7 @@
                     }
                 })
                 .when('/about/team', {
-                    templateUrl: '/assets/views/frontend/team.html',
+                    templateUrl: '/assets/views/frontend/our_team.html',
                     meta: {
                         title: 'Meet the Team - Eventvods - Esports on Demand',
                         description: 'Meet our team and get to know the people that deliver live updates for your spoiler-free esports experience. Most of our staff are volunteers.'

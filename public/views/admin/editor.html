@@ -63,7 +63,7 @@
 				<div ng-repeat-start="match in Editor.active.matches2 track by $index" class="list-group-item smaller" ng-if="match.title" ng-class="{active: hover}" ng-mouseenter="hover = true" ng-mouseleave="hover = false">
 					<span editable-select="match.title" e-ng-options="s for s in Editor.titles" e-placeholder="Select Title">{{match.title || 'Select Title'}}</span>
 				</div>
-				<div class="list-group-item" ng-class="{active: hover}" ng-mouseenter="hover = true" ng-mouseleave="hover = false">
+				<div class="list-group-item" ng-class="{active: match.hover}" ng-mouseenter="match.hover = true" ng-mouseleave="match.hover = false">
 					<div class="row match">
 						<div class="col-xs-1 id">
 							<div class="popover-wrapper">
@@ -118,7 +118,7 @@
 						</div>
 					</div>
 				</div>
-				<div ng-repeat-end ng-repeat="game in Editor.collection(match.bestOf) track by $index" class="list-group-item" ng-class="{active: hover}" ng-mouseenter="hover = true" ng-mouseleave="hover = false">
+				<div ng-repeat-end ng-repeat="game in Editor.collection(match.bestOf) track by $index" class="list-group-item" ng-class="{active: game.hover}" ng-mouseenter="game.hover = true" ng-mouseleave="game.hover = false">
 					<div class="row">
 						<div class="col-xs-1 auto">
 								{{match.identifier || Editor.getIdentifier($parent.$index)}}{{$index+1}}
@@ -139,9 +139,7 @@
 							</div>
 						</div>
 						<div ng-if-start="!Editor.data.game.simple_tables" class="col-xs-2 text-right">
-							<div class="popover-wrapper">
-								<b editable-text="Editor.data.contents[Editor.$section].draftText">{{Editor.data.contents[Editor.$section].draftText || "Picks & Bans"}}</b>
-							</div>
+								<b>{{Editor.data.game.draftText || "Picks & Bans"}}</b>
 						</div>
 						<div ng-if="Editor.active.twitch" class="col-xs-1 text-left">
 							<div class="popover-wrapper">

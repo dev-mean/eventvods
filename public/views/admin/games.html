@@ -125,6 +125,12 @@
 				<div class="panel-body" ng-show="Games.form.stage == 1">
 					<div class="form-group">
 						<label>
+                            Draft Text (optional)
+                        </label>
+						<input type="text" class="form-control" placeholder="e.g. Draft" ng-model="Games.form.draftText" />
+					</div>
+					<div class="form-group">
+						<label>
 							Icon (optional)
 						</label>
 						<image-drop model="Games.form.icon" preview-width="64" preview-height="64" />

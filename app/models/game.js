@@ -20,7 +20,8 @@ var gameSchema = new Schema({
 	simple_tables: {
 		type: Boolean,
 		default: false
-	}
+	},
+	draftText: String
 }, {
 	id: false,
 	toObject: {

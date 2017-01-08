@@ -4,11 +4,14 @@
         .controller('LeagueController', ['$rootScope', '$routeParams', '$http', 'API_BASE_URL', '$location', '$anchorScroll', '$timeout',
             function($rootScope, $routeParams, $http, API, $location, $anchorScroll, $timeout) {
                 var vm = this;
-                vm.abs = $location.absUrl();
                 vm.data;
                 vm.simple_tables = false;
                 vm.sectionIndex = parseInt($routeParams.s || 0);
                 vm.showDetails = false;
+                vm.toggleDetails = function(){
+                    vm.showDetails = !vm.showDetails;
+                    $('.details').slideToggle();
+                }
                 vm.rating = {
                     hover: 0,
                     timeout: null,
@@ -49,10 +52,6 @@
                         return vm.indexRating.hovers[index] > 0;
                     }
                 }
-                vm.toggleDetails = function() {
-                    vm.showDetails = !vm.showDetails;
-                    if (!vm.showDetails) $anchorScroll("top");
-                }
                 vm.getIdentifier = function($table, $index){
                     var counter = 0, str = "";
                     for(var i =0; i < vm.sectionIndex; i++){
@@ -75,10 +74,7 @@
                     vm.sectionIndex = sectionIndex;
                     $location.search('section', sectionIndex);
                 }
-                vm.parseLink = function(match, link) {
-                    if (match.placeholder) return "";
-                    else return link;
-                }
+                
                 vm.hasExtras = function(module, game) {
                     if (module.columns.length !== game.links.length) return false;
                     for (var i = 0; i < module.columns.length; i++) {
@@ -104,7 +100,7 @@
                         vm.data = res.data;
                         $rootScope.meta.title = vm.data.name + " - Eventvods - Esports on Demand";
                         $rootScope.meta.description = "Watch all " + vm.data.name + " vods and highlights on demand,  easily and spoiler-free. Rate, favorite and share matches of your favorite teams!";
-                        $('.evSlider .image, .contents .details-toggle').addClass('loaded');
+                        $('.evSlider .image').addClass('loaded');
                         $timeout(function() {
                             $('.load-in').addClass('loaded');
                         }, 100);

@@ -1,6 +1,7 @@
-var mongoose = require('mongoose');
+var mongoose = require('mongoose-fill');
 var Schema = mongoose.Schema;
-var Rating = require('./rating');
+var Event = require('./event');
+var moduleSchema = require('./section').moduleSchema;
 
 var matchSchema = new Schema({
     identifier: String,
@@ -46,8 +47,22 @@ var matchSchema = new Schema({
         },
     }],
     rating: Number
+}, {
+	id: false,
+	toObject: {
+		virtuals: true
+	},
+	toJSON: {
+		virtuals: true 
+	}
 });
-
+matchSchema.fill('event', function(cb){
+    mongoose.model('League', Event.eventSchema).findOne({
+        "contents.modules.matches2": this._id
+    })
+    .select('shortTitle')
+    .exec(cb);
+});
 
 var Match = mongoose.model('Match', matchSchema);
 module.exports = Match;

@@ -1,12 +1,12 @@
 var router = require('express').Router();
 var Team = require('../../models/team');
+var Game = require('../../models/game');
 var auth = require('../../controllers/auth');
 var ratelimit = require('../../controllers/ratelimit');
 var AWS = require('../../controllers/aws');
 var cache = require('../../controllers/cache');
 var Indicative = require('indicative');
 var Validators = require('../../controllers/validation');
-
 router.route('/')
 	.get(auth.public_api(), ratelimit, cache, function(req, res, next) {
 		Team.find()
@@ -31,6 +31,17 @@ router.route('/')
 				next(err);
 			});
 	});
+router.get('/slug/:slug', auth.public_api(), ratelimit, cache, function(req, res, next){
+	Team.find({
+		slug: req.params.slug
+	})
+	.populate('game')
+	.fill('matches')
+	.exec(function(err, teams) {
+		if (err) next(err);
+		res.json(teams);
+	});
+})
 router.route('/:team_id')
 	.delete(auth.updater(), function(req, res, next) {
 		Team.findById(req.params.team_id, function(err, doc) {
