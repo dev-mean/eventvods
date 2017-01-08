@@ -48,7 +48,10 @@
         </thead>
 
         <tbody ng-repeat="match in Team.data[Team.active].matches track by $index">
-            <tr ng-repeat="game in match.data track by $index">
+            <tr ng-repeat="game in match.data track by $index"
+                ng-hide="game.placeholder || 
+                    ( (Team.data[Team.active].game.simple_tables && !game.youtube.picksBans && !game.twitch.picksBans && !game.youtube.gameStart && !game.twitch.picksBans) ||
+                    (!Team.data[Team.active].game.simple_tables && !game.youtube.gameStart && !game.twitch.picksBans))">
                 <td ng-bind="match.event.shortTitle"></td>
                 <td ng-bind="match.team1.name" class="right-align"></td>
                 <td class="table-links"><img ng-src="{{match.team1.icon}}" /></td>

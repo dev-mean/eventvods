@@ -1,7 +1,7 @@
 (function() {
     'use strict';
     angular.module('eventApp')
-        .controller('featuredSelectController', function($http, API_BASE_URL, gamesService, eventsService, articlesService, notifier) {
+        .controller('featuredSelectController', function($http, API_BASE_URL, gamesService, eventsService, articlesService, notifier, teamsService) {
             var vm = this;
             vm.tab = 0;
             vm.save = function() {
@@ -33,6 +33,12 @@
             vm.addArticle = function() {
                 vm.data.articles.push(vm.selectedArticle);
             };
+            vm.deleteTeam = function(index) {
+                vm.data.teams.splice(index, 1);
+            };
+            vm.addTeam = function() {
+                vm.data.teams.push(vm.selectedTeam);
+            };
             $http.get(API_BASE_URL + '/featured')
                 .then(function(res) {
                     vm.data = res.data;
@@ -51,6 +57,11 @@
                 .then(function(res) {
                     vm.articles = res.data;
                     vm.selectedArticle = res.data[0];
+                });
+            teamsService.find()
+                .then(function(res) {
+                    vm.teams = res.data;
+                    vm.selectedTeam = res.data[0];
                 });
         });
 }());

@@ -15,8 +15,7 @@ var moduleSchema = new Schema({
 });
 var sectionSchema = new Schema({
 	title: String,
-	modules: [moduleSchema],
-	draftText: String
+	modules: [moduleSchema]
 });
 var Section = mongoose.model('Section', sectionSchema);
 module.exports = Section;

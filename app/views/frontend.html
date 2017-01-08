@@ -85,9 +85,14 @@
                     </a>
                 </li>
             </ul>
-            <ul class="dropdown-content wide grouped" id="teams_dd">
-                <li class="border-top">
-                    <a href="#">Coming Soon&trade;</a>
+            <ul class="dropdown-content wide" id="teams_dd">
+                <li ng-repeat="team in Page.nav.teams">
+                    <a ng-href="/team/{{team.slug}}">
+                        <i class="material-icons left icon border-right">
+							<img ng-src="{{team.icon}}" />
+							&nbsp;
+						</i> {{team.name}}
+                    </a>
                 </li>
             </ul>
             <div class="nav-wrapper container">
