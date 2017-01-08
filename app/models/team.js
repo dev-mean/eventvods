@@ -22,6 +22,7 @@ var teamSchema = new Schema({
 	},
 	media: [Media],
 	icon: String,
+	updatedAt: Date
 }, {
 	id: false,
 	strict: true,

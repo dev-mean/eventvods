@@ -43,7 +43,8 @@ var eventSchema = new Schema({
     header: String,
     header_blur: String,
     contents: [Section],
-    credits: String
+    credits: String,
+    updatedAt: Date
 }, {
 	id: false,
 	toObject: {

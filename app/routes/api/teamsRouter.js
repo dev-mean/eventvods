@@ -72,6 +72,7 @@ router.route('/:team_id')
 	.put(auth.updater(), AWS.handleUpload(['icon']), function(req, res, next) {
 		Indicative.validateAll(req.body, Validators.team, Validators.messages)
 			.then(function() {
+				req.body.updatedAt = Date.now();
 				Team.findByIdAndUpdate(req.params.team_id, req.body, function(err, team) {
 					if (err) next(err);
 					if (!team) {

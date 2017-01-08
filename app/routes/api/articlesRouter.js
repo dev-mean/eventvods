@@ -70,6 +70,7 @@ router.route('/:article_id')
 		Indicative.validateAll(req.body, Validators.article, Validators.messages)
 			.then(function() {
 				req.body.slug = slug(req.body.slug);
+				req.body.updatedAt = Date.now();
 				Article.findByIdAndUpdate(req.params.article_id, req.body, function(err, article) {
 					if (err) next(err);
 					if (!article) {

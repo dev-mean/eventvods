@@ -222,6 +222,8 @@ router.route('/:event_id')
                 req.body.slug = slug(req.body.slug);
                 updateAllMatches(req.body)
                 .then(function(contents){
+                    req.body = contents;
+                    req.body.updatedAt = Date.now();
                     Event.findByIdAndUpdate(req.params.event_id, req.body)
                         .exec(function(err, event) {
                             if (err) next(err);
