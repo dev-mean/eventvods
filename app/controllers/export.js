@@ -33,7 +33,7 @@ function has(event, param) {
 function staff_list(staff) {
     return staff.map(function(staff) {
         var twitter = staff.media.filter(media => media.type == "Twitter").length > 0;
-        var disp = twitter ? "{forename} **\"[{alias}]({link})\"** {surname}" : "{forename} **\"{alias}\"** {surname}"
+        var disp = twitter ? "{forename} \"[**{alias}**]({link})\" {surname}" : "{forename} **\"{alias}\"** {surname}"
         return format(disp, {
             forename: staff.forename,
             alias: staff.alias,
