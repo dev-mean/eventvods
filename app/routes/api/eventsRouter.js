@@ -15,8 +15,6 @@ var Game = require('../../models/game');
 //Individual base promise for updating a match
 function updateMatch(match){
     var $promise = Q.defer();
-    match.draftText = draftText;
-    match.columns = columns;
     if(typeof match._id !== "undefined")
         Match.findByIdAndUpdate(match._id, match)
             .exec((err, match) => {
@@ -149,12 +147,8 @@ router.get('/slug/:slug', auth.public_api(), ratelimit, cache, function(req, res
 })
 router.get('/export/:event_id', auth.updater(), function(req, res, next) {
     Event.findById(req.params.event_id)
+        .select('-__v -textOrientation')
         .populate('game staff contents.modules.matches2')
-        .populate({
-            path: 'teams',
-            model: 'Teams',
-                select: 'name tag _id slug icon'
-        })
         .populate({
                 path: 'contents.modules.matches2',
                 model: 'Match',
@@ -164,6 +158,11 @@ router.get('/export/:event_id', auth.updater(), function(req, res, next) {
                     select: 'name tag _id slug icon'
                 }
             })
+        .populate({
+            path: 'teams',
+            model: 'Teams',
+            select: 'name tag _id slug icon media'
+        })
         .exec(function(err, event) {
             if (err) next(err);
             if (!event) {
