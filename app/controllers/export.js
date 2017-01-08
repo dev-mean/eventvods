@@ -7,13 +7,18 @@ function getId(event, sectionIndex, moduleIndex, matchIndex) {
     var str = "",
         counter = 0;
     for (var i = 0; i < sectionIndex; i++) {
-        counter += event.contents[i].modules.length;
+        for(var c = 0; c < event.contents[i].modules.length; c++){
+            counter += event.contents[i].modules[c].matches2.length;
+        }
     }
-    counter += moduleIndex;
+    for(var c = 0; c < moduleIndex; c++){
+        counter += event.contents[sectionIndex].modules[c].matches2.length;
+    }
+    counter += matchIndex;
     if (counter > 25) {
         str += String.fromCharCode(64 + Math.floor(counter / 26))
-        str += String.fromCharCode(65 + (counter % 26)) + (matchIndex + 1);
-    } else str = String.fromCharCode(65 + counter) + (matchIndex + 1);
+        str += String.fromCharCode(65 + (counter % 26));
+    } else str = String.fromCharCode(65 + counter);
     return str;
 }
 
@@ -22,7 +27,7 @@ function def(v) {
 }
 
 function has(event, param) {
-    return (typeof event[param] !== "undefined");
+    return (def(event[param]) && event[param] !== "");
 }
 
 function staff_list(staff) {
@@ -115,12 +120,13 @@ function teamName(name, spoiler, text, invert) {
 
 function teamDisplay(match, invert) {
     var disp = invert ? "{icon} **{team}**" : "**{team}** {icon}";
-    var spoiler = invert ? match.team2Sp : match.team1Sp;
-    var text = invert ? match.team2SpText : match.team1SpText;
+    var spoiler = invert ? match.spoiler2 : match.spoiler1;
+    var text = invert ? match.team2Match : match.team1Match;
     var empty = invert ? !def(match.team2) : !def(match.team1);
-    if (!def(match.team1) && !invert) match.team1 = { tag: "Team 1" };
-    if (!def(match.team2) && invert) match.team2 = { tag: "Team 2" };
-    var tag = invert ? match.team2.tag : match.team1.tag;
+    var tag;
+    if (!def(match.team1) && !invert) tag = "Team 1";
+    else if (!def(match.team2) && invert) tag = "Team 2";
+    else tag = invert ? match.team2.tag : match.team1.tag;
     if (!def(text)) text = invert ? "Team 2" : "Team 1";
     return format(disp, {
         team: teamName(tag, spoiler, text, invert),
@@ -129,7 +135,6 @@ function teamDisplay(match, invert) {
 }
 
 function link(text, link, placeholder, slug) {
-    console.log(placeholder);
     var disp = (def(link) && link != "") ? "[{text}]({link})|" : "{text}|";
     return format(disp, {
         text: text,
@@ -137,18 +142,19 @@ function link(text, link, placeholder, slug) {
     });
 }
 
-function formatExtras(columns, links, placeholder, slug) {
+function formatExtras(columns, links, slug) {
     var i = 0;
     return columns.map((extra) => {
-        return link(extra.replace(/\b\w/g, l => l.toUpperCase()), links[i++], placeholder, slug)
+        return link(extra.replace(/\b\w/g, l => l.toUpperCase()), links[i++], false, slug)
     }).join("");
 }
 
 function simple_table(event, section, module, sectionIndex, moduleIndex) {
     var str = "";
-    str += format("####{section}, {module}", {
+    str += format("####{section}, {module}{date}", {
         section: section.title,
-        module: module.title
+        module: module.title,
+        date: has(module, "date") ? " - "+moment(module.date).format("dddd, MMMM Do") : ""
     }) + NL;
     str += format("|#|Team1|vs.|Team2|{twitch}{youtube}{extras}", {
         twitch: module.twitch ? "Twitch|" : "",
@@ -161,28 +167,34 @@ function simple_table(event, section, module, sectionIndex, moduleIndex) {
         extras: module.columns.map(() => { return ":--:" }).join("|")
     }) + EOL;
     var matchIndex = 0;
-    module.matches.forEach((match) => {
-        var disp = (matchIndex === 0) ? "{id}|{team1}|vs|{team2}|{twitch}{youtube}{extras}" : "{id}|{team1}|vs|{team2}|{twitch}{youtube}{extras}";
-        str += format(disp, {
-            id: getId(event, sectionIndex, moduleIndex, matchIndex++),
-            team1: teamDisplay(match, false),
-            team2: teamDisplay(match, true),
-            twitch: module.twitch ? link("Twitch", match.twitch.gameStart, match.placeholder, event.game.slug) : "",
-            youtube: module.youtube ? link("YouTube", match.youtube.gameStart, match.placeholder, event.game.slug) : "",
-            extras: formatExtras(module.columns, match.links, match.placeholder, event.game.slug)
-        }) + EOL;
+    module.matches2.forEach((match) => {
+        var gameIndex = 0;
+        match.data.forEach((game) => {
+            var disp = "{id}{index}|{team1}|vs|{team2}|{twitch}{youtube}{extras}";
+            str += format(disp, {
+                id: getId(event, sectionIndex, moduleIndex, matchIndex),
+                index: (match.data.length > 1) ? ++gameIndex : "",
+                team1: teamDisplay(match, false),
+                team2: teamDisplay(match, true),
+                twitch: module.twitch ? link("Twitch", game.twitch.gameStart, game.placeholder, event.game.slug) : "",
+                youtube: module.youtube ? link("YouTube", game.youtube.gameStart, game.placeholder, event.game.slug) : "",
+                extras: formatExtras(module.columns, game.links, event.game.slug)
+            }) + EOL;
+        })
+        matchIndex++;
     })
     str += NL;
     return str;
 }
 
 function table(event, section, module, sectionIndex, moduleIndex) {
-    var pbText = (typeof section.draftText !== "undefined") ? section.draftText : "Picks & Bans";
+    var pbText = (typeof event.game.draftText !== "undefined") ? event.game.draftText : "Picks & Bans";
     var league_only = (event.game.name === "League of Legends") ? "[](http://www.table_title.com \"{section}, {module} \")" : "";
     var str = "";
-    str += format("####{section}, {module}", {
+    str += format("####{section}, {module}{date}", {
         section: section.title,
-        module: module.title
+        module: module.title,
+        date: has(module, "date") ? " - "+moment(module.date).format("dddd, MMMM Do") : ""
     }) + NL;
     str += format("|#|Team1|vs.|Team2|{twitch}{youtube}{extras}", {
         twitch: module.twitch ? "Twitch|" : "",
@@ -195,32 +207,35 @@ function table(event, section, module, sectionIndex, moduleIndex) {
         extras: module.columns.map(() => { return ":--:" }).join("|")
     }) + EOL;
     var matchIndex = 0;
-    module.matches.forEach((match) => {
-        var disp = (matchIndex === 0) ? "{id}" + league_only + "|{team1}|vs|{team2}|{twitch}{youtube}{extras}" : "{id}|{team1}|vs|{team2}|{twitch}{youtube}{extras}";
-        str += format(disp, {
-            id: getId(event, sectionIndex, moduleIndex, matchIndex++),
-            section: section.title,
-            module: module.title,
-            team1: teamDisplay(match, false),
-            team2: teamDisplay(match, true),
-            twitch: module.twitch ? link(pbText, match.twitch.picksBans, match.placeholder, event.game.slug) : "",
-            youtube: module.youtube ? link(pbText, match.youtube.picksBans, match.placeholder, event.game.slug) + link("Game Start", match.youtube.gameStart, match.placeholder, event.game.slug) : "",
-            extras: formatExtras(module.columns, match.links, match.placeholder, event.game.slug)
-        }) + EOL;
+    module.matches2.forEach((match) => {
+        var gameIndex = 0;
+        match.data.forEach((game) => {
+            var disp = (matchIndex === 0 && gameIndex === 0) ? "{id}{index}" + league_only + "|{team1}|vs|{team2}|{twitch}{youtube}{extras}" : "{id}{index}|{team1}|vs|{team2}|{twitch}{youtube}{extras}";
+            str += format(disp, {
+                id: getId(event, sectionIndex, moduleIndex, matchIndex),
+                index: (match.data.length > 1) ? ++gameIndex : "",
+                section: section.title,
+                module: module.title,
+                team1: teamDisplay(match, false),
+                team2: teamDisplay(match, true),
+                twitch: module.twitch ? link(pbText, game.twitch.picksBans, game.placeholder, event.game.slug) : "",
+                youtube: module.youtube ? link(pbText, game.youtube.picksBans, game.placeholder, event.game.slug) + link("Game Start", game.youtube.gameStart, game.placeholder, event.game.slug) : "",
+                extras: formatExtras(module.columns, game.links, event.game.slug)
+            }) + EOL;
+        });
+        matchIndex++;
     })
     str += NL;
     return str;
 }
 module.exports = {
     parse: function(event) {
-        var sectionIndex = 0,
-            moduleIndex = 0;
-        var simple_tables = (event.game.slug === "csgo" || event.game.slug === "overwatch");
+        var sectionIndex = 0, moduleIndex = 0;
         var md = "<pre>";
         md += infobox(event);
         event.contents.forEach((section) => {
             section.modules.forEach((module) => {
-                if (simple_tables) md += simple_table(event, section, module, sectionIndex, moduleIndex);
+                if (event.game.simple_tables) md += simple_table(event, section, module, sectionIndex, moduleIndex);
                 else md += table(event, section, module, sectionIndex, moduleIndex);
                 moduleIndex++;
             })
