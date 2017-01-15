@@ -16,6 +16,19 @@
 			}
 			reset();
 			vm.save = function() {
+				// Ugly hack to force Angular from array-objects to arrays for newly defined matches
+				vm.data.contents.forEach(function(section){
+					section.modules.forEach(function(module){
+						module.matches2.forEach(function(match){
+							match.data.forEach(function(game){
+								game.links = $.map(game.links, function(value, index) {
+									console.log(value);
+									return [value];
+								});
+							})
+						})
+					})
+				})
 				eventsService.update($routeParams.id, vm.data)
 					.then(function(){
 						notifier.success('League updated');
@@ -24,7 +37,6 @@
 					eventsService.deleteMatch(toDelete[i]);
 					toDelete.splice(i, 1);
 				}
-				console.log(toDelete);
 			};
 			vm.setActive = function(item, $index, $section, $table){
 				vm.active = item;
