@@ -111,8 +111,16 @@
             </thead>
 
             <tbody ng-repeat="match in module.matches2 track by $index">
+                <tr ng-if="match.title">
+                    <td ng-if="League.data.game.simple_tables" class="title" colspan="11">
+                        <h5 ng-bind="match.title"></h5>
+                    </td>
+                   <td ng-if="!League.data.game.simple_tables" class="title" colspan="9">
+                       <h5 ng-bind="match.title"></h5>
+                    </td>
+                </tr>
                 <tr ng-repeat="game in match.data track by $index">
-                    <td>{{match.identifier || League.getIdentifier($parent.$parent.$index, $parent.$index)}}{{$index > 0 ? $index+1 : ''}}</td>
+                    <td>{{match.identifier || League.getIdentifier($parent.$parent.$index, $parent.$index)}}{{($index > 0 || match.data.length > 1) ? $index+1 : ''}}</td>
                     <td ng-show="!match.spoiler1 || match.team1H" ng-bind="match.team1.name" ng-mouseenter="League.setHover(match, 1, true)" ng-mouseleave="League.setHover(match, 1, false)" class="right-align"></td>
                     <td ng-show="!match.spoiler1 || match.team1H" ng-mouseenter="League.setHover(match, 1, true)" ng-mouseleave="League.setHover(match, 1, false)" class="table-links"><img ng-src="{{match.team1.icon}}" /></td>
                     <td ng-show="match.spoiler1 && !match.team1H" ng-mouseenter="League.setHover(match, 1, true)" ng-mouseleave="League.setHover(match, 1, false)" class="right-align">{{match.team1Match || "Team 1 "}}</td>
