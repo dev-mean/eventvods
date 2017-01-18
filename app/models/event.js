@@ -62,6 +62,9 @@ eventSchema.fill('followers', function(cb){
         .count()
         .exec(cb);
 });
+eventSchema.virtual('updated').get(function(){
+    return moment(this.updatedAt).fromNow();
+})
 
 //Leave model name as League so as to keep old data.
 //Eventually we'll want to rename the collection

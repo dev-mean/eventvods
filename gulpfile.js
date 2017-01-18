@@ -7,6 +7,7 @@ var sourcemaps = require('gulp-sourcemaps');
 var gm = require('gulp-gm');
 var rename = require('gulp-rename');
 var uglify = require('gulp-uglify');
+var htmlmin = require('gulp-htmlmin');
 
 gulp.task('watch', function() {
     gulp.watch('public/less/**/*.less', ['less-compile']);
@@ -42,7 +43,10 @@ gulp.task('header', ['header_pre'], function() {
         .pipe(gulp.dest("./"))
 });
 gulp.task('prod-build', function() {
-    return gulp.src('public/js/**/*.js')
+    gulp.src('public/js/**/*.js')
         .pipe(uglify({ mangle: false }))
         .pipe(gulp.dest('public/js'));
+    gulp.src(['public/views/**/*.html', 'app/views/*.html'])
+        .pipe(htmlmin({collapseWhitespace: true}))
+        .pipe(gulp.dest('dist'));
 });

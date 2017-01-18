@@ -190,6 +190,9 @@ nav.sections-nav {
 	background: url('/assets/images/backgrounds/pattern_light.png') repeat @accent-white;
 	transition: background 0.3s linear;
 	color: @default-blue;
+	.row {
+		margin: 5px auto;
+	}
 	.container {
 		padding: 15px;
 		background: transparent!important;
@@ -200,14 +203,19 @@ nav.sections-nav {
 		text-align: center;
 		.gotham-med();
 		width: 50%;
-		margin: auto;
+		margin: 10px auto 0 auto;
 		padding-bottom: 5px;
 	}
-	.col-left {
-		border-right: 1px solid @dark-blue;
-	}
-	.col-right {
-		border-left: 1px solid @dark-blue;
+	.info {
+		.gotham-med();
+		text-transform: uppercase;
+		h6 {
+			font-weight: bold!important;
+			font-size: 1.2em;
+		}
+		.col {
+			text-align: center;
+		}
 	}
 }
 
@@ -223,6 +231,7 @@ nav.sections-nav {
 	padding: 0!important;
 	margin-left: -50px;
 	margin-right: -50px;
+	margin-bottom: -10px;
 	.icon {
 		.gotham-med();
 		display: flex;
@@ -231,7 +240,7 @@ nav.sections-nav {
 		justify-content: center;
 		overflow: hidden;
 		text-align: center;
-		margin: 25px 5px;
+		margin: 25px 5px 0 5px;
 		width: 150px;
 		height: 175px;
 		position: relative;

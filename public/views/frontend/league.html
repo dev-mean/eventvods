@@ -33,8 +33,24 @@
 </div>
 <div class="details">
     <div class="container">
+        <div class="row info">
+            <div class="col s6 m3">
+                <h6>Last Updated</h6>
+                <span>{{League.data.updated}}</span>
+            </div>
+            <div class="col s12 m6">
+                <h6>Dates</h6>
+                <span>{{League.data.startDate | date: 'MMMM dd'}} to {{League.data.endDate | date: 'MMMM dd, yyyy'}}</span>
+            </div>
+            <div class="col s6 m3">
+                <h6 ng-if-start="League.data.patch">Patch</h6>
+                <span ng-if-end>{{League.data.updated}}</span>
+                <h6 ng-if-start="League.data.prize">Prize Pool</h6>
+                <span ng-if-end>{{League.data.prize}}</span>
+            </div>
+        </div>
         <div class="row">
-            <div class="col s12 m6 col-left">
+            <div class="col s12 m6">
                 <h5>Staff</h5>
                 <div class="icon-container">
                     <div class="icon" ng-repeat="staff in League.data.staff">
@@ -57,7 +73,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col s12 m6 col-right">
+            <div class="col s12 m6">
                 <h5>Teams</h5>
                 <div class="icon-container">
                     <div class="icon team" ng-repeat="team in League.data.teams">

@@ -16,6 +16,7 @@
     "file-type": "*",
     "gm": "*",
     "googleapis": "^14.2.0",
+    "gulp-htmlmin": "^3.0.0",
     "indicative": "*",
     "intimidate": "*",
     "keygenerator": "*",
