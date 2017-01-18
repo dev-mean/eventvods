@@ -6,7 +6,6 @@
                 var vm = this;
                 vm.data;
                 vm.simple_tables = false;
-                vm.sectionIndex = parseInt($routeParams.s || 0);
                 vm.showDetails = false;
                 vm.toggleDetails = function(){
                     vm.showDetails = !vm.showDetails;
@@ -101,6 +100,7 @@
                         $rootScope.meta.title = vm.data.name + " - Eventvods - Esports on Demand";
                         $rootScope.meta.description = "Watch all " + vm.data.name + " vods and highlights on demand,  easily and spoiler-free. Rate, favorite and share matches of your favorite teams!";
                         $('.evSlider .image').addClass('loaded');
+                        vm.sectionIndex = parseInt($routeParams.s || vm.data.contents.length - 1);
                         $timeout(function() {
                             $('.load-in').addClass('loaded');
                         }, 100);
