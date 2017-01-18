@@ -18,6 +18,9 @@ i.star-right {
 table.container {
 	background: @accent-white!important;
 	table-layout: fixed;
+	a {
+		color: inherit!important;
+	}
 	.right-align {
 		text-align: right!important;
 	}
@@ -51,29 +54,41 @@ table.container {
 	th.filler {
 		width: 50px;
 	}
-	td.table-links {
+	td.table-links, td.team-icon {
 		padding-bottom: 0;
-		i {
-			opacity: 0.6;
-		}
 		img {
 			max-height: 60px;
 			max-width: 70px;
 			pointer-events: none;
 		}
 		a {
-			opacity: 0.6;
 			display: block;
+			&:hover {
+				opacity: 0.6;
+			}
+		}
+	}
+	td.table-links {
+		i {
+			opacity: 0.6;
+		}
+		a {
+			opacity: 0.6;
 			&:hover {
 				opacity: 1;
 			}
 		}
 	}
-	td.title {
-		text-align: left;
-		padding-left: 10px;
+
+	tr.title {
+		height: 40px;
+		td {
+			height: 40px;
+			text-align: left;
+			padding-left: 10px;
+		}
 		h5 {
-			font-size: 1.34rem;
+			font-size: 1rem;
 		}
 	}
 }
@@ -112,7 +127,6 @@ nav.sections-nav {
 		align-items: center;
 		li {
 			flex-grow: 1;
-			flex-basis: 0;
 			a {
 				width: 100%;
 				text-transform: uppercase;
