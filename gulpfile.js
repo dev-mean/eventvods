@@ -46,7 +46,10 @@ gulp.task('prod-build', function() {
     gulp.src('public/js/**/*.js')
         .pipe(uglify({ mangle: false }))
         .pipe(gulp.dest('public/js'));
-    gulp.src(['public/views/**/*.html', 'app/views/*.html'])
+    gulp.src('public/views/**/*.html')
         .pipe(htmlmin({collapseWhitespace: true}))
-        .pipe(gulp.dest('dist'));
+        .pipe(gulp.dest('public/views'));
+    gulp.src('app/views/*.html')
+        .pipe(htmlmin({collapseWhitespace: true}))
+        .pipe(gulp.dest('app/views'));
 });
