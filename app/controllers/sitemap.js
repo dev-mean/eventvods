@@ -12,7 +12,7 @@ var s = function(link){
 };
 var u = function(link, lastMod, updateFreq, priority){
     if(lastMod == null || typeof lastMod == "undefined") lastMod = lastUpdated;
-    return "<url><loc>"+s(link)+"</loc><lastmod>"+moment(lastMod).format('YYYY-MM-DD')+"</lastmod><changeFreq>"+updateFreq+"</changeFreq><priority>"+priority+"</priority></url>";
+    return "<url><loc>"+s(link)+"</loc><lastmod>"+moment(lastMod).format('YYYY-MM-DD')+"</lastmod><changefreq>"+updateFreq+"</changefreq><priority>"+priority+"</priority></url>";
 };
 var ar = function(arrayIn, mod, freq, priority){
     return arrayIn.reduce((c, i) => {
