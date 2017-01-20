@@ -52,7 +52,7 @@
                 ng-hide="game.placeholder || 
                     ( (Team.data[Team.active].game.simple_tables && !game.youtube.picksBans && !game.twitch.picksBans && !game.youtube.gameStart && !game.twitch.picksBans) ||
                     (!Team.data[Team.active].game.simple_tables && !game.youtube.gameStart && !game.twitch.picksBans))">
-                <td ng-bind="match.event.shortTitle"></td>
+                <td class="inherit"><a ng-href="/event/{{match.event.slug}}" ng-bind="match.event.shortTitle"></a></td>
                 <td ng-bind="match.team1.name" class="right-align"></td>
                 <td class="table-links"><img ng-src="{{match.team1.icon}}" /></td>
                 <td>VS</td>
@@ -92,10 +92,16 @@
                     <i ng-if="!game.twitch.gameStart ">-</i>
                 </td>
                 <td>
+                    <span ng-if="!Team.showRatings" ng-click="Team.showRatings = true">
+                        Click to show ratings
+                    </span>
+                    <span ng-if="Team.showRatings && game.rating">{{game.rating | number: 1 || "Not Yet Rated"}}</span>
+                    <span ng-if="Team.showRatings && !game.rating">Not Yet Rated</span>
+                    <br/>
                     <i class="material-icons" ng-repeat="val in [1,2,3,4,5]"
-                        ng-class="{starred: (Team.indexRating.show(match._id+$parent.$index) ? Team.indexRating.hover(match._id+$parent.$index) : game.rating) >= val}"
+                        ng-class="{starred: Team.showRatings && (Team.indexRating.show(match._id+$parent.$index) ? Team.indexRating.hover(match._id+$parent.$index) : game.rating) >= val}"
                         ng-mouseenter="Team.indexRating.onHover(match._id+$parent.$index, val)" ng-mouseleave="Team.indexRating.onUnHover(match._id+$parent.$index)"
-                        ng-click="Page.rate(match._id, val, $parent.$index);game.rating = val">star</i>
+                        ng-click="Team.showRatings ? Page.rate(match._id, val, $parent.$index) : return;Team.showRatings ? game.rating = val : Team.showRatings = true">star</i>
                 </td>
             </tr>
         </tbody>

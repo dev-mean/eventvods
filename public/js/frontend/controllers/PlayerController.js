@@ -14,13 +14,13 @@
             vm.back = function() {
                 reset();
             }
-
             function reset() {
                 player.destroy();
                 player = null;
                 vm.type = null;
                 $('#player').empty();
                 vm.show = false;
+                vm.showRatingsPop();
             }
             vm.parseLink = function(match, link) {
                 if (match.placeholder) return "";
@@ -58,7 +58,7 @@
                     $('.ratings-popup').removeClass('show');
                 }, 30000);
             }
-            vm.playYoutube = function(link, match, $event, sectionT, moduleT) {
+            vm.playYoutube = function(link, match, $event, sectionT, moduleT, index) {
                 if (match.placeholder) return;
                 var yt = parseYoutube(link);
                 if (yt !== false) $event.preventDefault();
@@ -69,6 +69,7 @@
                 vm.moduleT = moduleT;
                 vm.targetTime = null;
                 vm.ratePop = false;
+                vm.index = index;
                 var options = {
                     width: window.innerWidth * 0.6,
                     height: window.innerWidth * 0.6 * 9 / 16,
@@ -104,7 +105,7 @@
                     }
                 }, 5000)
             }
-            vm.playTwitch = function(link, match, $event, sectionT, moduleT) {
+            vm.playTwitch = function(link, match, $event, sectionT, moduleT, index) {
                 if (match.placeholder) return;
                 var twitch = parseTwitch(link);
                 if (twitch !== false) $event.preventDefault();
@@ -114,6 +115,7 @@
                 vm.type = "twitch";
                 vm.sectionT = sectionT;
                 vm.moduleT = moduleT;
+                vm.index = index;
                 var options = {
                     width: window.innerWidth * 0.6,
                     height: window.innerWidth * 0.6 * 9 / 16,

@@ -150,7 +150,7 @@
                     <td ng-show="!match.spoiler2 || match.team2H" ng-mouseenter="League.setHover(match, 2, true)" ng-mouseleave="League.setHover(match, 2, false)" class="left-align "><a ng-href="/team/{{match.team2.slug}}/{{League.data.game.slug}}">{{match.team2.name}}</a></td>
                     <td ng-if="!League.data.game.simple_tables" class="table-links ">
                         <a ng-if="module.youtube && game.youtube.picksBans " ng-href="{{Player.parseLink(game, game.youtube.picksBans)}} " ng-click="!Page.inlineYoutube ? return : Player.playYoutube(game.youtube.picksBans, match, $event, League.data.contents[League.sectionIndex].title,
-                        module.title) ">
+                        module.title, $index) ">
                             <img ng-if="Page.contentClass=='light' " class="responsive-img " src="/assets/images/icons/youtube.png " />
                             <img ng-if="Page.contentClass=='dark' " class="responsive-img " src="/assets/images/icons/youtube_dark.png " />
                         </a>
@@ -158,7 +158,7 @@
                     </td>
                     <td ng-if="!League.data.game.simple_tables" class="table-links ">
                         <a ng-if="module.twitch && game.twitch.picksBans " ng-href="{{Player.parseLink(game, game.twitch.picksBans)}} " ng-click="!Page.inlineTwitch ? return : Player.playTwitch(game.twitch.picksBans, match, $event, League.data.contents[League.sectionIndex].title,
-                        module.title) ">
+                        module.title, $index) ">
                             <img ng-if="Page.contentClass=='light' " class="responsive-img " src="/assets/images/icons/twitch.png " />
                             <img ng-if="Page.contentClass=='dark' " class="responsive-img " src="/assets/images/icons/twitch_dark.png " />
                         </a>
@@ -167,7 +167,7 @@
                     <td></td>
                     <td class="table-links ">
                         <a ng-if="module.youtube && game.youtube.gameStart " ng-href="{{Player.parseLink(game, game.youtube.gameStart)}} " ng-click="!Page.inlineYoutube ? return : Player.playYoutube(game.youtube.gameStart, match, $event, League.data.contents[League.sectionIndex].title,
-                        module.title) ">
+                        module.title, $index) ">
                             <img ng-if="Page.contentClass=='light' " class="responsive-img " src="/assets/images/icons/youtube.png " />
                             <img ng-if="Page.contentClass=='dark' " class="responsive-img " src="/assets/images/icons/youtube_dark.png " />
                         </a>
@@ -175,17 +175,23 @@
                     </td>
                     <td class="table-links ">
                         <a ng-if="module.twitch && game.twitch.gameStart " ng-href="{{Player.parseLink(game, game.twitch.gameStart)}} " ng-click="!Page.inlineTwitch ? return : Player.playTwitch(game.twitch.gameStart, match, $event, League.data.contents[League.sectionIndex].title,
-                        module.title) ">
+                        module.title, $index) ">
                             <img ng-if="Page.contentClass=='light' " class="responsive-img " src="/assets/images/icons/twitch.png " />
                             <img ng-if="Page.contentClass=='dark' " class="responsive-img " src="/assets/images/icons/twitch_dark.png " />
                         </a>
                         <i ng-if="!(module.twitch && game.twitch.gameStart) ">-</i>
                     </td>
                     <td>
+                        <span ng-if="!League.showRatings" ng-click="League.showRatings = true">
+                            Click to show ratings
+                        </span>
+                        <span ng-if="League.showRatings && game.rating">{{game.rating | number: 1 || "Not Yet Rated"}}</span>
+                        <span ng-if="League.showRatings && !game.rating">Not Yet Rated</span>
+                        <br/>
                         <i class="material-icons" ng-repeat="val in [1,2,3,4,5]"
-                            ng-class="{starred: (League.indexRating.show(match._id+$parent.$index) ? League.indexRating.hover(match._id+$parent.$index) : game.rating) >= val}"
+                            ng-class="{starred: League.showRatings && (League.indexRating.show(match._id+$parent.$index) ? League.indexRating.hover(match._id+$parent.$index) : game.rating) >= val}"
                             ng-mouseenter="League.indexRating.onHover(match._id+$parent.$index, val)" ng-mouseleave="League.indexRating.onUnHover(match._id+$parent.$index)"
-                            ng-click="Page.rate(match._id, val, $parent.$index);game.rating = val">star</i>
+                            ng-click="League.showRatings ? Page.rate(match._id, val, $parent.$index) : return;League.showRatings ? game.rating = val : League.showRatings = true">star</i>
                     </td>
                     <td>
                         <i ng-if="League.hasExtras(module, game) " ng-attr-data-activates="{{match._id}}-{{$index}}" dropdown data-hover="true " class="material-icons extras-toggle " below-origin="true " alignment="right ">&#xE5CF;</i>
@@ -212,7 +218,7 @@
         <h5>How would you rate this match?</h5>
         <div class="ratings-stars">
             <i class="material-icons" ng-repeat="val in [1,2,3,4,5]"
-            ng-click="Page.rate(Player.match._id, val);League.rating.stick(val)"
+            ng-click="Page.rate(Player.match._id, val, Player.index);League.rating.stick(val)"
             ng-mouseenter="League.rating.onHover(val)" ng-mouseleave="League.rating.onUnHover()"
             ng-class="{starred: League.rating.hover >= val}" ng-style="{'transition-delay': 50*val+'ms'}">star</i>
         </div>

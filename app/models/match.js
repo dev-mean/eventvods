@@ -60,7 +60,7 @@ matchSchema.fill('event', function(cb){
     mongoose.model('League', Event.eventSchema).findOne({
         "contents.modules.matches2": this._id
     })
-    .select('shortTitle')
+    .select('shortTitle slug')
     .exec(cb);
 });
 
