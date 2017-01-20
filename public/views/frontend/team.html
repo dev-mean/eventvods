@@ -92,11 +92,10 @@
                     <i ng-if="!game.twitch.gameStart ">-</i>
                 </td>
                 <td>
-                    <i ng-if="$parent.$index == 0" class="material-icons" ng-repeat="val in [1,2,3,4,5]"
-                        ng-class="{starred: (Team.indexRating.show(match._id) ? Team.indexRating.hover(match._id) : match.rating) >= val}"
-                        ng-mouseenter="Team.indexRating.onHover(match._id, val)" ng-mouseleave="Team.indexRating.onUnHover(match._id)"
-                        ng-click="Page.rate(match._id, val);match.rating = val">star</i>
-                    <i ng-if="$index != 0">-</i>
+                    <i class="material-icons" ng-repeat="val in [1,2,3,4,5]"
+                        ng-class="{starred: (Team.indexRating.show(match._id+$parent.$index) ? Team.indexRating.hover(match._id+$parent.$index) : game.rating) >= val}"
+                        ng-mouseenter="Team.indexRating.onHover(match._id+$parent.$index, val)" ng-mouseleave="Team.indexRating.onUnHover(match._id+$parent.$index)"
+                        ng-click="Page.rate(match._id, val, $parent.$index);game.rating = val">star</i>
                 </td>
             </tr>
         </tbody>
