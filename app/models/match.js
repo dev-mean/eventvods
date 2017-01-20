@@ -45,8 +45,8 @@ var matchSchema = new Schema({
             type: Boolean,
             default: false
         },
-    }],
-    rating: Number
+        rating: Number
+    }]
 }, {
 	id: false,
 	toObject: {

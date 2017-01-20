@@ -14,7 +14,8 @@ var ratingSchema = new Schema({
         type: Number,
         min: 1,
         max: 5
-    }
+    },
+    index: Number
 });
 
 var Rating = mongoose.model('Rating', ratingSchema);

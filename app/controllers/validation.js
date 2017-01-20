@@ -86,5 +86,6 @@ module.exports.mail = {
 }
 module.exports.rating = {
     match: 'required',
-    rating:'required|max:5|min:1'
+    rating: 'required|max:5|min:1',
+    index: 'required'
 }

@@ -11,7 +11,8 @@ function recalcRatings(rating){
 	var $promise = Q.defer();
 	Rating.aggregate({
         $match: {
-            match: rating.match
+            match: rating.match,
+			index: rating.index
         }
     })
     .group({
@@ -23,12 +24,14 @@ function recalcRatings(rating){
     .exec((err, res) => {
 		if(err) $promise.reject(err);
 		else
-			Match.findByIdAndUpdate(rating.match, {
-				rating: res[0].average
-			})
-			.exec((err) => {
-				if(err) $promise.reject(err);
-				else $promise.resolve();
+			Match.findById(rating.match)
+			.exec((err, match) => {
+				console.log(match.data[rating.index]);
+				match.data[rating.index].rating = res[0].average;
+				match.save((err) => {
+					if(err) $promise.reject(err);
+					else $promise.resolve();
+				})
 			})
 	});
 	return $promise.promise;
@@ -39,7 +42,8 @@ router.post('/', auth.logged_in(true), (req, res, next) => {
 			.then(function() {
 				Rating.findOne({
 					match: req.body.match,
-					user: req.user._id
+					user: req.user._id,
+					index: req.body.index
 				})
 				.exec((err, rating) => {
 					if(err) return next(err);
@@ -58,7 +62,8 @@ router.post('/', auth.logged_in(true), (req, res, next) => {
 						Rating.create({
 							match: req.body.match,
 							user: req.user._id,
-							rating: req.body.rating
+							rating: req.body.rating,
+							index: req.body.index
 						})
 						.then(recalcRatings)
 						.then(() => {

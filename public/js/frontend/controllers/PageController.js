@@ -84,11 +84,13 @@
                     else vm.session.following.push(id);
                     SessionManager.following(vm.session.following);
                 }
-                vm.rate = function(id, rating){
+                vm.rate = function(id, rating, index){
+                    console.log(index);
                     if (vm.session == false || vm.session == null) return $location.path('/login');
                     $http.post(API+'/ratings', {
                         match: id,
-                        rating: rating
+                        rating: rating,
+                        index: index
                     }, {
                         ignoreLoadingBar: true
                     });

@@ -182,6 +182,12 @@
                         <i ng-if="!(module.twitch && game.twitch.gameStart) ">-</i>
                     </td>
                     <td>
+                        <i class="material-icons" ng-repeat="val in [1,2,3,4,5]"
+                            ng-class="{starred: (League.indexRating.show(match._id+$parent.$index) ? League.indexRating.hover(match._id+$parent.$index) : game.rating) >= val}"
+                            ng-mouseenter="League.indexRating.onHover(match._id+$parent.$index, val)" ng-mouseleave="League.indexRating.onUnHover(match._id+$parent.$index)"
+                            ng-click="Page.rate(match._id, val, $parent.$index);game.rating = val">star</i>
+                    </td>
+                    <td>
                         <i ng-if="League.hasExtras(module, game) " ng-attr-data-activates="{{match._id}}-{{$index}}" dropdown data-hover="true " class="material-icons extras-toggle " below-origin="true " alignment="right ">&#xE5CF;</i>
                         <i ng-if="!League.hasExtras(module, game) ">-</i>
                         <ul ng-attr-id="{{match._id}}-{{$index}} " class="dropdown-content match-extras-dd wide ">
@@ -189,13 +195,6 @@
                                 <a ng-href="{{Player.parseLink(game, game.links[$index])}}" target="_blank" ng-bind="column "></a>
                             </li>
                         </ul>
-                    </td>
-                    <td>
-                        <i ng-if="$parent.$index == 0" class="material-icons" ng-repeat="val in [1,2,3,4,5]"
-                            ng-class="{starred: (League.indexRating.show(match._id) ? League.indexRating.hover(match._id) : match.rating) >= val}"
-                            ng-mouseenter="League.indexRating.onHover(match._id, val)" ng-mouseleave="League.indexRating.onUnHover(match._id)"
-                            ng-click="Page.rate(match._id, val);match.rating = val">star</i>
-                        <i ng-if="$index != 0">-</i>
                     </td>
                 </tr>
             </tbody>
