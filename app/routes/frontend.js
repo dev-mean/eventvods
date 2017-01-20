@@ -16,6 +16,10 @@ router.get('/sitemap.xml', function(req, res, next){
 		})
 })
 
+router.get('/league/:slug', function(req, res){
+	res.redirect(301, '/event/'+req.params.slug);
+})
+
 router.get('/*', function (req, res) {
 	res.sendFile(path.resolve(__dirname + '/../../app/views/frontend.html'));
 });
