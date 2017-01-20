@@ -18,8 +18,30 @@ i.star-right {
 table.container {
 	background: @accent-white!important;
 	table-layout: fixed;
-	a {
-		color: inherit!important;
+	tbody {
+		tr:first-child:not(.title) {
+			border-top-width: 2px;
+		}
+		tr:last-child {
+			border-bottom-width: 2px;
+		}
+		tr.title {
+			height: 40px;
+			border-bottom-width: 2px;
+			td {
+				height: 40px;
+				text-align: left;
+				padding-left: 10px;
+			}
+			h5 {
+				font-size: 1rem;
+			}
+		}
+	}
+	.left-align, .right-align {
+		a {
+			color: inherit!important;
+		}
 	}
 	.right-align {
 		text-align: right!important;
@@ -80,25 +102,14 @@ table.container {
 		}
 	}
 
-	tr.title {
-		height: 40px;
-		td {
-			height: 40px;
-			text-align: left;
-			padding-left: 10px;
-		}
-		h5 {
-			font-size: 1rem;
-		}
-	}
 }
 .dark table.container {
 	background: @dark-blue!important;
 	> thead > tr {
-		border-bottom: 1px solid @darker-blue;
+		border-bottom-color: @dark-blue;
 	}
 	> tbody > tr {
-		border-bottom: 1px solid @darker-blue;
+		border-bottom-color: @dark-blue;
 		background-color: @default-blue;
 	}
 	.match-extras-dd {
@@ -222,6 +233,18 @@ nav.sections-nav {
 .dark .details {
 	background: url('/assets/images/backgrounds/pattern_dark.png') repeat @default-blue;
 	color: white;
+}
+.row .col:first-child {
+	.icon-container, h5 {
+		position: relative;
+		left: -25px;
+	}
+}
+.row .col:last-child {
+	.icon-container, h5 {
+		position: relative;
+		left: 25px;
+	}
 }
 .icon-container {
 	display: flex;
