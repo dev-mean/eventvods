@@ -65,6 +65,12 @@ eventSchema.fill('followers', function(cb){
 eventSchema.virtual('updated').get(function(){
     return moment(this.updatedAt).fromNow();
 })
+eventSchema.virtual('status').get(function(){
+    var now = moment();
+    if( moment(this.startDate).isAfter(now) ) return "Upcoming";
+    else if( moment(this.endDate).isBefore(now) ) return "Complete";
+    else return "Ongoing";
+})
 
 //Leave model name as League so as to keep old data.
 //Eventually we'll want to rename the collection
