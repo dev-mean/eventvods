@@ -21,6 +21,7 @@
 					section.modules.forEach(function(module){
 						module.matches2.forEach(function(match){
 							match.data.forEach(function(game){
+								if(game === null) return;
 								game.links = $.map(game.links, function(value, index) {
 									console.log(value);
 									return [value];
