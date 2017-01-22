@@ -176,8 +176,8 @@ function simple_table(event, section, module, sectionIndex, moduleIndex) {
                 index: (match.data.length > 1) ? ++gameIndex : "",
                 team1: teamDisplay(match, false),
                 team2: teamDisplay(match, true),
-                twitch: module.twitch ? link("Twitch", game.twitch.gameStart, game.placeholder, event.game.slug) : "",
-                youtube: module.youtube ? link("YouTube", game.youtube.gameStart, game.placeholder, event.game.slug) : "",
+                twitch: (module.twitch && def(game.twitch) && def(game.twitch.gameStart)) ? link("Twitch", game.twitch.gameStart, game.placeholder, event.game.slug) : "",
+                youtube: (module.youtube && def(game.youtube) && def(game.youtube.gameStart)) ? link("YouTube", game.youtube.gameStart, game.placeholder, event.game.slug) : "",
                 extras: formatExtras(module.columns, game.links, event.game.slug)
             }) + EOL;
         })
@@ -210,7 +210,7 @@ function table(event, section, module, sectionIndex, moduleIndex) {
     module.matches2.forEach((match) => {
         var gameIndex = 0;
         match.data.forEach((game) => {
-            var disp = (matchIndex === 0 && gameIndex === 0) ? "{id}{index}" + league_only + "|{team1}|vs|{team2}|{twitch}{youtube}{extras}" : "{id}{index}|{team1}|vs|{team2}|{twitch}{youtube}{extras}";
+            var disp = (matchIndex === 0 && gameIndex === 0) ? "{id}{index}" + league_only + "|{team1}|vs|{team2}|{twitch}{youtube1}{youtube2}{extras}" : "{id}{index}|{team1}|vs|{team2}|{twitch}{youtube1}{youtube2}{extras}";
             str += format(disp, {
                 id: getId(event, sectionIndex, moduleIndex, matchIndex),
                 index: (match.data.length > 1) ? ++gameIndex : "",
@@ -218,8 +218,9 @@ function table(event, section, module, sectionIndex, moduleIndex) {
                 module: module.title,
                 team1: teamDisplay(match, false),
                 team2: teamDisplay(match, true),
-                twitch: module.twitch ? link(pbText, game.twitch.picksBans, game.placeholder, event.game.slug) : "",
-                youtube: module.youtube ? link(pbText, game.youtube.picksBans, game.placeholder, event.game.slug) + link("Game Start", game.youtube.gameStart, game.placeholder, event.game.slug) : "",
+                twitch: (module.twitch && def(game.twitch) && def(game.twitch.picksBans)) ? link(pbText, game.twitch.picksBans, game.placeholder, event.game.slug) : "",
+                youtube1: (module.youtube && def(game.youtube) && def(game.youtube.picksBans)) ? link(pbText, game.youtube.picksBans, game.placeholder, event.game.slug) : "",
+                youtube2: (module.youtube && def(game.youtube) && def(game.youtube.gameStart)) ? link("Game Start", game.youtube.gameStart, game.placeholder, event.game.slug) : "",
                 extras: formatExtras(module.columns, game.links, event.game.slug)
             }) + EOL;
         });
