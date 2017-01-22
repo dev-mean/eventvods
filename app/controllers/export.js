@@ -23,7 +23,7 @@ function getId(event, sectionIndex, moduleIndex, matchIndex) {
 }
 
 function def(v) {
-    return typeof v !== "undefined";
+    return (typeof v !== "undefined" && v !== null);
 }
 
 function has(event, param) {
