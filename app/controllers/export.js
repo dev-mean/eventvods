@@ -179,7 +179,7 @@ function simple_table(event, section, module, sectionIndex, moduleIndex) {
                 team2: teamDisplay(match, true),
                 twitch: (module.twitch && def(game) && def(game.twitch) && def(game.twitch.gameStart)) ? link("Twitch", game.twitch.gameStart, game.placeholder, event.game.slug) : "",
                 youtube: (module.youtube && def(game) && def(game.youtube) && def(game.youtube.gameStart)) ? link("YouTube", game.youtube.gameStart, game.placeholder, event.game.slug) : "",
-                extras: def(game.links) ? formatExtras(module.columns, game.links, event.game.slug) : formatExtras(module.columns, null, event.game.slug)
+                extras: (def(game) && def(game.links)) ? formatExtras(module.columns, game.links, event.game.slug) : formatExtras(module.columns, null, event.game.slug)
             }) + EOL;
         })
         matchIndex++;
@@ -222,7 +222,7 @@ function table(event, section, module, sectionIndex, moduleIndex) {
                 twitch: (module.twitch && def(game) && def(game.twitch) && def(game.twitch.picksBans)) ? link(pbText, game.twitch.picksBans, game.placeholder, event.game.slug) : "",
                 youtube1: (module.youtube && def(game) && def(game.youtube) && def(game.youtube.picksBans)) ? link(pbText, game.youtube.picksBans, game.placeholder, event.game.slug) : "",
                 youtube2: (module.youtube && def(game) && def(game.youtube) && def(game.youtube.gameStart)) ? link("Game Start", game.youtube.gameStart, game.placeholder, event.game.slug) : "",
-                extras: def(game.links) ? formatExtras(module.columns, game.links, event.game.slug) : formatExtras(module.columns, null, event.game.slug)
+                extras: (def(game) && def(game.links)) ? formatExtras(module.columns, game.links, event.game.slug) : formatExtras(module.columns, null, event.game.slug)
             }) + EOL;
         });
         matchIndex++;
