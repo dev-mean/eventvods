@@ -1,7 +1,7 @@
 (function() {
     'use strict';
     angular.module('eventvods')
-        .controller('LoginController', ['SessionManager', '$rootScope', '$timeout', '$location', function(SessionManager, $rootScope, $timeout, $location) {
+        .controller('LoginController', ['SessionManager', '$rootScope', '$timeout', '$location', '$routeParams', function(SessionManager, $rootScope, $timeout, $location, $routeParams) {
             var vm = this;
             vm.data = {};
             vm.login = function() {
@@ -17,7 +17,7 @@
                 if (valid) {
                     SessionManager.login(vm.data)
                         .then(function() {
-                            $location.path('/');
+                            $location.path($routeParams.return || '/');
                         })
                         .catch(function(err) {
                             $('#login #password').focus();

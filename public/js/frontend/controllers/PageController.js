@@ -49,6 +49,10 @@
                 vm.logout = function() {
                     SessionManager.logout();
                 };
+				function login(){
+					var path = "/login?return=" + encodeURIComponent($location.path());
+					return $location.url(path);
+				}
                 vm.init = function() {
                     $timeout(function() {
                         $('.evSlider.multiple').evSlider({
@@ -77,7 +81,7 @@
                     else return false;
                 }
                 vm.toggleFollow = function(id) {
-                    if (vm.session == false || vm.session == null) return $location.path('/login');
+                    if (vm.session == false || vm.session == null) return login();
                     var index = vm.session.following == null ? -1 : vm.session.following.indexOf(id);
                     if (index > -1)
                         vm.session.following.splice(index, 1);
@@ -85,7 +89,7 @@
                     SessionManager.following(vm.session.following);
                 }
                 vm.rate = function(id, rating, index, spoilerCheck){
-                    if (vm.session == false || vm.session == null) return $location.path('/login');
+                    if (vm.session == false || vm.session == null) return login();
                     $http.post(API+'/ratings', {
                         match: id,
                         rating: rating,
