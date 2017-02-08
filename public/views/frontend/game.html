@@ -19,7 +19,7 @@
 </div>
 <div class="contents pad-bottom">
 	<h3 class="container" >{{Game.data.name}} Events</h3>
-	<div class="element-container container z-depth-3" ng-repeat="event in Game.data.events track by $index">
+	<div class="element-container container z-depth-3" ng-repeat="event in Game.data.events | orderBy:'-startDate' track by $index">
 		<div class="element-border">
 			<div class="element-background" ng-class="Page.elementClass($index)">
 				<a ng-href="/event/{{event.slug}}"><img ng-src="{{event.logo}}" /></a>
