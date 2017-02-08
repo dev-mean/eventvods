@@ -71,9 +71,8 @@
                 }
                 vm.jumpTo = function(sectionIndex) {
                     vm.sectionIndex = sectionIndex;
-                    $location.search('section', sectionIndex);
+                    $location.search({'s': sectionIndex});
                 }
-                
                 vm.hasExtras = function(module, game) {
                     if (module.columns.length !== game.links.length) return false;
                     for (var i = 0; i < module.columns.length; i++) {
