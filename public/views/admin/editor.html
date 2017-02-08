@@ -70,7 +70,7 @@
 								<span editable-text="match.identifier" class="p-2px">{{match.identifier || Editor.getIdentifier($index)}}</span>
 							</div>
 						</div>
-						<div class="col-xs-3 text-right">	
+						<div class="col-xs-3 text-right">
 							<div class="popover-wrapper">
 								<span ng-show="match.spoiler1" editable-text="match.team1Match" e-placeholder="Team 1" class="p-2px">{{match.team1Match || "Team 1"}}</span>
 							</div>
@@ -122,7 +122,16 @@
 						<div class="col-xs-1 auto">
 								{{match.identifier || Editor.getIdentifier($parent.$index)}}{{$index+1}}
 						</div>
-						<div ng-if-start="Editor.data.game.simple_tables" class="col-xs-3 text-right">
+						<div ng-if-start="Editor.data.game.simple_tables" class="col-xs-1 text-right">
+							<b>Map</b>
+						</div>
+						<div class="col-xs-1 text-left">
+							<div class="popover-wrapper">
+								<span editable-text="match.data[$index].map">{{match.data[$index].map || "Set Map"}}</span>
+								<i ng-if="match.data[$index].map" class="fa fa-check-square-o fa-fix"></i>
+							</div>
+						</div>
+						<div class="col-xs-1 text-right">
 							<b>Game Start</b>
 						</div>
 						<div ng-if="Editor.active.twitch" class="col-xs-1 text-left">
@@ -137,7 +146,7 @@
 								<i ng-if="match.data[$index].youtube.gameStart" class="fa fa-check-square-o fa-fix"></i>
 							</div>
 						</div>
-						<div ng-if-start="!Editor.data.game.simple_tables" class="col-xs-2 text-right">
+						<div ng-if-start="!Editor.data.game.simple_tables" class="col-xs-1 text-right">
 								<b>{{Editor.data.game.draftText || "Picks & Bans"}}</b>
 						</div>
 						<div ng-if="Editor.active.twitch" class="col-xs-1 text-left">

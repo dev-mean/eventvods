@@ -40,16 +40,16 @@
                 <th class="icon"></th>
                 <th class="icon"></th>
                 <th class="left-align">Team 2</th>
+				<th ng-if="Team.data[Team.active].game.simple_tables">Map</th>
                 <th class="double" ng-if="!Team.data[Team.active].game.simple_tables" colspan="2">{{Team.data[Team.active].game.draftText || "Picks & Bans"}}</th>
                 <th class="filler"></th>
                 <th class="double" colspan="2">Game Start</th>
                 <th>Rating</th>
             </tr>
         </thead>
-
         <tbody ng-repeat="match in Team.data[Team.active].matches track by $index">
             <tr ng-repeat="game in match.data track by $index"
-                ng-hide="game.placeholder || 
+                ng-hide="game.placeholder ||
                     ( (Team.data[Team.active].game.simple_tables && !game.youtube.picksBans && !game.twitch.picksBans && !game.youtube.gameStart && !game.twitch.picksBans) ||
                     (!Team.data[Team.active].game.simple_tables && !game.youtube.gameStart && !game.twitch.picksBans))">
                 <td class="inherit"><a ng-href="/event/{{match.event.slug}}" ng-bind="match.event.shortTitle"></a></td>
@@ -58,6 +58,7 @@
                 <td>VS</td>
                 <td class="table-links spoiler-icon"><img ng-src="{{match.team2.icon}} " /></td>
                 <td ng-bind="match.team2.name" class="left-align "></td>
+				<td ng-if="Team.data[Team.active].game.simple_tables" ng-bind="game.map"></td>
                 <td ng-if="!Team.data[Team.active].game.simple_tables" class="table-links ">
                     <a ng-if="game.youtube.picksBans " ng-href="{{Player.parseLink(game, game.youtube.picksBans)}} " ng-click="!Page.inlineYoutube ? return : Player.playYoutube(game.youtube.picksBans, match, $event, League.data.contents[League.sectionIndex].title,
                     module.title) ">
@@ -93,7 +94,7 @@
                 </td>
                 <td>
                     <span ng-if="!Team.showRatings" ng-click="Team.showRatings = true">
-                        Click to show ratings
+                        Click to show
                     </span>
                     <span ng-if="Team.showRatings && game.rating">{{game.rating | number: 1 || "Not Yet Rated"}}</span>
                     <span ng-if="Team.showRatings && !game.rating">Not Yet Rated</span>

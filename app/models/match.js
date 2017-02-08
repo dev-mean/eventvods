@@ -45,7 +45,8 @@ var matchSchema = new Schema({
             type: Boolean,
             default: false
         },
-        rating: Number
+        rating: Number,
+		map: String,
     }]
 }, {
 	id: false,
@@ -53,7 +54,7 @@ var matchSchema = new Schema({
 		virtuals: true
 	},
 	toJSON: {
-		virtuals: true 
+		virtuals: true
 	}
 });
 matchSchema.fill('event', function(cb){
