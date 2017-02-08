@@ -45,8 +45,8 @@
 				</a>
 			</div>
 			<div class="element-dates">
-				<b>Starts </b><span ng-bind="event.startDate | date: 'EEEE, MMMM dd yyyy'"></span><br />
-				<b>Ends </b><span ng-bind="event.endDate | date: 'EEEE, MMMM dd yyyy'"></span>
+				Starts <span ng-bind="event.startDate | date: 'EEEE, MMMM dd yyyy'"></span><br />
+				Ends <span ng-bind="event.endDate | date: 'EEEE, MMMM dd yyyy'"></span>
 			</div>
 			<div class="element-buttons">
 				<a class="waves-effect waves-light btn" ng-click="Page.toggleFollow(event._id, 'events')">
